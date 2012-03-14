@@ -35,7 +35,7 @@ public class PilotImpl implements Pilot {
 		double desiredAngle=0;
 		double rudderPos;
 		
-		
+		System.out.println("given relative angle: "+angle);
 		angle=angle%360;
 		
 		//ensuring that the specified angle doesn't exceed +/-180°; if yes, recalculating it

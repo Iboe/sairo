@@ -42,6 +42,18 @@ public class NavigatorImpl implements Navigator{
 		angle = Math.atan(diff.getLatitude() / diff.getLongitude());
 		//convert to degrees
 		angle = toDegree(angle);
+		
+		if(diff.getLatitude() >= 0 && diff.getLongitude() < 0)
+			angle+=180;
+		else if(diff.getLatitude() < 0 && diff.getLongitude() < 0)
+			angle+=180;
+		else if(diff.getLatitude() < 0 && diff.getLongitude() >= 0)
+			angle+=360;
+		
+		System.out.println("navigator - calculated angle: "+angle);
+		
+		//if(diff.getLatitude() < 0)
+		//	angle+=180;
 		//angle between current and goal position = 
 		//north (== y-axis) - current angle (direction of the bow as difference to north)
 		//- angle between difference vector and x-axis 
