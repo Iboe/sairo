@@ -6,37 +6,37 @@ public class nmea {
 	@Deprecated
 	public static String[] stringToArray(String dataString) {
 
-//		String[] dataArray = null;
-//		
-//		if(dataString != null){
-//
-//			// Die "*" durch "," ersetzen, damit diese auch abgetrennt werden können
-//			dataString = dataString.replace('*', ',');
-//
-//			// Den String an den "," trennen
-//			dataArray = dataString.split(",");
-//
-//			return dataArray;
-//		}else{
-//			return dataArray;
-//		}
-		return splitNmea(dataString);
+		String[] dataArray = null;
+		
+		if(dataString != null){
+
+			// Die "*" durch "," ersetzen, damit diese auch abgetrennt werden können
+			dataString = dataString.replace('*', ',');
+
+			// Den String an den "," trennen
+			dataArray = dataString.split(",");
+
+			return dataArray;
+		}else{
+			return dataArray;
+		}
+//		return splitNmea(dataString);
 	}
 
-//	@Deprecated
-//	public static String getDevice(String dataString) {
-//		String[] data = null;
-//
-//		data = stringToArray(dataString);
-//
-//		String device = data[0];
-//
-//		data = null;
-//
-//		device = device.replace("$", "");
-//
-//		return device;
-//	}
+	@Deprecated
+	public static String getDevice(String dataString) {
+		String[] data = null;
+
+		data = stringToArray(dataString);
+
+		String device = data[0];
+
+		data = null;
+
+		device = device.replace("$", "");
+
+		return device;
+	}
 	
 	/*
 	 * Added some stuff for NMEA String-Handling
@@ -119,12 +119,12 @@ public class nmea {
     	return data;
     }
     
-    public static String getDevice(String str) {
-    	
-    	String[] data =  splitNmea(str);
-
-		String device = data[0];
-
-		return device;
-    }
+//    public static String getDevice(String str) {
+//    	
+//    	String[] data =  splitNmea(str);
+//
+//		String device = data[0];
+//
+//		return device;
+//    }
 }
