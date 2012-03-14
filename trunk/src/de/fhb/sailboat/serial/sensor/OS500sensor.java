@@ -17,7 +17,7 @@ public class OS500sensor {
 	/*
 	 * Configuration Variables
 	 */
-	String comPort = "COM6";
+	String comPort = "COM2";
 	int baudrate = 115200;
 	long clock = 1000;			// clock-rate in milliseconds; Compass sends actually 10 Samples/s, Sample-Buffer stores 10 Samples
 	
@@ -105,10 +105,9 @@ public class OS500sensor {
 					int i = 0;
 					// Foreach List-Element
 					for (String item: list) {
-						nmea nmea = new nmea(item);
 						//Verify String and add to i or throw away
-						if (item != null && nmea.verifyString()) {
-							String[] data = nmea.getDataArray();
+						if (item != null && nmea.verifyString(item)) {
+							String[] data = (nmea.splitNmea(item));
 							// at the moment, we expect at least 12 fields
 							if (data.length<12) {
 								sensorInstance.errorcount++;
@@ -159,9 +158,9 @@ public class OS500sensor {
 															usefullrate);
 							WorldModelImpl.getInstance().getCompassModel().setCompass(c);
 							
-//							System.out.println("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
-//									+" Temp: "+ dataSet.getTemp()
-//									+" out of "+ i +" useful samples ("+ usefullrate +")");
+							System.out.println("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
+									+" Temp: "+ dataSet.getTemp()
+									+" out of "+ i +" useful samples ("+ usefullrate +")");
 							
 						}
 					}

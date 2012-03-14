@@ -86,7 +86,7 @@ public class Compass {
 	private final Vector3d accelerationField;
 	private final double usefullsamplerate;
 
-	@Deprecated
+	
 	public Compass(double yaw, double pitch, double roll) {
 		this.azimuth = yaw;
 		this.pitch = pitch;
@@ -99,9 +99,13 @@ public class Compass {
 		this.accelerationField = new Vector3d(0, 0, 0);
 		this.usefullsamplerate = 0;
 	}
-	@Deprecated
+	
 	public double getYaw() {
-		return azimuth;
+	
+		if( azimuth > 180)
+			return azimuth - 360;
+		else
+			return azimuth;
 	}
 /**
  * 

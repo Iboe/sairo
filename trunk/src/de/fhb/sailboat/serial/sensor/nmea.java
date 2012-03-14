@@ -3,79 +3,47 @@ package de.fhb.sailboat.serial.sensor;
 public class nmea {
 
 
-
+	@Deprecated
 	public static String[] stringToArray(String dataString) {
 
-		String[] dataArray = null;
-		
-		if(dataString != null){
-
-			// Die "*" durch "," ersetzen, damit diese auch abgetrennt werden können
-			dataString = dataString.replace('*', ',');
-
-			// Den String an den "," trennen
-			dataArray = dataString.split(",");
-
-			return dataArray;
-		}else{
-			return dataArray;
-		}
+//		String[] dataArray = null;
+//		
+//		if(dataString != null){
+//
+//			// Die "*" durch "," ersetzen, damit diese auch abgetrennt werden können
+//			dataString = dataString.replace('*', ',');
+//
+//			// Den String an den "," trennen
+//			dataArray = dataString.split(",");
+//
+//			return dataArray;
+//		}else{
+//			return dataArray;
+//		}
+		return splitNmea(dataString);
 	}
 
-	public static String getDevice(String dataString) {
-		String[] data = null;
-
-		data = stringToArray(dataString);
-
-		String device = data[0];
-
-		data = null;
-
-		device = device.replace("$", "");
-
-		return device;
-	}
+//	@Deprecated
+//	public static String getDevice(String dataString) {
+//		String[] data = null;
+//
+//		data = stringToArray(dataString);
+//
+//		String device = data[0];
+//
+//		data = null;
+//
+//		device = device.replace("$", "");
+//
+//		return device;
+//	}
+	
 	/*
 	 * Added some stuff for NMEA String-Handling
 	 * 
 	 * Put the String to Class via Constructor, 
 	 * call verifyString to check Checksum and split into pieces (StringArray)
 	 */
-	
-	String dataString = null;
-	String[] dataArray = null;
-	
-	public nmea() {
-		
-	}
-	/**
-	 * Constructor with dataString
-	 * @param dataString
-	 */
-	public nmea(String dataString) {
-		this.dataString = dataString;
-	}
-
-
-	public String getDataString() {
-		return dataString;
-	}
-
-
-	public void setDataString(String dataString) {
-		this.dataString = dataString;
-	}
-
-
-	public String[] getDataArray() {
-		return dataArray;
-	}
-
-
-	public void setDataArray(String[] dataArray) {
-		this.dataArray = dataArray;
-	}
-
 
 	/** calculates checksum of NMEA message and compares it
      * 
@@ -83,26 +51,22 @@ public class nmea {
      * @param msg
      * @return true if the checksum is valid, false if it is invalid
      */
-    public boolean verifyString() {
+    public static boolean verifyString(String str) {
 
         boolean valid = false;
         //calculate message length and subtract one (the carriage return)
-        int msglen = this.dataString.length();
+        int msglen = str.length();
         //if the message length is greater than 4 characters
         if (msglen > 4) {
             //check if there is a checksum in this message by seeing where the asterisk is
             //(it should be at the third last position in the message)
-            if (this.dataString.charAt(msglen - 3) == '*') {
-                String s = this.dataString.substring(1, msglen - 3);
-                String c = this.dataString.substring(msglen - 2, msglen);
+            if (str.charAt(msglen - 3) == '*') {
+                String s = str.substring(1, msglen - 3);
+                String c = str.substring(msglen - 2, msglen);
             	// perform NMEA checksum calculation, Strip the $
                 String chk_s = GetCheckSum(s);
                 // compare checksum to encoded checksum in msg
                 valid = c.equals(chk_s);
-                if (valid) {
-                	// split to dataArray
-                	this.dataArray = s.split(",");
-                }
                 return (valid);
             } else {
                 return false;
@@ -110,9 +74,8 @@ public class nmea {
         }
         return false;
     }
-
-
-   /**
+    
+    /**
      * Trims the checksum off an NMEA message, then
      * recalculates the checksum
      * to compare it with the one passed along with the message later
@@ -146,4 +109,22 @@ public class nmea {
         return chk_s;
     }
 
+
+   
+    public static String[] splitNmea(String str) {
+    	String[] data = null;
+    	if (verifyString(str)) {
+    		data = str.substring(1, str.length() - 3).split(",");
+    	}
+    	return data;
+    }
+    
+    public static String getDevice(String str) {
+    	
+    	String[] data =  splitNmea(str);
+
+		String device = data[0];
+
+		return device;
+    }
 }
