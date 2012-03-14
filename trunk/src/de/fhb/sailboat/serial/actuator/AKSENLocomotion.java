@@ -142,11 +142,11 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void reset() {
 		// Rudder
-		this.setRudder(rudderN);
+		this.resetRudder();
 		// Sail
-		this.setSail(sailN);
+		this.resetSail();
 		// Propellor
-		this.setPropellor(propellorN);
+		this.resetPropellor();
 	}
 
 	/** 
