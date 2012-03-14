@@ -83,4 +83,19 @@ public class PilotImpl implements Pilot {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void setPropellor(int value) {
+		locSystem.setSail(value);
+	}
+
+	@Override
+	public void setRudder(int value) {
+		locSystem.setRudder(value);
+	}
+
+	@Override
+	public void setSail(int value) {
+		locSystem.setSail(value);
+	}
 }

@@ -1,6 +1,7 @@
 package de.fhb.sailboat.control;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
@@ -22,6 +23,8 @@ public class NavigatorImpl implements Navigator{
 			throw new NullPointerException();
 		} else if (ReachCircleTask.class.equals(task.getClass() )) {
 			navigateToCircle((ReachCircleTask) task);
+		} else if (PrimitiveCommandTask.class.equals(task.getClass() )) {
+			handlePrimitiveCommands((PrimitiveCommandTask) task);
 		} else {
 			throw new UnsupportedOperationException("can not handle task");
 		}
@@ -59,6 +62,20 @@ public class NavigatorImpl implements Navigator{
 		//- angle between difference vector and x-axis 
 		angle = 90 - angle - worldModel.getCompassModel().getCompass().getYaw();
 		pilot.driveAngle((int) angle);
+	}
+	
+	private void handlePrimitiveCommands(PrimitiveCommandTask task) {
+		if (task.getPropellor() != null) {
+			pilot.setPropellor(task.getPropellor().intValue());
+		}
+		
+		if (task.getRudder() != null) {
+			pilot.setRudder(task.getRudder().intValue());
+		}
+		
+		if (task.getSail() != null) {
+			pilot.setSail(task.getSail().intValue());
+		}
 	}
 	
 	private double toDegree(double radian) {
