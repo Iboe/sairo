@@ -219,4 +219,10 @@ public class Compass {
 	public double getUsefullsamplerate() {
 		return usefullsamplerate;
 	}
+
+	@Override
+	public String toString() {
+		return "Compass [azimuth=" + azimuth + ", pitch=" + pitch + ", roll="
+				+ roll + "]";
+	}
 }
