@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Segelboot with libraries in sub-folder">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/project-svn/Autosegelboot/branches/releases/sbc_11.12.21_pilotTest.jar">
+            <manifest>
+                <attribute name="Main-Class" value="de.fhb.sailboat.test.PilotTest"/>
+                <attribute name="Class-Path" value=". sbc_11.12.21_pilotTest_lib/RXTXcomm.jar sbc_11.12.21_pilotTest_lib/vecmath-1.3.1.jar"/>
+            </manifest>
+            <fileset dir="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/workspace/Segelboot/bin"/>
+        </jar>
+        <delete dir="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/project-svn/Autosegelboot/branches/releases/sbc_11.12.21_pilotTest_lib"/>
+        <mkdir dir="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/project-svn/Autosegelboot/branches/releases/sbc_11.12.21_pilotTest_lib"/>
+        <copy file="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/workspace/Segelboot/lib/RXTXcomm.jar" todir="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/project-svn/Autosegelboot/branches/releases/sbc_11.12.21_pilotTest_lib"/>
+        <copy file="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/workspace/Segelboot/lib/vecmath-1.3.1.jar" todir="E:/Eigene Dateien/STUnterlagen/Masterstudium/1. Semester/Projekt - K.I/project-svn/Autosegelboot/branches/releases/sbc_11.12.21_pilotTest_lib"/>
+    </target>
+</project>

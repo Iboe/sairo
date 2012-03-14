@@ -1,0 +1,1 @@
+java -Djava.library.path=./sbc_12.01.04_pilotTest_lib/ -jar sbc_12.01.04_pilotTest.jar
