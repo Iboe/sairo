@@ -17,7 +17,9 @@ public class OS500sensor {
 	/*
 	 * Configuration Variables
 	 */
-	String comPort = "COM2";
+	boolean keepRunning = true;
+	Thread sensorThread;
+	String comPort = "COM17";
 	int baudrate = 115200;
 	long clock = 1000;			// clock-rate in milliseconds; Compass sends actually 10 Samples/s, Sample-Buffer stores 10 Samples
 	
@@ -31,7 +33,13 @@ public class OS500sensor {
 		
 		try {
 			this.sensorComm.connect();
-			(new Thread(new OS500sensorThread(this))).start();
+			//TODO sensorThread= new Thread...
+			//TODO zum beenden des threads durch separate methode:
+			//     keepRunning=false
+			//     sensorThread.join() //warten auf thread beendung
+			//     com port schlieﬂen
+			keepRunning=true;
+			(sensorThread=new Thread(new OS500sensorThread(this))).start();
 			
 			
 		} catch (Exception e) {
@@ -40,7 +48,20 @@ public class OS500sensor {
 		}
 	}
 	
-	
+	public void shutdown()
+	{
+		if(sensorThread != null && !sensorThread.isInterrupted())
+		{
+			keepRunning=false;
+			try {
+				sensorThread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//sensorComm.closePort();
+		}
+	}
 	public long getClock() {
 		return clock;
 	}
@@ -83,19 +104,19 @@ public class OS500sensor {
 		long clock = 1000;	// default Value
 		long start, end;
 		
-		
 		/**
 		 * @param sensorInstance
 		 */
 		public OS500sensorThread(OS500sensor sensorInstance) {
 			this.sensorInstance = sensorInstance;
 			this.clock = sensorInstance.getClock();
-			
 		}
+
 		@Override
 		public void run() {
-			Boolean keepRunning = true; 
-			while (keepRunning) {
+			 
+			//TODO keepRunning setzbar machen von auﬂen um thread  kontrolliert zu beenden
+			while (sensorInstance.keepRunning) {
 				try {
 					start = System.currentTimeMillis();
 					// Get List of the last 10 Elements
@@ -158,9 +179,9 @@ public class OS500sensor {
 															usefullrate);
 							WorldModelImpl.getInstance().getCompassModel().setCompass(c);
 							
-							System.out.println("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
-									+" Temp: "+ dataSet.getTemp()
-									+" out of "+ i +" useful samples ("+ usefullrate +")");
+//							System.out.println("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
+//									+" Temp: "+ dataSet.getTemp()
+//									+" out of "+ i +" useful samples ("+ usefullrate +")");
 							
 						}
 					}
@@ -171,7 +192,7 @@ public class OS500sensor {
 					
 				} catch (InterruptedException e) {
 					// something went wrong, stop the loop, throw an error to the next higher level
-					keepRunning = false;
+					sensorInstance.keepRunning = false;
 					
 					e.printStackTrace();
 				}
