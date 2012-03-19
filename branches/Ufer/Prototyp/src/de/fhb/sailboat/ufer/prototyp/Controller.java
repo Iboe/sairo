@@ -1,5 +1,6 @@
 package de.fhb.sailboat.ufer.prototyp;
 
+
 import java.util.Random;
 
 /**

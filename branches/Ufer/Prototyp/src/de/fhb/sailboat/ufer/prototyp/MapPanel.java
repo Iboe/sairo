@@ -1,9 +1,8 @@
 package de.fhb.sailboat.ufer.prototyp;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -13,7 +12,6 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -79,8 +77,6 @@ public class MapPanel extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -106,26 +102,7 @@ public class MapPanel extends JPanel {
 						map.removeMapMarker(markerList.get(i));
 					}
 
-					if (firstCorner == null)
-						firstCorner = target;
-					else {
-						Coordinate topLeft = new Coordinate(Math.max(
-								firstCorner.getLat(), target.getLat()), Math
-								.min(firstCorner.getLon(), target.getLon()));
-
-						Coordinate bottomRight = new Coordinate(Math.min(
-								firstCorner.getLat(), target.getLat()), Math
-								.max(firstCorner.getLon(), target.getLon()));
-
-						MapRectangleImpl rectangle = new MapRectangleImpl(
-								topLeft, bottomRight);
-
-						rectList.add(rectangle);
-
-						map.addMapRectangle(rectList.get(rectList.size() - 1));
-
-						firstCorner = null;
-					}
+					addRectsToMap(target);
 
 				}
 
@@ -140,20 +117,14 @@ public class MapPanel extends JPanel {
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 
@@ -223,6 +194,45 @@ public class MapPanel extends JPanel {
 		return mapArea;
 	}
 
+	/**
+	 * Adds a rectangle to the map. If firstCorner isn't set yet firstCorner
+	 * will be set by target (current click). If firstCorner is set, target will
+	 * be the second corner of the rectangle and the rectangle will be
+	 * displayed.
+	 * 
+	 * @param target
+	 *            coordinates of the last click
+	 */
+	private void addRectsToMap(Coordinate target) {
+		if (firstCorner == null)
+			firstCorner = target;
+		else {
+			Coordinate topLeft = new Coordinate(Math.max(firstCorner.getLat(),
+					target.getLat()), Math.min(firstCorner.getLon(),
+					target.getLon()));
+
+			Coordinate bottomRight = new Coordinate(Math.min(
+					firstCorner.getLat(), target.getLat()), Math.max(
+					firstCorner.getLon(), target.getLon()));
+
+			MapRectangleImpl rectangle = new MapRectangleImpl(topLeft,
+					bottomRight);
+
+			rectList.add(rectangle);
+
+			map.addMapRectangle(rectList.get(rectList.size() - 1));
+
+			firstCorner = null;
+		}
+	}
+
+	/**
+	 * Adds MapMarker to the last n positions of the boat.
+	 * 
+	 * @param boatPosition
+	 *            current position of the boat
+	 */
+
 	public void followBoat(Coordinate boatPosition) {
 		positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
 				.getLat(), boatPosition.getLon()));
@@ -236,7 +246,9 @@ public class MapPanel extends JPanel {
 	}
 
 	/**
-	 * Funktioniert noch nicht wie es soll, muss vervollständigt werden
+	 * TODO doesn't work yet.
+	 * 
+	 * Loads tiles around a given coordinate.
 	 * 
 	 * @param coordinate
 	 * @param zoomlevel

@@ -1,5 +1,6 @@
 package de.fhb.sailboat.ufer.prototyp;
 
+
 /**
  * This class serves as storage for all data relevant to be served to and displayed by View.
  * @author Patrick Rutter
