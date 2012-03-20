@@ -265,4 +265,52 @@ public class MapPanel extends JPanel {
 			}
 		}
 	}
+
+	public ArrayList<MapMarker> getMarkerList() {
+		return markerList;
+	}
+
+	public void setMarkerList(ArrayList<MapMarker> markerList) {
+		this.markerList = markerList;
+	}
+
+	public ArrayList<MapMarker> getPositionHistory() {
+		return positionHistory;
+	}
+
+	public void setPositionHistory(ArrayList<MapMarker> positionHistory) {
+		this.positionHistory = positionHistory;
+	}
+
+	public ArrayList<MapRectangle> getRectList() {
+		return rectList;
+	}
+
+	public void setRectList(ArrayList<MapRectangle> rectList) {
+		this.rectList = rectList;
+	}
+
+	public JMapViewer getMap() {
+		return map;
+	}
+
+	public void setMap(JMapViewer map) {
+		this.map = map;
+	}
+
+	public boolean isInMarkerMarkMode() {
+		return inMarkerMarkMode;
+	}
+
+	public void setInMarkerMarkMode(boolean inMarkerMarkMode) {
+		this.inMarkerMarkMode = inMarkerMarkMode;
+	}
+
+	public boolean isInRectMarkMode() {
+		return inRectMarkMode;
+	}
+
+	public void setInRectMarkMode(boolean inRectMarkMode) {
+		this.inRectMarkMode = inRectMarkMode;
+	}
 }
