@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import de.fhb.sailboat.control.Navigator;
 import de.fhb.sailboat.control.NavigatorImpl;
@@ -44,14 +45,20 @@ public class Initializier {
 	
 	private void initializeProperties() {
 		Properties prop = new Properties();
+		Properties systemProps = System.getProperties();
 		InputStream stream = this.getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
+		Set<Object> keySet;
 		
 		try	{
 			prop.load(stream);
 		} catch (IOException e) {
 			throw new IllegalStateException("ERROR: could not load properties", e);
 		}
-		System.setProperties(prop);
+		
+		keySet = prop.keySet();
+		for (Object key : keySet) {
+			systemProps.put(key, prop.get(key));
+		}
 	}
 	
 	private void initializeSensors() {
