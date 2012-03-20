@@ -12,6 +12,8 @@ import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.worldmodel.WorldModel;
+import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
  * This class manages the data pipe between view, model and the sensors.
@@ -24,9 +26,12 @@ public class Controller {
 
 	// Variables
 	private Model model;
+	
+	private WorldModel worldModel;
 
 	public Controller() {
 		this.model = new Model();
+		worldModel=WorldModelImpl.getInstance();
 	}
 
 	// Committer (used for sending data to other sailbot classes)
@@ -75,7 +80,8 @@ public class Controller {
 	public void updateRandom() {
 		Random dice = new Random();
 
-		this.model.setCompDirection(dice.nextInt(361));
+		//this.model.setCompDirection(dice.nextInt(361));
+		this.model.setCompDirection((int)(worldModel.getCompassModel().getCompass().getYaw()));
 
 		this.model.setCompTemperature(dice.nextInt(15)
 				+ Math.round((dice.nextDouble() * 100.0)) / 100.0);
@@ -84,11 +90,13 @@ public class Controller {
 
 		this.model.setWindVelocity(dice.nextInt(3000));
 
-		this.model.setGpsLongitude(dice.nextInt(1000)
-				+ Math.round((dice.nextDouble() * 1000.0)) / 100.0);
+		this.model.setGpsLongitude(worldModel.getGPSModel().getPosition().getLongitude());
+//		this.model.setGpsLongitude(dice.nextInt(1000)
+//				+ Math.round((dice.nextDouble() * 1000.0)) / 100.0);
 
-		this.model.setGpsLatitude(dice.nextInt(1000)
-				+ Math.round((dice.nextDouble() * 1000.0)) / 100.0);
+		this.model.setGpsLatitude(worldModel.getGPSModel().getPosition().getLatitude());
+//		this.model.setGpsLatitude(dice.nextInt(1000)
+//				+ Math.round((dice.nextDouble() * 1000.0)) / 100.0);
 
 		this.model.setGpsPrecision((float) dice.nextInt(2));
 	}
