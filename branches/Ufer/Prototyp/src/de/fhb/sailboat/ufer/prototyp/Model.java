@@ -1,5 +1,12 @@
 package de.fhb.sailboat.ufer.prototyp;
 
+import java.util.ArrayList;
+
+import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+
+import de.fhb.sailboat.control.Planner;
+
+
 
 /**
  * This class serves as storage for all data relevant to be served to and displayed by View.
@@ -23,8 +30,7 @@ public class Model {
 	private double gpsPrecision;
 	
 	// for the planned exercise
-	private double gpsTargetLongitude;
-	private double gpsTargetLatitude;
+	private ArrayList<MapMarker> markerList;
 	
 	public Model() {
 		this.compTemperature = 0.0f;
@@ -34,8 +40,6 @@ public class Model {
 		this.gpsLatitude = 0;
 		this.gpsLongitude = 0;
 		this.gpsPrecision = 0.0f;
-		this.gpsTargetLatitude = 0;
-		this.gpsTargetLongitude = 0;
 	}
 
 	// Getter/ Setter
@@ -100,21 +104,15 @@ public class Model {
 		}
 		this.gpsPrecision = gpsPrecision;
 	}
+
+	public ArrayList<MapMarker> getMarkerList() {
+		return markerList;
+	}
+
+	public void setMarkerList(ArrayList<MapMarker> markerList) {
+		this.markerList = markerList;
+	}
 	
-	public double getGpsTargetLongitude() {
-		return gpsTargetLongitude;
-	}
-
-	public void setGpsTargetLongitude(double gpsTargetLongitude) {
-		this.gpsTargetLongitude = gpsTargetLongitude;
-	}
-
-	public double getGpsTargetLatitude() {
-		return gpsTargetLatitude;
-	}
-
-	public void setGpsTargetLatitude(double gpsTargetLatitude) {
-		this.gpsTargetLatitude = gpsTargetLatitude;
-	}
+	
 	
 }

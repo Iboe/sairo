@@ -73,6 +73,7 @@ public class View extends JFrame {
 	final static public String M_CONNECTION_SETTINGS = "Einstelllungen";
 
 	final static public String M_MISSION = "Mission";
+	final static public String M_MISSION_SEND = "Senden";
 
 	final static public String M_PROTOCOL = "Protokoll";
 	
@@ -139,6 +140,7 @@ public class View extends JFrame {
 	final static public int L_LINE = 18; // Common height of a line of text, used as distance between two lines of text (may be removed later)
 
 	// variables
+	private MapPanel map;
 	private Controller controller;
 	
 	private Font font;
@@ -196,9 +198,23 @@ public class View extends JFrame {
 		mProtocol.setFont(font);
 
 		// Menü->Mission
+		//TODO Remove button for exercise from UI
 		JMenu mMission = new JMenu(M_MISSION);
 		mMission.setMnemonic(KeyEvent.VK_M);
 		mMission.setFont(font);
+		
+		JMenuItem mMissionSend = new JMenuItem(M_MISSION_SEND);
+		mMissionSend.setMnemonic(KeyEvent.VK_S);
+		mMissionSend.setToolTipText("Koordinaten senden.");
+
+		mMissionSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				sendMapMarkers();
+			}
+
+		});
+		
+		mMission.add(mMissionSend);
 
 		// Menü->Verbindung
 		JMenu mConnection = new JMenu(M_CONNECTION);
@@ -644,8 +660,8 @@ public class View extends JFrame {
 		}
 
 		// Map Panel
-		MapPanel map = new MapPanel();
-		mapArea = map.mapPanel();		
+		map = new MapPanel();
+		mapArea = map.mapPanel();
 		add(mapArea);
 
 		// chart panel (just temporary)
@@ -658,6 +674,13 @@ public class View extends JFrame {
 		add(chartArea);
 		
 		
+	}
+	
+	private void sendMapMarkers() {
+		if (map.getMarkerList() == null) {
+			this.controller.setMarkerList(map.getMarkerList());
+			this.controller.commitMarkerList();
+		}
 	}
 
 	/**
