@@ -3,6 +3,7 @@ package de.fhb.sailboat.control;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
+import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -25,13 +26,19 @@ public class NavigatorImpl implements Navigator{
 			navigateToCircle((ReachCircleTask) task);
 		} else if (PrimitiveCommandTask.class.equals(task.getClass() )) {
 			handlePrimitiveCommands((PrimitiveCommandTask) task);
+		} else if (StopTask.class.equals(task.getClass() )) {
+			stop((StopTask) task);
 		} else {
 			throw new UnsupportedOperationException("can not handle task");
 		}
 	}
 	
-	//calculates relative angle from current position to goal
-	//hands over angle to pilot
+	/**
+	 * Calculates relative angle from current position to goal defined in task and 
+	 * hands it over to pilot.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void navigateToCircle(ReachCircleTask task) {
 		GPS gpsPosition = worldModel.getGPSModel().getPosition();
 		GPS diff;
@@ -55,8 +62,10 @@ public class NavigatorImpl implements Navigator{
 		
 		System.out.println("navigator - calculated angle: "+angle);
 		
-		//if(diff.getLatitude() < 0)
+		//if (diff.getLatitude() < 0) {
 		//	angle+=180;
+		//} 
+		
 		//angle between current and goal position = 
 		//north (== y-axis) - current angle (direction of the bow as difference to north)
 		//- angle between difference vector and x-axis 
@@ -76,6 +85,12 @@ public class NavigatorImpl implements Navigator{
 		if (task.getSail() != null) {
 			pilot.setSail(task.getSail().intValue());
 		}
+		
+		task.setExecuted(true);
+	}
+	
+	private void stop(StopTask task) {
+		
 	}
 	
 	private double toDegree(double radian) {
