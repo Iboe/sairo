@@ -19,6 +19,7 @@ import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.serial.sensor.GpsSensor;
 import de.fhb.sailboat.serial.sensor.OS500sensor;
 import de.fhb.sailboat.ufer.prototyp.View;
 import de.fhb.sailboat.worldmodel.WorldModel;
@@ -38,7 +39,7 @@ public class Initializier {
 		init.initializeProperties();
 		init.initializeSensors();
 		init.initializeControl();
-		//init.initializeView();
+		init.initializeView();
 		init.createDummyMission();
 		//init.waitForShutdown();
 	}
@@ -62,12 +63,12 @@ public class Initializier {
 	}
 	
 	private void initializeSensors() {
-		GPSDummy gps = new GPSDummy();
-		WorldModelImpl.getInstance().getCompassModel()
-			.setCompass(new Compass(170, 0, 0));
+		//GPSDummy gps = new GPSDummy();
+//		WorldModelImpl.getInstance().getCompassModel()
+//			.setCompass(new Compass(170, 0, 0));
 		System.out.println("-----init sensors-----");
-		//GpsSensor gps=new GpsSensor("COM8");
-		//compassSensor=new OS500sensor(); //zzt. COM17
+		GpsSensor gps=new GpsSensor("COM4");
+		compassSensor=new OS500sensor(); //zzt. COM17
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -85,6 +86,9 @@ public class Initializier {
 	}
 	
 	private void initializeView() {
+		
+		System.getProperties().setProperty("http.proxyHost", "proxy.fh-brandenburg.de");
+		System.getProperties().setProperty("http.proxyPort", "3128");
 		view = new View(planner);
 		view.setVisible(true);
 	}
@@ -99,8 +103,8 @@ public class Initializier {
 			if (position != null) {
 				Mission mission = new MissionImpl();
 				List<Task> tasks = new LinkedList<Task>();
-				GPS goal = new GPS(position.getLatitude() + 200, 
-						position.getLongitude());
+				//GPS goal = new GPS(position.getLatitude() + 200, 
+				//		position.getLongitude());
 				GPS goal2 = new GPS(position.getLatitude(), 
 						position.getLongitude());
 				GPS goal3 = new GPS(52.24615, //mensa
@@ -108,17 +112,17 @@ public class Initializier {
 				
 				System.out.println("current: "+WorldModelImpl.getInstance().getCompassModel().getCompass());
 				System.out.println("current: "+position);
-				System.out.println("desired: "+goal);
+				System.out.println("desired: "+goal3);
 				
-				tasks.add(new ReachCircleTask(goal, 5));
+				//tasks.add(new ReachCircleTask(goal, 5));
 				tasks.add(new ReachCircleTask(goal2, 5));
 				tasks.add(new ReachCircleTask(goal3, 5));
 				mission.setTasks(tasks);
 				planner.doMission(mission);
 			
-				if (compassSensor != null) {
-					compassSensor.shutdown();
-				}
+				//if (compassSensor != null) {
+				//	compassSensor.shutdown();
+				//}
 				gpsExist = true;
 			}
 			try {
