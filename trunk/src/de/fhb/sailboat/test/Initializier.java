@@ -18,12 +18,14 @@ import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
 import de.fhb.sailboat.serial.sensor.OS500sensor;
+import de.fhb.sailboat.ufer.prototyp.View;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class Initializier {
 
 	private Planner planner;
+	private View view;
 	
 	private OS500sensor compassSensor;
 	
@@ -32,15 +34,16 @@ public class Initializier {
 		
 		init.initializeSensors();
 		init.initializeControl();
+		init.initializeView();
 		init.createDummyMission();
 		//init.waitForShutdown();
 	}
 	
 	private void initializeSensors() {
-		//GPSDummy gps = new GPSDummy();
+		GPSDummy gps = new GPSDummy();
 		System.out.println("-----init sensors-----");
-		GpsSensor gps=new GpsSensor("COM8");
-		compassSensor=new OS500sensor(); //zzt. COM17
+		//GpsSensor gps=new GpsSensor("COM8");
+		//compassSensor=new OS500sensor(); //zzt. COM17
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -57,6 +60,11 @@ public class Initializier {
 		Pilot pilot = new PilotImpl(new DummyLoco());
 		Navigator navigator = new NavigatorImpl(pilot);
 		planner = new PlannerImpl(navigator);
+	}
+	
+	private void initializeView() {
+		view = new View(planner);
+		view.setVisible(true);
 	}
 	
 	private void createDummyMission() {
