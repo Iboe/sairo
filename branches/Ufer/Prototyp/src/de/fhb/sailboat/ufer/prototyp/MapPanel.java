@@ -1,6 +1,5 @@
 package de.fhb.sailboat.ufer.prototyp;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -31,7 +30,7 @@ import de.fhb.sailboat.ufer.prototyp.utility.MapRectangleImpl;
 
 public class MapPanel extends JPanel {
 
-	private final int MAXIMUM_COUNT_LAST_POSITION = 20;
+	private final int MAXIMUM_COUNT_LAST_POSITION = 30;
 
 	private static final long serialVersionUID = 1L;
 
@@ -70,8 +69,9 @@ public class MapPanel extends JPanel {
 				javax.swing.border.BevelBorder.RAISED));
 		setLayout(null);
 
-		// Startposition auf Brandenburg gestellt
-		map.setDisplayPositionByLatLon(52.40577, 12.51411, 11);
+		// Startposition auf FH gestellt
+		
+		map.setDisplayPositionByLatLon(52.410771, 12.538745, 18);
 
 		map.addMouseListener(new MouseListener() {
 
@@ -83,8 +83,7 @@ public class MapPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				Coordinate target = map.getPosition(arg0.getPoint());
 				if (inMarkerMarkMode) {
-					followBoat(target);
-
+					
 					for (int i = 0; i < rectList.size(); i++) {
 						map.removeMapRectangle(rectList.get(i));
 					}
@@ -227,7 +226,8 @@ public class MapPanel extends JPanel {
 	}
 
 	/**
-	 * Adds MapMarker to the last n positions of the boat.
+	 * Adds MapMarker to the last MAXIMUM_COUNT_LAST_POSITION positions of the
+	 * boat.
 	 * 
 	 * @param boatPosition
 	 *            current position of the boat

@@ -50,8 +50,10 @@ public class MapPolygonImpl implements MapPolygon {
 			g2.setStroke(stroke);
 		}
 		// Draw
-		g.drawRect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x,
-				bottomRight.y - topLeft.y);
+		/*
+		 * g.drawRect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x,
+		 * bottomRight.y - topLeft.y);
+		 */
 		// Restore graphics
 		g.setColor(oldColor);
 		if (g instanceof Graphics2D) {
@@ -59,7 +61,7 @@ public class MapPolygonImpl implements MapPolygon {
 		}
 	}
 
-	public String toString() {
-		return "MapRectangle from " + topLeft + " to " + bottomRight;
-	}
+	// public String toString() {
+	// return "MapRectangle from " + topLeft + " to " + bottomRight;
+	// }
 }
