@@ -31,7 +31,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	String lastCom;
 	// Servo-Config; ==> TODO outsourcing!
 	//String comPort = "COM1";
-	String comPort = "COM4";
+	String comPort = "COM2";
 	int baudrate = 9600;
 	// Sail
 	int sailNo = 0;
