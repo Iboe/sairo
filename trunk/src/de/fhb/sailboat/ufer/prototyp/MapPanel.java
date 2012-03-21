@@ -26,6 +26,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
+import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.ufer.prototyp.utility.MapRectangleImpl;
 
 public class MapPanel extends JPanel {
@@ -233,9 +234,9 @@ public class MapPanel extends JPanel {
 	 *            current position of the boat
 	 */
 
-	public void followBoat(Coordinate boatPosition) {
+	public void followBoat(GPS boatPosition) {
 		positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
-				.getLat(), boatPosition.getLon()));
+				.getLatitude(), boatPosition.getLongitude()));
 
 		if (positionHistory.size() > MAXIMUM_COUNT_LAST_POSITION) {
 			map.removeMapMarker(positionHistory.get(0));
