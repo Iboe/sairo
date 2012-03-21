@@ -47,29 +47,29 @@ public class BoatMonitor {
 	final static public int L_COMP_DIRECTION_V_VSIZE = L_VSIZE;
 	
 	final static public String L_GPS_LONG_NAME = "Longitude:";
-	final static public String L_GPS_LONG_UNIT = " °"; // this will be appended to the value-label text for displaying the longitude
+	final static public String L_GPS_LONG_UNIT = "°"; // this will be appended to the value-label text for displaying the longitude
 	final static public int L_GPS_LONG_X = 8;
 	final static public int L_GPS_LONG_Y = 16;
 	final static public int L_GPS_LONG_DSIZE = L_DSIZE;
 	
-	final static public int L_GPS_LONG_V_X = L_GPS_LONG_X + L_GPS_LONG_DSIZE + L_OFFSET -8;
-	final static public int L_GPS_LONG_V_Y = L_GPS_LONG_Y;
-	final static public int L_GPS_LONG_V_VSIZE = L_VSIZE + 8;
+	final static public int L_GPS_LONG_V_X = L_GPS_LONG_X + L_OFFSET;
+	final static public int L_GPS_LONG_V_Y = L_GPS_LONG_Y + L_LINE;
+	final static public int L_GPS_LONG_V_VSIZE = L_VSIZE;
 	
 	final static public String L_GPS_LAT_NAME = "Latitude:";
-	final static public String L_GPS_LAT_UNIT = " °"; // this will be appended to the value-label text for displaying the Latitude
+	final static public String L_GPS_LAT_UNIT = "°"; // this will be appended to the value-label text for displaying the Latitude
 	final static public int L_GPS_LAT_X = 8;
-	final static public int L_GPS_LAT_Y = 16 + L_LINE;
+	final static public int L_GPS_LAT_Y = 16 + (L_LINE * 2);
 	final static public int L_GPS_LAT_DSIZE = L_DSIZE;
 	
-	final static public int L_GPS_LAT_V_X = L_GPS_LAT_X + L_GPS_LAT_DSIZE + L_OFFSET -8;
-	final static public int L_GPS_LAT_V_Y = L_GPS_LAT_Y;
-	final static public int L_GPS_LAT_V_VSIZE = L_VSIZE + 8;
+	final static public int L_GPS_LAT_V_X = L_GPS_LAT_X + L_OFFSET;
+	final static public int L_GPS_LAT_V_Y = L_GPS_LAT_Y + L_LINE;
+	final static public int L_GPS_LAT_V_VSIZE = L_VSIZE;
 	
 	final static public String L_GPS_PRECISION_NAME = "Präzision:";
 	final static public String L_GPS_PRECISION_UNIT = ""; // this will be appended to the value-label text for displaying the precision
 	final static public int L_GPS_PRECISION_X = 8;
-	final static public int L_GPS_PRECISION_Y = 16 + (L_LINE * 2);
+	final static public int L_GPS_PRECISION_Y = 16 + (L_LINE * 4);
 	final static public int L_GPS_PRECISION_DSIZE = L_DSIZE;
 	
 	final static public int L_GPS_PRECISION_V_X = L_GPS_PRECISION_X + L_GPS_PRECISION_DSIZE + L_OFFSET;
@@ -193,7 +193,7 @@ public class BoatMonitor {
 				lGPSLongitudeV = new JLabel();
 				lGPSLongitudeV.setText("0" + L_GPS_LONG_UNIT);
 				lGPSLongitudeV.setSize(new Dimension(L_VSIZE, L_LINE));
-				lGPSLongitudeV.setLocation(L_GPS_LONG_X + L_GPS_LONG_DSIZE + L_OFFSET, L_GPS_LONG_Y);
+				lGPSLongitudeV.setLocation(L_GPS_LONG_V_X, L_GPS_LONG_V_Y);
 				panel.add(lGPSLongitudeV);
 				
 				// Latitude
@@ -206,7 +206,7 @@ public class BoatMonitor {
 				lGPSLatitudeV = new JLabel();
 				lGPSLatitudeV.setText("0" + L_GPS_LAT_UNIT);
 				lGPSLatitudeV.setSize(new Dimension(L_VSIZE, L_LINE));
-				lGPSLatitudeV.setLocation(L_GPS_LAT_X + L_GPS_LAT_DSIZE + L_OFFSET, L_GPS_LAT_Y);
+				lGPSLatitudeV.setLocation(L_GPS_LAT_V_X, L_GPS_LAT_V_Y);
 				panel.add(lGPSLatitudeV);
 				
 				// Precision
