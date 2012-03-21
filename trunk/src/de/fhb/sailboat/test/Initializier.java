@@ -32,17 +32,14 @@ public class Initializier {
 	private Planner planner;
 	private View view;
 	
-	private OS500sensor compassSensor;
-	
 	public static void main(String[] args) {
 		Initializier init = new Initializier();
 		
 		init.initializeProperties();
 		init.initializeSensors();
 		init.initializeControl();
-		init.initializeView();
+		//init.initializeView();
 		init.createDummyMission();
-		//init.waitForShutdown();
 	}
 	
 	private void initializeProperties() {
@@ -54,7 +51,7 @@ public class Initializier {
 		try	{
 			prop.load(stream);
 		} catch (IOException e) {
-			throw new IllegalStateException("ERROR: could not load properties", e);
+			throw new IllegalStateException("could not load properties", e);
 		}
 		
 		keySet = prop.keySet();
@@ -64,14 +61,14 @@ public class Initializier {
 	}
 	
 	private void initializeSensors() {
-		//GPSDummy gps = new GPSDummy();
 		WorldModelImpl.getInstance().getCompassModel()
 			.setCompass(new Compass(170, 0, 0));
 		WorldModelImpl.getInstance().getGPSModel()
 		.setPosition(new GPS( 0, 0));
 		System.out.println("-----init sensors-----");
-		GpsSensor gps=new GpsSensor("COM8");
-		compassSensor=new OS500sensor(); //zzt. COM17
+		GPSDummy gps = new GPSDummy();
+		//GpsSensor gps=new GpsSensor("COM8");
+		OS500sensor compassSensor=new OS500sensor(); //zzt. COM17
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -82,16 +79,13 @@ public class Initializier {
 	}
 	
 	private void initializeControl() {
-		Pilot pilot = new PilotImpl(new AKSENLocomotion());
-//		Pilot pilot = new PilotImpl(new DummyLoco());
+		//Pilot pilot = new PilotImpl(new AKSENLocomotion());
+		Pilot pilot = new PilotImpl(new DummyLoco());
 		Navigator navigator = new NavigatorImpl(pilot);
 		planner = new PlannerImpl(navigator);
 	}
 	
 	private void initializeView() {
-		
-		System.getProperties().setProperty("http.proxyHost", "proxy.fh-brandenburg.de");
-		System.getProperties().setProperty("http.proxyPort", "3128");
 		view = new View(planner);
 		view.setVisible(true);
 	}
@@ -106,40 +100,22 @@ public class Initializier {
 			if (position != null) {
 				Mission mission = new MissionImpl();
 				List<Task> tasks = new LinkedList<Task>();
-				//GPS goal = new GPS(position.getLatitude() + 200, 
-				//		position.getLongitude());
+				GPS goal = new GPS(position.getLatitude() + 200, 
+						position.getLongitude());
 				GPS goal2 = new GPS(position.getLatitude(), 
 						position.getLongitude());
 				GPS goal3 = new GPS(52.24615, //mensa
 						12.32274);
 				
-				System.out.println("current: "+WorldModelImpl.getInstance().getCompassModel().getCompass());
-				System.out.println("current: "+position);
-				System.out.println("desired: "+goal3);
-				
-				//tasks.add(new ReachCircleTask(goal, 5));
+				tasks.add(new ReachCircleTask(goal, 5));
 				tasks.add(new ReachCircleTask(goal2, 5));
 				tasks.add(new ReachCircleTask(goal3, 5));
 				mission.setTasks(tasks);
-				//planner.doMission(mission);
-			
-				//if (compassSensor != null) {
-				//	compassSensor.shutdown();
-				//}
+				planner.doMission(mission);
 				gpsExist = true;
 			}
 			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private void waitForShutdown() {
-		while (true) {
-			try {
-				Thread.sleep(100);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

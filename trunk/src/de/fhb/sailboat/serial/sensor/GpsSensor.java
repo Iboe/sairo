@@ -52,29 +52,25 @@ public class GpsSensor{
 			if(myNmea != null){
 				if(myNmea.length == 9){
 					if(myNmea[1] != "0.0" && myNmea[3] != "0.0"){
-						
 						// Schreiben in Weltmodell
-						int gradLat=(int)(Double.parseDouble(myNmea[1])/100);
-						int gradLong=(int)(Double.parseDouble(myNmea[3])/100);
-						//System.out.println("calc: gradLat="+gradLat+", gradLong="+gradLong);
-						double minLat=Double.parseDouble(myNmea[1])-gradLat*100;
-						double minLong=Double.parseDouble(myNmea[3])-gradLong*100;
+						double latitude = Double.parseDouble(myNmea[1]);
+						double longitude = Double.parseDouble(myNmea[3]);
+						int gradLat = (int)(latitude / 100);
+						int gradLong = (int)(longitude / 100);
+						double minLat = latitude - gradLat * 100;
+						double minLong = longitude - gradLong * 100;
 						
 						minLat*=10./600.;
 						minLong*=10./600.;
-						//System.out.println("calc: min//Lat="+minLat+", minLong="+minLong);
-						//GPS myGps = new GPS(Double.parseDouble(myNmea[1])/100, Double.parseDouble(myNmea[3])/100);
 						GPS myGps = new GPS(gradLat+minLat,gradLong+minLong);
 						WorldModelImpl.getInstance().getGPSModel().setPosition(myGps);
+						
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						//System.out.println(myNmea[1]+","+myNmea[3]);
-						//gpsInstance.setLatitude(Double.parseDouble(myNmea[1]));
-						//gpsInstance.setLongitude(Double.parseDouble(myNmea[3]));
 					}
 				}
 			}

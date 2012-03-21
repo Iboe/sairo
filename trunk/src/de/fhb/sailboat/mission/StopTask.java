@@ -6,8 +6,6 @@ public class StopTask implements Task{
 
 	@Override
 	public boolean isFinished(GPS position) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
