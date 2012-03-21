@@ -9,6 +9,11 @@ import de.fhb.sailboat.data.GPS;
 public interface Pilot {
 
 	/**
+	 * Name of the property defining the wait time between two planning cycles.
+	 */
+	static final String WAIT_TIME_PROPERTY = Pilot.class.getSimpleName() + ".waitTime";
+	
+	/**
 	 * Telling the pilot to change to a certain direction (angle), relative to the current direction.
 	 * The angle range goes from -180° to 180°.
 	 * If an angle above 180° is given, it will automatically transform it to the corresponding negative angle. 

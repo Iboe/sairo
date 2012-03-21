@@ -3,7 +3,6 @@ package de.fhb.sailboat.control;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.CompassModel;
-import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
@@ -14,6 +13,9 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class PilotImpl implements Pilot {
 
+	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
+			Pilot.WAIT_TIME_PROPERTY));
+	
 	/**
 	 * The max relevant angle where the boat rudder reaches the maximum deflection. 
 	 */
@@ -37,7 +39,6 @@ public class PilotImpl implements Pilot {
 	public void driveAngle(int angle) {
 		
 		double desiredAngle=0;
-		double rudderPos;
 		
 		System.out.println("given relative angle: "+angle);
 		angle=angle%360;
@@ -163,8 +164,7 @@ public class PilotImpl implements Pilot {
 				
 				
 				try {
-					
-					Thread.sleep(200);
+					Thread.sleep(WAIT_TIME);
 				}
 				catch (InterruptedException e) {
 					
