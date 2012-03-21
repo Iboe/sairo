@@ -21,26 +21,26 @@ public class compasstest {
 
 		
 		OS500sensor compass = new OS500sensor();
-//		try {
+		try {
 //			System.out.println("Abfrage1: ");
 //			while(true) {
 //				Thread.sleep(1000);
 //				System.out.println("Takt");
 //			}
-//			compass.getRawString();
-//			System.out.println("Abfrage2: ");
-//			Thread.sleep(1000);
-//			compass.getRawString();
-//			System.out.println("Abfrage3: ");
-//			Thread.sleep(1000);
-//			compass.getRawString();
-//			System.out.println("Abfrage4: ");
-//			Thread.sleep(1000);
-//			compass.getRawString();
-//			System.out.println("Abfrage5: ");
-//			Thread.sleep(1000);
-//			compass.getRawString();
-//			System.out.println("----");
+			compass.getRawString();
+			System.out.println("Abfrage2: ");
+			Thread.sleep(1000);
+			compass.getRawString();
+			System.out.println("Abfrage3: ");
+			Thread.sleep(1000);
+			compass.getRawString();
+			System.out.println("Abfrage4: ");
+			Thread.sleep(1000);
+			compass.getRawString();
+			System.out.println("Abfrage5: ");
+			Thread.sleep(1000);
+			compass.getRawString();
+			System.out.println("----");
 //			int i = 0;
 //			while (i<=10) {
 //				Thread.sleep(1000);
@@ -50,11 +50,11 @@ public class compasstest {
 //			}
 //			
 //			
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-////			e.printStackTrace();
-//			System.exit(0); 
-//		}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(0); 
+		}
 		
 		
 		
