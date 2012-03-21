@@ -669,7 +669,7 @@ public class View extends JFrame {
 		}
 
 		// Map Panel
-		map = new MapPanel(controller);
+		map = new MapPanel();
 		mapArea = map.mapPanel();
 		add(mapArea);
 
