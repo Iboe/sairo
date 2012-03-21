@@ -19,6 +19,7 @@ import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
 import de.fhb.sailboat.serial.sensor.OS500sensor;
 import de.fhb.sailboat.ufer.prototyp.View;
@@ -64,10 +65,12 @@ public class Initializier {
 	
 	private void initializeSensors() {
 		//GPSDummy gps = new GPSDummy();
-//		WorldModelImpl.getInstance().getCompassModel()
-//			.setCompass(new Compass(170, 0, 0));
+		WorldModelImpl.getInstance().getCompassModel()
+			.setCompass(new Compass(170, 0, 0));
+		WorldModelImpl.getInstance().getGPSModel()
+		.setPosition(new GPS( 0, 0));
 		System.out.println("-----init sensors-----");
-		GpsSensor gps=new GpsSensor("COM4");
+		GpsSensor gps=new GpsSensor("COM8");
 		compassSensor=new OS500sensor(); //zzt. COM17
 		try {
 			Thread.sleep(2000);
@@ -79,8 +82,8 @@ public class Initializier {
 	}
 	
 	private void initializeControl() {
-		//Pilot pilot = new PilotImpl(new AKSENLocomotion());
-		Pilot pilot = new PilotImpl(new DummyLoco());
+		Pilot pilot = new PilotImpl(new AKSENLocomotion());
+//		Pilot pilot = new PilotImpl(new DummyLoco());
 		Navigator navigator = new NavigatorImpl(pilot);
 		planner = new PlannerImpl(navigator);
 	}
@@ -118,7 +121,7 @@ public class Initializier {
 				tasks.add(new ReachCircleTask(goal2, 5));
 				tasks.add(new ReachCircleTask(goal3, 5));
 				mission.setTasks(tasks);
-				planner.doMission(mission);
+				//planner.doMission(mission);
 			
 				//if (compassSensor != null) {
 				//	compassSensor.shutdown();
