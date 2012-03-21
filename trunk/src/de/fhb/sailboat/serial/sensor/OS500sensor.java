@@ -19,7 +19,8 @@ public class OS500sensor {
 	 */
 	boolean keepRunning = true;
 	Thread sensorThread;
-	String comPort = "COM17";
+//	String comPort = "COM17";
+	String comPort = "COM5";
 	int baudrate = 115200;
 	long clock = 1000;			// clock-rate in milliseconds; Compass sends actually 10 Samples/s, Sample-Buffer stores 10 Samples
 	
@@ -101,7 +102,7 @@ public class OS500sensor {
 
 		OS500sensor sensorInstance;
 		// clock in milliseconds
-		long clock = 1000;	// default Value
+		long clock = 100;	// default Value
 		long start, end;
 		
 		/**
