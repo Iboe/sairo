@@ -54,7 +54,7 @@ public class BoatMonitor {
 	
 	final static public int L_GPS_LONG_V_X = L_GPS_LONG_X + L_OFFSET;
 	final static public int L_GPS_LONG_V_Y = L_GPS_LONG_Y + L_LINE;
-	final static public int L_GPS_LONG_V_VSIZE = L_VSIZE;
+	final static public int L_GPS_LONG_V_VSIZE = L_VSIZE * 2;
 	
 	final static public String L_GPS_LAT_NAME = "Latitude:";
 	final static public String L_GPS_LAT_UNIT = "°"; // this will be appended to the value-label text for displaying the Latitude
@@ -64,7 +64,7 @@ public class BoatMonitor {
 	
 	final static public int L_GPS_LAT_V_X = L_GPS_LAT_X + L_OFFSET;
 	final static public int L_GPS_LAT_V_Y = L_GPS_LAT_Y + L_LINE;
-	final static public int L_GPS_LAT_V_VSIZE = L_VSIZE;
+	final static public int L_GPS_LAT_V_VSIZE = L_VSIZE * 2;
 	
 	final static public String L_GPS_PRECISION_NAME = "Präzision:";
 	final static public String L_GPS_PRECISION_UNIT = ""; // this will be appended to the value-label text for displaying the precision
