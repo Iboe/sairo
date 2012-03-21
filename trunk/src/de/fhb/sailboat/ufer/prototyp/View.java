@@ -21,6 +21,7 @@ import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigMap;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigReader;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigWriter;
+import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 
 /**
@@ -668,7 +669,7 @@ public class View extends JFrame {
 		}
 
 		// Map Panel
-		map = new MapPanel();
+		map = new MapPanel(controller);
 		mapArea = map.mapPanel();
 		add(mapArea);
 
@@ -701,6 +702,7 @@ public class View extends JFrame {
 		smallMonitor2.updatePanel();
 		smallMonitor3.updatePanel();
 		smallMonitor4.updatePanel();
+		map.followBoat(WorldModelImpl.getInstance().getGPSModel().getPosition());
 	}
 	
 	/**
