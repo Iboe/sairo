@@ -29,7 +29,7 @@ public class NavigatorImpl implements Navigator{
 		} else if (StopTask.class.equals(task.getClass() )) {
 			stop((StopTask) task);
 		} else {
-			throw new UnsupportedOperationException("can not handle task");
+			throw new UnsupportedOperationException("can not handle task: " + task);
 		}
 	}
 	

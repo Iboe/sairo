@@ -2,23 +2,21 @@ package de.fhb.sailboat.worldmodel;
 
 import java.util.LinkedList;
 import java.util.List;
-/*
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-*/
+
 public class History<T> {
 
 	public static final int DEFAULT_MAX_SIZE = 10;
 	public static final String MAX_SIZE_PROPERTY_NAME = ".historySize";
-	//private static final Logger LOG = LoggerFactory.getLogger(History.class);
+	private static final Logger LOG = LoggerFactory.getLogger(History.class);
 	
 	private LinkedList<T> history;
-	private int maxSize; //final, can just be altered by init method, which
-						 //is just called by constructor
+	private int maxSize; //in fact it's final, it's only altered by the init method, which
+						 //is only called by constructor
 	
 	public History() {
 		this(DEFAULT_MAX_SIZE);
-		
 	}
 	
 	public History (String maxSize) {
@@ -28,7 +26,7 @@ public class History<T> {
 			try {
 				init(Integer.parseInt(maxSize));
 			} catch (NumberFormatException ne) {
-				//LOG.warn("could not parse configuration value for history maximum size of history");
+				LOG.warn("could not parse configuration value for history maximum size of history");
 				init(DEFAULT_MAX_SIZE);
 			}
 		}
