@@ -2,7 +2,6 @@ package de.fhb.sailboat.ufer.prototyp;
 
 
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,8 +14,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.SwingUtilities;
-
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigMap;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigReader;
@@ -142,11 +139,11 @@ public class View extends JFrame {
 	final static public int L_LINE = 18; // Common height of a line of text, used as distance between two lines of text (may be removed later)
 
 	// variables
+	private boolean debugMode; // if true will emulate updates from boat sensors by random values, for local UI testing
+	
 	private Planner planner;
 	private MapPanel map;
 	private Controller controller;
-	
-	private Font font;
 
 	private JPanel mapArea;
 	
@@ -160,7 +157,7 @@ public class View extends JFrame {
 	private View() {
 		this.controller = new Controller();
 		initUI();
-		//target = new Coordinate(0,0);
+		this.debugMode = false;
 		startUpdating();
 	}
 	
@@ -176,10 +173,6 @@ public class View extends JFrame {
 	private final void initUI() {
 
 		setLayout(null); // disable layout manager
-
-		// create default font and set it to be used for certain elements (currently unused as it is obsolete)
-		//font = new Font(F_NAME, Font.BOLD, F_SIZE);
-		//UIManager.put("Label.font", font);
 
 		// create menubar
 		JMenuBar menubar = new JMenuBar();
@@ -204,13 +197,11 @@ public class View extends JFrame {
 		// Menü->Protokoll
 		JMenu mProtocol = new JMenu(M_PROTOCOL);
 		mProtocol.setMnemonic(KeyEvent.VK_P);
-		mProtocol.setFont(font);
 
 		// Menü->Mission
 		//TODO Remove button for exercise from UI
 		JMenu mMission = new JMenu(M_MISSION);
 		mMission.setMnemonic(KeyEvent.VK_M);
-		mMission.setFont(font);
 		
 		JMenuItem mMissionSend = new JMenuItem(M_MISSION_SEND);
 		mMissionSend.setMnemonic(KeyEvent.VK_S);
@@ -228,7 +219,6 @@ public class View extends JFrame {
 		// Menü->Verbindung
 		JMenu mConnection = new JMenu(M_CONNECTION);
 		mConnection.setMnemonic(KeyEvent.VK_V);
-		mConnection.setFont(font);
 
 		JMenuItem mConnectionEnable = new JMenuItem(M_CONNECTION_ENABLE);
 		mConnectionEnable.setMnemonic(KeyEvent.VK_A);
@@ -262,7 +252,6 @@ public class View extends JFrame {
 		
 		JMenu mSmallMonitor1 = new JMenu(M_SMONITOR1);
 		mSmallMonitor1.setMnemonic(KeyEvent.VK_1);
-		mSmallMonitor1.setFont(font);
 		ButtonGroup mSmallMonitor1Radio = new ButtonGroup();
 		
 		JRadioButtonMenuItem mSmallMonitor1_Blank = new JRadioButtonMenuItem(M_SMONITOR_BLANK);
@@ -327,7 +316,6 @@ public class View extends JFrame {
 		
 		JMenu mSmallMonitor2 = new JMenu(M_SMONITOR2);
 		mSmallMonitor2.setMnemonic(KeyEvent.VK_2);
-		mSmallMonitor2.setFont(font);
 		ButtonGroup mSmallMonitor2Radio = new ButtonGroup();
 		
 		JRadioButtonMenuItem mSmallMonitor2_Blank = new JRadioButtonMenuItem(M_SMONITOR_BLANK);
@@ -392,7 +380,6 @@ public class View extends JFrame {
 		
 		JMenu mSmallMonitor3 = new JMenu(M_SMONITOR3);
 		mSmallMonitor3.setMnemonic(KeyEvent.VK_3);
-		mSmallMonitor3.setFont(font);
 		ButtonGroup mSmallMonitor3Radio = new ButtonGroup();
 		
 		JRadioButtonMenuItem mSmallMonitor3_Blank = new JRadioButtonMenuItem(M_SMONITOR_BLANK);
@@ -457,7 +444,6 @@ public class View extends JFrame {
 		
 		JMenu mSmallMonitor4 = new JMenu(M_SMONITOR4);
 		mSmallMonitor4.setMnemonic(KeyEvent.VK_4);
-		mSmallMonitor4.setFont(font);
 		ButtonGroup mSmallMonitor4Radio = new ButtonGroup();
 		
 		JRadioButtonMenuItem mSmallMonitor4_Blank = new JRadioButtonMenuItem(M_SMONITOR_BLANK);
@@ -695,14 +681,14 @@ public class View extends JFrame {
 	}
 
 	/**
-	 * Updates the values displayed by the various labels used according to the ones received from controller/ Model.C
+	 * Updates the values displayed by the various labels used according to the ones received from controller/ model
+	 * !!! ONLY FOR GETTING VALUES FROM MODEL, NOT FOR SETTING THESE !!!
 	 */
 	private void updateView() {
 		smallMonitor1.updatePanel();
 		smallMonitor2.updatePanel();
 		smallMonitor3.updatePanel();
 		smallMonitor4.updatePanel();
-		map.followBoat(WorldModelImpl.getInstance().getGPSModel().getPosition());
 	}
 	
 	/**
@@ -714,7 +700,13 @@ public class View extends JFrame {
 			public void run() {
 				while(true) {
 					
-					controller.updateRandom();
+					if (debugMode) {
+						controller.updateRandom();
+					}
+					else {
+						controller.updateAll();
+						map.followBoat(WorldModelImpl.getInstance().getGPSModel().getPosition());
+					}
 					updateView();
 					
 					try {
@@ -761,23 +753,8 @@ public class View extends JFrame {
 		smallMonitor4.setPerspective(perspectiveID);
 		saveViewConfiguration();
 	}
-
-	/**
-	 * This method returns the width of a given string in pixels, assuming it uses
-	 * the default font (see also F_NAME and F_SIZE). Currently not needed anymore.
-	 * 
-	 * @param string
-	 * @return width of the given string (pixel)
-	 */
-	/*public int getStringWidth(String string) {
-		int myReturn = 0;
-
-		FontMetrics fontMetrics = new JLabel().getFontMetrics(font);
-		myReturn = fontMetrics.stringWidth(string);
-
-		return myReturn;
-	}*/
 	
+	// Main für lokales Debuggen der GUI, für Regelbetrieb auskommentieren und debugMode im Constructor false setzen
 	/*public static void main(String[] args) {
         System.setProperty("proxyPort","3128");
 		System.setProperty("proxyHost","proxy.fh-brandenburg.de");

@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.worldmodel.CompassModel;
+import de.fhb.sailboat.worldmodel.CompassModelImpl;
+import de.fhb.sailboat.worldmodel.GPSModel;
+import de.fhb.sailboat.worldmodel.GPSModelImpl;
 
 
 
@@ -19,48 +23,38 @@ public class Model {
 	// CONSTANTS
 	
 	// VARIABLES
-	private double compTemperature;
-	private int compDirection;
+	private CompassModel compass;
 	
 	private int windDirection;
 	private int windVelocity;
 	
-	private double gpsLongitude;
-	private double gpsLatitude;
-	private double gpsPrecision;
+	private GPSModel gps;
+	private double gpsPrecision; // Used to value the reliability of GPS values, currently cosmetic and unused (ranged from 0.0 for 0% relaiability to 1.0 fpr 100%)
 	
 	// for the planned exercise
 	private ArrayList<MapMarker> markerList;
 	
 	public Model() {
-		this.compTemperature = 0.0f;
-		this.compDirection = 0;
 		this.windDirection = 0;
 		this.windVelocity = 0;
-		this.gpsLatitude = 0;
-		this.gpsLongitude = 0;
-		this.gpsPrecision = 0.0f;
+		
+		this.compass = new CompassModelImpl();
+		this.gps = new GPSModelImpl();
 	}
 
 	// Getter/ Setter
-	public double getCompTemperature() {
-		return compTemperature;
+	// Compass
+	public CompassModel getCompass() {
+		return this.compass;
+	}
+	
+	public void setCompass(CompassModel compass) {
+		this.compass = compass;
 	}
 
-	public void setCompTemperature(double compTemperature) {
-		this.compTemperature = compTemperature;
-	}
-
-	public int getCompDirection() {
-		return compDirection;
-	}
-
-	public void setCompDirection(int compDirection) {
-		this.compDirection = compDirection;
-	}
-
+	// Wind
 	public int getWindDirection() {
-		return windDirection;
+		return this.windDirection;
 	}
 
 	public void setWindDirection(int windDirection) {
@@ -75,24 +69,27 @@ public class Model {
 		this.windVelocity = windVelocity;
 	}
 
-	public double getGpsLongitude() {
-		return gpsLongitude;
-	}
-
-	public void setGpsLongitude(double gpsLongitude) {
-		this.gpsLongitude = gpsLongitude;
-	}
-
-	public double getGpsLatitude() {
-		return gpsLatitude;
-	}
-
-	public void setGpsLatitude(double gpsLatitude) {
-		this.gpsLatitude = gpsLatitude;
+	// GPS
+	public GPSModel getGps() {
+		return gps;
 	}
 
 	public double getGpsPrecision() {
 		return gpsPrecision;
+	}
+	
+	public void setGps(GPSModel gps) {
+		this.gps = gps;
+	}
+	
+	/**
+	 * Helper method which should *ONLY* be used for testing/ debugging. Sets the GPS position manually and
+	 * deletes local GPS History.
+	 * @param position
+	 */
+	public void setGpsPosition(GPS position) {
+		this.gps = new GPSModelImpl();
+		gps.setPosition(position);
 	}
 
 	public void setGpsPrecision(double gpsPrecision) {

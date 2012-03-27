@@ -8,10 +8,11 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.worldmodel.CompassModel;
+import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
@@ -67,10 +68,8 @@ public class Controller {
 	 * get the most recent values possible at once.
 	 */
 	public void updateAll() {
-		updateGpsLongitude();
-		updateGpsLatitude();
-		updateShipGpsLongitude();
-		updateShipGpsLatitude();
+		updateCompass();
+		updateGps();
 	}
 
 	/**
@@ -81,57 +80,24 @@ public class Controller {
 		Random dice = new Random();
 
 		//this.model.setCompDirection(dice.nextInt(361));
-		this.model.setCompDirection((int)(worldModel.getCompassModel().getCompass().getYaw()));
-
-		this.model.setCompTemperature(dice.nextInt(15)
-				+ Math.round((dice.nextDouble() * 100.0)) / 100.0);
 
 		this.model.setWindDirection(dice.nextInt(361));
 
 		this.model.setWindVelocity(dice.nextInt(3000));
 
-		this.model.setGpsLongitude(worldModel.getGPSModel().getPosition().getLongitude());
-//		this.model.setGpsLongitude(dice.nextInt(1000)
-//				+ Math.round((dice.nextDouble() * 1000.0)) / 100.0);
-
-		this.model.setGpsLatitude(worldModel.getGPSModel().getPosition().getLatitude());
-//		this.model.setGpsLatitude(dice.nextInt(1000)
-//				+ Math.round((dice.nextDouble() * 1000.0)) / 100.0);
+		this.model.setGpsPosition(new GPS(dice.nextDouble(), dice.nextDouble()));
 
 		this.model.setGpsPrecision((float) dice.nextInt(2));
 	}
 
-	public void updateGpsLongitude() {
-		int myValue = 0;
-
-		// pseudocode: myValue = boat.gps.getLongitude();
-
-		this.model.setGpsLongitude(myValue);
+	public void updateCompass() {
+		this.model.setCompass(worldModel.getCompassModel());
 	}
 
-	public void updateGpsLatitude() {
-		int myValue = 0;
-
-		// pseudocode: myValue = boat.gps.getLatitude();
-
-		this.model.setGpsLatitude(myValue);
+	public void updateGps() {
+		this.model.setGps(worldModel.getGPSModel());
 	}
 
-	public void updateShipGpsLongitude() {
-		int myValue = 0;
-
-		// pseudocode: myValue = boat.gps.getLongitude();
-
-		this.model.setGpsLongitude(myValue);
-	}
-
-	public void updateShipGpsLatitude() {
-		int myValue = 0;
-
-		// pseudocode: myValue = boat.gps.getLatitude();
-
-		this.model.setGpsLatitude(myValue);
-	}
 
 	// Setter (values given by View to store in Model)
 	public void setMarkerList(ArrayList<MapMarker> markerList) {
@@ -140,12 +106,8 @@ public class Controller {
 	}
 
 	// Getter ("tunneled" from Model)
-	public double getCompTemperature() {
-		return this.model.getCompTemperature();
-	}
-
-	public int getCompDirection() {
-		return this.model.getCompDirection();
+	public CompassModel getCompass() {
+		return this.model.getCompass();
 	}
 
 	public int getWindDirection() {
@@ -156,13 +118,10 @@ public class Controller {
 		return this.model.getWindVelocity();
 	}
 
-	public double getGpsLongitude() {
-		return this.model.getGpsLongitude();
+	public GPSModel getGps() {
+		return this.model.getGps();
 	}
 
-	public double getGpsLatitude() {
-		return this.model.getGpsLatitude();
-	}
 
 	public double getGpsPrecision() {
 		return this.model.getGpsPrecision();

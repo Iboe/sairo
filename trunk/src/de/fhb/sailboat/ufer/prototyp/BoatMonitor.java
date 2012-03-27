@@ -33,10 +33,11 @@ public class BoatMonitor {
 
 	final static public int L_OFFSET = 8; // Offset between certain elements (mostly descriptor- and valuelabels)
 	final static public int L_DSIZE = 90; // Common width for descriptor labels
-	final static public int L_VSIZE = 60; // Common width for value labels (only used while they contain no values)
+	final static public int L_VSIZE = 60; // Common width for value labels
+	final static public int L_VSIZE_FULL = P_WIDTH - 20; // Width for extra-large value labels which are positioned to use the full panel width (keeping in mind offset)
 	final static public int L_LINE = 18; // Common height of a line of text, used as distance between two lines of text (may be removed later)
 
-	final static public String L_COMP_DIRECTION_NAME = "Richtung:"; // The identifier-label for displaying the direction measured
+	final static public String L_COMP_DIRECTION_NAME = "Azimuth:"; // The identifier-label for displaying the direction(?) measured
 	final static public String L_COMP_DIRECTION_UNIT = " °"; // this will be appended to the value-label text for displaying the direction measured
 	final static public int L_COMP_DIRECTION_X = 8;
 	final static public int L_COMP_DIRECTION_Y = 16;
@@ -192,7 +193,7 @@ public class BoatMonitor {
 				
 				lGPSLongitudeV = new JLabel();
 				lGPSLongitudeV.setText("0" + L_GPS_LONG_UNIT);
-				lGPSLongitudeV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lGPSLongitudeV.setSize(new Dimension(L_VSIZE_FULL, L_LINE));
 				lGPSLongitudeV.setLocation(L_GPS_LONG_V_X, L_GPS_LONG_V_Y);
 				panel.add(lGPSLongitudeV);
 				
@@ -205,7 +206,7 @@ public class BoatMonitor {
 				
 				lGPSLatitudeV = new JLabel();
 				lGPSLatitudeV.setText("0" + L_GPS_LAT_UNIT);
-				lGPSLatitudeV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lGPSLatitudeV.setSize(new Dimension(L_VSIZE_FULL, L_LINE));
 				lGPSLatitudeV.setLocation(L_GPS_LAT_V_X, L_GPS_LAT_V_Y);
 				panel.add(lGPSLatitudeV);
 				
@@ -299,13 +300,13 @@ public class BoatMonitor {
 	public void updatePanel() {
 		switch (perspectiveID) {
 			case (PERSPECITVE_ID_COMPASS) : {
-				if (lCompDirectionV != null) lCompDirectionV.setText(controller.getCompDirection() + L_COMP_DIRECTION_UNIT);
+				if (lCompDirectionV != null) lCompDirectionV.setText(controller.getCompass().getCompass().getAzimuth() + L_COMP_DIRECTION_UNIT);
 				panel.validate();
 				break;
 			}
 			case (PERSPECITVE_ID_GPS) : {
-				if (lGPSLongitudeV != null) lGPSLongitudeV.setText(controller.getGpsLongitude() + L_GPS_LONG_UNIT);
-				if (lGPSLatitudeV != null) lGPSLatitudeV.setText(controller.getGpsLatitude() + L_GPS_LAT_UNIT);
+				if (lGPSLongitudeV != null) lGPSLongitudeV.setText(controller.getGps().getPosition().getLongitude() + L_GPS_LONG_UNIT);
+				if (lGPSLatitudeV != null) lGPSLatitudeV.setText(controller.getGps().getPosition().getLatitude() + L_GPS_LAT_UNIT);
 				if (lGPSPrecisionV != null) lGPSPrecisionV.setText(controller.getGpsPrecision() + L_GPS_PRECISION_UNIT);
 				panel.validate();
 				break;
@@ -317,7 +318,7 @@ public class BoatMonitor {
 				break;
 			}
 			case (PERSPECITVE_ID_TEMPERATURE) : {
-				if (lTemperatureV != null) lTemperatureV.setText(controller.getCompTemperature() + L_TEMPERATURE_UNIT);
+				if (lTemperatureV != null) lTemperatureV.setText(controller.getCompass().getCompass().getTemperature() + L_TEMPERATURE_UNIT);
 				panel.validate();
 				break;
 			}
