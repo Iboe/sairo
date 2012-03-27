@@ -38,14 +38,7 @@ public class PlannerImpl implements Planner {
 				workerThread = new WorkerThread();
 			} else if (workerThread.isAlive()) {
 				//shut down thread before starting new mission
-				workerThread.interrupt();
-				
-				try {
-					workerThread.join(5000l);
-				} catch (InterruptedException e) {
-					// TODO implement exception handling
-					LOG.error("could not stop thread", e);
-				}
+				stopThread();
 				workerThread = new WorkerThread();
 			}
 			
@@ -58,9 +51,14 @@ public class PlannerImpl implements Planner {
 
 	@Override
 	public void stop() {
+		stopThread();
 		navigator.doTask(new StopTask());
 	}
 
+	private void stopThread() {
+		workerThread.interrupt();
+	}
+	
 	private class WorkerThread extends Thread {
 		private Task currentTask;
 		private List<Task> tasks;
@@ -68,6 +66,7 @@ public class PlannerImpl implements Planner {
 		@Override
 		public void run() {
 			while (!isInterrupted()) {
+				
 				//execute task till it is finished
 				if (tasks != null && !tasks.isEmpty()) {
 					//execute new task
@@ -99,9 +98,9 @@ public class PlannerImpl implements Planner {
 			try {
 				Thread.sleep(WAIT_TIME);
 			} catch (InterruptedException e) {
-				// do nothing, since earlier execution should not disturb program
+				//interrupt again to shut down thread
+				LOG.debug("interrupted while waiting", e);
 				interrupt();
-				LOG.warn("interrupted while waiting", e);
 			}
 		}
 
