@@ -10,7 +10,6 @@ import javax.swing.JPanel;
  * This class represents a monitor for viewing and checking data send by/ concerning the sailboat. After choosing the type of data to be displayed it
  * provides a panel for adding to the main user interface. Such a data view is called a "perspective" within this class.
  * @author Patrick Rutter
- * @lastUpdate 03.02.2012
  *
  */
 public class BoatMonitor {
@@ -20,7 +19,7 @@ public class BoatMonitor {
 	final static public int PERSPECITVE_ID_COMPASS = 1;
 	final static public int PERSPECITVE_ID_GPS = 2;
 	final static public int PERSPECITVE_ID_WIND = 3;
-	final static public int PERSPECITVE_ID_TEMPERATURE = 4;
+	final static public int PERSPECITVE_ID_MISSION = 4;
 	
 	final static public String P_BLANK_NAME = "Monitor";
 	final static public int P_WIDTH = 200;
@@ -29,7 +28,7 @@ public class BoatMonitor {
 	final static public String P_COMPASS_NAME = "Kompass";
 	final static public String P_GPS_NAME = "GPS";
 	final static public String P_WIND_NAME = "Wind";
-	final static public String P_TEMPERATURE_NAME = "Temperatur";
+	final static public String P_MISSION_NAME = "Mission";
 
 	final static public int L_OFFSET = 8; // Offset between certain elements (mostly descriptor- and valuelabels)
 	final static public int L_DSIZE = 90; // Common width for descriptor labels
@@ -46,6 +45,46 @@ public class BoatMonitor {
 	final static public int L_COMP_DIRECTION_V_X = L_COMP_DIRECTION_X + L_COMP_DIRECTION_DSIZE + L_OFFSET;
 	final static public int L_COMP_DIRECTION_V_Y = L_COMP_DIRECTION_Y;
 	final static public int L_COMP_DIRECTION_V_VSIZE = L_VSIZE;
+	
+	final static public String L_COMP_ACCELERATION_NAME = "Beschl.:"; // The identifier-label for displaying the acceleration measured
+	final static public String L_COMP_ACCELERATION_UNIT = " ?"; // this will be appended to the value-label text for displaying the ACCELERATION measured
+	final static public int L_COMP_ACCELERATION_X = L_COMP_DIRECTION_X;
+	final static public int L_COMP_ACCELERATION_Y = L_COMP_DIRECTION_Y + L_LINE;
+	final static public int L_COMP_ACCELERATION_DSIZE = L_DSIZE;
+	
+	final static public int L_COMP_ACCELERATION_V_X = L_COMP_ACCELERATION_X + L_COMP_ACCELERATION_DSIZE + L_OFFSET;
+	final static public int L_COMP_ACCELERATION_V_Y = L_COMP_ACCELERATION_Y;
+	final static public int L_COMP_ACCELERATION_V_VSIZE = L_VSIZE;
+	
+	final static public String L_COMP_PITCH_NAME = "Pitch:"; // The identifier-label for displaying the PITCH measured
+	final static public String L_COMP_PITCH_UNIT = " °"; // this will be appended to the value-label text for displaying the PITCH measured
+	final static public int L_COMP_PITCH_X = L_COMP_ACCELERATION_X;
+	final static public int L_COMP_PITCH_Y = L_COMP_ACCELERATION_Y + L_LINE;
+	final static public int L_COMP_PITCH_DSIZE = L_DSIZE;
+	
+	final static public int L_COMP_PITCH_V_X = L_COMP_PITCH_X + L_COMP_PITCH_DSIZE + L_OFFSET;
+	final static public int L_COMP_PITCH_V_Y = L_COMP_PITCH_Y;
+	final static public int L_COMP_PITCH_V_VSIZE = L_VSIZE;
+	
+	final static public String L_COMP_ROLL_NAME = "Roll:"; // The identifier-label for displaying the ROLL measured
+	final static public String L_COMP_ROLL_UNIT = " °"; // this will be appended to the value-label text for displaying the ROLL measured
+	final static public int L_COMP_ROLL_X = L_COMP_PITCH_X;
+	final static public int L_COMP_ROLL_Y = L_COMP_PITCH_Y + L_LINE;
+	final static public int L_COMP_ROLL_DSIZE = L_DSIZE;
+	
+	final static public int L_COMP_ROLL_V_X = L_COMP_ROLL_X + L_COMP_ROLL_DSIZE + L_OFFSET;
+	final static public int L_COMP_ROLL_V_Y = L_COMP_ROLL_Y;
+	final static public int L_COMP_ROLL_V_VSIZE = L_VSIZE;
+	
+	final static public String L_COMP_TEMPERATURE_NAME = "Temperatur:"; // The identifier-label for displaying the temperature measured
+	final static public String L_COMP_TEMPERATURE_UNIT = " °C"; // this will be appended to the value-label text for displaying the temperature measured
+	final static public int L_COMP_TEMPERATURE_X = L_COMP_ROLL_X;
+	final static public int L_COMP_TEMPERATURE_Y = L_COMP_ROLL_Y + L_LINE;
+	final static public int L_COMP_TEMPERATURE_DSIZE = L_DSIZE;
+	
+	final static public int L_COMP_TEMPERATURE_V_X = L_COMP_TEMPERATURE_X + L_COMP_TEMPERATURE_DSIZE + L_OFFSET;
+	final static public int L_COMP_TEMPERATURE_V_Y = L_COMP_TEMPERATURE_Y;
+	final static public int L_COMP_TEMPERATURE_V_VSIZE = L_VSIZE;
 	
 	final static public String L_GPS_LONG_NAME = "Longitude:";
 	final static public String L_GPS_LONG_UNIT = "°"; // this will be appended to the value-label text for displaying the longitude
@@ -96,16 +135,6 @@ public class BoatMonitor {
 	final static public int L_WIND_DIRECTION_V_X = L_WIND_DIRECTION_X + L_WIND_DIRECTION_DSIZE + L_OFFSET;
 	final static public int L_WIND_DIRECTION_V_Y = L_WIND_DIRECTION_Y;
 	final static public int L_WIND_DIRECTION_V_VSIZE = L_VSIZE;
-	
-	final static public String L_TEMPERATURE_NAME = "Temperatur:"; // The identifier-label for displaying the temperature measured
-	final static public String L_TEMPERATURE_UNIT = " °C"; // this will be appended to the value-label text for displaying the temperature measured
-	final static public int L_TEMPERATURE_X = 8;
-	final static public int L_TEMPERATURE_Y = 16;
-	final static public int L_TEMPERATURE_DSIZE = L_DSIZE;
-	
-	final static public int L_TEMPERATURE_V_X = L_TEMPERATURE_X + L_TEMPERATURE_DSIZE + L_OFFSET;
-	final static public int L_TEMPERATURE_V_Y = L_TEMPERATURE_Y;
-	final static public int L_TEMPERATURE_V_VSIZE = L_VSIZE;
 
 	// VARIABLES
 	private Controller controller; // used controller, interface to model
@@ -119,6 +148,12 @@ public class BoatMonitor {
 	// compass perspective
 	private JLabel lCompDirection;
 	private JLabel lCompDirectionV;
+	private JLabel lCompAcceleration;
+	private JLabel lCompAccelerationV;
+	private JLabel lCompPitch;
+	private JLabel lCompPitchV;
+	private JLabel lCompRoll;
+	private JLabel lCompRollV;
 	
 	// GPS perspective
 	private JLabel lGPSLongitude;
@@ -135,8 +170,8 @@ public class BoatMonitor {
 	private JLabel lWindDirectionV;
 	
 	// temperature perspective
-	private JLabel lTemperature; // identifier label for Temperature
-	private JLabel lTemperatureV; // value label for Temperature
+	private JLabel lCompTemperature; // identifier label for Temperature
+	private JLabel lCompTemperatureV; // value label for Temperature
 	
 	public BoatMonitor(int panelX, int panelY, Controller controller) {
 		this.controller = controller;
@@ -162,6 +197,7 @@ public class BoatMonitor {
 				// add compass components
 				panel.setBorder(new javax.swing.border.TitledBorder(P_COMPASS_NAME));
 				
+				// Direction
 				lCompDirection = new JLabel();
 				lCompDirection.setText(L_COMP_DIRECTION_NAME);
 				lCompDirection.setSize(new Dimension(L_COMP_DIRECTION_DSIZE, L_LINE));
@@ -173,6 +209,58 @@ public class BoatMonitor {
 				lCompDirectionV.setSize(new Dimension(L_VSIZE, L_LINE));
 				lCompDirectionV.setLocation(L_COMP_DIRECTION_X + L_COMP_DIRECTION_DSIZE + L_OFFSET, L_COMP_DIRECTION_Y);
 				panel.add(lCompDirectionV);
+				
+				// Acceleration
+				lCompAcceleration = new JLabel();
+				lCompAcceleration.setText(L_COMP_ACCELERATION_NAME);
+				lCompAcceleration.setSize(new Dimension(L_COMP_ACCELERATION_DSIZE, L_LINE));
+				lCompAcceleration.setLocation(L_COMP_ACCELERATION_X, L_COMP_ACCELERATION_Y);
+				panel.add(lCompAcceleration);
+				
+				lCompAccelerationV = new JLabel();
+				lCompAccelerationV.setText("0" + L_COMP_ACCELERATION_UNIT);
+				lCompAccelerationV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lCompAccelerationV.setLocation(L_COMP_ACCELERATION_X + L_COMP_ACCELERATION_DSIZE + L_OFFSET, L_COMP_ACCELERATION_Y);
+				panel.add(lCompAccelerationV);
+				
+				// Pitch
+				lCompPitch = new JLabel();
+				lCompPitch.setText(L_COMP_PITCH_NAME);
+				lCompPitch.setSize(new Dimension(L_COMP_PITCH_DSIZE, L_LINE));
+				lCompPitch.setLocation(L_COMP_PITCH_X, L_COMP_PITCH_Y);
+				panel.add(lCompPitch);
+				
+				lCompPitchV = new JLabel();
+				lCompPitchV.setText("0" + L_COMP_PITCH_UNIT);
+				lCompPitchV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lCompPitchV.setLocation(L_COMP_PITCH_X + L_COMP_PITCH_DSIZE + L_OFFSET, L_COMP_PITCH_Y);
+				panel.add(lCompPitchV);
+				
+				// Roll
+				lCompRoll = new JLabel();
+				lCompRoll.setText(L_COMP_ROLL_NAME);
+				lCompRoll.setSize(new Dimension(L_COMP_ROLL_DSIZE, L_LINE));
+				lCompRoll.setLocation(L_COMP_ROLL_X, L_COMP_ROLL_Y);
+				panel.add(lCompRoll);
+				
+				lCompRollV = new JLabel();
+				lCompRollV.setText("0" + L_COMP_ROLL_UNIT);
+				lCompRollV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lCompRollV.setLocation(L_COMP_ROLL_X + L_COMP_ROLL_DSIZE + L_OFFSET, L_COMP_ROLL_Y);
+				panel.add(lCompRollV);
+				
+				// Temperature
+				lCompTemperature = new JLabel();
+				lCompTemperature.setText(L_COMP_TEMPERATURE_NAME);
+				lCompTemperature.setSize(new Dimension(L_COMP_TEMPERATURE_DSIZE, L_LINE));
+				lCompTemperature.setLocation(L_COMP_TEMPERATURE_X, L_COMP_TEMPERATURE_Y);
+				panel.add(lCompTemperature);
+				
+				lCompTemperatureV = new JLabel();
+				lCompTemperatureV.setText("0" + L_COMP_TEMPERATURE_UNIT);
+				lCompTemperatureV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lCompTemperatureV.setLocation(L_COMP_TEMPERATURE_X + L_COMP_TEMPERATURE_DSIZE + L_OFFSET, L_COMP_TEMPERATURE_Y);
+				panel.add(lCompTemperatureV);
 				
 				panel.validate();
 				break;
@@ -262,24 +350,12 @@ public class BoatMonitor {
 				panel.validate();
 				break;
 			}
-			case (PERSPECITVE_ID_TEMPERATURE) : {
+			case (PERSPECITVE_ID_MISSION) : {
 				// free other components
-				freeAllBut(PERSPECITVE_ID_TEMPERATURE);
+				freeAllBut(PERSPECITVE_ID_MISSION);
 				
 				// create temperature components
-				panel.setBorder(new javax.swing.border.TitledBorder(P_TEMPERATURE_NAME));
-				
-				lTemperature = new JLabel();
-				lTemperature.setText(L_TEMPERATURE_NAME);
-				lTemperature.setSize(new Dimension(L_TEMPERATURE_DSIZE, L_LINE));
-				lTemperature.setLocation(L_TEMPERATURE_X, L_TEMPERATURE_Y);
-				panel.add(lTemperature);
-				
-				lTemperatureV = new JLabel();
-				lTemperatureV.setText("0" + L_TEMPERATURE_UNIT);
-				lTemperatureV.setSize(new Dimension(L_VSIZE, L_LINE));
-				lTemperatureV.setLocation(L_TEMPERATURE_X + L_TEMPERATURE_DSIZE + L_OFFSET, L_TEMPERATURE_Y);
-				panel.add(lTemperatureV);
+				panel.setBorder(new javax.swing.border.TitledBorder(P_MISSION_NAME));
 				
 				panel.validate();
 				break;
@@ -301,6 +377,9 @@ public class BoatMonitor {
 		switch (perspectiveID) {
 			case (PERSPECITVE_ID_COMPASS) : {
 				if (lCompDirectionV != null) lCompDirectionV.setText(controller.getCompass().getCompass().getAzimuth() + L_COMP_DIRECTION_UNIT);
+				if (lCompAccelerationV != null) lCompAccelerationV.setText(controller.getCompass().getCompass().getAcceleration() + L_COMP_ACCELERATION_UNIT);
+				if (lCompPitchV != null) lCompPitchV.setText(controller.getCompass().getCompass().getPitch() + L_COMP_PITCH_UNIT);
+				if (lCompRollV != null) lCompRollV.setText(controller.getCompass().getCompass().getRoll() + L_COMP_ROLL_UNIT);
 				panel.validate();
 				break;
 			}
@@ -312,13 +391,13 @@ public class BoatMonitor {
 				break;
 			}
 			case (PERSPECITVE_ID_WIND) : {
-				if (lWindVelocityV != null) lWindVelocityV.setText(controller.getWindVelocity() + L_WIND_VELOCITY_UNIT);
-				if (lWindDirectionV != null) lWindDirectionV.setText(controller.getWindDirection() + L_WIND_DIRECTION_UNIT);
+				if (lWindVelocityV != null) lWindVelocityV.setText(controller.getWind().getWind().getSpeed() + L_WIND_VELOCITY_UNIT);
+				if (lWindDirectionV != null) lWindDirectionV.setText(controller.getWind().getWind().getDirection() + L_WIND_DIRECTION_UNIT);
 				panel.validate();
 				break;
 			}
-			case (PERSPECITVE_ID_TEMPERATURE) : {
-				if (lTemperatureV != null) lTemperatureV.setText(controller.getCompass().getCompass().getTemperature() + L_TEMPERATURE_UNIT);
+			case (PERSPECITVE_ID_MISSION) : {
+				if (lCompTemperatureV != null) lCompTemperatureV.setText(controller.getCompass().getCompass().getTemperature() + L_COMP_TEMPERATURE_UNIT);
 				panel.validate();
 				break;
 			}
@@ -344,8 +423,6 @@ public class BoatMonitor {
 					lGPSLongitudeV = null;
 					lGPSPrecision = null;
 					lGPSPrecisionV = null;
-					lTemperature = null;
-					lTemperatureV = null;
 					lWindVelocity = null;
 					lWindVelocityV = null;
 					lWindDirection = null;
@@ -356,14 +433,18 @@ public class BoatMonitor {
 			}
 			case (PERSPECITVE_ID_GPS) : {
 				if (perspectiveID != PERSPECITVE_ID_WIND) {
-					lTemperature = null;
-					lTemperatureV = null;
 					lWindVelocity = null;
 					lWindVelocityV = null;
 					lWindDirection = null;
 					lWindDirectionV = null;
 					lCompDirection = null;
 					lCompDirectionV = null;
+					lCompAcceleration = null;
+					lCompAccelerationV = null;
+					lCompPitchV = null;
+					lCompRollV = null;
+					lCompTemperature = null;
+					lCompTemperatureV = null;
 				}
 				
 				break;
@@ -376,16 +457,20 @@ public class BoatMonitor {
 					lGPSLongitudeV = null;
 					lGPSPrecision = null;
 					lGPSPrecisionV = null;
-					lTemperature = null;
-					lTemperatureV = null;
 					lCompDirection = null;
 					lCompDirectionV = null;
+					lCompAcceleration = null;
+					lCompAccelerationV = null;
+					lCompPitchV = null;
+					lCompRollV = null;
+					lCompTemperature = null;
+					lCompTemperatureV = null;
 				}
 				
 				break;
 			}
-			case (PERSPECITVE_ID_TEMPERATURE) : {
-				if (perspectiveID != PERSPECITVE_ID_TEMPERATURE) {
+			case (PERSPECITVE_ID_MISSION) : {
+				if (perspectiveID != PERSPECITVE_ID_MISSION) {
 					lGPSLatitude = null;
 					lGPSLatitudeV = null;
 					lGPSLongitude = null;
@@ -398,6 +483,12 @@ public class BoatMonitor {
 					lWindDirectionV = null;
 					lCompDirection = null;
 					lCompDirectionV = null;
+					lCompAcceleration = null;
+					lCompAccelerationV = null;
+					lCompPitchV = null;
+					lCompRollV = null;
+					lCompTemperature = null;
+					lCompTemperatureV = null;
 				}
 				
 				break;

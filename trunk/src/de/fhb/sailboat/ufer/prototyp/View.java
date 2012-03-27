@@ -14,6 +14,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.SwingUtilities;
+
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigMap;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigReader;
@@ -29,7 +31,6 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * initial author. 
  * 
  * @author Patrick Rutter
- * @lastUpdate 03.02.2012
  * 
  */
 public class View extends JFrame {
@@ -40,10 +41,10 @@ public class View extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/* CONSTANTS */
-	final static public int  UPDATE_RATE = 500; // rate in ms at which new values are ordered/ received from controller
+	final static public int  UPDATE_RATE = 500; // rate in ms at which new values are ordered/ received from controller (and there from the boat)
 
 	final static public String TITLE = "Lorelei"; // title of the application
-	final static public String VERSION = "0.64"; // current version of the GUI (for now only subjective gimmick)
+	final static public String VERSION = "0.69"; // current version of the GUI (for now only subjective gimmick)
 
 	final static public int SCREEN_X = 862; // horizontal size of the window
 	final static public int SCREEN_Y = 600; // vertical size of the window
@@ -84,7 +85,7 @@ public class View extends JFrame {
 	final static public String M_SMONITOR_COMPASS = "Kompass";
 	final static public String M_SMONITOR_GPS = "GPS";
 	final static public String M_SMONITOR_WIND = "Wind";
-	final static public String M_SMONITOR_TEMPERATURE = "Temperatur";
+	final static public String M_SMONITOR_MISSION = "Mission";
 
 	/* Panels:
 	 * All values which can be associated with a certain sensor are grouped
@@ -294,12 +295,12 @@ public class View extends JFrame {
 
 		});
 		
-		JRadioButtonMenuItem mSmallMonitor1_Temperature = new JRadioButtonMenuItem(M_SMONITOR_TEMPERATURE);
-		mSmallMonitor1_Temperature.setToolTipText("Setzt Monitor 1 auf Temperaturanzeige.");
-		mSmallMonitor1Radio.add(mSmallMonitor1_Temperature);
-		mSmallMonitor1_Temperature.addActionListener(new ActionListener() {
+		JRadioButtonMenuItem mSmallMonitor1_Mission = new JRadioButtonMenuItem(M_SMONITOR_MISSION);
+		mSmallMonitor1_Mission.setToolTipText("Setzt Monitor 1 auf Missionsanzeige.");
+		mSmallMonitor1Radio.add(mSmallMonitor1_Mission);
+		mSmallMonitor1_Mission.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				setSmallMonitor1(BoatMonitor.PERSPECITVE_ID_TEMPERATURE);
+				setSmallMonitor1(BoatMonitor.PERSPECITVE_ID_MISSION);
 			}
 
 		});
@@ -308,7 +309,7 @@ public class View extends JFrame {
 		mSmallMonitor1.add(mSmallMonitor1_Compass);
 		mSmallMonitor1.add(mSmallMonitor1_GPS);
 		mSmallMonitor1.add(mSmallMonitor1_Wind);
-		mSmallMonitor1.add(mSmallMonitor1_Temperature);
+		mSmallMonitor1.add(mSmallMonitor1_Mission);
 		add(smallMonitor1.getJPanel());		
 		
 		// Menü->Monitor 2
@@ -358,12 +359,12 @@ public class View extends JFrame {
 
 		});
 		
-		JRadioButtonMenuItem mSmallMonitor2_Temperature = new JRadioButtonMenuItem(M_SMONITOR_TEMPERATURE);
-		mSmallMonitor2_Temperature.setToolTipText("Setzt Monitor 2 auf Temperaturanzeige.");
-		mSmallMonitor2Radio.add(mSmallMonitor2_Temperature);
-		mSmallMonitor2_Temperature.addActionListener(new ActionListener() {
+		JRadioButtonMenuItem mSmallMonitor2_Mission = new JRadioButtonMenuItem(M_SMONITOR_MISSION);
+		mSmallMonitor2_Mission.setToolTipText("Setzt Monitor 2 auf Missionsanzeige.");
+		mSmallMonitor2Radio.add(mSmallMonitor2_Mission);
+		mSmallMonitor2_Mission.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				setSmallMonitor2(BoatMonitor.PERSPECITVE_ID_TEMPERATURE);
+				setSmallMonitor2(BoatMonitor.PERSPECITVE_ID_MISSION);
 			}
 
 		});
@@ -372,7 +373,7 @@ public class View extends JFrame {
 		mSmallMonitor2.add(mSmallMonitor2_Compass);
 		mSmallMonitor2.add(mSmallMonitor2_GPS);
 		mSmallMonitor2.add(mSmallMonitor2_Wind);
-		mSmallMonitor2.add(mSmallMonitor2_Temperature);
+		mSmallMonitor2.add(mSmallMonitor2_Mission);
 		add(smallMonitor2.getJPanel());		
 		
 		// Menü->Monitor 3
@@ -422,12 +423,12 @@ public class View extends JFrame {
 
 		});
 		
-		JRadioButtonMenuItem mSmallMonitor3_Temperature = new JRadioButtonMenuItem(M_SMONITOR_TEMPERATURE);
-		mSmallMonitor3_Temperature.setToolTipText("Setzt Monitor 3 auf Temperaturanzeige.");
-		mSmallMonitor3Radio.add(mSmallMonitor3_Temperature);
-		mSmallMonitor3_Temperature.addActionListener(new ActionListener() {
+		JRadioButtonMenuItem mSmallMonitor3_Mission = new JRadioButtonMenuItem(M_SMONITOR_MISSION);
+		mSmallMonitor3_Mission.setToolTipText("Setzt Monitor 3 auf Missionsanzeige.");
+		mSmallMonitor3Radio.add(mSmallMonitor3_Mission);
+		mSmallMonitor3_Mission.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				setSmallMonitor3(BoatMonitor.PERSPECITVE_ID_TEMPERATURE);
+				setSmallMonitor3(BoatMonitor.PERSPECITVE_ID_MISSION);
 			}
 
 		});
@@ -436,7 +437,7 @@ public class View extends JFrame {
 		mSmallMonitor3.add(mSmallMonitor3_Compass);
 		mSmallMonitor3.add(mSmallMonitor3_GPS);
 		mSmallMonitor3.add(mSmallMonitor3_Wind);
-		mSmallMonitor3.add(mSmallMonitor3_Temperature);
+		mSmallMonitor3.add(mSmallMonitor3_Mission);
 		add(smallMonitor3.getJPanel());		
 		
 		// Menü->Monitor 4
@@ -486,12 +487,12 @@ public class View extends JFrame {
 
 		});
 		
-		JRadioButtonMenuItem mSmallMonitor4_Temperature = new JRadioButtonMenuItem(M_SMONITOR_TEMPERATURE);
-		mSmallMonitor4_Temperature.setToolTipText("Setzt Monitor 4 auf Temperaturanzeige.");
-		mSmallMonitor4Radio.add(mSmallMonitor4_Temperature);
-		mSmallMonitor4_Temperature.addActionListener(new ActionListener() {
+		JRadioButtonMenuItem mSmallMonitor4_Mission = new JRadioButtonMenuItem(M_SMONITOR_MISSION);
+		mSmallMonitor4_Mission.setToolTipText("Setzt Monitor 4 auf Missionsanzeige.");
+		mSmallMonitor4Radio.add(mSmallMonitor4_Mission);
+		mSmallMonitor4_Mission.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				setSmallMonitor4(BoatMonitor.PERSPECITVE_ID_TEMPERATURE);
+				setSmallMonitor4(BoatMonitor.PERSPECITVE_ID_MISSION);
 			}
 
 		});
@@ -500,7 +501,7 @@ public class View extends JFrame {
 		mSmallMonitor4.add(mSmallMonitor4_Compass);
 		mSmallMonitor4.add(mSmallMonitor4_GPS);
 		mSmallMonitor4.add(mSmallMonitor4_Wind);
-		mSmallMonitor4.add(mSmallMonitor4_Temperature);
+		mSmallMonitor4.add(mSmallMonitor4_Mission);
 		add(smallMonitor4.getJPanel());
 
 		//add menu-items
@@ -547,8 +548,8 @@ public class View extends JFrame {
 						mSmallMonitor1_GPS.setSelected(true);
 						break;
 					}
-					case (BoatMonitor.PERSPECITVE_ID_TEMPERATURE) : {
-						mSmallMonitor1_Temperature.setSelected(true);
+					case (BoatMonitor.PERSPECITVE_ID_MISSION) : {
+						mSmallMonitor1_Mission.setSelected(true);
 						break;
 					}
 					case (BoatMonitor.PERSPECITVE_ID_WIND) : {
@@ -575,8 +576,8 @@ public class View extends JFrame {
 					mSmallMonitor2_GPS.setSelected(true);
 					break;
 				}
-				case (BoatMonitor.PERSPECITVE_ID_TEMPERATURE) : {
-					mSmallMonitor2_Temperature.setSelected(true);
+				case (BoatMonitor.PERSPECITVE_ID_MISSION) : {
+					mSmallMonitor2_Mission.setSelected(true);
 					break;
 				}
 				case (BoatMonitor.PERSPECITVE_ID_WIND) : {
@@ -603,8 +604,8 @@ public class View extends JFrame {
 					mSmallMonitor3_GPS.setSelected(true);
 					break;
 				}
-				case (BoatMonitor.PERSPECITVE_ID_TEMPERATURE) : {
-					mSmallMonitor3_Temperature.setSelected(true);
+				case (BoatMonitor.PERSPECITVE_ID_MISSION) : {
+					mSmallMonitor3_Mission.setSelected(true);
 					break;
 				}
 				case (BoatMonitor.PERSPECITVE_ID_WIND) : {
@@ -631,8 +632,8 @@ public class View extends JFrame {
 					mSmallMonitor4_GPS.setSelected(true);
 					break;
 				}
-				case (BoatMonitor.PERSPECITVE_ID_TEMPERATURE) : {
-					mSmallMonitor4_Temperature.setSelected(true);
+				case (BoatMonitor.PERSPECITVE_ID_MISSION) : {
+					mSmallMonitor4_Mission.setSelected(true);
 					break;
 				}
 				case (BoatMonitor.PERSPECITVE_ID_WIND) : {

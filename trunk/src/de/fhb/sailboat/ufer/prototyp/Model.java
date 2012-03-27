@@ -4,18 +4,20 @@ import java.util.ArrayList;
 
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
+import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.CompassModelImpl;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.GPSModelImpl;
+import de.fhb.sailboat.worldmodel.WindModel;
+import de.fhb.sailboat.worldmodel.WindModelImpl;
 
 
 
 /**
  * This class serves as storage for all data relevant to be served to and displayed by View.
  * @author Patrick Rutter
- * @lastUpdate 03.02.2012
  *
  */
 public class Model {
@@ -23,10 +25,9 @@ public class Model {
 	// CONSTANTS
 	
 	// VARIABLES
-	private CompassModel compass;
+	private WindModel wind;
 	
-	private int windDirection;
-	private int windVelocity;
+	private CompassModel compass;
 	
 	private GPSModel gps;
 	private double gpsPrecision; // Used to value the reliability of GPS values, currently cosmetic and unused (ranged from 0.0 for 0% relaiability to 1.0 fpr 100%)
@@ -35,10 +36,9 @@ public class Model {
 	private ArrayList<MapMarker> markerList;
 	
 	public Model() {
-		this.windDirection = 0;
-		this.windVelocity = 0;
-		
+		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();
+		this.compass.setCompass(new Compass(170,0,0));
 		this.gps = new GPSModelImpl();
 	}
 
@@ -53,23 +53,19 @@ public class Model {
 	}
 
 	// Wind
-	public int getWindDirection() {
-		return this.windDirection;
+	public void setWind(WindModel wind) {
+		this.wind = wind;
 	}
-
-	public void setWindDirection(int windDirection) {
-		this.windDirection = windDirection;
-	}
-
-	public int getWindVelocity() {
-		return windVelocity;
-	}
-
-	public void setWindVelocity(int windVelocity) {
-		this.windVelocity = windVelocity;
+	
+	public WindModel getWind() {
+		return this.wind;
 	}
 
 	// GPS
+	public void setGps(GPSModel gps) {
+		this.gps = gps;
+	}
+	
 	public GPSModel getGps() {
 		return gps;
 	}
@@ -78,9 +74,6 @@ public class Model {
 		return gpsPrecision;
 	}
 	
-	public void setGps(GPSModel gps) {
-		this.gps = gps;
-	}
 	
 	/**
 	 * Helper method which should *ONLY* be used for testing/ debugging. Sets the GPS position manually and

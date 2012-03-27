@@ -8,11 +8,13 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
+import de.fhb.sailboat.worldmodel.WindModel;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
@@ -20,7 +22,6 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * This class manages the data pipe between view, model and the sensors.
  * 
  * @author Patrick Rutter
- * @lastUpdate 03.02.2012
  * 
  */
 public class Controller {
@@ -68,6 +69,7 @@ public class Controller {
 	 * get the most recent values possible at once.
 	 */
 	public void updateAll() {
+		updateWind();
 		updateCompass();
 		updateGps();
 	}
@@ -80,16 +82,18 @@ public class Controller {
 		Random dice = new Random();
 
 		//this.model.setCompDirection(dice.nextInt(361));
-
-		this.model.setWindDirection(dice.nextInt(361));
-
-		this.model.setWindVelocity(dice.nextInt(3000));
+		
+		this.model.getWind().setWind(new Wind(dice.nextInt(361), dice.nextInt(3000)));
 
 		this.model.setGpsPosition(new GPS(dice.nextDouble(), dice.nextDouble()));
 
 		this.model.setGpsPrecision((float) dice.nextInt(2));
 	}
 
+	public void updateWind() {
+		this.model.setWind(worldModel.getWindModel());
+	}
+	
 	public void updateCompass() {
 		this.model.setCompass(worldModel.getCompassModel());
 	}
@@ -110,18 +114,13 @@ public class Controller {
 		return this.model.getCompass();
 	}
 
-	public int getWindDirection() {
-		return this.model.getWindDirection();
-	}
-
-	public int getWindVelocity() {
-		return this.model.getWindVelocity();
+	public WindModel getWind() {
+		return this.model.getWind();
 	}
 
 	public GPSModel getGps() {
 		return this.model.getGps();
 	}
-
 
 	public double getGpsPrecision() {
 		return this.model.getGpsPrecision();
