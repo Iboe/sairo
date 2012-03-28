@@ -82,14 +82,14 @@ public class AKSENLocomotion implements LocomotionSystem {
 		// send command-string to AKSEN-Board
 		String com = this.buildCommand(rudderNo, angle);
 		System.out.println(com);
-		try {
+//		try {
 			this.aksenComm.writeOutputStream(com);
-			Thread.sleep(1000);
-			System.out.println(this.aksenComm.getStrInput());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			Thread.sleep(1000);
+//			System.out.println(this.aksenComm.getStrInput());
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	/** 
@@ -103,14 +103,14 @@ public class AKSENLocomotion implements LocomotionSystem {
 		int angle = value;
 		String com = this.buildCommand(sailNo, angle);
 		System.out.println(com);
-		try {
+//		try {
 			this.aksenComm.writeOutputStream(com);
-			Thread.sleep(1000);
-			System.out.println(this.aksenComm.getStrInput());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			Thread.sleep(1000);
+//			System.out.println(this.aksenComm.getStrInput());
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	/** 
@@ -125,14 +125,14 @@ public class AKSENLocomotion implements LocomotionSystem {
 		String com = this.buildCommand(propellorNo, angle);
 		// send command-string to AKSEN-Board
 		System.out.println(com);
-		try {
+//		try {
 			this.aksenComm.writeOutputStream(com);
-			Thread.sleep(1000);
-			System.out.println(this.aksenComm.getStrInput());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			Thread.sleep(1000);
+//			System.out.println(this.aksenComm.getStrInput());
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	/** 
