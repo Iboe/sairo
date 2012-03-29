@@ -706,7 +706,7 @@ public class View extends JFrame {
 					}
 					else {
 						controller.updateAll();
-						map.followBoat(WorldModelImpl.getInstance().getGPSModel().getPosition());
+						map.followBoat(controller.getGps().getPosition());
 					}
 					updateView();
 					
