@@ -40,7 +40,7 @@ public class PilotImpl implements Pilot {
 		
 		double desiredAngle=0;
 		
-		System.out.println("given relative angle: "+angle);
+		//System.out.println("given relative angle: "+angle);
 		angle=angle%360;
 		
 		//ensuring that the specified angle doesn't exceed +/-180°; if yes, recalculating it
@@ -56,7 +56,7 @@ public class PilotImpl implements Pilot {
 		else
 			(driveAngleThread=new DriveAngleThread(desiredAngle)).start();
 		
-		System.out.println("desired relative angle: "+angle);
+		//System.out.println("desired relative angle: "+angle);
 //		
 //		rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(angle)); 
 //		System.out.println("relevant relative angle: "+rudderPos);
@@ -96,7 +96,7 @@ public class PilotImpl implements Pilot {
 
 	@Override
 	public void setPropellor(int value) {
-		locSystem.setSail(value);
+		locSystem.setPropellor(value);
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class PilotImpl implements Pilot {
 				
 				locSystem.setRudder((int)rudderPos);
 				
-				System.out.println("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle="+desiredAngle+", delta="+deltaAngle);
+				//System.out.println("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle="+desiredAngle+", delta="+deltaAngle);
 				
 				
 				try {
