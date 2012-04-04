@@ -9,7 +9,10 @@ public interface WorldModel {
 	GPSModel getGPSModel();
 	WindModel getWindModel();
 	MapModel getMapModel();
+	
 	void setBatteryState(int batteryState);
 	int getBatteryState();
+	
 	Mission getMission();
+	void setMission(Mission mission);
 }

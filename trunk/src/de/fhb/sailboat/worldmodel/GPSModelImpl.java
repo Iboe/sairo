@@ -12,6 +12,7 @@ public class GPSModelImpl implements GPSModel {
 	public GPSModelImpl() {
 		this.history = new History<GPS>(System.getProperty(
 				GPSModel.HISTORY_SIZE_PROPERTY));
+		position = new GPS(0d, 0d);
 	}
 
 	@Override

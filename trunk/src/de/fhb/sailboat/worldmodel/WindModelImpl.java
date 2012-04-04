@@ -12,6 +12,7 @@ public class WindModelImpl implements WindModel {
 	public WindModelImpl() {
 		this.history = new History<Wind>(System.getProperty(
 				WindModel.HISTORY_SIZE_PROPERTY));
+		wind = new Wind(0, 0);
 	}
 	
 	@Override

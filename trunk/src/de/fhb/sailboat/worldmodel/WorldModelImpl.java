@@ -67,5 +67,9 @@ public class WorldModelImpl implements WorldModel {
 	public Mission getMission() {
 		return mission;
 	}
-	
+
+	@Override
+	public void setMission(Mission mission) {
+		this.mission = mission;
+	}
 }
