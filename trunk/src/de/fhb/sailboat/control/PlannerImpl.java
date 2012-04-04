@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
@@ -33,11 +34,12 @@ public class PlannerImpl implements Planner {
 		if (mission == null || mission.getTasks() == null || mission.getTasks().isEmpty()) {
 			LOG.warn("could not start mission: mission is null or emtpy: {}", mission);
 		} else {
-
+			worldModel.setMission(mission);
+			
 			if (workerThread == null) {
 				workerThread = new WorkerThread();
 			} else if (workerThread.isAlive()) {
-				//shut down thread before starting new mission
+				//start mission in a new thread
 				stopThread();
 				workerThread = new WorkerThread();
 			}
@@ -72,7 +74,12 @@ public class PlannerImpl implements Planner {
 					//execute new task
 					if (!(currentTask == tasks.get(0))) {
 						currentTask = tasks.get(0);
-						navigator.doTask(currentTask);
+						try {
+							navigator.doTask(currentTask);
+						} catch (IllegalStateException e) {
+							LOG.warn("could not execute task - remove task {}", currentTask);
+							tasks.remove(0);
+						}
 					}
 					
 					//remove task if it is finished

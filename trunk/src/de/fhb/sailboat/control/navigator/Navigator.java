@@ -1,4 +1,4 @@
-package de.fhb.sailboat.control;
+package de.fhb.sailboat.control.navigator;
 
 import de.fhb.sailboat.mission.Task;
 
