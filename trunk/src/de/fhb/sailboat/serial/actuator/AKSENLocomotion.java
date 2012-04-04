@@ -3,6 +3,9 @@
  */
 package de.fhb.sailboat.serial.actuator;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.fhb.sailboat.serial.sensor.sairoComm2;
 
 /**
@@ -26,7 +29,7 @@ import de.fhb.sailboat.serial.sensor.sairoComm2;
  * @author schmidst
  *
  */
-public class AKSENLocomotion implements LocomotionSystem {
+public class AKSENLocomotion implements LocomotionSystem, Observer {
 	sairoComm2 aksenComm;
 	String lastCom;
 	// Servo-Config; ==> TODO outsourcing!
@@ -49,6 +52,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	int propellorMax = 112;
 	int propellorN = 72;
 
+	int zustand = 0;
 	//Debug
 	String lastAnswer;
 	/**
@@ -60,6 +64,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		
 		this.aksenComm = new sairoComm2(comPort,baudrate, true);
 		
+		
 		try {
 			this.aksenComm.connect();
 		} catch (Exception e) {
@@ -67,6 +72,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 			e.printStackTrace();
 		}
 		//Debug Output
+		
+		// Observer
+		this.aksenComm.addObserver(this);
 		System.out.println("Status: " + this.aksenComm.getStatus() + "\n");
 	}
 	
@@ -83,9 +91,11 @@ public class AKSENLocomotion implements LocomotionSystem {
 		String com = this.buildCommand(rudderNo, angle);
 		System.out.println(com);
 //		try {
-			this.aksenComm.writeOutputStream(com);
-//			Thread.sleep(1000);
-//			System.out.println(this.aksenComm.getStrInput());
+		this.zustand = 1;	
+		this.aksenComm.writeOutputStream(com);
+			
+			//Thread.sleep(1000);
+			//System.out.println(this.aksenComm.getStrInput());
 //		} catch (InterruptedException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -181,7 +191,21 @@ public class AKSENLocomotion implements LocomotionSystem {
 	}
 	
 	private String buildCommand(int s, int a) {
+		//String str = "s"+ s +"," + a + "ea";
 		String str = "s"+ s +"," + a + "ea";
 		return str;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
+		// Bestätigen
+		
+//			this.aksenComm.writeOutputStream("a");
+			System.out.println("test: "+ arg1);
+
+		
+		
 	}
 }
