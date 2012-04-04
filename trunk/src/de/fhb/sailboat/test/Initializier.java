@@ -2,22 +2,23 @@ package de.fhb.sailboat.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import de.fhb.sailboat.control.Navigator;
-import de.fhb.sailboat.control.NavigatorImpl;
 import de.fhb.sailboat.control.Pilot;
 import de.fhb.sailboat.control.PilotImpl;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.control.PlannerImpl;
-import de.fhb.sailboat.data.Compass;
+import de.fhb.sailboat.control.navigator.Navigator;
+import de.fhb.sailboat.control.navigator.NavigatorImpl;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
+import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
@@ -28,6 +29,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class Initializier {
 
+	private static final boolean TEST = true;
 	private static final String CONFIG_FILE = "config.properties";
 	private Planner planner;
 	private View view;
@@ -36,10 +38,14 @@ public class Initializier {
 		Initializier init = new Initializier();
 		
 		init.initializeProperties();
-		init.initializeSensors();
 		init.initializeControl();
-		//init.initializeView();
-		init.createDummyMission();
+		
+		if (TEST) {
+			init.createDummyMission();
+		} else {
+			init.initializeSensors();
+			init.initializeView();
+		}
 	}
 	
 	private void initializeProperties() {
@@ -61,13 +67,8 @@ public class Initializier {
 	}
 	
 	private void initializeSensors() {
-		WorldModelImpl.getInstance().getCompassModel()
-			.setCompass(new Compass(170, 0, 0));
-		WorldModelImpl.getInstance().getGPSModel()
-		.setPosition(new GPS( 0, 0));
 		System.out.println("-----init sensors-----");
-		GPSDummy gps = new GPSDummy();
-		//GpsSensor gps=new GpsSensor("COM8");
+		GpsSensor gps=new GpsSensor("COM8");
 		OS500sensor compassSensor=new OS500sensor(); //zzt. COM17
 		try {
 			Thread.sleep(2000);
@@ -79,8 +80,14 @@ public class Initializier {
 	}
 	
 	private void initializeControl() {
-		//Pilot pilot = new PilotImpl(new AKSENLocomotion());
-		Pilot pilot = new PilotImpl(new DummyLoco());
+		Pilot pilot;
+		
+		if (TEST) {
+			pilot = new PilotImpl(new DummyLoco());
+		} else {
+			pilot = new PilotImpl(new AKSENLocomotion());
+		}
+		
 		Navigator navigator = new NavigatorImpl(pilot);
 		planner = new PlannerImpl(navigator);
 	}
@@ -92,33 +99,38 @@ public class Initializier {
 	
 	private void createDummyMission() {
 		WorldModel worldModel = WorldModelImpl.getInstance();
-		boolean gpsExist = false;
+		final GPS position = worldModel.getGPSModel().getPosition();
+		Mission mission = new MissionImpl();
+		List<Task> tasks = new LinkedList<Task>();
 		
-		while (!gpsExist) {
-			final GPS position = worldModel.getGPSModel().getPosition();
+		if (position != null) {
+			GPS goal = new GPS(position.getLatitude() + 200, 
+					position.getLongitude());
+			GPS goal2 = new GPS(position.getLatitude() + 300, 
+					position.getLongitude());
+			GPS goal3 = new GPS(52.24615, //mensa
+					12.32274);
 			
-			if (position != null) {
-				Mission mission = new MissionImpl();
-				List<Task> tasks = new LinkedList<Task>();
-				GPS goal = new GPS(position.getLatitude() + 200, 
-						position.getLongitude());
-				GPS goal2 = new GPS(position.getLatitude(), 
-						position.getLongitude());
-				GPS goal3 = new GPS(52.24615, //mensa
-						12.32274);
-				
-				tasks.add(new ReachCircleTask(goal, 5));
-				tasks.add(new ReachCircleTask(goal2, 5));
-				tasks.add(new ReachCircleTask(goal3, 5));
-				mission.setTasks(tasks);
-				planner.doMission(mission);
-				gpsExist = true;
-			}
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			List<GPS> polygon = new ArrayList<GPS>();
+			polygon.add(new GPS(0,0));
+			polygon.add(new GPS(-2,0));
+			polygon.add(new GPS(-2,2));
+			polygon.add(new GPS(0,2));
+			
+			//tasks.add(new ReachCircleTask(goal, 5));
+			tasks.add(new ReachPolygonTask(polygon));
+			tasks.add(new ReachCircleTask(goal2, 5));
+			tasks.add(new ReachCircleTask(goal3, 5));
+			mission.setTasks(tasks);
+			planner.doMission(mission);
 		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		tasks.remove(0);
+		planner.doMission(mission);
 	}
 }
