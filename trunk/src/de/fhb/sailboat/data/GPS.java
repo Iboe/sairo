@@ -23,6 +23,28 @@ public class GPS {
 		this.longitude = longitude;
 	}
 
+	/**
+	 * Checks if the specified GPS object has the same coordinates as
+	 * this object.
+	 * 
+	 * @param other the GPS object to compare to
+	 * @return false if they have not the same coordinates or the specified 
+	 * object is null 
+	 */
+	public boolean hasEqualCoordinates(GPS other) {
+		if (other == null) {
+			return false;
+		} else if (Double.doubleToLongBits(latitude) != Double
+					.doubleToLongBits(other.latitude)) {
+			return false;
+		} else if (Double.doubleToLongBits(longitude) != Double
+			.doubleToLongBits(other.longitude)) {
+				return false;
+		} else {
+			return true;
+		}
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

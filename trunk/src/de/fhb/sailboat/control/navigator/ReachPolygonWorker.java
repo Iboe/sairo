@@ -32,7 +32,7 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 		while (!isInterrupted()) {
 			double angle;
 			
-			//the centroid has only to be calculated once
+			//the centroid has to be calculated only once for one task
 			//but has to be recalculated if task changed
 			if (taskChanged) {
 				centroid = calcCentroid();
@@ -72,7 +72,7 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 		if (area == 0) {
 			throw new IllegalStateException("can not calculate centroid: invalid polygon " + task);
 		}
-		cenLat /= area * 3; //the correct value for area is area / 2, but it is
+		cenLat /= area * 3; //the correct value for the area is area / 2, but it is
 							//not used directly, so the real value is not calculated 
 		cenLong /= area * 3;
 		return new GPS(cenLat, cenLong);

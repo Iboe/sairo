@@ -34,9 +34,10 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		try {
 			Thread.sleep(WAIT_TIME);
 		} catch (InterruptedException e) {
-			// do nothing, since earlier execution should not disturb program
+			//the exception causes the interrupt flag to be set to false,
+			//so another interrupt is needed
 			interrupt();
-			LOG.warn("interrupted while waiting", e);
+			LOG.debug("interrupted while waiting", e);
 		}
 	}
 	
