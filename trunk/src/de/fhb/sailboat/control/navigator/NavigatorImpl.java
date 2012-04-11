@@ -72,7 +72,7 @@ public class NavigatorImpl implements Navigator{
 	private void navigateToCircle(ReachCircleTask task) {
 		if (workerThread == null) {
 			workerThread = new ReachCircleWorker(pilot);
-		} else if (workerThread.isAlive() && workerThread instanceof ReachCircleWorker) {
+		} else if (workerThread.isAlive() && !(workerThread instanceof ReachCircleWorker)) {
 			//stop thread if other type of task is executed
 			stopThread();
 			workerThread = new ReachCircleWorker(pilot);
@@ -87,7 +87,7 @@ public class NavigatorImpl implements Navigator{
 	private void navigateToPolygon(ReachPolygonTask task) {
 		if (workerThread == null) {
 			workerThread = new ReachPolygonWorker(pilot);
-		} else if (workerThread.isAlive() && workerThread instanceof ReachPolygonWorker) {
+		} else if (workerThread.isAlive() && !(workerThread instanceof ReachPolygonWorker)) {
 			//stop thread if other type of task is executed
 			stopThread();
 			workerThread = new ReachPolygonWorker(pilot);

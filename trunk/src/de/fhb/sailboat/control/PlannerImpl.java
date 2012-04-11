@@ -32,7 +32,7 @@ public class PlannerImpl implements Planner {
 	@Override
 	public void doMission(Mission mission) {
 		if (mission == null || mission.getTasks() == null || mission.getTasks().isEmpty()) {
-			LOG.warn("could not start mission: mission is null or emtpy: {}", mission);
+			LOG.warn("could not start mission: mission is emtpy: {}", mission);
 		} else {
 			worldModel.setMission(mission);
 			

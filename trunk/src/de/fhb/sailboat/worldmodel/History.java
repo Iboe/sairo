@@ -11,9 +11,8 @@ public class History<T> {
 	public static final String MAX_SIZE_PROPERTY_NAME = ".historySize";
 	private static final Logger LOG = LoggerFactory.getLogger(History.class);
 	
+	private final int maxSize;
 	private LinkedList<T> history;
-	private int maxSize; //in fact it's final, it's only altered by the init method, which
-						 //is only called by constructor
 	
 	public History() {
 		this(DEFAULT_MAX_SIZE);
@@ -21,19 +20,24 @@ public class History<T> {
 	
 	public History (String maxSize) {
 		if (maxSize == null) {
-			init(DEFAULT_MAX_SIZE);
+			this.maxSize = DEFAULT_MAX_SIZE;
 		} else {
+			int maxSizeTemp;
+			
 			try {
-				init(Integer.parseInt(maxSize));
+				maxSizeTemp = Integer.parseInt(maxSize);
 			} catch (NumberFormatException ne) {
 				LOG.warn("could not parse configuration value for history maximum size of history");
-				init(DEFAULT_MAX_SIZE);
+				maxSizeTemp = DEFAULT_MAX_SIZE;
 			}
+			this.maxSize = maxSizeTemp;
 		}
+		this.history = new LinkedList<T>();
 	}
 	
 	public History(int maxSize) {
-		init(maxSize);
+		this.maxSize = maxSize;
+		this.history = new LinkedList<T>();
 	}
 
 	public void addElement(T element) {
@@ -41,6 +45,7 @@ public class History<T> {
 			history.removeLast();
 		}
 		history.addFirst(element);
+		LOG.debug("element added: {}", element);
 	}
 	
 	public int getMaxSize() {
@@ -49,10 +54,5 @@ public class History<T> {
 
 	public List<T> getHistory() {
 		return history;
-	}
-	
-	private void init(int maxSize) {
-		this.maxSize = maxSize;
-		this.history = new LinkedList<T>();
 	}
 }
