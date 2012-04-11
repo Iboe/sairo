@@ -208,4 +208,15 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 		
 		
 	}
+	
+	
+	/**
+	 * Data-Object for an AKSEN-Board-Command
+	 * and the state of transmission via serial Port
+	 * @author schmidst
+	 *
+	 */
+	private static class AKSENCommand {
+		
+	}
 }
