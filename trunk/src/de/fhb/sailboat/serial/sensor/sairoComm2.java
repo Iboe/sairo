@@ -211,7 +211,7 @@ public class sairoComm2 extends Observable {
 	 */
 	private void setStrInput(String str) {
 		System.out.println(str);
-		// Änderung anzeigen
+		// ï¿½nderung anzeigen
 		setChanged();
 		this.strInput = str;
 		this.addSample(str); // set into StringArray
@@ -299,7 +299,7 @@ public class sairoComm2 extends Observable {
 
 			for (int i = 0; i < b.length; i++) {
 				this.outputStream.write(b[i]);
-				// Thread.sleep(50);
+				Thread.sleep(2);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -307,6 +307,9 @@ public class sairoComm2 extends Observable {
 			// } catch (InterruptedException e) {
 			// // TODO Auto-generated catch block
 			// e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
