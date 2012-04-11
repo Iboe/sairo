@@ -1,12 +1,18 @@
 package de.fhb.sailboat.ufer.prototyp;
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,12 +20,17 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigMap;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigReader;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigWriter;
+import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 
@@ -65,6 +76,7 @@ public class View extends JFrame {
 	 * the addition of "_<Entry name>".
 	 */
 	final static public String M_FILE = "Datei";
+	final static public String M_FILE_SCROLL = "AutoScroll";
 	final static public String M_FILE_CLOSE = "Beenden";
 
 	final static public String M_CONNECTION = "Verbindung";
@@ -125,6 +137,17 @@ public class View extends JFrame {
 	final static public int P_CHART_WIDTH = 404;
 	final static public int P_CHART_HEIGHT = 290;
 	final static public String P_CHART_NAME = "Protokoll";
+	
+	final static public int P_CHART_SUBPANEL_X = P_CHART_X + 4;
+	final static public int P_CHART_SUBPANEL_Y = P_CHART_Y + 4;
+	final static public int P_CHART_SUBPANEL_WIDTH = P_CHART_WIDTH - 8;
+	final static public int P_CHART_SUBPANEL_HEIGHT = P_CHART_HEIGHT - 8;
+	
+	final static public int P_CHART_TEXT_X = P_CHART_SUBPANEL_X + 4;
+	final static public int P_CHART_TEXT_Y = P_CHART_SUBPANEL_Y + 4;
+	final static public int P_CHART_TEXT_WIDTH = P_CHART_SUBPANEL_WIDTH - 12;
+	final static public int P_CHART_TEXT_HEIGHT = P_CHART_SUBPANEL_HEIGHT - 30;
+	
 
 	/* Labels:
 	 * All label constants start with "L_".
@@ -141,10 +164,12 @@ public class View extends JFrame {
 
 	// variables
 	private boolean debugMode; // if true will emulate updates from boat sensors by random values, for local UI testing
+	private boolean tabAutoScroll; // if true the textAreas in the tabbedPlane will scroll with latest entry
 	
 	private Planner planner;
 	private MapPanel map;
 	private Controller controller;
+	private UferLogger logger;
 
 	private JPanel mapArea;
 	
@@ -153,12 +178,20 @@ public class View extends JFrame {
 	private BoatMonitor smallMonitor3;
 	private BoatMonitor smallMonitor4;
 	
+	private JTextArea compassDisplayText;
+	private JTextArea gpsDisplayText;
+	private JTextArea windDisplayText;
+	private JTextArea missionDisplayText;
+	private JTextArea systemDisplayText;
+	
 	//private Coordinate target; // to be used for coordination 
 
 	private View() {
 		this.controller = new Controller();
+		this.logger = new UferLogger(this.controller);
 		initUI();
 		this.debugMode = false;
+		this.tabAutoScroll = false;
 		startUpdating();
 	}
 	
@@ -182,6 +215,19 @@ public class View extends JFrame {
 		JMenu mFile = new JMenu(M_FILE);
 		mFile.setMnemonic(KeyEvent.VK_D);
 
+		final JCheckBoxMenuItem mFileScroll = new JCheckBoxMenuItem(M_FILE_SCROLL);
+		mFileScroll.setMnemonic(KeyEvent.VK_S);
+		mFileScroll.setToolTipText("Textfelder scrollen automatisch, falls ausgewählt.");
+
+		mFileScroll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				tabAutoScroll = mFileScroll.getState();
+			}
+
+		});
+
+		mFile.add(mFileScroll);
+		
 		JMenuItem mFileExit = new JMenuItem(M_FILE_CLOSE);
 		mFileExit.setMnemonic(KeyEvent.VK_B);
 		mFileExit.setToolTipText(TITLE + " beenden.");
@@ -200,7 +246,6 @@ public class View extends JFrame {
 		mProtocol.setMnemonic(KeyEvent.VK_P);
 
 		// Menü->Mission
-		//TODO Remove button for exercise from UI
 		JMenu mMission = new JMenu(M_MISSION);
 		mMission.setMnemonic(KeyEvent.VK_M);
 		
@@ -660,15 +705,73 @@ public class View extends JFrame {
 		mapArea = map.mapPanel();
 		add(mapArea);
 
-		// chart panel (just temporary)
-		JPanel chartArea = new JPanel();
-		chartArea
-				.setBounds(P_CHART_X, P_CHART_Y, P_CHART_WIDTH, P_CHART_HEIGHT);
-		chartArea.setBorder(new javax.swing.border.TitledBorder(P_CHART_NAME));
-		chartArea.setLayout(null);
-
-		add(chartArea);
+		// TODO Tabbed Logger - Research why scrolling wont work for the text area
+		JTabbedPane tabbedLogger = new JTabbedPane();
+		tabbedLogger.setLocation(P_CHART_X, P_CHART_Y);
+		tabbedLogger.setSize(new Dimension(P_CHART_WIDTH, P_CHART_HEIGHT));
+		tabbedLogger.setPreferredSize(new Dimension(P_CHART_WIDTH, P_CHART_HEIGHT));
 		
+		// Compass tab
+		JPanel compassDisplay = new JPanel();
+		compassDisplay.setLocation(P_CHART_SUBPANEL_X, P_CHART_SUBPANEL_Y);
+		
+		compassDisplayText = new JTextArea();
+		compassDisplayText.setBorder(BorderFactory.createEtchedBorder());
+		compassDisplayText.setLineWrap(true);
+		compassDisplayText.setWrapStyleWord(true);
+		compassDisplayText.setEditable(false);
+		
+		JScrollPane compassDisplayScroll = new JScrollPane(compassDisplayText);
+		compassDisplayScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		compassDisplayScroll.setPreferredSize(new Dimension(P_CHART_TEXT_WIDTH, P_CHART_TEXT_HEIGHT));
+        compassDisplay.add(compassDisplayScroll);
+
+        tabbedLogger.addTab("Compass", compassDisplay);
+        
+        // GPS tab
+        JPanel gpsDisplay = new JPanel();
+        gpsDisplay.setLocation(P_CHART_SUBPANEL_X, P_CHART_SUBPANEL_Y);
+		
+		gpsDisplayText = new JTextArea();
+		gpsDisplayText.setBorder(BorderFactory.createEtchedBorder());
+		gpsDisplayText.setLineWrap(true);
+		gpsDisplayText.setWrapStyleWord(true);
+		gpsDisplayText.setEditable(false);
+		
+		JScrollPane gpsDisplayScroll = new JScrollPane(gpsDisplayText);
+		gpsDisplayScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		gpsDisplayScroll.setPreferredSize(new Dimension(P_CHART_TEXT_WIDTH, P_CHART_TEXT_HEIGHT));
+        gpsDisplay.add(gpsDisplayScroll);
+        
+        tabbedLogger.addTab("GPS", gpsDisplay);
+        
+        // Wind tab
+        JPanel windDisplay = new JPanel();
+        windDisplay.setLocation(P_CHART_SUBPANEL_X, P_CHART_SUBPANEL_Y);
+		
+        windDisplayText = new JTextArea();
+        windDisplayText.setBorder(BorderFactory.createEtchedBorder());
+        windDisplayText.setLineWrap(true);
+        windDisplayText.setWrapStyleWord(true);
+        windDisplayText.setEditable(false);
+		
+		JScrollPane windDisplayScroll = new JScrollPane(windDisplayText);
+		windDisplayScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		windDisplayScroll.setPreferredSize(new Dimension(P_CHART_TEXT_WIDTH, P_CHART_TEXT_HEIGHT));
+		windDisplay.add(windDisplayScroll);
+        
+        tabbedLogger.addTab("Wind", windDisplay);
+        
+        // Mission tab
+        JPanel missionDisplay = new JPanel();
+        tabbedLogger.addTab("Mission", missionDisplay);
+        
+        // System tab
+        JPanel systemDisplay = new JPanel();
+        tabbedLogger.addTab("System", systemDisplay);
+        
+        add(tabbedLogger);
+        
 		System.out.println("View initialized");
 	}
 	
@@ -690,6 +793,16 @@ public class View extends JFrame {
 		smallMonitor2.updatePanel();
 		smallMonitor3.updatePanel();
 		smallMonitor4.updatePanel();
+		
+		// update tabed text
+		compassDisplayText.setText(logger.getCompassData().toString());
+		if (tabAutoScroll) compassDisplayText.setCaretPosition(compassDisplayText.getDocument().getLength());
+		
+		gpsDisplayText.setText(logger.getGpsData().toString());
+		if (tabAutoScroll) gpsDisplayText.setCaretPosition(gpsDisplayText.getDocument().getLength());
+		
+		windDisplayText.setText(logger.getWindData().toString());
+		if (tabAutoScroll) windDisplayText.setCaretPosition(windDisplayText.getDocument().getLength());
 	}
 	
 	/**
@@ -708,6 +821,7 @@ public class View extends JFrame {
 						controller.updateAll();
 						map.followBoat(controller.getGps().getPosition());
 					}
+					logger.dumpAll();
 					updateView();
 					
 					try {
