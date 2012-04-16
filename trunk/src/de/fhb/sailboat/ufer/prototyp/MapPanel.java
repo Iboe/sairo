@@ -362,4 +362,14 @@ public class MapPanel extends JPanel {
 	public void setInRectMarkMode(boolean inRectMarkMode) {
 		this.inRectMarkMode = inRectMarkMode;
 	}
+
+	public ArrayList<MapMarker> getPolygon() {
+		return polygon;
+	}
+
+	public void setPolygon(ArrayList<MapMarker> polygon) {
+		this.polygon = polygon;
+	}
+	
+	
 }
