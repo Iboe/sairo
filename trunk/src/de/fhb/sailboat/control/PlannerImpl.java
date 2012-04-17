@@ -35,6 +35,7 @@ public class PlannerImpl implements Planner {
 			LOG.warn("could not start mission: mission is emtpy: {}", mission);
 		} else {
 			worldModel.setMission(mission);
+			LOG.info("execute mission {}", mission);
 			
 			if (workerThread == null) {
 				workerThread = new WorkerThread();
