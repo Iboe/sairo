@@ -10,8 +10,11 @@ import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
+import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.ufer.prototyp.utility.MapMarkerToGPS;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -42,23 +45,44 @@ public class Controller {
 	 * For the milestone. Stores MapMarkers set in View and stored in Model as a
 	 * collection of CircleTasks in Mission.
 	 */
-	public void commitMarkerList(Planner planner) {
-		ArrayList<MapMarker> markerList = this.model.getMarkerList();
+	public void commitCircleMarkerList(Planner planner) {
+		ArrayList<MapMarker> markerList = this.model.getCircleMarkerList();
 
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
+		tasks.add(new PrimitiveCommandTask(null, null, 100));
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i).getLat(),
 					markerList.get(i).getLon()), 3));
 		}
+		tasks.add(new PrimitiveCommandTask(null, null, 73));
 
 		mission.setTasks(tasks);
 		
 		System.out.println("Mission passed.");
 		System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
 		
-		//TODO weiterleiten der Mission an ein Planner-Objekt
+		//TODO add start/ stop task for motor
+		planner.doMission(mission);
+	}
+	
+	public void commitPolyMarkerList(Planner planner) {
+		ArrayList<MapMarker> markerList = this.model.getPolyMarkerList();
+
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		tasks.add(new PrimitiveCommandTask(null, null, 100));
+		tasks.add(new ReachPolygonTask(MapMarkerToGPS.toGPS(markerList)));
+		tasks.add(new PrimitiveCommandTask(null, null, 73));
+		
+		mission.setTasks(tasks);
+		
+		System.out.println("Mission passed.");
+		//System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
+		
+		//TODO add start/ stop task for motor
 		planner.doMission(mission);
 	}
 
@@ -104,8 +128,13 @@ public class Controller {
 
 
 	// Setter (values given by View to store in Model)
-	public void setMarkerList(ArrayList<MapMarker> markerList) {
-		this.model.setMarkerList(markerList);
+	public void setCircleMarkerList(ArrayList<MapMarker> markerList) {
+		this.model.setCircleMarkerList(markerList);
+		System.out.println("Set passed.");
+	}
+	
+	public void setPolyMarkerList(ArrayList<MapMarker> markerList) {
+		this.model.setPolyMarkerList(markerList);
 		System.out.println("Set passed.");
 	}
 

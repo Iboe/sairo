@@ -33,7 +33,8 @@ public class Model {
 	private double gpsPrecision; // Used to value the reliability of GPS values, currently cosmetic and unused (ranged from 0.0 for 0% relaiability to 1.0 fpr 100%)
 	
 	// for the planned exercise
-	private ArrayList<MapMarker> markerList;
+	private ArrayList<MapMarker> circleMarkerList;
+	private ArrayList<MapMarker> polyMarkerList;
 	
 	public Model() {
 		this.wind = new WindModelImpl();
@@ -95,14 +96,20 @@ public class Model {
 		this.gpsPrecision = gpsPrecision;
 	}
 
-	public ArrayList<MapMarker> getMarkerList() {
-		return markerList;
+	public ArrayList<MapMarker> getCircleMarkerList() {
+		return circleMarkerList;
 	}
 
-	public void setMarkerList(ArrayList<MapMarker> markerList) {
-		this.markerList = markerList;
+	public void setCircleMarkerList(ArrayList<MapMarker> markerList) {
+		this.circleMarkerList = markerList;
 	}
 	
-	
+	public ArrayList<MapMarker> getPolyMarkerList() {
+		return polyMarkerList;
+	}
+
+	public void setPolyMarkerList(ArrayList<MapMarker> markerList) {
+		this.polyMarkerList = markerList;
+	}
 	
 }

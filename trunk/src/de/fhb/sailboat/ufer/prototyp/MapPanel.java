@@ -38,7 +38,7 @@ public class MapPanel extends JPanel {
 	final static int P_MAP_X = 412;
 	final static int P_MAP_Y = 4;
 	final static int P_MAP_WIDTH = 435;
-	final static int P_MAP_HEIGHT = 535;
+	final static int P_MAP_HEIGHT = 435;
 
 	private ArrayList<MapMarker> markerList;
 	private ArrayList<MapMarker> positionHistory = new ArrayList<MapMarker>();

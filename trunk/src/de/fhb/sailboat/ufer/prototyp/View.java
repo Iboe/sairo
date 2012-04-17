@@ -55,10 +55,10 @@ public class View extends JFrame {
 	final static public int  UPDATE_RATE = 500; // rate in ms at which new values are ordered/ received from controller (and there from the boat)
 
 	final static public String TITLE = "Lorelei"; // title of the application
-	final static public String VERSION = "0.69"; // current version of the GUI (for now only subjective gimmick)
+	final static public String VERSION = "0.71"; // current version of the GUI (for now only subjective gimmick)
 
 	final static public int SCREEN_X = 862; // horizontal size of the window
-	final static public int SCREEN_Y = 600; // vertical size of the window
+	final static public int SCREEN_Y = 500; // vertical size of the window
 	
 	final static public String CONFIG_FILE = "ViewConfig.ini"; // name of the configuration file used for storing settings (created in working directory)
 
@@ -85,7 +85,8 @@ public class View extends JFrame {
 	final static public String M_CONNECTION_SETTINGS = "Einstelllungen";
 
 	final static public String M_MISSION = "Mission";
-	final static public String M_MISSION_SEND = "Senden";
+	final static public String M_MISSION_SEND = "ReachCircle Task(s) senden";
+	final static public String M_MISSION_SEND_POLY = "ReachPolygon Task senden";
 
 	final static public String M_PROTOCOL = "Protokoll";
 	
@@ -125,7 +126,7 @@ public class View extends JFrame {
 	final static public int P_MAP_X = 412;
 	final static public int P_MAP_Y = 35;
 	final static public int P_MAP_WIDTH = 435;
-	final static public int P_MAP_HEIGHT = 505;
+	final static public int P_MAP_HEIGHT = 405;
 	
 	final static public int P_MAP_SELECTORS_X = P_MAP_X;
 	final static public int P_MAP_SELECTORS_Y = 5;
@@ -135,7 +136,7 @@ public class View extends JFrame {
 	final static public int P_CHART_X = 4;
 	final static public int P_CHART_Y = 252;
 	final static public int P_CHART_WIDTH = 404;
-	final static public int P_CHART_HEIGHT = 290;
+	final static public int P_CHART_HEIGHT = 190;
 	final static public String P_CHART_NAME = "Protokoll";
 	
 	final static public int P_CHART_SUBPANEL_X = P_CHART_X + 4;
@@ -251,16 +252,29 @@ public class View extends JFrame {
 		
 		JMenuItem mMissionSend = new JMenuItem(M_MISSION_SEND);
 		mMissionSend.setMnemonic(KeyEvent.VK_S);
-		mMissionSend.setToolTipText("Koordinaten senden.");
+		mMissionSend.setToolTipText("ReachCircle Task senden.");
 
 		mMissionSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				sendMapMarkers();
+				sendCircleMapMarkers();
 			}
 
 		});
 		
 		mMission.add(mMissionSend);
+		
+		JMenuItem mMissionSendPoly = new JMenuItem(M_MISSION_SEND_POLY);
+		mMissionSendPoly.setMnemonic(KeyEvent.VK_S);
+		mMissionSendPoly.setToolTipText("ReachPolygon Task senden.");
+
+		mMissionSendPoly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				sendPolyMapMarkers();
+			}
+
+		});
+		
+		mMission.add(mMissionSendPoly);
 
 		// Menü->Verbindung
 		JMenu mConnection = new JMenu(M_CONNECTION);
@@ -775,11 +789,20 @@ public class View extends JFrame {
 		System.out.println("View initialized");
 	}
 	
-	private void sendMapMarkers() {
-		System.out.println("Attempting to send markers");
+	private void sendCircleMapMarkers() {
+		System.out.println("Attempting to send circle markers");
 		if (map.getMarkerList().size() > 0) {
-			this.controller.setMarkerList(map.getMarkerList());
-			this.controller.commitMarkerList(planner);
+			this.controller.setCircleMarkerList(map.getMarkerList());
+			this.controller.commitCircleMarkerList(planner);
+			System.out.println("Send markers.");
+		}
+	}
+	
+	private void sendPolyMapMarkers() {
+		System.out.println("Attempting to send poly markers");
+		if (map.getPolygon().size() > 0) {
+			this.controller.setPolyMarkerList(map.getPolygon());
+			this.controller.commitPolyMarkerList(planner);
 			System.out.println("Send markers.");
 		}
 	}
