@@ -1,5 +1,8 @@
 package de.fhb.sailboat.control;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.CompassModel;
@@ -15,11 +18,16 @@ public class PilotImpl implements Pilot {
 
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Pilot.WAIT_TIME_PROPERTY));
+	public static final double P = Double.parseDouble(System.getProperty(Pilot.P_PROPERTY));
+	public static final double I = Double.parseDouble(System.getProperty(Pilot.I_PROPERTY));
+	public static final double D = Double.parseDouble(System.getProperty(Pilot.D_PROPERTY));
 	
 	/**
 	 * The max relevant angle where the boat rudder reaches the maximum deflection. 
 	 */
 	public static final int MAX_RELEVANT_ANGLE=45;
+
+	private static final Logger LOG = LoggerFactory.getLogger(PilotImpl.class);
 	
 	private final LocomotionSystem locSystem;
 	private final CompassModel compassModel;
@@ -115,6 +123,10 @@ public class PilotImpl implements Pilot {
 		//private CompassModel compassModel;
 		private double desiredAngle;
 		private boolean bStop;
+		double p = 0;
+		double i = 0;
+		double d = 0;
+		double lastRudderPos = 0;
 		
 		public DriveAngleThread(double desiredAngle)
 		{
@@ -151,6 +163,7 @@ public class PilotImpl implements Pilot {
 					rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_RIGHT-LocomotionSystem.RUDDER_NORMAL);
 				}
 				
+				rudderPos = pidController(rudderPos);
 				//System.out.println("desired relative rudderpos: "+rudderPos);
 				
 				//adding offset, to match with the absolute rudder values
@@ -158,7 +171,7 @@ public class PilotImpl implements Pilot {
 				
 				//TODO add watch-thread about the process of changing direction
 				
-				locSystem.setRudder((int)rudderPos);
+				locSystem.setRudder((int) rudderPos);
 				
 				//System.out.println("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle="+desiredAngle+", delta="+deltaAngle);
 				
@@ -179,6 +192,14 @@ public class PilotImpl implements Pilot {
 		
 		}
 
+		private double pidController(double rudderPos) {
+			p = rudderPos * P;
+			i = (i + rudderPos) * I;
+			d = (rudderPos - lastRudderPos) * D;
+			lastRudderPos = rudderPos;
+			
+			return p + i +d;
+		}
 		public void setDesiredAngle(double desiredAngle) {
 			if(desiredAngle > 180) 
 				desiredAngle-=360;

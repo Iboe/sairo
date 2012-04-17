@@ -13,6 +13,10 @@ public interface Pilot {
 	 */
 	static final String WAIT_TIME_PROPERTY = Pilot.class.getSimpleName() + ".waitTime";
 	
+	static final String P_PROPERTY = Pilot.class.getSimpleName() + ".pFactor";
+	static final String I_PROPERTY = Pilot.class.getSimpleName() + ".iFactor";
+	static final String D_PROPERTY = Pilot.class.getSimpleName() + ".dFactor";
+	
 	/**
 	 * Telling the pilot to change to a certain direction (angle), relative to the current direction.
 	 * The angle range goes from -180° to 180°.
