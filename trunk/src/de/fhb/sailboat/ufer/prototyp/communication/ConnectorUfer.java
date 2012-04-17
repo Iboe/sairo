@@ -77,7 +77,9 @@ public class ConnectorUfer {
 		WorldModelImpl wm = null;
 		try {
 			wm = (WorldModelImpl)in.readObject();
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return wm;
