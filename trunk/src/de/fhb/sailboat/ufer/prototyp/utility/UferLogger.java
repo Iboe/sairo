@@ -15,7 +15,7 @@ public class UferLogger {
 	// CONSTANTS
 	public static final int SAVE_RATE = 10; // Rate in update cycles at which data dumps will be written to a session-specific-file
 	
-	public static final String TIME_FORMAT = "HH:mm:ss:ms yyyy-MM-dd";
+	public static final String TIME_FORMAT = "HH:mm:ss:SS yyyy-MM-dd";
 	public static final String DATA_TERMINATOR = "[NEXT]";
 	
 	// VARIABLES
@@ -48,7 +48,7 @@ public class UferLogger {
 		this.compassData = new StringBuffer("");
 		this.lastCompass = "";
 		
-		this.debugOutput = true;
+		this.debugOutput = false;
 	}
 	
 	/**

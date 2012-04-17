@@ -27,6 +27,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.ufer.prototyp.communication.ConnectorUfer;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigMap;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigReader;
 import de.fhb.sailboat.ufer.prototyp.utility.ConfigWriter;
@@ -170,6 +171,7 @@ public class View extends JFrame {
 	private Planner planner;
 	private MapPanel map;
 	private Controller controller;
+	private ConnectorUfer connection;
 	private UferLogger logger;
 
 	private JPanel mapArea;
@@ -286,8 +288,7 @@ public class View extends JFrame {
 
 		mConnectionEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				JOptionPane.showConfirmDialog((Component) event.getSource(),
-						"Verbindung zum Boot aufbauen?");
+				//enableConnection();
 			}
 
 		});
@@ -805,6 +806,11 @@ public class View extends JFrame {
 			this.controller.commitPolyMarkerList(planner);
 			System.out.println("Send markers.");
 		}
+	}
+	
+	private void enableConnection() {
+		connection = new ConnectorUfer("172.16.16.70");
+		connection.startConnection();
 	}
 
 	/**

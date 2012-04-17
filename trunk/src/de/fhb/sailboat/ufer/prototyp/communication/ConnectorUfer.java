@@ -5,13 +5,17 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
+import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class ConnectorUfer {
 
 	public static final int UPDATE_RATE = 500; // Sleep in ms between every attempt to listen/ send (loop)
+	public static final String TIME_FORMAT = "mm:ss:SS";
 	public static final int PORT = 4444;
 	
 	private ObjectInputStream in = null;
@@ -43,7 +47,8 @@ public class ConnectorUfer {
     	Runnable updater = new Runnable() { 
 			public void run() {
 				while(true) {
-					receiveWorldModel();
+					//receiveWorldModel();
+					receiveTestWerte();
 					
 					if (sendMission) try {
 						out.writeObject(mission);
@@ -54,6 +59,14 @@ public class ConnectorUfer {
 					finally {
 						sendMission = false;
 					}
+					
+					System.out.println("Loop\n");
+					try {
+						Thread.sleep(UPDATE_RATE);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					
 				}
 			}
 		};
@@ -70,11 +83,28 @@ public class ConnectorUfer {
 		return wm;
 	}
 	
+	public TestWerte receiveTestWerte() {
+		TestWerte w = null;
+		try {
+			w = (TestWerte)in.readObject();
+			System.out.println("TEST: " + w.toString() + "\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return w;
+	}
+	
 	public void sendMission(Mission mission) {
 		if (mission != null) {
 			this.mission = mission;
 			sendMission = true;
 		}
+	}
+	
+	public static String currentTime() {
+	    Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
+	    return sdf.format(cal.getTime());
 	}
 	
 }
