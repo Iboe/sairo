@@ -193,7 +193,7 @@ public class View extends JFrame {
 		this.controller = new Controller();
 		this.logger = new UferLogger(this.controller);
 		initUI();
-		this.debugMode = true;
+		this.debugMode = false;
 		this.tabAutoScroll = false;
 		startUpdating();
 	}
@@ -926,7 +926,7 @@ public class View extends JFrame {
 	}
 	
 	// Main für lokales Debuggen der GUI, für Regelbetrieb auskommentieren und debugMode im Constructor false setzen
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
         System.setProperty("proxyPort","3128");
 		System.setProperty("proxyHost","proxy.fh-brandenburg.de");
 		SwingUtilities.invokeLater(new Runnable() {
@@ -935,5 +935,5 @@ public class View extends JFrame {
 				view.setVisible(true);
 			}
 		});
-	}
+	}*/
 }
