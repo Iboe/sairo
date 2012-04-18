@@ -37,7 +37,7 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			//the exception causes the interrupt flag to be set to false,
 			//so another interrupt is needed
 			interrupt();
-			LOG.debug("interrupted while waiting", e);
+			LOG.debug("interrupted while waiting");
 		}
 	}
 	

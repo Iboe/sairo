@@ -90,11 +90,11 @@ public class PlannerImpl implements Planner {
 					}
 				//if no task is available the boat is stopped
 				} else {
-					LOG.warn("no task to execute: use StopTask ");
 					
 					//execute new StopTask if one is not already started  
 					if (!(currentTask instanceof StopTask)) {
 						currentTask = new StopTask();
+						LOG.warn("no task to execute: use StopTask ");
 						navigator.doTask(currentTask);
 					}
 				}
@@ -107,7 +107,7 @@ public class PlannerImpl implements Planner {
 				Thread.sleep(WAIT_TIME);
 			} catch (InterruptedException e) {
 				//interrupt again to shut down thread
-				LOG.debug("interrupted while waiting", e);
+				LOG.debug("interrupted while waiting");
 				interrupt();
 			}
 		}

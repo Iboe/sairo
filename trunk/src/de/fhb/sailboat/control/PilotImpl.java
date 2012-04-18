@@ -140,6 +140,7 @@ public class PilotImpl implements Pilot {
 		{
 			double rudderPos=0;
 			double deltaAngle=0;
+			int counter = 0;
 			
 			while(!isInterrupted() && !bStop){
 				
@@ -173,8 +174,10 @@ public class PilotImpl implements Pilot {
 				
 				locSystem.setRudder((int) rudderPos);
 				
-				//System.out.println("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle="+desiredAngle+", delta="+deltaAngle);
-				
+				if (++counter == 3) {
+					LOG.debug("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle="+desiredAngle+", delta="+deltaAngle);
+					counter = 0;
+				}
 				
 				try {
 					Thread.sleep(WAIT_TIME);
