@@ -61,7 +61,7 @@ public class View extends JFrame {
 	final static public int SCREEN_X = 862; // horizontal size of the window
 	final static public int SCREEN_Y = 500; // vertical size of the window
 	
-	final static public String CONFIG_FILE = "ViewConfig.ini"; // name of the configuration file used for storing settings (created in working directory)
+	//final static public String CONFIG_FILE = "ViewConfig.ini"; // name of the configuration file used for storing settings (created in working directory)
 
 	/* UI-CONSTANTS */
 
@@ -193,7 +193,7 @@ public class View extends JFrame {
 		this.controller = new Controller();
 		this.logger = new UferLogger(this.controller);
 		initUI();
-		this.debugMode = false;
+		this.debugMode = true;
 		this.tabAutoScroll = false;
 		startUpdating();
 	}
@@ -586,7 +586,7 @@ public class View extends JFrame {
 		// create Interface
 		
 		// load monitor configuration and set the monitors accordingly
-		ConfigReader reader = new ConfigReader();
+		/*ConfigReader reader = new ConfigReader();
 		ConfigMap settings = new ConfigMap();
 		if (reader.fileExists(CONFIG_FILE)) {
 			settings = reader.readConfigFile(CONFIG_FILE);
@@ -713,7 +713,15 @@ public class View extends JFrame {
 			setSmallMonitor3(BoatMonitor.PERSPECITVE_ID_BLANK);
 			mSmallMonitor4_Blank.setSelected(true);
 			setSmallMonitor4(BoatMonitor.PERSPECITVE_ID_BLANK);
-		}
+		}*/
+		mSmallMonitor1_Compass.setSelected(true);
+		setSmallMonitor1(BoatMonitor.PERSPECITVE_ID_COMPASS);
+		mSmallMonitor2_GPS.setSelected(true);
+		setSmallMonitor2(BoatMonitor.PERSPECITVE_ID_GPS);
+		mSmallMonitor3_Wind.setSelected(true);
+		setSmallMonitor3(BoatMonitor.PERSPECITVE_ID_WIND);
+		mSmallMonitor4_Blank.setSelected(true);
+		setSmallMonitor4(BoatMonitor.PERSPECITVE_ID_BLANK);
 
 		// Map Panel
 		map = new MapPanel();
@@ -824,8 +832,8 @@ public class View extends JFrame {
 	}
 	
 	private void enableConnection() {
-		connection = new ConnectorUfer("172.16.16.70");
-		connection.startConnection();
+		/*connection = new ConnectorUfer("172.16.16.70");
+		connection.startConnection();*/
 	}
 
 	/**
@@ -886,14 +894,14 @@ public class View extends JFrame {
 	// Stores the current settings to the configuration file
 	private void saveViewConfiguration() {
 		// create map of current settings
-		ConfigMap settings = new ConfigMap();
+		/*ConfigMap settings = new ConfigMap();
 		settings.put(M_SMONITOR1, smallMonitor1.getPerspective() + "");
 		settings.put(M_SMONITOR2, smallMonitor2.getPerspective() + "");
 		settings.put(M_SMONITOR3, smallMonitor3.getPerspective() + "");
 		settings.put(M_SMONITOR4, smallMonitor4.getPerspective() + "");
 		
 		ConfigWriter writer = new ConfigWriter(settings);
-		writer.writeConfigFile(CONFIG_FILE);
+		writer.writeConfigFile(CONFIG_FILE);*/
 	}
 
 	// Setter
@@ -918,7 +926,7 @@ public class View extends JFrame {
 	}
 	
 	// Main für lokales Debuggen der GUI, für Regelbetrieb auskommentieren und debugMode im Constructor false setzen
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
         System.setProperty("proxyPort","3128");
 		System.setProperty("proxyHost","proxy.fh-brandenburg.de");
 		SwingUtilities.invokeLater(new Runnable() {
@@ -927,5 +935,5 @@ public class View extends JFrame {
 				view.setVisible(true);
 			}
 		});
-	}*/
+	}
 }
