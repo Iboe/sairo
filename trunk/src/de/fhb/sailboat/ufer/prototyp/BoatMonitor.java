@@ -47,7 +47,7 @@ public class BoatMonitor {
 	final static public int L_COMP_DIRECTION_V_VSIZE = L_VSIZE;
 	
 	final static public String L_COMP_ACCELERATION_NAME = "Beschl.:"; // The identifier-label for displaying the acceleration measured
-	final static public String L_COMP_ACCELERATION_UNIT = " ?"; // this will be appended to the value-label text for displaying the ACCELERATION measured
+	final static public String L_COMP_ACCELERATION_UNIT = " m/s"; // this will be appended to the value-label text for displaying the ACCELERATION measured
 	final static public int L_COMP_ACCELERATION_X = L_COMP_DIRECTION_X;
 	final static public int L_COMP_ACCELERATION_Y = L_COMP_DIRECTION_Y + L_LINE;
 	final static public int L_COMP_ACCELERATION_DSIZE = L_DSIZE;

@@ -13,7 +13,7 @@ import de.fhb.sailboat.ufer.prototyp.Controller;
 public class UferLogger {
 	
 	// CONSTANTS
-	public static final int SAVE_RATE = 10; // Rate in update cycles at which data dumps will be written to a session-specific-file
+	public static final int SAVE_RATE = 20; // Rate in update cycles at which data dumps will be written to a session-specific-file (buffers will be emptied)
 	
 	public static final String TIME_FORMAT = "HH:mm:ss:SS yyyy-MM-dd";
 	public static final String DATA_TERMINATOR = "[NEXT]";
@@ -36,6 +36,8 @@ public class UferLogger {
 	private boolean dumpGPSToConsole = true; // If true new GPS-data will be printed to console
 	private boolean dumpCompassToConsole = true; // If true new compass-data will be printed to console
 	
+	private int dumpCount;
+	
 	public UferLogger(Controller controller) {
 		this.controller = controller;
 		
@@ -47,6 +49,8 @@ public class UferLogger {
 		
 		this.compassData = new StringBuffer("");
 		this.lastCompass = "";
+		
+		this.dumpCount = 0;
 		
 		this.debugOutput = false;
 	}
@@ -101,6 +105,20 @@ public class UferLogger {
 		lastCompass = data;
 		
 		compassData.append(data);
+	}
+	
+	/**
+	 * Advances the internal dumpCount by 1. If dumpCount >= SAVE_RATE all buffers will be written to files (not yet implemented) and then emptied. 
+	 */
+	public void advanceDumpCount() {
+		this.dumpCount++;
+		if (this.dumpCount >= SAVE_RATE) {
+			// TODO dumpToFile
+			compassData = new StringBuffer("");
+			gpsData = new StringBuffer("");
+			windData = new StringBuffer("");
+			dumpCount = 0;
+		}
 	}
 	
 	public static String currentTime() {

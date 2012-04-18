@@ -779,6 +779,19 @@ public class View extends JFrame {
         
         // Mission tab
         JPanel missionDisplay = new JPanel();
+        missionDisplay.setLocation(P_CHART_SUBPANEL_X, P_CHART_SUBPANEL_Y);
+		
+        missionDisplayText = new JTextArea();
+        missionDisplayText.setBorder(BorderFactory.createEtchedBorder());
+        missionDisplayText.setLineWrap(true);
+        missionDisplayText.setWrapStyleWord(true);
+        missionDisplayText.setEditable(false);
+		
+		JScrollPane missionDisplayScroll = new JScrollPane(missionDisplayText);
+		missionDisplayScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		missionDisplayScroll.setPreferredSize(new Dimension(P_CHART_TEXT_WIDTH, P_CHART_TEXT_HEIGHT));
+		missionDisplay.add(missionDisplayScroll);
+        
         tabbedLogger.addTab("Mission", missionDisplay);
         
         // System tab
@@ -786,6 +799,8 @@ public class View extends JFrame {
         tabbedLogger.addTab("System", systemDisplay);
         
         add(tabbedLogger);
+        
+        tabbedLogger.setSelectedComponent(missionDisplay);
         
 		System.out.println("View initialized");
 	}
@@ -832,6 +847,9 @@ public class View extends JFrame {
 		
 		windDisplayText.setText(logger.getWindData().toString());
 		if (tabAutoScroll) windDisplayText.setCaretPosition(windDisplayText.getDocument().getLength());
+		
+		// Parse marker list
+		missionDisplayText.setText("Einzelpunkte:\n" + map.getMarkerList().toString() + "\nPolygon:\n" + map.getPolygon().toString());
 	}
 	
 	/**
@@ -851,6 +869,7 @@ public class View extends JFrame {
 						map.followBoat(controller.getGps().getPosition());
 					}
 					logger.dumpAll();
+					logger.advanceDumpCount();
 					updateView();
 					
 					try {
