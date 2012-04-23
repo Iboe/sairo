@@ -3,6 +3,7 @@
  */
 package de.fhb.sailboat.communication;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -44,7 +45,10 @@ public abstract class CommunicationBase {
 		boolean bRegistered=false;
 		if(tm != null && numModules < modules.length){
 			modules[numModules]=tm;
-		   (workers[numModules]=new ModuleWorker(this,tm,(byte)numModules)).start();
+			//Just starting a ModuleWorker if the given transmission interval is above zero
+			//modules with a transmission interval of zero only receive data but don't transmit 
+			if(tm.getTransmissionInterval() > 0) 
+				(workers[numModules]=new ModuleWorker(this,tm,(byte)numModules)).start();
 		    LOG.info("Registering Transmission-Module: "+tm.getClass().getSimpleName());
 			numModules++;
 			bRegistered=true;
@@ -55,28 +59,39 @@ public abstract class CommunicationBase {
 	
 	protected void setSender(DataOutputStream sender){
 		
-		synchronized(this.sender){
+		this.sender=sender;
+		if(this.sender != null){
 			
-			this.sender=sender;
+			synchronized(this.sender){
 			
-			if(this.sender != null){
-				
-				for(ModuleWorker mw : workers)
-					if(mw != null)
-						mw.notify();
+				for(ModuleWorker mw : workers){
+					if(mw != null){
+						
+						synchronized(mw){
+							
+							mw.notify();
+						}
+					}
+				}
 			}
 		}
 	}
 	
 	protected void setReceiver(DataInputStream receiver){	
 		
-		synchronized(this.receiver){
+		this.receiver=receiver;
+		if(this.receiver != null){
 			
-			this.receiver=receiver;
+			synchronized(this.receiver){
 			
-			if(this.receiver != null)
-				if(recvThread != null)
-					recvThread.notify();
+				if(recvThread != null){
+				
+					synchronized(recvThread){
+					
+						recvThread.notify();
+					}
+				}
+			}
 			
 		}
 	}
@@ -111,17 +126,30 @@ public abstract class CommunicationBase {
 		LOG.debug("Shutting down..");
 		for(int i=0;i<modules.length;i++){
 			
-			LOG.debug("Removing: "+modules[i].getClass().getSimpleName());
+			if(modules[i] != null)
+				LOG.debug("Removing: "+modules[i].getClass().getSimpleName());
 			modules[i]=null;
 			if(workers[i] != null){
 				
 				workers[i].interrupt();
+				try {
+					workers[i].join(1000);
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
 				workers[i]=null;
 			}
 		}
 		if(recvThread != null){
 			
 			recvThread.interrupt();
+			try {
+				recvThread.join(2000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			recvThread=null;
 		}
 	}
@@ -130,7 +158,7 @@ public abstract class CommunicationBase {
 	
 	private class ReceiverThread extends Thread {
 	
-		public void run(){
+		public synchronized void run(){
 			
 			byte signature=0,keyId=-1;
 			while(!isInterrupted()){
@@ -138,27 +166,32 @@ public abstract class CommunicationBase {
 				try {
 					if(isConnected() && receiver != null){
 					
-						signature=receiver.readByte();
+						synchronized(receiver){
+							
+							signature=receiver.readByte();
 						
-						if((signature & START_SIGNATURE) == START_SIGNATURE) {
-							
-							keyId=(byte)(signature & 0x0F);
-							
-							LOG.debug("Incoming object data..");
-							
-							if(keyId >= 0 && keyId < MAX_MODULES && modules[keyId] != null){
+						
+							if((signature & START_SIGNATURE) == START_SIGNATURE) {
 								
-								LOG.debug("Forwarding data to module: "+modules[keyId].getClass().getSimpleName());
-								modules[keyId].objectReceived(getReceiver());
+								keyId=(byte)(signature & 0x0F);
+								
+								LOG.debug("Incoming object data..");
+								
+								if(keyId >= 0 && keyId < MAX_MODULES && modules[keyId] != null){
+									
+									LOG.debug("Forwarding data to module: "+modules[keyId].getClass().getSimpleName());
+									modules[keyId].objectReceived(receiver);
+								}
+								else{
+									
+									LOG.warn("Unknown object code received: "+keyId);
+								}
 							}
 							else{
-								
-								LOG.warn("Unknown object code received: "+keyId);
+								LOG.warn("Invalid byte received: 0x"+Integer.toHexString(signature));
 							}
 						}
-						else{
-							LOG.warn("Invalid byte received: 0x"+Integer.toHexString(signature));
-						}
+						
 						
 					} else {
 						
@@ -168,11 +201,19 @@ public abstract class CommunicationBase {
 				}
 				catch (InterruptedException e) {
 						break;
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (EOFException e){
+					
+					LOG.warn("Stream elapsed: "+e.getMessage());
+					receiver=null;
+				}
+				catch (IOException e) {
+					
+					LOG.warn("Error reading socket: "+e.getMessage());
 					e.printStackTrace();
 				}
 			}
+			LOG.debug("Receiver Thread finished.");
 		}
 	}
 	//public abstract void trans

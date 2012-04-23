@@ -55,6 +55,8 @@ public class CommunicationServer extends CommunicationBase{
 		
 		LOG.debug("Shutting down...");
 		
+		super.shutdown();
+		
 		if(acceptThread != null){
 			
 			try {
@@ -106,7 +108,7 @@ public class CommunicationServer extends CommunicationBase{
 			}
 		}	
 		
-		super.shutdown();
+		
 	}
 	
 	@Override
@@ -142,11 +144,16 @@ public class CommunicationServer extends CommunicationBase{
 					}
 					
 				} 
+				catch (SocketException e){
+					
+					
+				}
 				catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
+			LOG.debug("Accept Thread finished.");
 		}
 	}
 }

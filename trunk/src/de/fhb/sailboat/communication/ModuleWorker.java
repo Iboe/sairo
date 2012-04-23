@@ -41,7 +41,7 @@ public class ModuleWorker extends Thread {
 		
 	}
 	
-	public void run(){
+	public synchronized void run(){
 		
 		while(!isInterrupted() && !bInterruptCycle){
 			
@@ -50,7 +50,7 @@ public class ModuleWorker extends Thread {
 			try {
 				sleep(cycleInterval);
 				
-				if(sender != null){
+				if(commBase.isConnected() && sender != null){
 				
 					synchronized(sender){
 						
@@ -72,5 +72,6 @@ public class ModuleWorker extends Thread {
 				e.printStackTrace();
 			}
 		}
+		LOG.debug("Module Worker Thread finished.");
 	}
 }

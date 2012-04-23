@@ -39,11 +39,12 @@ public class CommuncationClient extends CommunicationBase {
 		
 		boolean bInitialized=false;
 		
+		LOG.debug("Initializing..");
 		if(!isConnected()){
 			
 			try {
 				
-				destination=new Socket("destinationIP",destinationPort);
+				destination=new Socket(destinationIP,destinationPort);
 				LOG.debug("Connecting to "+destinationIP+":"+destinationPort+"...");
 					
 				
@@ -64,6 +65,8 @@ public class CommuncationClient extends CommunicationBase {
 				destination=null;
 			}
 		}
+		else
+			LOG.warn("Initialization skipped.");
 		
 		return bInitialized;
 	}
@@ -72,6 +75,8 @@ public class CommuncationClient extends CommunicationBase {
 	public void shutdown(){
 		
 		LOG.debug("Shutting down...");
+		
+		super.shutdown();
 		
 		setSender(null);
 		setReceiver(null);
@@ -87,8 +92,6 @@ public class CommuncationClient extends CommunicationBase {
 				e.printStackTrace();
 			}
 		}
-		
-		super.shutdown();
 	}
 	
 	@Override
