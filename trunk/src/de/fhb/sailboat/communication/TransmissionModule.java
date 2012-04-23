@@ -3,8 +3,8 @@
  */
 package de.fhb.sailboat.communication;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
 /**
  * to be commented
@@ -13,8 +13,8 @@ import java.io.ObjectOutputStream;
  */
 public interface TransmissionModule {
 
-	public void objectReceived(ObjectInputStream stream);
-	public void requestObject(ObjectOutputStream stream);
+	public void objectReceived(DataInputStream stream);
+	public void requestObject(DataOutputStream stream);
 	
 	public int getTransmissionInterval();
 }

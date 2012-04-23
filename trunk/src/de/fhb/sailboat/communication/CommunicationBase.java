@@ -4,8 +4,8 @@
 package de.fhb.sailboat.communication;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +28,8 @@ public abstract class CommunicationBase {
 	private int numModules;
 	private Thread recvThread;
 	
-	private ObjectOutputStream sender = null;
-	private ObjectInputStream receiver = null;
+	private DataOutputStream sender = null;
+	private DataInputStream receiver = null;
 	
 	public CommunicationBase(){
 		
@@ -53,7 +53,7 @@ public abstract class CommunicationBase {
 		return bRegistered;
 	}
 	
-	protected void setSender(ObjectOutputStream sender){
+	protected void setSender(DataOutputStream sender){
 		
 		synchronized(this.sender){
 			
@@ -68,7 +68,7 @@ public abstract class CommunicationBase {
 		}
 	}
 	
-	protected void setReceiver(ObjectInputStream receiver){	
+	protected void setReceiver(DataInputStream receiver){	
 		
 		synchronized(this.receiver){
 			
@@ -81,11 +81,11 @@ public abstract class CommunicationBase {
 		}
 	}
 	
-	public ObjectOutputStream getSender() {
+	public DataOutputStream getSender() {
 		return sender;
 	}
 
-	public ObjectInputStream getReceiver() {
+	public DataInputStream getReceiver() {
 		return receiver;
 	}
 
@@ -160,7 +160,6 @@ public abstract class CommunicationBase {
 							LOG.warn("Invalid byte received: 0x"+Integer.toHexString(signature));
 						}
 						
-						//TODO reading first byte to determine and redirect to the desired transmission module 
 					} else {
 						
 						LOG.debug("No receiver is set.. waiting.");

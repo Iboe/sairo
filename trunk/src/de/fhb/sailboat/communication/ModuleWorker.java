@@ -4,7 +4,7 @@
 package de.fhb.sailboat.communication;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.DataOutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,7 @@ public class ModuleWorker extends Thread {
 		
 		while(!isInterrupted() && !bInterruptCycle){
 			
-			ObjectOutputStream sender=commBase.getSender();
+			DataOutputStream sender=commBase.getSender();
 			
 			try {
 				sleep(cycleInterval);

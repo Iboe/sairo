@@ -4,8 +4,8 @@
 package de.fhb.sailboat.communication;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.*;
 
 import org.slf4j.Logger;
@@ -75,6 +75,8 @@ public class CommunicationServer extends CommunicationBase{
 		if(connectedClient != null){
 			
 			try {
+				setSender(null);
+				setReceiver(null);
 				connectedClient.close();
 				LOG.debug("Connected client server closed.");
 			} 
@@ -103,6 +105,8 @@ public class CommunicationServer extends CommunicationBase{
 				listenServer=null;
 			}
 		}	
+		
+		super.shutdown();
 	}
 	
 	@Override
@@ -126,8 +130,8 @@ public class CommunicationServer extends CommunicationBase{
 							
 							connectedClient=client;
 							LOG.debug("Accepted incoming client from: "+connectedClient.getRemoteSocketAddress().toString());
-							setSender(new ObjectOutputStream(connectedClient.getOutputStream()));
-							setReceiver(new ObjectInputStream(connectedClient.getInputStream()));
+							setSender(new DataOutputStream(connectedClient.getOutputStream()));
+							setReceiver(new DataInputStream(connectedClient.getInputStream()));
 							
 						}
 						else{
