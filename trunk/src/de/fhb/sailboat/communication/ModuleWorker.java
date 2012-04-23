@@ -6,12 +6,17 @@ package de.fhb.sailboat.communication;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * to be commented
  * @author Michael Kant
  *
  */
 public class ModuleWorker extends Thread {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ModuleWorker.class);
 	
 	private CommunicationBase commBase;
 	private TransmissionModule commModule;
@@ -51,9 +56,13 @@ public class ModuleWorker extends Thread {
 						
 						sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
 						commModule.requestObject(sender);
+						sender.flush();
 					}
 				}
-				else wait();
+				else {
+					LOG.debug("No sender is set.. waiting.");
+					wait();
+				}
 			}	
 			catch (InterruptedException e) {
 			

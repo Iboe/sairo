@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 /**
  * to be commented
  * @author Michael Kant
@@ -14,13 +18,15 @@ import java.io.ObjectOutputStream;
  */
 public abstract class CommunicationBase {
 
+	private static final Logger LOG = LoggerFactory.getLogger(CommunicationBase.class);
+	
 	protected static final byte START_SIGNATURE=0x40|0x20;
 	public static final int MAX_MODULES=16;
 	
 	private TransmissionModule[] modules;
 	private ModuleWorker[] workers;
 	private int numModules;
-	private ReceiverThread recvThread;
+	private Thread recvThread;
 	
 	private ObjectOutputStream sender = null;
 	private ObjectInputStream receiver = null;
@@ -39,6 +45,7 @@ public abstract class CommunicationBase {
 		if(tm != null && numModules < modules.length){
 			modules[numModules]=tm;
 		   (workers[numModules]=new ModuleWorker(this,tm,(byte)numModules)).start();
+		    LOG.info("Registering Transmission-Module: "+tm.getClass().getSimpleName());
 			numModules++;
 			bRegistered=true;
 		}
@@ -86,18 +93,25 @@ public abstract class CommunicationBase {
 	/**
 	 * To be called in a subclass to initialize the concrete transmission endpoints
 	 */
-	public void initialize(){
+	public boolean initialize(){
 		
+		boolean bInitialized=false;
 		if(recvThread == null){
+			LOG.debug("Initializing recv thread.");
 			recvThread=new ReceiverThread();	
 			recvThread.start();
+			
+			bInitialized=true;
 		}
+		return bInitialized;
 	}
 	
 	public void shutdown(){
 		
+		LOG.debug("Shutting down..");
 		for(int i=0;i<modules.length;i++){
 			
+			LOG.debug("Removing: "+modules[i].getClass().getSimpleName());
 			modules[i]=null;
 			if(workers[i] != null){
 				
@@ -105,7 +119,14 @@ public abstract class CommunicationBase {
 				workers[i]=null;
 			}
 		}
+		if(recvThread != null){
+			
+			recvThread.interrupt();
+			recvThread=null;
+		}
 	}
+	
+	public abstract boolean isConnected();
 	
 	private class ReceiverThread extends Thread {
 	
@@ -115,7 +136,7 @@ public abstract class CommunicationBase {
 			while(!isInterrupted()){
 				
 				try {
-					if(receiver != null){
+					if(isConnected() && receiver != null){
 					
 						signature=receiver.readByte();
 						
@@ -123,17 +144,26 @@ public abstract class CommunicationBase {
 							
 							keyId=(byte)(signature & 0x0F);
 							
-							if(keyId >= 0 && keyId < MAX_MODULES){
+							LOG.debug("Incoming object data..");
+							
+							if(keyId >= 0 && keyId < MAX_MODULES && modules[keyId] != null){
 								
-								if(modules[keyId] != null ){
-									modules[keyId].objectReceived(getReceiver());
-								}
+								LOG.debug("Forwarding data to module: "+modules[keyId].getClass().getSimpleName());
+								modules[keyId].objectReceived(getReceiver());
 							}
+							else{
+								
+								LOG.warn("Unknown object code received: "+keyId);
+							}
+						}
+						else{
+							LOG.warn("Invalid byte received: 0x"+Integer.toHexString(signature));
 						}
 						
 						//TODO reading first byte to determine and redirect to the desired transmission module 
 					} else {
 						
+						LOG.debug("No receiver is set.. waiting.");
 						wait();
 					} 		
 				}
