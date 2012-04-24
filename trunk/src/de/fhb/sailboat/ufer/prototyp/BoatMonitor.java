@@ -2,6 +2,7 @@ package de.fhb.sailboat.ufer.prototyp;
 
 
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +21,8 @@ public class BoatMonitor {
 	final static public int PERSPECITVE_ID_GPS = 2;
 	final static public int PERSPECITVE_ID_WIND = 3;
 	final static public int PERSPECITVE_ID_MISSION = 4;
+	
+	final static public String GPS_DECIMAL_FORMAT = "00.000000"; // format string for GPS longitude/ latitude display style 
 	
 	final static public String P_BLANK_NAME = "Monitor";
 	final static public int P_WIDTH = 200;
@@ -106,15 +109,15 @@ public class BoatMonitor {
 	final static public int L_GPS_LAT_V_Y = L_GPS_LAT_Y + L_LINE;
 	final static public int L_GPS_LAT_V_VSIZE = L_VSIZE * 2;
 	
-	final static public String L_GPS_PRECISION_NAME = "Präzision:";
-	final static public String L_GPS_PRECISION_UNIT = ""; // this will be appended to the value-label text for displaying the precision
-	final static public int L_GPS_PRECISION_X = 8;
-	final static public int L_GPS_PRECISION_Y = 16 + (L_LINE * 4);
-	final static public int L_GPS_PRECISION_DSIZE = L_DSIZE;
+	final static public String L_GPS_SATELITES_NAME = "Sateliten:";
+	final static public String L_GPS_SATELITES_UNIT = ""; // this will be appended to the value-label text for displaying the precision
+	final static public int L_GPS_SATELITES_X = 8;
+	final static public int L_GPS_SATELITES_Y = 16 + (L_LINE * 4);
+	final static public int L_GPS_SATELITES_DSIZE = L_DSIZE;
 	
-	final static public int L_GPS_PRECISION_V_X = L_GPS_PRECISION_X + L_GPS_PRECISION_DSIZE + L_OFFSET;
-	final static public int L_GPS_PRECISION_V_Y = L_GPS_PRECISION_Y;
-	final static public int L_GPS_PRECISION_V_VSIZE = L_VSIZE;
+	final static public int L_GPS_SATELITES_V_X = L_GPS_SATELITES_X + L_GPS_SATELITES_DSIZE + L_OFFSET;
+	final static public int L_GPS_SATELITES_V_Y = L_GPS_SATELITES_Y;
+	final static public int L_GPS_SATELITES_V_VSIZE = L_VSIZE;
 	
 	final static public String L_WIND_VELOCITY_NAME = "Windgeschw:";
 	final static public String L_WIND_VELOCITY_UNIT = " kn"; // this will be appended to the value-label text for displaying the wind velocity
@@ -160,8 +163,10 @@ public class BoatMonitor {
 	private JLabel lGPSLongitudeV;
 	private JLabel lGPSLatitude;
 	private JLabel lGPSLatitudeV;
-	private JLabel lGPSPrecision;
-	private JLabel lGPSPrecisionV;
+	private JLabel lGPSSatelites;
+	private JLabel lGPSSatelitesV;
+	
+	DecimalFormat gpsDecimalFormat;
 	
 	// wind perspective
 	private JLabel lWindVelocity;
@@ -179,6 +184,7 @@ public class BoatMonitor {
 		this.panelX = panelX;
 		this.panelY = panelY;
 		perspectiveID = PERSPECITVE_ID_BLANK;
+		gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
 	}
 	
 	/**
@@ -298,18 +304,18 @@ public class BoatMonitor {
 				lGPSLatitudeV.setLocation(L_GPS_LAT_V_X, L_GPS_LAT_V_Y);
 				panel.add(lGPSLatitudeV);
 				
-				// Precision
-				lGPSPrecision = new JLabel();
-				lGPSPrecision.setText(L_GPS_PRECISION_NAME);
-				lGPSPrecision.setSize(new Dimension(L_GPS_PRECISION_DSIZE, L_LINE));
-				lGPSPrecision.setLocation(L_GPS_PRECISION_X, L_GPS_PRECISION_Y);
-				panel.add(lGPSPrecision);
+				// Satelites
+				lGPSSatelites = new JLabel();
+				lGPSSatelites.setText(L_GPS_SATELITES_NAME);
+				lGPSSatelites.setSize(new Dimension(L_GPS_SATELITES_DSIZE, L_LINE));
+				lGPSSatelites.setLocation(L_GPS_SATELITES_X, L_GPS_SATELITES_Y);
+				panel.add(lGPSSatelites);
 				
-				lGPSPrecisionV = new JLabel();
-				lGPSPrecisionV.setText("0" + L_GPS_PRECISION_UNIT);
-				lGPSPrecisionV.setSize(new Dimension(L_VSIZE, L_LINE));
-				lGPSPrecisionV.setLocation(L_GPS_PRECISION_X + L_GPS_PRECISION_DSIZE + L_OFFSET, L_GPS_PRECISION_Y);
-				panel.add(lGPSPrecisionV);
+				lGPSSatelitesV = new JLabel();
+				lGPSSatelitesV.setText("0" + L_GPS_SATELITES_UNIT);
+				lGPSSatelitesV.setSize(new Dimension(L_VSIZE, L_LINE));
+				lGPSSatelitesV.setLocation(L_GPS_SATELITES_X + L_GPS_SATELITES_DSIZE + L_OFFSET, L_GPS_SATELITES_Y);
+				panel.add(lGPSSatelitesV);
 				
 				panel.validate();
 				break;
@@ -384,9 +390,9 @@ public class BoatMonitor {
 				break;
 			}
 			case (PERSPECITVE_ID_GPS) : {
-				if (lGPSLongitudeV != null) lGPSLongitudeV.setText(controller.getGps().getPosition().getLongitude() + L_GPS_LONG_UNIT);
-				if (lGPSLatitudeV != null) lGPSLatitudeV.setText(controller.getGps().getPosition().getLatitude() + L_GPS_LAT_UNIT);
-				if (lGPSPrecisionV != null) lGPSPrecisionV.setText(controller.getGpsPrecision() + L_GPS_PRECISION_UNIT);
+				if (lGPSLongitudeV != null) lGPSLongitudeV.setText(gpsDecimalFormat.format(controller.getGps().getPosition().getLongitude()) + L_GPS_LONG_UNIT);
+				if (lGPSLatitudeV != null) lGPSLatitudeV.setText(gpsDecimalFormat.format(controller.getGps().getPosition().getLatitude()) + L_GPS_LAT_UNIT);
+				if (lGPSSatelitesV != null) lGPSSatelitesV.setText(controller.getGpsSatelites() + L_GPS_SATELITES_UNIT);
 				panel.validate();
 				break;
 			}
@@ -421,8 +427,8 @@ public class BoatMonitor {
 					lGPSLatitudeV = null;
 					lGPSLongitude = null;
 					lGPSLongitudeV = null;
-					lGPSPrecision = null;
-					lGPSPrecisionV = null;
+					lGPSSatelites = null;
+					lGPSSatelitesV = null;
 					lWindVelocity = null;
 					lWindVelocityV = null;
 					lWindDirection = null;
@@ -455,8 +461,8 @@ public class BoatMonitor {
 					lGPSLatitudeV = null;
 					lGPSLongitude = null;
 					lGPSLongitudeV = null;
-					lGPSPrecision = null;
-					lGPSPrecisionV = null;
+					lGPSSatelites = null;
+					lGPSSatelitesV = null;
 					lCompDirection = null;
 					lCompDirectionV = null;
 					lCompAcceleration = null;
@@ -475,8 +481,8 @@ public class BoatMonitor {
 					lGPSLatitudeV = null;
 					lGPSLongitude = null;
 					lGPSLongitudeV = null;
-					lGPSPrecision = null;
-					lGPSPrecisionV = null;
+					lGPSSatelites = null;
+					lGPSSatelitesV = null;
 					lWindVelocity = null;
 					lWindVelocityV = null;
 					lWindDirection = null;

@@ -30,7 +30,7 @@ public class Model {
 	private CompassModel compass;
 	
 	private GPSModel gps;
-	private double gpsPrecision; // Used to value the reliability of GPS values, currently cosmetic and unused (ranged from 0.0 for 0% relaiability to 1.0 fpr 100%)
+	private int gpsSatelites; // Used to value the reliability of GPS values
 	
 	// for the planned exercise
 	private ArrayList<MapMarker> circleMarkerList;
@@ -71,8 +71,8 @@ public class Model {
 		return gps;
 	}
 
-	public double getGpsPrecision() {
-		return gpsPrecision;
+	public int getGpsSatelites() {
+		return gpsSatelites;
 	}
 	
 	
@@ -86,14 +86,8 @@ public class Model {
 		gps.setPosition(position);
 	}
 
-	public void setGpsPrecision(double gpsPrecision) {
-		if (gpsPrecision > 1.0f) {
-			gpsPrecision = 1.0f;
-		}
-		else {
-			if (gpsPrecision < 0.0f) gpsPrecision = 0.0f;
-		}
-		this.gpsPrecision = gpsPrecision;
+	public void setGpsSatelites(int gpsSatelites) {
+		this.gpsSatelites = gpsSatelites;
 	}
 
 	public ArrayList<MapMarker> getCircleMarkerList() {

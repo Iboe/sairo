@@ -63,7 +63,6 @@ public class Controller {
 		System.out.println("Mission passed.");
 		System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
 		
-		//TODO add start/ stop task for motor
 		planner.doMission(mission);
 	}
 	
@@ -82,7 +81,21 @@ public class Controller {
 		System.out.println("Mission passed.");
 		//System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
 		
-		//TODO add start/ stop task for motor
+		planner.doMission(mission);
+	}
+	
+	public void commitStopMotor(Planner planner) {
+		// TODO Implement proper stop mission task beyond resetting motor
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		tasks.add(new PrimitiveCommandTask(null, null, 73));
+		
+		mission.setTasks(tasks);
+		
+		System.out.println("Mission passed.");
+		//System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
+		
 		planner.doMission(mission);
 	}
 
@@ -109,9 +122,9 @@ public class Controller {
 		
 		this.model.getWind().setWind(new Wind(dice.nextInt(361), dice.nextInt(3000)));
 
-		this.model.setGpsPosition(new GPS(dice.nextDouble(), dice.nextDouble()));
+		this.model.setGpsPosition(new GPS(dice.nextDouble() + dice.nextInt(12), dice.nextDouble() + dice.nextInt(12)));
 
-		this.model.setGpsPrecision((float) dice.nextInt(2));
+		this.model.setGpsSatelites(dice.nextInt(5));
 	}
 
 	public void updateWind() {
@@ -151,8 +164,8 @@ public class Controller {
 		return this.model.getGps();
 	}
 
-	public double getGpsPrecision() {
-		return this.model.getGpsPrecision();
+	public int getGpsSatelites() {
+		return this.model.getGpsSatelites();
 	}
 
 }

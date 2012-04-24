@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
@@ -89,6 +90,8 @@ public class View extends JFrame {
 	final static public String M_MISSION = "Mission";
 	final static public String M_MISSION_SEND = "ReachCircle Task(s) senden";
 	final static public String M_MISSION_SEND_POLY = "ReachPolygon Task senden";
+	final static public String M_MISSION_SEND_STOP = "Stop Task senden";
+	final static public String M_MISSION_RESET = "Map zurücksetzen";
 
 	final static public String M_PROTOCOL = "Protokoll";
 
@@ -200,7 +203,7 @@ public class View extends JFrame {
 		this.controller = new Controller();
 		this.logger = new UferLogger(this.controller);
 		initUI();
-		this.debugMode = true;
+		this.debugMode = false;
 		this.tabAutoScroll = false;
 		startUpdating();
 	}
@@ -268,7 +271,6 @@ public class View extends JFrame {
 		mMissionSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				sendCircleMapMarkers();
-				map.removeAll();
 			}
 
 		});
@@ -287,6 +289,34 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionSendPoly);
+		
+		JMenuItem mMissionSendStop = new JMenuItem(M_MISSION_SEND_STOP);
+		mMissionSendStop.setMnemonic(KeyEvent.VK_X);
+		mMissionSendStop.setToolTipText("Stop Task senden.");
+
+		mMissionSendStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				sendStop();
+			}
+
+		});
+
+		mMission.add(mMissionSendStop);
+		
+		JMenuItem mMissionReset = new JMenuItem(M_MISSION_RESET);
+		mMissionReset.setToolTipText("Karte (Marker) zurücksetzen.");
+
+		mMissionReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				int choice = JOptionPane.showConfirmDialog(null, "Wirklich Map zurücksetzen?", "Bitte bestätigen", JOptionPane.YES_NO_OPTION);
+				if (choice == JOptionPane.YES_OPTION) {
+					resetMap();
+				}
+			}
+
+		});
+
+		mMission.add(mMissionReset);
 
 		// Menü->Verbindung
 		JMenu mConnection = new JMenu(M_CONNECTION);
@@ -711,8 +741,7 @@ public class View extends JFrame {
 		mapArea = map.mapPanel();
 		add(mapArea);
 
-		// TODO Tabbed Logger - Research why scrolling wont work for the text
-		// area
+		// Tabbed Logger
 		JTabbedPane tabbedLogger = new JTabbedPane();
 		tabbedLogger.setLocation(P_CHART_X, P_CHART_Y);
 		tabbedLogger.setSize(new Dimension(P_CHART_WIDTH, P_CHART_HEIGHT));
@@ -802,28 +831,36 @@ public class View extends JFrame {
 		add(tabbedLogger);
 
 		tabbedLogger.setSelectedComponent(missionDisplay);
-
-		System.out.println("View initialized");
 	}
 
 	private void sendCircleMapMarkers() {
-		System.out.println("Attempting to send circle markers");
 		if (map.getMarkerList().size() > 0) {
 			this.controller.setCircleMarkerList(map.getMarkerList());
 			this.controller.commitCircleMarkerList(planner);
-			System.out.println("Send markers.");
+			resetMap();
 		}
 	}
 
 	private void sendPolyMapMarkers() {
-		System.out.println("Attempting to send poly markers");
 		if (map.getPolygon().size() > 0) {
 			this.controller.setPolyMarkerList(map.getPolygon());
 			this.controller.commitPolyMarkerList(planner);
-			System.out.println("Send markers.");
+			resetMap();
+		}
+	}
+	
+	private void sendStop() {
+		int choice = JOptionPane.showConfirmDialog(null, "Wirklich Mission stoppen?", "Bitte bestätigen", JOptionPane.YES_NO_OPTION);
+		if (choice == JOptionPane.YES_OPTION) {
+			this.controller.commitStopMotor(planner);
+			resetMap();
 		}
 	}
 
+	private void resetMap() {
+		map.removeEveryObject();
+	}
+	
 	private void enableConnection() {
 		/*
 		 * connection = new ConnectorUfer("172.16.16.70");
@@ -895,7 +932,7 @@ public class View extends JFrame {
 	}
 
 	// Stores the current settings to the configuration file
-	private void saveViewConfiguration() {
+	//private void saveViewConfiguration() {
 		// create map of current settings
 		/*
 		 * ConfigMap settings = new ConfigMap(); settings.put(M_SMONITOR1,
@@ -907,33 +944,33 @@ public class View extends JFrame {
 		 * ConfigWriter writer = new ConfigWriter(settings);
 		 * writer.writeConfigFile(CONFIG_FILE);
 		 */
-	}
+	//}
 
 	// Setter
 	private void setSmallMonitor1(int perspectiveID) {
 		smallMonitor1.setPerspective(perspectiveID);
-		saveViewConfiguration();
+		//saveViewConfiguration();
 	}
 
 	private void setSmallMonitor2(int perspectiveID) {
 		smallMonitor2.setPerspective(perspectiveID);
-		saveViewConfiguration();
+		//saveViewConfiguration();
 	}
 
 	private void setSmallMonitor3(int perspectiveID) {
 		smallMonitor3.setPerspective(perspectiveID);
-		saveViewConfiguration();
+		//saveViewConfiguration();
 	}
 
 	private void setSmallMonitor4(int perspectiveID) {
 		smallMonitor4.setPerspective(perspectiveID);
-		saveViewConfiguration();
+		//saveViewConfiguration();
 	}
 
 	// Main für lokales Debuggen der GUI, für Regelbetrieb auskommentieren und
 	// debugMode im Constructor false setzen
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		System.setProperty("proxyPort", "3128");
 		System.setProperty("proxyHost", "proxy.fh-brandenburg.de");
 		SwingUtilities.invokeLater(new Runnable() {
@@ -942,6 +979,6 @@ public class View extends JFrame {
 				view.setVisible(true);
 			}
 		});
-	}
+	}*/
 
 }

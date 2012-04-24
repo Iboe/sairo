@@ -274,7 +274,8 @@ public class MapPanel extends JPanel {
 		map.addMapMarker(positionHistory.get(positionHistory.size() - 1));
 	}
 
-	private void removeEveryObject() {
+	// FIXME Set this to public so I can reset the Map manually through View - Patrick
+	public void removeEveryObject() {
 		removeMapMarkerFromMap();
 		removePolygonsFromMap();
 		removeRectanglesFromMap();

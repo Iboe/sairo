@@ -82,7 +82,7 @@ public class UferLogger {
 		String data = "";
 		
 		data += "[GPS]\n";
-		data += "Lat: " + controller.getGps().getPosition().getLatitude() + " Lon: " + controller.getGps().getPosition().getLatitude() + " Prc: " + controller.getGpsPrecision() + "\n";
+		data += "Lat: " + controller.getGps().getPosition().getLatitude() + " Lon: " + controller.getGps().getPosition().getLatitude() + " Sat: " + controller.getGpsSatelites() + "\n";
 		data += "Timestamp: " + currentTime() + "\n";
 		data += DATA_TERMINATOR + "\n";
 		
