@@ -31,8 +31,9 @@ public class RCommTest {
 		CommunicationBase server=new CommunicationServer(6699);
 		System.out.println("..done.");
 		Thread.sleep(1000);
-		System.out.println("Registering SimpleServerTModule");
-		server.registerModule(new SimpleServerTModule());
+		System.out.println("Registering SimpleServerTModule and FastTModule");
+		server.registerModule(new SimpleClientTModule());
+		server.registerModule(new FastServerTModule());
 		System.out.println("..done.");
 		Thread.sleep(1000);
 		System.out.println("Initializing Server endpoint..");
@@ -48,8 +49,9 @@ public class RCommTest {
 		CommunicationBase client = new CommuncationClient("127.0.0.1", 6699);
 		System.out.println("..done.");
 		Thread.sleep(1000);
-		System.out.println("Registering SimpleClientTModule");
-		client.registerModule(new SimpleClientTModule());
+		System.out.println("Registering SimpleClientTModule and FastClientTModule");
+		client.registerModule(new SimpleServerTModule());
+		client.registerModule(new FastClientTModule());
 		System.out.println("..done.");
 		Thread.sleep(1000);
 		System.out.println("Initializing Client endpoint..");
@@ -117,6 +119,52 @@ public class RCommTest {
 		public int getTransmissionInterval() {
 			
 			return 2000;
+		}
+	}
+	
+	public static class FastClientTModule implements TransmissionModule{
+
+		@Override
+		public void objectReceived(DataInputStream stream) throws IOException {
+			
+			float number=stream.readFloat();
+			
+			System.out.println("Received float value: "+number);
+		}
+
+		@Override
+		public void requestObject(DataOutputStream stream) {
+			
+			System.out.println("Client NOOP");
+		}
+
+		@Override
+		public int getTransmissionInterval() {
+			
+			return 0;
+		}
+		
+	}
+
+	public static class FastServerTModule implements TransmissionModule{
+		
+		@Override
+		public void objectReceived(DataInputStream stream) throws IOException {
+			
+			System.out.println("An object was received but not expected");
+		}
+
+		@Override
+		public void requestObject(DataOutputStream stream) throws IOException {
+			
+			System.out.println("Sending requested value (2710.1987)");
+			stream.writeFloat(2710.1987f);
+		}
+
+		@Override
+		public int getTransmissionInterval() {
+			
+			return 500;
 		}
 	}
 }
