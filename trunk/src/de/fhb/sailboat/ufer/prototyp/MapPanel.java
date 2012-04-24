@@ -27,6 +27,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.ufer.prototyp.utility.Constants;
 import de.fhb.sailboat.ufer.prototyp.utility.MapRectangleImpl;
 
 public class MapPanel extends JPanel {
@@ -48,6 +49,7 @@ public class MapPanel extends JPanel {
 	private boolean inMarkerMarkMode = false;
 	private boolean inRectMarkMode = false;
 	private boolean inPolygonMode = false;
+	private int markerMode = Constants.NO_MARK;
 
 	private Coordinate firstCorner = null;
 
@@ -86,46 +88,32 @@ public class MapPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				Coordinate target = map.getPosition(arg0.getPoint());
-				if (inMarkerMarkMode) {
 
-					for (int i = 0; i < rectList.size(); i++) {
-						map.removeMapRectangle(rectList.get(i));
-					}
+				switch (markerMode) {
+				case 0:
+					break;
 
+				case 1: {
 					markerList.add(new MapMarkerDot(Color.GREEN, target
 							.getLat(), target.getLon()));
-
 					map.addMapMarker(markerList.get(markerList.size() - 1));
-
 				}
+					break;
 
-				if (inRectMarkMode) {
-
-					for (int i = 0; i < markerList.size(); i++) {
-						map.removeMapMarker(markerList.get(i));
-					}
-
+				case 2:
 					addRectsToMap(target);
+					break;
 
-				}
-
-				if (inPolygonMode) {
-
-					for (int i = 0; i < markerList.size(); i++) {
-						map.removeMapMarker(markerList.get(i));
-					}
-
-					for (int i = 0; i < rectList.size(); i++) {
-						map.removeMapRectangle(rectList.get(i));
-					}
-
+				case 3: {
 					polygon.add(new MapMarkerDot(Color.RED, target.getLat(),
 							target.getLon()));
-
 					map.addMapMarker(polygon.get(polygon.size() - 1));
-
 				}
+					break;
 
+				default:
+					break;
+				}
 				/*
 				 * Coordinate currentPosition =
 				 * map.getPosition(map.getWidth()/2, map.getHeight()/2); int
@@ -173,22 +161,18 @@ public class MapPanel extends JPanel {
 
 		final JCheckBox markOnMap = new JCheckBox("Add Marker");
 		final JCheckBox markRectOnMap = new JCheckBox("Add Rectangle");
-		final JCheckBox markPolygon = new JCheckBox("Add polygon");
+		final JCheckBox markPolygon = new JCheckBox("Add Polygon");
 
 		markOnMap.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				inMarkerMarkMode = markOnMap.isSelected();
-				markOnMap.setSelected(inMarkerMarkMode);
-				if (inRectMarkMode || inPolygonMode) {
-					inRectMarkMode = false;
-					inPolygonMode = false;
-					markRectOnMap.setSelected(inRectMarkMode);
-					markPolygon.setSelected(inPolygonMode);
-					for (int i = 0; i < polygon.size(); i++) {
-						map.removeMapMarker(polygon.get(i));
-					}
-					polygon = new ArrayList<MapMarker>();
+				if (markOnMap.isSelected()) {
+					markerMode = Constants.MARKER;
+					markRectOnMap.setSelected(false);
+					markPolygon.setSelected(false);
+					removeEveryObject();
+				} else {
+					markerMode = Constants.NO_MARK;
 				}
 			}
 		});
@@ -196,17 +180,13 @@ public class MapPanel extends JPanel {
 		markRectOnMap.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				inRectMarkMode = markRectOnMap.isSelected();
-				markRectOnMap.setSelected(inRectMarkMode);
-				if (inMarkerMarkMode || inPolygonMode) {
-					inMarkerMarkMode = false;
-					inPolygonMode = false;
-					markOnMap.setSelected(inMarkerMarkMode);
-					markPolygon.setSelected(inPolygonMode);
-					for (int i = 0; i < polygon.size(); i++) {
-						map.removeMapMarker(polygon.get(i));
-					}
-					polygon = new ArrayList<MapMarker>();
+				if (markRectOnMap.isSelected()) {
+					markerMode = Constants.RECTANGLE;
+					markOnMap.setSelected(false);
+					markPolygon.setSelected(false);
+					removeEveryObject();
+				} else {
+					markerMode = Constants.NO_MARK;
 				}
 			}
 		});
@@ -214,13 +194,13 @@ public class MapPanel extends JPanel {
 		markPolygon.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				inPolygonMode = markPolygon.isSelected();
-				markRectOnMap.setSelected(inRectMarkMode);
-				if (inMarkerMarkMode || inRectMarkMode) {
-					inMarkerMarkMode = false;
-					inRectMarkMode = false;
-					markOnMap.setSelected(inMarkerMarkMode);
-					markRectOnMap.setSelected(inRectMarkMode);
+				if (markPolygon.isSelected()) {
+					markerMode = Constants.POLYGON;
+					markOnMap.setSelected(false);
+					markRectOnMap.setSelected(false);
+					removeEveryObject();
+				} else {
+					markerMode = Constants.NO_MARK;
 				}
 			}
 		});
@@ -292,6 +272,33 @@ public class MapPanel extends JPanel {
 		}
 
 		map.addMapMarker(positionHistory.get(positionHistory.size() - 1));
+	}
+
+	private void removeEveryObject() {
+		removeMapMarkerFromMap();
+		removePolygonsFromMap();
+		removeRectanglesFromMap();
+	}
+
+	private void removeMapMarkerFromMap() {
+		for (int i = this.markerList.size() - 1; i >= 0; i--) {
+			this.map.removeMapMarker(this.markerList.get(i));
+		}
+		this.markerList = new ArrayList<MapMarker>();
+	}
+
+	private void removePolygonsFromMap() {
+		for (int i = this.polygon.size() - 1; i >= 0; i--) {
+			this.map.removeMapMarker(this.polygon.get(i));
+		}
+		this.polygon = new ArrayList<MapMarker>();
+	}
+
+	private void removeRectanglesFromMap() {
+		for (int i = this.rectList.size() - 1; i >= 0; i--) {
+			this.map.removeMapRectangle(this.rectList.get(i));
+		}
+		this.rectList = new ArrayList<MapRectangle>();
 	}
 
 	/**
@@ -370,6 +377,5 @@ public class MapPanel extends JPanel {
 	public void setPolygon(ArrayList<MapMarker> polygon) {
 		this.polygon = polygon;
 	}
-	
-	
+
 }
