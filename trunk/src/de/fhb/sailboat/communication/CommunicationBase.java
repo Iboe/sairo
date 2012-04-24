@@ -21,8 +21,9 @@ public abstract class CommunicationBase {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CommunicationBase.class);
 	
-	protected static final byte START_SIGNATURE=0x40|0x20;
+	public static final byte START_SIGNATURE=0x40|0x20;
 	public static final int MAX_MODULES=16;
+	public static final int MAX_TRX_COUNT=3;
 	
 	private TransmissionModule[] modules;
 	private ModuleWorker[] workers;
@@ -160,6 +161,7 @@ public abstract class CommunicationBase {
 	
 		public synchronized void run(){
 			
+			int errorCount=0;
 			byte signature=0,keyId=-1;
 			while(!isInterrupted()){
 				
@@ -181,6 +183,7 @@ public abstract class CommunicationBase {
 									
 									LOG.debug("Forwarding data to module: "+modules[keyId].getClass().getSimpleName());
 									modules[keyId].objectReceived(receiver);
+									errorCount=0;
 								}
 								else{
 									
@@ -210,7 +213,20 @@ public abstract class CommunicationBase {
 				catch (IOException e) {
 					
 					LOG.warn("Error reading socket: "+e.getMessage());
-					e.printStackTrace();
+					if(errorCount < CommunicationBase.MAX_TRX_COUNT){
+						
+						errorCount++;
+						LOG.warn("IO error: "+e.getMessage());
+					}
+					else{
+						LOG.warn("Too many transmission attempts.. waiting.");
+						try {
+							wait();
+						} catch (InterruptedException e1) {
+							
+							break;
+						}
+					}
 				}
 			}
 			LOG.debug("Receiver Thread finished.");

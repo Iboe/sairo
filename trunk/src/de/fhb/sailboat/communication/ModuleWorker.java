@@ -5,6 +5,7 @@ package de.fhb.sailboat.communication;
 
 import java.io.IOException;
 import java.io.DataOutputStream;
+import java.net.SocketException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,7 @@ public class ModuleWorker extends Thread {
 	
 	public synchronized void run(){
 		
+		int errorCount=0;
 		while(!isInterrupted() && !bInterruptCycle){
 			
 			DataOutputStream sender=commBase.getSender();
@@ -57,19 +59,51 @@ public class ModuleWorker extends Thread {
 						sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
 						commModule.requestObject(sender);
 						sender.flush();
+						errorCount=0;
 					}
 				}
 				else {
 					LOG.debug("No sender is set.. waiting.");
 					wait();
 				}
-			}	
+			}/*	
+			catch (SocketException e){
+				
+				if(errorCount < CommunicationBase.MAX_TRX_COUNT){
+					
+					errorCount++;
+					LOG.warn("Error writing to socket: "+e.getMessage());
+				}
+				else{
+					LOG.warn("Too many transmission attempts.. waiting.");
+					try {
+						wait();
+					} catch (InterruptedException e1) {
+						
+						break;
+					}
+				}
+			}*/
 			catch (InterruptedException e) {
 			
 				break;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} 
+			catch (IOException e) {
+			
+				if(errorCount < CommunicationBase.MAX_TRX_COUNT){
+					
+					errorCount++;
+					LOG.warn("IO error: "+e.getMessage());
+				}
+				else{
+					LOG.warn("Too many transmission attempts.. waiting.");
+					try {
+						wait();
+					} catch (InterruptedException e1) {
+						
+						break;
+					}
+				}
 			}
 		}
 		LOG.debug("Module Worker Thread finished.");
