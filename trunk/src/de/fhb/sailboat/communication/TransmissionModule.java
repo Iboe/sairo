@@ -34,6 +34,14 @@ public interface TransmissionModule {
 	public void objectReceived(DataInputStream stream) throws IOException;
 	
 	/**
+	 * This can be used to get the underlying {@link ModuleWorker} to skip the next pending transmission request.<br>
+	 * A useful method for bandwidth optimization.
+	 * 
+	 * @return True if the next cycle shall be skipped, otherwise false.
+	 */
+	public boolean skipNextCycle();
+	
+	/**
 	 * Called by the underlying {@link ModuleWorker}, if the {@link TransmissionModule}'s transmission interval has been reached
 	 * and a new object or bunch of data is supposed to be sent.<br>
 	 * The given {@link TransmissionModule} is supposed to encode the data on its own.<br>
@@ -48,9 +56,20 @@ public interface TransmissionModule {
 	 * Defines the transmission interval of this {@link TransmissionModule}.<br>
 	 * The return value is interpreted as milliseconds.<br>
 	 * Setting a transmission interval of 0 or less will cause the {@link TransmissionModule} to be declared as passive.<br>
-	 * That means it can just receive incoming objects by {@link #objectReceived(DataInputStream)} because {@link #requestObject(DataOutputStream)} is never being called.
+	 * That means it can just receive incoming objects by {@link #objectReceived(DataInputStream)} because {@link #requestObject(DataOutputStream)} is never being called automatically.<br>
+	 * However, {@link #requestObject(DataOutputStream)} can still be called by explicit request over the communication base.
 	 * 
 	 * @return The transmission interval value.
 	 */
 	public int getTransmissionInterval();
+	
+	/**
+	 * Defines the priority of this {@link TransmissionModule}. The higher the priority, the bigger the chance of outgoing data to be preferred on low bandwidth.<br>
+	 * The estimated priority is descending with an ascending priority value. e.g. The highest priority is 1. <br>
+	 * A priority value of 0 or less is however interpreted as no priority at all, which causes given packets to be added to the very end of the priority chain.<br>
+	 * Note: This method is NOT taken into account in the current version of the communication component yet!
+	 * 
+	 * @return The priority value of the {@link TransmissionModule}
+	 */
+	public int getPriority();
 }

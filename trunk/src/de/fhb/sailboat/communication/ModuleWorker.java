@@ -23,8 +23,8 @@ public class ModuleWorker extends Thread {
 	private TransmissionModule commModule;
 	
 	private byte moduleId;
-	private int cycleInterval;
-	private boolean bInterruptCycle;
+	//private int cycleInterval;
+	//private boolean bInterruptCycle;
 	
 	public ModuleWorker(CommunicationBase commBase, TransmissionModule commModule, byte moduleId) {
 		
@@ -34,23 +34,35 @@ public class ModuleWorker extends Thread {
 			
 			this.commBase = commBase;
 			this.commModule = commModule;
-			cycleInterval=commModule.getTransmissionInterval();
+			//cycleInterval=commModule.getTransmissionInterval();
 			this.moduleId=moduleId;
-			bInterruptCycle=false;
+			//bInterruptCycle=false;
 		}
-		else bInterruptCycle=true;
+		//else bInterruptCycle=true;
 		
 	}
 	
 	public synchronized void run(){
 		
 		int errorCount=0;
-		while(!isInterrupted() && !bInterruptCycle){
+		int cycleInterval=0;
+		
+		while(!isInterrupted() || this.commBase == null || this.commModule != null){
 			
 			DataOutputStream sender=commBase.getSender();
 			
 			try {
-				sleep(cycleInterval);
+				cycleInterval=commModule.getTransmissionInterval();
+				
+				//sleeping a defined amount of time before starting the new loop cycle
+				//if the given time amount is 0, it will just wait and start a loop cycle on explicit notification
+				if(cycleInterval > 0)
+					sleep(cycleInterval);
+				else wait();
+				
+				//skipping the next cycle for the associated TransmissionModule if requested
+				if(commModule.skipNextCycle())
+					continue;
 				
 				if(commBase.isConnected() && sender != null){
 				
