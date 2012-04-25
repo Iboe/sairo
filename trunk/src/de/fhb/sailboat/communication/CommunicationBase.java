@@ -7,6 +7,8 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -249,6 +251,109 @@ public abstract class CommunicationBase {
 	 * @return True, if the underlying connection is establishes, otherwise False.
 	 */
 	public abstract boolean isConnected();
+	
+	/**
+	 * Reads a compact index out of the given {@link InputStream} and returns the resulting integer value.<br>
+	 * A detailed explanation of compact indices follows later.
+	 * @param i The {@link InputStream} to read the compact index from
+	 * @return The resulting integer value.
+	 * @throws IOException Thrown, if an error occurred while reading from the given {@link InputStream}
+	 */
+	public static int readIndex(InputStream i) throws IOException {
+		
+		int value=0;
+		int b=0;
+		boolean bNegative=false;
+		
+		if((b=i.read()) != -1){
+			
+			bNegative=((b & 0x80) != 0);
+			value += (b & 0x3f);
+			
+			if((b & 0x40) != 0){
+			
+				if((b=i.read()) != -1){
+				
+					value += (b & 0x7f) << 6;
+					if((b & 0x80) != 0){
+					
+						if((b=i.read()) != -1){
+							
+							value += (b & 0x7f) << (6+7);
+							if((b & 0x80) != 0){
+								
+								if((b=i.read()) != -1){
+									
+									value += (b & 0x7f) << (6+7+7);
+									if((b & 0x80) != 0){
+										
+										if((b=i.read()) != -1){
+											
+											value += (b & 0xff) << (6+7+7+7);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(bNegative)
+			value = -value;
+		
+		return value;
+	}
+	
+	/**
+	 * Writes an integer value as compact index into the given {@link OutputStream}.<br>
+	 * A detailed explanation of compact indices follows later.
+	 * @param o The {@link OutputStream} to write the compact index to
+	 * @param value integer value to write as compact index
+	 * @throws IOException Thrown, if an error occurred while writing on the given {@link OutputStream}
+	 */
+	public static void writeIndex(OutputStream o, int value) throws IOException {
+		
+		int v=value;
+		int b=0;
+		
+		if(v < 0)
+			v = -v;
+		b = ((value >=0) ? 0 : 0x80) + ((v < 0x40) ? v : ((v & 0x3f) + 0x40));
+		
+		o.write(b);
+		
+		if( (b & 0x40) != 0){
+			
+			v = v >> 6;
+			b = (v < 0x80) ? v : ((v & 0x7f)+0x80);
+			o.write(b);
+			
+			if((b & 0x80) != 0){
+				
+				v = v >> 7;
+				b = (v < 0x80) ? v : ((v & 0x7f)+0x80);
+				o.write(b);
+				
+				if((b & 0x80) != 0){
+				
+					v = v >> 7;
+					b = (v < 0x80) ? v : ((v & 0x7f)+0x80);
+					o.write(b);
+					
+					if((b & 0x80) != 0){
+					
+						v = v >> 7;
+						b = v;
+						o.write(b);
+					}
+				}
+			}
+		}
+	}
+	
+	
 	
 	/**
 	 * The class that implements the receive thread.
