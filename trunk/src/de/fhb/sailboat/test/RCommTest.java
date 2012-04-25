@@ -97,6 +97,18 @@ public class RCommTest {
 			
 			return 0;
 		}
+
+		@Override
+		public int getPriority() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public boolean skipNextCycle() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 		
 	}
 
@@ -119,6 +131,18 @@ public class RCommTest {
 		public int getTransmissionInterval() {
 			
 			return 2000;
+		}
+		
+		@Override
+		public int getPriority() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public boolean skipNextCycle() {
+			// TODO Auto-generated method stub
+			return false;
 		}
 	}
 	
@@ -144,6 +168,18 @@ public class RCommTest {
 			return 0;
 		}
 		
+		@Override
+		public int getPriority() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public boolean skipNextCycle() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
 	}
 
 	public static class FastServerTModule implements TransmissionModule{
@@ -165,6 +201,18 @@ public class RCommTest {
 		public int getTransmissionInterval() {
 			
 			return 500;
+		}
+		
+		@Override
+		public int getPriority() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public boolean skipNextCycle() {
+			// TODO Auto-generated method stub
+			return false;
 		}
 	}
 }
