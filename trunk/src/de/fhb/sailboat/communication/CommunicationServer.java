@@ -12,7 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * to be commented
+ * Provides a TCP server endpoint as {@link CommunicationBase}.<br>
+ * Although it defines a TCP server, it can be interpreted as peer to peer connection because just one client is accepted at a time.<br>
+ * Further connection attempts are discarded.
+ * 
  * @author Michael Kant
  *
  */
@@ -25,6 +28,11 @@ public class CommunicationServer extends CommunicationBase{
 	
 	private Thread acceptThread;
 	
+	/**
+	 * Initialization constructor.<br>
+	 * Creates a {@link ServerSocket}, listening on the given port.
+	 * @param listenPort The port to listen on
+	 */
 	public CommunicationServer(int listenPort){
 		
 		try {
@@ -34,11 +42,16 @@ public class CommunicationServer extends CommunicationBase{
 			acceptThread=null;
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			LOG.error("Error binding to port "+listenPort+":"+e.getMessage());
 		}
 	}
 	
+	/**
+	 * Creating and starting the accept thread, that's responsible for accepting/rejecting incoming client connections.
+	 * @see AcceptThread#run()
+	 */
+	@Override
 	public boolean initialize(){
 		
 		boolean bInitialized=false;
@@ -50,6 +63,7 @@ public class CommunicationServer extends CommunicationBase{
 		}
 		return bInitialized;
 	}
+	
 	
 	public void shutdown(){
 		
