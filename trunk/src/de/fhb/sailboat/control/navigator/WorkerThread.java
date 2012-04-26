@@ -18,25 +18,51 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	
 	protected final WorldModel worldModel;
 	protected final Pilot pilot;
+	protected T task;
+	private boolean taskChanged;
 	
 	/**
 	 * Initial GPS position of the boat, when the {@link WorkerThread} was started.
 	 */
-	protected GPS initialPosition;
+	protected GPS startPosition;
+	
+	/**
+	 * Position of the goal of the current task. 
+	 */
+	protected GPS goal;
+	
+	private double dx12, dy12, startGoalDistance;
 	
 	public WorkerThread(Pilot pilot) {
 		this.pilot = pilot;
 		this.worldModel = WorldModelImpl.getInstance();
-		this.initialPosition = null;
+		this.startPosition = null;
+		this.goal = null;
+		this.taskChanged = false;
 	}
 	
-	public WorkerThread(Pilot pilot, GPS initialPos) {
-		
-		this(pilot);
-		this.initialPosition=initialPos;
+	/**
+	 * Sets the task and indicates that the current task has changed.
+	 * 
+	 * @param task the new task to execute
+	 */
+	public void setTask(T task) {
+		this.task = task;
+		this.taskChanged = true;
 	}
 	
-	public abstract void setTask(T task);
+	/**
+	 * Sets the task and indicates that the current task has changed. Additional, the
+	 * position of the boat at the start of the task is set. 
+	 * 
+	 * @param task the new task to execute
+	 * 
+	 */
+	public void setTask(T task, GPS startPosition, GPS goal) {
+		setTask(task);
+		this.startPosition = startPosition;
+		this.goal = goal;
+	}
 	
 	/**
 	 * Waits for an defined time and interrupts thread if there was an 
@@ -97,23 +123,36 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	 * @param currentPos Current position for which the distance to that line shall be calculated
 	 * @return The distance of the given currentPos to the imaginary line between start and goal
 	 */
-	public double calcIdealLineDist(GPS start, GPS goal, GPS currentPos){
+	public double calcIdealLineDist(GPS currentPos){
+		double dist = 0;
+		double dx13, dy13;
 		
-		double dist=0;
-		double dx12, dy12, dx13, dy13;
+		//the differences has to be calculated only once for one task
+		//but has to be recalculated if task changed
+		if (taskChanged) {
+			calcStartGoalDifference();
+			taskChanged = false;
+		}
 		
-		if(start != null){
+		if(currentPos != null && startGoalDistance != 0){
+			dx13 = goal.getLongitude() - currentPos.getLongitude();
+			dy13 = goal.getLatitude() - currentPos.getLatitude();
 			
-			dx12=goal.getLongitude()-start.getLongitude();
-			dy12=goal.getLatitude()-start.getLatitude();
-			dx13=goal.getLongitude()-currentPos.getLongitude();
-			dy13=goal.getLatitude()-currentPos.getLatitude();
-			
-			dist=Math.abs( (dx12)*(dy13) - (dx13)*(dy12) )
-				    /     
-				Math.sqrt( (dx12)*(dx12) + (dy12)*(dy12) );        	           
+			dist = Math.abs( (dx12)*(dy13) - (dx13)*(dy12) ) / startGoalDistance;   
 		}
 		return dist;
+	}
+	
+	private void calcStartGoalDifference() {
+		if (startPosition == null || goal == null) {
+			dx12 = goal.getLongitude() - startPosition.getLongitude();
+			dy12 = goal.getLatitude() - startPosition.getLatitude();
+			startGoalDistance = Math.sqrt( (dx12)*(dx12) + (dy12)*(dy12));
+		} else {
+			dx12 = 0;
+			dy12 = 0;
+			startGoalDistance = 0;
+		}
 	}
 	
 	/**

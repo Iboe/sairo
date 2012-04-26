@@ -18,17 +18,7 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 	
 	public ReachPolygonWorker(Pilot pilot) {
 		super(pilot);
-		taskChanged = true;
-	}
-	
-	public ReachPolygonWorker(Pilot pilot, GPS initialPos) {
-		super(pilot,initialPos);
-	}
-
-	@Override
-	public void setTask(ReachPolygonTask task) {
-		this.task = task;
-		taskChanged = true;
+		taskChanged = false;
 	}
 	
 	@Override
@@ -40,6 +30,7 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 			//but has to be recalculated if task changed
 			if (taskChanged) {
 				centroid = calcCentroid();
+				taskChanged = false;
 			}
 			
 			angle = calcAngleToGPS(centroid);
