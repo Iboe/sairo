@@ -5,7 +5,6 @@ package de.fhb.sailboat.communication;
 
 import java.io.IOException;
 import java.io.DataOutputStream;
-import java.net.SocketException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +56,7 @@ public class ModuleWorker extends Thread {
 				//sleeping a defined amount of time before starting the new loop cycle
 				//if the given time amount is 0, it will just wait and start a loop cycle on explicit notification
 				if(cycleInterval > 0)
-					sleep(cycleInterval);
+					wait(cycleInterval);
 				else wait();
 				
 				//skipping the next cycle for the associated TransmissionModule if requested
