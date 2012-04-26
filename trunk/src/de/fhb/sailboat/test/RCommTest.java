@@ -11,6 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.*;
+import de.fhb.sailboat.communication.clientModules.CompassReceiver;
+import de.fhb.sailboat.communication.clientModules.GPSReceiver;
+import de.fhb.sailboat.communication.serverModules.CompassTransmitter;
+import de.fhb.sailboat.communication.serverModules.GPSTransmitter;
+import de.fhb.sailboat.data.Compass;
+import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
  * Dedicated testing class for the communication component in the de.fhb.sailboat.communication package.
@@ -31,9 +38,15 @@ public class RCommTest {
 		CommunicationBase server=new CommunicationServer(6699);
 		System.out.println("..done.");
 		Thread.sleep(1000);
-		System.out.println("Registering SimpleServerTModule and FastTModule");
-		server.registerModule(new SimpleClientTModule());
-		server.registerModule(new FastServerTModule());
+		System.out.println("Registering modules...");
+		//server.registerModule(new SimpleClientTModule());
+		//server.registerModule(new FastServerTModule());
+		
+		WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(52.246555,12.323096));
+		server.registerModule(new GPSTransmitter());
+		WorldModelImpl.getInstance().getCompassModel().setCompass(new Compass(-17.76,0,0));
+		server.registerModule(new CompassTransmitter());
+		
 		System.out.println("..done.");
 		Thread.sleep(1000);
 		System.out.println("Initializing Server endpoint..");
@@ -49,9 +62,11 @@ public class RCommTest {
 		CommunicationBase client = new CommuncationClient("127.0.0.1", 6699);
 		System.out.println("..done.");
 		Thread.sleep(1000);
-		System.out.println("Registering SimpleClientTModule and FastClientTModule");
-		client.registerModule(new SimpleServerTModule());
-		client.registerModule(new FastClientTModule());
+		System.out.println("Registering modules...");
+		//client.registerModule(new SimpleServerTModule());
+		//client.registerModule(new FastClientTModule());
+		client.registerModule(new GPSReceiver());
+		client.registerModule(new CompassReceiver());
 		System.out.println("..done.");
 		Thread.sleep(1000);
 		System.out.println("Initializing Client endpoint..");
