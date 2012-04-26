@@ -259,7 +259,7 @@ public abstract class CommunicationBase {
 	 * @return The resulting integer value.
 	 * @throws IOException Thrown, if an error occurred while reading from the given {@link InputStream}
 	 */
-	public static int readIndex(InputStream i) throws IOException {
+	public static int readCompactIndex(InputStream i) throws IOException {
 		
 		int value=0;
 		int b=0;
@@ -313,7 +313,7 @@ public abstract class CommunicationBase {
 	 * @param value integer value to write as compact index
 	 * @throws IOException Thrown, if an error occurred while writing on the given {@link OutputStream}
 	 */
-	public static void writeIndex(OutputStream o, int value) throws IOException {
+	public static void writeCompactIndex(OutputStream o, int value) throws IOException {
 		
 		int v=value;
 		int b=0;
@@ -380,7 +380,7 @@ public abstract class CommunicationBase {
 							signature=receiver.readByte();
 						
 						
-							if((signature & START_SIGNATURE) == START_SIGNATURE) {
+							if((signature & ~0x0f) == START_SIGNATURE) {
 								
 								keyId=(byte)(signature & 0x0F);
 								
