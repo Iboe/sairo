@@ -379,7 +379,6 @@ public abstract class CommunicationBase {
 							
 							signature=receiver.readByte();
 						
-						
 							if((signature & ~0x0f) == START_SIGNATURE) {
 								
 								keyId=(byte)(signature & 0x0F);
