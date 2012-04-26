@@ -1,6 +1,7 @@
 package de.fhb.sailboat.control.navigator;
 
 import de.fhb.sailboat.control.Pilot;
+import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.ReachCircleTask;
 
 /**
@@ -15,6 +16,10 @@ public class ReachCircleWorker extends WorkerThread<ReachCircleTask> {
 	
 	public ReachCircleWorker(Pilot pilot) {
 		super(pilot);
+	}
+	
+	public ReachCircleWorker(Pilot pilot, GPS initialPos) {
+		super(pilot,initialPos);
 	}
 	
 	@Override

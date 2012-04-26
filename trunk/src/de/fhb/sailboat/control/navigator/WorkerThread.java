@@ -19,9 +19,21 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	protected final WorldModel worldModel;
 	protected final Pilot pilot;
 	
+	/**
+	 * Initial GPS position of the boat, when the {@link WorkerThread} was started.
+	 */
+	protected GPS initialPosition;
+	
 	public WorkerThread(Pilot pilot) {
 		this.pilot = pilot;
 		this.worldModel = WorldModelImpl.getInstance();
+		this.initialPosition = null;
+	}
+	
+	public WorkerThread(Pilot pilot, GPS initialPos) {
+		
+		this(pilot);
+		this.initialPosition=initialPos;
 	}
 	
 	public abstract void setTask(T task);
@@ -74,6 +86,34 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		angle = 90 - angle - worldModel.getCompassModel().getCompass().getYaw();
 		
 		return angle;
+	}
+	
+	/**
+	 * Calculates the absolute distance from the current position to the ideal line between a start and the goal position.<br>
+	 * The interpretation of the resulting distance is matter of the caller. e.g. A transformation into meters had to be done yet, if required.
+	 * 
+	 * @param start Start position that defines the line 
+	 * @param goal Destination position that defines the line
+	 * @param currentPos Current position for which the distance to that line shall be calculated
+	 * @return The distance of the given currentPos to the imaginary line between start and goal
+	 */
+	public double calcIdealLineDist(GPS start, GPS goal, GPS currentPos){
+		
+		double dist=0;
+		double dx12, dy12, dx13, dy13;
+		
+		if(start != null){
+			
+			dx12=goal.getLongitude()-start.getLongitude();
+			dy12=goal.getLatitude()-start.getLatitude();
+			dx13=goal.getLongitude()-currentPos.getLongitude();
+			dy13=goal.getLatitude()-currentPos.getLatitude();
+			
+			dist=Math.abs( (dx12)*(dy13) - (dx13)*(dy12) )
+				    /     
+				Math.sqrt( (dx12)*(dx12) + (dy12)*(dy12) );        	           
+		}
+		return dist;
 	}
 	
 	/**

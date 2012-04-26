@@ -20,6 +20,10 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 		super(pilot);
 		taskChanged = true;
 	}
+	
+	public ReachPolygonWorker(Pilot pilot, GPS initialPos) {
+		super(pilot,initialPos);
+	}
 
 	@Override
 	public void setTask(ReachPolygonTask task) {
