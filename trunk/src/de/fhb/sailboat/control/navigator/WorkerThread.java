@@ -115,8 +115,11 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	}
 	
 	/**
-	 * Calculates the absolute distance from the current position to the ideal line between a start and the goal position.<br>
+	 * Calculates the distance from the current position to the ideal line between a start and the goal position.<br>
+	 * A negative value means that the given currentPos is left from the ideal line, based on the direction of travel<br>
+	 * A positive value means that the given currentPos is right from the ideal line, based on the direction of travel<br>
 	 * The interpretation of the resulting distance is matter of the caller. e.g. A transformation into meters had to be done yet, if required.
+	 * (Internal note: perhaps we can misuse that function to perform a cross line task too!)
 	 * 
 	 * @param start Start position that defines the line 
 	 * @param goal Destination position that defines the line
@@ -138,7 +141,8 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			dx13 = goal.getLongitude() - currentPos.getLongitude();
 			dy13 = goal.getLatitude() - currentPos.getLatitude();
 			
-			dist = Math.abs( (dx12)*(dy13) - (dx13)*(dy12) ) / startGoalDistance;   
+			//without Math. abs, we're additionally having the information if the current position is left (negative) or right (positive) from that line
+			dist = /*Math.abs*/( (dx12)*(dy13) - (dx13)*(dy12) ) / startGoalDistance;   
 		}
 		return dist;
 	}
