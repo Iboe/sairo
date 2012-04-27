@@ -12,6 +12,7 @@ import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+@Deprecated
 public class ConnectorUfer {
 
 	public static final int UPDATE_RATE = 500; // Sleep in ms between every attempt to listen/ send (loop)

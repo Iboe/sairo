@@ -1,6 +1,7 @@
 package de.fhb.sailboat.ufer.prototyp.communication;
 import java.io.Serializable;
 
+@Deprecated
 public class TestWerte implements Serializable{
 	private static final long serialVersionUID = -376302004636704066L;
 	
