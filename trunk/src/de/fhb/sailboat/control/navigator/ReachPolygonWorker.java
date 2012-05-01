@@ -12,31 +12,25 @@ import de.fhb.sailboat.mission.ReachPolygonTask;
  */
 public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 
-	private ReachPolygonTask task;
-	private boolean taskChanged;
 	private GPS centroid;
 	
 	public ReachPolygonWorker(Pilot pilot) {
 		super(pilot);
-		taskChanged = false;
 	}
 	
 	@Override
 	public void run() {
 		while (!isInterrupted()) {
-			double angle;
-			
-			//the centroid has to be calculated only once for one task
-			//but has to be recalculated if task changed
-			if (taskChanged) {
-				centroid = calcCentroid();
-				taskChanged = false;
-			}
-			
-			angle = calcAngleToGPS(centroid);
+			double angle = calcAngleToGPS(centroid);
 			pilot.driveAngle((int) angle);
 			waitForNextCycle();
 		}
+	}
+	
+	@Override
+	protected void taskHasChanged() {
+		super.taskHasChanged();
+		centroid = calcCentroid();
 	}
 	
 	/**

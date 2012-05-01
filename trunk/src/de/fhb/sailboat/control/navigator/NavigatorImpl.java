@@ -1,8 +1,5 @@
 package de.fhb.sailboat.control.navigator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import de.fhb.sailboat.control.Pilot;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
@@ -14,7 +11,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class NavigatorImpl implements Navigator{
 
-	private static final Logger LOG = LoggerFactory.getLogger(NavigatorImpl.class);
+	//private static final Logger LOG = LoggerFactory.getLogger(NavigatorImpl.class);
 	private final Pilot pilot;
 	private final WorldModel worldModel;
 	private Thread workerThread = null;

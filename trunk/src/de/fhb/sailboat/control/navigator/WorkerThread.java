@@ -19,7 +19,6 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	protected final WorldModel worldModel;
 	protected final Pilot pilot;
 	protected T task;
-	private boolean taskChanged;
 	
 	/**
 	 * Initial GPS position of the boat, when the {@link WorkerThread} was started.
@@ -38,30 +37,51 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		this.worldModel = WorldModelImpl.getInstance();
 		this.startPosition = null;
 		this.goal = null;
-		this.taskChanged = false;
 	}
 	
 	/**
-	 * Sets the task and indicates that the current task has changed.
+	 * Sets the task and triggers calculations for the new task.
 	 * 
 	 * @param task the new task to execute
 	 */
-	public void setTask(T task) {
-		this.task = task;
-		this.taskChanged = true;
+	public final void setTask(T task) {
+		setTask(task, null, null);
 	}
 	
 	/**
-	 * Sets the task and indicates that the current task has changed. Additional, the
+	 * Sets the task and triggers calculations for the new task. Additional, the
 	 * position of the boat at the start of the task is set. 
 	 * 
 	 * @param task the new task to execute
 	 * 
 	 */
-	public void setTask(T task, GPS startPosition, GPS goal) {
-		setTask(task);
+	public final void setTask(T task, GPS startPosition, GPS goal) {
 		this.startPosition = startPosition;
 		this.goal = goal;
+		this.task = task;
+		taskHasChanged();
+	}
+	
+	/**
+	 * Calculates everything necessary when the task to be executed has changed.
+	 * This method is a hook for subclasses to add own calculations. Subclasses that need own calculations to be done
+	 * when the task changed, should override this method, call the method from the base class (this method) 
+	 * and execute their calculations afterwards.
+	 */
+	protected void taskHasChanged() {
+		calcStartGoalDifference();
+	}
+	
+	private void calcStartGoalDifference() {
+		if (startPosition != null && goal != null) {
+			dx12 = goal.getLongitude() - startPosition.getLongitude();
+			dy12 = goal.getLatitude() - startPosition.getLatitude();
+			startGoalDistance = Math.sqrt((dx12)*(dx12) + (dy12)*(dy12));
+		} else {
+			dx12 = 0;
+			dy12 = 0;
+			startGoalDistance = 0;
+		}
 	}
 	
 	/**
@@ -130,13 +150,6 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		double dist = 0;
 		double dx13, dy13;
 		
-		//the differences has to be calculated only once for one task
-		//but has to be recalculated if task changed
-		if (taskChanged) {
-			calcStartGoalDifference();
-			taskChanged = false;
-		}
-		
 		if(currentPos != null && startGoalDistance != 0){
 			dx13 = goal.getLongitude() - currentPos.getLongitude();
 			dy13 = goal.getLatitude() - currentPos.getLatitude();
@@ -145,18 +158,6 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			dist = /*Math.abs*/( (dx12)*(dy13) - (dx13)*(dy12) ) / startGoalDistance;   
 		}
 		return dist;
-	}
-	
-	private void calcStartGoalDifference() {
-		if (startPosition == null || goal == null) {
-			dx12 = goal.getLongitude() - startPosition.getLongitude();
-			dy12 = goal.getLatitude() - startPosition.getLatitude();
-			startGoalDistance = Math.sqrt( (dx12)*(dx12) + (dy12)*(dy12));
-		} else {
-			dx12 = 0;
-			dy12 = 0;
-			startGoalDistance = 0;
-		}
 	}
 	
 	/**
