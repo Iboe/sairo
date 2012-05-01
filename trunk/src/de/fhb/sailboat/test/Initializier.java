@@ -36,8 +36,9 @@ public class Initializier {
 	
 	public static void main(String[] args) {
 		Initializier init = new Initializier();
+		PropertiesInitializer propsInit = new PropertiesInitializer();
 		
-		init.initializeProperties();
+		propsInit.initializeProperties();
 		init.initializeControl();
 		
 		if (TEST) {
@@ -45,24 +46,6 @@ public class Initializier {
 		} else {
 			init.initializeSensors();
 			init.initializeView();
-		}
-	}
-	
-	private void initializeProperties() {
-		Properties prop = new Properties();
-		Properties systemProps = System.getProperties();
-		InputStream stream = this.getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
-		Set<Object> keySet;
-		
-		try	{
-			prop.load(stream);
-		} catch (IOException e) {
-			throw new IllegalStateException("could not load properties", e);
-		}
-		
-		keySet = prop.keySet();
-		for (Object key : keySet) {
-			systemProps.put(key, prop.get(key));
 		}
 	}
 	
@@ -108,8 +91,7 @@ public class Initializier {
 					position.getLongitude());
 			GPS goal2 = new GPS(position.getLatitude() + 300, 
 					position.getLongitude());
-			GPS goal3 = new GPS(52.24615, //mensa
-					12.32274);
+			GPS goal3 = new GPS(52.24615, 12.32274); //mensa
 			
 			List<GPS> polygon = new ArrayList<GPS>();
 			polygon.add(new GPS(0,0));
@@ -132,5 +114,36 @@ public class Initializier {
 		
 		tasks.remove(0);
 		planner.doMission(mission);
+	}
+	
+	/**
+	 * Class for loading the properties. This is separated from the {@link Initializier} to be
+	 * accessible from tests. 
+	 *  
+	 * @author hscheel
+	 *
+	 */
+	public static class PropertiesInitializer {
+		
+		/**
+		 * Loads the properties from the configuration file and adds them to the system properties. 
+		 */
+		public void initializeProperties() {
+			Properties prop = new Properties();
+			Properties systemProps = System.getProperties();
+			InputStream stream = this.getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
+			Set<Object> keySet;
+			
+			try	{
+				prop.load(stream);
+			} catch (IOException e) {
+				throw new IllegalStateException("could not load properties", e);
+			}
+			
+			keySet = prop.keySet();
+			for (Object key : keySet) {
+				systemProps.put(key, prop.get(key));
+			}
+		}
 	}
 }
