@@ -2,6 +2,9 @@ package de.fhb.sailboat.serial.sensor;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.apache.log4j.Logger;
+
 import gnu.io.*;
 
 public class sairoComm {
@@ -15,6 +18,8 @@ public class sairoComm {
   // The String with the data of the Device
   private String dataString;
  
+  private static Logger LOG = Logger.getLogger(GpsSensor.class);
+  
   /**
    * The Constructor that needs a comPort-Name for doing its work
    * @param comPort
@@ -43,7 +48,7 @@ public class sairoComm {
     try {
       sp = this.getSerialPort();
     } catch (Exception e) {
-      e.printStackTrace();
+    	LOG.error(e);
     }
     if (sp != null) {
       // Teststuff that can be removed or used for debugging
@@ -106,8 +111,7 @@ public class sairoComm {
     try {
       in = sp.getInputStream();
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+    	LOG.error(e);      
     }
 
     return in;
@@ -119,8 +123,7 @@ public class sairoComm {
 		try {
 			connect();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
     return dataString;
@@ -156,7 +159,7 @@ public class sairoComm {
           }
         }
       } catch (IOException e) {
-        e.printStackTrace();
+    	  LOG.error(e);
       }
     }
   }
