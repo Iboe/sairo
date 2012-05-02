@@ -111,8 +111,14 @@ public class COMPort{
 	 * @return String line
 	 * @throws IOException
 	 */
-	public String readLine() throws IOException {
-		return new BufferedReader(new InputStreamReader(this._serialPortObject.getInputStream())).readLine();
+	public String[] readLine(int rows) throws IOException {
+		String[] rowArray = new String[rows];
+		for(int i = 0; i<= rows; i++){
+			rowArray[i] = new BufferedReader(
+					new InputStreamReader(this._serialPortObject.getInputStream()
+					)).readLine();		
+		}
+		return rowArray;
 	}
 	
 	/**
