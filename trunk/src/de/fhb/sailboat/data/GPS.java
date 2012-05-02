@@ -13,16 +13,7 @@ public class GPS {
 	private final double longitude;
 	private Integer nrSatelites = null;
 
-	/**
-	 * Constructs a new instance with the values handed over.
-	 * 
-	 * @param latitude the value for latitude
-	 * @param longitude the value for longitude
-	 */
-	public GPS(double latitude, double longitude) {
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
+
 	
 	/**
 	 * Another instance 
