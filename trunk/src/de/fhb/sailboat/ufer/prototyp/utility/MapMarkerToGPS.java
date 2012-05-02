@@ -12,7 +12,7 @@ public class MapMarkerToGPS {
 		ArrayList<GPS> gpsList = new ArrayList<GPS>();
 		for (int i = 0; i < markerList.size(); i++) {
 			gpsList.add(new GPS(markerList.get(i).getLat(), markerList.get(i)
-					.getLon()));
+					.getLon(), 0));
 		}
 		return gpsList;
 	}

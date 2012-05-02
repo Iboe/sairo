@@ -13,6 +13,7 @@ import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
+import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.ufer.prototyp.utility.MapMarkerToGPS;
 import de.fhb.sailboat.worldmodel.CompassModel;
@@ -54,14 +55,11 @@ public class Controller {
 		tasks.add(new PrimitiveCommandTask(null, null, 100));
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i).getLat(),
-					markerList.get(i).getLon()), 3));
+					markerList.get(i).getLon(), 0), 3));
 		}
 		tasks.add(new PrimitiveCommandTask(null, null, 73));
 
 		mission.setTasks(tasks);
-		
-		System.out.println("Mission passed.");
-		System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
 		
 		planner.doMission(mission);
 	}
@@ -78,23 +76,17 @@ public class Controller {
 		
 		mission.setTasks(tasks);
 		
-		System.out.println("Mission passed.");
-		//System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
-		
 		planner.doMission(mission);
 	}
 	
-	public void commitStopMotor(Planner planner) {
+	public void commitStopTask(Planner planner) {
 		// TODO Implement proper stop mission task beyond resetting motor
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(null, null, 73));
+		tasks.add(new StopTask());
 		
 		mission.setTasks(tasks);
-		
-		System.out.println("Mission passed.");
-		//System.out.println("First GPS marker: " + markerList.get(0).getLat() + " / " + markerList.get(0).getLon());
 		
 		planner.doMission(mission);
 	}
@@ -122,9 +114,7 @@ public class Controller {
 		
 		this.model.getWind().setWind(new Wind(dice.nextInt(361), dice.nextInt(3000)));
 
-		this.model.setGpsPosition(new GPS(dice.nextDouble() + dice.nextInt(12), dice.nextDouble() + dice.nextInt(12)));
-
-		this.model.setGpsSatelites(dice.nextInt(5));
+		this.model.setGpsPosition(new GPS(dice.nextDouble() + dice.nextInt(12), dice.nextDouble() + dice.nextInt(12), dice.nextInt(10)));
 	}
 
 	public void updateWind() {
@@ -165,7 +155,7 @@ public class Controller {
 	}
 
 	public int getGpsSatelites() {
-		return this.model.getGpsSatelites();
+		return this.model.getGps().getPosition().getSatelites();
 	}
 
 }

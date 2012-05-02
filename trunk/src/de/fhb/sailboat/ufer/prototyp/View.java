@@ -852,7 +852,7 @@ public class View extends JFrame {
 	private void sendStop() {
 		int choice = JOptionPane.showConfirmDialog(null, "Wirklich Mission stoppen?", "Bitte bestätigen", JOptionPane.YES_NO_OPTION);
 		if (choice == JOptionPane.YES_OPTION) {
-			this.controller.commitStopMotor(planner);
+			this.controller.commitStopTask(planner);
 			resetMap();
 		}
 	}

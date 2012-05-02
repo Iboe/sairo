@@ -30,7 +30,6 @@ public class Model {
 	private CompassModel compass;
 	
 	private GPSModel gps;
-	private int gpsSatelites; // Used to value the reliability of GPS values
 	
 	// for the planned exercise
 	private ArrayList<MapMarker> circleMarkerList;
@@ -70,11 +69,6 @@ public class Model {
 	public GPSModel getGps() {
 		return gps;
 	}
-
-	public int getGpsSatelites() {
-		return gpsSatelites;
-	}
-	
 	
 	/**
 	 * Helper method which should *ONLY* be used for testing/ debugging. Sets the GPS position manually and
@@ -84,10 +78,6 @@ public class Model {
 	public void setGpsPosition(GPS position) {
 		this.gps = new GPSModelImpl();
 		gps.setPosition(position);
-	}
-
-	public void setGpsSatelites(int gpsSatelites) {
-		this.gpsSatelites = gpsSatelites;
 	}
 
 	public ArrayList<MapMarker> getCircleMarkerList() {

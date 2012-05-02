@@ -7,7 +7,7 @@ import de.fhb.sailboat.data.GPS;
 public class GPSToCoordinate {
 
 	public static GPS coordinateToGPS(Coordinate coordinate) {
-		return new GPS(coordinate.getLat(), coordinate.getLon());
+		return new GPS(coordinate.getLat(), coordinate.getLon(), 0);
 	}
 
 	public static Coordinate gpsToCoordinate(GPS gps) {
