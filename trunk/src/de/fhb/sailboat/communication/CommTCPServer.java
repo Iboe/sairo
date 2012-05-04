@@ -19,9 +19,9 @@ import org.slf4j.LoggerFactory;
  * @author Michael Kant
  *
  */
-public class CommunicationServer extends CommunicationBase{
+public class CommTCPServer extends CommunicationBase{
 
-	private static final Logger LOG = LoggerFactory.getLogger(CommunicationServer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CommTCPServer.class);
 	
 	private ServerSocket listenServer;
 	private Socket connectedClient;
@@ -33,7 +33,7 @@ public class CommunicationServer extends CommunicationBase{
 	 * Creates a {@link ServerSocket}, listening on the given port.
 	 * @param listenPort The port to listen on
 	 */
-	public CommunicationServer(int listenPort){
+	public CommTCPServer(int listenPort){
 		
 		try {
 			

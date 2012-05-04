@@ -35,7 +35,7 @@ public class RCommTest {
 		
 		Thread.sleep(2000);
 		System.out.println("Creating Server endpoint, listening on port 6699..");
-		CommunicationBase server=new CommunicationServer(6699);
+		CommunicationBase server=new CommTCPServer(6699);
 		System.out.println("..done.");
 		Thread.sleep(1000);
 		System.out.println("Registering modules...");
@@ -59,7 +59,7 @@ public class RCommTest {
 		System.out.println("-------------------------");
 		Thread.sleep(2000);
 		System.out.println("Creating Client endpoint, connecting to localhost:6699..");
-		CommunicationBase client = new CommuncationClient("127.0.0.1", 6699);
+		CommunicationBase client = new CommTCPClient("127.0.0.1", 6699);
 		System.out.println("..done.");
 		Thread.sleep(1000);
 		System.out.println("Registering modules...");

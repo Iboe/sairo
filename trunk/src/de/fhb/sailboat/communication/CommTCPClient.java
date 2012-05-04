@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
  * @author Michael Kant
  *
  */
-public class CommuncationClient extends CommunicationBase {
+public class CommTCPClient extends CommunicationBase {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CommuncationClient.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CommTCPClient.class);
 	
 	private Socket destination;
 	private String destinationIP;
@@ -27,7 +27,7 @@ public class CommuncationClient extends CommunicationBase {
 	
 	
 	
-	public CommuncationClient(String destIP, int port){
+	public CommTCPClient(String destIP, int port){
 		
 		destinationIP=destIP;
 		destinationPort=port;
