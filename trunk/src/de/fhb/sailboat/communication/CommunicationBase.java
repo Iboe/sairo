@@ -388,7 +388,7 @@ public abstract class CommunicationBase {
 								if(keyId >= 0 && keyId < MAX_MODULES && modules[keyId] != null){
 									
 									LOG.debug("Forwarding data to module: "+modules[keyId].getClass().getSimpleName());
-									modules[keyId].objectReceived(receiver);
+									modules[keyId].receivedObject(receiver);
 									errorCount=0;
 								}
 								else{

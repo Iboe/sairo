@@ -40,7 +40,7 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 	 * 
 	 */
 	@Override
-	public void objectReceived(DataInputStream stream) throws IOException {
+	public void receivedObject(DataInputStream stream) throws IOException {
 		
 		int yaw=0;
 		Compass newCompass;

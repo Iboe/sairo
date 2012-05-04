@@ -94,7 +94,7 @@ public class RCommTest {
 	public static class SimpleClientTModule implements TransmissionModule{
 
 		@Override
-		public void objectReceived(DataInputStream stream) throws IOException {
+		public void receivedObject(DataInputStream stream) throws IOException {
 			
 			int number=stream.readInt();
 			
@@ -130,7 +130,7 @@ public class RCommTest {
 	public static class SimpleServerTModule implements TransmissionModule{
 		
 		@Override
-		public void objectReceived(DataInputStream stream) throws IOException {
+		public void receivedObject(DataInputStream stream) throws IOException {
 			
 			System.out.println("An object was received but not expected");
 		}
@@ -164,7 +164,7 @@ public class RCommTest {
 	public static class FastClientTModule implements TransmissionModule{
 
 		@Override
-		public void objectReceived(DataInputStream stream) throws IOException {
+		public void receivedObject(DataInputStream stream) throws IOException {
 			
 			float number=stream.readFloat();
 			
@@ -200,7 +200,7 @@ public class RCommTest {
 	public static class FastServerTModule implements TransmissionModule{
 		
 		@Override
-		public void objectReceived(DataInputStream stream) throws IOException {
+		public void receivedObject(DataInputStream stream) throws IOException {
 			
 			System.out.println("An object was received but not expected");
 		}

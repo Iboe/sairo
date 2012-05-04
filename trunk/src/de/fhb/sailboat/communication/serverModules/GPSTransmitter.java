@@ -42,7 +42,7 @@ public class GPSTransmitter implements TransmissionModule {
 	 * @see de.fhb.sailboat.communication.TransmissionModule#objectReceived(java.io.DataInputStream)
 	 */
 	@Override
-	public void objectReceived(DataInputStream stream) throws IOException {
+	public void receivedObject(DataInputStream stream) throws IOException {
 		
 		LOG.warn("Received an unexpected incoming transmission.");
 

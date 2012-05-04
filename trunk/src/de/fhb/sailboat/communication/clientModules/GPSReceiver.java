@@ -41,7 +41,7 @@ public class GPSReceiver implements TransmissionModule {
 	 * 
 	 */
 	@Override
-	public void objectReceived(DataInputStream stream) throws IOException {
+	public void receivedObject(DataInputStream stream) throws IOException {
 		
 		int lon=0,lat=0;
 		GPS newGPS;

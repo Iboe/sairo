@@ -31,7 +31,7 @@ public interface TransmissionModule {
 	 * @param stream Stream that provides the data.
 	 * @throws IOException IOException that's back-propagated to the underlying {@link CommunicationBase}, if this {@link TransmissionModule} doesn't handle the exception itself.
 	 */
-	public void objectReceived(DataInputStream stream) throws IOException;
+	public void receivedObject(DataInputStream stream) throws IOException;
 	
 	/**
 	 * This can be used to get the underlying {@link ModuleWorker} to skip the next pending transmission request.<br>
@@ -56,7 +56,7 @@ public interface TransmissionModule {
 	 * Defines the transmission interval of this {@link TransmissionModule}.<br>
 	 * The return value is interpreted as milliseconds.<br>
 	 * Setting a transmission interval of 0 or less will cause the {@link TransmissionModule} to be declared as passive.<br>
-	 * That means it can just receive incoming objects by {@link #objectReceived(DataInputStream)} because {@link #requestObject(DataOutputStream)} is never being called automatically.<br>
+	 * That means it can just receive incoming objects by {@link #receivedObject(DataInputStream)} because {@link #requestObject(DataOutputStream)} is never being called automatically.<br>
 	 * However, {@link #requestObject(DataOutputStream)} can still be called by explicit request over the communication base.
 	 * 
 	 * @return The transmission interval value.
