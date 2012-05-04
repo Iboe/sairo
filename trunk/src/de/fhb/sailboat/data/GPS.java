@@ -14,13 +14,24 @@ public class GPS {
 	private Integer nrSatelites = null;
 
 
+	/**
+	 * Initialization constructor.<br> 
+	 * Creates a new GPS object with a given latitude and longitude.
+	 * 
+	 * @param latitude The latitude of the GPS object
+	 * @param longitude The longitude of the GPS object
+	 */
+	public GPS(double latitude, double longitude){
+		
+		this(latitude,longitude,-1);
+	}
 	
 	/**
-	 * Another instance 
+	 * Initialization constructor.<br> 
+	 * Creates a new GPS object with a given latitude, longitude and the number of satellites that were involved when obtaining the values.
 	 * 
-	 * @param latitude
-	 * @param longitude
-	 * @param nrSatelites
+	 * @param latitude The latitude of the GPS object
+	 * @param longitude The longitude of the GPS object
 	 */
 	public GPS(double latitude, double longitude, int nrSatelites){
 		this.latitude = latitude;
