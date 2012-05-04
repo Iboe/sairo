@@ -8,12 +8,20 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.fhb.sailboat.communication.CommTCPServer;
+import de.fhb.sailboat.communication.CommunicationBase;
+import de.fhb.sailboat.communication.serverModules.CompassTransmitter;
+import de.fhb.sailboat.communication.serverModules.GPSTransmitter;
 import de.fhb.sailboat.control.Pilot;
 import de.fhb.sailboat.control.PilotImpl;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.control.PlannerImpl;
 import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.control.navigator.NavigatorImpl;
+import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
@@ -29,6 +37,8 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class Initializier {
 
+	private static final Logger LOG = LoggerFactory.getLogger(Initializier.class);
+	
 	private static final boolean TEST = true;
 	private static final String CONFIG_FILE = "config.properties";
 	private Planner planner;
@@ -42,15 +52,26 @@ public class Initializier {
 		init.initializeControl();
 		
 		if (TEST) {
-			init.createDummyMission();
+			init.setSensorDummyValues();
+			init.initializeCommunication();
+			//init.createDummyMission();
+			
 		} else {
 			init.initializeSensors();
 			init.initializeView();
 		}
 	}
 	
+	private void setSensorDummyValues() {
+		
+		WorldModel worldModel = WorldModelImpl.getInstance();
+		
+		worldModel.getGPSModel().setPosition(new GPS(52.246555,12.323096));
+		worldModel.getCompassModel().setCompass(new Compass(175, 0, 0));
+	}
+	
 	private void initializeSensors() {
-		System.out.println("-----init sensors-----");
+		LOG.info("-----init sensors-----");
 		GpsSensor gps=new GpsSensor("COM8");
 		OS500sensor compassSensor=new OS500sensor(); //zzt. COM17
 		try {
@@ -59,7 +80,7 @@ public class Initializier {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("-----init sensors done-----");
+		LOG.info("-----init sensors done-----");
 	}
 	
 	private void initializeControl() {
@@ -73,6 +94,15 @@ public class Initializier {
 		
 		Navigator navigator = new NavigatorImpl(pilot);
 		planner = new PlannerImpl(navigator);
+	}
+	
+	private void initializeCommunication() {
+		
+		CommunicationBase server=new CommTCPServer(6699);
+		server.registerModule(new GPSTransmitter());
+		server.registerModule(new CompassTransmitter());
+		if(!server.initialize())
+			LOG.warn("Unable to start the communications TCP server on port 6699");
 	}
 	
 	private void initializeView() {

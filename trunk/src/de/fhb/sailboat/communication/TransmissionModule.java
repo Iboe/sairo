@@ -53,6 +53,11 @@ public interface TransmissionModule {
 	public void requestObject(DataOutputStream stream) throws IOException;
 
 	/**
+	 * Called by the underlying {@link ModuleWorker}, if the connection was closed or interrupted.
+	 */
+	public void connectionReset();
+	
+	/**
 	 * Defines the transmission interval of this {@link TransmissionModule}.<br>
 	 * The return value is interpreted as milliseconds.<br>
 	 * Setting a transmission interval of 0 or less will cause the {@link TransmissionModule} to be declared as passive.<br>

@@ -135,6 +135,7 @@ public abstract class CommunicationBase {
 			
 			synchronized(this.sender){
 			
+				
 				for(ModuleWorker mw : workers){
 					if(mw != null){
 						
@@ -251,6 +252,8 @@ public abstract class CommunicationBase {
 	 * @return True, if the underlying connection is establishes, otherwise False.
 	 */
 	public abstract boolean isConnected();
+	
+	public abstract boolean closeConnection();
 	
 	/**
 	 * Reads a compact index out of the given {@link InputStream} and returns the resulting integer value.<br>
@@ -425,8 +428,10 @@ public abstract class CommunicationBase {
 						LOG.warn("IO error: "+e.getMessage());
 					}
 					else{
-						LOG.warn("Too many transmission attempts.. waiting.");
+						LOG.warn("Too many receive attempts.. closing connection.");
 						try {
+							closeConnection();
+							errorCount=0;
 							wait();
 						} catch (InterruptedException e1) {
 							

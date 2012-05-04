@@ -131,6 +131,23 @@ public class CommTCPServer extends CommunicationBase{
 		return connectedClient != null && !(connectedClient.isClosed() || connectedClient.isInputShutdown() || connectedClient.isOutputShutdown());
 	}
 	
+	public boolean closeConnection(){
+		
+		boolean bClosed=false;
+		
+		if(isConnected()){
+		
+			try {
+				connectedClient.close();
+				connectedClient=null;
+				bClosed=true;
+			} catch (IOException e) {
+				
+			}
+		}	
+		return bClosed;
+	}
+	
 	private class AcceptThread extends Thread {
 		
 		public void run()
@@ -142,18 +159,17 @@ public class CommTCPServer extends CommunicationBase{
 					client=listenServer.accept();
 					if(client != null){
 						
-						if(connectedClient == null ){
+						if(isConnected() ){
+							
+							LOG.debug("Rejected second incoming client from: "+client.getRemoteSocketAddress().toString());
+							client.close();
+						}
+						else{
 							
 							connectedClient=client;
 							LOG.debug("Accepted incoming client from: "+connectedClient.getRemoteSocketAddress().toString());
 							setSender(new DataOutputStream(connectedClient.getOutputStream()));
 							setReceiver(new DataInputStream(connectedClient.getInputStream()));
-							
-						}
-						else{
-							
-							LOG.debug("Rejected second incoming client from: "+client.getRemoteSocketAddress().toString());
-							client.close();
 						}
 					}
 					

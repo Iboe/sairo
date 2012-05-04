@@ -22,8 +22,6 @@ public class ModuleWorker extends Thread {
 	private TransmissionModule commModule;
 	
 	private byte moduleId;
-	//private int cycleInterval;
-	//private boolean bInterruptCycle;
 	
 	public ModuleWorker(CommunicationBase commBase, TransmissionModule commModule, byte moduleId) {
 		
@@ -33,12 +31,8 @@ public class ModuleWorker extends Thread {
 			
 			this.commBase = commBase;
 			this.commModule = commModule;
-			//cycleInterval=commModule.getTransmissionInterval();
 			this.moduleId=moduleId;
-			//bInterruptCycle=false;
 		}
-		//else bInterruptCycle=true;
-		
 	}
 	
 	public synchronized void run(){
@@ -59,12 +53,13 @@ public class ModuleWorker extends Thread {
 					wait(cycleInterval);
 				else wait();
 				
-				//skipping the next cycle for the associated TransmissionModule if requested
-				if(commModule.skipNextCycle())
-					continue;
 				
 				if(commBase.isConnected() && sender != null){
 				
+					//skipping the next cycle for the associated TransmissionModule if requested
+					if(commModule.skipNextCycle())
+						continue;
+					
 					synchronized(sender){
 						
 						sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
@@ -75,26 +70,11 @@ public class ModuleWorker extends Thread {
 				}
 				else {
 					LOG.debug("No sender is set.. waiting.");
+					commModule.connectionReset();
 					wait();
+					LOG.debug("Thread was notified, continuing the cycle.");
 				}
-			}/*	
-			catch (SocketException e){
-				
-				if(errorCount < CommunicationBase.MAX_TRX_COUNT){
-					
-					errorCount++;
-					LOG.warn("Error writing to socket: "+e.getMessage());
-				}
-				else{
-					LOG.warn("Too many transmission attempts.. waiting.");
-					try {
-						wait();
-					} catch (InterruptedException e1) {
-						
-						break;
-					}
-				}
-			}*/
+			}
 			catch (InterruptedException e) {
 			
 				break;
@@ -109,6 +89,8 @@ public class ModuleWorker extends Thread {
 				else{
 					LOG.warn("Too many transmission attempts.. waiting.");
 					try {
+						commModule.connectionReset();
+						errorCount=0;
 						wait();
 					} catch (InterruptedException e1) {
 						

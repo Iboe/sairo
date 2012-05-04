@@ -78,7 +78,8 @@ public class GPSTransmitter implements TransmissionModule {
 		lastGPS=current;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Setting an interval of 1000ms
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
 	 */
 	@Override
@@ -94,6 +95,15 @@ public class GPSTransmitter implements TransmissionModule {
 	public int getPriority() {
 		
 		return 0;
+	}
+	
+	/**
+	 * Setting the last sent {@link GPS} to null, so it will transmit the new value when a new connection was established.
+	 */
+	@Override
+	public void connectionReset() {
+		
+		lastGPS=null;
 	}
 
 }

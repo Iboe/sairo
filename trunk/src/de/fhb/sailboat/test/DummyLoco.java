@@ -1,9 +1,14 @@
 package de.fhb.sailboat.test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 
 public class DummyLoco implements LocomotionSystem {
 
+	private static final Logger LOG = LoggerFactory.getLogger(DummyLoco.class);
+	
 	@Override
 	public void setSail(int value) {
 		// TODO Auto-generated method stub
@@ -13,7 +18,7 @@ public class DummyLoco implements LocomotionSystem {
 	@Override
 	public void setRudder(int value) { 
 		
-		System.out.println("LOCO: attempt to set: "+value);
+		LOG.trace("LOCO: attempt to set: "+value);
 
 	}
 

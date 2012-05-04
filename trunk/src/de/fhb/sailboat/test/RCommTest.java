@@ -124,6 +124,12 @@ public class RCommTest {
 			// TODO Auto-generated method stub
 			return false;
 		}
+
+		@Override
+		public void connectionReset() {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 
@@ -158,6 +164,12 @@ public class RCommTest {
 		public boolean skipNextCycle() {
 			// TODO Auto-generated method stub
 			return false;
+		}
+
+		@Override
+		public void connectionReset() {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	
@@ -194,6 +206,12 @@ public class RCommTest {
 			// TODO Auto-generated method stub
 			return false;
 		}
+
+		@Override
+		public void connectionReset() {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 
@@ -228,6 +246,12 @@ public class RCommTest {
 		public boolean skipNextCycle() {
 			// TODO Auto-generated method stub
 			return false;
+		}
+
+		@Override
+		public void connectionReset() {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 }

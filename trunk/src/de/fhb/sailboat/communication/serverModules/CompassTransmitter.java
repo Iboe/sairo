@@ -76,7 +76,8 @@ public class CompassTransmitter implements TransmissionModule{
 		lastCompass=current;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Setting an interval of 500ms
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
 	 */
 	@Override
@@ -85,12 +86,21 @@ public class CompassTransmitter implements TransmissionModule{
 		return 500;
 	}
 
-	/* (non-Javadoc)
+	/*
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getPriority()
 	 */
 	@Override
 	public int getPriority() {
 		
 		return 0;
+	}
+	
+	/**
+	 * Setting the last sent {@link Compass} to null, so it will transmit the new value when a new connection was established.
+	 */
+	@Override
+	public void connectionReset() {
+		
+		lastCompass=null;
 	}
 }

@@ -88,4 +88,10 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		return 0;
 	}
 
+	@Override
+	public void connectionReset() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

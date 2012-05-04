@@ -90,4 +90,10 @@ public class GPSReceiver implements TransmissionModule {
 		return 0;
 	}
 
+	@Override
+	public void connectionReset() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

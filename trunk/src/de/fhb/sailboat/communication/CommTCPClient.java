@@ -100,4 +100,20 @@ public class CommTCPClient extends CommunicationBase {
 		return destination != null && !(destination.isClosed() || destination.isInputShutdown() || destination.isOutputShutdown());
 	}
 
+	public boolean closeConnection(){
+		
+		boolean bClosed=false;
+		
+		if(isConnected()){
+		
+			try {
+				destination.close();
+				destination=null;
+				bClosed=true;
+			} catch (IOException e) {
+				
+			}
+		}	
+		return bClosed;
+	}
 }
