@@ -43,13 +43,14 @@ public class GPSReceiver implements TransmissionModule {
 	@Override
 	public void receivedObject(DataInputStream stream) throws IOException {
 		
-		int lon=0,lat=0;
+		int lon=0,lat=0,sat=0;
 		GPS newGPS;
 		
 		lat=CommunicationBase.readCompactIndex(stream);
 		lon=CommunicationBase.readCompactIndex(stream);
+		sat=CommunicationBase.readCompactIndex(stream);
 		
-		newGPS=new GPS(((double)(lat))/10000,((double)(lon))/10000);
+		newGPS=new GPS(((double)(lat))/10000,((double)(lon))/10000,sat);
 		worldModel.getGPSModel().setPosition(newGPS);
 	}
 

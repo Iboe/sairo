@@ -63,17 +63,19 @@ public class GPSTransmitter implements TransmissionModule {
 	@Override
 	public void requestObject(DataOutputStream stream) throws IOException {
 		
-		int lon=0,lat=0;
+		int lon=0,lat=0,sat=0;
 		GPS current=worldModel.getGPSModel().getPosition();
 		
 		if(current != null){
 			
 			lat=(int)(current.getLatitude()*10000);
-			lon=(int)(current.getLongitude()*10000);	
+			lon=(int)(current.getLongitude()*10000);
+			sat=current.getSatelites();
 		}
 		
 		CommunicationBase.writeCompactIndex(stream, lat);
 		CommunicationBase.writeCompactIndex(stream, lon);
+		CommunicationBase.writeCompactIndex(stream, sat);
 		
 		lastGPS=current;
 	}
