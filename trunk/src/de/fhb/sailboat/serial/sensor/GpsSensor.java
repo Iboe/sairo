@@ -19,9 +19,9 @@ public class GpsSensor {
 	COMPort myCOM;
 	private static Logger LOG = Logger.getLogger(GpsSensor.class);
 
-	public GpsSensor(String port) {
+	public GpsSensor(int port) {
 		// create an instance of the sairoComm Class
-		COMPort myCOM = new COMPort(6, 0, 0);
+		COMPort myCOM = new COMPort(port, 0, 0);
 		this.myCOM = myCOM;
 		myCOM.open();
 
@@ -36,13 +36,6 @@ public class GpsSensor {
 		return this.longitude;
 	}
 
-	private void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	private void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
 
 	private int getSatelites() {
 		return this.satelites;

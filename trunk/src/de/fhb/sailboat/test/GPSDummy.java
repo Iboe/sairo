@@ -21,7 +21,7 @@ public class GPSDummy extends Thread{
 	
 	public static void main(String args[])
 	{
-		GpsSensor myGPS = new GpsSensor("COM4");
+		GpsSensor myGPS = new GpsSensor(6);
 		
 		//WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(52.246555,12.323096));
 	}
