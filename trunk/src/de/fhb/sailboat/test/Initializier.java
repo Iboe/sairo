@@ -72,7 +72,7 @@ public class Initializier {
 	
 	private void initializeSensors() {
 		LOG.info("-----init sensors-----");
-		GpsSensor gps=new GpsSensor("COM8");
+		GpsSensor gps=new GpsSensor(8);
 		OS500sensor compassSensor=new OS500sensor(); //zzt. COM17
 		try {
 			Thread.sleep(2000);
