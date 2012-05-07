@@ -7,6 +7,7 @@ import de.fhb.sailboat.communication.CommTCPClient;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
+import de.fhb.sailboat.communication.clientModules.WindReceiver;
 import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
 import de.fhb.sailboat.ufer.prototyp.View;
 
@@ -28,6 +29,7 @@ public class UferGUITest {
 		CommunicationBase client=new CommTCPClient("127.0.0.1", 6699);
 		client.registerModule(new GPSReceiver());
 		client.registerModule(new CompassReceiver());
+		client.registerModule(new WindReceiver());
 		
 		if(!client.initialize())
 			System.out.println("Error connecting to BOAT!");

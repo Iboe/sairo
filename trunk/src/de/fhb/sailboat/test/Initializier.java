@@ -1,7 +1,9 @@
 package de.fhb.sailboat.test;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +17,7 @@ import de.fhb.sailboat.communication.CommTCPServer;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.serverModules.CompassTransmitter;
 import de.fhb.sailboat.communication.serverModules.GPSTransmitter;
+import de.fhb.sailboat.communication.serverModules.WindTransmitter;
 import de.fhb.sailboat.control.Pilot;
 import de.fhb.sailboat.control.PilotImpl;
 import de.fhb.sailboat.control.Planner;
@@ -54,6 +57,50 @@ public class Initializier {
 		if (TEST) {
 			init.setSensorDummyValues();
 			init.initializeCommunication();
+			/*
+			new Thread(){
+
+				@Override
+				public void run() {
+					
+					String line;
+					String[] token;
+					BufferedReader read=new BufferedReader(new InputStreamReader(System.in));
+					
+					
+					while(!isInterrupted()){
+						
+						System.out.print(">");
+						try {
+							line=read.readLine();
+							token=line.split(" ");
+							
+							if(token[0].compareTo("c")==0){
+								
+								int compass=Integer.parseInt(token[1]);
+								System.out.println("setting compass to "+compass);
+								WorldModelImpl.getInstance().getCompassModel().setCompass(new Compass(compass,0,0));
+							}
+							else if(token[0].compareTo("g")==0){
+								
+								double lat=Double.parseDouble(token[1]);
+								double lon=Double.parseDouble(token[2]);
+								int sat=Integer.parseInt(token[3]);
+								System.out.println("setting gps to ("+lat+","+lon+") - "+sat);
+								WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(lat,lon,sat));
+							}
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					
+				}
+				
+			}.start();
+			*/
 			//init.createDummyMission();
 			
 		} else {
@@ -101,6 +148,7 @@ public class Initializier {
 		CommunicationBase server=new CommTCPServer(6699);
 		server.registerModule(new GPSTransmitter());
 		server.registerModule(new CompassTransmitter());
+		server.registerModule(new WindTransmitter());
 		if(!server.initialize())
 			LOG.warn("Unable to start the communications TCP server on port 6699");
 	}
