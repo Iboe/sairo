@@ -20,6 +20,7 @@ public class ReachCircleWorker extends WorkerThread<ReachCircleTask> {
 		while (!isInterrupted()) {
 			double angle = calcAngleToGPS(task.getCenter());
 			
+			//angle += calcIdealLineAngle(worldModel.getGPSModel().getPosition());
 			pilot.driveAngle((int) angle);
 			waitForNextCycle();
 		}

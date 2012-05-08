@@ -22,6 +22,8 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 	public void run() {
 		while (!isInterrupted()) {
 			double angle = calcAngleToGPS(centroid);
+			
+			//angle += calcIdealLineAngle(worldModel.getGPSModel().getPosition());
 			pilot.driveAngle((int) angle);
 			waitForNextCycle();
 		}
@@ -29,7 +31,6 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 	
 	@Override
 	protected void taskHasChanged() {
-		super.taskHasChanged();
 		centroid = calcCentroid();
 	}
 	

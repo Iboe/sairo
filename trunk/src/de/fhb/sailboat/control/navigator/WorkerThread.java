@@ -14,6 +14,9 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Navigator.WAIT_TIME_PROPERTY));
 	
+	public static final double MAX_LINE_DIST = 0.001;
+	public static final double MAX_LINE_ANGLE = 30;
+	
 	private static final Logger LOG = LoggerFactory.getLogger(WorkerThread.class);
 	
 	protected final WorldModel worldModel;
@@ -59,17 +62,17 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		this.startPosition = startPosition;
 		this.goal = goal;
 		this.task = task;
+		calcStartGoalDifference();
 		taskHasChanged();
 	}
 	
 	/**
 	 * Calculates everything necessary when the task to be executed has changed.
 	 * This method is a hook for subclasses to add own calculations. Subclasses that need own calculations to be done
-	 * when the task changed, should override this method, call the method from the base class (this method) 
-	 * and execute their calculations afterwards.
+	 * when the task changed, should override this method and execute their calculations.
 	 */
 	protected void taskHasChanged() {
-		calcStartGoalDifference();
+		
 	}
 	
 	private void calcStartGoalDifference() {
@@ -155,9 +158,26 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			dy13 = goal.getLatitude() - currentPos.getLatitude();
 			
 			//without Math. abs, we're additionally having the information if the current position is left (negative) or right (positive) from that line
-			dist = /*Math.abs*/( (dx12)*(dy13) - (dx13)*(dy12) ) / startGoalDistance;   
+			dist = ( (dx12)*(dy13) - (dx13)*(dy12) ) / startGoalDistance;   
 		}
+		
 		return dist;
+	}
+	
+	/**
+	 * Insert better name!
+	 * 
+	 * @param currentPos
+	 * @return
+	 */
+	public double calcIdealLineAngle(GPS currentPos) {
+		double dist = calcIdealLineDist(currentPos);
+		
+		if (Math.abs(dist) >= MAX_LINE_DIST) {
+			return MAX_LINE_ANGLE;
+		} else {
+			return dist / MAX_LINE_DIST * MAX_LINE_ANGLE;
+		}
 	}
 	
 	/**
