@@ -9,9 +9,13 @@ package de.fhb.sailboat.serial.actuator;
  */
 public interface LocomotionSystem {
 	
-	public static final int RUDDER_LEFT=34;
-	public static final int RUDDER_NORMAL=68;
-	public static final int RUDDER_RIGHT=108;
+	public static final int RUDDER_LEFT = 34;
+	public static final int RUDDER_NORMAL = 68;
+	public static final int RUDDER_RIGHT = 108;
+	
+	public static final int PROPELLOR_MIN = 170;
+	public static final int PROPELLOR_NORMAL = 125;
+	public static final int PROPELLOR_MAX = 80;
 	
 	/**
 	 * relative Position

@@ -55,7 +55,7 @@ public class PlannerImpl implements Planner {
 	@Override
 	public void stop() {
 		stopThread();
-		navigator.doTask(new StopTask());
+		navigator.doTask(new StopTask(false));
 	}
 
 	private void stopThread() {
