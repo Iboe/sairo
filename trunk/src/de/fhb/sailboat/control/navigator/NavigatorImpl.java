@@ -4,8 +4,10 @@ import de.fhb.sailboat.control.Pilot;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
+import de.fhb.sailboat.mission.RepeatTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
@@ -31,6 +33,8 @@ public class NavigatorImpl implements Navigator{
 			navigateToPolygon((ReachPolygonTask) task);
 		} else if (task instanceof PrimitiveCommandTask) {
 			handlePrimitiveCommands((PrimitiveCommandTask) task);
+		} else if (task instanceof RepeatTask) {
+			handleRepeatTask((RepeatTask) task);
 		} else if (task instanceof StopTask) {
 			stop((StopTask) task);
 		} else {
@@ -54,10 +58,17 @@ public class NavigatorImpl implements Navigator{
 		task.setExecuted(true);
 	}
 	
+	private void handleRepeatTask(RepeatTask task) {
+		doTask(task.getCurrentTask());
+	}
+	
 	private void stop(StopTask task) {
 		ReachCircleTask reachCircleTask = new ReachCircleTask(
 				worldModel.getGPSModel().getPosition(), 10);
 		
+		if (task.isTurnPropellorOff()) {
+			pilot.setPropellor(LocomotionSystem.PROPELLOR_NORMAL);
+		}
 		navigateToCircle(reachCircleTask);
 	}
 	
