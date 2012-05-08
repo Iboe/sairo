@@ -59,6 +59,19 @@ public class RemoteControl extends javax.swing.JFrame {
 				RUDDER_MIN, RUDDER_NULL, RUDDER_MAX) + "");
 		sendCommands(); // initialize sailboat
 	}
+	
+	public void closeRemoteControl() {
+		propellorSlider.setValue(0);
+		propellorText.setText(convertToNativeValue(propellorSlider.getValue(),
+				PROPELLOR_MIN, PROPELLOR_NULL, PROPELLOR_MAX) + "");
+		sailSlider.setValue(0);
+		sailText.setText(convertToNativeValue(sailSlider.getValue(), SAIL_MIN,
+				SAIL_NULL, SAIL_MAX) + "");
+		rudderSlider.setValue(0);
+		rudderText.setText(convertToNativeValue(rudderSlider.getValue(),
+				RUDDER_MIN, RUDDER_NULL, RUDDER_MAX) + "");
+		sendCommands(); // initialize sailboat
+	}
 
 	/**
 	 * Attempts to send all relevant control commands (propellor, sail and
@@ -574,6 +587,16 @@ public class RemoteControl extends javax.swing.JFrame {
 	}
 
 	private void menuFile_CloseActionPerformed(java.awt.event.ActionEvent evt) {
+		propellorSlider.setValue(0);
+		propellorText.setText(convertToNativeValue(propellorSlider.getValue(),
+				PROPELLOR_MIN, PROPELLOR_NULL, PROPELLOR_MAX) + "");
+		sailSlider.setValue(0);
+		sailText.setText(convertToNativeValue(sailSlider.getValue(), SAIL_MIN,
+				SAIL_NULL, SAIL_MAX) + "");
+		rudderSlider.setValue(0);
+		rudderText.setText(convertToNativeValue(rudderSlider.getValue(),
+				RUDDER_MIN, RUDDER_NULL, RUDDER_MAX) + "");
+		sendCommands(); // initialize sailboat
 		System.exit(0);
 	}
 
