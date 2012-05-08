@@ -15,7 +15,7 @@ import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 public class RemoteControl extends javax.swing.JFrame {
 
 	public static final int PROPELLOR_MIN = 170;
-	public static final int PROPELLOR_NULL = 125;
+	public static final int PROPELLOR_NULL = 130;
 	public static final int PROPELLOR_MAX = 80;
 
 	public static final int SAIL_MIN = 34;
