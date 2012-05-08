@@ -9,6 +9,7 @@ import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.serial.sensor.sairoComm2;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+@Deprecated
 public class OS500sensor {
 	sairoComm2 sensorComm;
 	String lastCom;

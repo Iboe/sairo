@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import gnu.io.*;
 
+@Deprecated
 public class sairoComm {
 
   // Status der Verbindung (0: inaktiv, 1: aktiv)

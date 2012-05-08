@@ -21,6 +21,7 @@ import java.util.Observable;
  * @author schmidst
  * 
  */
+@Deprecated
 public class sairoComm2 extends Observable {
 
 	// Status der Verbindung (0: inaktiv, 1: aktiv)

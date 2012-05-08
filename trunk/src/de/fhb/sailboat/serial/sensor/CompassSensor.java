@@ -16,7 +16,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 public class CompassSensor {
 	
 	COMPort myCOM;
-	private static Logger LOG = Logger.getLogger(CompassSensor.class);
+	private static final Logger LOG = Logger.getLogger(CompassSensor.class);
 
 	String lastCom;
 
@@ -31,9 +31,9 @@ public class CompassSensor {
 	// intern
 	int errorcount = 0;
 	
-	static final String MODEL = CompassSensor.class.getSimpleName() + ".Model";
-	static final String COM_PORT = CompassSensor.class.getSimpleName() + "." + MODEL + ".comPort";
-	static final String BAUDRATE = CompassSensor.class.getSimpleName() + "." + MODEL + ".baudrate";
+	static final String MODEL = System.getProperty(CompassSensor.class.getSimpleName() + ".Model");
+	static final String COM_PORT = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".comPort");
+	static final String BAUDRATE = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".baudrate");
 	
 	public CompassSensor(){
 		
@@ -73,7 +73,7 @@ public class CompassSensor {
 					try {
 						valueArray = cInstance.myCOM.readLine(10);
 					} catch (IOException e1) {
-						LOG.fatal(e1, e1.fillInStackTrace());
+						LOG.warn("no senosr data available", e1);
 					}
 					
 					// wenn Werte gelesen wurden
@@ -154,7 +154,7 @@ public class CompassSensor {
 					// something went wrong, stop the loop, throw an error to the next higher level
 					cInstance.keepRunning = false;
 					
-					LOG.fatal(e, e.fillInStackTrace());
+					LOG.debug("thread interrupted", e);
 				}
 			}
 		}
