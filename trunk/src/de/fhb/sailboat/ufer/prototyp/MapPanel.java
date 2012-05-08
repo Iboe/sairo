@@ -4,35 +4,28 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
-import org.openstreetmap.gui.jmapviewer.OsmTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
-import org.openstreetmap.gui.jmapviewer.interfaces.TileLoader;
-import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.ufer.prototyp.utility.Constants;
+import de.fhb.sailboat.ufer.prototyp.utility.GPSToCoordinate;
 import de.fhb.sailboat.ufer.prototyp.utility.MapRectangleImpl;
+import de.fhb.sailboat.ufer.prototyp.utility.ScalePanel;
 
 public class MapPanel extends JPanel {
-
-	private final int MAXIMUM_COUNT_LAST_POSITION = 30;
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,12 +39,11 @@ public class MapPanel extends JPanel {
 	private ArrayList<MapRectangle> rectList;
 	private ArrayList<MapMarker> polygon;
 	private JMapViewer map;
-	private boolean inMarkerMarkMode = false;
-	private boolean inRectMarkMode = false;
-	private boolean inPolygonMode = false;
 	private int markerMode = Constants.NO_MARK;
 
 	private Coordinate firstCorner = null;
+
+	private int currentZoom;
 
 	public MapPanel() {
 		this.markerList = new ArrayList<MapMarker>();
@@ -77,7 +69,9 @@ public class MapPanel extends JPanel {
 
 		// Startposition auf FH gestellt
 
-		map.setDisplayPositionByLatLon(52.410771, 12.538745, 18);
+		//navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
+
+		navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.REGATTASTRECKE));
 
 		map.addMouseListener(new MouseListener() {
 
@@ -87,40 +81,42 @@ public class MapPanel extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				Coordinate target = map.getPosition(arg0.getPoint());
+				if (SwingUtilities.isLeftMouseButton(arg0)) {
+					Coordinate target = map.getPosition(arg0.getPoint());
 
-				switch (markerMode) {
-				case 0:
-					break;
+					switch (markerMode) {
+					case 0:
+						break;
 
-				case 1: {
-					markerList.add(new MapMarkerDot(Color.GREEN, target
-							.getLat(), target.getLon()));
-					map.addMapMarker(markerList.get(markerList.size() - 1));
+					case 1: {
+						markerList.add(new MapMarkerDot(Color.GREEN, target
+								.getLat(), target.getLon()));
+						map.addMapMarker(markerList.get(markerList.size() - 1));
+					}
+						break;
+
+					case 2:
+						addRectsToMap(target);
+						break;
+
+					case 3: {
+						polygon.add(new MapMarkerDot(Color.RED,
+								target.getLat(), target.getLon()));
+						map.addMapMarker(polygon.get(polygon.size() - 1));
+					}
+						break;
+
+					default:
+						break;
+					}
+					/*
+					 * Coordinate currentPosition =
+					 * map.getPosition(map.getWidth()/2, map.getHeight()/2); int
+					 * currentZoomLevel = map.getZoom();
+					 * map.setDisplayPositionByLatLon(currentPosition.getLat(),
+					 * currentPosition.getLon(), currentZoomLevel);
+					 */
 				}
-					break;
-
-				case 2:
-					addRectsToMap(target);
-					break;
-
-				case 3: {
-					polygon.add(new MapMarkerDot(Color.RED, target.getLat(),
-							target.getLon()));
-					map.addMapMarker(polygon.get(polygon.size() - 1));
-				}
-					break;
-
-				default:
-					break;
-				}
-				/*
-				 * Coordinate currentPosition =
-				 * map.getPosition(map.getWidth()/2, map.getHeight()/2); int
-				 * currentZoomLevel = map.getZoom();
-				 * map.setDisplayPositionByLatLon(currentPosition.getLat(),
-				 * currentPosition.getLon(), currentZoomLevel);
-				 */
 			}
 
 			@Override
@@ -136,32 +132,12 @@ public class MapPanel extends JPanel {
 			}
 		});
 
-		JComboBox tileSourceSelector = new JComboBox(new TileSource[] {
-				new OsmTileSource.Mapnik(), new OsmTileSource.TilesAtHome(),
-				new OsmTileSource.CycleMap() });
-		tileSourceSelector.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				map.setTileSource((TileSource) e.getItem());
-			}
-		});
-		JComboBox tileLoaderSelector;
-		try {
-			tileLoaderSelector = new JComboBox(new TileLoader[] {
-					new OsmFileCacheTileLoader(map), new OsmTileLoader(map) });
-		} catch (IOException e) {
-			tileLoaderSelector = new JComboBox(
-					new TileLoader[] { new OsmTileLoader(map) });
-		}
-		tileLoaderSelector.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				map.setTileLoader((TileLoader) e.getItem());
-			}
-		});
-		map.setTileLoader((TileLoader) tileLoaderSelector.getSelectedItem());
+		map.setTileSource(new OsmTileSource.Mapnik());
 
 		final JCheckBox markOnMap = new JCheckBox("Add Marker");
 		final JCheckBox markRectOnMap = new JCheckBox("Add Rectangle");
 		final JCheckBox markPolygon = new JCheckBox("Add Polygon");
+		final ScalePanel meterPerPixelPanel = new ScalePanel();
 
 		markOnMap.addActionListener(new ActionListener() {
 
@@ -205,20 +181,42 @@ public class MapPanel extends JPanel {
 			}
 		});
 
-		JPanel selectors = new JPanel();
-		selectors.add(tileSourceSelector);
-		selectors.add(tileLoaderSelector);
-		selectors.setBounds(P_MAP_X, 0, P_MAP_WIDTH, 50);
+		Runnable recalculateScale = new Runnable() {
+			public void run() {
+				while (true) {
+					if (currentZoom != map.getZoom()) {
+						currentZoom = map.getZoom();
+						int meterPerPixel = (int) (Constants.PIXEL_TO_CALCULATE_SCALE
+								* (Constants.EARTH_CIRCUMFERENCE * Math
+										.cos(Math.toRadians(map.getPosition(10,
+												P_MAP_HEIGHT - 10).getLat()))) / Math
+								.pow(2, map.getZoom() + 8));
+
+						meterPerPixelPanel.getMeterPerPixelLabel().setText(
+								meterPerPixel + " m / "
+										+ Constants.PIXEL_TO_CALCULATE_SCALE
+										+ "Pixel");
+					}
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		new Thread(recalculateScale).start();
 
 		JPanel markerCheckBoxes = new JPanel();
+		markerCheckBoxes.add(meterPerPixelPanel);
 		markerCheckBoxes.add(markOnMap);
 		markerCheckBoxes.add(markRectOnMap);
 		markerCheckBoxes.add(markPolygon);
 
 		mapArea.setLayout(new BorderLayout());
-		mapArea.add(selectors, BorderLayout.NORTH);
-		mapArea.add(map, BorderLayout.CENTER);
+		mapArea.add(map, BorderLayout.NORTH);
 		mapArea.add(markerCheckBoxes, BorderLayout.SOUTH);
+
 		return mapArea;
 	}
 
@@ -266,7 +264,7 @@ public class MapPanel extends JPanel {
 		positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
 				.getLatitude(), boatPosition.getLongitude()));
 
-		if (positionHistory.size() > MAXIMUM_COUNT_LAST_POSITION) {
+		if (positionHistory.size() > Constants.MAXIMUM_COUNT_LAST_POSITION) {
 			map.removeMapMarker(positionHistory.get(0));
 			positionHistory.remove(0);
 		}
@@ -274,7 +272,8 @@ public class MapPanel extends JPanel {
 		map.addMapMarker(positionHistory.get(positionHistory.size() - 1));
 	}
 
-	// FIXME Set this to public so I can reset the Map manually through View - Patrick
+	// FIXME Set this to public so I can reset the Map manually through View -
+	// Patrick
 	public void removeEveryObject() {
 		removeMapMarkerFromMap();
 		removePolygonsFromMap();
@@ -300,6 +299,14 @@ public class MapPanel extends JPanel {
 			this.map.removeMapRectangle(this.rectList.get(i));
 		}
 		this.rectList = new ArrayList<MapRectangle>();
+	}
+
+	private void navigateTo(Coordinate coor) {
+		navigateTo(coor, 18);
+	}
+
+	private void navigateTo(Coordinate coor, int zoomLevel) {
+		map.setDisplayPositionByLatLon(coor.getLat(), coor.getLon(), zoomLevel);
 	}
 
 	/**
@@ -353,22 +360,6 @@ public class MapPanel extends JPanel {
 
 	public void setMap(JMapViewer map) {
 		this.map = map;
-	}
-
-	public boolean isInMarkerMarkMode() {
-		return inMarkerMarkMode;
-	}
-
-	public void setInMarkerMarkMode(boolean inMarkerMarkMode) {
-		this.inMarkerMarkMode = inMarkerMarkMode;
-	}
-
-	public boolean isInRectMarkMode() {
-		return inRectMarkMode;
-	}
-
-	public void setInRectMarkMode(boolean inRectMarkMode) {
-		this.inRectMarkMode = inRectMarkMode;
 	}
 
 	public ArrayList<MapMarker> getPolygon() {
