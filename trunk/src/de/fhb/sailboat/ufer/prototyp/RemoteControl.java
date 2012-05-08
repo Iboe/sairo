@@ -1,5 +1,11 @@
 package de.fhb.sailboat.ufer.prototyp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.fhb.sailboat.control.navigator.WorkerThread;
+import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
+
 /**
 * Class for remote controlling a autonomous sailing boat via a minimalistic user interface.
 * @author Patrick Rutter
@@ -18,6 +24,9 @@ public class RemoteControl extends javax.swing.JFrame {
     public static final int RUDDER_NULL = 73;
     public static final int RUDDER_MAX = 114;
     
+    AKSENLocomotion locomotion;
+    private static final Logger LOG = LoggerFactory.getLogger(RemoteControl.class);
+    
     private int lastPropellorSend = -1;  // The last value send for this control, used for new-input determination
     private int lastSailSend = -1;       // The last value send for this control, used for new-input determination
     private int lastRudderSend = -1;     // The last value send for this control, used for new-input determination
@@ -27,6 +36,8 @@ public class RemoteControl extends javax.swing.JFrame {
      */
     public RemoteControl() {
         initComponents();
+        
+        locomotion = new AKSENLocomotion();
         
         menuSettings_AutoSendCommands.setSelected(true); // Auto-Send new values input?
         
@@ -55,8 +66,8 @@ public class RemoteControl extends javax.swing.JFrame {
     private void sendPropellorCommand(int value) {
         if (value != lastPropellorSend) {
             lastPropellorSend = value;
-            System.out.println("Attempting to send <" + value + "> to propellor.");
-            //TODO connection to locomotion
+            LOG.trace("Attempting to send <" + value + "> to propellor.");
+            locomotion.setPropellor(value);
         }
     }
     
@@ -67,8 +78,8 @@ public class RemoteControl extends javax.swing.JFrame {
     private void sendSailCommand(int value) {
         if (value != lastSailSend) {
             lastSailSend = value;
-            System.out.println("Attempting to send <" + value + "> to sail.");
-            //TODO connection to locomotion
+            LOG.trace("Attempting to send <" + value + "> to sail.");
+            locomotion.setSail(value);
         }
     }
     
@@ -79,8 +90,8 @@ public class RemoteControl extends javax.swing.JFrame {
     private void sendRudderCommand(int value) {
         if (value != lastRudderSend) {
             lastRudderSend = value;
-            System.out.println("Attempting to send <" + value + "> to rudder.");
-            //TODO connection to locomotion
+            LOG.trace("Attempting to send <" + value + "> to rudder.");
+            locomotion.setRudder(value);
         }
     }
 

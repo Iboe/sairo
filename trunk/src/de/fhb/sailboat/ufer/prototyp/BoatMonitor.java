@@ -120,7 +120,7 @@ public class BoatMonitor {
 	final static public int L_GPS_SATELITES_V_VSIZE = L_VSIZE;
 	
 	final static public String L_WIND_VELOCITY_NAME = "Windgeschw:";
-	final static public String L_WIND_VELOCITY_UNIT = " kn"; // this will be appended to the value-label text for displaying the wind velocity
+	final static public String L_WIND_VELOCITY_UNIT = " m/s"; // this will be appended to the value-label text for displaying the wind velocity
 	final static public int L_WIND_VELOCITY_X = 8;
 	final static public int L_WIND_VELOCITY_Y = 16;
 	final static public int L_WIND_VELOCITY_DSIZE = L_DSIZE;
