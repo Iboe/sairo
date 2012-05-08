@@ -110,6 +110,11 @@ public class nmea {
     }
 
 
+    /**
+     * Splits a given NMEA-Like String into its Components after verifying the Checksum 
+     * @param str String
+     * @return  data String[]
+     */
    
     public static String[] splitNmea(String str) {
     	String[] data = null;
@@ -118,13 +123,4 @@ public class nmea {
     	}
     	return data;
     }
-    
-//    public static String getDevice(String str) {
-//    	
-//    	String[] data =  splitNmea(str);
-//
-//		String device = data[0];
-//
-//		return device;
-//    }
 }
