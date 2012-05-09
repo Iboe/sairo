@@ -1,6 +1,5 @@
 package de.fhb.sailboat.control;
 
-import de.fhb.sailboat.data.GPS;
 
 /**
  * 
@@ -22,9 +21,6 @@ public interface Pilot {
 	 * The angle range goes from -180° to 180°.
 	 * If an angle above 180° is given, it will automatically transform it to the corresponding negative angle. 
 	 * 
-	 * CURRENTLY: Just changes the rudder position to turn to the right direction initially.
-	 *            A continuous observation and adjustment of the rudder based on the changing direction has yet to come.
-	 * 
 	 * @param angle The relative angle to the desired direction. 
 	 */
 	void driveAngle(int angle);
@@ -33,11 +29,6 @@ public interface Pilot {
 	 * @param angle
 	 */
 	void holdAngleToWind(int angle);
-	/**
-	 * TODO
-	 * @param point
-	 */
-	void driveToGPSPoint(GPS point);
 	
 	void setSail(int value);
 	

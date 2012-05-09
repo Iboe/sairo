@@ -3,7 +3,6 @@ package de.fhb.sailboat.control;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -60,7 +59,7 @@ public class PilotImpl implements Pilot {
 		desiredAngle=compassModel.getCompass().getYaw()+angle;
 		
 		if(driveAngleThread != null && driveAngleThread.isAlive())
-			driveAngleThread.setDesiredAngle(desiredAngle);
+			driveAngleThread.transformAngle(desiredAngle);
 		else
 			(driveAngleThread=new DriveAngleThread(desiredAngle)).start();
 		
@@ -88,12 +87,6 @@ public class PilotImpl implements Pilot {
 //		//TODO add watch-thread about the process of changing direction
 //		
 //		locSystem.setRudder((int)rudderPos);
-	}
-
-	@Override
-	public void driveToGPSPoint(GPS point) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -131,7 +124,7 @@ public class PilotImpl implements Pilot {
 		public DriveAngleThread(double desiredAngle)
 		{
 			this.bStop=false;
-			this.setDesiredAngle(desiredAngle);
+			this.desiredAngle = transformAngle(desiredAngle);
 			
 			//compassModel=WorldModelImpl.getInstance().getCompassModel();
 		}
@@ -145,10 +138,7 @@ public class PilotImpl implements Pilot {
 			while(!isInterrupted() && !bStop){
 				
 				deltaAngle=desiredAngle-compassModel.getCompass().getYaw();
-				if(deltaAngle > 180) 
-					deltaAngle-=360;
-				else if(deltaAngle < -180) 
-					deltaAngle+=360;
+				deltaAngle = transformAngle(deltaAngle);
 				
 				rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle)); 
 				//System.out.println("[THREAD]relevant relative angle: "+rudderPos);
@@ -164,14 +154,9 @@ public class PilotImpl implements Pilot {
 					rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_RIGHT-LocomotionSystem.RUDDER_NORMAL);
 				}
 				
-				rudderPos = pidController(rudderPos);
-				//System.out.println("desired relative rudderpos: "+rudderPos);
-				
 				//adding offset, to match with the absolute rudder values
 				rudderPos+=LocomotionSystem.RUDDER_NORMAL;
-				
-				//TODO add watch-thread about the process of changing direction
-				
+				rudderPos = pidController(rudderPos);
 				locSystem.setRudder((int) rudderPos);
 				
 				if (++counter == 3) {
@@ -203,13 +188,14 @@ public class PilotImpl implements Pilot {
 			
 			return p + i +d;
 		}
-		public void setDesiredAngle(double desiredAngle) {
+		
+		public double transformAngle(double desiredAngle) {
 			if(desiredAngle > 180) 
 				desiredAngle-=360;
 			else if(desiredAngle < -180) 
 				desiredAngle+=360;
 			
-			this.desiredAngle = desiredAngle;
+			return desiredAngle;
 		}
 
 		public double getDesiredAngle() {
