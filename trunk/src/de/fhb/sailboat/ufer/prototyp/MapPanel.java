@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
@@ -15,6 +16,7 @@ import javax.swing.SwingUtilities;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
@@ -69,7 +71,7 @@ public class MapPanel extends JPanel {
 
 		// Startposition auf FH gestellt
 
-		//navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
+		// navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
 
 		navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.REGATTASTRECKE));
 
@@ -87,6 +89,16 @@ public class MapPanel extends JPanel {
 					switch (markerMode) {
 					case 0:
 						break;
+
+					/*
+					 * case 1: { int g = 0; if (markerList.size() >= 10) { g =
+					 * 255; } else { g = (int) ((markerList.size() * 255) / 9);
+					 * } Color markerColor = new Color(0, g, 0);
+					 * markerList.add(new MapMarkerDot(markerColor, target
+					 * .getLat(), target.getLon()));
+					 * map.addMapMarker(markerList.get(markerList.size() - 1));
+					 * } break;
+					 */
 
 					case 1: {
 						markerList.add(new MapMarkerDot(Color.GREEN, target
@@ -133,6 +145,11 @@ public class MapPanel extends JPanel {
 		});
 
 		map.setTileSource(new OsmTileSource.Mapnik());
+		try {
+			map.setTileLoader(new OsmFileCacheTileLoader(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		final JCheckBox markOnMap = new JCheckBox("Add Marker");
 		final JCheckBox markRectOnMap = new JCheckBox("Add Rectangle");
