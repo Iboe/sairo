@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
@@ -143,8 +142,8 @@ public class MapPanel extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
-
 		map.setTileSource(new OsmTileSource.Mapnik());
+
 		try {
 			map.setTileLoader(new OsmFileCacheTileLoader(map));
 		} catch (Exception e) {
@@ -209,13 +208,12 @@ public class MapPanel extends JPanel {
 												P_MAP_HEIGHT - 10).getLat()))) / Math
 								.pow(2, map.getZoom() + 8));
 
+						meterPerPixelPanel.getMeterPerPixelLabel().setText("");
 						meterPerPixelPanel.getMeterPerPixelLabel().setText(
-								meterPerPixel + " m / "
-										+ Constants.PIXEL_TO_CALCULATE_SCALE
-										+ "Pixel");
+								"        " + meterPerPixel + " m          ");
 					}
 					try {
-						Thread.sleep(500);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
