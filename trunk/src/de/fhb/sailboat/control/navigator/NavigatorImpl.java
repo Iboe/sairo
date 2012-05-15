@@ -1,6 +1,7 @@
 package de.fhb.sailboat.control.navigator;
 
-import de.fhb.sailboat.control.Pilot;
+import de.fhb.sailboat.control.pilot.Pilot;
+import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -37,6 +38,8 @@ public class NavigatorImpl implements Navigator{
 			handleRepeatTask((RepeatTask) task);
 		} else if (task instanceof StopTask) {
 			stop((StopTask) task);
+		} else if (task instanceof BeatTask) {
+			beat((BeatTask) task);
 		} else {
 			throw new UnsupportedOperationException("can not handle task: " + task);
 		}
@@ -72,6 +75,21 @@ public class NavigatorImpl implements Navigator{
 		navigateToCircle(reachCircleTask);
 	}
 	
+	private void beat(BeatTask task) {
+		if (workerThread == null) {
+			workerThread = new BeatWorker(pilot, this);
+		} else if (workerThread.isAlive() && !(workerThread instanceof BeatWorker)) {
+			//stop thread if other type of task is executed
+			stopThread();
+			workerThread = new BeatWorker(pilot, this);
+		}
+		
+		((BeatWorker) workerThread).setTask(task);
+		if (!workerThread.isAlive()) {
+			workerThread.start();
+		}
+	}
+	
 	/**
 	 * Starts new thread which repeatedly calculates angle to goal.
 	 * 
@@ -79,11 +97,11 @@ public class NavigatorImpl implements Navigator{
 	 */
 	private void navigateToCircle(ReachCircleTask task) {
 		if (workerThread == null) {
-			workerThread = new ReachCircleWorker(pilot);
+			workerThread = new ReachCircleWorker(pilot, this);
 		} else if (workerThread.isAlive() && !(workerThread instanceof ReachCircleWorker)) {
 			//stop thread if other type of task is executed
 			stopThread();
-			workerThread = new ReachCircleWorker(pilot);
+			workerThread = new ReachCircleWorker(pilot, this);
 		}
 		
 		((ReachCircleWorker) workerThread).setTask(task);
@@ -94,11 +112,11 @@ public class NavigatorImpl implements Navigator{
 	
 	private void navigateToPolygon(ReachPolygonTask task) {
 		if (workerThread == null) {
-			workerThread = new ReachPolygonWorker(pilot);
+			workerThread = new ReachPolygonWorker(pilot, this);
 		} else if (workerThread.isAlive() && !(workerThread instanceof ReachPolygonWorker)) {
 			//stop thread if other type of task is executed
 			stopThread();
-			workerThread = new ReachPolygonWorker(pilot);
+			workerThread = new ReachPolygonWorker(pilot, this);
 		}
 		
 		((ReachPolygonWorker) workerThread).setTask(task);

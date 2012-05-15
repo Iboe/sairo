@@ -2,8 +2,9 @@ package de.fhb.sailboat.control.navigator;
 
 import java.util.List;
 
-import de.fhb.sailboat.control.Pilot;
+import de.fhb.sailboat.control.pilot.Pilot;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 
 /**
@@ -14,8 +15,8 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 
 	private GPS centroid;
 	
-	public ReachPolygonWorker(Pilot pilot) {
-		super(pilot);
+	public ReachPolygonWorker(Pilot pilot, Navigator navigator) {
+		super(pilot, navigator);
 	}
 	
 	@Override
@@ -24,6 +25,11 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 			double angle = calcAngleToGPS(centroid);
 			
 			//angle += calcIdealLineAngle(worldModel.getGPSModel().getPosition());
+			
+			if (isBeatNecessary(angle)) {
+				navigator.doTask(new BeatTask(task, centroid));
+			}
+			
 			pilot.driveAngle((int) angle);
 			waitForNextCycle();
 		}

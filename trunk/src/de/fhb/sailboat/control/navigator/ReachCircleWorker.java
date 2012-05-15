@@ -1,6 +1,7 @@
 package de.fhb.sailboat.control.navigator;
 
-import de.fhb.sailboat.control.Pilot;
+import de.fhb.sailboat.control.pilot.Pilot;
+import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 
 /**
@@ -11,8 +12,8 @@ public class ReachCircleWorker extends WorkerThread<ReachCircleTask> {
 	
 	//private static final Logger LOG = LoggerFactory.getLogger(ReachCircleWorker.class);
 	
-	public ReachCircleWorker(Pilot pilot) {
-		super(pilot);
+	public ReachCircleWorker(Pilot pilot, Navigator navigator) {
+		super(pilot, navigator);
 	}
 	
 	@Override
@@ -21,6 +22,11 @@ public class ReachCircleWorker extends WorkerThread<ReachCircleTask> {
 			double angle = calcAngleToGPS(task.getCenter());
 			
 			//angle += calcIdealLineAngle(worldModel.getGPSModel().getPosition());
+			
+			if (isBeatNecessary(angle)) {
+				navigator.doTask(new BeatTask(task, task.getCenter()));
+			}
+			
 			pilot.driveAngle((int) angle);
 			waitForNextCycle();
 		}

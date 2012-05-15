@@ -3,7 +3,7 @@ package de.fhb.sailboat.control.navigator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fhb.sailboat.control.Pilot;
+import de.fhb.sailboat.control.pilot.Pilot;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
@@ -17,10 +17,14 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	public static final double MAX_LINE_DIST = 0.001;
 	public static final double MAX_LINE_ANGLE = 30;
 	
+	public static final int MAX_BEAT_ANGLE = 38;
+	public static final int MIN_BEAT_ANGLE = -38;
+	
 	private static final Logger LOG = LoggerFactory.getLogger(WorkerThread.class);
 	
 	protected final WorldModel worldModel;
 	protected final Pilot pilot;
+	protected final Navigator navigator;
 	protected T task;
 	
 	/**
@@ -35,7 +39,8 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	
 	private double dx12, dy12, startGoalDistance;
 	
-	public WorkerThread(Pilot pilot) {
+	public WorkerThread(Pilot pilot, Navigator navigator) {
+		this.navigator = navigator;
 		this.pilot = pilot;
 		this.worldModel = WorldModelImpl.getInstance();
 		this.startPosition = null;
@@ -103,7 +108,7 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	}
 	
 	/**
-	 * Calculates relative angle from current position to goal.
+	 * Calculates absolute angle from current position to goal.
 	 * 
 	 * @param goal the GPS point to reach
 	 * @return angle from current position to goal
@@ -130,9 +135,8 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		LOG.debug("calculated angle: {}", angle);
 		
 		//angle between current and goal position = 
-		//north (== y-axis) - current angle (direction of the bow as difference to north)
-		//- angle between difference vector and x-axis 
-		angle = 90 - angle - worldModel.getCompassModel().getCompass().getYaw();
+		//north (== y-axis) - angle between difference vector and x-axis 
+		angle = 90 - angle;
 		
 		return angle;
 	}
@@ -181,7 +185,22 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	}
 	
 	/**
-	 * Converts an radian value to degrees.
+	 * Checks if the boat can reach the desired angle considering the current
+	 * wind.
+	 * 
+	 * @param desiredAngle the angle to the goal
+	 * @return if the angle can be reached
+	 */
+	public boolean isBeatNecessary(double desiredAngle) {
+		double windGoalDiffernce = worldModel.getWindModel().calcAverageWind().getDirection()
+			+ desiredAngle; //TODO average useful?
+		
+		return windGoalDiffernce < MAX_BEAT_ANGLE && 
+			windGoalDiffernce > MIN_BEAT_ANGLE;  
+	}
+	
+	/**
+	 * Converts a radian value to degrees.
 	 * 
 	 * @param radian the radian value
 	 * @return the value in degrees
