@@ -12,4 +12,5 @@ public interface WindModel {
 	void setWind(Wind wind);
 	Wind getWind();
 	List<Wind> getHistory();
+	Wind calcAverageWind();
 }
