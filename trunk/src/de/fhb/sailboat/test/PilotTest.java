@@ -1,7 +1,7 @@
 package de.fhb.sailboat.test;
 
-import de.fhb.sailboat.control.Pilot;
-import de.fhb.sailboat.control.PilotImpl;
+import de.fhb.sailboat.control.pilot.Pilot;
+import de.fhb.sailboat.control.pilot.PilotImpl;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
