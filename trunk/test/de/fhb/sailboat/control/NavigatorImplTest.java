@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.control.navigator.NavigatorImpl;
+import de.fhb.sailboat.control.pilot.Pilot;
+import de.fhb.sailboat.control.pilot.PilotImpl;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
