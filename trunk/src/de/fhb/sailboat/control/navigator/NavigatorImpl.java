@@ -1,7 +1,12 @@
 package de.fhb.sailboat.control.navigator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhb.sailboat.control.pilot.Pilot;
 import de.fhb.sailboat.mission.BeatTask;
+import de.fhb.sailboat.mission.CompassCourseTask;
+import de.fhb.sailboat.mission.HoldAngleToWindTask;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -14,7 +19,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class NavigatorImpl implements Navigator{
 
-	//private static final Logger LOG = LoggerFactory.getLogger(NavigatorImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(NavigatorImpl.class);
 	private final Pilot pilot;
 	private final WorldModel worldModel;
 	private Thread workerThread = null;
@@ -26,6 +31,8 @@ public class NavigatorImpl implements Navigator{
 	
 	@Override
 	public void doTask(Task task) {
+		LOG.info("execute task: {}", task);
+		
 		if (task == null) {
 			throw new NullPointerException();
 		} else if (task instanceof ReachCircleTask) {
@@ -34,6 +41,10 @@ public class NavigatorImpl implements Navigator{
 			navigateToPolygon((ReachPolygonTask) task);
 		} else if (task instanceof PrimitiveCommandTask) {
 			handlePrimitiveCommands((PrimitiveCommandTask) task);
+		} else if (task instanceof CompassCourseTask) {
+			driveCompassCourse((CompassCourseTask) task);
+		} else if (task instanceof HoldAngleToWindTask) {
+			holdAngleToWind((HoldAngleToWindTask) task);
 		} else if (task instanceof RepeatTask) {
 			handleRepeatTask((RepeatTask) task);
 		} else if (task instanceof StopTask) {
@@ -59,6 +70,14 @@ public class NavigatorImpl implements Navigator{
 		}
 		
 		task.setExecuted(true);
+	}
+	
+	private void driveCompassCourse(CompassCourseTask task) {
+		pilot.driveAngle(task.getAngle());
+	}
+	
+	private void holdAngleToWind(HoldAngleToWindTask task) {
+		pilot.holdAngleToWind(task.getAngle());
 	}
 	
 	private void handleRepeatTask(RepeatTask task) {
