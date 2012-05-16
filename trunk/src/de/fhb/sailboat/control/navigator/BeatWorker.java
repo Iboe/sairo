@@ -14,7 +14,7 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 		boolean pilotSet = false;
 		
 		while(!isInterrupted()) {
-			double angle = calcAngleToGPS(task.getGoal()) + 
+			double angle = calcAngleToGPS(task.getGoal()) - 
 				worldModel.getCompassModel().getCompass().getYaw();
 			
 			if (angle >= 90 || angle <= -90) {
@@ -32,6 +32,8 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 			}
 			waitForNextCycle();
 		}
+		
+		LOG.debug("leaving run methode now");
 		
 		if (task.getContinueTask() != null) {
 			navigator.doTask(task.getContinueTask());

@@ -34,7 +34,7 @@ public class PilotImpl implements Pilot {
 		driveAngle(angle, DriveAngleMode.WIND);
 	}
 
-	private void driveAngle(int angle, DriveAngleMode mode) {
+	private synchronized void driveAngle(int angle, DriveAngleMode mode) {
 		if (driveAngleThread != null && driveAngleThread.isAlive()) {
 			driveAngleThread.driveAngle(angle, mode);
 		} else {

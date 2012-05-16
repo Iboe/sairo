@@ -80,7 +80,8 @@ public class DriveAngleThread extends Thread {
 			locSystem.setRudder((int) rudderPos);
 			
 			if (++counter == 3) {
-				LOG.debug("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle="+desiredAngle+", delta="+deltaAngle);
+				LOG.debug("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle=" +
+						+ desiredAngle+", delta="+deltaAngle + ", mode: " + mode);
 				counter = 0;
 			}
 			

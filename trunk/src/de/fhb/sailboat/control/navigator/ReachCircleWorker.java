@@ -25,9 +25,10 @@ public class ReachCircleWorker extends WorkerThread<ReachCircleTask> {
 			
 			if (isBeatNecessary(angle)) {
 				navigator.doTask(new BeatTask(task, task.getCenter()));
+			} else {
+				pilot.driveAngle((int) angle);
 			}
 			
-			pilot.driveAngle((int) angle);
 			waitForNextCycle();
 		}
 	}
