@@ -20,7 +20,7 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	public static final int MAX_BEAT_ANGLE = 38;
 	public static final int MIN_BEAT_ANGLE = -38;
 	
-	private static final Logger LOG = LoggerFactory.getLogger(WorkerThread.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(WorkerThread.class);
 	
 	protected final WorldModel worldModel;
 	protected final Pilot pilot;
@@ -132,12 +132,11 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			angle += 360;
 		}
 			
-		LOG.debug("calculated angle: {}", angle);
-		
 		//angle between current and goal position = 
 		//north (== y-axis) - angle between difference vector and x-axis 
 		angle = 90 - angle;
 		
+		LOG.debug("calculated angle: {}", angle);
 		return angle;
 	}
 	
@@ -192,11 +191,15 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	 * @return if the angle can be reached
 	 */
 	public boolean isBeatNecessary(double desiredAngle) {
-		double windGoalDiffernce = worldModel.getWindModel().calcAverageWind().getDirection()
-			+ desiredAngle; //TODO average useful?
-		
-		return windGoalDiffernce < MAX_BEAT_ANGLE && 
-			windGoalDiffernce > MIN_BEAT_ANGLE;  
+		if (worldModel.getWindModel().calcAverageWind() != null) {
+			double windGoalDiffernce = worldModel.getWindModel().calcAverageWind().getDirection()
+				+ desiredAngle; //TODO average useful?
+			
+			return windGoalDiffernce < MAX_BEAT_ANGLE && 
+				windGoalDiffernce > MIN_BEAT_ANGLE;
+		} else {
+			return false;
+		}
 	}
 	
 	/**

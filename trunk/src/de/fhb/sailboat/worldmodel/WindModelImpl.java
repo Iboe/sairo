@@ -33,18 +33,24 @@ public class WindModelImpl implements WindModel {
 	
 	@Override
 	public Wind calcAverageWind() {
-		int averageDirection = 0;
-		double averageSpeed = 0d;
 		List<Wind> history = getHistory();
 		
-		for (Wind i : history) {
-			averageDirection += i.getDirection();
-			averageSpeed += i.getSpeed();
+		if (!history.isEmpty()) {
+			int averageDirection = 0;
+			double averageSpeed = 0d;
+			
+			
+			for (Wind i : history) {
+				averageDirection += i.getDirection();
+				averageSpeed += i.getSpeed();
+			}
+			
+			averageDirection /= history.size();
+			averageSpeed /= history.size();
+			
+			return new Wind(averageDirection, averageSpeed);
+		} else {
+			return null;
 		}
-		
-		averageDirection /= history.size();
-		averageSpeed /= history.size();
-		
-		return new Wind(averageDirection, averageSpeed);
 	}
 }
