@@ -219,4 +219,11 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	private static class AKSENCommand {
 		
 	}
+
+
+	@Override
+	public int getBatteryState() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -51,5 +51,5 @@ public interface LocomotionSystem {
 	public void resetRudder();
 	public void resetSail();
 	public void resetPropellor();
-	
+	public int getBatteryState();
 }

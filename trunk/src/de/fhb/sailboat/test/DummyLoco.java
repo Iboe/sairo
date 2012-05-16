@@ -52,4 +52,10 @@ public class DummyLoco implements LocomotionSystem {
 
 	}
 
+	@Override
+	public int getBatteryState() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
