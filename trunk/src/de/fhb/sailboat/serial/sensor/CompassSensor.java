@@ -180,7 +180,7 @@ public class CompassSensor {
 				// TODO Auto-generated catch block
 				LOG.fatal(e, e.fillInStackTrace());
 			}
-			//sensorComm.closePort();
+			
 		}
 	}
 	public long getClock() {
