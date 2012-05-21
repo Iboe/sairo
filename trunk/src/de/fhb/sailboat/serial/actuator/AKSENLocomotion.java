@@ -1,12 +1,12 @@
-/**
- * 
- */
 package de.fhb.sailboat.serial.actuator;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.fhb.sailboat.serial.sensor.sairoComm2;
+import org.apache.log4j.Logger;
+
+import de.fhb.sailboat.serial.serialAPI.COMPort;
 
 /**
  *
@@ -30,27 +30,29 @@ import de.fhb.sailboat.serial.sensor.sairoComm2;
  *
  */
 public class AKSENLocomotion implements LocomotionSystem, Observer {
-	sairoComm2 aksenComm;
+	COMPort myCOM;
+	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
 	String lastCom;
-	// Servo-Config; ==> TODO outsourcing!
-	//String comPort = "COM1";
-	String comPort = "COM2";
-	int baudrate = 9600;
+	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
+	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
+	boolean keepRunning = true;
+	Thread aksenThread;
+	
 	// Sail
-	int sailNo = 0;
-	int sailMin = 31;
-	int sailMax = 114;
-	int sailN = 73;
+	static final int sailNo = 0;
+	static final int sailMin = 31;
+	static final int sailMax = 114;
+	static final int sailN = 73;
 	// Rudder
-	int rudderNo = 1;
-	int rudderMin = 34;
-	int rudderMax = 108;
-	int rudderN = 68;
+	static final int rudderNo = 1;
+	static final int rudderMin = 34;
+	static final int rudderMax = 108;
+	static final int rudderN = 68;
 	// Propellor
-	int propellorNo = 2;
-	int propellorMin = 32;
-	int propellorMax = 112;
-	int propellorN = 72;
+	static final int propellorNo = 2;
+	static final int propellorMin = 32;
+	static final int propellorMax = 112;
+	static final int propellorN = 72;
 
 	int zustand = 0;
 	//Debug
@@ -62,44 +64,35 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	 */
 	public AKSENLocomotion(){
 		
-		this.aksenComm = new sairoComm2(comPort,baudrate, true);
-		
-		
-		try {
-			this.aksenComm.connect();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//Debug Output
-		
-		// Observer
-		this.aksenComm.addObserver(this);
-		System.out.println("Status: " + this.aksenComm.getStatus() + "\n");
+		COMPort myCOM = new COMPort(Integer.parseInt(COM_PORT), Integer.parseInt(BAUDRATE), 0);
+		this.myCOM = myCOM;
+		myCOM.open();
+
+		//keepRunning=true;
+		//(aksenThread=new Thread(new AKSENLocomotionThread(this))).start();
+
 	}
-	
+
 	/** 
 	 * Send one Rudder-Command to AKSEN-Board
 	 * @param int angle
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setRudder(int)
 	 */
-	@Override
 	public void setRudder(int value) {
 		//TODO implement normalize value handling
 		int angle = value;
 		// send command-string to AKSEN-Board
 		String com = this.buildCommand(rudderNo, angle);
-		System.out.println(com);
+
+		String answer = this.AKSENCommand(com);
+		
 //		try {
-		this.zustand = 1;	
-		this.aksenComm.writeOutputStream(com);
-			
-			//Thread.sleep(1000);
-			//System.out.println(this.aksenComm.getStrInput());
-//		} catch (InterruptedException e) {
+//			
+//		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
 	}
 
 	/** 
@@ -112,15 +105,7 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 		//TODO implement normalize value handling
 		int angle = value;
 		String com = this.buildCommand(sailNo, angle);
-		System.out.println(com);
-//		try {
-			this.aksenComm.writeOutputStream(com);
-//			Thread.sleep(1000);
-//			System.out.println(this.aksenComm.getStrInput());
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		String answer = this.AKSENCommand(com);
 	}
 
 	/** 
@@ -133,16 +118,7 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 		//TODO implement normalize value handling
 		int angle = value;
 		String com = this.buildCommand(propellorNo, angle);
-		// send command-string to AKSEN-Board
-		System.out.println(com);
-//		try {
-			this.aksenComm.writeOutputStream(com);
-//			Thread.sleep(1000);
-//			System.out.println(this.aksenComm.getStrInput());
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		String answer = this.AKSENCommand(com);
 	}
 
 	/** 
@@ -187,12 +163,12 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	}
 	
 	public void closePort() {
-		this.aksenComm.closePort();
+		this.myCOM.close();
 	}
 	
 	private String buildCommand(int s, int a) {
 		//String str = "s"+ s +"," + a + "ea";
-		String str = "s"+ s +"," + a + "ea";
+		String str = "s"+ s +"," + a + "e";
 		return str;
 	}
 
@@ -210,20 +186,31 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	}
 	
 	
-	/**
-	 * Data-Object for an AKSEN-Board-Command
-	 * and the state of transmission via serial Port
-	 * @author schmidst
-	 *
-	 */
-	private static class AKSENCommand {
-		
-	}
 
+	private String AKSENCommand(String com) {
+		
+		try {
+			this.myCOM.writeString(com + "a");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String answer = "Test";
+		return answer;
+	}
 
 	@Override
 	public int getBatteryState() {
-		// TODO Auto-generated method stub
+		
+		try {
+			this.myCOM.writeString("v");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return 0;
 	}
 }
