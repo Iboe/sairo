@@ -29,7 +29,7 @@ import de.fhb.sailboat.serial.sensor.sairoComm2;
  * @author schmidst
  *
  */
-public class AKSENLocomotion_alt implements LocomotionSystem, Observer {
+public class AKSENLocomotion_alt implements LocomotionSystem  {
 	sairoComm2 aksenComm;
 	String lastCom;
 	// Servo-Config; ==> TODO outsourcing!
@@ -73,8 +73,6 @@ public class AKSENLocomotion_alt implements LocomotionSystem, Observer {
 		}
 		//Debug Output
 		
-		// Observer
-		this.aksenComm.addObserver(this);
 		System.out.println("Status: " + this.aksenComm.getStatus() + "\n");
 	}
 	
@@ -196,18 +194,7 @@ public class AKSENLocomotion_alt implements LocomotionSystem, Observer {
 		return str;
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-		// Bestätigen
-		
-//			this.aksenComm.writeOutputStream("a");
-			System.out.println("test: "+ arg1);
 
-		
-		
-	}
 	
 	
 	/**
@@ -223,7 +210,7 @@ public class AKSENLocomotion_alt implements LocomotionSystem, Observer {
 
 	@Override
 	public int getBatteryState() {
-		// TODO Auto-generated method stub
+		this.aksenComm.writeOutputStream("v");
 		return 0;
 	}
 }

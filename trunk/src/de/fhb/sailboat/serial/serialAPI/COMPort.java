@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import org.apache.log4j.Logger;
+
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;
@@ -22,7 +24,7 @@ public class COMPort{
 	private CommPortIdentifier _identObject = null;
 	private SerialPort _serialPortObject = null;
 	private int _baud = 9600;
-
+	private static final Logger LOG = Logger.getLogger(COMPort.class);
 	/**
 	 * Construktor der COM Klasse
 	 * @param int port Nr des Com Ports
@@ -48,7 +50,8 @@ public class COMPort{
 		// Create a port identifier Object
 		try {
 			identObject = CommPortIdentifier.getPortIdentifier("COM" + port);
-			System.out.println("COM" + port + " wurde initialisiert.");
+			//System.out.println("COM" + port + " wurde initialisiert.");
+			LOG.info("Port " + port + " initialized.");
 		} catch (NoSuchPortException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,13 +92,14 @@ public class COMPort{
 				}
 				
 				this._serialPortObject = serialPortObject;
+				
+				
 			}else{
 				// paralleler Port (nicht unterstützt)
 			}
 			
 		} catch (PortInUseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.info("PortInUse", e);
 		}
 	}
 	
@@ -143,6 +147,14 @@ public class COMPort{
 	 * @throws IOException
 	 */
 	public void writeString(String text) throws IOException {
-		new OutputStreamWriter(this._serialPortObject.getOutputStream()).write(text);
+		
+		OutputStreamWriter os = new OutputStreamWriter(this._serialPortObject.getOutputStream());
+		byte[] b = text.getBytes();
+		for (int i = 0; i < b.length; i++) {
+			os.write(b[i]);
+			
+		}
+		
+		
 	}
 }

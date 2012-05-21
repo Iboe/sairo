@@ -1,11 +1,7 @@
 package de.fhb.sailboat.serial.actuator;
 
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
-
 import org.apache.log4j.Logger;
-
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 
 /**
@@ -29,12 +25,12 @@ import de.fhb.sailboat.serial.serialAPI.COMPort;
  * @author schmidst
  *
  */
-public class AKSENLocomotion implements LocomotionSystem, Observer {
+public class AKSENLocomotion implements LocomotionSystem {
 	COMPort myCOM;
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
 	String lastCom;
-	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
-	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
+	static final String COM_PORT = "3"; //System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
+	static final String BAUDRATE = "9600"; //System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
 	boolean keepRunning = true;
 	Thread aksenThread;
 	
@@ -68,9 +64,6 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 		this.myCOM = myCOM;
 		myCOM.open();
 
-		//keepRunning=true;
-		//(aksenThread=new Thread(new AKSENLocomotionThread(this))).start();
-
 	}
 
 	/** 
@@ -79,13 +72,13 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setRudder(int)
 	 */
 	public void setRudder(int value) {
-		//TODO implement normalize value handling
-		int angle = value;
-		// send command-string to AKSEN-Board
-		String com = this.buildCommand(rudderNo, angle);
+			int angle = value;
+			// send command-string to AKSEN-Board
+			String com = this.buildCommand(rudderNo, angle);
+	
+			this.AKSENCommand(com);
+			
 
-		String answer = this.AKSENCommand(com);
-		
 //		try {
 //			
 //		} catch (IOException e) {
@@ -102,10 +95,11 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	 */
 	@Override
 	public void setSail(int value) {
-		//TODO implement normalize value handling
+
 		int angle = value;
 		String com = this.buildCommand(sailNo, angle);
-		String answer = this.AKSENCommand(com);
+		this.AKSENCommand(com);
+
 	}
 
 	/** 
@@ -115,10 +109,11 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	 */
 	@Override
 	public void setPropellor(int value) {
-		//TODO implement normalize value handling
+
 		int angle = value;
 		String com = this.buildCommand(propellorNo, angle);
-		String answer = this.AKSENCommand(com);
+		this.AKSENCommand(com);
+
 	}
 
 	/** 
@@ -168,49 +163,53 @@ public class AKSENLocomotion implements LocomotionSystem, Observer {
 	
 	private String buildCommand(int s, int a) {
 		//String str = "s"+ s +"," + a + "ea";
-		String str = "s"+ s +"," + a + "e";
+		String str = "s"+ s +"," + a + "ea";
 		return str;
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-		// Bestätigen
-		
-//			this.aksenComm.writeOutputStream("a");
-			System.out.println("test: "+ arg1);
-
-		
-		
-	}
-	
 	
 
-	private String AKSENCommand(String com) {
+	private void AKSENCommand(String com) {
+			try {
+				this.myCOM.writeString(com);
+				
+				byte[] buffer = new byte[1024];
+				int len = -1;
+				while ((len = this.myCOM.readByte()) > -1) {
+				 System.out.println(new String(buffer,0,len));
+				
+				}
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
-		try {
-			this.myCOM.writeString(com + "a");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		String answer = "Test";
-		return answer;
 	}
 
 	@Override
 	public int getBatteryState() {
-		
+		int state = -1;
 		try {
 			this.myCOM.writeString("v");
+
+			
+//			int b = this.myCOM.readByte();
+//			
+//			System.out.println(b);
+			byte[] buffer = new byte[1024];
+			int len = -1;
+			while ((len = this.myCOM.readByte()) > -1) {
+				System.out.println(new String(buffer,0,len));
+			}
+			
+			
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.warn("Couldn't get BatteryState", e);
 		}
+
 		
-		
-		return 0;
+		return state;
 	}
 }

@@ -18,8 +18,10 @@ public class aksentest {
 		System.out.println("\n Setze korrekten Befehl ab:");
 		aksen.setSail(73);
 		//System.out.println("Antwort: "+ aksen.lastAnswer());
+		System.out.println("Frage Ladezustand ab:");
+		System.out.println("IST: "+ aksen.getBatteryState());
 		
-		//aksen.closePort();
+		aksen.closePort();
 	}
 
 }
