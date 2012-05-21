@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.navigator.WorkerThread;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
+import de.fhb.sailboat.serial.actuator.AKSENLocomotion_alt;
 
 /**
  * Class for remote controlling a autonomous sailing boat via a minimalistic
@@ -48,19 +49,6 @@ public class RemoteControl extends javax.swing.JFrame {
 		menuSettings_AutoSendCommands.setSelected(true); // Auto-Send new values
 															// input?
 
-		propellorSlider.setValue(0);
-		propellorText.setText(convertToNativeValue(propellorSlider.getValue(),
-				PROPELLOR_MIN, PROPELLOR_NULL, PROPELLOR_MAX) + "");
-		sailSlider.setValue(0);
-		sailText.setText(convertToNativeValue(sailSlider.getValue(), SAIL_MIN,
-				SAIL_NULL, SAIL_MAX) + "");
-		rudderSlider.setValue(0);
-		rudderText.setText(convertToNativeValue(rudderSlider.getValue(),
-				RUDDER_MIN, RUDDER_NULL, RUDDER_MAX) + "");
-		sendCommands(); // initialize sailboat
-	}
-	
-	public void closeRemoteControl() {
 		propellorSlider.setValue(0);
 		propellorText.setText(convertToNativeValue(propellorSlider.getValue(),
 				PROPELLOR_MIN, PROPELLOR_NULL, PROPELLOR_MAX) + "");
@@ -209,12 +197,18 @@ public class RemoteControl extends javax.swing.JFrame {
 		menuSettings_ResetSail = new javax.swing.JMenuItem();
 		menuSettings_ResetRudder = new javax.swing.JMenuItem();
 		menuSettings_AutoSendCommands = new javax.swing.JCheckBoxMenuItem();
+		menuSettings_SeamlessCommands = new javax.swing.JCheckBoxMenuItem();
 		menuSettings_Seperator = new javax.swing.JPopupMenu.Separator();
 		menuSettings_SendCommands = new javax.swing.JMenuItem();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("RemoteControl");
 		setResizable(false);
+		 addWindowListener(new java.awt.event.WindowAdapter() {
+	            public void windowClosing(java.awt.event.WindowEvent evt) {
+	                remoteClosing(evt);
+	            }
+	        });
 
 		propellorLabel.setText("Motor");
 		propellorLabel.setFocusable(false);
@@ -353,6 +347,16 @@ public class RemoteControl extends javax.swing.JFrame {
 					}
 				});
 		menuSettings.add(menuSettings_AutoSendCommands);
+		
+		menuSettings_SeamlessCommands.setSelected(true);
+        menuSettings_SeamlessCommands.setText("Steuerbefehle flieﬂend senden");
+        menuSettings_SeamlessCommands.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSettings_SeamlessCommandsActionPerformed(evt);
+            }
+        });
+        menuSettings.add(menuSettings_SeamlessCommands);
+		
 		menuSettings.add(menuSettings_Seperator);
 
 		menuSettings_SendCommands.setAccelerator(javax.swing.KeyStroke
@@ -569,21 +573,26 @@ public class RemoteControl extends javax.swing.JFrame {
 	}
 
 	private void propellorUpdated(javax.swing.event.ChangeEvent evt) {
-		// propellorText.setText(propellorSlider.getValue() + "");
 		propellorText.setText(convertToNativeValue(propellorSlider.getValue(),
 				PROPELLOR_MIN, PROPELLOR_NULL, PROPELLOR_MAX) + "");
+		if (menuSettings_SeamlessCommands.isSelected()) {
+			sendPropellorCommand(Integer.parseInt(propellorText.getText()));
+		}
+			
 	}
 
 	private void sailUpdated(javax.swing.event.ChangeEvent evt) {
-		// sailText.setText(sailSlider.getValue() + "");
 		sailText.setText(convertToNativeValue(sailSlider.getValue(), SAIL_MIN,
 				SAIL_NULL, SAIL_MAX) + "");
+		if (menuSettings_SeamlessCommands.isSelected())
+			sendSailCommand(Integer.parseInt(sailText.getText()));
 	}
 
 	private void rudderUpdated(javax.swing.event.ChangeEvent evt) {
-		// rudderText.setText(rudderSlider.getValue() + "");
 		rudderText.setText(convertToNativeValue(rudderSlider.getValue(),
 				RUDDER_MIN, RUDDER_NULL, RUDDER_MAX) + "");
+		if (menuSettings_SeamlessCommands.isSelected())
+			sendRudderCommand(Integer.parseInt(rudderText.getText()));
 	}
 
 	private void menuFile_CloseActionPerformed(java.awt.event.ActionEvent evt) {
@@ -600,10 +609,10 @@ public class RemoteControl extends javax.swing.JFrame {
 		System.exit(0);
 	}
 
-	private void menuSettings_AutoSendCommandsActionPerformed(
-			java.awt.event.ActionEvent evt) {
-
+	private void menuSettings_AutoSendCommandsActionPerformed(java.awt.event.ActionEvent evt) {
 	}
+	private void menuSettings_SeamlessCommandsActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
 	private void menuSettings_SendCommandsActionPerformed(
 			java.awt.event.ActionEvent evt) {
@@ -629,6 +638,19 @@ public class RemoteControl extends javax.swing.JFrame {
 		if (menuSettings_AutoSendCommands.isSelected())
 			sendRudderCommand(Integer.parseInt(rudderText.getText()));
 	}
+	
+	private void remoteClosing(java.awt.event.WindowEvent evt) {
+		propellorSlider.setValue(0);
+		propellorText.setText(convertToNativeValue(propellorSlider.getValue(),
+				PROPELLOR_MIN, PROPELLOR_NULL, PROPELLOR_MAX) + "");
+		sailSlider.setValue(0);
+		sailText.setText(convertToNativeValue(sailSlider.getValue(), SAIL_MIN,
+				SAIL_NULL, SAIL_MAX) + "");
+		rudderSlider.setValue(0);
+		rudderText.setText(convertToNativeValue(rudderSlider.getValue(),
+				RUDDER_MIN, RUDDER_NULL, RUDDER_MAX) + "");
+		sendCommands(); // initialize sailboat
+    }
 
 	/**
 	 * @param args
@@ -686,6 +708,7 @@ public class RemoteControl extends javax.swing.JFrame {
 	private javax.swing.JMenuItem menuFile_Close;
 	private javax.swing.JMenu menuSettings;
 	private javax.swing.JCheckBoxMenuItem menuSettings_AutoSendCommands;
+	private javax.swing.JCheckBoxMenuItem menuSettings_SeamlessCommands;
 	private javax.swing.JMenuItem menuSettings_ResetMotor;
 	private javax.swing.JMenuItem menuSettings_ResetRudder;
 	private javax.swing.JMenuItem menuSettings_ResetSail;

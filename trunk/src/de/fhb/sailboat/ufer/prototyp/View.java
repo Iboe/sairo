@@ -92,6 +92,7 @@ public class View extends JFrame {
 	final static public String M_MISSION_SEND_POLY = "ReachPolygon Task senden";
 	final static public String M_MISSION_SEND_STOP = "Stop Task senden";
 	final static public String M_MISSION_RESET = "Map zurücksetzen";
+	final static public String M_MISSION_REMOTE = "Fernsteuerung";
 
 	final static public String M_PROTOCOL = "Protokoll";
 
@@ -181,8 +182,8 @@ public class View extends JFrame {
 	private Planner planner;
 	private MapPanel map;
 	private Controller controller;
-	private ConnectorUfer connection;
 	private UferLogger logger;
+	private RemoteControl remote;
 
 	private JPanel mapArea;
 
@@ -317,6 +318,20 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionReset);
+		
+		JMenuItem mMissionRemote = new JMenuItem(M_MISSION_REMOTE);
+		mMissionSendStop.setMnemonic(KeyEvent.VK_R);
+		mMissionRemote.setToolTipText("Fernsteuerung öffnen.");
+
+		mMissionRemote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				remote = new RemoteControl();
+				remote.main(null);
+			}
+
+		});
+
+		mMission.add(mMissionRemote);
 
 		// Menü->Verbindung
 		JMenu mConnection = new JMenu(M_CONNECTION);
