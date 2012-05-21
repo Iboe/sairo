@@ -99,6 +99,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 		int angle = value;
 		String com = this.buildCommand(sailNo, angle);
 		this.AKSENCommand(com);
+		
+//		this.AKSENServoCommand(sailNo, angle);
 
 	}
 
@@ -170,46 +172,58 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 
 	private void AKSENCommand(String com) {
-			try {
-				this.myCOM.writeString(com);
-				
-				byte[] buffer = new byte[1024];
-				int len = -1;
-				while ((len = this.myCOM.readByte()) > -1) {
-				 System.out.println(new String(buffer,0,len));
-				
-				}
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
+				try {
+					this.myCOM.writeString(com);
+					
+//					byte[] buffer = new byte[1024];
+//					buffer = this.myCOM.readByte(buffer);
+//					System.out.println("Ausgabe: "+ new String(buffer,0,buffer.length));
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
 	}
 
+//	private int AKSENServoCommand(int s, int a) {
+//		int status = -1;
+//		int r;
+//		try {
+//			 //* 		1) (S)end: s, byte: 73	- acquire Connection
+//			this.myCOM.writeByte((byte) 73);
+//			 //*         (R)eceive: a	- Acknowledge
+//			r = this.myCOM.readByte();
+//			System.out.println(String.valueOf(r));
+//			 //*      2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
+//			 //*                                            More commands separated by comma (e.g. 1,90,2,45,0,73)
+//			 //*         R: +			- for every correct command
+//			 //*      3) S: e			- end of Instruction set
+//			 //*         R: a			- Ack
+//			 //*      4) S: a			- execute Instruction on AKSEN
+//			 //*         R: e			- executed (=ACK)
+//			
+////			byte[] buffer = new byte[1024];
+////			buffer = this.myCOM.readByte(buffer);
+////			System.out.println("Ausgabe: "+ new String(buffer,0,buffer.length));
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return status;
+//}
+	
 	@Override
 	public int getBatteryState() {
 		int state = -1;
 		try {
-			this.myCOM.writeString("v");
-
-			
-//			int b = this.myCOM.readByte();
-//			
-//			System.out.println(b);
-			byte[] buffer = new byte[1024];
-			int len = -1;
-			while ((len = this.myCOM.readByte()) > -1) {
-				System.out.println(new String(buffer,0,len));
-			}
-			
-			
-			
+			byte b = 118;
+			this.myCOM.writeByte(b);
+			state = this.myCOM.readByte();
 		} catch (IOException e) {
 			LOG.warn("Couldn't get BatteryState", e);
 		}
-
-		
 		return state;
 	}
 }

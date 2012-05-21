@@ -3,6 +3,7 @@ package de.fhb.sailboat.serial.serialAPI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import org.apache.log4j.Logger;
@@ -147,14 +148,30 @@ public class COMPort{
 	 * @throws IOException
 	 */
 	public void writeString(String text) throws IOException {
+		System.out.println(text);
+		try {
+			OutputStream os = this._serialPortObject.getOutputStream();
+			byte[] b = text.getBytes();
+
+			for (int i = 0; i < b.length; i++) {
+				os.write(b[i]);
+				// minimal sleep to give Devices time to handle the data
+				Thread.sleep(2);
+			}
 		
-		OutputStreamWriter os = new OutputStreamWriter(this._serialPortObject.getOutputStream());
-		byte[] b = text.getBytes();
-		for (int i = 0; i < b.length; i++) {
-			os.write(b[i]);
-			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			LOG.warn("Sleep-Failure");
 		}
-		
-		
+	}
+	
+	/**
+	 * Write bytewise to OutputStream
+	 * @param b
+	 * @throws IOException
+	 * @author S. Schmidt
+	 */
+	public void writeByte(byte b) throws IOException {
+		this._serialPortObject.getOutputStream().write(b);
 	}
 }
