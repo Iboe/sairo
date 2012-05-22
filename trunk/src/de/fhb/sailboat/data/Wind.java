@@ -30,4 +30,9 @@ public class Wind {
 	public double getSpeed() {
 		return speed;
 	}
+	
+	@Override
+	public String toString() {
+		return "direction: " + direction + ", speed: " + speed;
+	}
 }

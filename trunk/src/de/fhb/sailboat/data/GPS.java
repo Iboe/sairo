@@ -107,6 +107,7 @@ public class GPS {
 
 	@Override
 	public String toString() {
-		return "GPS [latitude=" + latitude + ", longitude=" + longitude + "]";
+		return "latitude: " + latitude + ", longitude: " + longitude
+			+ " satelites: " + nrSatelites;
 	}
 }
