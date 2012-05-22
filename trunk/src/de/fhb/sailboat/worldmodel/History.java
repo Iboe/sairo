@@ -13,6 +13,8 @@ public class History<T> {
 	
 	private final int maxSize;
 	private LinkedList<T> history;
+	//used for not logging too much
+	private int debugCounter = 0;
 	
 	public History() {
 		this(DEFAULT_MAX_SIZE);
@@ -45,7 +47,10 @@ public class History<T> {
 			history.removeLast();
 		}
 		history.addFirst(element);
-		LOG.debug("element added: {}", element);
+		
+		if (++debugCounter == 10) {
+			LOG.debug("element added: {}", element);
+		}
 	}
 	
 	public int getMaxSize() {
