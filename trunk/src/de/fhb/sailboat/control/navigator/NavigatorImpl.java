@@ -149,6 +149,7 @@ public class NavigatorImpl implements Navigator{
 	}
 	
 	private void stopThread() {
-		workerThread.interrupt();
+		if (workerThread != null)
+			workerThread.interrupt();
 	}
 }
