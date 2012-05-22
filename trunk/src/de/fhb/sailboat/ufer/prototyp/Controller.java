@@ -9,6 +9,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
+import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
@@ -52,12 +53,12 @@ public class Controller {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i).getLat(),
 					markerList.get(i).getLon(), 0), 3));
 		}
-		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
 
 		mission.setTasks(tasks);
 		
@@ -70,9 +71,35 @@ public class Controller {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
 		tasks.add(new ReachPolygonTask(MapMarkerToGPS.toGPS(markerList)));
-		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
+		
+		mission.setTasks(tasks);
+		
+		planner.doMission(mission);
+	}
+	
+	public void commitReachCompassTask(int angle, Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		tasks.add(new CompassCourseTask(angle));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
+		
+		mission.setTasks(tasks);
+		
+		planner.doMission(mission);
+	}
+	
+	public void commitHoldAngleToWind(int angle, Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		tasks.add(new CompassCourseTask(angle));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
 		
 		mission.setTasks(tasks);
 		
@@ -156,6 +183,14 @@ public class Controller {
 
 	public int getGpsSatelites() {
 		return this.model.getGps().getPosition().getSatelites();
+	}
+	
+	public boolean isSailMode() {
+		return this.model.isSailMode();
+	}
+	
+	public void setSailMode(boolean sailMode) {
+		this.model.setSailMode(sailMode);
 	}
 
 }
