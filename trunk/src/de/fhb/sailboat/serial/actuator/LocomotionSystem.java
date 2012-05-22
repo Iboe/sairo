@@ -9,9 +9,11 @@ package de.fhb.sailboat.serial.actuator;
  */
 public interface LocomotionSystem {
 	
-	public static final int RUDDER_LEFT = 34;
-	public static final int RUDDER_NORMAL = 68;
-	public static final int RUDDER_RIGHT = 108;
+	//TODO which are the correct ones??? not using two constants
+	//for the same value, use for example properties file instead
+	public static final int RUDDER_LEFT = 31;//34; 
+	public static final int RUDDER_NORMAL = 73;//68;
+	public static final int RUDDER_RIGHT = 114;//108;
 	
 	public static final int PROPELLOR_MIN = 170;
 	public static final int PROPELLOR_NORMAL = 125;
