@@ -29,23 +29,23 @@ public class AKSENLocomotion implements LocomotionSystem {
 	COMPort myCOM;
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
 	String lastCom;
-	static final String COM_PORT = "3"; //System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
-	static final String BAUDRATE = "9600"; //System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
+	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
+	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
 	boolean keepRunning = true;
 	Thread aksenThread;
 	
 	// Sail
-	static final int sailNo = 0;
+	static final int sailNo = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".sailNo"));
 	static final int sailMin = 31;
 	static final int sailMax = 114;
 	static final int sailN = 73;
 	// Rudder
-	static final int rudderNo = 1;
+	static final int rudderNo = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".rudderNo"));
 	static final int rudderMin = 34;
 	static final int rudderMax = 108;
 	static final int rudderN = 68;
 	// Propellor
-	static final int propellorNo = 2;
+	static final int propellorNo = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
 	static final int propellorMin = 32;
 	static final int propellorMax = 112;
 	static final int propellorN = 72;
@@ -185,40 +185,40 @@ public class AKSENLocomotion implements LocomotionSystem {
 				}		
 	}
 
-//	private int AKSENServoCommand(int s, int a) {
-//		int status = -1;
-//		int r;
-//		try {
-//			 //* 		1) (S)end: s, byte: 73	- acquire Connection
-//			this.myCOM.writeByte((byte) 73);
-//			 //*         (R)eceive: a	- Acknowledge
-//			r = this.myCOM.readByte();
-//			System.out.println(String.valueOf(r));
-//			 //*      2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
-//			 //*                                            More commands separated by comma (e.g. 1,90,2,45,0,73)
-//			 //*         R: +			- for every correct command
-//			 //*      3) S: e			- end of Instruction set
-//			 //*         R: a			- Ack
-//			 //*      4) S: a			- execute Instruction on AKSEN
-//			 //*         R: e			- executed (=ACK)
-//			
-////			byte[] buffer = new byte[1024];
-////			buffer = this.myCOM.readByte(buffer);
-////			System.out.println("Ausgabe: "+ new String(buffer,0,buffer.length));
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return status;
-//}
+	private int AKSENServoCommand(int s, int a) {
+		int status = -1;
+		int r;
+		try {
+			 //* 		1) (S)end: s, byte: 73	- acquire Connection
+			this.myCOM.writeByte((byte) 73);
+			 //*         (R)eceive: a	- Acknowledge
+			r = this.myCOM.readByte();
+			System.out.println(String.valueOf(r));
+			 //*      2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
+			 //*                                            More commands separated by comma (e.g. 1,90,2,45,0,73)
+			 //*         R: +			- for every correct command
+			 //*      3) S: e			- end of Instruction set
+			 //*         R: a			- Ack
+			 //*      4) S: a			- execute Instruction on AKSEN
+			 //*         R: e			- executed (=ACK)
+			
+//			byte[] buffer = new byte[1024];
+//			buffer = this.myCOM.readByte(buffer);
+//			System.out.println("Ausgabe: "+ new String(buffer,0,buffer.length));
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return status;
+}
 	
 	@Override
 	public int getBatteryState() {
 		int state = -1;
 		try {
-			byte b = 118;
+			byte b = 118;	// v in byte
 			this.myCOM.writeByte(b);
 			state = this.myCOM.readByte();
 		} catch (IOException e) {
