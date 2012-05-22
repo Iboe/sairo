@@ -35,6 +35,7 @@ import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.serial.sensor.CompassSensor;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
+import de.fhb.sailboat.serial.sensor.WindSensor;
 import de.fhb.sailboat.ufer.prototyp.View;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -121,7 +122,8 @@ public class Initializier {
 	
 	private void initializeSensors() {
 		LOG.info("-----init sensors-----");
-		GpsSensor gps=new GpsSensor(8);
+		GpsSensor gps=new GpsSensor(9);
+		WindSensor wind=new WindSensor(4);
 		
 		CompassSensor compassSensor=new CompassSensor(); //zzt. COM17
 		try {
