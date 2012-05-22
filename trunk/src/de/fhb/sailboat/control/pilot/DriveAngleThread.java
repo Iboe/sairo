@@ -14,7 +14,7 @@ public class DriveAngleThread extends Thread {
 	 * @see Pilot.MAX_RELEVANT_ANGLE_PROPERTY
 	 */
 	public static final int MAX_RELEVANT_ANGLE = Integer.parseInt(System.getProperty(
-			Pilot.WAIT_TIME_PROPERTY));
+			Pilot.MAX_RELEVANT_ANGLE_PROPERTY));
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Pilot.WAIT_TIME_PROPERTY));
 	public static final double P = Double.parseDouble(System.getProperty(Pilot.P_PROPERTY));
@@ -81,7 +81,7 @@ public class DriveAngleThread extends Thread {
 			
 			if (++counter == 3) {
 				LOG.debug("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle=" +
-						+ desiredAngle+", delta="+deltaAngle + ", mode: " + mode);
+						+ desiredAngle+", delta="+deltaAngle + ", mode: " + mode + ", rudderPos=" + rudderPos);
 				counter = 0;
 			}
 			
