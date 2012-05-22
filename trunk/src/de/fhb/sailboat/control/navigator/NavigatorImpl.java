@@ -57,6 +57,8 @@ public class NavigatorImpl implements Navigator{
 	}
 	
 	private void handlePrimitiveCommands(PrimitiveCommandTask task) {
+		stopThread();
+		
 		if (task.getPropellor() != null) {
 			pilot.setPropellor(task.getPropellor().intValue());
 		}
@@ -73,10 +75,12 @@ public class NavigatorImpl implements Navigator{
 	}
 	
 	private void driveCompassCourse(CompassCourseTask task) {
+		stopThread();
 		pilot.driveAngle(task.getAngle());
 	}
 	
 	private void holdAngleToWind(HoldAngleToWindTask task) {
+		stopThread();
 		pilot.holdAngleToWind(task.getAngle());
 	}
 	
