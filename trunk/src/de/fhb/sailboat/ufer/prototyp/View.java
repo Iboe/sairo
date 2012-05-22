@@ -25,6 +25,8 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 
 import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
+import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.ufer.prototyp.communication.ConnectorUfer;
 import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
 
@@ -90,9 +92,12 @@ public class View extends JFrame {
 	final static public String M_MISSION = "Mission";
 	final static public String M_MISSION_SEND = "ReachCircle Task(s) senden";
 	final static public String M_MISSION_SEND_POLY = "ReachPolygon Task senden";
+	final static public String M_MISSION_SEND_COMPASS = "CompassCourse senden";
+	final static public String M_MISSION_SEND_WIND = "HoldAngleToWind Task senden";
 	final static public String M_MISSION_SEND_STOP = "Stop Task senden";
 	final static public String M_MISSION_RESET = "Map zurücksetzen";
 	final static public String M_MISSION_REMOTE = "Fernsteuerung";
+	final static public String M_MISSION_SAIL_MODE = "Segelmodus";
 
 	final static public String M_PROTOCOL = "Protokoll";
 
@@ -180,6 +185,7 @@ public class View extends JFrame {
 									// will scroll with latest entry
 
 	private Planner planner;
+	private LocomotionSystem locomotion;
 	private MapPanel map;
 	private Controller controller;
 	private UferLogger logger;
@@ -209,9 +215,10 @@ public class View extends JFrame {
 		startUpdating();
 	}
 
-	public View(Planner planner) {
+	public View(Planner planner, LocomotionSystem loco) {
 		this();
 		this.planner = planner;
+		this.locomotion = loco;
 		System.out.println("View Constructed");
 	}
 
@@ -291,6 +298,30 @@ public class View extends JFrame {
 
 		mMission.add(mMissionSendPoly);
 		
+		JMenuItem mMissionSendCompass = new JMenuItem(M_MISSION_SEND_COMPASS);
+		mMissionSendCompass.setToolTipText("CompassCourse Task senden.");
+
+		mMissionSendCompass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				sendReachCompassTask();
+			}
+
+		});
+
+		mMission.add(mMissionSendCompass);
+		
+		JMenuItem mMissionSendWind = new JMenuItem(M_MISSION_SEND_WIND);
+		mMissionSendWind.setToolTipText("HoldAngleToWind Task senden.");
+
+		mMissionSendWind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				sendHoldAngleToWind();
+			}
+
+		});
+
+		mMission.add(mMissionSendWind);
+		
 		JMenuItem mMissionSendStop = new JMenuItem(M_MISSION_SEND_STOP);
 		mMissionSendStop.setMnemonic(KeyEvent.VK_X);
 		mMissionSendStop.setToolTipText("Stop Task senden.");
@@ -325,13 +356,26 @@ public class View extends JFrame {
 
 		mMissionRemote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				remote = new RemoteControl();
-				remote.main(null);
+				remote = new RemoteControl(locomotion);
+				remote.start(locomotion);
 			}
 
 		});
 
 		mMission.add(mMissionRemote);
+		
+		JCheckBoxMenuItem mMissionSailMode = new JCheckBoxMenuItem(M_MISSION_SAIL_MODE);
+		mMissionSailMode.setSelected(false);
+		mMissionSailMode.setToolTipText("Wenn aktiv wird der Motor nicht verwendet.");
+
+		mMissionSailMode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				// nuffin
+			}
+
+		});
+
+		mMission.add(mMissionSailMode);
 
 		// Menü->Verbindung
 		JMenu mConnection = new JMenu(M_CONNECTION);
@@ -861,6 +905,20 @@ public class View extends JFrame {
 			this.controller.setPolyMarkerList(map.getPolygon());
 			this.controller.commitPolyMarkerList(planner);
 			resetMap();
+		}
+	}
+	
+	private void sendReachCompassTask() {
+		String str = JOptionPane.showInputDialog(null, "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+		if (str.length() != 0) {
+			this.controller.commitReachCompassTask(Integer.parseInt(str), planner);
+		}
+	}
+	
+	private void sendHoldAngleToWind() {
+		String str = JOptionPane.showInputDialog(null, "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+		if (str.length() != 0) {
+			this.controller.commitHoldAngleToWind(Integer.parseInt(str), planner);
 		}
 	}
 	

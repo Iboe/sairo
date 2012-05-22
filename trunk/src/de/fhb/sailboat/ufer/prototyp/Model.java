@@ -35,11 +35,14 @@ public class Model {
 	private ArrayList<MapMarker> circleMarkerList;
 	private ArrayList<MapMarker> polyMarkerList;
 	
+	private boolean sailMode;
+	
 	public Model() {
 		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();
 		this.compass.setCompass(new Compass(170,0,0));
 		this.gps = new GPSModelImpl();
+		this.sailMode = false;
 	}
 
 	// Getter/ Setter
@@ -95,5 +98,15 @@ public class Model {
 	public void setPolyMarkerList(ArrayList<MapMarker> markerList) {
 		this.polyMarkerList = markerList;
 	}
+
+	public boolean isSailMode() {
+		return sailMode;
+	}
+
+	public void setSailMode(boolean sailMode) {
+		this.sailMode = sailMode;
+	}
+	
+	
 	
 }

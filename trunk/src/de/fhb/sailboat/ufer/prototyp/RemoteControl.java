@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.control.navigator.WorkerThread;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion_alt;
+import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 
 /**
  * Class for remote controlling a autonomous sailing boat via a minimalistic
@@ -27,7 +28,7 @@ public class RemoteControl extends javax.swing.JFrame {
 	public static final int RUDDER_NULL = 73;
 	public static final int RUDDER_MAX = 114;
 
-	AKSENLocomotion locomotion;
+	LocomotionSystem locomotion;
 	private static final Logger LOG = LoggerFactory
 			.getLogger(RemoteControl.class);
 
@@ -41,10 +42,10 @@ public class RemoteControl extends javax.swing.JFrame {
 	/**
 	 * Creates new form remoteControl
 	 */
-	public RemoteControl() {
+	public RemoteControl(LocomotionSystem loco) {
 		initComponents();
 
-		locomotion = new AKSENLocomotion();
+		locomotion = loco;
 
 		menuSettings_AutoSendCommands.setSelected(true); // Auto-Send new values
 															// input?
@@ -563,6 +564,7 @@ public class RemoteControl extends javax.swing.JFrame {
 		sailSlider.setValue(0);
 		sailText.setText(convertToNativeValue(sailSlider.getValue(), SAIL_MIN,
 				SAIL_NULL, SAIL_MAX) + "");
+	
 	}
 
 	private void menuSettings_ResetRudderActionPerformed(
@@ -656,7 +658,7 @@ public class RemoteControl extends javax.swing.JFrame {
 	 * @param args
 	 *            the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void start(final LocomotionSystem loco) {
 		/*
 		 * Set the Nimbus look and feel
 		 */
@@ -697,7 +699,7 @@ public class RemoteControl extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
-				new RemoteControl().setVisible(true);
+				new RemoteControl(loco).setVisible(true);
 			}
 		});
 	}
