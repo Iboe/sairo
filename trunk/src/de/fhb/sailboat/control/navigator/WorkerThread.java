@@ -14,11 +14,15 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Navigator.WAIT_TIME_PROPERTY));
 	
-	public static final double MAX_LINE_DIST = 0.001;
-	public static final double MAX_LINE_ANGLE = 30;
+	public static final double MAX_LINE_DIST = Double.parseDouble(System.getProperty(
+			Navigator.MAX_LINE_DIST_PROPERTY));
+	public static final double MAX_LINE_ANGLE = Double.parseDouble(System.getProperty(
+			Navigator.MAX_LINE_ANGLE_PROPERTY));
 	
-	public static final int MAX_BEAT_ANGLE = 38;
-	public static final int MIN_BEAT_ANGLE = -38;
+	public static final int MAX_BEAT_ANGLE = Integer.parseInt(System.getProperty(
+			Navigator.MAX_BEAT_ANGLE_PROPERTY));
+	public static final int MIN_BEAT_ANGLE = Integer.parseInt(System.getProperty(
+			Navigator.MIN_BEAT_ANGLE_PROPERTY));
 	
 	protected static final Logger LOG = LoggerFactory.getLogger(WorkerThread.class);
 	
@@ -121,8 +125,20 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		//as new origin of coordinates
 		difference = new GPS(goal.getLatitude() - worldModel.getGPSModel().getPosition().getLatitude(), 
 				goal.getLongitude() - worldModel.getGPSModel().getPosition().getLongitude());
+		
 		//calculate angle between difference vector and x-axis
-		angle = Math.atan(difference.getLatitude() / difference.getLongitude());
+		if (difference.getLongitude() == 0) {
+			if (difference.getLatitude() > 0) {
+				angle = 90;
+			} else if (difference.getLatitude() < 0) {
+				angle = -90;
+			} else {
+				angle = 0;
+			}
+		} else {
+			angle = Math.atan(difference.getLatitude() / difference.getLongitude());
+		}
+		
 		//convert to degrees
 		angle = toDegree(angle);
 		
