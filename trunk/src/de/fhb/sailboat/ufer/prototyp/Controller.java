@@ -52,12 +52,12 @@ public class Controller {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(null, null, 100));
+		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i).getLat(),
 					markerList.get(i).getLon(), 0), 3));
 		}
-		tasks.add(new PrimitiveCommandTask(null, null, 73));
+		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 
 		mission.setTasks(tasks);
 		
@@ -70,9 +70,9 @@ public class Controller {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(null, null, 100));
+		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
 		tasks.add(new ReachPolygonTask(MapMarkerToGPS.toGPS(markerList)));
-		tasks.add(new PrimitiveCommandTask(null, null, 73));
+		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 		
 		mission.setTasks(tasks);
 		
