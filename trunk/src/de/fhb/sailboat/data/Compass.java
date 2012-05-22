@@ -222,6 +222,7 @@ public class Compass {
 
 	@Override
 	public String toString() {
-		return "azimuth: " + azimuth + ", pitch: " + pitch + ", roll: "	+ roll;
+		return "Compass [azimuth: " + azimuth + ", pitch: " + pitch + ", roll: "
+			+ roll + "]";
 	}
 }

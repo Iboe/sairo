@@ -33,6 +33,6 @@ public class Wind {
 	
 	@Override
 	public String toString() {
-		return "direction: " + direction + ", speed: " + speed;
+		return "Wind [direction: " + direction + ", speed: " + speed + "]";
 	}
 }
