@@ -356,21 +356,21 @@ public class View extends JFrame {
 
 		mMissionRemote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				remote = new RemoteControl(locomotion);
-				remote.start(locomotion);
+				remote = new RemoteControl();
+				remote.main(null);
 			}
 
 		});
 
 		mMission.add(mMissionRemote);
 		
-		JCheckBoxMenuItem mMissionSailMode = new JCheckBoxMenuItem(M_MISSION_SAIL_MODE);
+		final JCheckBoxMenuItem mMissionSailMode = new JCheckBoxMenuItem(M_MISSION_SAIL_MODE);
 		mMissionSailMode.setSelected(false);
 		mMissionSailMode.setToolTipText("Wenn aktiv wird der Motor nicht verwendet.");
 
 		mMissionSailMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				// nuffin
+				toggleSailMode(mMissionSailMode.isSelected());
 			}
 
 		});
@@ -972,6 +972,11 @@ public class View extends JFrame {
 		missionDisplayText.setText("Einzelpunkte:\n"
 				+ map.getMarkerList().toString() + "\nPolygon:\n"
 				+ map.getPolygon().toString());
+	}
+	
+	private void toggleSailMode(boolean mode) {
+		this.controller.setSailMode(mode);
+		if (mode) this.controller.stopMotorTask(planner);
 	}
 
 	/**

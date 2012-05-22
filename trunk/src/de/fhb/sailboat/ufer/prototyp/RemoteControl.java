@@ -3,10 +3,9 @@ package de.fhb.sailboat.ufer.prototyp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fhb.sailboat.control.navigator.WorkerThread;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
-import de.fhb.sailboat.serial.actuator.AKSENLocomotion_alt;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
+import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
 
 /**
  * Class for remote controlling a autonomous sailing boat via a minimalistic
@@ -42,10 +41,11 @@ public class RemoteControl extends javax.swing.JFrame {
 	/**
 	 * Creates new form remoteControl
 	 */
-	public RemoteControl(LocomotionSystem loco) {
+	//public RemoteControl(LocomotionSystem loco) {
+	public RemoteControl() {
 		initComponents();
 
-		locomotion = loco;
+		locomotion = new AKSENLocomotion();
 
 		menuSettings_AutoSendCommands.setSelected(true); // Auto-Send new values
 															// input?
@@ -658,7 +658,11 @@ public class RemoteControl extends javax.swing.JFrame {
 	 * @param args
 	 *            the command line arguments
 	 */
-	public static void start(final LocomotionSystem loco) {
+	public static void main(String[] args) {
+		
+		PropertiesInitializer propsInit = new PropertiesInitializer();
+		
+		propsInit.initializeProperties();
 		/*
 		 * Set the Nimbus look and feel
 		 */
@@ -699,7 +703,7 @@ public class RemoteControl extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
-				new RemoteControl(loco).setVisible(true);
+				new RemoteControl().setVisible(true);
 			}
 		});
 	}

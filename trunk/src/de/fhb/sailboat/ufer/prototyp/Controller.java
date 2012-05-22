@@ -10,6 +10,7 @@ import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.mission.CompassCourseTask;
+import de.fhb.sailboat.mission.HoldAngleToWindTask;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
@@ -58,7 +59,7 @@ public class Controller {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i).getLat(),
 					markerList.get(i).getLon(), 0), 3));
 		}
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 
 		mission.setTasks(tasks);
 		
@@ -73,7 +74,7 @@ public class Controller {
 
 		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
 		tasks.add(new ReachPolygonTask(MapMarkerToGPS.toGPS(markerList)));
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 		
 		mission.setTasks(tasks);
 		
@@ -86,7 +87,7 @@ public class Controller {
 
 		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
 		tasks.add(new CompassCourseTask(angle));
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 		
 		mission.setTasks(tasks);
 		
@@ -98,8 +99,8 @@ public class Controller {
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
-		tasks.add(new CompassCourseTask(angle));
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MIN));
+		tasks.add(new HoldAngleToWindTask(angle));
+		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 		
 		mission.setTasks(tasks);
 		
@@ -112,6 +113,17 @@ public class Controller {
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(new StopTask());
+		
+		mission.setTasks(tasks);
+		
+		planner.doMission(mission);
+	}
+	
+	public void stopMotorTask(Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
 		
 		mission.setTasks(tasks);
 		
