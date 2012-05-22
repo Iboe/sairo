@@ -18,12 +18,12 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.serverModules.CompassTransmitter;
 import de.fhb.sailboat.communication.serverModules.GPSTransmitter;
 import de.fhb.sailboat.communication.serverModules.WindTransmitter;
-import de.fhb.sailboat.control.Pilot;
-import de.fhb.sailboat.control.PilotImpl;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.control.PlannerImpl;
 import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.control.navigator.NavigatorImpl;
+import de.fhb.sailboat.control.pilot.Pilot;
+import de.fhb.sailboat.control.pilot.PilotImpl;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.Mission;
@@ -32,9 +32,9 @@ import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
+import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.serial.sensor.CompassSensor;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
-import de.fhb.sailboat.serial.sensor.WindSensor;
 import de.fhb.sailboat.ufer.prototyp.View;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -43,10 +43,11 @@ public class Initializier {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Initializier.class);
 	
-	private static final boolean TEST = false;
+	private static final boolean TEST = true;
 	private static final String CONFIG_FILE = "config.properties";
 	private Planner planner;
 	private View view;
+	private LocomotionSystem loco=null;
 	
 	public static void main(String[] args) {
 		Initializier init = new Initializier();
@@ -54,10 +55,10 @@ public class Initializier {
 		
 		propsInit.initializeProperties();
 		init.initializeControl();
-		init.initializeCommunication();
 		
 		if (TEST) {
 			init.setSensorDummyValues();
+			init.initializeCommunication();
 			/*
 			new Thread(){
 
@@ -120,11 +121,9 @@ public class Initializier {
 	
 	private void initializeSensors() {
 		LOG.info("-----init sensors-----");
-
 		GpsSensor gps=new GpsSensor(8);
-
+		
 		CompassSensor compassSensor=new CompassSensor(); //zzt. COM17
-		WindSensor wind = new WindSensor(4);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -138,11 +137,12 @@ public class Initializier {
 		Pilot pilot;
 		
 		if (TEST) {
-			pilot = new PilotImpl(new DummyLoco());
+			loco=new DummyLoco();
 		} else {
-			pilot = new PilotImpl(new AKSENLocomotion());
+			loco=new AKSENLocomotion();
+			
 		}
-		
+		pilot = new PilotImpl(loco);
 		Navigator navigator = new NavigatorImpl(pilot);
 		planner = new PlannerImpl(navigator);
 	}
@@ -158,7 +158,7 @@ public class Initializier {
 	}
 	
 	private void initializeView() {
-		view = new View(planner);
+		view = new View(planner,loco);
 		view.setVisible(true);
 	}
 	
