@@ -138,16 +138,19 @@ public class CompassSensor {
 																dataSet.getAccVect(), 
 																usefullrate);
 								WorldModelImpl.getInstance().getCompassModel().setCompass(c);
-								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
-										+" Temp: "+ dataSet.getTemp()
-										+" out of "+ i +" useful samples ("+ usefullrate +")");
+//								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
+//										+" Temp: "+ dataSet.getTemp()
+//										+" out of "+ i +" useful samples ("+ usefullrate +")");
 								
 							}
 						}
 						
 						end = System.currentTimeMillis();
 						// Sleep the difference of clock-rate and calculation-time of this run
-						Thread.sleep(clock-((end - start)));
+						if( end-start > clock)
+							Thread.sleep(clock);
+						else
+							Thread.sleep(clock-((end - start)));
 						
 					}
 				}  catch (InterruptedException e) {
