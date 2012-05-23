@@ -8,16 +8,21 @@ package de.fhb.sailboat.serial.actuator;
  *
  */
 public interface LocomotionSystem {
-	
-	//TODO which are the correct ones??? not using two constants
-	//for the same value, use for example properties file instead
-	public static final int RUDDER_LEFT = 31;//34; 
-	public static final int RUDDER_NORMAL = 73;//68;
-	public static final int RUDDER_RIGHT = 114;//108;
-	
-	public static final int PROPELLOR_MIN = 170;
-	public static final int PROPELLOR_NORMAL = 125;
-	public static final int PROPELLOR_MAX = 80;
+	// Sail
+	public static final int SAIL_SHEET_IN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_IN")); 	// "dichtholen"
+	public static final int SAIL_SHEET_OUT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_OUT")); //"fieren", let out the sail
+	public static final int SAIL_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_NORMAL"));
+	// Rudder
+	public static final int RUDDER_LEFT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_LEFT"));
+	public static final int RUDDER_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_NORMAL"));
+	public static final int RUDDER_RIGHT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_RIGHT"));
+	// Propellor
+	public static final int PROPELLOR_MIN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MIN"));
+	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
+	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_Max"));
+
+	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
+	boolean debug = true; 
 	
 	/**
 	 * relative Position
@@ -26,7 +31,7 @@ public interface LocomotionSystem {
 	 * Neutral: 73
 	 * TODO normalize -41 .. 0 .. +41 => -100 .. 0 .. +100
 	 */	
-	public void setSail(int value);
+	public void setSail(int angle);
 
 	/**
 	 * relative Position
@@ -35,7 +40,7 @@ public interface LocomotionSystem {
 	 * Neutral: 68
 	 * TODO normalize -36 .. 0 .. +36 => -100 .. 0 .. +100
 	 */
-	public void setRudder(int value);
+	public void setRudder(int angle);
 	
 	/**
 	 * absolute Position
@@ -44,7 +49,7 @@ public interface LocomotionSystem {
 	 * Neutral: 73
 	 * TODO normalize 0 .. 82 => -100 .. 0 .. +100
 	 */	
-	public void setPropellor(int value);
+	public void setPropellor(int angle);
 	
 	/**
 	 * TODO Reset-Method on AKSEN-BOARD?
@@ -54,4 +59,7 @@ public interface LocomotionSystem {
 	public void resetSail();
 	public void resetPropellor();
 	public int getBatteryState();
+	public void setDebug(boolean debug);
+	public int getWait_Sleep();
+	public void setWait_Sleep(int wait_sleep);
 }

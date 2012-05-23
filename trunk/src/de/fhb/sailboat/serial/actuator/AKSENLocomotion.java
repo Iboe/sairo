@@ -39,19 +39,19 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 	// Sail
 	static final int SAIL_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".sailNo"));
-	static final int SAIL_SHEET_IN = 31; 	// "dichtholen"
-	static final int SAIL_SHEET_OUT = 114; //"fieren", let out the sail
-	static final int SAIL_NORMAL = 73;
+	static final int SAIL_SHEET_IN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_IN")); 	// "dichtholen"
+	static final int SAIL_SHEET_OUT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_OUT")); //"fieren", let out the sail
+	static final int SAIL_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_NORMAL"));
 	// Rudder
 	static final int RUDDER_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".rudderNo"));
-	public static final int RUDDER_LEFT = 34;
-	public static final int RUDDER_NORMAL = 68;
-	public static final int RUDDER_RIGHT = 108;
+	public static final int RUDDER_LEFT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_LEFT"));
+	public static final int RUDDER_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_NORMAL"));
+	public static final int RUDDER_RIGHT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_RIGHT"));
 	// Propellor
 	static final int PROPELLOR_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
-	public static final int PROPELLOR_MIN = 170;
-	public static final int PROPELLOR_NORMAL = 125;
-	public static final int PROPELLOR_MAX = 80;
+	public static final int PROPELLOR_MIN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MIN"));
+	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
+	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_Max"));
 
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
 	boolean debug = true; 
@@ -77,10 +77,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 		this.debug = debug;
 	}
 
-	public int getWaitSleep() {
+	public int getWait_Sleep() {
 		return this.wait_sleep;
 	}
-	public void setWait_sleep(int wait_sleep) {
+	public void setWait_Sleep(int wait_sleep) {
 		this.wait_sleep = wait_sleep;
 	}
 	/** 
@@ -301,7 +301,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						if(r != expected) {
 							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString());
 							status = 0;
-							this.setWait_sleep(wait_sleep*2);
+							this.setWait_Sleep(wait_sleep*2);
 							continue;
 						} else {
 							// We expect everything went well:
@@ -323,7 +323,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 		return status;
 }
 	
-	@Override
 	public int getBatteryState() {
 		int state = -1;
 		try {
@@ -335,4 +334,5 @@ public class AKSENLocomotion implements LocomotionSystem {
 		}
 		return state;
 	}
+
 }
