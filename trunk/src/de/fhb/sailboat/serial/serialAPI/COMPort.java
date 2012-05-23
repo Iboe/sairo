@@ -26,6 +26,7 @@ public class COMPort{
 	private SerialPort _serialPortObject = null;
 	private int _baud = 9600;
 	private static final Logger LOG = Logger.getLogger(COMPort.class);
+	private static final int SEND_WAIT = 0;//Integer.parseInt(System.getProperty(COMPort.class.getSimpleName() + ".wait_sleep")); // Wait between each written Byte in Milliseconds
 	/**
 	 * Construktor der COM Klasse
 	 * @param int port Nr des Com Ports
@@ -148,7 +149,16 @@ public class COMPort{
 	 * @throws IOException
 	 */
 	public void writeString(String text) throws IOException {
-		System.out.println(text);
+		this.writeString(text, SEND_WAIT);
+	}
+	/**
+	 * Write bytewise to output-Stream of a given Com-Port
+	 * 
+	 * @param text
+	 * @param sleep
+	 * @throws IOException
+	 */
+	public void writeString(String text,int sleep) throws IOException {
 		try {
 			OutputStream os = this._serialPortObject.getOutputStream();
 			byte[] b = text.getBytes();
@@ -156,7 +166,7 @@ public class COMPort{
 			for (int i = 0; i < b.length; i++) {
 				os.write(b[i]);
 				// minimal sleep to give Devices time to handle the data
-				Thread.sleep(2);
+				Thread.sleep(sleep);
 			}
 		
 		} catch (InterruptedException e) {
@@ -165,6 +175,7 @@ public class COMPort{
 		}
 	}
 	
+
 	/**
 	 * Write bytewise to OutputStream
 	 * @param b
@@ -172,6 +183,7 @@ public class COMPort{
 	 * @author S. Schmidt
 	 */
 	public void writeByte(byte b) throws IOException {
+		
 		this._serialPortObject.getOutputStream().write(b);
 	}
 }

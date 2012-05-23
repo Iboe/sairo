@@ -31,28 +31,31 @@ public class AKSENLocomotion implements LocomotionSystem {
 	String lastCom;
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
+	int wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
+
+
 	boolean keepRunning = true;
 	Thread aksenThread;
 	
 	// Sail
-	static final int sailNo = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".sailNo"));
-	static final int sailMin = 31;
-	static final int sailMax = 114;
-	static final int sailN = 73;
+	static final int SAIL_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".sailNo"));
+	static final int SAIL_SHEET_IN = 31; 	// "dichtholen"
+	static final int SAIL_SHEET_OUT = 114; //"fieren", let out the sail
+	static final int SAIL_NORMAL = 73;
 	// Rudder
-	static final int rudderNo = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".rudderNo"));
-	static final int rudderMin = 34;
-	static final int rudderMax = 108;
-	static final int rudderN = 68;
+	static final int RUDDER_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".rudderNo"));
+	public static final int RUDDER_LEFT = 34;
+	public static final int RUDDER_NORMAL = 68;
+	public static final int RUDDER_RIGHT = 108;
 	// Propellor
-	static final int propellorNo = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
-	static final int propellorMin = 32;
-	static final int propellorMax = 112;
-	static final int propellorN = 72;
+	static final int PROPELLOR_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
+	public static final int PROPELLOR_MIN = 170;
+	public static final int PROPELLOR_NORMAL = 125;
+	public static final int PROPELLOR_MAX = 80;
 
-	int zustand = 0;
+	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
+	boolean debug = true; 
 	//Debug
-	String lastAnswer;
 	/**
 	 * Constructor
 	 * 
@@ -66,26 +69,41 @@ public class AKSENLocomotion implements LocomotionSystem {
 
 	}
 
+	public boolean isDebug() {
+		return debug;
+	}
+
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
+
+	public int getWaitSleep() {
+		return this.wait_sleep;
+	}
+	public void setWait_sleep(int wait_sleep) {
+		this.wait_sleep = wait_sleep;
+	}
 	/** 
 	 * Send one Rudder-Command to AKSEN-Board
 	 * @param int angle
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setRudder(int)
 	 */
-	public void setRudder(int value) {
-			int angle = value;
+	public void setRudder(int angle) {
+		if(isDebug())	
+		{
+			int status = this.AKSENServoCommand(RUDDER_NUMBER, angle);
+			System.out.println(status);
+			if(status == -1) {
+				LOG.warn("Command not send!");
+			}
+		}
+		else
+		{
 			// send command-string to AKSEN-Board
-			String com = this.buildCommand(rudderNo, angle);
+			String com = this.buildCommand(RUDDER_NUMBER, angle);
 	
 			this.AKSENCommand(com);
-			
-
-//		try {
-//			
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+		}	
 	}
 
 	/** 
@@ -94,13 +112,23 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setSail(int)
 	 */
 	@Override
-	public void setSail(int value) {
-
-		int angle = value;
-		String com = this.buildCommand(sailNo, angle);
-		this.AKSENCommand(com);
+	public void setSail(int angle) {
 		
-//		this.AKSENServoCommand(sailNo, angle);
+		if(isDebug())	
+		{
+			int status = this.AKSENServoCommand(SAIL_NUMBER, angle);
+			System.out.println(status);
+			if(status == -1) {
+				LOG.warn("Command not send!");
+			}
+		}
+		else
+		{
+			// send command-string to AKSEN-Board
+			String com = this.buildCommand(SAIL_NUMBER, angle);
+	
+			this.AKSENCommand(com);
+		}	
 
 	}
 
@@ -110,11 +138,22 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setPropeller(int)
 	 */
 	@Override
-	public void setPropellor(int value) {
-
-		int angle = value;
-		String com = this.buildCommand(propellorNo, angle);
-		this.AKSENCommand(com);
+	public void setPropellor(int angle) {
+		if(isDebug())	
+		{
+			int status = this.AKSENServoCommand(PROPELLOR_NUMBER, angle);
+			System.out.println(status);
+			if(status == -1) {
+				LOG.warn("Command not send!");
+			}
+		}
+		else
+		{
+			// send command-string to AKSEN-Board
+			String com = this.buildCommand(PROPELLOR_NUMBER, angle);
+	
+			this.AKSENCommand(com);
+		}	
 
 	}
 
@@ -138,7 +177,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void resetRudder() {
-		this.setRudder(rudderN);
+		this.setRudder(RUDDER_NORMAL);
 	}
 
 	/** 
@@ -147,7 +186,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void resetSail() {
-		this.setSail(sailN);
+		this.setSail(SAIL_NORMAL);
 	}
 
 	/** 
@@ -156,7 +195,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void resetPropellor() {
-		this.setPropellor(propellorN);
+		this.setPropellor(PROPELLOR_NORMAL);
 	}
 	
 	public void closePort() {
@@ -173,40 +212,110 @@ public class AKSENLocomotion implements LocomotionSystem {
 
 	private void AKSENCommand(String com) {
 				try {
-					this.myCOM.writeString(com);
-					
-//					byte[] buffer = new byte[1024];
-//					buffer = this.myCOM.readByte(buffer);
-//					System.out.println("Ausgabe: "+ new String(buffer,0,buffer.length));
-
+					this.myCOM.writeString(com,this.wait_sleep);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		
 	}
-
+	/**
+	 * Send Command to AKSEN step by step
+	 * with response observation and command validation
+	 * @param s
+	 * @param a
+	 * @return Status (-1: fail, 1: correct
+	 */
 	private int AKSENServoCommand(int s, int a) {
 		int status = -1;
-		int r;
+		final int n = 3; // Number of attempts to
+		int k = 0;
+		int i;
+		
+		Byte send,r, expected;
 		try {
-			 //* 		1) (S)end: s, byte: 73	- acquire Connection
-			this.myCOM.writeByte((byte) 73);
-			 //*         (R)eceive: a	- Acknowledge
-			r = this.myCOM.readByte();
-			System.out.println(String.valueOf(r));
-			 //*      2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
-			 //*                                            More commands separated by comma (e.g. 1,90,2,45,0,73)
-			 //*         R: +			- for every correct command
-			 //*      3) S: e			- end of Instruction set
-			 //*         R: a			- Ack
-			 //*      4) S: a			- execute Instruction on AKSEN
-			 //*         R: e			- executed (=ACK)
-			
-//			byte[] buffer = new byte[1024];
-//			buffer = this.myCOM.readByte(buffer);
-//			System.out.println("Ausgabe: "+ new String(buffer,0,buffer.length));
+		
+			 while(k < n){
+				k++;
+				//* 1) (S)end: s, hex: 0x73, dec : 115	- acquire Connection
+				send = 0x73;
+				//*     (R)eceive: a, hex: 0x61, dec: 97	- Acknowledge
+				expected = 0x61;
+				
+				r = 0x00;
+				i = 0;
+				while (r != expected) {
+					i++;
+					this.myCOM.writeByte(send);
+					r = (byte) this.myCOM.readByte();
+					if (i == n) {
+						break;
+					}
+				}
+				// recheck, because of broken loop
+				if ( r != expected) {
+					LOG.info("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts.");
+					return -1;
+				} else {
+					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
+					String t = s + "," + a;
+					byte[] b = t.getBytes();
+					
+					for (int j = 0; j < b.length; j++) {
+						r=0x00;
+						this.myCOM.writeByte(b[j]);
+						Thread.sleep(wait_sleep);
+						r = (byte) this.myCOM.readByte();
+					}
+					if (r == 110) {
+						continue;
+					}
+					//*                                        More commands separated by comma (e.g. 1,90,2,45,0,73)
+					// TODO Multi-Instructions
+					//*         R: +, dec:  43, hex: 2b		- for every correct command
+					//*      3) S: e, dec: 101, hex: 65			- end of Instruction set
+					send = 0x65;
+					//*         R: number of recieved commands; 1
+					expected = 0x31;
+					r = 0x00;
+					
+					this.myCOM.writeByte(send);
+					
+					r = (byte) this.myCOM.readByte();					
+					// didn't got the correct answer? try to resend whole command in next loop
+					if(r != expected) {
+						if(k==n)
+							LOG.info("Couldn't end InstructionSet on AKSEN in "+ n +" attempts.");
+						continue;
+					} else {
+						 //* 4) S: a, hex: 61, dec 097			- execute Instruction on AKSEN
+						send = 0x61;
+						//*     R: e, hex: 65, dec: 101			- executed (=ACK)
+						expected = 0x65;
+						r = 0x00;
+						this.myCOM.writeByte(send);
+						Thread.sleep(wait_sleep*2);
+						r = (byte) this.myCOM.readByte();
+						
+						// didn't got the correct answer? try to resend whole command in next loop
+						// r might be 110
+						if(r != expected) {
+							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString());
+							status = 0;
+							this.setWait_sleep(wait_sleep*2);
+							continue;
+						} else {
+							// We expect everything went well:
+							status = 1;
+							break;
+						}
+					}
+				}
+			}
 
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -218,7 +327,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	public int getBatteryState() {
 		int state = -1;
 		try {
-			byte b = 118;	// v in byte
+			byte b = 118;	// decimal for String "v"
 			this.myCOM.writeByte(b);
 			state = this.myCOM.readByte();
 		} catch (IOException e) {
