@@ -42,7 +42,7 @@ public class ReachPolygonTask implements Task {
 		//java.awt.polygon uses integer values for its points, so the GPS
 		//coordinates have to scaled up to achieve the required precision
 		int latitude = (int) (position.getLatitude() * PRECISION);
-		int longitude = (int) (position.getLatitude() * PRECISION);
+		int longitude = (int) (position.getLongitude() * PRECISION);
 		
 		return polygon.contains(latitude, longitude);
 	}
@@ -56,7 +56,7 @@ public class ReachPolygonTask implements Task {
 		//coordinates have to scaled up to achieve the required precision
 		for (int i = 0; i < size; i++) {
 			latitudes[i] = (int) (points.get(i).getLatitude() * PRECISION);
-			longitudes[i] = (int) (points.get(i).getLatitude() * PRECISION);
+			longitudes[i] = (int) (points.get(i).getLongitude() * PRECISION);
 		}
 		
 		return new Polygon(latitudes, latitudes, size);
