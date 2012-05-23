@@ -19,7 +19,7 @@ public interface LocomotionSystem {
 	// Propellor
 	public static final int PROPELLOR_MIN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MIN"));
 	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
-	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_Max"));
+	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MAX"));
 
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
 	boolean debug = true; 
