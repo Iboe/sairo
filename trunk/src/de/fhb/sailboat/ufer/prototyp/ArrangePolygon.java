@@ -24,10 +24,6 @@ public class ArrangePolygon {
 				distances.add(euklidDistance(
 						arrangedPolygon.get(arrangedPolygon.size() - 1),
 						polygon.get(i)));
-
-				System.out.println(euklidDistance(
-						arrangedPolygon.get(arrangedPolygon.size() - 1),
-						polygon.get(i)));
 			}
 			arrangedPolygon.add(polygon.get(returnMinimum(distances)));
 			polygon.remove(returnMinimum(distances));
