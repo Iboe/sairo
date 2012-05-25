@@ -22,6 +22,7 @@ import de.fhb.sailboat.serial.serialAPI.COMPort;
  * 
  * ---
  * 
+ * 
  * @author schmidst
  *
  */
@@ -33,29 +34,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
 	int wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
 
-
-	boolean keepRunning = true;
-	Thread aksenThread;
-	
-	// Sail
-	static final int SAIL_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".sailNo"));
-	static final int SAIL_SHEET_IN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_IN")); 	// "dichtholen"
-	static final int SAIL_SHEET_OUT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_OUT")); //"fieren", let out the sail
-	static final int SAIL_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_NORMAL"));
-	// Rudder
-	static final int RUDDER_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".rudderNo"));
-	public static final int RUDDER_LEFT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_LEFT"));
-	public static final int RUDDER_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_NORMAL"));
-	public static final int RUDDER_RIGHT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_RIGHT"));
-	// Propellor
-	static final int PROPELLOR_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
-	public static final int PROPELLOR_MIN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MIN"));
-	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
-	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_Max"));
-
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
 	boolean debug = true; 
-	//Debug
+
 	/**
 	 * Constructor
 	 * 
@@ -68,18 +49,33 @@ public class AKSENLocomotion implements LocomotionSystem {
 		myCOM.open();
 
 	}
-
+	/**
+	 * internal Debug-Mode
+	 * @return boolean debug
+	 */
 	public boolean isDebug() {
 		return debug;
 	}
 
+	/**
+	 * internal Debug-Mode
+	 * Setter
+	 */
 	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}
 
+	/**
+	 * 
+	 * @return int wait_sleep
+	 */
 	public int getWait_Sleep() {
 		return this.wait_sleep;
 	}
+	
+	/**
+	 * Setter Wait_Sleep
+	 */
 	public void setWait_Sleep(int wait_sleep) {
 		this.wait_sleep = wait_sleep;
 	}

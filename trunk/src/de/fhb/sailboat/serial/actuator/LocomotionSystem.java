@@ -9,20 +9,22 @@ package de.fhb.sailboat.serial.actuator;
  */
 public interface LocomotionSystem {
 	// Sail
+	static final int SAIL_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".sailNo"));
 	public static final int SAIL_SHEET_IN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_IN")); 	// "dichtholen"
 	public static final int SAIL_SHEET_OUT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_OUT")); //"fieren", let out the sail
 	public static final int SAIL_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".SAIL_SHEET_NORMAL"));
 	// Rudder
+	static final int RUDDER_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".rudderNo"));
 	public static final int RUDDER_LEFT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_LEFT"));
 	public static final int RUDDER_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_NORMAL"));
 	public static final int RUDDER_RIGHT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_RIGHT"));
 	// Propellor
+	static final int PROPELLOR_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
 	public static final int PROPELLOR_MIN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MIN"));
 	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
 	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MAX"));
 
-	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
-	boolean debug = true; 
+
 	
 	/**
 	 * relative Position
