@@ -18,7 +18,7 @@ public class CompassSensor {
 	COMPort myCOM;
 	private static final Logger LOG = Logger.getLogger(CompassSensor.class);
 
-	String lastCom;
+	private Compass c;
 
 	/*
 	 * Configuration Variables
@@ -54,6 +54,7 @@ public class CompassSensor {
 		long start, end;
 		private static Logger LOG = Logger.getLogger(CompassSensorThread.class);
 
+		
 		public CompassSensorThread(CompassSensor sensorInstance) {
 			this.cInstance = sensorInstance;
 			this.clock = sensorInstance.getClock();
@@ -128,7 +129,7 @@ public class CompassSensor {
 							if(dataSet.medianAll()) {
 								// set to Worldmodel
 								double usefullrate = i/valueArray.length;
-								Compass c = new Compass(dataSet.getAzimuth(),
+								this.cInstance.c = new Compass(dataSet.getAzimuth(),
 																dataSet.getPitch(), 
 																dataSet.getRoll(),
 																dataSet.getTemp(),
@@ -137,7 +138,7 @@ public class CompassSensor {
 																dataSet.getAccS(), 
 																dataSet.getAccVect(), 
 																usefullrate);
-								WorldModelImpl.getInstance().getCompassModel().setCompass(c);
+								WorldModelImpl.getInstance().getCompassModel().setCompass(this.cInstance.c);
 //								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
 //										+" Temp: "+ dataSet.getTemp()
 //										+" out of "+ i +" useful samples ("+ usefullrate +")");
@@ -196,6 +197,9 @@ public class CompassSensor {
 	}
 
 	
+	public String getC() {
+		return c.toString();
+	}
 	public int getErrorcount() {
 		return errorcount;
 	}
