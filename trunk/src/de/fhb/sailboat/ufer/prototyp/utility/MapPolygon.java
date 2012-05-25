@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 
+import de.fhb.sailboat.data.GPS;
+
 public interface MapPolygon {
 
 	/**
 	 * @return Latitude/Longitude of top left of rectangle
 	 */
-	public List<Coordinate> getPoints();
+	public List<GPS> getPoints();
 
 	/**
 	 * Paints the map rectangle on the map. The <code>topLeft</code> and

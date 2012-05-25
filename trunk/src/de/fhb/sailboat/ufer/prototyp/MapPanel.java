@@ -1,5 +1,6 @@
 package de.fhb.sailboat.ufer.prototyp;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -7,13 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
-import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
@@ -22,7 +23,10 @@ import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.ufer.prototyp.utility.Constants;
-import de.fhb.sailboat.ufer.prototyp.utility.GPSToCoordinate;
+import de.fhb.sailboat.ufer.prototyp.utility.GPSTransformations;
+import de.fhb.sailboat.ufer.prototyp.utility.JMapViewer;
+import de.fhb.sailboat.ufer.prototyp.utility.MapPolygon;
+import de.fhb.sailboat.ufer.prototyp.utility.MapPolygonImpl;
 import de.fhb.sailboat.ufer.prototyp.utility.MapRectangleImpl;
 import de.fhb.sailboat.ufer.prototyp.utility.ScalePanel;
 
@@ -37,27 +41,22 @@ public class MapPanel extends JPanel {
 
 	private ArrayList<MapMarker> markerList;
 	private ArrayList<MapMarker> positionHistory = new ArrayList<MapMarker>();
+	private ArrayList<MapMarker> polyHelpList = new ArrayList<MapMarker>();
 	private ArrayList<MapRectangle> rectList;
-	private ArrayList<MapMarker> polygon;
+	private ArrayList<MapPolygon> polygonList;
 	private JMapViewer map;
 	private int markerMode = Constants.NO_MARK;
 
 	private Coordinate firstCorner = null;
+	private List<GPS> currentPoly = null;
 
 	private int currentZoom;
 
 	public MapPanel() {
+		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
 		this.rectList = new ArrayList<MapRectangle>();
-		this.polygon = new ArrayList<MapMarker>();
-		this.map = new JMapViewer();
-	}
-
-	public MapPanel(ArrayList<MapMarker> markerList,
-			ArrayList<MapRectangle> rectList) {
-		this.markerList = markerList;
-		this.rectList = rectList;
-		this.map = new JMapViewer();
+		this.polygonList = new ArrayList<MapPolygon>();
 	}
 
 	public JPanel mapPanel() {
@@ -72,7 +71,7 @@ public class MapPanel extends JPanel {
 
 		// navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
 
-		navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.REGATTASTRECKE));
+		navigateTo(GPSTransformations.gpsToCoordinate(Constants.REGATTASTRECKE));
 
 		map.addMouseListener(new MouseListener() {
 
@@ -99,22 +98,19 @@ public class MapPanel extends JPanel {
 					 * } break;
 					 */
 
-					case 1: {
-						markerList.add(new MapMarkerDot(Color.GREEN, target
+					case 1:
+						markerList.add(new MapMarkerDot(Color.RED, target
 								.getLat(), target.getLon()));
 						map.addMapMarker(markerList.get(markerList.size() - 1));
-					}
 						break;
 
 					case 2:
 						addRectsToMap(target);
 						break;
 
-					case 3: {
-						polygon.add(new MapMarkerDot(Color.RED,
-								target.getLat(), target.getLon()));
-						map.addMapMarker(polygon.get(polygon.size() - 1));
-					}
+					case 3:
+						addPointToPolygon(GPSTransformations
+								.coordinateToGPS(target));
 						break;
 
 					default:
@@ -162,7 +158,6 @@ public class MapPanel extends JPanel {
 					markerMode = Constants.MARKER;
 					markRectOnMap.setSelected(false);
 					markPolygon.setSelected(false);
-					removeEveryObject();
 				} else {
 					markerMode = Constants.NO_MARK;
 				}
@@ -176,7 +171,6 @@ public class MapPanel extends JPanel {
 					markerMode = Constants.RECTANGLE;
 					markOnMap.setSelected(false);
 					markPolygon.setSelected(false);
-					removeEveryObject();
 				} else {
 					markerMode = Constants.NO_MARK;
 				}
@@ -190,9 +184,9 @@ public class MapPanel extends JPanel {
 					markerMode = Constants.POLYGON;
 					markOnMap.setSelected(false);
 					markRectOnMap.setSelected(false);
-					removeEveryObject();
 				} else {
 					markerMode = Constants.NO_MARK;
+					addPointToPolygon(currentPoly.get(0));
 				}
 			}
 		});
@@ -260,10 +254,40 @@ public class MapPanel extends JPanel {
 					bottomRight);
 
 			rectList.add(rectangle);
-
 			map.addMapRectangle(rectList.get(rectList.size() - 1));
 
 			firstCorner = null;
+		}
+	}
+
+	private void addPointToPolygon(GPS target) {
+		if (currentPoly == null) {
+			currentPoly = new ArrayList<GPS>();
+			currentPoly.add(target);
+			polyHelpList.add(new MapMarkerDot(Color.BLACK,
+					target.getLatitude(), target.getLongitude()));
+			map.addMapMarker(polyHelpList.get(polyHelpList.size() - 1));
+		} else {
+			// if the current point to add has the same coordinates as the first
+			// point in the polygon, finish this polygon, else add this point to
+			// the current polygon
+			if (currentPoly.get(0).getLatitude() == target.getLatitude()
+					&& currentPoly.get(0).getLongitude() == target
+							.getLongitude()) {
+				MapPolygon builtPolygon = new MapPolygonImpl(ArrangePolygon.arrange(currentPoly),
+						Color.BLACK, new BasicStroke(3));
+				map.addMapPolygon(builtPolygon);
+				polygonList.add(builtPolygon);
+				for (int i = 0; i < polyHelpList.size(); i++) {
+					map.removeMapMarker(polyHelpList.get(i));
+				}
+				currentPoly = null;
+			} else {
+				currentPoly.add(target);
+				polyHelpList.add(new MapMarkerDot(Color.BLACK,
+						target.getLatitude(), target.getLongitude()));
+				map.addMapMarker(polyHelpList.get(polyHelpList.size() - 1));
+			}
 		}
 	}
 
@@ -276,15 +300,17 @@ public class MapPanel extends JPanel {
 	 */
 
 	public void followBoat(GPS boatPosition) {
-		positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
-				.getLatitude(), boatPosition.getLongitude()));
+		if (boatPosition.getLatitude() != 0.0) {
+			positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
+					.getLatitude(), boatPosition.getLongitude()));
 
-		if (positionHistory.size() > Constants.MAXIMUM_COUNT_LAST_POSITION) {
-			map.removeMapMarker(positionHistory.get(0));
-			positionHistory.remove(0);
+			if (positionHistory.size() > Constants.MAXIMUM_COUNT_LAST_POSITION) {
+				map.removeMapMarker(positionHistory.get(0));
+				positionHistory.remove(0);
+			}
+
+			map.addMapMarker(positionHistory.get(positionHistory.size() - 1));
 		}
-
-		map.addMapMarker(positionHistory.get(positionHistory.size() - 1));
 	}
 
 	// FIXME Set this to public so I can reset the Map manually through View -
@@ -296,24 +322,15 @@ public class MapPanel extends JPanel {
 	}
 
 	private void removeMapMarkerFromMap() {
-		for (int i = this.markerList.size() - 1; i >= 0; i--) {
-			this.map.removeMapMarker(this.markerList.get(i));
-		}
-		this.markerList = new ArrayList<MapMarker>();
+		map.getMapMarkerList().clear();
 	}
 
 	private void removePolygonsFromMap() {
-		for (int i = this.polygon.size() - 1; i >= 0; i--) {
-			this.map.removeMapMarker(this.polygon.get(i));
-		}
-		this.polygon = new ArrayList<MapMarker>();
+		map.getMapPolygonList().clear();
 	}
 
 	private void removeRectanglesFromMap() {
-		for (int i = this.rectList.size() - 1; i >= 0; i--) {
-			this.map.removeMapRectangle(this.rectList.get(i));
-		}
-		this.rectList = new ArrayList<MapRectangle>();
+		map.getMapRectangleList().clear();
 	}
 
 	private void navigateTo(Coordinate coor) {
@@ -345,28 +362,12 @@ public class MapPanel extends JPanel {
 		}
 	}
 
-	public ArrayList<MapMarker> getMarkerList() {
-		return markerList;
-	}
-
-	public void setMarkerList(ArrayList<MapMarker> markerList) {
-		this.markerList = markerList;
-	}
-
 	public ArrayList<MapMarker> getPositionHistory() {
 		return positionHistory;
 	}
 
 	public void setPositionHistory(ArrayList<MapMarker> positionHistory) {
 		this.positionHistory = positionHistory;
-	}
-
-	public ArrayList<MapRectangle> getRectList() {
-		return rectList;
-	}
-
-	public void setRectList(ArrayList<MapRectangle> rectList) {
-		this.rectList = rectList;
 	}
 
 	public JMapViewer getMap() {
@@ -377,12 +378,27 @@ public class MapPanel extends JPanel {
 		this.map = map;
 	}
 
-	public ArrayList<MapMarker> getPolygon() {
-		return polygon;
+	public ArrayList<MapMarker> getMarkerList() {
+		return markerList;
 	}
 
-	public void setPolygon(ArrayList<MapMarker> polygon) {
-		this.polygon = polygon;
+	public void setMarkerList(ArrayList<MapMarker> markerList) {
+		this.markerList = markerList;
 	}
 
+	public ArrayList<MapRectangle> getRectList() {
+		return rectList;
+	}
+
+	public void setRectList(ArrayList<MapRectangle> rectList) {
+		this.rectList = rectList;
+	}
+
+	public ArrayList<MapPolygon> getPolygonList() {
+		return polygonList;
+	}
+
+	public void setPolygonList(ArrayList<MapPolygon> polygonList) {
+		this.polygonList = polygonList;
+	}
 }

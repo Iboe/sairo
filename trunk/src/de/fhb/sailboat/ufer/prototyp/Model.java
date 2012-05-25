@@ -1,11 +1,13 @@
 package de.fhb.sailboat.ufer.prototyp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.ufer.prototyp.utility.MapPolygon;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.CompassModelImpl;
 import de.fhb.sailboat.worldmodel.GPSModel;
@@ -32,8 +34,8 @@ public class Model {
 	private GPSModel gps;
 	
 	// for the planned exercise
-	private ArrayList<MapMarker> circleMarkerList;
-	private ArrayList<MapMarker> polyMarkerList;
+	private List<GPS> circleMarkerList;
+	private List<MapPolygon> polyList;
 	
 	private boolean sailMode;
 	
@@ -83,20 +85,20 @@ public class Model {
 		gps.setPosition(position);
 	}
 
-	public ArrayList<MapMarker> getCircleMarkerList() {
+	public List<GPS> getCircleMarkerList() {
 		return circleMarkerList;
 	}
 
-	public void setCircleMarkerList(ArrayList<MapMarker> markerList) {
+	public void setCircleMarkerList(List<GPS> markerList) {
 		this.circleMarkerList = markerList;
 	}
-	
-	public ArrayList<MapMarker> getPolyMarkerList() {
-		return polyMarkerList;
+
+	public List<MapPolygon> getPolyList() {
+		return polyList;
 	}
 
-	public void setPolyMarkerList(ArrayList<MapMarker> markerList) {
-		this.polyMarkerList = markerList;
+	public void setPolyList(List<MapPolygon> polyList) {
+		this.polyList = polyList;
 	}
 
 	public boolean isSailMode() {

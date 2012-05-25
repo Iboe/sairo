@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
@@ -17,7 +15,7 @@ import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
-import de.fhb.sailboat.ufer.prototyp.utility.MapMarkerToGPS;
+import de.fhb.sailboat.ufer.prototyp.utility.MapPolygon;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -34,12 +32,12 @@ public class Controller {
 
 	// Variables
 	private Model model;
-	
+
 	private WorldModel worldModel;
 
 	public Controller() {
 		this.model = new Model();
-		worldModel=WorldModelImpl.getInstance();
+		worldModel = WorldModelImpl.getInstance();
 	}
 
 	// Committer (used for sending data to other sailbot classes)
@@ -49,84 +47,103 @@ public class Controller {
 	 * collection of CircleTasks in Mission.
 	 */
 	public void commitCircleMarkerList(Planner planner) {
-		ArrayList<MapMarker> markerList = this.model.getCircleMarkerList();
+		List<GPS> markerList = this.model.getCircleMarkerList();
 
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_MAX));
 		for (int i = 0; i < markerList.size(); i++) {
-			tasks.add(new ReachCircleTask(new GPS(markerList.get(i).getLat(),
-					markerList.get(i).getLon(), 0), 3));
+			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
+					.getLatitude(), markerList.get(i).getLongitude()), 3));
 		}
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_NULL));
 
 		mission.setTasks(tasks);
-		
+		System.out.println(mission.getTasks().toString());
 		planner.doMission(mission);
 	}
-	
-	public void commitPolyMarkerList(Planner planner) {
-		ArrayList<MapMarker> markerList = this.model.getPolyMarkerList();
+
+	public void commitPolyList(Planner planner) {
+		List<MapPolygon> polyList = this.model.getPolyList();
 
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
-		tasks.add(new ReachPolygonTask(MapMarkerToGPS.toGPS(markerList)));
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
-		
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_MAX));
+		for (int i = 0; i < polyList.size(); i++) {
+			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
+		}
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_NULL));
+
 		mission.setTasks(tasks);
-		
+
 		planner.doMission(mission);
 	}
-	
+
 	public void commitReachCompassTask(int angle, Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_MAX));
 		tasks.add(new CompassCourseTask(angle));
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
-		
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_NULL));
+
 		mission.setTasks(tasks);
-		
+
 		planner.doMission(mission);
 	}
-	
+
 	public void commitHoldAngleToWind(int angle, Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_MAX));
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_MAX));
 		tasks.add(new HoldAngleToWindTask(angle));
-		if (!isSailMode()) tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
-		
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null,
+					RemoteControl.PROPELLOR_NULL));
+
 		mission.setTasks(tasks);
-		
+
 		planner.doMission(mission);
 	}
-	
+
 	public void commitStopTask(Planner planner) {
 		// TODO Implement proper stop mission task beyond resetting motor
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(new StopTask());
-		
+
 		mission.setTasks(tasks);
-		
+
 		planner.doMission(mission);
 	}
-	
+
 	public void stopMotorTask(Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(null, null, RemoteControl.PROPELLOR_NULL));
-		
+		tasks.add(new PrimitiveCommandTask(null, null,
+				RemoteControl.PROPELLOR_NULL));
+
 		mission.setTasks(tasks);
-		
+
 		planner.doMission(mission);
 	}
 
@@ -149,17 +166,19 @@ public class Controller {
 	public void updateRandom() {
 		Random dice = new Random();
 
-		//this.model.setCompDirection(dice.nextInt(361));
-		
-		this.model.getWind().setWind(new Wind(dice.nextInt(361), dice.nextInt(3000)));
+		// this.model.setCompDirection(dice.nextInt(361));
 
-		this.model.setGpsPosition(new GPS(dice.nextDouble() + dice.nextInt(12), dice.nextDouble() + dice.nextInt(12), dice.nextInt(10)));
+		this.model.getWind().setWind(
+				new Wind(dice.nextInt(361), dice.nextInt(3000)));
+
+		this.model.setGpsPosition(new GPS(dice.nextDouble() + dice.nextInt(12),
+				dice.nextDouble() + dice.nextInt(12), dice.nextInt(10)));
 	}
 
 	public void updateWind() {
 		this.model.setWind(worldModel.getWindModel());
 	}
-	
+
 	public void updateCompass() {
 		this.model.setCompass(worldModel.getCompassModel());
 	}
@@ -168,15 +187,14 @@ public class Controller {
 		this.model.setGps(worldModel.getGPSModel());
 	}
 
-
 	// Setter (values given by View to store in Model)
-	public void setCircleMarkerList(ArrayList<MapMarker> markerList) {
-		this.model.setCircleMarkerList(markerList);
+	public void setCircleMarkerList(List<GPS> pointList) {
+		this.model.setCircleMarkerList(pointList);
 		System.out.println("Set passed.");
 	}
-	
-	public void setPolyMarkerList(ArrayList<MapMarker> markerList) {
-		this.model.setPolyMarkerList(markerList);
+
+	public void setPolyList(List<MapPolygon> polyList) {
+		this.model.setPolyList(polyList);
 		System.out.println("Set passed.");
 	}
 
@@ -196,11 +214,11 @@ public class Controller {
 	public int getGpsSatelites() {
 		return this.model.getGps().getPosition().getSatelites();
 	}
-	
+
 	public boolean isSailMode() {
 		return this.model.isSailMode();
 	}
-	
+
 	public void setSailMode(boolean sailMode) {
 		this.model.setSailMode(sailMode);
 	}

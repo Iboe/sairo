@@ -12,29 +12,31 @@ import java.util.List;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 
+import de.fhb.sailboat.data.GPS;
+
 /**
  * @author Vincent
  * 
  */
 public class MapPolygonImpl implements MapPolygon {
 
-	private ArrayList<Coordinate> points;
+	private List<GPS> points;
 	private Color color;
 	private Stroke stroke;
 
-	public MapPolygonImpl(ArrayList<Coordinate> points) {
+	public MapPolygonImpl(List<GPS> points) {
 		this(points, Color.BLUE, new BasicStroke(2));
 	}
 
-	public MapPolygonImpl(ArrayList<Coordinate> points, Color color,
+	public MapPolygonImpl(List<GPS> currentPoly, Color color,
 			Stroke stroke) {
-		this.points = points;
+		this.points = currentPoly;
 		this.color = color;
 		this.stroke = stroke;
 	}
 
 	@Override
-	public ArrayList<Coordinate> getPoints() {
+	public List<GPS> getPoints() {
 		return points;
 	}
 
@@ -50,18 +52,20 @@ public class MapPolygonImpl implements MapPolygon {
 			g2.setStroke(stroke);
 		}
 		// Draw
-		/*
-		 * g.drawRect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x,
-		 * bottomRight.y - topLeft.y);
-		 */
+
+		int[] longPoints = new int[points.size()];
+		int[] latPoints = new int[points.size()];
+
+		for (int i = 0; i < points.size(); i++) {
+			longPoints[i] = points.get(i).x;
+			latPoints[i] = points.get(i).y;
+		}
+
+		g.drawPolygon(longPoints, latPoints, longPoints.length);
 		// Restore graphics
 		g.setColor(oldColor);
 		if (g instanceof Graphics2D) {
 			((Graphics2D) g).setStroke(oldStroke);
 		}
 	}
-
-	// public String toString() {
-	// return "MapRectangle from " + topLeft + " to " + bottomRight;
-	// }
 }

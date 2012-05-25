@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -19,15 +18,10 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
-import de.fhb.sailboat.ufer.prototyp.communication.ConnectorUfer;
+import de.fhb.sailboat.ufer.prototyp.utility.GPSTransformations;
 import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
 
 /**
@@ -41,6 +35,10 @@ import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
  * @author Patrick Rutter
  * 
  */
+// FIXME 25.05. habe endlich mal meine polygone mit reingebracht und musste
+// dahingehend die polygonmissionserstellung anspassen, habe eben getestet,
+// steigt erst aus wenn er die mission an den planer weitergeben will, müsste
+// also gehen, falls dir dennoch irgendwas auffällt bescheid geben
 public class View extends JFrame {
 
 	/**
@@ -297,7 +295,7 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionSendPoly);
-		
+
 		JMenuItem mMissionSendCompass = new JMenuItem(M_MISSION_SEND_COMPASS);
 		mMissionSendCompass.setToolTipText("CompassCourse Task senden.");
 
@@ -309,7 +307,7 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionSendCompass);
-		
+
 		JMenuItem mMissionSendWind = new JMenuItem(M_MISSION_SEND_WIND);
 		mMissionSendWind.setToolTipText("HoldAngleToWind Task senden.");
 
@@ -321,7 +319,7 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionSendWind);
-		
+
 		JMenuItem mMissionSendStop = new JMenuItem(M_MISSION_SEND_STOP);
 		mMissionSendStop.setMnemonic(KeyEvent.VK_X);
 		mMissionSendStop.setToolTipText("Stop Task senden.");
@@ -334,13 +332,15 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionSendStop);
-		
+
 		JMenuItem mMissionReset = new JMenuItem(M_MISSION_RESET);
 		mMissionReset.setToolTipText("Karte (Marker) zurücksetzen.");
 
 		mMissionReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				int choice = JOptionPane.showConfirmDialog(null, "Wirklich Map zurücksetzen?", "Bitte bestätigen", JOptionPane.YES_NO_OPTION);
+				int choice = JOptionPane.showConfirmDialog(null,
+						"Wirklich Map zurücksetzen?", "Bitte bestätigen",
+						JOptionPane.YES_NO_OPTION);
 				if (choice == JOptionPane.YES_OPTION) {
 					resetMap();
 				}
@@ -349,7 +349,7 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionReset);
-		
+
 		JMenuItem mMissionRemote = new JMenuItem(M_MISSION_REMOTE);
 		mMissionSendStop.setMnemonic(KeyEvent.VK_R);
 		mMissionRemote.setToolTipText("Fernsteuerung öffnen.");
@@ -363,10 +363,12 @@ public class View extends JFrame {
 		});
 
 		mMission.add(mMissionRemote);
-		
-		final JCheckBoxMenuItem mMissionSailMode = new JCheckBoxMenuItem(M_MISSION_SAIL_MODE);
+
+		final JCheckBoxMenuItem mMissionSailMode = new JCheckBoxMenuItem(
+				M_MISSION_SAIL_MODE);
 		mMissionSailMode.setSelected(false);
-		mMissionSailMode.setToolTipText("Wenn aktiv wird der Motor nicht verwendet.");
+		mMissionSailMode
+				.setToolTipText("Wenn aktiv wird der Motor nicht verwendet.");
 
 		mMissionSailMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -893,37 +895,42 @@ public class View extends JFrame {
 	}
 
 	private void sendCircleMapMarkers() {
-		if (map.getMarkerList().size() > 0) {
-			this.controller.setCircleMarkerList(map.getMarkerList());
+		if (map.getMap().getMapMarkerList().size() > 0) {
+			this.controller.setCircleMarkerList(GPSTransformations
+					.mapMarkerListToGpsList(map.getMap().getMapMarkerList()));
 			this.controller.commitCircleMarkerList(planner);
 			resetMap();
 		}
 	}
 
 	private void sendPolyMapMarkers() {
-		if (map.getPolygon().size() > 0) {
-			this.controller.setPolyMarkerList(map.getPolygon());
-			this.controller.commitPolyMarkerList(planner);
-			resetMap();
-		}
+		this.controller.setPolyList(map.getPolygonList());
+		this.controller.commitPolyList(planner);
+		resetMap();
 	}
-	
+
 	private void sendReachCompassTask() {
-		String str = JOptionPane.showInputDialog(null, "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+		String str = JOptionPane.showInputDialog(null,
+				"Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
 		if (str.length() != 0) {
-			this.controller.commitReachCompassTask(Integer.parseInt(str), planner);
+			this.controller.commitReachCompassTask(Integer.parseInt(str),
+					planner);
 		}
 	}
-	
+
 	private void sendHoldAngleToWind() {
-		String str = JOptionPane.showInputDialog(null, "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+		String str = JOptionPane.showInputDialog(null,
+				"Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
 		if (str.length() != 0) {
-			this.controller.commitHoldAngleToWind(Integer.parseInt(str), planner);
+			this.controller.commitHoldAngleToWind(Integer.parseInt(str),
+					planner);
 		}
 	}
-	
+
 	private void sendStop() {
-		int choice = JOptionPane.showConfirmDialog(null, "Wirklich Mission stoppen?", "Bitte bestätigen", JOptionPane.YES_NO_OPTION);
+		int choice = JOptionPane.showConfirmDialog(null,
+				"Wirklich Mission stoppen?", "Bitte bestätigen",
+				JOptionPane.YES_NO_OPTION);
 		if (choice == JOptionPane.YES_OPTION) {
 			this.controller.commitStopTask(planner);
 			resetMap();
@@ -932,8 +939,9 @@ public class View extends JFrame {
 
 	private void resetMap() {
 		map.removeEveryObject();
+		map.getMap().repaint();
 	}
-	
+
 	private void enableConnection() {
 		/*
 		 * connection = new ConnectorUfer("172.16.16.70");
@@ -970,13 +978,14 @@ public class View extends JFrame {
 
 		// Parse marker list
 		missionDisplayText.setText("Einzelpunkte:\n"
-				+ map.getMarkerList().toString() + "\nPolygon:\n"
-				+ map.getPolygon().toString());
+				+ map.getMap().getMapMarkerList().toString() + "\nPolygon:\n"
+				+ map.getPolygonList().toString());
 	}
-	
+
 	private void toggleSailMode(boolean mode) {
 		this.controller.setSailMode(mode);
-		if (mode) this.controller.stopMotorTask(planner);
+		if (mode)
+			this.controller.stopMotorTask(planner);
 	}
 
 	/**
@@ -1010,53 +1019,53 @@ public class View extends JFrame {
 	}
 
 	// Stores the current settings to the configuration file
-	//private void saveViewConfiguration() {
-		// create map of current settings
-		/*
-		 * ConfigMap settings = new ConfigMap(); settings.put(M_SMONITOR1,
-		 * smallMonitor1.getPerspective() + ""); settings.put(M_SMONITOR2,
-		 * smallMonitor2.getPerspective() + ""); settings.put(M_SMONITOR3,
-		 * smallMonitor3.getPerspective() + ""); settings.put(M_SMONITOR4,
-		 * smallMonitor4.getPerspective() + "");
-		 * 
-		 * ConfigWriter writer = new ConfigWriter(settings);
-		 * writer.writeConfigFile(CONFIG_FILE);
-		 */
-	//}
+	// private void saveViewConfiguration() {
+	// create map of current settings
+	/*
+	 * ConfigMap settings = new ConfigMap(); settings.put(M_SMONITOR1,
+	 * smallMonitor1.getPerspective() + ""); settings.put(M_SMONITOR2,
+	 * smallMonitor2.getPerspective() + ""); settings.put(M_SMONITOR3,
+	 * smallMonitor3.getPerspective() + ""); settings.put(M_SMONITOR4,
+	 * smallMonitor4.getPerspective() + "");
+	 * 
+	 * ConfigWriter writer = new ConfigWriter(settings);
+	 * writer.writeConfigFile(CONFIG_FILE);
+	 */
+	// }
 
 	// Setter
 	private void setSmallMonitor1(int perspectiveID) {
 		smallMonitor1.setPerspective(perspectiveID);
-		//saveViewConfiguration();
+		// saveViewConfiguration();
 	}
 
 	private void setSmallMonitor2(int perspectiveID) {
 		smallMonitor2.setPerspective(perspectiveID);
-		//saveViewConfiguration();
+		// saveViewConfiguration();
 	}
 
 	private void setSmallMonitor3(int perspectiveID) {
 		smallMonitor3.setPerspective(perspectiveID);
-		//saveViewConfiguration();
+		// saveViewConfiguration();
 	}
 
 	private void setSmallMonitor4(int perspectiveID) {
 		smallMonitor4.setPerspective(perspectiveID);
-		//saveViewConfiguration();
+		// saveViewConfiguration();
 	}
 
 	// Main für lokales Debuggen der GUI, für Regelbetrieb auskommentieren und
 	// debugMode im Constructor false setzen
 
-	/*public static void main(String[] args) {
-		System.setProperty("proxyPort", "3128");
-		System.setProperty("proxyHost", "proxy.fh-brandenburg.de");
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				View view = new View();
-				view.setVisible(true);
-			}
-		});
-	}*/
+	// public static void main(String[] args) {
+	// System.setProperty("proxyPort", "3128");
+	// System.setProperty("proxyHost", "proxy.fh-brandenburg.de");
+	// SwingUtilities.invokeLater(new Runnable() {
+	// public void run() {
+	// View view = new View();
+	// view.setVisible(true);
+	// }
+	// });
+	// }
 
 }

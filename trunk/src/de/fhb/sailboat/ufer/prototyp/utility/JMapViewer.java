@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,7 +27,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
-import org.openstreetmap.gui.jmapviewer.DefaultMapController;
 import org.openstreetmap.gui.jmapviewer.MemoryTileCache;
 import org.openstreetmap.gui.jmapviewer.OsmMercator;
 import org.openstreetmap.gui.jmapviewer.Tile;
@@ -39,9 +39,11 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileLoaderListener;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
+import de.fhb.sailboat.data.GPS;
+
 /**
  * Provides a simple panel that displays pre-rendered map tiles loaded from the
- * OpenStreetMap project. 
+ * OpenStreetMap project.
  */
 public class JMapViewer extends JPanel implements TileLoaderListener {
 
@@ -106,7 +108,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 	 */
 	public JMapViewer() {
 		this(new MemoryTileCache(), 4);
-		//new DefaultMapController(org.openstreetmap.gui.jmapviewer.JMapViewer map);
+		new DefaultMapController(this);
 	}
 
 	public JMapViewer(TileCache tileCache, int downloadThreadCount) {
@@ -115,8 +117,10 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		tileController = new TileController(tileSource, tileCache, this);
 		mapMarkerList = new LinkedList<MapMarker>();
 		mapRectangleList = new LinkedList<MapRectangle>();
+		mapPolygonList = new LinkedList<MapPolygon>();
 		mapMarkersVisible = true;
 		mapRectanglesVisible = true;
+		mapPolygonsVisible = true;
 		tileGridVisible = false;
 		setLayout(null);
 		initializeZoomSlider();
@@ -535,6 +539,22 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 			}
 		}
 
+		if (mapPolygonsVisible && mapPolygonList != null) {
+			for (MapPolygon polygon : mapPolygonList) {
+				List<GPS> pointList = polygon.getPoints();
+				if (pointList != null) {
+					List<Point> pPointList = new ArrayList<Point>();
+					for (GPS currentPoint : pointList) {
+						pPointList.add(getMapPosition(GPSTransformations
+								.gpsToCoordinate(currentPoint), false));
+					}
+					if (pPointList != null) {
+						polygon.paint(g, pPointList);
+					}
+				}
+			}
+		}
+
 		if (mapMarkersVisible && mapMarkerList != null) {
 			for (MapMarker marker : mapMarkerList) {
 				paintMarker(g, marker);
@@ -699,6 +719,16 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		repaint();
 	}
 
+	public void addMapPolygon(MapPolygon polygon) {
+		mapPolygonList.add(polygon);
+		repaint();
+	}
+
+	public void removeMapPolygon(MapPolygon polygon) {
+		mapPolygonList.remove(polygon);
+		repaint();
+	}
+
 	public void setZoomContolsVisible(boolean visible) {
 		zoomSlider.setVisible(visible);
 		zoomInButton.setVisible(visible);
@@ -814,4 +844,13 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 
 		g.setFont(font);
 	}
+
+	public List<MapPolygon> getMapPolygonList() {
+		return mapPolygonList;
+	}
+
+	public void setMapPolygonList(List<MapPolygon> mapPolygonList) {
+		this.mapPolygonList = mapPolygonList;
+	}
+
 }
