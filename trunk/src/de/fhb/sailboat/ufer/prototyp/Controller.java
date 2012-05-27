@@ -7,12 +7,15 @@ import java.util.Random;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
+import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
+import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
+import de.fhb.sailboat.mission.RepeatTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.ufer.prototyp.utility.MapPolygon;
@@ -65,6 +68,8 @@ public class Controller {
 
 		mission.setTasks(tasks);
 		System.out.println(mission.getTasks().toString());
+		this.model.setCurrentWholeMission(mission); // Store send mission in model for reporting of advancements
+		
 		planner.doMission(mission);
 	}
 
@@ -86,6 +91,8 @@ public class Controller {
 
 		mission.setTasks(tasks);
 
+		this.model.setCurrentWholeMission(mission); // Store send mission in model for reporting of advancements
+		
 		planner.doMission(mission);
 	}
 
@@ -103,6 +110,8 @@ public class Controller {
 
 		mission.setTasks(tasks);
 
+		this.model.setCurrentWholeMission(mission); // Store send mission in model for reporting of advancements
+		
 		planner.doMission(mission);
 	}
 
@@ -120,6 +129,8 @@ public class Controller {
 
 		mission.setTasks(tasks);
 
+		this.model.setCurrentWholeMission(mission); // Store send mission in model for reporting of advancements
+		
 		planner.doMission(mission);
 	}
 
@@ -132,6 +143,8 @@ public class Controller {
 
 		mission.setTasks(tasks);
 
+		this.model.setCurrentWholeMission(mission); // Store send mission in model for reporting of advancements
+		
 		planner.doMission(mission);
 	}
 
@@ -144,6 +157,8 @@ public class Controller {
 
 		mission.setTasks(tasks);
 
+		this.model.setCurrentWholeMission(mission); // Store send mission in model for reporting of advancements
+		
 		planner.doMission(mission);
 	}
 
@@ -185,6 +200,60 @@ public class Controller {
 
 	public void updateGps() {
 		this.model.setGps(worldModel.getGPSModel());
+	}
+	
+	public void updateMission() {
+		if (worldModel.getMission() != this.model.getMissionTasksLeft()) {
+			this.model.setMissionTasksLeft(worldModel.getMission());
+			generateMissionReport();
+		}
+	}
+	
+	public void generateMissionReport() {
+		if ((this.model.getCurrentWholeMission().getTasks().size() > 0) && (this.model.getMissionTasksLeft().getTasks().size() > 0)) {
+			Mission currentWholeMission = this.model.getCurrentWholeMission();
+			Mission missionTasksLeft = this.model.getMissionTasksLeft();
+			StringBuffer missionReport = new StringBuffer();
+			Task task;
+			int crossPoint = currentWholeMission.getTasks().size() - missionTasksLeft.getTasks().size();
+			
+			missionReport.append("Mission Status:\n");
+			for (int i = 0; i < currentWholeMission.getTasks().size(); i++) {
+				task = currentWholeMission.getTasks().get(i);
+				
+				missionReport.append("Task " + i + " ");
+				if (task == null) {
+					throw new NullPointerException();
+				} else if (task instanceof ReachCircleTask) {
+					missionReport.append("ReachCircleTask");
+					missionReport.append(" zu " + ((ReachCircleTask)task).getCenter().toString());
+				} else if (task instanceof ReachPolygonTask) {
+					missionReport.append("ReachPolygonTask");
+					missionReport.append(" zu " + ((ReachPolygonTask)task).getPoints().size() + " Punkten");
+				} else if (task instanceof PrimitiveCommandTask) {
+					missionReport.append("PrimitiveCommandTask");
+					missionReport.append(" bei P" + ((PrimitiveCommandTask)task).getPropellor() + " R" + ((PrimitiveCommandTask)task).getRudder() + " S" + ((PrimitiveCommandTask)task).getSail());
+				} else if (task instanceof CompassCourseTask) {
+					missionReport.append("CompassCourseTask");
+					missionReport.append(" zu " + ((CompassCourseTask)task).getAngle() + "°");
+				} else if (task instanceof HoldAngleToWindTask) {
+					missionReport.append("HoldAngleToWindTask");
+					missionReport.append(" zu " + ((HoldAngleToWindTask)task).getAngle() + "°");
+				} else if (task instanceof RepeatTask) {
+					missionReport.append("RepeatTask");
+				} else if (task instanceof StopTask) {
+					missionReport.append("StopTask");
+				} else if (task instanceof BeatTask) {
+					missionReport.append("BeatTask");
+				}
+				if (i < crossPoint) {
+					missionReport.append(" FERTIG\n");
+				}
+				else {
+					missionReport.append("\n");
+				}
+			}
+		}
 	}
 
 	// Setter (values given by View to store in Model)

@@ -3,6 +3,9 @@ package de.fhb.sailboat.ufer.prototyp.utility;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhb.sailboat.ufer.prototyp.Controller;
 
 /**
@@ -16,12 +19,12 @@ public class UferLogger {
 	public static final int SAVE_RATE = 20; // Rate in update cycles at which data dumps will be written to a session-specific-file (buffers will be emptied)
 	
 	public static final String TIME_FORMAT = "HH:mm:ss:SS yyyy-MM-dd";
-	public static final String DATA_TERMINATOR = "[NEXT]";
+	public static final String DATA_TERMINATOR = "[-]";
 	
 	// VARIABLES
 	private Controller controller;
 	
-	private boolean debugOutput; // Shall data be dumped to console, too? Enabled per default, can be set to false.
+	private boolean debugOutput; // Shall data be dumped to j4log (trace), too? Enabled per default, can be set to false.
 	
 	private StringBuffer windData;
 	private String lastWind;
@@ -32,11 +35,9 @@ public class UferLogger {
 	private StringBuffer compassData;
 	private String lastCompass;
 	
-	private boolean dumpWindToConsole = true; // If true new wind-data will be printed to console
-	private boolean dumpGPSToConsole = true; // If true new GPS-data will be printed to console
-	private boolean dumpCompassToConsole = true; // If true new compass-data will be printed to console
-	
 	private int dumpCount;
+	
+	private static final Logger LOG = LoggerFactory.getLogger(UferLogger.class);
 	
 	public UferLogger(Controller controller) {
 		this.controller = controller;
@@ -72,7 +73,7 @@ public class UferLogger {
 		data += "Timestamp: " + currentTime() + "\n";
 		data += DATA_TERMINATOR + "\n";
 		
-		if (debugOutput) System.out.print(data);
+		if (debugOutput) LOG.trace(data);
 		lastWind = data;
 		
 		windData.append(data);
@@ -86,7 +87,7 @@ public class UferLogger {
 		data += "Timestamp: " + currentTime() + "\n";
 		data += DATA_TERMINATOR + "\n";
 		
-		if (debugOutput) System.out.print(data);
+		if (debugOutput) LOG.trace(data);
 		lastGps = data;
 		
 		gpsData.append(data);
@@ -101,7 +102,7 @@ public class UferLogger {
 		data += "Timestamp: " + currentTime() + "\n";
 		data += DATA_TERMINATOR + "\n";
 		
-		if (debugOutput) System.out.print(data);
+		if (debugOutput) LOG.trace(data);
 		lastCompass = data;
 		
 		compassData.append(data);
