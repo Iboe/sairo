@@ -13,8 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
+import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
+import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.Task;
 
@@ -22,88 +24,32 @@ import de.fhb.sailboat.mission.Task;
  * @author Michael Kant
  *
  */
-public class MissionReceiver implements TransmissionModule {
+public class MissionReceiver extends MissionNegotiationBase implements TransmissionModule {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MissionReceiver.class);
 	
-	
-	public enum eOperationType{
-		
-		OT_BeginMission(1),
-		OT_CancelMission(2),
-		OT_EndMission(3),
-		OT_NewTask(4),
-		OT_Error(5),
-		OT_BeginMission_ACK(9),
-		OT_CancelMission_ACK(10),
-		OT_EndMission_ACK(11),
-		OT_NewTask_ACK(12);
-		
-		
-		private int typeId;
-		
-		private eOperationType(int id){
-		
-			typeId=id;
-		}
-		
-		public int getValue(){
-			
-			return typeId;
-		}
-		
-		public static eOperationType getByValue(int val)
-	    {
-			eOperationType opType = null;
-
-	        for (eOperationType op : eOperationType.values())
-	        {
-	            if(val == op.getValue())
-	            {
-	                opType = op;
-	                break;
-	            }
-	        }
-
-	        return opType;
-	    }
-	}
-	
-	public enum eTransmissionMode {
-		
-		TM_Idle(0),
-		TM_MissionBegin_AACK(1),
-		TM_Task_Wait(2),
-		TM_Task_AACK(3),
-		TM_MissionEnd_AACK(4),
-		TM_MissionCancel_AACK(5);
-		
-		private int modeId;
-		
-		private eTransmissionMode(int id){
-		
-			modeId=id;
-		}
-		
-		public int getValue(){
-			
-			return modeId;
-		}
-		
-	}
-	
+	private Planner planner;
 	private eTransmissionMode mode;
 	private CommunicationBase base;
 	private List<Task> missionAssembly;
 	private Task pendingTask;
 	
-	public MissionReceiver(CommunicationBase base){
+	private eErrorType error;
 	
+	/**
+	 * 
+	 * @param base
+	 */
+	public MissionReceiver(CommunicationBase base, Planner planner){
+	
+		this.planner=planner;
 		this.base=base;
 		mode=eTransmissionMode.TM_Idle;
 		missionAssembly=null;
 		pendingTask=null;
+		error=eErrorType.ET_None;
 	}
+	
 	/* (non-Javadoc)
 	 * @see de.fhb.sailboat.communication.TransmissionModule#receivedObject(java.io.DataInputStream)
 	 */
@@ -111,7 +57,7 @@ public class MissionReceiver implements TransmissionModule {
 	public void receivedObject(DataInputStream stream) throws IOException {
 		
 		int signature;
-		byte opCode=0; //TODO
+		byte opCode=0; 
 		
 		signature=stream.read();
 		
@@ -122,43 +68,92 @@ public class MissionReceiver implements TransmissionModule {
 			case TM_Idle:
 				if(opCode == eOperationType.OT_BeginMission.getValue()){
 					
-					mode=eTransmissionMode.TM_MissionBegin_AACK;
-					//initiate mission acknowledge
+					mode=eTransmissionMode.TM_MissionBegin_ACK;
+					base.requestTransmission(this);
 				}
 				else
 					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");
-				
-				break;
+			break;
 					
-			case TM_MissionBegin_AACK:
+			case TM_MissionBegin_ACK:
 				if(opCode == eOperationType.OT_BeginMission_ACK.getValue()){
 					
 					missionAssembly=new LinkedList<Task>();
 					mode=eTransmissionMode.TM_Task_Wait;
 				}
+				else if(opCode == eOperationType.OT_CancelMission.getValue()){
+					
+					mode=eTransmissionMode.TM_MissionCancel_ACK;
+					//TODO: initiate mission cancel acknowledge
+				}
 				else
 					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");
-				
-				break;
+			break;
 				
 			case TM_Task_Wait:
 				if(opCode == eOperationType.OT_NewTask.getValue()){
 					
 					//TODO: pendingTask=
-					mode=eTransmissionMode.TM_Task_AACK;
+					mode=eTransmissionMode.TM_Task_ACK;
+					base.requestTransmission(this);
+					
 				}
 				else if(opCode == eOperationType.OT_CancelMission.getValue()){
 					
-					mode=eTransmissionMode.TM_MissionCancel_AACK;
+					mode=eTransmissionMode.TM_MissionCancel_ACK;
+					base.requestTransmission(this);
 				}
 				else if(opCode == eOperationType.OT_EndMission.getValue()){
 					
-					mode=eTransmissionMode.TM_MissionEnd_AACK;
+					mode=eTransmissionMode.TM_MissionEnd_ACK;
+					base.requestTransmission(this);
 				}
-				break;
-			case TM_Task_AACK:
-			case TM_MissionEnd_AACK:
-			case TM_MissionCancel_AACK:
+				else
+					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");
+				
+			break;
+				
+			case TM_Task_ACK:
+				if(opCode == eOperationType.OT_NewTask_ACK.getValue()){
+					
+					missionAssembly.add(pendingTask);
+					pendingTask=null;
+					mode=eTransmissionMode.TM_Task_Wait;
+				}
+				else if(opCode == eOperationType.OT_CancelMission.getValue()){
+					
+					mode=eTransmissionMode.TM_MissionCancel_ACK;
+					//TODO: initiate mission cancel acknowledge
+				}
+				else
+					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");
+			break;
+				
+			case TM_MissionEnd_ACK:
+				if(opCode == eOperationType.OT_EndMission_ACK.getValue()){
+					
+					//TODO: planner.doMission(new MissionImpl(missionAssembly))
+					missionAssembly=null;
+					mode=eTransmissionMode.TM_Idle;
+					
+				}
+				else if(opCode == eOperationType.OT_CancelMission.getValue()){
+					
+					mode=eTransmissionMode.TM_MissionCancel_ACK;
+					//TODO: initiate mission cancel acknowledge
+				}
+				else
+					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");	
+			break;
+				
+			case TM_MissionCancel_ACK:
+				if(opCode == eOperationType.OT_CancelMission_ACK.getValue()){
+					
+					missionAssembly.clear();
+					missionAssembly=null;
+					mode=eTransmissionMode.TM_Idle;
+				}	
+			break;
 				
 		}
 
@@ -169,7 +164,11 @@ public class MissionReceiver implements TransmissionModule {
 	 */
 	@Override
 	public boolean skipNextCycle() {
-		// TODO Auto-generated method stub
+		
+		//don't instigate a transmission within this two modes
+		if(mode == eTransmissionMode.TM_Idle || mode == eTransmissionMode.TM_Task_Wait)
+			return true;
+
 		return false;
 	}
 
@@ -178,8 +177,40 @@ public class MissionReceiver implements TransmissionModule {
 	 */
 	@Override
 	public void requestObject(DataOutputStream stream) throws IOException {
-		// TODO Auto-generated method stub
-
+		
+		int opCode;
+		
+			if(error != eErrorType.ET_None){
+				
+				switch(mode){
+				
+					case TM_MissionBegin_ACK:
+						opCode=eOperationType.OT_BeginMission_ACK.getValue();
+					break;	
+					case TM_Task_ACK:
+						opCode=eOperationType.OT_NewTask_ACK.getValue();
+					break;
+					case TM_MissionEnd_ACK:
+						opCode=eOperationType.OT_EndMission_ACK.getValue();
+					break;
+					case TM_MissionCancel_ACK:
+						opCode=eOperationType.OT_CancelMission_ACK.getValue();	
+					break;
+						
+					case TM_Idle:
+					case TM_Task_Wait:
+					default:
+						opCode=eOperationType.OT_NoOp.getValue();
+					break;
+				}
+			}
+			else {
+				
+				opCode=eOperationType.OT_Error.getValue() | (error.getValue() << 4);
+			}
+				
+		stream.write(opCode);
+		
 	}
 
 	/* (non-Javadoc)
@@ -197,8 +228,24 @@ public class MissionReceiver implements TransmissionModule {
 	 */
 	@Override
 	public int getTransmissionInterval() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int interval;
+		switch(mode){
+		
+			case TM_MissionBegin_ACK:			
+			case TM_Task_ACK:
+			case TM_MissionEnd_ACK:
+			case TM_MissionCancel_ACK:
+				interval=2000;
+			break;
+			
+			case TM_Idle:
+			case TM_Task_Wait:
+			default:
+				interval=0;
+		}
+
+		return interval;
 	}
 
 	/* (non-Javadoc)
