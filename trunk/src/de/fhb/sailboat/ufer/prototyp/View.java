@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -18,9 +17,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.ufer.prototyp.utility.GPSTransformations;
 import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
 
@@ -183,11 +180,9 @@ public class View extends JFrame {
 									// will scroll with latest entry
 
 	private Planner planner;
-	private LocomotionSystem locomotion;
 	private MapPanel map;
 	private Controller controller;
 	private UferLogger logger;
-	private RemoteControl remote;
 
 	private JPanel mapArea;
 
@@ -200,7 +195,6 @@ public class View extends JFrame {
 	private JTextArea gpsDisplayText;
 	private JTextArea windDisplayText;
 	private JTextArea missionDisplayText;
-	private JTextArea systemDisplayText;
 
 	// private Coordinate target; // to be used for coordination
 
@@ -213,10 +207,9 @@ public class View extends JFrame {
 		startUpdating();
 	}
 
-	public View(Planner planner, LocomotionSystem loco) {
+	public View(Planner planner) {
 		this();
 		this.planner = planner;
-		this.locomotion = loco;
 		System.out.println("View Constructed");
 	}
 
@@ -356,8 +349,6 @@ public class View extends JFrame {
 
 		mMissionRemote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				remote = new RemoteControl();
-				remote.main(null);
 			}
 
 		});
@@ -717,77 +708,6 @@ public class View extends JFrame {
 		setResizable(false);
 
 		// create Interface
-
-		// load monitor configuration and set the monitors accordingly
-		/*
-		 * ConfigReader reader = new ConfigReader(); ConfigMap settings = new
-		 * ConfigMap(); if (reader.fileExists(CONFIG_FILE)) { settings =
-		 * reader.readConfigFile(CONFIG_FILE);
-		 * 
-		 * int value = settings.getEntryIntegerValue(M_SMONITOR1);
-		 * //System.out.println("Read 1: " + value); if (value != -1) {
-		 * setSmallMonitor1(value); switch (value) { case
-		 * (BoatMonitor.PERSPECITVE_ID_BLANK) : {
-		 * mSmallMonitor1_Blank.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_COMPASS) : {
-		 * mSmallMonitor1_Compass.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_GPS) : {
-		 * mSmallMonitor1_GPS.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_MISSION) : {
-		 * mSmallMonitor1_Mission.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_WIND) : {
-		 * mSmallMonitor1_Wind.setSelected(true); break; } } }
-		 * 
-		 * value = settings.getEntryIntegerValue(M_SMONITOR2);
-		 * //System.out.println("Read 2: " + value); if (value != -1) {
-		 * setSmallMonitor2(value); switch (value) { case
-		 * (BoatMonitor.PERSPECITVE_ID_BLANK) : {
-		 * mSmallMonitor2_Blank.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_COMPASS) : {
-		 * mSmallMonitor2_Compass.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_GPS) : {
-		 * mSmallMonitor2_GPS.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_MISSION) : {
-		 * mSmallMonitor2_Mission.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_WIND) : {
-		 * mSmallMonitor2_Wind.setSelected(true); break; } } }
-		 * 
-		 * value = settings.getEntryIntegerValue(M_SMONITOR3);
-		 * //System.out.println("Read 3: " + value); if (value != -1) {
-		 * setSmallMonitor3(value); switch (value) { case
-		 * (BoatMonitor.PERSPECITVE_ID_BLANK) : {
-		 * mSmallMonitor3_Blank.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_COMPASS) : {
-		 * mSmallMonitor3_Compass.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_GPS) : {
-		 * mSmallMonitor3_GPS.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_MISSION) : {
-		 * mSmallMonitor3_Mission.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_WIND) : {
-		 * mSmallMonitor3_Wind.setSelected(true); break; } } }
-		 * 
-		 * value = settings.getEntryIntegerValue(M_SMONITOR4);
-		 * //System.out.println("Read 4: " + value); if (value != -1) {
-		 * setSmallMonitor4(value); switch (value) { case
-		 * (BoatMonitor.PERSPECITVE_ID_BLANK) : {
-		 * mSmallMonitor4_Blank.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_COMPASS) : {
-		 * mSmallMonitor4_Compass.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_GPS) : {
-		 * mSmallMonitor4_GPS.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_MISSION) : {
-		 * mSmallMonitor4_Mission.setSelected(true); break; } case
-		 * (BoatMonitor.PERSPECITVE_ID_WIND) : {
-		 * mSmallMonitor4_Wind.setSelected(true); break; } } } } else { // set
-		 * initial state mSmallMonitor1_Blank.setSelected(true);
-		 * setSmallMonitor1(BoatMonitor.PERSPECITVE_ID_BLANK);
-		 * mSmallMonitor2_Blank.setSelected(true);
-		 * setSmallMonitor2(BoatMonitor.PERSPECITVE_ID_BLANK);
-		 * mSmallMonitor3_Blank.setSelected(true);
-		 * setSmallMonitor3(BoatMonitor.PERSPECITVE_ID_BLANK);
-		 * mSmallMonitor4_Blank.setSelected(true);
-		 * setSmallMonitor4(BoatMonitor.PERSPECITVE_ID_BLANK); }
-		 */
 		mSmallMonitor1_Compass.setSelected(true);
 		setSmallMonitor1(BoatMonitor.PERSPECITVE_ID_COMPASS);
 		mSmallMonitor2_GPS.setSelected(true);
@@ -1018,21 +938,6 @@ public class View extends JFrame {
 		new Thread(updater).start();
 	}
 
-	// Stores the current settings to the configuration file
-	// private void saveViewConfiguration() {
-	// create map of current settings
-	/*
-	 * ConfigMap settings = new ConfigMap(); settings.put(M_SMONITOR1,
-	 * smallMonitor1.getPerspective() + ""); settings.put(M_SMONITOR2,
-	 * smallMonitor2.getPerspective() + ""); settings.put(M_SMONITOR3,
-	 * smallMonitor3.getPerspective() + ""); settings.put(M_SMONITOR4,
-	 * smallMonitor4.getPerspective() + "");
-	 * 
-	 * ConfigWriter writer = new ConfigWriter(settings);
-	 * writer.writeConfigFile(CONFIG_FILE);
-	 */
-	// }
-
 	// Setter
 	private void setSmallMonitor1(int perspectiveID) {
 		smallMonitor1.setPerspective(perspectiveID);
@@ -1053,19 +958,5 @@ public class View extends JFrame {
 		smallMonitor4.setPerspective(perspectiveID);
 		// saveViewConfiguration();
 	}
-
-	// Main für lokales Debuggen der GUI, für Regelbetrieb auskommentieren und
-	// debugMode im Constructor false setzen
-
-	// public static void main(String[] args) {
-	// System.setProperty("proxyPort", "3128");
-	// System.setProperty("proxyHost", "proxy.fh-brandenburg.de");
-	// SwingUtilities.invokeLater(new Runnable() {
-	// public void run() {
-	// View view = new View();
-	// view.setVisible(true);
-	// }
-	// });
-	// }
 
 }

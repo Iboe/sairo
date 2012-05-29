@@ -7,6 +7,8 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.ufer.prototyp.utility.MapPolygon;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.CompassModelImpl;
@@ -39,12 +41,20 @@ public class Model {
 	
 	private boolean sailMode;
 	
+	private Mission currentWholeMission;			// current mission of the sailboat as a whole from start to finish
+	private Mission missionTasksLeft;				// current state of the mission (tasks left)
+	
+	private StringBuffer missionReport;
+	
 	public Model() {
 		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();
 		this.compass.setCompass(new Compass(170,0,0));
 		this.gps = new GPSModelImpl();
 		this.sailMode = false;
+		this.currentWholeMission = new MissionImpl();
+		this.missionTasksLeft = new MissionImpl();
+		this.missionReport = new StringBuffer();
 	}
 
 	// Getter/ Setter
@@ -108,7 +118,30 @@ public class Model {
 	public void setSailMode(boolean sailMode) {
 		this.sailMode = sailMode;
 	}
-	
-	
+
+	public Mission getCurrentWholeMission() {
+		return currentWholeMission;
+	}
+
+	public Mission getMissionTasksLeft() {
+		return missionTasksLeft;
+	}
+
+	public StringBuffer getMissionReport() {
+		return missionReport;
+	}
+
+	public void setCurrentWholeMission(Mission currentWholeMission) {
+		this.currentWholeMission = currentWholeMission;
+	}
+
+	public void setMissionTasksLeft(Mission missionTasksLeft) {
+		this.missionTasksLeft = missionTasksLeft;
+	}
+
+	public void setMissionReport(StringBuffer missionReport) {
+		this.missionReport = missionReport;
+	}
+
 	
 }
