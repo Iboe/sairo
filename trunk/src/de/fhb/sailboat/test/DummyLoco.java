@@ -58,4 +58,22 @@ public class DummyLoco implements LocomotionSystem {
 		return 0;
 	}
 
+	@Override
+	public void setDebug(boolean debug) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getWait_Sleep() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWait_Sleep(int wait_sleep) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
