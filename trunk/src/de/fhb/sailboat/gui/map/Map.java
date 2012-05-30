@@ -27,11 +27,6 @@ public class Map extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-//	final static int P_MAP_X = 412;
-//	final static int P_MAP_Y = 4;
-//	final static int P_MAP_WIDTH = 435;
-//	final static int P_MAP_HEIGHT = 435;
-
 	private ArrayList<MapMarker> markerList;
 	private ArrayList<MapMarker> positionHistory = new ArrayList<MapMarker>();
 	private ArrayList<MapMarker> polyHelpList = new ArrayList<MapMarker>();
@@ -52,17 +47,9 @@ public class Map extends JPanel {
 		this.polygonList = new ArrayList<MapPolygon>();
 	}
 
-	public JPanel mapPanel() {
-		final JPanel mapArea = new JPanel();
-		//mapArea.setOpaque(true);
-	//	mapArea.setBounds(P_MAP_X, P_MAP_Y, P_MAP_WIDTH, P_MAP_HEIGHT);
-		/*mapArea.setBorder(new javax.swing.border.BevelBorder(
-				javax.swing.border.BevelBorder.RAISED));
-		setLayout(null);*/
-
+	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
 		// Startposition auf FH gestellt
-
-		// navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
+		//navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
 
 		navigateTo(GPSTransformations.gpsToCoordinate(Constants.REGATTASTRECKE));
 
