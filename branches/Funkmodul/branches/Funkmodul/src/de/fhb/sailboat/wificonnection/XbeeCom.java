@@ -2,7 +2,7 @@ package de.fhb.sailboat.wificonnection;
 
 import org.apache.log4j.Logger;
 
-import com.sun.jmx.mbeanserver.OpenConverter;
+
 
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 
