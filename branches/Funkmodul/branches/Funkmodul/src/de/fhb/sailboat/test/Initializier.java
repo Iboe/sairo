@@ -108,7 +108,7 @@ public class Initializier {
 			
 		} else {
 			init.initializeSensors();
-			init.initializeView();
+			//init.initializeView();
 		}
 	}
 	
@@ -159,10 +159,6 @@ public class Initializier {
 			LOG.warn("Unable to start the communications TCP server on port 6699");
 	}
 	
-	private void initializeView() {
-		view = new View(planner,loco);
-		view.setVisible(true);
-	}
 	
 	private void createDummyMission() {
 		WorldModel worldModel = WorldModelImpl.getInstance();

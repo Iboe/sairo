@@ -34,8 +34,7 @@ public class UferGUITest {
 		if(!client.initialize())
 			System.out.println("Error connecting to BOAT!");
 		
-		View view=new View(null,null);
-		view.setVisible(true);
+	
 
 	}
 
