@@ -60,7 +60,7 @@ public class MapPanel extends JPanel {
 	}
 
 	public JPanel mapPanel() {
-		JPanel mapArea = new JPanel();
+		final JPanel mapArea = new JPanel();
 		mapArea.setOpaque(true);
 		mapArea.setBounds(P_MAP_X, P_MAP_Y, P_MAP_WIDTH, P_MAP_HEIGHT);
 		mapArea.setBorder(new javax.swing.border.BevelBorder(
@@ -186,7 +186,9 @@ public class MapPanel extends JPanel {
 					markRectOnMap.setSelected(false);
 				} else {
 					markerMode = Constants.NO_MARK;
-					addPointToPolygon(currentPoly.get(0));
+					if (currentPoly != null) {
+						addPointToPolygon(currentPoly.get(0));
+					}
 				}
 			}
 		});
@@ -199,8 +201,9 @@ public class MapPanel extends JPanel {
 						int meterPerPixel = (int) (Constants.PIXEL_TO_CALCULATE_SCALE
 								* (Constants.EARTH_CIRCUMFERENCE * Math
 										.cos(Math.toRadians(map.getPosition(10,
-												P_MAP_HEIGHT - 10).getLat()))) / Math
-								.pow(2, map.getZoom() + 8));
+												mapArea.getHeight() - 10)
+												.getLat()))) / Math.pow(2,
+								map.getZoom() + 8));
 
 						meterPerPixelPanel.getMeterPerPixelLabel().setText("");
 						meterPerPixelPanel.getMeterPerPixelLabel().setText(
@@ -274,8 +277,9 @@ public class MapPanel extends JPanel {
 			if (currentPoly.get(0).getLatitude() == target.getLatitude()
 					&& currentPoly.get(0).getLongitude() == target
 							.getLongitude()) {
-				MapPolygon builtPolygon = new MapPolygonImpl(ArrangePolygon.arrange(currentPoly),
-						Color.BLACK, new BasicStroke(3));
+				MapPolygon builtPolygon = new MapPolygonImpl(
+						ArrangePolygon.arrange(currentPoly), Color.BLACK,
+						new BasicStroke(3));
 				map.addMapPolygon(builtPolygon);
 				polygonList.add(builtPolygon);
 				for (int i = 0; i < polyHelpList.size(); i++) {
@@ -284,8 +288,8 @@ public class MapPanel extends JPanel {
 				currentPoly = null;
 			} else {
 				currentPoly.add(target);
-				polyHelpList.add(new MapMarkerDot(Color.BLACK,
-						target.getLatitude(), target.getLongitude()));
+				polyHelpList.add(new MapMarkerDot(Color.BLACK, target
+						.getLatitude(), target.getLongitude()));
 				map.addMapMarker(polyHelpList.get(polyHelpList.size() - 1));
 			}
 		}
