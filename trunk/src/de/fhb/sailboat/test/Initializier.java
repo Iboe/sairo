@@ -160,7 +160,7 @@ public class Initializier {
 	}
 	
 	private void initializeView() {
-		view = new View(planner,loco);
+		view = new View(planner);
 		view.setVisible(true);
 	}
 	
