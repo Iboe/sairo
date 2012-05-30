@@ -8,7 +8,7 @@ public class GUITest {
         // TODO code application logic here
 		PropertiesInitializer propsInit = new PropertiesInitializer();
 		propsInit.initializeProperties();
-        GUInterface view = new GUInterface();
+        GUInterface view = new GUInterface(null);
         view.setVisible(true);
     }
 	

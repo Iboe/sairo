@@ -4,6 +4,8 @@
  */
 package de.fhb.sailboat.gui;
 
+import de.fhb.sailboat.control.Planner;
+
 /**
  * SlimGUI for autonomous sailboat. Requires a compliant GUILogic class to be assigned in constructor.
  * @author Frocean - "Kenn ich, kann ich"
@@ -15,9 +17,9 @@ public class GUInterface extends javax.swing.JFrame {
     /**
      * Creates new form GUInterface
      */
-    public GUInterface() {
+    public GUInterface(Planner planner) {
         initComponents();
-        guiLogic = new GUILogicImpl();              	// GUILogic classes may be switched here
+        guiLogic = new GUILogicImpl(planner);              	// GUILogic classes may be switched here
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
         guiLoop();
     }
