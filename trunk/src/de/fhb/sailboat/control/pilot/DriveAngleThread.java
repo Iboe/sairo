@@ -53,12 +53,14 @@ public class DriveAngleThread extends Thread {
 			synchronized (mode) {
 				if (DriveAngleMode.COMPASS.equals(mode)) {
 					deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
+					deltaAngle = transformAngle(deltaAngle);
+					
 				} else if (DriveAngleMode.WIND.equals(mode)) {
 					deltaAngle = (int) (desiredAngle - windModel.getWind().getDirection());
+					deltaAngle = -transformAngle(deltaAngle); //here negating because the wind is not influenced by the boat and the wind angle depends on the boat
 				}
 			}
 			
-			deltaAngle = transformAngle(deltaAngle);
 			
 			rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle)); 
 			//System.out.println("[THREAD]relevant relative angle: "+rudderPos);
