@@ -51,9 +51,5 @@ public class ArrangePolygon {
 		}
 		return x;
 	}
-	//
-	// public static void main(String[] args) {
-	// System.out.println(euklidDistance(new GPS(0.0, 0.0),
-	// new GPS(30.0, 30.0)));
-	// }
+
 }

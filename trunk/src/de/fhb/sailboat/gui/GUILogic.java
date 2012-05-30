@@ -4,6 +4,8 @@
  */
 package de.fhb.sailboat.gui;
 
+import de.fhb.sailboat.control.Planner;
+
 /**
  *
  * @author Frocean
@@ -11,6 +13,9 @@ package de.fhb.sailboat.gui;
 public interface GUILogic {
     
     public final static int UPDATE_RATE = 500;
+    
+    Planner planner = null;;
+    GUIController controller = null;
     
     public void initializeMissionMap(javax.swing.JPanel missionMapPanel);
     
@@ -38,7 +43,8 @@ public interface GUILogic {
     public void sendReachCompass();
     public void sendHoldAngleToWind();
     public void sendStop();
-    public void sendReset();
+    public void sendResetActors();
+    public void sendResetMissionMap();
     public void setSailMode(boolean sailMode);
     
 }

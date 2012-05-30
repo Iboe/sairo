@@ -17,7 +17,7 @@ public class GUInterface extends javax.swing.JFrame {
      */
     public GUInterface() {
         initComponents();
-        guiLogic = new GUILogicImpl(true);              // GUILogic classes may be switched here
+        guiLogic = new GUILogicImpl();              	// GUILogic classes may be switched here
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
         guiLoop();
     }
@@ -76,11 +76,11 @@ public class GUInterface extends javax.swing.JFrame {
         missionTestMenuHoldAngleToWind = new javax.swing.JMenuItem();
         missionTestMenuStopTask = new javax.swing.JMenuItem();
         missionTestMenuResetActors = new javax.swing.JMenuItem();
+        missionTestMenuResetMap = new javax.swing.JMenuItem();
         missionTestMenuSailMode = new javax.swing.JCheckBoxMenuItem();
 
         infoDialog.setTitle("SaiilboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 205));
-        infoDialog.setPreferredSize(new java.awt.Dimension(405, 205));
         infoDialog.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 infoDialogWindowClosing(evt);
@@ -162,7 +162,6 @@ public class GUInterface extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(600, 500));
         setName("sailboatGUI");
-        setPreferredSize(new java.awt.Dimension(600, 500));
 
         gpsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("GPS"));
         gpsPanel.setName("");
@@ -466,6 +465,14 @@ public class GUInterface extends javax.swing.JFrame {
         });
         missionTestMenu.add(missionTestMenuResetActors);
 
+        missionTestMenuResetMap.setText("Karte zurücksetzen");
+        missionTestMenuResetMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                missionTestMenuResetMapActionPerformed(evt);
+            }
+        });
+        missionTestMenu.add(missionTestMenuResetMap);
+
         missionTestMenuSailMode.setText("Segelmodus");
         missionTestMenuSailMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,53 +518,57 @@ public class GUInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {
+    private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
         guiLogic.closeGUI();
-    }
+    }                                             
 
-    private void windowMenuInfoActionPerformed(java.awt.event.ActionEvent evt) {
+    private void windowMenuInfoActionPerformed(java.awt.event.ActionEvent evt) {                                               
         infoDialog.setVisible(windowMenuInfo.isSelected());
-    }
+    }                                              
 
-    private void infoDialogWindowClosing(java.awt.event.WindowEvent evt) {
+    private void infoDialogWindowClosing(java.awt.event.WindowEvent evt) {                                         
         windowMenuInfo.setSelected(false);
-    }
+    }                                        
 
-    private void infoDialogMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {
+    private void infoDialogMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         windowMenuInfo.setSelected(false);
         infoDialog.setVisible(false);
-    }
+    }                                                   
 
-    private void windowMenuRemoteActionPerformed(java.awt.event.ActionEvent evt) {
+    private void windowMenuRemoteActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-    }
+    }                                                
 
-    private void missionTestMenuReachCircleActionPerformed(java.awt.event.ActionEvent evt) {
+    private void missionTestMenuReachCircleActionPerformed(java.awt.event.ActionEvent evt) {                                                           
         guiLogic.sendCircleMarkers();
-    }
+    }                                                          
 
-    private void missionTestMenuReachPolygonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void missionTestMenuReachPolygonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
         guiLogic.sendPolyMapMarkers();
-    }
+    }                                                           
 
-    private void missionTestMenuCompassCourseActionPerformed(java.awt.event.ActionEvent evt) {
+    private void missionTestMenuCompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         guiLogic.sendReachCompass();
-    }
+    }                                                            
 
-    private void missionTestMenuHoldAngleToWindActionPerformed(java.awt.event.ActionEvent evt) {
+    private void missionTestMenuHoldAngleToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                               
         guiLogic.sendHoldAngleToWind();
-    }
+    }                                                              
 
-    private void missionTestMenuStopTaskActionPerformed(java.awt.event.ActionEvent evt) {
+    private void missionTestMenuStopTaskActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         guiLogic.sendStop();
-    }
+    }                                                       
 
-    private void missionTestMenuResetActorsActionPerformed(java.awt.event.ActionEvent evt) {
-        guiLogic.sendReset();
-    }
+    private void missionTestMenuResetActorsActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        guiLogic.sendResetActors();
+    }                                                          
 
-    private void missionTestMenuSailModeActionPerformed(java.awt.event.ActionEvent evt) {
+    private void missionTestMenuSailModeActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         guiLogic.setSailMode(missionTestMenuSailMode.isSelected());
+    }                                                       
+
+    private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {
+        guiLogic.sendResetMissionMap();
     }
 
     /**
@@ -647,6 +658,7 @@ public class GUInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem missionTestMenuReachCircle;
     private javax.swing.JMenuItem missionTestMenuReachPolygon;
     private javax.swing.JMenuItem missionTestMenuResetActors;
+    private javax.swing.JMenuItem missionTestMenuResetMap;
     private javax.swing.JCheckBoxMenuItem missionTestMenuSailMode;
     private javax.swing.JMenuItem missionTestMenuStopTask;
     private javax.swing.JPanel systemTabPanel;

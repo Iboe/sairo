@@ -27,11 +27,10 @@ public class Map extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<MapMarker> markerList;
-	private ArrayList<MapMarker> positionHistory = new ArrayList<MapMarker>();
-	private ArrayList<MapMarker> polyHelpList = new ArrayList<MapMarker>();
-	private ArrayList<MapRectangle> rectList;
-	private ArrayList<MapPolygon> polygonList;
+	private List<MapMarker> markerList;
+	private List<MapMarker> positionHistory = new ArrayList<MapMarker>();
+	private List<MapMarker> polyHelpList = new ArrayList<MapMarker>();
+	private List<MapPolygon> polygonList;
 	private JMapViewer map;
 	private int markerMode = Constants.NO_MARK;
 
@@ -43,7 +42,6 @@ public class Map extends JPanel {
 	public Map() {
 		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
-		this.rectList = new ArrayList<MapRectangle>();
 		this.polygonList = new ArrayList<MapPolygon>();
 	}
 
@@ -85,10 +83,6 @@ public class Map extends JPanel {
 						break;
 
 					case 2:
-						addRectsToMap(target);
-						break;
-
-					case 3:
 						addPointToPolygon(GPSTransformations
 								.coordinateToGPS(target));
 						break;
@@ -127,7 +121,6 @@ public class Map extends JPanel {
 		}
 
 		final JCheckBox markOnMap = new JCheckBox("Add Marker");
-		final JCheckBox markRectOnMap = new JCheckBox("Add Rectangle");
 		final JCheckBox markPolygon = new JCheckBox("Add Polygon");
 		final ScalePanel meterPerPixelPanel = new ScalePanel();
 
@@ -136,7 +129,6 @@ public class Map extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (markOnMap.isSelected()) {
 					markerMode = Constants.MARKER;
-					markRectOnMap.setSelected(false);
 					markPolygon.setSelected(false);
 				} else {
 					markerMode = Constants.NO_MARK;
@@ -144,18 +136,6 @@ public class Map extends JPanel {
 			}
 		});
 
-		markRectOnMap.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if (markRectOnMap.isSelected()) {
-					markerMode = Constants.RECTANGLE;
-					markOnMap.setSelected(false);
-					markPolygon.setSelected(false);
-				} else {
-					markerMode = Constants.NO_MARK;
-				}
-			}
-		});
 
 		markPolygon.addActionListener(new ActionListener() {
 
@@ -163,7 +143,6 @@ public class Map extends JPanel {
 				if (markPolygon.isSelected()) {
 					markerMode = Constants.POLYGON;
 					markOnMap.setSelected(false);
-					markRectOnMap.setSelected(false);
 				} else {
 					markerMode = Constants.NO_MARK;
 					if (currentPoly != null) addPointToPolygon(currentPoly.get(0));
@@ -199,45 +178,13 @@ public class Map extends JPanel {
 		JPanel markerCheckBoxes = new JPanel();
 		markerCheckBoxes.add(meterPerPixelPanel);
 		markerCheckBoxes.add(markOnMap);
-		markerCheckBoxes.add(markRectOnMap);
 		markerCheckBoxes.add(markPolygon);
 
 		mapArea.setLayout(new BorderLayout());
-		mapArea.add(map, BorderLayout.NORTH);
+		mapArea.add(map, BorderLayout.CENTER);
 		mapArea.add(markerCheckBoxes, BorderLayout.SOUTH);
 
 		return mapArea;
-	}
-
-	/**
-	 * Adds a rectangle to the map. If firstCorner isn't set yet firstCorner
-	 * will be set by target (current click). If firstCorner is set, target will
-	 * be the second corner of the rectangle and the rectangle will be
-	 * displayed.
-	 * 
-	 * @param target
-	 *            coordinates of the last click
-	 */
-	private void addRectsToMap(Coordinate target) {
-		if (firstCorner == null)
-			firstCorner = target;
-		else {
-			Coordinate topLeft = new Coordinate(Math.max(firstCorner.getLat(),
-					target.getLat()), Math.min(firstCorner.getLon(),
-					target.getLon()));
-
-			Coordinate bottomRight = new Coordinate(Math.min(
-					firstCorner.getLat(), target.getLat()), Math.max(
-					firstCorner.getLon(), target.getLon()));
-
-			MapRectangleImpl rectangle = new MapRectangleImpl(topLeft,
-					bottomRight);
-
-			rectList.add(rectangle);
-			map.addMapRectangle(rectList.get(rectList.size() - 1));
-
-			firstCorner = null;
-		}
 	}
 
 	private void addPointToPolygon(GPS target) {
@@ -307,6 +254,8 @@ public class Map extends JPanel {
 
 	private void removePolygonsFromMap() {
 		map.getMapPolygonList().clear();
+		currentPoly = null;
+		
 	}
 
 	private void removeRectanglesFromMap() {
@@ -342,11 +291,11 @@ public class Map extends JPanel {
 		}
 	}
 
-	public ArrayList<MapMarker> getPositionHistory() {
+	public List<MapMarker> getPositionHistory() {
 		return positionHistory;
 	}
 
-	public void setPositionHistory(ArrayList<MapMarker> positionHistory) {
+	public void setPositionHistory(List<MapMarker> positionHistory) {
 		this.positionHistory = positionHistory;
 	}
 
@@ -358,27 +307,19 @@ public class Map extends JPanel {
 		this.map = map;
 	}
 
-	public ArrayList<MapMarker> getMarkerList() {
+	public List<MapMarker> getMarkerList() {
 		return markerList;
 	}
 
-	public void setMarkerList(ArrayList<MapMarker> markerList) {
+	public void setMarkerList(List<MapMarker> markerList) {
 		this.markerList = markerList;
 	}
 
-	public ArrayList<MapRectangle> getRectList() {
-		return rectList;
-	}
-
-	public void setRectList(ArrayList<MapRectangle> rectList) {
-		this.rectList = rectList;
-	}
-
-	public ArrayList<MapPolygon> getPolygonList() {
+	public List<MapPolygon> getPolygonList() {
 		return polygonList;
 	}
 
-	public void setPolygonList(ArrayList<MapPolygon> polygonList) {
+	public void setPolygonList(List<MapPolygon> polygonList) {
 		this.polygonList = polygonList;
 	}
 }
