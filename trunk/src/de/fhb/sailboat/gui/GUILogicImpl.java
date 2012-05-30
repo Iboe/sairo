@@ -63,7 +63,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + gpsDecimalFormat.format(controller.getGps().getPosition().getLongitude()) + GPS_UNIT;
+            value = value + gpsDecimalFormat.format(controller.getGps().getPosition().getLongitude()) + GPS_UNIT;
         } else {
             Random random = new Random();
             value = value + gpsDecimalFormat.format((random.nextDouble() + 13)) + GPS_UNIT;
@@ -77,7 +77,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + gpsDecimalFormat.format(controller.getGps().getPosition().getLatitude()) + GPS_UNIT;
+            value = value + gpsDecimalFormat.format(controller.getGps().getPosition().getLatitude()) + GPS_UNIT;
         } else {
             Random random = new Random();
             value = value + gpsDecimalFormat.format((random.nextDouble() + 13)) + GPS_UNIT;
@@ -91,7 +91,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + controller.getGpsSatelites(); //FIXME proper GPS class usage
+            value = value + controller.getGpsSatelites(); //FIXME proper GPS class usage
         } else {
             Random random = new Random();
             value = value + random.nextInt(9);
@@ -105,7 +105,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + controller.getCompass().getCompass().getAzimuth() + COMPASS_UNIT;
+            value = value + controller.getCompass().getCompass().getAzimuth() + COMPASS_UNIT;
         } else {
             Random random = new Random();
             value = value + random.nextInt(361) + COMPASS_UNIT;
@@ -119,7 +119,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + controller.getCompass().getCompass().getPitch() + COMPASS_UNIT;
+            value = value + controller.getCompass().getCompass().getPitch() + COMPASS_UNIT;
         } else {
             Random random = new Random();
             value = value + random.nextInt(361) + COMPASS_UNIT;
@@ -133,7 +133,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + controller.getCompass().getCompass().getPitch() + COMPASS_UNIT;
+            value = value + controller.getCompass().getCompass().getPitch() + COMPASS_UNIT;
         } else {
             Random random = new Random();
             value = value + random.nextInt(361) + COMPASS_UNIT;
@@ -147,7 +147,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + controller.getWind().getWind().getSpeed() + WIND_VELOCITY_UNIT;
+            value = value + controller.getWind().getWind().getSpeed() + WIND_VELOCITY_UNIT;
         } else {
             Random random = new Random();
             value = value + random.nextInt(361) + WIND_VELOCITY_UNIT;
@@ -161,7 +161,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            //value = value + controller.getWind().getWind().getDirection() + WIND_DIRECTION_UNIT;
+            value = value + controller.getWind().getWind().getDirection() + WIND_DIRECTION_UNIT;
         } else {
             Random random = new Random();
             value = value + random.nextInt(361) + WIND_DIRECTION_UNIT;
