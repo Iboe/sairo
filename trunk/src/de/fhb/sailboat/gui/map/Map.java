@@ -166,7 +166,7 @@ public class Map extends JPanel {
 					markRectOnMap.setSelected(false);
 				} else {
 					markerMode = Constants.NO_MARK;
-					addPointToPolygon(currentPoly.get(0));
+					if (currentPoly != null) addPointToPolygon(currentPoly.get(0));
 				}
 			}
 		});
