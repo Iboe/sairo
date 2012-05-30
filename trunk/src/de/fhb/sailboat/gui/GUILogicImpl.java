@@ -175,10 +175,9 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            value = value + "Einzelpunkte:\n" + missionMap.getMap().getMapMarkerList().toString() + "\nPolygon:\n" + missionMap.getPolygonList().toString();
+            value = value + "Einzelpunkte:\n" + missionMap.getMarkerList().toString() + "\nPolygon:\n" + missionMap.getPolygonList().toString();
         } else {
-            Random random = new Random();
-            value = value + random.nextInt(99999) + "\n" + random.nextInt(99999) + "\n" + random.nextInt(99999) + "\n" + random.nextInt(99999) + "\n";
+        	value = value + "Einzelpunkte:\n" + missionMap.getMarkerList().toString() + "\nPolygon:\n" + missionMap.getPolygonList().toString();
         }
 
         systemTabTextArea.setText(value);
@@ -204,7 +203,7 @@ public class GUILogicImpl implements GUILogic {
      * to manage timed tasks.
      */
     public void updateLogic() {
-        
+        controller.updateAll();
     }
 
     @Override

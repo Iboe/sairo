@@ -583,6 +583,9 @@ public class GUInterface extends javax.swing.JFrame {
             public void run() {
                 while (true) {
 
+                	// update logic
+                	guiLogic.updateLogic();
+                	
                     // update display labels with current values present
                     guiLogic.updateCompassAzimuth(compassAzimuthDisplayLabel);
                     guiLogic.updateCompassPitch(compassPitchDisplayLabel);
