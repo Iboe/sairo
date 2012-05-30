@@ -33,6 +33,13 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class GUIControllerImpl implements GUIController {
 
+	// Constants
+	final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));
+	final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));
+	final static int RUDDER_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_NORMAL"));
+	final static int SAIL_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_NORMAL"));
+	
+	
 	// Variables
 	private GUIModelImpl model;
 
@@ -57,17 +64,13 @@ public class GUIControllerImpl implements GUIController {
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_MAX"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
 					.getLatitude(), markerList.get(i).getLongitude()), 3));
 		}
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
 		mission.setTasks(tasks);
 		System.out.println(mission.getTasks().toString());
@@ -86,16 +89,12 @@ public class GUIControllerImpl implements GUIController {
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_MAX"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
 		for (int i = 0; i < polyList.size(); i++) {
 			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
 		}
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
 		mission.setTasks(tasks);
 
@@ -112,14 +111,10 @@ public class GUIControllerImpl implements GUIController {
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_MAX"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
 		tasks.add(new CompassCourseTask(angle));
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
 		mission.setTasks(tasks);
 
@@ -136,14 +131,10 @@ public class GUIControllerImpl implements GUIController {
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_MAX"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
 		tasks.add(new HoldAngleToWindTask(angle));
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, Integer
-					.parseInt(System
-							.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"))));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
 		mission.setTasks(tasks);
 
@@ -175,10 +166,7 @@ public class GUIControllerImpl implements GUIController {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(Integer.parseInt(System
-				.getProperty("AKSENLocomotion.SAIL_SHEET_NORMAL")), Integer.parseInt(System
-				.getProperty("AKSENLocomotion.RUDDER_NORMAL")), Integer.parseInt(System
-				.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"))));
+		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_NORMAL));
 
 		mission.setTasks(tasks);
 
@@ -319,6 +307,7 @@ public class GUIControllerImpl implements GUIController {
 	@Override
 	public boolean isSailMode() {
 		return this.model.isSailMode();
+		
 	}
 
 	@Override
