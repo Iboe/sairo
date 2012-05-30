@@ -30,30 +30,5 @@ public class XBeeTest {
 		xbee.sendDataXbee("bla");
 	}
 
-	public static class PropertiesInitializer {
-
-		/**
-		 * Loads the properties from the configuration file and adds them to the
-		 * system properties.
-		 */
-		public void initializeProperties() {
-			Properties prop = new Properties();
-			Properties systemProps = System.getProperties();
-			InputStream stream = this.getClass().getClassLoader()
-					.getResourceAsStream(CONFIG_FILE);
-			Set<Object> keySet;
-
-			try {
-				prop.load(stream);
-			} catch (IOException e) {
-				throw new IllegalStateException("could not load properties", e);
-			}
-
-			keySet = prop.keySet();
-			for (Object key : keySet) {
-				systemProps.put(key, prop.get(key));
-			}
-		}
-
-	}
+	
 }
