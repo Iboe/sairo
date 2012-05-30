@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import com.sun.jmx.mbeanserver.OpenConverter;
 
-import de.fhb.sailboat.serial.sensor.WindSensor.WindSensorThread;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 
 final class XbeeCom {

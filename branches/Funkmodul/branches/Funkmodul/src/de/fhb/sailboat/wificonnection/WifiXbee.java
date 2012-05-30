@@ -21,7 +21,7 @@ public class WifiXbee implements IwifiXbee {
 	   
 	}
 	
-	public byte[] ReceiveData()
+	public void ReceiveData()
 	{		
 		
 		
