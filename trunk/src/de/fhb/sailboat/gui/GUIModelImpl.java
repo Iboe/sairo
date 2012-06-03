@@ -1,10 +1,6 @@
 package de.fhb.sailboat.gui;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
@@ -59,86 +55,94 @@ public class GUIModelImpl implements GUIModel{
 
 	// Getter/ Setter
 	// Compass
+	@Override
 	public CompassModel getCompass() {
 		return this.compass;
 	}
 	
+	@Override
 	public void setCompass(CompassModel compass) {
 		this.compass = compass;
 	}
 
 	// Wind
+	@Override
 	public void setWind(WindModel wind) {
 		this.wind = wind;
 	}
 	
+	@Override
 	public WindModel getWind() {
 		return this.wind;
 	}
 
 	// GPS
+	@Override
 	public void setGps(GPSModel gps) {
 		this.gps = gps;
 	}
 	
+	@Override
 	public GPSModel getGps() {
 		return gps;
 	}
-	
-	/**
-	 * Helper method which should *ONLY* be used for testing/ debugging. Sets the GPS position manually and
-	 * deletes local GPS History.
-	 * @param position
-	 */
-	public void setGpsPosition(GPS position) {
-		this.gps = new GPSModelImpl();
-		gps.setPosition(position);
-	}
 
+	@Override
 	public List<GPS> getCircleMarkerList() {
 		return circleMarkerList;
 	}
 
+	@Override
 	public void setCircleMarkerList(List<GPS> markerList) {
 		this.circleMarkerList = markerList;
 	}
 
+	@Override
 	public List<MapPolygon> getPolyList() {
 		return polyList;
 	}
 
+	@Override
 	public void setPolyList(List<MapPolygon> polyList) {
 		this.polyList = polyList;
 	}
 
+	@Override
 	public boolean isSailMode() {
 		return sailMode;
 	}
 
+	@Override
 	public void setSailMode(boolean sailMode) {
 		this.sailMode = sailMode;
 	}
 
+	@Override
 	public Mission getCurrentWholeMission() {
 		return currentWholeMission;
 	}
 
+	@Override
 	public Mission getMissionTasksLeft() {
 		return missionTasksLeft;
 	}
 
+	@Override
 	public StringBuffer getMissionReport() {
 		return missionReport;
 	}
 
+	@Override
 	public void setCurrentWholeMission(Mission currentWholeMission) {
 		this.currentWholeMission = currentWholeMission;
 	}
 
+	@Override
 	public void setMissionTasksLeft(Mission missionTasksLeft) {
 		this.missionTasksLeft = missionTasksLeft;
 	}
 
+	@Override
 	public void setMissionReport(StringBuffer missionReport) {
 		this.missionReport = missionReport;
 	}

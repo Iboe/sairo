@@ -45,6 +45,20 @@ public class GUInterface extends javax.swing.JFrame {
         infoDialogFileMenu = new javax.swing.JMenu();
         infoDialogMenuAutoScroll = new javax.swing.JCheckBoxMenuItem();
         infoDialogMenuClose = new javax.swing.JMenuItem();
+        remoteDialog = new javax.swing.JDialog();
+        sailPanel = new javax.swing.JPanel();
+        sailSlider = new javax.swing.JSlider();
+        sailLabelRight = new javax.swing.JLabel();
+        sailLabelLeft = new javax.swing.JLabel();
+        rudderPanel = new javax.swing.JPanel();
+        rudderSlider = new javax.swing.JSlider();
+        rudderLabelRight = new javax.swing.JLabel();
+        rudderLabelLeft = new javax.swing.JLabel();
+        propellorPanel = new javax.swing.JPanel();
+        propellorMinRadioButton = new javax.swing.JRadioButton();
+        propellorNullRadioButton = new javax.swing.JRadioButton();
+        propellorMaxRadioButton = new javax.swing.JRadioButton();
+        propellorRadioGroup = new javax.swing.ButtonGroup();
         gpsPanel = new javax.swing.JPanel();
         gpsLongitudeLabel = new javax.swing.JLabel();
         gpsLongitudeDisplayLabel = new javax.swing.JLabel();
@@ -157,6 +171,148 @@ public class GUInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(infoTabPlane)
                 .addContainerGap())
+        );
+
+        remoteDialog.setTitle("Fernsteuerung");
+        remoteDialog.setMinimumSize(new java.awt.Dimension(352, 240));
+        remoteDialog.setPreferredSize(new java.awt.Dimension(352, 240));
+        remoteDialog.setResizable(false);
+        remoteDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                remoteDialogWindowClosing(evt);
+            }
+        });
+
+        sailPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Segel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        sailSlider.setMajorTickSpacing(25);
+        sailSlider.setMinimum(-100);
+        sailSlider.setMinorTickSpacing(1);
+        sailSlider.setSnapToTicks(true);
+        sailSlider.setValue(0);
+
+        sailLabelRight.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        sailLabelRight.setText("Außen");
+        sailLabelRight.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        sailLabelLeft.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        sailLabelLeft.setText("Innen");
+        sailLabelLeft.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        javax.swing.GroupLayout sailPanelLayout = new javax.swing.GroupLayout(sailPanel);
+        sailPanel.setLayout(sailPanelLayout);
+        sailPanelLayout.setHorizontalGroup(
+            sailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sailPanelLayout.createSequentialGroup()
+                .addComponent(sailLabelLeft)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sailLabelRight))
+            .addComponent(sailSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        sailPanelLayout.setVerticalGroup(
+            sailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sailPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(sailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sailLabelLeft)
+                    .addComponent(sailLabelRight))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sailSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        rudderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ruder", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        rudderSlider.setMajorTickSpacing(25);
+        rudderSlider.setMinimum(-100);
+        rudderSlider.setMinorTickSpacing(1);
+        rudderSlider.setSnapToTicks(true);
+        rudderSlider.setValue(0);
+
+        rudderLabelRight.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        rudderLabelRight.setText("Rechts");
+        rudderLabelRight.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        rudderLabelLeft.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rudderLabelLeft.setText("Links");
+        rudderLabelLeft.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        javax.swing.GroupLayout rudderPanelLayout = new javax.swing.GroupLayout(rudderPanel);
+        rudderPanel.setLayout(rudderPanelLayout);
+        rudderPanelLayout.setHorizontalGroup(
+            rudderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rudderPanelLayout.createSequentialGroup()
+                .addComponent(rudderLabelLeft)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rudderLabelRight))
+            .addComponent(rudderSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        rudderPanelLayout.setVerticalGroup(
+            rudderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rudderPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(rudderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rudderLabelLeft)
+                    .addComponent(rudderLabelRight))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rudderSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        propellorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Motor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        propellorRadioGroup.add(propellorMinRadioButton);
+        propellorMinRadioButton.setText("Volle Fahr zurück");
+        propellorMinRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        propellorRadioGroup.add(propellorNullRadioButton);
+        propellorNullRadioButton.setText("Aus");
+        propellorNullRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        propellorNullRadioButton.setMaximumSize(new java.awt.Dimension(107, 23));
+        propellorNullRadioButton.setMinimumSize(new java.awt.Dimension(107, 23));
+        propellorNullRadioButton.setPreferredSize(new java.awt.Dimension(107, 23));
+
+        propellorRadioGroup.add(propellorMaxRadioButton);
+        propellorMaxRadioButton.setText("Volle Fahrt vor");
+        propellorMaxRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        propellorMaxRadioButton.setMaximumSize(new java.awt.Dimension(107, 23));
+        propellorMaxRadioButton.setMinimumSize(new java.awt.Dimension(107, 23));
+        propellorMaxRadioButton.setPreferredSize(new java.awt.Dimension(107, 23));
+
+        javax.swing.GroupLayout propellorPanelLayout = new javax.swing.GroupLayout(propellorPanel);
+        propellorPanel.setLayout(propellorPanelLayout);
+        propellorPanelLayout.setHorizontalGroup(
+            propellorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(propellorPanelLayout.createSequentialGroup()
+                .addComponent(propellorMinRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(propellorNullRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(propellorMaxRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+        );
+        propellorPanelLayout.setVerticalGroup(
+            propellorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(propellorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(propellorMinRadioButton)
+                .addComponent(propellorNullRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(propellorMaxRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout remoteDialogLayout = new javax.swing.GroupLayout(remoteDialog.getContentPane());
+        remoteDialog.getContentPane().setLayout(remoteDialogLayout);
+        remoteDialogLayout.setHorizontalGroup(
+            remoteDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(rudderPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(propellorPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(sailPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        remoteDialogLayout.setVerticalGroup(
+            remoteDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, remoteDialogLayout.createSequentialGroup()
+                .addComponent(propellorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rudderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -538,7 +694,7 @@ public class GUInterface extends javax.swing.JFrame {
     }                                                   
 
     private void windowMenuRemoteActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+        remoteDialog.setVisible(windowMenuRemote.isSelected());
     }                                                
 
     private void missionTestMenuReachCircleActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -569,8 +725,12 @@ public class GUInterface extends javax.swing.JFrame {
         guiLogic.setSailMode(missionTestMenuSailMode.isSelected());
     }                                                       
 
-    private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {
-        guiLogic.sendResetMissionMap();
+    private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        guiLogic.sendResetActors();
+    }                                                       
+
+    private void remoteDialogWindowClosing(java.awt.event.WindowEvent evt) {
+        windowMenuRemote.setSelected(false);
     }
 
     /**
@@ -616,6 +776,7 @@ public class GUInterface extends javax.swing.JFrame {
         };
         new Thread(updater).start();
     }
+    
     
     /**
      * @param args the command line arguments
@@ -666,6 +827,20 @@ public class GUInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem missionTestMenuResetMap;
     private javax.swing.JCheckBoxMenuItem missionTestMenuSailMode;
     private javax.swing.JMenuItem missionTestMenuStopTask;
+    private javax.swing.JRadioButton propellorMaxRadioButton;
+    private javax.swing.JRadioButton propellorMinRadioButton;
+    private javax.swing.JRadioButton propellorNullRadioButton;
+    private javax.swing.JPanel propellorPanel;
+    private javax.swing.ButtonGroup propellorRadioGroup;
+    private javax.swing.JDialog remoteDialog;
+    private javax.swing.JLabel rudderLabelLeft;
+    private javax.swing.JLabel rudderLabelRight;
+    private javax.swing.JPanel rudderPanel;
+    private javax.swing.JSlider rudderSlider;
+    private javax.swing.JLabel sailLabelLeft;
+    private javax.swing.JLabel sailLabelRight;
+    private javax.swing.JPanel sailPanel;
+    private javax.swing.JSlider sailSlider;
     private javax.swing.JPanel systemTabPanel;
     private javax.swing.JTextArea systemTabTextArea;
     private javax.swing.JLabel windDirectionDisplayLabel;

@@ -2,11 +2,9 @@ package de.fhb.sailboat.gui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
@@ -41,7 +39,7 @@ public class GUIControllerImpl implements GUIController {
 	
 	
 	// Variables
-	private GUIModelImpl model;
+	private GUIModel model;
 
 	private WorldModel worldModel;
 
