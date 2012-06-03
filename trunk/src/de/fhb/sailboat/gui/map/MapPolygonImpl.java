@@ -20,8 +20,7 @@ public class MapPolygonImpl implements MapPolygon {
 		this(points, Color.BLUE, new BasicStroke(2));
 	}
 
-	public MapPolygonImpl(List<GPS> currentPoly, Color color,
-			Stroke stroke) {
+	public MapPolygonImpl(List<GPS> currentPoly, Color color, Stroke stroke) {
 		this.points = currentPoly;
 		this.color = color;
 		this.stroke = stroke;
@@ -59,5 +58,19 @@ public class MapPolygonImpl implements MapPolygon {
 		if (g instanceof Graphics2D) {
 			((Graphics2D) g).setStroke(oldStroke);
 		}
+	}
+
+	public String toString() {
+		String x = "MapPolygon: [";
+
+		for (int i = 0; i < this.points.size() - 1; i++) {
+			x += this.points.get(i).getLatitude() + ", "
+					+ this.points.get(i).getLongitude() + "; ";
+		}
+
+		x += this.points.get(this.points.size() - 1).getLatitude() + ", "
+				+ this.points.get(this.points.size() - 1).getLongitude() + "]";
+
+		return x;
 	}
 }

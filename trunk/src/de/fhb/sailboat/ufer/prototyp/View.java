@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -17,8 +18,9 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.ufer.prototyp.utility.GPSTransformations;
+import de.fhb.sailboat.gui.map.GPSTransformations;
 import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
 
 /**
@@ -32,10 +34,6 @@ import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
  * @author Patrick Rutter
  * 
  */
-// FIXME 25.05. habe endlich mal meine polygone mit reingebracht und musste
-// dahingehend die polygonmissionserstellung anspassen, habe eben getestet,
-// steigt erst aus wenn er die mission an den planer weitergeben will, müsste
-// also gehen, falls dir dennoch irgendwas auffällt bescheid geben
 public class View extends JFrame {
 
 	/**

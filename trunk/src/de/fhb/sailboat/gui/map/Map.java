@@ -47,9 +47,9 @@ public class Map extends JPanel {
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
 		// Startposition auf FH gestellt
-		//navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
+		// navigateTo(Constants.FH_BRANDENBURG);
 
-		navigateTo(GPSTransformations.gpsToCoordinate(Constants.REGATTASTRECKE));
+		navigateTo(Constants.REGATTASTRECKE);
 
 		map.addMouseListener(new MouseListener() {
 
@@ -66,16 +66,6 @@ public class Map extends JPanel {
 					case 0:
 						break;
 
-					/*
-					 * case 1: { int g = 0; if (markerList.size() >= 10) { g =
-					 * 255; } else { g = (int) ((markerList.size() * 255) / 9);
-					 * } Color markerColor = new Color(0, g, 0);
-					 * markerList.add(new MapMarkerDot(markerColor, target
-					 * .getLat(), target.getLon()));
-					 * map.addMapMarker(markerList.get(markerList.size() - 1));
-					 * } break;
-					 */
-
 					case 1:
 						markerList.add(new MapMarkerDot(Color.RED, target
 								.getLat(), target.getLon()));
@@ -90,13 +80,6 @@ public class Map extends JPanel {
 					default:
 						break;
 					}
-					/*
-					 * Coordinate currentPosition =
-					 * map.getPosition(map.getWidth()/2, map.getHeight()/2); int
-					 * currentZoomLevel = map.getZoom();
-					 * map.setDisplayPositionByLatLon(currentPosition.getLat(),
-					 * currentPosition.getLon(), currentZoomLevel);
-					 */
 				}
 			}
 
@@ -136,7 +119,6 @@ public class Map extends JPanel {
 			}
 		});
 
-
 		markPolygon.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +127,8 @@ public class Map extends JPanel {
 					markOnMap.setSelected(false);
 				} else {
 					markerMode = Constants.NO_MARK;
-					if (currentPoly != null) addPointToPolygon(currentPoly.get(0));
+					if (currentPoly != null)
+						addPointToPolygon(currentPoly.get(0));
 				}
 			}
 		});
@@ -158,8 +141,9 @@ public class Map extends JPanel {
 						int meterPerPixel = (int) (Constants.PIXEL_TO_CALCULATE_SCALE
 								* (Constants.EARTH_CIRCUMFERENCE * Math
 										.cos(Math.toRadians(map.getPosition(10,
-												mapArea.getHeight() - 10).getLat()))) / Math
-								.pow(2, map.getZoom() + 8));
+												mapArea.getHeight() - 10)
+												.getLat()))) / Math.pow(2,
+								map.getZoom() + 8));
 
 						meterPerPixelPanel.getMeterPerPixelLabel().setText("");
 						meterPerPixelPanel.getMeterPerPixelLabel().setText(
@@ -187,6 +171,14 @@ public class Map extends JPanel {
 		return mapArea;
 	}
 
+	/**
+	 * Adds a point to the current list of points (currentPoly). When the
+	 * checkbox for polygon-marking is deselected this list will be cleared and
+	 * the polygon will be painted.
+	 * 
+	 * @param target
+	 *            gps-point with coordinates
+	 */
 	private void addPointToPolygon(GPS target) {
 		if (currentPoly == null) {
 			currentPoly = new ArrayList<GPS>();
@@ -201,31 +193,32 @@ public class Map extends JPanel {
 			if (currentPoly.get(0).getLatitude() == target.getLatitude()
 					&& currentPoly.get(0).getLongitude() == target
 							.getLongitude()) {
-				MapPolygon builtPolygon = new MapPolygonImpl(ArrangePolygon.arrange(currentPoly),
-						Color.BLACK, new BasicStroke(3));
+				MapPolygon builtPolygon = new MapPolygonImpl(
+						ArrangePolygon.arrange(currentPoly), Color.BLACK,
+						new BasicStroke(3));
 				map.addMapPolygon(builtPolygon);
 				polygonList.add(builtPolygon);
 				for (int i = 0; i < polyHelpList.size(); i++) {
 					map.removeMapMarker(polyHelpList.get(i));
 				}
 				currentPoly = null;
+				System.out.println(builtPolygon);
 			} else {
 				currentPoly.add(target);
-				polyHelpList.add(new MapMarkerDot(Color.BLACK,
-						target.getLatitude(), target.getLongitude()));
+				polyHelpList.add(new MapMarkerDot(Color.BLACK, target
+						.getLatitude(), target.getLongitude()));
 				map.addMapMarker(polyHelpList.get(polyHelpList.size() - 1));
 			}
 		}
 	}
 
 	/**
-	 * Adds MapMarker to the last MAXIMUM_COUNT_LAST_POSITION positions of the
+	 * Adds MapMarker for the last MAXIMUM_COUNT_LAST_POSITION positions of the
 	 * boat.
 	 * 
 	 * @param boatPosition
 	 *            current position of the boat
 	 */
-
 	public void followBoat(GPS boatPosition) {
 		if (boatPosition.getLatitude() != 0.0) {
 			positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
@@ -240,8 +233,25 @@ public class Map extends JPanel {
 		}
 	}
 
-	// FIXME Set this to public so I can reset the Map manually through View -
-	// Patrick
+	/**
+	 * Draw a line from gps-position a to gps-position b.
+	 * 
+	 * @param a
+	 *            src
+	 * @param b
+	 *            dest
+	 */
+	public void paintLine(GPS a, GPS b) {
+		List<GPS> list = new ArrayList<GPS>();
+		list.add(a);
+		list.add(b);
+		map.addMapPolygon(new MapPolygonImpl(list, Color.LIGHT_GRAY,
+				new BasicStroke(3)));
+	}
+
+	/**
+	 * Clear the map from artifacts.
+	 */
 	public void removeEveryObject() {
 		removeMapMarkerFromMap();
 		removePolygonsFromMap();
@@ -255,19 +265,30 @@ public class Map extends JPanel {
 	private void removePolygonsFromMap() {
 		map.getMapPolygonList().clear();
 		currentPoly = null;
-		
 	}
 
 	private void removeRectanglesFromMap() {
 		map.getMapRectangleList().clear();
 	}
 
-	private void navigateTo(Coordinate coor) {
-		navigateTo(coor, 18);
+	/**
+	 * Move the map to a point at current zoomlevel.
+	 * 
+	 * @param gps
+	 */
+	private void navigateTo(GPS gps) {
+		navigateTo(gps, map.getZoom());
 	}
 
-	private void navigateTo(Coordinate coor, int zoomLevel) {
-		map.setDisplayPositionByLatLon(coor.getLat(), coor.getLon(), zoomLevel);
+	/**
+	 * Move the map to a point and to a given zoom.
+	 * 
+	 * @param gps
+	 * @param zoomLevel
+	 */
+	private void navigateTo(GPS gps, int zoomLevel) {
+		map.setDisplayPositionByLatLon(gps.getLatitude(), gps.getLongitude(),
+				zoomLevel);
 	}
 
 	/**

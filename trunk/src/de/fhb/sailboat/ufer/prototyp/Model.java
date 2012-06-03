@@ -1,15 +1,12 @@
 package de.fhb.sailboat.ufer.prototyp;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
-import de.fhb.sailboat.ufer.prototyp.utility.MapPolygon;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.CompassModelImpl;
 import de.fhb.sailboat.worldmodel.GPSModel;
