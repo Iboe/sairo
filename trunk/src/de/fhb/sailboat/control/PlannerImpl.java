@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
@@ -53,13 +54,21 @@ public class PlannerImpl implements Planner {
 	}
 
 	@Override
+	public void doPrimitiveCommand(PrimitiveCommandTask task) {
+		stopThread();
+		navigator.doTask(task);
+	}
+	
+	@Override
 	public void stop() {
 		stopThread();
 		navigator.doTask(new StopTask(false));
 	}
 
 	private void stopThread() {
-		workerThread.interrupt();
+		if (workerThread != null && workerThread.isAlive()) {
+			workerThread.interrupt();
+		}
 	}
 	
 	private class WorkerThread extends Thread {

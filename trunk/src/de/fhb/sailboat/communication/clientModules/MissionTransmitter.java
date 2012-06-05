@@ -14,6 +14,7 @@ import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.control.Planner;
 
 import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.Task;
 
 /**
@@ -110,6 +111,12 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	public int getPriority() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void doPrimitiveCommand(PrimitiveCommandTask task) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
