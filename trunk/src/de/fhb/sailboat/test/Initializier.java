@@ -46,7 +46,6 @@ public class Initializier {
 	private static final Logger LOG = LoggerFactory.getLogger(Initializier.class);
 	
 	private static final boolean TEST = true;
-	private static final String CONFIG_FILE = "config.properties";
 	private Planner planner;
 	//private View view;
 	private GUInterface view;
@@ -210,6 +209,8 @@ public class Initializier {
 	 *
 	 */
 	public static class PropertiesInitializer {
+		
+		private static final String CONFIG_FILE = "config.properties";
 		
 		/**
 		 * Loads the properties from the configuration file and adds them to the system properties. 
