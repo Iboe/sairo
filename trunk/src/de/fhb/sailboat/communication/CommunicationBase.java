@@ -3,6 +3,8 @@
  */
 package de.fhb.sailboat.communication;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.DataInputStream;
@@ -41,6 +43,8 @@ public abstract class CommunicationBase {
 	 */
 	public static final int MAX_TRX_COUNT=3;
 	
+	public static final int MAX_PACKET_SIZE = 64;
+	
 	private TransmissionModule[] modules;
 	private ModuleWorker[] workers;
 	private int numModules;
@@ -48,6 +52,10 @@ public abstract class CommunicationBase {
 	
 	private DataOutputStream sender = null;
 	private DataInputStream receiver = null;
+	
+	private byte[] receiveBuffer;
+	
+	private ByteArrayInputStream dataForwarder;
 	
 	/**
 	 * Default constructor.
@@ -58,6 +66,8 @@ public abstract class CommunicationBase {
 		workers=new ModuleWorker[MAX_MODULES];
 		numModules=0;
 		recvThread=null;
+		receiveBuffer=new byte[MAX_PACKET_SIZE];
+		dataForwarder=new ByteArrayInputStream(receiveBuffer);
 	}
 	
 	/**
@@ -73,7 +83,9 @@ public abstract class CommunicationBase {
 	public boolean registerModule(TransmissionModule tm) {
 		
 		boolean bRegistered=false;
+		
 		if(tm != null && numModules < modules.length){
+			
 			modules[numModules]=tm; 
 		   (workers[numModules]=new ModuleWorker(this,tm,(byte)numModules)).start();
 		    LOG.info("Registering Transmission-Module: "+tm.getClass().getSimpleName());
@@ -373,6 +385,7 @@ public abstract class CommunicationBase {
 			
 			int errorCount=0;
 			byte signature=0,keyId=-1;
+			int dataLength=0,readBytes=0;
 			while(!isInterrupted()){
 				
 				try {
@@ -388,15 +401,41 @@ public abstract class CommunicationBase {
 								
 								LOG.debug("Incoming object data..");
 								
+								dataLength=CommunicationBase.readCompactIndex(receiver);
+								
 								if(keyId >= 0 && keyId < MAX_MODULES && modules[keyId] != null){
 									
-									LOG.debug("Forwarding data to module: "+modules[keyId].getClass().getSimpleName());
-									modules[keyId].receivedObject(receiver);
-									errorCount=0;
+									if( dataLength > MAX_PACKET_SIZE)
+									{
+										LOG.warn("Received too large packet for module: "+modules[keyId].getClass().getSimpleName());
+										receiver.skipBytes(dataLength);
+									}
+									else{
+										
+										readBytes=receiver.read(receiveBuffer, 0, dataLength);
+										if(readBytes == dataLength)
+										{
+											dataForwarder.reset();
+											LOG.debug("Forwarding packet ("+dataLength+" Bytes) to module: "+modules[keyId].getClass().getSimpleName());
+											String bytes="";
+											
+											for(int i=0;i<dataLength;i++)
+												bytes+=Integer.toHexString(receiveBuffer[i]&0xff)+ " ";
+												
+											LOG.debug(bytes);
+											modules[keyId].receivedObject(new DataInputStream(dataForwarder));
+											errorCount=0;	
+										}
+										else
+										{
+											LOG.warn("Received incomplete packet for module: "+modules[keyId].getClass().getSimpleName());
+										}
+									}
 								}
 								else{
 									
-									LOG.warn("Unknown object code received: "+keyId);
+									LOG.warn("Unknown object code received: "+keyId+". Skipping packet.");
+									receiver.skipBytes(dataLength);
 								}
 							}
 							else{

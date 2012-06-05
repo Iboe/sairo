@@ -3,6 +3,7 @@
  */
 package de.fhb.sailboat.communication;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.DataOutputStream;
 
@@ -23,6 +24,8 @@ public class ModuleWorker extends Thread {
 	
 	private byte moduleId;
 	
+	//private byte[] sendBuffer;
+	
 	public ModuleWorker(CommunicationBase commBase, TransmissionModule commModule, byte moduleId) {
 		
 		super();
@@ -32,6 +35,7 @@ public class ModuleWorker extends Thread {
 			this.commBase = commBase;
 			this.commModule = commModule;
 			this.moduleId=moduleId;
+	//		this.sendBuffer=new byte[CommunicationBase.MAX_PACKET_SIZE];
 		}
 	}
 	
@@ -65,13 +69,56 @@ public class ModuleWorker extends Thread {
 					if(commModule.skipNextCycle())
 						continue;
 					
-					synchronized(sender){
+					ByteArrayOutputStream dataForwarder=new ByteArrayOutputStream(CommunicationBase.MAX_PACKET_SIZE);
+					
+					commModule.requestObject(new DataOutputStream(dataForwarder));
+					
+					byte[] sendBuffer=dataForwarder.toByteArray();
+					
+					while(errorCount < CommunicationBase.MAX_TRX_COUNT){
 						
-						sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
-						commModule.requestObject(sender);
-						sender.flush();
-						errorCount=0;
+						try{
+						
+							synchronized(sender){
+								
+								LOG.debug("Sending packet ("+sendBuffer.length+" Bytes) from module: "+commModule.getClass().getSimpleName());
+								sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
+								CommunicationBase.writeCompactIndex(sender, sendBuffer.length);								
+								sender.write(sendBuffer);
+								sender.flush();
+								errorCount=0;
+								break;
+							}
+						}
+						catch (IOException e) {
+							
+							if(errorCount < CommunicationBase.MAX_TRX_COUNT){
+								
+								errorCount++;
+								LOG.warn("IO error: "+e.getMessage());
+							}
+							else{
+								
+								break;
+							}
+						}
 					}
+					
+					if(errorCount >= CommunicationBase.MAX_TRX_COUNT){
+						
+						LOG.warn("Too many transmission attempts.. waiting.");
+						
+						try {
+							commModule.connectionReset();
+							errorCount=0;
+							wait();
+						} catch (InterruptedException e1) {
+							
+							break;
+						}
+					}
+					
+					
 				}
 				else {
 					LOG.debug("No sender is set.. waiting.");
@@ -80,29 +127,15 @@ public class ModuleWorker extends Thread {
 					LOG.debug("Thread was notified, continuing the cycle.");
 				}
 			}
+			catch (IOException e) {
+				
+				LOG.warn("Failed to request object from module: "+commModule.getClass().getSimpleName());
+			}
 			catch (InterruptedException e) {
 			
 				break;
 			} 
-			catch (IOException e) {
 			
-				if(errorCount < CommunicationBase.MAX_TRX_COUNT){
-					
-					errorCount++;
-					LOG.warn("IO error: "+e.getMessage());
-				}
-				else{
-					LOG.warn("Too many transmission attempts.. waiting.");
-					try {
-						commModule.connectionReset();
-						errorCount=0;
-						wait();
-					} catch (InterruptedException e1) {
-						
-						break;
-					}
-				}
-			}
 		}
 		LOG.debug("Module Worker Thread finished.");
 	}
