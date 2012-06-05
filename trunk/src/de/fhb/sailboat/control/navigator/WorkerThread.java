@@ -137,10 +137,9 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			}
 		} else {
 			angle = Math.atan(difference.getLatitude() / difference.getLongitude());
+			//convert to degrees
+			angle = toDegree(angle);
 		}
-		
-		//convert to degrees
-		angle = toDegree(angle);
 		
 		if (difference.getLongitude() < 0) {
 			angle += 180;
