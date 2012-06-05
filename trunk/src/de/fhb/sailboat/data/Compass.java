@@ -9,71 +9,6 @@ import javax.vecmath.Vector3d;
  * @author hscheel
  *
  */
-//@Deprecated
-//public class Compass {
-//
-//	private final double yaw;
-//	private final double pitch;
-//	private final double roll;
-//
-//	/**
-//	 * Constructs a new instance with the values handed over.
-//	 * 
-//	 * @param yaw the value for yaw
-//	 * @param pitch the value for pitch
-//	 * @param roll the value for roll
-//	 */
-//	public Compass(double yaw, double pitch, double roll) {
-//		this.yaw = yaw;
-//		this.pitch = pitch;
-//		this.roll = roll;
-//	}
-//
-//	/**
-//	 * Getter for the angle that describes the direction of the boat. The angle is relative to a fixed origin direction.<br>
-//	 * Directions:
-//	 * North:	   0°
-//	 * East:	   90°
-//	 * South:	[-]180°
-//	 * West:	  -90°
-//	 *   
-//	 * @return the direction
-//	 */
-//	public double getYaw() {
-//		return yaw;
-//	}
-//	
-//	/**
-//	 * Getter for the pitch angle. It describes the angle between bow of the boat and the water surface.
-//	 *        |__|                   ^
-//	 *   --   |  |            ---    |  pitch angle
-//	 *     \--|--|-----------/       |
-//	 *      \_______________/        V   
-//	 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//	 *      side view
-//	 * 
-//	 * @return the pitch angle
-//	 */
-//	public double getPitch() {
-//		return pitch;
-//	}
-//	
-//	/**
-//	 * Getter for the roll angle. It describes heeling of the boat.
-//	 *               ^ 
-//	 *       |__|     \
-//	 *       |  |      |   roll angle
-//	 *    \--|--|--/   |
-//	 *     \______/   /
-//	 * ~~~~~~~~~~~~~ v 
-//	 *   front view
-//	 *   
-//	 * @return the heeling angle
-//	 */
-//	public double getRoll() {
-//		return roll;
-//	}
-//}
 
 public class Compass {
 	private final double azimuth;
@@ -85,13 +20,11 @@ public class Compass {
 	private final double acceleration;
 	private final Vector3d accelerationField;
 	private final double usefullsamplerate;
-
 	
 	public Compass(double yaw, double pitch, double roll) {
 		this.azimuth = yaw;
 		this.pitch = pitch;
 		this.roll = roll;
-		
 		this.temperature = 0;
 		this.magnatic = 0;
 		this.magnaticField = new Vector3d(0, 0, 0);
@@ -107,24 +40,24 @@ public class Compass {
 		else
 			return azimuth;
 	}
-/**
- * 
- * @param a for azimuth value
- * @param p for pitch value
- * @param r for roll value
- * @param t for temperature value
- * @param m for magnatic value
- * @param mx for magnatic-x value
- * @param my for magnatic-y value
- * @param mz for magnatic-z value
- * @param ac for acceleration value
- * @param acx for acceleration-x value
- * @param acy for acceleration-y value
- * @param acz for acceleration-z value
- * @param u for usefullsamplerate value
- * @return 
- */
-	
+
+
+	/**
+	 * 
+	 * @param a for azimuth value
+	 * @param p for pitch value
+	 * @param r for roll value
+	 * @param t for temperature value
+	 * @param m for magnatic value
+	 * @param mx for magnatic-x value
+	 * @param my for magnatic-y value
+	 * @param mz for magnatic-z value
+	 * @param ac for acceleration value
+	 * @param acx for acceleration-x value
+	 * @param acy for acceleration-y value
+	 * @param acz for acceleration-z value
+	 * @param u for usefullsamplerate value
+	 */
 	public Compass(double a, double p, double r, double t, double m, Vector3d mvect, double ac, Vector3d acvect, double u) {
 		this.azimuth = a;
 		this.pitch = p;
