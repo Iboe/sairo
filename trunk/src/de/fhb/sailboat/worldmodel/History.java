@@ -48,8 +48,9 @@ public class History<T> {
 		}
 		history.addFirst(element);
 		
-		if (++debugCounter == 10) {
+		if (++debugCounter == maxSize) {
 			LOG.debug("element added: {}", element);
+			debugCounter = 0;
 		}
 	}
 	
