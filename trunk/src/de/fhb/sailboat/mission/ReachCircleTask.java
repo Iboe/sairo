@@ -33,4 +33,9 @@ public class ReachCircleTask implements Task {
 		
 		return bearing.getDistance() < radius;
 	}
+
+	@Override
+	public String toString() {
+		return "ReachCircleTask [center=" + center + ", radius=" + radius + "]";
+	}
 }
