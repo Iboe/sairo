@@ -53,7 +53,7 @@ public class WifiXbee implements IwifiXbee {
 	public void initializeXbee() {
 
 		try {
-			xbee.open("COM8", BAUD_RATE);
+			xbee.open(COM_PORT, BAUD_RATE);
 			xbee.addPacketListener(new PacketListener() {
 				public void processResponse(XBeeResponse response) {
 					queue.offer(response);
@@ -126,11 +126,20 @@ public class WifiXbee implements IwifiXbee {
 
 		// replace with SH + SL of your end device
 		XBeeAddress64 address = new XBeeAddress64(XBEE_RECEIVER_ADRESS);
+		char[] dataSend = data.toCharArray();
+		int[] sendAry = new int[dataSend.length];
+		for(int i =0 ; i<dataSend.length;i++)
+		{
+			sendAry[i] = dataSend[i];
+		}
+		
 		
 		try {
 			// Develop test Case
-			xbee.sendSynchronous(new ZNetTxRequest(address, new int[] { 'H',
-					'i' }), 5000);
+			
+			xbee.sendSynchronous(new ZNetTxRequest(address, sendAry), 5000);
+			System.out.println(xbee.sendSynchronous(new ZNetTxRequest(address, sendAry), 5000).toString());
+					
 
 		} catch (XBeeTimeoutException e) {
 
