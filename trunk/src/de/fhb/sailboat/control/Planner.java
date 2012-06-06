@@ -2,7 +2,16 @@ package de.fhb.sailboat.control;
 
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
+import de.fhb.sailboat.mission.Task;
 
+/**
+ * Interface for executing a {@link Mission}. Implementations are responsible for
+ * arranging the order of the {@link Task} elements of the {@link Mission} and 
+ * the execution of the tasks.
+ * 
+ * @author hscheel
+ *
+ */
 public interface Planner {
 
 	/**

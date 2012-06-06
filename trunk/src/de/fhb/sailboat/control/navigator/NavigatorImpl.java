@@ -17,14 +17,30 @@ import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
-public class NavigatorImpl implements Navigator{
+/**
+ * Implementation of {@link Navigator} which calculates commands based on
+ * the {@link Task} to execute. The commands are hand over to a {@link Pilot}. 
+ * 
+ * @author hscheel
+ *
+ */
+public class NavigatorImpl implements Navigator {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NavigatorImpl.class);
 	private final Pilot pilot;
 	private final WorldModel worldModel;
 	private Thread workerThread = null;
 	
+	/**
+	 * Creates a new instance with the specified {@link Pilot} to hand over commands 
+	 * 
+	 * @param pilot the pilot to hand over commands, must not be null
+	 */
 	public NavigatorImpl(Pilot pilot) {
+		if (pilot == null) {
+			throw new NullPointerException();
+		}
+		
 		this.pilot = pilot;
 		this.worldModel = WorldModelImpl.getInstance();
 	}
@@ -149,7 +165,8 @@ public class NavigatorImpl implements Navigator{
 	}
 	
 	private void stopThread() {
-		if (workerThread != null)
+		if (workerThread != null) {
 			workerThread.interrupt();
+		}
 	}
 }

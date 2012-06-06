@@ -13,6 +13,15 @@ import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+/**
+ * Implementation of {@link Planner} which executes the tasks in their 
+ * original sequence. The current {@link Task} is hand over to the {@link Navigator}.
+ * The planner checks concurrently if the current task is finished and executes the next
+ * task afterwards. 
+ * 
+ * @author hscheel
+ *
+ */
 public class PlannerImpl implements Planner {
 
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
@@ -24,7 +33,16 @@ public class PlannerImpl implements Planner {
 	private final WorldModel worldModel;
 	private WorkerThread workerThread;
 	
+	/**
+	 * Creates a new instance with the specified {@link Navigator} to hand over tasks.
+	 * 
+	 * @param navigator the navigator to hand over tasks, must not be <code>null</code>
+	 */
 	public PlannerImpl(Navigator navigator) {
+		if (navigator == null) {
+			throw new NullPointerException();
+		}
+		
 		this.navigator = navigator;
 		this.worldModel = WorldModelImpl.getInstance();
 		this.workerThread = null;
@@ -71,6 +89,14 @@ public class PlannerImpl implements Planner {
 		}
 	}
 	
+	/**
+	 * {@link Thread} for observing the current executed task. Checks repeatedly
+	 * if the task is finished and starts the next task afterwards. If no task
+	 * is available for execution, a {@link StopTask} is performed.
+	 * 
+	 * @author hscheel
+	 *
+	 */
 	private class WorkerThread extends Thread {
 		private Task currentTask;
 		private List<Task> tasks;

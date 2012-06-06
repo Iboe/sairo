@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.pilot.Pilot;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -225,5 +226,31 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	 */
 	public double toDegree(double radian) {
 		return (radian / Math.PI * 180);
+	}
+	
+	/**
+	 * NOT READY! MUST NOT BE USED!
+	 * @return nonsense
+	 */
+	protected double calcAngleToGoal() {
+		final int beatingParameter = 1;
+		int boatPosition = 0;
+		int targetPosition = 0;
+		
+		int vectorBoatToTarget = targetPosition - boatPosition;
+		double currentAngle = worldModel.getCompassModel().getCompass().getYaw();
+		double newAngle = currentAngle;
+		double windDirectionInverse = 360 - calcRealWind().getDirection();
+		double n = 1 + beatingParameter / Math.abs(vectorBoatToTarget);
+		
+		return 0;
+	}
+	
+	protected Wind calcRealWind() {
+		return worldModel.getWindModel().getWind();
+	}
+	
+	private double amountOfVector(double x, double y) {
+		return Math.sqrt(x * x + y * y);
 	}
 }

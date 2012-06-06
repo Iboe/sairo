@@ -15,6 +15,12 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 
 	private GPS centroid;
 	
+	/**
+	 * Creates a new initialized instance.
+	 * 
+	 * @param pilot the pilot to send the commands to
+	 * @param navigator the navigator who created this instance
+	 */
 	public ReachPolygonWorker(Pilot pilot, Navigator navigator) {
 		super(pilot, navigator);
 	}
