@@ -15,7 +15,11 @@ import com.rapplogic.xbee.api.XBeeException;
 import com.rapplogic.xbee.api.XBeeResponse;
 import com.rapplogic.xbee.api.XBeeTimeoutException;
 import com.rapplogic.xbee.api.wpan.RxResponseIoSample;
+import com.rapplogic.xbee.api.zigbee.ZNetRxBaseResponse;
+import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
+import com.rapplogic.xbee.api.zigbee.ZNetTxStatusResponse;
+import com.rapplogic.xbee.examples.zigbee.ZNetSenderExample;
 import com.rapplogic.xbee.util.ByteUtils;
 
 public class WifiXbee implements IwifiXbee {
@@ -49,7 +53,7 @@ public class WifiXbee implements IwifiXbee {
 	public void initializeXbee() {
 
 		try {
-			xbee.open(COM_PORT, BAUD_RATE);
+			xbee.open("COM8", BAUD_RATE);
 			xbee.addPacketListener(new PacketListener() {
 				public void processResponse(XBeeResponse response) {
 					queue.offer(response);
@@ -80,17 +84,36 @@ public class WifiXbee implements IwifiXbee {
 		while ((response = queue.poll()) != null) { // we got something!
 
 			try {
-				RxResponseIoSample ioSample = (RxResponseIoSample) response;
-
-				System.out.println("We received a sample from "
-						+ ioSample.getSourceAddress());
-
-				if (ioSample.containsAnalog()) {
-					System.out.println("10-bit temp reading (pin 19) is "
-							+ ioSample.getSamples()[0].getAnalog1());
+				//XBeeResponse ioSample = response;
+				ZNetRxResponse ioSample = (ZNetRxResponse)response;
+				
+				
+				int[] intArray = ioSample.getData();
+				String myString = "";
+				
+				for(int i = 0; i<intArray.length;i++ ){
+					myString = myString+(char)intArray[i];
 				}
+				
+				System.out.println(myString);
+				
+				//String test = ByteUtils.toChar(ioSample.getProcessedPacketBytes());
+					   // since this API ID is AT_RESPONSE, we know to cast to AtCommandResponse
+					    
+					       // System.out.println("Command returned " + ByteUtils.toBase16(ioSample.getProcessedPacketBytes()));
+					    
+				/*
+				int data = ioSample.getChecksum();				
+				
+				//if (ioSample.containsAnalog()) {
+					System.out.println("10-bit temp reading (pin 19) is "
+							+ data);
+				//}
+				 */
 			} catch (ClassCastException e) {
 				// not an IO Sample
+				e.printStackTrace();
+				System.out.println("Autsch");
 			}
 		}
 	}
