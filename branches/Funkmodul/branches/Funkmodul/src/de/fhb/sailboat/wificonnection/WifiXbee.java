@@ -96,7 +96,7 @@ public class WifiXbee implements IwifiXbee {
 	}
 
 	/*
-	 * Sends Data to other xbee module
+	 * Sends Data to other xbee 
 	 */
 	public void sendDataXbee(String data) throws XBeeException,
 			InterruptedException, IOException {

@@ -31,4 +31,20 @@ public class XBeeTest {
 	}
 
 	
+	/**
+	 * @param args
+	 * @throws InterruptedException
+	 * @throws XBeeException
+	 * @throws IOException 
+	 
+	public static void main(String[] args) throws XBeeException,
+			InterruptedException, IOException {
+		PropertiesInitializer propsInit = new PropertiesInitializer();
+		propsInit.initializeProperties();
+		IwifiXbee xbee = new WifiXbee();
+		xbee.initializeXbee();
+		xbee.read();
+	}
+	*/
+	
 }
