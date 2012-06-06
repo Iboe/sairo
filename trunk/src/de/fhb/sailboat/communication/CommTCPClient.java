@@ -13,7 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * to be commented
+ * Provides a TCP client endpoint as {@link CommunicationBase}.<br>
+ * 
  * @author Michael Kant
  *
  */
@@ -26,7 +27,13 @@ public class CommTCPClient extends CommunicationBase {
 	private int destinationPort;
 	
 	
-	
+	/**
+	 * Initialization constructor.<br>
+	 * Creates a new {@link CommTCPClient} object with the given destination IP address and port.
+	 * 
+	 * @param destIP IP address of the remote host.
+	 * @param port Port of the remote host.
+	 */
 	public CommTCPClient(String destIP, int port){
 		
 		destinationIP=destIP;
@@ -34,6 +41,9 @@ public class CommTCPClient extends CommunicationBase {
 		destination=null;
 	}
 	
+	/**
+	 * Opens a socket to the given destination IP and port.
+	 */
 	@Override
 	public boolean initialize(){
 		
@@ -71,6 +81,9 @@ public class CommTCPClient extends CommunicationBase {
 		return bInitialized;
 	}
 	
+	/**
+	 * Closes the socket along with the remote connection.
+	 */
 	@Override
 	public void shutdown(){
 		
@@ -100,6 +113,7 @@ public class CommTCPClient extends CommunicationBase {
 		return destination != null && !(destination.isClosed() || destination.isInputShutdown() || destination.isOutputShutdown());
 	}
 
+	@Override
 	public boolean closeConnection(){
 		
 		boolean bClosed=false;

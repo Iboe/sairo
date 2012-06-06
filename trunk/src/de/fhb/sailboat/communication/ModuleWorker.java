@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * to be commented
+ * Serves as background thread for calling the requestObject method on the {@link TransmissionModule} instances. <br>
+ * A {@link ModuleWorker} is created for each registered module.
+ * 
  * @author Michael Kant
  *
  */
@@ -26,6 +28,12 @@ public class ModuleWorker extends Thread {
 	
 	//private byte[] sendBuffer;
 	
+	/**
+	 * Initialization constructor.
+	 * @param commBase The {@link CommunicationBase} object where this object was created from.
+	 * @param commModule The associated {@link TransmissionModule}, which will be controlled.
+	 * @param The ID of the associated {@link TransmissionModule}. It's added to the outgoing packets, when sending data.
+	 */
 	public ModuleWorker(CommunicationBase commBase, TransmissionModule commModule, byte moduleId) {
 		
 		super();
@@ -39,6 +47,10 @@ public class ModuleWorker extends Thread {
 		}
 	}
 	
+	/**
+	 * Thread loop that's responsible for calling the interface methods on the associated {@link TransmissionModule}.<br>
+	 * @see TransmissionModule
+	 */
 	public synchronized void run(){
 		
 		int errorCount=0;

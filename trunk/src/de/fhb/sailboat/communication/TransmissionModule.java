@@ -17,6 +17,7 @@ import java.io.IOException;
  * ping-pong like transmission, which is usually not intended. <br> 
  * <b>In order to ensure a successful transmission, all {@link TransmissionModule} pairs must be registered at the<br>
  * end-nodes (server and client) in the SAME order!!</b><br>
+ * 
  *   
  * @author Michael Kant
  *

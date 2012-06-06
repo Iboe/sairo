@@ -265,6 +265,11 @@ public abstract class CommunicationBase {
 	 */
 	public abstract boolean isConnected();
 	
+	/**
+	 * Causes the underlying connection to be closed.<br>
+	 * This method must be implemented in a derived class, since it's responsible for implementing the concrete connection.
+	 * @return
+	 */
 	public abstract boolean closeConnection();
 	
 	/**

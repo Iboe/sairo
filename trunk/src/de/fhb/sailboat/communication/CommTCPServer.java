@@ -64,7 +64,10 @@ public class CommTCPServer extends CommunicationBase{
 		return bInitialized;
 	}
 	
-	
+	/**
+	 * Stops the server socket along with its accept thread and disconnects the connected client.
+	 */
+	@Override
 	public void shutdown(){
 		
 		LOG.debug("Shutting down...");
@@ -125,12 +128,20 @@ public class CommTCPServer extends CommunicationBase{
 		
 	}
 	
+	/**
+	 * Checks whether a remote client connection is established.
+	 * 
+	 */
 	@Override
 	public boolean isConnected(){
 		
 		return connectedClient != null && !(connectedClient.isClosed() || connectedClient.isInputShutdown() || connectedClient.isOutputShutdown());
 	}
 	
+	/**
+	 * Terminates the connection to the remote client.
+	 */
+	@Override
 	public boolean closeConnection(){
 		
 		boolean bClosed=false;

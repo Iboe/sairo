@@ -7,11 +7,18 @@ package de.fhb.sailboat.communication;
 /**
  * Base class for the mission transmitter and receiver. <br> 
  * It contains the enumeration definitions for transmission, operation and error modes.
+ * 
  * @author Michael Kant
  *
  */
 public class MissionNegotiationBase {
 
+	/**
+	 * Enumeration, describing the types of packets that can be sent within the mission transmission process.
+	 * 
+	 * @author Michael Kant
+	 *
+	 */
 	public enum eOperationType{
 		
 		OT_BeginMission(1),
@@ -55,6 +62,12 @@ public class MissionNegotiationBase {
 	    }
 	}
 	
+	/**
+	 * Enumeration of error types that may occur within the states of mission transmission.
+	 * 
+	 * @author Michael Kant
+	 *
+	 */
 	public enum eErrorType{
 		
 		ET_None(0),
@@ -91,6 +104,12 @@ public class MissionNegotiationBase {
 	    }
 	}
 	
+	/**
+	 * Enumeration, describing the state of the mission transmission.
+	 * 
+	 * @author Michael Kant
+	 *
+	 */
 	public enum eTransmissionMode {
 		
 		TM_Idle(0),
