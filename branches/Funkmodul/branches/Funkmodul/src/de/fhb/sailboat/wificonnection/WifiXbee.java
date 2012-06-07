@@ -24,10 +24,28 @@ import com.rapplogic.xbee.util.ByteUtils;
 
 public class WifiXbee implements IwifiXbee {
 
+	//Class Instance
+	private WifiXbee instance = null;
+	
+	// Instance for Data Maipulation
+	private XbeeDataManipulation myManiPu = new XbeeDataManipulation();
+
+	public String resp;
+
+	public String getResp() {
+		return resp;
+	}
+
+	private void setResp(String resp) {
+		this.resp = resp;
+	}
+
 	// Comport Xbee
 	private final String COM_PORT = System.getProperty(WifiXbee.class
-			.getSimpleName() + ".comPort");
+			.getSimpleName()
+			+ ".comPort");
 
+	private char[] dataToSend = new char[] {};
 	// Baudrate XBee
 	private final int BAUD_RATE = Integer.parseInt(System
 			.getProperty(WifiXbee.class.getSimpleName() + ".baudrate"));
@@ -38,7 +56,7 @@ public class WifiXbee implements IwifiXbee {
 	private final String XBEE_RECEIVER_ADRESS = System
 			.getProperty(WifiXbee.class.getSimpleName() + ".receiverID");
 
-	//Response from other Xbee
+	// Response from other Xbee
 	private XBeeResponse response;
 
 	// XBee
@@ -48,17 +66,23 @@ public class WifiXbee implements IwifiXbee {
 	private static final Logger LOG = Logger.getLogger(WifiXbee.class);
 
 	/*
-	 * To Start the Xbee Module
+	 * To Start the Xbee Module starts a Paketlistener vor incomming Pakets
 	 */
 	public void initializeXbee() {
 
 		try {
-			xbee.open(COM_PORT, BAUD_RATE);
-			xbee.addPacketListener(new PacketListener() {
-				public void processResponse(XBeeResponse response) {
-					queue.offer(response);
-				}
-			});
+			
+			if (instance != null) {
+				
+			} else {
+				xbee.open(COM_PORT, BAUD_RATE);
+				xbee.addPacketListener(new PacketListener() {
+					public void processResponse(XBeeResponse response) {
+						queue.offer(response);
+					}
+				});
+				//instance = WifiXbee.newInstance();
+			}
 		} catch (Exception e) {
 			LOG.error("XBee failed to initialize: " + e);
 			e.printStackTrace();
@@ -82,85 +106,49 @@ public class WifiXbee implements IwifiXbee {
 	private void receiveDataXbee() throws XBeeException, InterruptedException {
 
 		while ((response = queue.poll()) != null) { // we got something!
-
 			try {
-				//XBeeResponse ioSample = response;
-				ZNetRxResponse ioSample = (ZNetRxResponse)response;
-				
-				
-				int[] intArray = ioSample.getData();
-				String myString = "";
-				
-				for(int i = 0; i<intArray.length;i++ ){
-					myString = myString+(char)intArray[i];
+				if (response.getApiId() == ApiId.ZNET_RX_RESPONSE) {
+
+					// XBeeResponse ioSample = response;
+					ZNetRxResponse ioSample = (ZNetRxResponse) response;
+
+					int[] intArray = ioSample.getData();
+					setResp(this.myManiPu.IntArryToString(intArray));
+				} else {
+					// not the right respons delivered (ignoring)
+					LOG.debug("Xbee lieferte nicht das erwartete Signal.");
+
 				}
-				
-				System.out.println(myString);
-				
-				//String test = ByteUtils.toChar(ioSample.getProcessedPacketBytes());
-					   // since this API ID is AT_RESPONSE, we know to cast to AtCommandResponse
-					    
-					       // System.out.println("Command returned " + ByteUtils.toBase16(ioSample.getProcessedPacketBytes()));
-					    
-				/*
-				int data = ioSample.getChecksum();				
-				
-				//if (ioSample.containsAnalog()) {
-					System.out.println("10-bit temp reading (pin 19) is "
-							+ data);
-				//}
-				 */
 			} catch (ClassCastException e) {
 				// not an IO Sample
+				LOG.error("Some shit happens with the response");
 				e.printStackTrace();
-				System.out.println("Autsch");
 			}
 		}
 	}
 
 	/*
-	 * Sends Data to other xbee 
+	 * Sends Data to other xbee
 	 */
 	public void sendDataXbee(String data) throws XBeeException,
 			InterruptedException, IOException {
 
 		// replace with SH + SL of your end device
 		XBeeAddress64 address = new XBeeAddress64(XBEE_RECEIVER_ADRESS);
-		char[] dataSend = data.toCharArray();
-		int[] sendAry = new int[dataSend.length];
-		for(int i =0 ; i<dataSend.length;i++)
-		{
-			sendAry[i] = dataSend[i];
-		}
-		
-		
+
+		int[] arryToSend = this.myManiPu.StringToIntArry(data);
+
 		try {
-			// Develop test Case
-			
-			xbee.sendSynchronous(new ZNetTxRequest(address, sendAry), 5000);
-			System.out.println(xbee.sendSynchronous(new ZNetTxRequest(address, sendAry), 5000).toString());
-					
+			// Sends the array to other Xbee
+			xbee.sendSynchronous(new ZNetTxRequest(address, arryToSend), 5000);
+
+			// Shows the send Attributes
+			LOG.debug(xbee.sendSynchronous(
+					new ZNetTxRequest(address, arryToSend), 5000).toString());
 
 		} catch (XBeeTimeoutException e) {
 
 			LOG.warn("Send Timed out: " + e.toString());
 		}
-		XBeeResponse response = xbee.getResponse();
-
-		if (response.getApiId() == ApiId.AT_RESPONSE) {
-			// since this API ID is AT_RESPONSE, we know to cast to
-			// AtCommandResponse
-			AtCommandResponse atResponse = (AtCommandResponse) response;
-
-			if (atResponse.isOk()) {
-				// command was successful
-				System.out.println("Command returned "
-						+ ByteUtils.toBase16(atResponse.getValue()));
-			} else {
-
-			}
-		}
-
 	}
-
 }

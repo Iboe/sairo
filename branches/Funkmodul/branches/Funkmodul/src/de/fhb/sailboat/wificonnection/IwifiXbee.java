@@ -17,6 +17,12 @@ public interface IwifiXbee {
 	public void initializeXbee();
 	
 	/*
+	 * gets the Xbee Response 
+	 * Null if nothing happend
+	 */
+	public String getResp();
+	
+	/*
 	 * Sends Data to other xbee 
 	 */
 	public void sendDataXbee(String data) throws XBeeException,
