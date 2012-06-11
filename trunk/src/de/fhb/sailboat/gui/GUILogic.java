@@ -37,6 +37,9 @@ public interface GUILogic {
     
     public void closeGUI();
     
+    public GUIController getController();
+    public Planner getPlanner();
+    
     // the following are methods for primitive tests and should be removed in future releases (namely after missionCreatorDialog is finished)
     public void sendCircleMarkers();
     public void sendPolyMapMarkers();

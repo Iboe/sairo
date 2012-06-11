@@ -35,10 +35,13 @@ public class GUIModelImpl implements GUIModel{
 	private List<GPS> circleMarkerList;
 	private List<MapPolygon> polyList;
 	
-	private boolean sailMode;
+	private boolean sailMode;					// stores current test mission mode
+	private int propellor;						// current propellor mode, 1=maximum backward/ 2=off/ 3=maximum forward
+	private int rudder;							// current rudder value
+	private int sail;							// current sail value
 	
-	private Mission currentWholeMission;			// current mission of the sailboat as a whole from start to finish
-	private Mission missionTasksLeft;				// current state of the mission (tasks left)
+	private Mission currentWholeMission;		// current mission of the sailboat as a whole from start to finish
+	private Mission missionTasksLeft;			// current state of the mission (tasks left)
 	
 	private StringBuffer missionReport;
 	
@@ -51,6 +54,9 @@ public class GUIModelImpl implements GUIModel{
 		this.currentWholeMission = new MissionImpl();
 		this.missionTasksLeft = new MissionImpl();
 		this.missionReport = new StringBuffer();
+		this.propellor = 2;
+		this.rudder = 0;
+		this.sail = 0;
 	}
 
 	// Getter/ Setter
@@ -147,5 +153,33 @@ public class GUIModelImpl implements GUIModel{
 		this.missionReport = missionReport;
 	}
 
+	@Override
+	public int getPropellor() {
+		return this.propellor;
+	}
 	
+	@Override
+	public int getRudder() {
+		return this.rudder;
+	}
+	
+	@Override
+	public int getSail() {
+		return this.sail;
+	}
+	
+	@Override
+	public void setPropellor(int propellor) {
+		this.propellor = propellor;
+	}
+	
+	@Override
+	public void setSail(int sail) {
+		this.sail = sail;
+	}
+	
+	@Override
+	public void setRudder(int rudder) {
+		this.rudder = rudder;
+	}
 }

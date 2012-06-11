@@ -23,6 +23,8 @@ public interface GUIController {
 
 	public void commitStopTask(Planner planner);
 	
+	public void commitPrimitiveCommand(Planner planner, int propellor, int rudder, int sail);
+	
 	public void resetActorsTask(Planner planner);
 
 	public void updateAll();
@@ -41,6 +43,8 @@ public interface GUIController {
 	public void setCircleMarkerList(List<GPS> pointList);
 
 	public void setPolyList(List<MapPolygon> polyList);
+	
+	public void setSailMode(boolean sailMode);
 
 	// Getter ("tunneled" from Model)
 	public CompassModel getCompass();
@@ -53,6 +57,15 @@ public interface GUIController {
 
 	public boolean isSailMode();
 
-	public void setSailMode(boolean sailMode);
-
+	public int getPropellor();
+	
+	public int getRudder();
+	
+	public int getSail();
+	
+	public void setPropellor();
+	
+	public void setRudder();
+	
+	public void setSail();
 }

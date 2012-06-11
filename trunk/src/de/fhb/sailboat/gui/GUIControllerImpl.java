@@ -34,8 +34,13 @@ public class GUIControllerImpl implements GUIController {
 	// Constants
 	final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));
 	final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));
+	final static int PROPELLOR_MIN = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MIN"));
+	final static int RUDDER_LEFT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_LEFT"));
 	final static int RUDDER_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_NORMAL"));
+	final static int RUDDER_RIGHT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_RIGHT"));
+	final static int SAIL_IN = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_IN"));
 	final static int SAIL_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_NORMAL"));
+	final static int SAIL_OUT = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_OUT"));
 	
 	
 	// Variables
@@ -174,6 +179,11 @@ public class GUIControllerImpl implements GUIController {
 
 		planner.doMission(mission);
 	}
+	
+	@Override
+	public void commitPrimitiveCommand(Planner planner, int propellor, int rudder, int sail) {
+		planner.doPrimitiveCommand(new PrimitiveCommandTask(sail, rudder, propellor));
+	}
 
 	// Updater (used to update a sensor reading and store it in model, kind of
 	// like a more sophisticated setter)
@@ -186,6 +196,9 @@ public class GUIControllerImpl implements GUIController {
 		updateWind();
 		updateCompass();
 		updateGps();
+		setPropellor();
+		setSail();
+		setRudder();
 	}
 
 	@Override
@@ -307,10 +320,46 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.isSailMode();
 		
 	}
+	
+	@Override
+	public int getPropellor() {
+		return this.model.getPropellor();
+	}
+	
+	@Override
+	public int getRudder() {
+		return this.model.getRudder();
+	}
+	
+	@Override
+	public int getSail() {
+		return this.model.getSail();
+	}
+	
+	@Override
+	public void setPropellor() {
+		int value = this.worldModel.getActuatorModel().getPropeller().getValue();
+		if ((value <= PROPELLOR_MAX) && (value <= PROPELLOR_NORMAL)) {
+			this.model.setPropellor(3); 	// set propellor to maximum forward
+		}
+		else if (value == PROPELLOR_NORMAL) {
+			this.model.setPropellor(2); 	// set propellor to off
+		}
+		else this.model.setPropellor(1); 	// set propellor to maximum backward
+	}
+	
+	@Override
+	public void setRudder() {
+		this.model.setPropellor(this.worldModel.getActuatorModel().getRudder().getValue());
+	}
+	
+	@Override
+	public void setSail() {
+		this.model.setSail(this.worldModel.getActuatorModel().getSail().getValue());
+	}
 
 	@Override
 	public void setSailMode(boolean sailMode) {
 		this.model.setSailMode(sailMode);
 	}
-
 }

@@ -51,4 +51,16 @@ public interface GUIModel {
 	public void setMissionTasksLeft(Mission missionTasksLeft);
 
 	public void setMissionReport(StringBuffer missionReport);
+	
+	public void setPropellor(int propellor);
+	
+	public void setRudder(int rudder);
+	
+	public void setSail(int sail);
+	
+	public int getPropellor();
+	
+	public int getRudder();
+	
+	public int getSail();
 }

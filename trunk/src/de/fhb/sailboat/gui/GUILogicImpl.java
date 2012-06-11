@@ -34,11 +34,11 @@ public class GUILogicImpl implements GUILogic {
     private boolean testMode;                                       // if true random values will be generated for each update, instead of trying to retrieve true values
     private DecimalFormat gpsDecimalFormat;
 
-    public GUILogicImpl() {
+    /*public GUILogicImpl() {
     	this.testMode = false;
         this.gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
         this.controller = new GUIControllerImpl();
-    }
+    }*/
     
     public GUILogicImpl(Planner planner) {
         this.testMode = false;
@@ -47,10 +47,10 @@ public class GUILogicImpl implements GUILogic {
         this.planner = planner;
     }
 
-    public GUILogicImpl(boolean testMode) {
+    /*public GUILogicImpl(boolean testMode) {
         this();
         this.testMode = testMode;
-    }
+    }*/
 
     @Override
     public void initializeMissionMap(javax.swing.JPanel missionMapPanel) {
@@ -278,5 +278,13 @@ public class GUILogicImpl implements GUILogic {
     @Override
     public void setSailMode(boolean sailMode) {
         this.controller.setSailMode(sailMode);
+    }
+    
+    public GUIController getController() {
+    	return this.controller;
+    }
+    
+    public Planner getPlanner() {
+    	return this.planner;
     }
 }

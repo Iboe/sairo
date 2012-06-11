@@ -277,7 +277,7 @@ public class Map extends JPanel {
 	 * @param gps
 	 */
 	private void navigateTo(GPS gps) {
-		navigateTo(gps, map.getZoom());
+		navigateTo(gps, 18);
 	}
 
 	/**
