@@ -37,7 +37,10 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileLoaderListener;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import de.fhb.sailboat.control.pilot.DriveAngleThread;
 import de.fhb.sailboat.data.GPS;
 
 /**
@@ -47,6 +50,8 @@ import de.fhb.sailboat.data.GPS;
 public class JMapViewer extends JPanel implements TileLoaderListener {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger LOG = LoggerFactory.getLogger(JMapViewer.class);
 
 	/**
 	 * Vectors for clock-wise tile painting
@@ -559,7 +564,9 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 			for (MapMarker marker : mapMarkerList) {
 				paintMarker(g, marker);
 			}
-			} catch (ConcurrentModificationException ex){}
+			} catch (ConcurrentModificationException ex){
+				LOG.warn(ex.getMessage());
+			}
 		}
 		paintAttribution(g);
 	}
