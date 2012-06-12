@@ -763,7 +763,6 @@ public class GUInterface extends javax.swing.JFrame {
 
     private void remoteDialogWindowClosing(java.awt.event.WindowEvent evt) {                                           
         windowMenuRemote.setSelected(false);
-        System.out.println("CLOSED");
     }                                          
 
     private void remoteDialogWindowActivated(java.awt.event.WindowEvent evt) {                                             
@@ -785,11 +784,11 @@ public class GUInterface extends javax.swing.JFrame {
     }                                            
 
     private void sailStateChanged(javax.swing.event.ChangeEvent evt) {
-        this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), guiLogic.getController().getPropellor(), guiLogic.getController().getRudder(), convertToNativeValue(sailSlider.getValue(), GUIControllerImpl.SAIL_IN, GUIControllerImpl.SAIL_NORMAL, GUIControllerImpl.SAIL_OUT));
+        this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), null, null, convertToNativeValue(sailSlider.getValue(), GUIControllerImpl.SAIL_IN, GUIControllerImpl.SAIL_NORMAL, GUIControllerImpl.SAIL_OUT));
     }
 
     private void rudderStateChanged(javax.swing.event.ChangeEvent evt) {
-        this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), guiLogic.getController().getPropellor(), convertToNativeValue(rudderSlider.getValue(), GUIControllerImpl.RUDDER_LEFT, GUIControllerImpl.RUDDER_NORMAL, GUIControllerImpl.RUDDER_RIGHT), guiLogic.getController().getSail());
+        this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), null, convertToNativeValue(rudderSlider.getValue(), GUIControllerImpl.RUDDER_LEFT, GUIControllerImpl.RUDDER_NORMAL, GUIControllerImpl.RUDDER_RIGHT), null);
     }
 
     private void propellorMinStateChanged(javax.swing.event.ChangeEvent evt) {
@@ -806,13 +805,13 @@ public class GUInterface extends javax.swing.JFrame {
 
     private void propellorStateUpdate() {
         if (propellorMinRadioButton.isSelected()) {
-            this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_MIN, guiLogic.getController().getRudder(), guiLogic.getController().getSail());
+            this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_MIN, null, null);
         }
         else if (propellorNullRadioButton.isSelected()) {
-            this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_NORMAL, guiLogic.getController().getRudder(), guiLogic.getController().getSail());
+            this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_NORMAL, null, null);
         }
         else {
-            this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_MAX, guiLogic.getController().getRudder(), guiLogic.getController().getSail());
+            this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_MAX, null, null);
         }
     }
     

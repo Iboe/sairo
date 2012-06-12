@@ -23,7 +23,7 @@ public interface GUIController {
 
 	public void commitStopTask(Planner planner);
 	
-	public void commitPrimitiveCommand(Planner planner, int propellor, int rudder, int sail);
+	public void commitPrimitiveCommand(Planner planner, Integer propellor, Integer rudder, Integer sail);
 	
 	public void resetActorsTask(Planner planner);
 

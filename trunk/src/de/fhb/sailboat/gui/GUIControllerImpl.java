@@ -181,8 +181,8 @@ public class GUIControllerImpl implements GUIController {
 	}
 	
 	@Override
-	public void commitPrimitiveCommand(Planner planner, int propellor, int rudder, int sail) {
-		planner.doPrimitiveCommand(new PrimitiveCommandTask(sail, rudder, propellor));
+	public void commitPrimitiveCommand(Planner planner, Integer propellor, Integer rudder, Integer sail) {
+		if (planner != null) planner.doPrimitiveCommand(new PrimitiveCommandTask(sail, rudder, propellor));
 	}
 
 	// Updater (used to update a sensor reading and store it in model, kind of
