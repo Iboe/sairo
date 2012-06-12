@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -554,9 +555,11 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		}
 
 		if (mapMarkersVisible && mapMarkerList != null) {
+			try {
 			for (MapMarker marker : mapMarkerList) {
 				paintMarker(g, marker);
 			}
+			} catch (ConcurrentModificationException ex){}
 		}
 		paintAttribution(g);
 	}
