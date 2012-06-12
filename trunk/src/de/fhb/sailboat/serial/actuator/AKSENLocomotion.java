@@ -2,7 +2,11 @@ package de.fhb.sailboat.serial.actuator;
 
 import java.io.IOException;
 import org.apache.log4j.Logger;
+
+import de.fhb.sailboat.data.Actuator;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
+import de.fhb.sailboat.worldmodel.WorldModel;
+import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
  *
@@ -27,6 +31,7 @@ import de.fhb.sailboat.serial.serialAPI.COMPort;
  *
  */
 public class AKSENLocomotion implements LocomotionSystem {
+	private final WorldModel worldModel;
 	COMPort myCOM;
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
 	String lastCom;
@@ -43,7 +48,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * initializes new Serial-Port-Connection to AKSEN-BOARD
 	 */
 	public AKSENLocomotion(){
-		
+		worldModel = WorldModelImpl.getInstance();
 		COMPort myCOM = new COMPort(Integer.parseInt(COM_PORT), Integer.parseInt(BAUDRATE), 0);
 		this.myCOM = myCOM;
 		myCOM.open();
@@ -100,6 +105,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 			this.AKSENCommand(com);
 		}	
+		worldModel.getActuatorModel().setRudder(new Actuator(angle));
 	}
 
 	/** 
@@ -125,7 +131,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 			this.AKSENCommand(com);
 		}	
-
+		worldModel.getActuatorModel().setSail(new Actuator(angle));
 	}
 
 	/** 
@@ -150,7 +156,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 			this.AKSENCommand(com);
 		}	
-
+		worldModel.getActuatorModel().setPropeller(new Actuator(angle));
 	}
 
 	/** 
@@ -174,6 +180,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void resetRudder() {
 		this.setRudder(RUDDER_NORMAL);
+		worldModel.getActuatorModel().setRudder(new Actuator(RUDDER_NORMAL));
 	}
 
 	/** 
@@ -183,6 +190,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void resetSail() {
 		this.setSail(SAIL_NORMAL);
+		worldModel.getActuatorModel().setSail(new Actuator(SAIL_NORMAL));
 	}
 
 	/** 
@@ -192,6 +200,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void resetPropellor() {
 		this.setPropellor(PROPELLOR_NORMAL);
+		worldModel.getActuatorModel().setPropeller(new Actuator(PROPELLOR_NORMAL));
 	}
 	
 	public void closePort() {
