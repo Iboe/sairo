@@ -204,6 +204,7 @@ public class GUILogicImpl implements GUILogic {
      */
     public void updateLogic() {
         controller.updateAll();
+        missionMap.followBoat(controller.getGps().getPosition());
     }
 
     @Override
