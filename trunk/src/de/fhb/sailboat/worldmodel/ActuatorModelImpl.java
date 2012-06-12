@@ -1,6 +1,7 @@
 package de.fhb.sailboat.worldmodel;
 
 import de.fhb.sailboat.data.Actuator;
+import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 
 public class ActuatorModelImpl implements ActuatorModel {
 
@@ -9,9 +10,9 @@ public class ActuatorModelImpl implements ActuatorModel {
 	private Actuator propeller;
 	
 	public ActuatorModelImpl() {
-		sail = new Actuator(0);
-		rudder = new Actuator(0);
-		propeller = new Actuator(0);
+		sail = new Actuator(LocomotionSystem.SAIL_NORMAL);
+		rudder = new Actuator(LocomotionSystem.RUDDER_NORMAL);
+		propeller = new Actuator(LocomotionSystem.PROPELLOR_NORMAL);
 	}
 	
 	@Override
