@@ -758,7 +758,7 @@ public class GUInterface extends javax.swing.JFrame {
     }                                                       
 
     private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        guiLogic.sendResetActors();
+        guiLogic.sendResetMissionMap();
     }                                                       
 
     private void remoteDialogWindowClosing(java.awt.event.WindowEvent evt) {                                           
