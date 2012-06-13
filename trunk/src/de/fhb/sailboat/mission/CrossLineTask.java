@@ -31,4 +31,10 @@ public class CrossLineTask implements Task {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "CrossLineTask [endPoint=" + endPoint + ", startPoint="
+				+ startPoint + "]";
+	}
 }

@@ -12,6 +12,9 @@ public class BeatTask implements Task {
 	}
 	
 	public BeatTask(Task continueTask, GPS goal) {
+		if (continueTask instanceof BeatTask) {
+			throw new IllegalArgumentException("must not execute a BeatTask after a BeatTask");
+		}
 		this.continueTask = continueTask;
 		this.goal = goal;
 	}
@@ -27,5 +30,11 @@ public class BeatTask implements Task {
 
 	public GPS getGoal() {
 		return goal;
+	}
+
+	@Override
+	public String toString() {
+		return "BeatTask [continueTask=" + continueTask + ", goal=" + goal
+				+ "]";
 	}
 }

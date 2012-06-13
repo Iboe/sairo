@@ -36,4 +36,9 @@ public class StopTask implements Task{
 	public boolean isTurnPropellorOff() {
 		return turnPropellorOff;
 	}
+
+	@Override
+	public String toString() {
+		return "StopTask [turnPropellorOff=" + turnPropellorOff + "]";
+	}
 }

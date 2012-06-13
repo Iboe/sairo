@@ -18,4 +18,9 @@ public class HoldAngleToWindTask implements Task {
 	public int getAngle() {
 		return angle;
 	}
+	
+	@Override
+	public String toString() {
+		return "HoldAngleToWindTask [angle=" + angle + "]";
+	}
 }

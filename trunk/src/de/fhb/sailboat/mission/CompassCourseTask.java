@@ -18,4 +18,9 @@ public class CompassCourseTask implements Task {
 	public int getAngle() {
 		return angle;
 	}
+
+	@Override
+	public String toString() {
+		return "CompassCourseTask [angle=" + angle + "]";
+	}
 }

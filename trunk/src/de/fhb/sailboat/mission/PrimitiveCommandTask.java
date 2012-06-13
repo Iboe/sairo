@@ -44,4 +44,10 @@ public class PrimitiveCommandTask implements Task {
 	public boolean isExecuted() {
 		return executed;
 	}
+
+	@Override
+	public String toString() {
+		return "PrimitiveCommandTask [executed=" + executed + ", propellor="
+				+ propellor + ", rudder=" + rudder + ", sail=" + sail + "]";
+	}
 }

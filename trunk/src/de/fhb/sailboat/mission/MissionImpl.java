@@ -21,4 +21,17 @@ public class MissionImpl implements Mission {
 	public List<Task> getTasks() {
 		return tasks;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		
+		buffer.append("MissionImpl [");
+		for (Task task : tasks) {
+			buffer.append(task.getClass().getSimpleName()).append(", ");
+		}
+		buffer.append("]");
+		
+		return buffer.toString();
+	}
 }

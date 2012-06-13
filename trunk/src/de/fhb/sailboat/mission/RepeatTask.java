@@ -66,4 +66,18 @@ public class RepeatTask implements Task {
 	public Task getCurrentTask() {
 		return currentTask;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		
+		buffer.append("RepeatTask [");
+		buffer.append("repetitions=").append(repetitions).append(", ");
+		for (Task task : tasks) {
+			buffer.append(task.getClass().getSimpleName()).append(", ");
+		}
+		buffer.append("]");
+		
+		return buffer.toString();
+	}
 }
