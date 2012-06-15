@@ -37,8 +37,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 	String lastCom;
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
-	int wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
-
+	static int wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
+	
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
 	boolean debug = true; 
 
@@ -90,12 +90,16 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setRudder(int)
 	 */
 	public void setRudder(int angle) {
+		this.lastCom = "setRudder to "+ angle;
 		if(isDebug())	
 		{
 			int status = this.AKSENServoCommand(RUDDER_NUMBER, angle);
-			System.out.println(status);
+			
 			if(status == -1) {
-				LOG.warn("Command not send!");
+				//TODO Exception? Eskalieren?
+				LOG.warn("Command: "+ lastCom +": incorrect/not send");
+			} else {
+				LOG.info("Command: "+ lastCom +": correct");
 			}
 		}
 		else
@@ -115,13 +119,16 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void setSail(int angle) {
-		
+		this.lastCom = "setSail to "+ angle;
 		if(isDebug())	
 		{
 			int status = this.AKSENServoCommand(SAIL_NUMBER, angle);
-			System.out.println(status);
+			
 			if(status == -1) {
-				LOG.warn("Command not send!");
+				//TODO Exception? Eskalieren?
+				LOG.warn("Command: "+ lastCom +": incorrect/not send");
+			} else {
+				LOG.info("Command: "+ lastCom +": correct");
 			}
 		}
 		else
@@ -141,12 +148,16 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void setPropellor(int angle) {
+		this.lastCom = "setPropellor to "+ angle;
 		if(isDebug())	
 		{
 			int status = this.AKSENServoCommand(PROPELLOR_NUMBER, angle);
-			System.out.println(status);
+			
 			if(status == -1) {
-				LOG.warn("Command not send!");
+				//TODO Exception? Eskalieren?
+				LOG.warn("Command: "+ lastCom +": incorrect/not send");
+			} else {
+				LOG.info("Command: "+ lastCom +": correct");
 			}
 		}
 		else
@@ -235,6 +246,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		final int n = 3; // Number of attempts to
 		int k = 0;
 		int i;
+		int temp_wait_sleep = wait_sleep;
 		
 		Byte send,r, expected;
 		try {
@@ -268,7 +280,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					for (int j = 0; j < b.length; j++) {
 						r=0x00;
 						this.myCOM.writeByte(b[j]);
-						Thread.sleep(wait_sleep);
+						Thread.sleep(temp_wait_sleep);
 						r = (byte) this.myCOM.readByte();
 					}
 					if (r == 110) {
@@ -298,7 +310,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						expected = 0x65;
 						r = 0x00;
 						this.myCOM.writeByte(send);
-						Thread.sleep(wait_sleep*2);
+						Thread.sleep(temp_wait_sleep*2);
 						r = (byte) this.myCOM.readByte();
 						
 						// didn't got the correct answer? try to resend whole command in next loop
@@ -306,7 +318,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						if(r != expected) {
 							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString());
 							status = 0;
-							this.setWait_Sleep(wait_sleep*2);
+							
 							continue;
 						} else {
 							// We expect everything went well:
