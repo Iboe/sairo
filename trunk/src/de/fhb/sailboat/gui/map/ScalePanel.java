@@ -10,7 +10,7 @@ public class ScalePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private final int LINE_X1 = 5;
 	private final int LINE_Y1 = 5;
-	private final int LINE_X2 = LINE_X1 + Constants.PIXEL_TO_CALCULATE_SCALE;
+	private final int LINE_X2 = LINE_X1 + Map.PIXEL_TO_CALCULATE_SCALE;
 	private final int LINE_Y2 = LINE_Y1;
 
 	private JLabel meterPerPixelLabel;

@@ -9,9 +9,10 @@ public class ArrangePolygon {
 
 	/**
 	 * arranges the points so that they build a "well-looking" polygon
-	 * @param polygon old list without any order
-	 * @return
-	 * 	ordered list
+	 * 
+	 * @param polygon
+	 *            old list without any order
+	 * @return ordered list
 	 */
 	public static List<GPS> arrange(List<GPS> polygon) {
 		List<GPS> arrangedPolygon = new ArrayList<GPS>();
@@ -29,8 +30,8 @@ public class ArrangePolygon {
 			polygon.remove(returnMinimum(distances));
 			distances = new ArrayList<Double>();
 		}
-
-		arrangedPolygon.add(polygon.get(0));
+		if (polygon.size() > 0)
+			arrangedPolygon.add(polygon.get(0));
 
 		return arrangedPolygon;
 	}

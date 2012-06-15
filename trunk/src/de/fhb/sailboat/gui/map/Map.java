@@ -18,8 +18,9 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 
@@ -27,12 +28,26 @@ public class Map extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final int NO_MARK = 0;
+	private static final int MARKER = 1;
+	private static final int POLYGON = 2;
+	private static final int EVERY_X_GPS_POSITION = 20;
+	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
+	private static final int EARTH_CIRCUMFERENCE = 40074000;
+	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
+	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+
+	private static final Logger LOG = LoggerFactory.getLogger(Map.class);
+
 	private List<MapMarker> markerList;
-	private List<MapMarker> positionHistory = new ArrayList<MapMarker>();
-	private List<MapMarker> polyHelpList = new ArrayList<MapMarker>();
+	private List<GPS> positionHistoryList = new ArrayList<GPS>();
+	private List<MapMarker> polyHelpList;
 	private List<MapPolygon> polygonList;
+	private MapPolygon positionHistory = null;
 	private JMapViewer map;
-	private int markerMode = Constants.NO_MARK;
+	private int markerMode = NO_MARK;
+	private int followCounter = 0;
+	private int counter= 0;
 
 	private Coordinate firstCorner = null;
 	private List<GPS> currentPoly = null;
@@ -43,13 +58,14 @@ public class Map extends JPanel {
 		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
 		this.polygonList = new ArrayList<MapPolygon>();
+		this.polyHelpList = new ArrayList<MapMarker>();
 	}
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
 		// Startposition auf FH gestellt
-		// navigateTo(Constants.FH_BRANDENBURG);
+		// navigateTo(FH_BRANDENBURG);
 
-		navigateTo(Constants.REGATTASTRECKE);
+		navigateTo(REGATTASTRECKE);
 
 		map.addMouseListener(new MouseListener() {
 
@@ -100,7 +116,7 @@ public class Map extends JPanel {
 		try {
 			map.setTileLoader(new OsmFileCacheTileLoader(map));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.warn(e.getMessage());
 		}
 
 		final JCheckBox markOnMap = new JCheckBox("Add Marker");
@@ -111,10 +127,10 @@ public class Map extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				if (markOnMap.isSelected()) {
-					markerMode = Constants.MARKER;
+					markerMode = MARKER;
 					markPolygon.setSelected(false);
 				} else {
-					markerMode = Constants.NO_MARK;
+					markerMode = NO_MARK;
 				}
 			}
 		});
@@ -123,10 +139,10 @@ public class Map extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				if (markPolygon.isSelected()) {
-					markerMode = Constants.POLYGON;
+					markerMode = POLYGON;
 					markOnMap.setSelected(false);
 				} else {
-					markerMode = Constants.NO_MARK;
+					markerMode = NO_MARK;
 					if (currentPoly != null)
 						addPointToPolygon(currentPoly.get(0));
 				}
@@ -138,9 +154,9 @@ public class Map extends JPanel {
 				while (true) {
 					if (currentZoom != map.getZoom()) {
 						currentZoom = map.getZoom();
-						int meterPerPixel = (int) (Constants.PIXEL_TO_CALCULATE_SCALE
-								* (Constants.EARTH_CIRCUMFERENCE * Math
-										.cos(Math.toRadians(map.getPosition(10,
+						int meterPerPixel = (int) (PIXEL_TO_CALCULATE_SCALE
+								* (EARTH_CIRCUMFERENCE * Math.cos(Math
+										.toRadians(map.getPosition(10,
 												mapArea.getHeight() - 10)
 												.getLat()))) / Math.pow(2,
 								map.getZoom() + 8));
@@ -152,7 +168,7 @@ public class Map extends JPanel {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						LOG.warn(e.getMessage());
 					}
 				}
 			}
@@ -202,7 +218,6 @@ public class Map extends JPanel {
 					map.removeMapMarker(polyHelpList.get(i));
 				}
 				currentPoly = null;
-				System.out.println(builtPolygon);
 			} else {
 				currentPoly.add(target);
 				polyHelpList.add(new MapMarkerDot(Color.BLACK, target
@@ -212,24 +227,44 @@ public class Map extends JPanel {
 		}
 	}
 
-	/**
-	 * Adds MapMarker for the last MAXIMUM_COUNT_LAST_POSITION positions of the
-	 * boat.
-	 * 
-	 * @param boatPosition
-	 *            current position of the boat
-	 */
 	public void followBoat(GPS boatPosition) {
-		if (boatPosition.getLatitude() != 0.0) {
-			positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
-					.getLatitude(), boatPosition.getLongitude()));
 
-			if (positionHistory.size() > Constants.MAXIMUM_COUNT_LAST_POSITION) {
-				map.removeMapMarker(positionHistory.get(0));
-				positionHistory.remove(0);
+		if (positionHistoryList.size() < 1) {
+			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
+					boatPosition.getLongitude()));
+		} else {
+			if (positionHistoryList.size() == 1) {
+				
+				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
+						boatPosition.getLongitude()));
+
+				for (int i = positionHistoryList.size() - 2; i >= 0; i--)
+					positionHistoryList.add(positionHistoryList.get(i));
+				
+				positionHistory = new MapPolygonImpl(positionHistoryList,
+						Color.DARK_GRAY, new BasicStroke(3));
+				map.addMapPolygon(positionHistory);
+				
+			} else {
+				if (followCounter == EVERY_X_GPS_POSITION) {
+					map.removeMapPolygon(positionHistory);
+					int j = (positionHistoryList.size() / 2) + 1;
+					while (j < positionHistoryList.size())
+						positionHistoryList.remove(j);
+
+					positionHistoryList.add(new GPS(boatPosition.getLatitude(),
+							boatPosition.getLongitude()));
+					
+					for (int i = positionHistoryList.size() - 2; i >= 0; i--)
+						positionHistoryList.add(positionHistoryList.get(i));
+
+					positionHistory = new MapPolygonImpl(positionHistoryList,
+							Color.DARK_GRAY, new BasicStroke(3));
+					followCounter = 0;
+					map.addMapPolygon(positionHistory);
+				} else
+					followCounter++;
 			}
-
-			map.addMapMarker(positionHistory.get(positionHistory.size() - 1));
 		}
 	}
 
@@ -310,14 +345,6 @@ public class Map extends JPanel {
 
 			}
 		}
-	}
-
-	public List<MapMarker> getPositionHistory() {
-		return positionHistory;
-	}
-
-	public void setPositionHistory(List<MapMarker> positionHistory) {
-		this.positionHistory = positionHistory;
 	}
 
 	public JMapViewer getMap() {

@@ -565,7 +565,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 				paintMarker(g, marker);
 			}
 			} catch (ConcurrentModificationException ex){
-				LOG.warn(ex.getMessage());
+				LOG.warn("ConcurrentModificationException");
 			}
 		}
 		paintAttribution(g);

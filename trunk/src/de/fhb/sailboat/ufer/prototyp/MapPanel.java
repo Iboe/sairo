@@ -18,22 +18,28 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.ArrangePolygon;
-import de.fhb.sailboat.gui.map.Constants;
 import de.fhb.sailboat.gui.map.GPSTransformations;
 import de.fhb.sailboat.gui.map.JMapViewer;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.gui.map.MapPolygonImpl;
-import de.fhb.sailboat.gui.map.MapRectangleImpl;
 import de.fhb.sailboat.gui.map.ScalePanel;
 
 public class MapPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static final int NO_MARK = 0;
+	private static final int MARKER = 1;
+	private static final int POLYGON = 2;
+	private static final int MAXIMUM_COUNT_LAST_POSITION = 30;
+	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
+	private static final int EARTH_CIRCUMFERENCE = 40074000;
+	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
+	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
 
 	final static int P_MAP_X = 412;
 	final static int P_MAP_Y = 4;
@@ -45,7 +51,7 @@ public class MapPanel extends JPanel {
 	private ArrayList<MapMarker> polyHelpList = new ArrayList<MapMarker>();
 	private ArrayList<MapPolygon> polygonList;
 	private JMapViewer map;
-	private int markerMode = Constants.NO_MARK;
+	private int markerMode = NO_MARK;
 
 	private Coordinate firstCorner = null;
 	private List<GPS> currentPoly = null;
@@ -68,9 +74,9 @@ public class MapPanel extends JPanel {
 
 		// Startposition auf FH gestellt
 
-		// navigateTo(GPSToCoordinate.gpsToCoordinate(Constants.FH_BRANDENBURG));
+		// navigateTo(GPSToCoordinate.gpsToCoordinate(FH_BRANDENBURG));
 
-		navigateTo(GPSTransformations.gpsToCoordinate(Constants.REGATTASTRECKE));
+		navigateTo(GPSTransformations.gpsToCoordinate(REGATTASTRECKE));
 
 		map.addMouseListener(new MouseListener() {
 
@@ -150,10 +156,10 @@ public class MapPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				if (markOnMap.isSelected()) {
-					markerMode = Constants.MARKER;
+					markerMode = MARKER;
 					markPolygon.setSelected(false);
 				} else {
-					markerMode = Constants.NO_MARK;
+					markerMode = NO_MARK;
 				}
 			}
 		});
@@ -162,10 +168,10 @@ public class MapPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				if (markPolygon.isSelected()) {
-					markerMode = Constants.POLYGON;
+					markerMode = POLYGON;
 					markOnMap.setSelected(false);
 				} else {
-					markerMode = Constants.NO_MARK;
+					markerMode = NO_MARK;
 					if (currentPoly != null) {
 						addPointToPolygon(currentPoly.get(0));
 					}
@@ -178,8 +184,8 @@ public class MapPanel extends JPanel {
 				while (true) {
 					if (currentZoom != map.getZoom()) {
 						currentZoom = map.getZoom();
-						int meterPerPixel = (int) (Constants.PIXEL_TO_CALCULATE_SCALE
-								* (Constants.EARTH_CIRCUMFERENCE * Math
+						int meterPerPixel = (int) (PIXEL_TO_CALCULATE_SCALE
+								* (EARTH_CIRCUMFERENCE * Math
 										.cos(Math.toRadians(map.getPosition(10,
 												mapArea.getHeight() - 10)
 												.getLat()))) / Math.pow(2,
@@ -257,7 +263,7 @@ public class MapPanel extends JPanel {
 			positionHistory.add(new MapMarkerDot(Color.DARK_GRAY, boatPosition
 					.getLatitude(), boatPosition.getLongitude()));
 
-			if (positionHistory.size() > Constants.MAXIMUM_COUNT_LAST_POSITION) {
+			if (positionHistory.size() > MAXIMUM_COUNT_LAST_POSITION) {
 				map.removeMapMarker(positionHistory.get(0));
 				positionHistory.remove(0);
 			}
