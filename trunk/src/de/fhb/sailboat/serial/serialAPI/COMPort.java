@@ -155,10 +155,10 @@ public class COMPort{
 	 * Write bytewise to output-Stream of a given Com-Port
 	 * 
 	 * @param text
-	 * @param sleep
+	 * @param wait_sleep
 	 * @throws IOException
 	 */
-	public void writeString(String text,int sleep) throws IOException {
+	public void writeString(String text,long wait_sleep) throws IOException {
 		try {
 			OutputStream os = this._serialPortObject.getOutputStream();
 			byte[] b = text.getBytes();
@@ -166,7 +166,7 @@ public class COMPort{
 			for (int i = 0; i < b.length; i++) {
 				os.write(b[i]);
 				// minimal sleep to give Devices time to handle the data
-				Thread.sleep(sleep);
+				Thread.sleep(wait_sleep);
 			}
 		
 		} catch (InterruptedException e) {

@@ -31,16 +31,17 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  *
  */
 public class AKSENLocomotion implements LocomotionSystem {
+	
 	private final WorldModel worldModel;
 	COMPort myCOM;
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
 	String lastCom;
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
-	static int wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
+	static long wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
 	
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
-	boolean debug = true; 
+	boolean debug = false; 
 
 	/**
 	 * Constructor
@@ -74,13 +75,15 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * 
 	 * @return int wait_sleep
 	 */
-	public int getWait_Sleep() {
+	@SuppressWarnings("static-access")
+	public long getWait_Sleep() {
 		return this.wait_sleep;
 	}
 	
 	/**
 	 * Setter Wait_Sleep
 	 */
+	@SuppressWarnings("static-access")
 	public void setWait_Sleep(int wait_sleep) {
 		this.wait_sleep = wait_sleep;
 	}
@@ -225,14 +228,21 @@ public class AKSENLocomotion implements LocomotionSystem {
 	}
 
 	
-
+	/**
+	 * Send well defined AKSEN-Command as a complete string to myCom
+	 * follows the 'fire and forget' principle
+	 * no 3-way Handshake, no checking for completion
+	 * 
+	 * @param String command built by buildCommand()
+	 */
 	private void AKSENCommand(String com) {
-				try {
-					this.myCOM.writeString(com,this.wait_sleep);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
+		this.lastCom = com;		
+		try {
+					this.myCOM.writeString(com,wait_sleep);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			LOG.warn("IOException", e);
+		}		
 	}
 	/**
 	 * Send Command to AKSEN step by step
@@ -246,11 +256,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 		final int n = 3; // Number of attempts to
 		int k = 0;
 		int i;
-		int temp_wait_sleep = wait_sleep;
-		
+		long temp_wait_sleep = wait_sleep;
 		Byte send,r, expected;
 		try {
-		
 			 while(k < n){
 				k++;
 				//* 1) (S)end: s, hex: 0x73, dec : 115	- acquire Connection
@@ -276,11 +284,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
 					String t = s + "," + a;
 					byte[] b = t.getBytes();
-					
 					for (int j = 0; j < b.length; j++) {
 						r=0x00;
 						this.myCOM.writeByte(b[j]);
-						Thread.sleep(temp_wait_sleep);
 						r = (byte) this.myCOM.readByte();
 					}
 					if (r == 110) {
@@ -304,7 +310,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 							LOG.info("Couldn't end InstructionSet on AKSEN in "+ n +" attempts.");
 						continue;
 					} else {
-						 //* 4) S: a, hex: 61, dec 097			- execute Instruction on AKSEN
+						//* 4) S: a, hex: 61, dec 097			- execute Instruction on AKSEN
 						send = 0x61;
 						//*     R: e, hex: 65, dec: 101			- executed (=ACK)
 						expected = 0x65;
@@ -328,18 +334,21 @@ public class AKSENLocomotion implements LocomotionSystem {
 					}
 				}
 			}
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.warn("IOException", e);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.warn("InterruptException", e);
 		}
 		
 		return status;
-}
-	
+	}
+	/**
+	 * Returns the Battery-State given by AKSENBoard
+	 * 
+	 * @return int state
+	 */
 	public int getBatteryState() {
 		int state = -1;
 		try {

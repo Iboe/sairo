@@ -22,6 +22,7 @@ public class aksentest {
 		
 		AKSENLocomotion aksen = new AKSENLocomotion();
 		
+		aksen.setDebug(true);
 		
 		int i = 0;
 		int x;
@@ -48,7 +49,7 @@ public class aksentest {
 				aksen.setSail(x);
 			}
 			long t = end - start;
-			LOG.info("Time elapses this run: "+ t);
+			LOG.trace("Time elapses this run: "+ t);
 			i++;
 			
 		}

@@ -62,6 +62,6 @@ public interface LocomotionSystem {
 	public void resetPropellor();
 	public int getBatteryState();
 	public void setDebug(boolean debug);
-	public int getWait_Sleep();
+	public long getWait_Sleep();
 	public void setWait_Sleep(int wait_sleep);
 }
