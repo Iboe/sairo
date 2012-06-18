@@ -12,6 +12,8 @@ public class aksentest {
 	 */
 	
 	private static final Logger LOG = LoggerFactory.getLogger(aksentest.class);
+	private static long start;
+	private static long end;
 	
 	public static void main(String[] args) {
 		
@@ -23,31 +25,38 @@ public class aksentest {
 		
 		int i = 0;
 		int x;
-		while(i < 1000) {
+		while(i < 100) {
+			// Log evere 10th run
 			if (i%10 == 0)
 				LOG.info("Test-Run "+ i);
+			// Alternate Rudder- or Sail-Command
+			
 			switch(i%2) {
 			case 1:
 				x = myRandom(aksen.RUDDER_LEFT, aksen.RUDDER_RIGHT);
 				LOG.trace("Set Rudder to "+ x);
+				start = System.currentTimeMillis();
 				aksen.setRudder(x);
-				
+				end = System.currentTimeMillis();
 				break;
 			case 0:
 			default:
 				
 				x = myRandom(aksen.SAIL_SHEET_IN, aksen.SAIL_SHEET_OUT);
 				LOG.trace("Set Sail to "+ x);
+				
 				aksen.setSail(x);
 			}
-			
+			long t = end - start;
+			LOG.info("Time elapses this run: "+ t);
 			i++;
+			
 		}
-		aksen.resetRudder();
-		aksen.resetSail();
+		//aksen.resetRudder();
+		//aksen.resetSail();
 		//System.out.println("Antwort: "+ aksen.lastAnswer());
-		System.out.println("Frage Ladezustand ab:");
-		System.out.println("IST: "+ aksen.getBatteryState());
+		//System.out.println("Frage Ladezustand ab:");
+		//System.out.println("IST: "+ aksen.getBatteryState());
 		
 		aksen.closePort();
 	}
