@@ -24,7 +24,7 @@ import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
- * This class manages the data pipe between view, model and the sensors.
+ * This class manages the data pipe between GUI (logic), model and the boat (world model/ planner).
  * 
  * @author Patrick Rutter
  * 
@@ -32,9 +32,9 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 public class GUIControllerImpl implements GUIController {
 
 	// Constants
-	final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));
-	final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));
-	final static int PROPELLOR_MIN = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MIN"));
+	final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward
+	final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));	// propellor off
+	final static int PROPELLOR_MIN = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MIN"));			// full backward
 	final static int RUDDER_LEFT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_LEFT"));
 	final static int RUDDER_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_NORMAL"));
 	final static int RUDDER_RIGHT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_RIGHT"));
@@ -44,22 +44,15 @@ public class GUIControllerImpl implements GUIController {
 	
 	
 	// Variables
-	private GUIModel model;
+	private GUIModel model;			// GUIModel is used to store values locally
 
-	private WorldModel worldModel;
+	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
 
 	public GUIControllerImpl() {
 		this.model = new GUIModelImpl();
 		this.worldModel = WorldModelImpl.getInstance();
 	}
 
-	// Committer (used for sending data to other sailbot classes)
-
-	/**
-	 * For the milestone. Stores MapMarkers set in View and stored in Model as a
-	 * collection of CircleTasks in Mission.
-	 */
-	@Override
 	public void commitCircleMarkerList(Planner planner) {
 		List<GPS> markerList = this.model.getCircleMarkerList();
 
@@ -84,7 +77,6 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
-	@Override
 	public void commitPolyList(Planner planner) {
 		List<MapPolygon> polyList = this.model.getPolyList();
 
@@ -108,7 +100,6 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
-	@Override
 	public void commitReachCompassTask(int angle, Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -128,7 +119,6 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
-	@Override
 	public void commitHoldAngleToWind(int angle, Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -148,7 +138,6 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
-	@Override
 	public void commitStopTask(Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -164,7 +153,6 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 	
-	@Override
 	public void resetActorsTask(Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -180,7 +168,14 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 	
-	@Override
+	/**
+	 * Commits a special manual command to either sail, rudder or propellor actor. Used primary by remoteDialog for remote control.
+	 * 
+	 * @param planner planner reference used for commiting
+	 * @param propellor new value for propellor, may be null
+	 * @param rudder new value for rudder, may be null
+	 * @param sail new value for sail, may be null
+	 */
 	public void commitPrimitiveCommand(Planner planner, Integer propellor, Integer rudder, Integer sail) {
 		if (planner != null) planner.doPrimitiveCommand(new PrimitiveCommandTask(sail, rudder, propellor));
 	}
@@ -191,40 +186,39 @@ public class GUIControllerImpl implements GUIController {
 	 * As the name suggests, this method calls ALL (existing) update methods to
 	 * get the most recent values possible at once.
 	 */
-	@Override
 	public void updateAll() {
 		updateWind();
 		updateCompass();
 		updateGps();
+		//updateMission();
 		setPropellor();
 		setSail();
 		setRudder();
 	}
 
-	@Override
 	public void updateWind() {
 		this.model.setWind(worldModel.getWindModel());
 	}
 
-	@Override
 	public void updateCompass() {
 		this.model.setCompass(worldModel.getCompassModel());
 	}
 
-	@Override
 	public void updateGps() {
 		this.model.setGps(worldModel.getGPSModel());
 	}
 
-	@Override
 	public void updateMission() {
 		if (worldModel.getMission() != this.model.getMissionTasksLeft()) {
 			this.model.setMissionTasksLeft(worldModel.getMission());
-			generateMissionReport();
+			//generateMissionReport();
 		}
 	}
 
-	@Override
+	/**
+	 * Currently a unused stub. Tries to generate a report on the status of the current mission.
+	 */
+	/*
 	public void generateMissionReport() {
 		if ((this.model.getCurrentWholeMission().getTasks().size() > 0)
 				&& (this.model.getMissionTasksLeft().getTasks().size() > 0)) {
@@ -280,63 +274,52 @@ public class GUIControllerImpl implements GUIController {
 			}
 		}
 	}
+	*/
 
 	// Setter (values given by View to store in Model)
-	@Override
 	public void setCircleMarkerList(List<GPS> pointList) {
 		this.model.setCircleMarkerList(pointList);
 		System.out.println("Set passed.");
 	}
 
-	@Override
 	public void setPolyList(List<MapPolygon> polyList) {
 		this.model.setPolyList(polyList);
 		System.out.println("Set passed.");
 	}
 
 	// Getter ("tunneled" from Model)
-	@Override
 	public CompassModel getCompass() {
 		return this.model.getCompass();
 	}
 
-	@Override
 	public WindModel getWind() {
 		return this.model.getWind();
 	}
 
-	@Override
 	public GPSModel getGps() {
 		return this.model.getGps();
 	}
 
-	@Override
 	public int getGpsSatelites() {
 		return this.model.getGps().getPosition().getSatelites();
 	}
 
-	@Override
 	public boolean isSailMode() {
 		return this.model.isSailMode();
-		
 	}
 	
-	@Override
 	public int getPropellor() {
 		return this.model.getPropellor();
 	}
 	
-	@Override
 	public int getRudder() {
 		return this.model.getRudder();
 	}
-	
-	@Override
+
 	public int getSail() {
 		return this.model.getSail();
 	}
 	
-	@Override
 	public void setPropellor() {
 		int value = this.worldModel.getActuatorModel().getPropeller().getValue();
 		if ((value <= PROPELLOR_MAX) && (value <= PROPELLOR_NORMAL)) {
@@ -348,17 +331,14 @@ public class GUIControllerImpl implements GUIController {
 		else this.model.setPropellor(1); 	// set propellor to maximum backward
 	}
 	
-	@Override
 	public void setRudder() {
 		this.model.setPropellor(this.worldModel.getActuatorModel().getRudder().getValue());
 	}
 	
-	@Override
 	public void setSail() {
 		this.model.setSail(this.worldModel.getActuatorModel().getSail().getValue());
 	}
 
-	@Override
 	public void setSailMode(boolean sailMode) {
 		this.model.setSailMode(sailMode);
 	}

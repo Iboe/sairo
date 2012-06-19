@@ -10,7 +10,7 @@ import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
 
 /**
- * This class serves as storage for all data relevant to be served to and displayed by View.
+ * This interfaced class serves as storage for all data relevant to be served to and displayed by View.
  * @author Patrick Rutter
  *
  */

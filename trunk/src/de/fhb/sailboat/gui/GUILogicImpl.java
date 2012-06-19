@@ -14,12 +14,13 @@ import de.fhb.sailboat.gui.map.GPSTransformations;
 import de.fhb.sailboat.gui.map.Map;
 
 /**
- *
- * @author Frocean
+ * This class represents the program logic used by a GUInterface. It handles updating, sending and converting of value displayed
+ * and set via the GUI.
+ * 
+ * @author Patrick Rutter
  */
 public class GUILogicImpl implements GUILogic {
 
-    @SuppressWarnings("FieldNameHidesFieldInSuperclass")
     public final static int UPDATE_RATE = 500;                      // sleep in ms after each gui loop
     final static public String GPS_DECIMAL_FORMAT = "00.000000";    // format string for GPS longitude/ latitude display style
     final static public String GPS_UNIT = "°";                      // this will be appended to longitude/ latitude display strings
@@ -28,18 +29,16 @@ public class GUILogicImpl implements GUILogic {
     final static public String WIND_DIRECTION_UNIT = "°";           // this will be appended to windDirection display strings
     
     
-    private GUIController controller;
-    private Planner planner;
-    private Map missionMap;
-    private boolean testMode;                                       // if true random values will be generated for each update, instead of trying to retrieve true values
-    private DecimalFormat gpsDecimalFormat;
-
-    /*public GUILogicImpl() {
-    	this.testMode = false;
-        this.gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
-        this.controller = new GUIControllerImpl();
-    }*/
+    private GUIController controller;								// the GUIController is used for getting and setting values from and to the world model/ local database
+    private Planner planner;										// the Planner is used for sending mission sets
+    private Map missionMap;											// the Map is used to visualize the missionArea and landmarks/ points of interest
+    private boolean testMode;                                       // if true random values will be generated for each update, instead of trying to retrieve true values (only hard code setting)
+    private DecimalFormat gpsDecimalFormat;							// used to format display strings
     
+    /**
+     * Constructs and initializes the GUILogic with the assigned planner reference.
+     * @param planner
+     */
     public GUILogicImpl(Planner planner) {
         this.testMode = false;
         this.gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
@@ -47,18 +46,17 @@ public class GUILogicImpl implements GUILogic {
         this.planner = planner;
     }
 
-    /*public GUILogicImpl(boolean testMode) {
-        this();
-        this.testMode = testMode;
-    }*/
-
-    @Override
+    /**
+     * Initializes a Map Object and assigns it to the given panel. The map will fit itself to the size of the given panel and can be resized.
+     */
     public void initializeMissionMap(javax.swing.JPanel missionMapPanel) {
         missionMap = new Map();
         missionMap.mapPanel(missionMapPanel);
     }
 
-    @Override
+    /**
+     * Gets the current longitude of the boat and sets the given label to the resulting value. 
+     */
     public void updateGPSLongitude(javax.swing.JLabel gpsLongitudeLabel) {
         String value = "";
 
@@ -72,7 +70,9 @@ public class GUILogicImpl implements GUILogic {
         gpsLongitudeLabel.setText(value);
     }
 
-    @Override
+    /**
+     * Gets the current latitude of the boat and sets the given label to the resulting value. 
+     */
     public void updateGPSLatitude(javax.swing.JLabel gpsLatitudeLabel) {
         String value = "";
 
@@ -86,8 +86,10 @@ public class GUILogicImpl implements GUILogic {
         gpsLatitudeLabel.setText(value);
     }
 
-    @Override
-    public void updateGPSSatelites(javax.swing.JLabel gpsSatelites) {
+    /**
+     * Gets the current number of received satellites and sets the given label to the resulting value. 
+     */
+    public void updateGPSSatellites(javax.swing.JLabel gpsSatelites) {
         String value = "";
 
         if (!testMode) {
@@ -100,7 +102,9 @@ public class GUILogicImpl implements GUILogic {
         gpsSatelites.setText(value);
     }
 
-    @Override
+    /**
+     * Gets the current azimuth of the boat and sets the given label to the resulting value. 
+     */
     public void updateCompassAzimuth(javax.swing.JLabel compassAzimuth) {
         String value = "";
 
@@ -114,7 +118,9 @@ public class GUILogicImpl implements GUILogic {
         compassAzimuth.setText(value);
     }
 
-    @Override
+    /**
+     * Gets the current pitch of the boat and sets the given label to the resulting value. 
+     */
     public void updateCompassPitch(javax.swing.JLabel compassPitch) {
         String value = "";
 
@@ -128,7 +134,9 @@ public class GUILogicImpl implements GUILogic {
         compassPitch.setText(value);
     }
 
-    @Override
+    /**
+     * Gets the current roll of the boat and sets the given label to the resulting value. 
+     */
     public void updateCompassRoll(javax.swing.JLabel compassRoll) {
         String value = "";
 
@@ -142,7 +150,9 @@ public class GUILogicImpl implements GUILogic {
         compassRoll.setText(value);
     }
 
-    @Override
+    /**
+     * Gets the current wind velocity recognized by the boat and sets the given label to the resulting value. 
+     */
     public void updateWindVelocity(javax.swing.JLabel windVelocity) {
         String value = "";
 
@@ -156,7 +166,9 @@ public class GUILogicImpl implements GUILogic {
         windVelocity.setText(value);
     }
 
-    @Override
+    /**
+     * Gets the current wind direction recognized by the boat and sets the given label to the resulting value. 
+     */
     public void updateWindDirection(javax.swing.JLabel windDirection) {
         String value = "";
 
@@ -170,7 +182,9 @@ public class GUILogicImpl implements GUILogic {
         windDirection.setText(value);
     }
 
-    @Override
+    /**
+     * Able to put out info in the given TextArea. Currently only displays debug info.
+     */
     public void updateSystemInfo(javax.swing.JTextArea systemTabTextArea) {
         String value = "";
 
@@ -183,7 +197,9 @@ public class GUILogicImpl implements GUILogic {
         systemTabTextArea.setText(value);
     }
 
-    @Override
+    /**
+     * Able to put out info in the given TextArea.
+     */
     public void updateMissionInfo(javax.swing.JTextArea missionTabTextArea) {
         String value = "";
 
@@ -197,17 +213,18 @@ public class GUILogicImpl implements GUILogic {
         missionTabTextArea.setText(value);
     }
 
-    @Override
     /**
      * This will be called once per gui_loop (see UPDATE_RATE) and can be used
-     * to manage timed tasks.
+     * to manage timed tasks. Basic usage is to call update logic.
      */
     public void updateLogic() {
         controller.updateAll();
         missionMap.followBoat(controller.getGps().getPosition());
     }
 
-    @Override
+    /**
+     * Closes the GUI with all necessary actions to do so in a clean state.
+     */
     public void closeGUI() {
         System.exit(0);
     }
