@@ -31,7 +31,7 @@ public class Map extends JPanel {
 	private static final int NO_MARK = 0;
 	private static final int MARKER = 1;
 	private static final int POLYGON = 2;
-	private static final int EVERY_X_GPS_POSITION = 20;
+	private static final int EVERY_X_GPS_POSITION = 3;
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
 	private static final int EARTH_CIRCUMFERENCE = 40074000;
 	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
@@ -86,6 +86,7 @@ public class Map extends JPanel {
 						markerList.add(new MapMarkerDot(Color.RED, target
 								.getLat(), target.getLon()));
 						map.addMapMarker(markerList.get(markerList.size() - 1));
+						followBoat(GPSTransformations.coordinateToGPS(target));
 						break;
 
 					case 2:
