@@ -35,7 +35,12 @@ public class DriveAngleThread extends Thread {
 	private double p = 0;
 	private double i = 0;
 	private double d = 0;
+	
+	//local variables for calculation of the rudder position, they are not 
+	//in the corresponding method, so they can be logged in the run() method 
 	private double lastRudderPos = 0;
+	private double rudderPos=0;
+	private int deltaAngle=0;
 	
 	public DriveAngleThread(LocomotionSystem locSystem) {
 		this.locSystem = locSystem;
@@ -44,46 +49,25 @@ public class DriveAngleThread extends Thread {
 	}
 	
 	public void run() {
-		double rudderPos=0;
-		int deltaAngle=0;
 		int counter = 0;
 		
 		while(!isInterrupted() ) {
 			
-			synchronized (mode) {
-				if (DriveAngleMode.COMPASS.equals(mode)) {
-					deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
-					deltaAngle = transformAngle(deltaAngle);
-					
-				} else if (DriveAngleMode.WIND.equals(mode)) {
-					deltaAngle = (int) (desiredAngle - windModel.getWind().getDirection());
-					deltaAngle = -transformAngle(deltaAngle); //here negating because the wind is not influenced by the boat and the wind angle depends on the boat
-				}
-			}
-			
-			
-			rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle)); 
-			//System.out.println("[THREAD]relevant relative angle: "+rudderPos);
-			
-			if(deltaAngle < 0){
-				
-				//rudder to the very left, assumung very left is the smallest value
-				rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_LEFT-LocomotionSystem.RUDDER_NORMAL);
-			}
-			else{
-				
-				//rudder to the very right, assumung very right is the biggest value
-				rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_RIGHT-LocomotionSystem.RUDDER_NORMAL);
-			}
-			
-			//adding offset, to match with the absolute rudder values
-			rudderPos+=LocomotionSystem.RUDDER_NORMAL;
-			rudderPos = pidController(rudderPos);
-			locSystem.setRudder((int) rudderPos);
+			calculateRudderPosisition();
+			calculateSailPosition();
 			
 			if (++counter == 3) {
-				LOG.debug("[THREAD]Summarize: angle="+compassModel.getCompass().getYaw()+", desiredAngle=" +
-						+ desiredAngle+", delta="+deltaAngle + ", mode: " + mode + ", rudderPos=" + rudderPos);
+				String message = "";
+				
+				if (mode == DriveAngleMode.COMPASS) {
+					message = "compass=" + compassModel.getCompass().getYaw();
+				} else if (mode == DriveAngleMode.WIND) {
+					message = "wind=" + windModel.getWind().getDirection();
+				}
+				
+				message += ", desiredAngle=" + desiredAngle + ", delta=" + deltaAngle + 
+					", rudderPos=" + rudderPos;
+				LOG.debug("Summarize: {}", message);
 				counter = 0;
 			}
 			
@@ -96,13 +80,48 @@ public class DriveAngleThread extends Thread {
 		}
 	}
 	
+	private void calculateSailPosition() {
+		
+	}
+
+	private void calculateRudderPosisition() {
+		
+		synchronized (mode) {
+			if (DriveAngleMode.COMPASS.equals(mode)) {
+				deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
+				deltaAngle = transformAngle(deltaAngle);
+				
+			} else if (DriveAngleMode.WIND.equals(mode)) {
+				deltaAngle = (int) (desiredAngle - windModel.getWind().getDirection());
+				//here negating because the wind is not influenced by the boat and 
+				//the wind angle depends on the boat
+				deltaAngle = -transformAngle(deltaAngle); 
+			}
+		}
+		
+		rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle)); 
+		
+		if (deltaAngle < 0) {
+			//rudder to the very left, assumung very left is the smallest value
+			rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_LEFT-LocomotionSystem.RUDDER_NORMAL);
+		} else {
+			//rudder to the very right, assumung very right is the biggest value
+			rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_RIGHT-LocomotionSystem.RUDDER_NORMAL);
+		}
+		
+		//adding offset, to match with the absolute rudder values
+		rudderPos += LocomotionSystem.RUDDER_NORMAL;
+		rudderPos = pidController(rudderPos);
+		locSystem.setRudder((int) rudderPos);
+	}
+	
 	private double pidController(double rudderPos) {
 		p = rudderPos * P;
 		i = (i + rudderPos) * I;
 		d = (rudderPos - lastRudderPos) * D;
 		lastRudderPos = rudderPos;
 		
-		return p + i +d;
+		return p + i + d;
 	}
 	
 	/**
