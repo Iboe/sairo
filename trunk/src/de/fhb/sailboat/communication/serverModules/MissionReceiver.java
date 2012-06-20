@@ -6,6 +6,7 @@ package de.fhb.sailboat.communication.serverModules;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.Task;
 
 /**
+ * Transmitter module for receiving and deserializing a mission with all its {@link Task}s.<br>
+ * The module ensures a reliable receiving process of the mission, using three-way-handshake and mission transmission modes.
  * @author Michael Kant
  *
  */

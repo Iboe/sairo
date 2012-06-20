@@ -6,7 +6,10 @@ package de.fhb.sailboat.communication.clientModules;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
+
+import com.sun.jmx.snmp.tasks.TaskServer;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
@@ -18,6 +21,9 @@ import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.Task;
 
 /**
+ * Transmitter module for serializing and sending a mission with all its {@link Task}s over the underlying {@link OutputStream}.<br>
+ * The module ensures a reliable transmission of the mission to the connected endpoint, using three-way-handshake and mission transmission modes.
+ * 
  * @author Michael Kant
  *
  */
@@ -41,14 +47,20 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		//error=eErrorType.ET_None;
 	}
 	
-	//Planner methods 
+	//Planner methods
+	/**
+	 * Takes the given mission and instigates the transmission to the remote endpoint.
+	 */
 	@Override
 	public void doMission(Mission mission) {
 		
 		synchronized(mode){
 				
-			missionAssembly.clear();
-			missionAssembly=null;
+			if(missionAssembly != null){
+				
+				missionAssembly.clear();
+				missionAssembly=null;
+			}
 			missionAssembly = mission != null ? mission.getTasks() : null;
 			
 			if(mode == eTransmissionMode.TM_Idle){
@@ -66,6 +78,14 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 				
 			}
 		}
+		
+	}
+	/**
+	 * Not supported yet.
+	 */
+	@Override
+	public void doPrimitiveCommand(PrimitiveCommandTask task) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -113,11 +133,7 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		return 0;
 	}
 
-	@Override
-	public void doPrimitiveCommand(PrimitiveCommandTask task) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 }
