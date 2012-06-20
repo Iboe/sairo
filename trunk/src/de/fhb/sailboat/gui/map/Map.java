@@ -86,7 +86,7 @@ public class Map extends JPanel {
 						markerList.add(new MapMarkerDot(Color.RED, target
 								.getLat(), target.getLon()));
 						map.addMapMarker(markerList.get(markerList.size() - 1));
-						followBoat(GPSTransformations.coordinateToGPS(target));
+						//followBoat(GPSTransformations.coordinateToGPS(target));
 						break;
 
 					case 2:
