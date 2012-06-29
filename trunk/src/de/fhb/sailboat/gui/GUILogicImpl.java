@@ -290,6 +290,7 @@ public class GUILogicImpl implements GUILogic {
     @Override
     public void sendResetMissionMap() {
         missionMap.removeEveryObject();
+        missionMap.removeTrail();
         missionMap.getMap().repaint();
     }
     

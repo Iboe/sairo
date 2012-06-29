@@ -47,9 +47,8 @@ public class Map extends JPanel {
 	private JMapViewer map;
 	private int markerMode = NO_MARK;
 	private int followCounter = 0;
-	private int counter= 0;
+	private MapMarker currentPosition;
 
-	private Coordinate firstCorner = null;
 	private List<GPS> currentPoly = null;
 
 	private int currentZoom;
@@ -62,9 +61,10 @@ public class Map extends JPanel {
 	}
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
-		// Startposition auf FH gestellt
-		// navigateTo(FH_BRANDENBURG);
 
+		// startpositions, Regattastrecke or FH Brandenburg
+		// if needed defining of other position with navigateTo(GPS)
+		// navigateTo(FH_BRANDENBURG);
 		navigateTo(REGATTASTRECKE);
 
 		map.addMouseListener(new MouseListener() {
@@ -86,10 +86,11 @@ public class Map extends JPanel {
 						markerList.add(new MapMarkerDot(Color.RED, target
 								.getLat(), target.getLon()));
 						map.addMapMarker(markerList.get(markerList.size() - 1));
-						//followBoat(GPSTransformations.coordinateToGPS(target));
+						followBoat(GPSTransformations.coordinateToGPS(target));
 						break;
 
 					case 2:
+						removeTrail();
 						addPointToPolygon(GPSTransformations
 								.coordinateToGPS(target));
 						break;
@@ -228,24 +229,41 @@ public class Map extends JPanel {
 		}
 	}
 
+	/**
+	 * Creates a line with a node every (EVERY_X_GPS_POSITION + 1)
+	 * positions/function calls representing the positions of the boat in the
+	 * current mission. Should be reset with removeTrail() at the start of a new
+	 * mission.
+	 * 
+	 * @param boatPosition
+	 *            current Position of the boat
+	 */
 	public void followBoat(GPS boatPosition) {
+
+		if (map.getMapMarkerList().contains(currentPosition))
+			map.removeMapMarker(currentPosition);
+
+		currentPosition = new MapMarkerDot(Color.LIGHT_GRAY,
+				boatPosition.getLatitude(), boatPosition.getLongitude());
+
+		map.addMapMarker(currentPosition);
 
 		if (positionHistoryList.size() < 1) {
 			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
 					boatPosition.getLongitude()));
 		} else {
 			if (positionHistoryList.size() == 1) {
-				
+
 				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
 						boatPosition.getLongitude()));
 
 				for (int i = positionHistoryList.size() - 2; i >= 0; i--)
 					positionHistoryList.add(positionHistoryList.get(i));
-				
+
 				positionHistory = new MapPolygonImpl(positionHistoryList,
-						Color.DARK_GRAY, new BasicStroke(3));
+						Color.LIGHT_GRAY, new BasicStroke(3));
 				map.addMapPolygon(positionHistory);
-				
+
 			} else {
 				if (followCounter == EVERY_X_GPS_POSITION) {
 					map.removeMapPolygon(positionHistory);
@@ -255,18 +273,29 @@ public class Map extends JPanel {
 
 					positionHistoryList.add(new GPS(boatPosition.getLatitude(),
 							boatPosition.getLongitude()));
-					
+
 					for (int i = positionHistoryList.size() - 2; i >= 0; i--)
 						positionHistoryList.add(positionHistoryList.get(i));
 
 					positionHistory = new MapPolygonImpl(positionHistoryList,
-							Color.DARK_GRAY, new BasicStroke(3));
+							Color.LIGHT_GRAY, new BasicStroke(3));
 					followCounter = 0;
 					map.addMapPolygon(positionHistory);
 				} else
 					followCounter++;
 			}
 		}
+	}
+
+	/**
+	 * Removes line of positions.
+	 */
+	public void removeTrail() {
+		if (map.getMapMarkerList().contains(currentPosition))
+			map.removeMapMarker(currentPosition);
+		if (map.getMapPolygonList().contains(positionHistory))
+			map.removeMapPolygon(positionHistory);
+		positionHistoryList = new ArrayList<GPS>();
 	}
 
 	/**
@@ -308,7 +337,7 @@ public class Map extends JPanel {
 	}
 
 	/**
-	 * Move the map to a point at current zoomlevel.
+	 * Move the map to a point at maximum zoomlevel.
 	 * 
 	 * @param gps
 	 */
