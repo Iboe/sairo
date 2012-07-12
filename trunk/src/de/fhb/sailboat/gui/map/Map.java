@@ -83,10 +83,8 @@ public class Map extends JPanel {
 						break;
 
 					case 1:
-						markerList.add(new MapMarkerDot(Color.RED, target
-								.getLat(), target.getLon()));
-						map.addMapMarker(markerList.get(markerList.size() - 1));
-						followBoat(GPSTransformations.coordinateToGPS(target));
+						addMapMarker(GPSTransformations.coordinateToGPS(target));
+
 						break;
 
 					case 2:
@@ -190,6 +188,18 @@ public class Map extends JPanel {
 	}
 
 	/**
+	 * Adds a MapMarker at a given gps-position
+	 * 
+	 * @param target
+	 *            gps position
+	 */
+	public void addMapMarker(GPS target) {
+		markerList.add(new MapMarkerDot(Color.RED, target.getLatitude(), target
+				.getLongitude()));
+		map.addMapMarker(markerList.get(markerList.size() - 1));
+	}
+
+	/**
 	 * Adds a point to the current list of points (currentPoly). When the
 	 * checkbox for polygon-marking is deselected this list will be cleared and
 	 * the polygon will be painted.
@@ -197,7 +207,7 @@ public class Map extends JPanel {
 	 * @param target
 	 *            gps-point with coordinates
 	 */
-	private void addPointToPolygon(GPS target) {
+	public void addPointToPolygon(GPS target) {
 		if (currentPoly == null) {
 			currentPoly = new ArrayList<GPS>();
 			currentPoly.add(target);
@@ -320,20 +330,17 @@ public class Map extends JPanel {
 	public void removeEveryObject() {
 		removeMapMarkerFromMap();
 		removePolygonsFromMap();
-		removeRectanglesFromMap();
 	}
 
 	private void removeMapMarkerFromMap() {
 		map.getMapMarkerList().clear();
+		this.getMarkerList().clear();
 	}
 
 	private void removePolygonsFromMap() {
 		map.getMapPolygonList().clear();
+		this.getPolygonList().clear();
 		currentPoly = null;
-	}
-
-	private void removeRectanglesFromMap() {
-		map.getMapRectangleList().clear();
 	}
 
 	/**
