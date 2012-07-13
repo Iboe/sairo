@@ -8,6 +8,12 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Class for transforming GPS-objects in Coordinate-objects and vice versa
+ * 
+ * @author Paul Lehmann
+ * 
+ */
 public class GPSTransformations {
 
 	public static GPS coordinateToGPS(Coordinate coordinate) {
@@ -18,12 +24,14 @@ public class GPSTransformations {
 		return new Coordinate(gps.getLatitude(), gps.getLongitude());
 	}
 
-	public static List<GPS> mapMarkerListToGpsList(List<MapMarker> markerList) {
-		List<GPS> gpsList = new ArrayList<GPS>();
-		for (int i = 0; i < markerList.size(); i++) {
-			gpsList.add(new GPS(markerList.get(i).getLat(), markerList.get(i)
-					.getLon()));
+	public static List<GPS> mapMarkerListToGpsList(List<MapMarker> mapMarkerList) {
+		List<GPS> list = new ArrayList<GPS>();
+
+		for (int i = 0; i < mapMarkerList.size(); i++) {
+			list.add(new GPS(mapMarkerList.get(i).getLat(), mapMarkerList
+					.get(i).getLon()));
 		}
-		return gpsList;
+
+		return list;
 	}
 }

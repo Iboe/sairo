@@ -11,6 +11,8 @@ import java.awt.event.MouseWheelListener;
 /**
  * Default map controller which implements map moving by pressing the right
  * mouse button and zooming by double click or by mouse wheel.
+ * Slightly changed the version of JMapViewer.
+ * @author Paul Lehmann / JMapViewer
  */
 public class DefaultMapController extends JMapController implements MouseListener, MouseMotionListener,
 MouseWheelListener {

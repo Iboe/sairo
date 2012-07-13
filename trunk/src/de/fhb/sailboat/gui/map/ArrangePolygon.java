@@ -5,6 +5,11 @@ import java.util.List;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Class for rearranging the polygon (list of points)
+ * 
+ * @author Paul Lehmann
+ */
 public class ArrangePolygon {
 
 	/**
@@ -36,11 +41,24 @@ public class ArrangePolygon {
 		return arrangedPolygon;
 	}
 
+	/**
+	 * Calculates distance between two given points
+	 * 
+	 * @param a
+	 * @param b
+	 * @return distance
+	 */
 	private static double euklidDistance(GPS a, GPS b) {
 		return Math.sqrt(Math.pow(a.getLatitude() - b.getLatitude(), 2)
 				+ Math.pow(a.getLongitude() - b.getLongitude(), 2));
 	}
 
+	/**
+	 * Returns index of the minimum in a list.
+	 * 
+	 * @param list
+	 * @return index of minimum
+	 */
 	private static int returnMinimum(List<Double> list) {
 		int x = 0;
 		double minimum = list.get(0);

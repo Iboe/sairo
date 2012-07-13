@@ -13,6 +13,7 @@ import java.awt.event.MouseWheelListener;
  * <li>{@link MouseMotionListener}</li>
  * <li>{@link MouseWheelListener}</li>
  * </ul>
+ * @author Paul Lehmann / JMapViewer
  */
 public abstract class JMapController {
 

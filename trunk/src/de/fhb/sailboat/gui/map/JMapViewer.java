@@ -46,6 +46,7 @@ import de.fhb.sailboat.data.GPS;
 /**
  * Provides a simple panel that displays pre-rendered map tiles loaded from the
  * OpenStreetMap project.
+ * @author Paul Lehmann / JMapViewer (adapted for this project)
  */
 public class JMapViewer extends JPanel implements TileLoaderListener {
 

@@ -10,6 +10,12 @@ import java.util.List;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Class which represents a polygon as a list and drawable on the map.
+ * 
+ * @author Paul Lehmann
+ * 
+ */
 public class MapPolygonImpl implements MapPolygon {
 
 	private List<GPS> points;

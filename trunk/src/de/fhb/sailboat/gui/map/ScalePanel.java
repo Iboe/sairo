@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Panel for displaying the scale below the map.
+ * @author Paul Lehmann
+ *
+ */
 public class ScalePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,7 @@
 package de.fhb.sailboat.gui.map;
 
 import java.awt.BasicStroke;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
+
+/**
+ * Primary Map-class which uses all the other classes.
+ * 
+ * @author Paul Lehmann
+ */
 
 public class Map extends JPanel {
 
@@ -226,9 +233,8 @@ public class Map extends JPanel {
 						new BasicStroke(3));
 				map.addMapPolygon(builtPolygon);
 				polygonList.add(builtPolygon);
-				for (int i = 0; i < polyHelpList.size(); i++) {
+				for (int i = 0; i < polyHelpList.size(); i++)
 					map.removeMapMarker(polyHelpList.get(i));
-				}
 				currentPoly = null;
 			} else {
 				currentPoly.add(target);
@@ -407,4 +413,13 @@ public class Map extends JPanel {
 	public void setPolygonList(List<MapPolygon> polygonList) {
 		this.polygonList = polygonList;
 	}
+
+	public List<GPS> getCurrentPoly() {
+		return currentPoly;
+	}
+
+	public void setCurrentPoly(List<GPS> currentPoly) {
+		this.currentPoly = currentPoly;
+	}
+
 }

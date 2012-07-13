@@ -27,7 +27,11 @@ import de.fhb.sailboat.gui.map.JMapViewer;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.gui.map.MapPolygonImpl;
 import de.fhb.sailboat.gui.map.ScalePanel;
-
+/**
+ * 
+ * @author Paul Lehmann
+ *
+ */
 public class MapPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
