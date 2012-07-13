@@ -89,7 +89,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current number of received satellites and sets the given label to the resulting value. 
      */
-    public void updateGPSSatellites(javax.swing.JLabel gpsSatelites) {
+    public void updateGPSSatelites(javax.swing.JLabel gpsSatelites) {
         String value = "";
 
         if (!testMode) {
