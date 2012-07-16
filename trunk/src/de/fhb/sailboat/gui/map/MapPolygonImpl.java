@@ -26,6 +26,11 @@ public class MapPolygonImpl implements MapPolygon {
 		this(points, Color.BLUE, new BasicStroke(2));
 	}
 
+	public MapPolygonImpl(List<GPS> currentPoly, Color color) {
+		this(currentPoly, color, new BasicStroke(3));
+
+	}
+
 	public MapPolygonImpl(List<GPS> currentPoly, Color color, Stroke stroke) {
 		this.points = currentPoly;
 		this.color = color;

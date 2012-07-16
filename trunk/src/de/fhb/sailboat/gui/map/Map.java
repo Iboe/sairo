@@ -315,22 +315,6 @@ public class Map extends JPanel {
 	}
 
 	/**
-	 * Draw a line from gps-position a to gps-position b.
-	 * 
-	 * @param a
-	 *            src
-	 * @param b
-	 *            dest
-	 */
-	public void paintLine(GPS a, GPS b) {
-		List<GPS> list = new ArrayList<GPS>();
-		list.add(a);
-		list.add(b);
-		map.addMapPolygon(new MapPolygonImpl(list, Color.LIGHT_GRAY,
-				new BasicStroke(3)));
-	}
-
-	/**
 	 * Clear the map from artifacts.
 	 */
 	public void removeEveryObject() {
