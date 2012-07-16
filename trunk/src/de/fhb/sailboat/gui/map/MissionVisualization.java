@@ -105,11 +105,11 @@ public class MissionVisualization {
 					color);
 
 		} else if (task instanceof RepeatTask) {
-
+			//TODO
 		} else if (task instanceof StopTask) {
-
+			//TODO
 		} else if (task instanceof BeatTask) {
-
+			//TODO
 		}
 	}
 
