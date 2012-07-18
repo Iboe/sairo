@@ -1,6 +1,5 @@
 package de.fhb.sailboat.gui.map;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +8,7 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.GUIModel;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
@@ -37,7 +37,7 @@ public class MissionVisualization {
 	private List<MapMarker> markerList;
 	private List<MapPolygon> polygonList;
 
-	private GPS currentPosition;
+	private GUIModel model;
 
 	public MissionVisualization(JMapViewer map) {
 		this.map = map;
@@ -46,10 +46,14 @@ public class MissionVisualization {
 		polygonList = new ArrayList<MapPolygon>();
 	}
 
-	public void visualize(Mission current) {
+	public void visualize(GUIModel model) {
+
+		Mission current = model.getMissionTasksLeft();
+		
+		this.model = model;
 
 		if (whole == null)
-			whole = current;
+			whole = model.getMissionTasksLeft();
 
 		if (current.getTasks().size() < whole.getTasks().size()) {
 			Mission solved = getSolved(current);
@@ -97,19 +101,19 @@ public class MissionVisualization {
 			map.addMapPolygon(polygonList.get(polygonList.size() - 1));
 
 		} else if (task instanceof CompassCourseTask) {
-			drawLine(currentPosition, ((CompassCourseTask) task).getAngle(),
+			drawLine(model.getGps().getPosition(), ((CompassCourseTask) task).getAngle(),
 					color);
 
 		} else if (task instanceof HoldAngleToWindTask) {
-			drawLine(currentPosition, ((HoldAngleToWindTask) task).getAngle(),
+			drawLine(model.getGps().getPosition(), ((HoldAngleToWindTask) task).getAngle(),
 					color);
 
 		} else if (task instanceof RepeatTask) {
-			//TODO
+			// TODO
 		} else if (task instanceof StopTask) {
-			//TODO
+			// TODO
 		} else if (task instanceof BeatTask) {
-			//TODO
+			// TODO
 		}
 	}
 

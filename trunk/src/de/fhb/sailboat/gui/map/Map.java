@@ -1,7 +1,6 @@
 package de.fhb.sailboat.gui.map;
 
 import java.awt.BasicStroke;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -24,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.GUIModel;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -47,24 +47,29 @@ public class Map extends JPanel {
 	private static final Logger LOG = LoggerFactory.getLogger(Map.class);
 
 	private List<MapMarker> markerList;
-	private List<GPS> positionHistoryList = new ArrayList<GPS>();
-	private List<MapMarker> polyHelpList;
-	private List<MapPolygon> polygonList;
-	private MapPolygon positionHistory = null;
-	private JMapViewer map;
-	private int markerMode = NO_MARK;
-	private int followCounter = 0;
 	private MapMarker currentPosition;
 
+	private List<GPS> positionHistoryList;
+	private MapPolygon positionHistory = null;
+	private List<MapPolygon> polygonList;
+	private List<MapMarker> polyHelpList;
 	private List<GPS> currentPoly = null;
 
+	private JMapViewer map;
+
+	private int markerMode = NO_MARK;
+	private int followCounter = 0;
 	private int currentZoom;
+
+	private MissionVisualization visualize;
 
 	public Map() {
 		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
 		this.polygonList = new ArrayList<MapPolygon>();
 		this.polyHelpList = new ArrayList<MapMarker>();
+		this.positionHistoryList = new ArrayList<GPS>();
+		this.visualize = new MissionVisualization(map);
 	}
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
@@ -301,6 +306,10 @@ public class Map extends JPanel {
 					followCounter++;
 			}
 		}
+	}
+
+	public void visualizeMission(GUIModel model) {
+		visualize.visualize(model);
 	}
 
 	/**
