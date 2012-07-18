@@ -23,9 +23,9 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 			
 			if (!pilotSet) {
 				if (angle >= 0) {
-					pilot.holdAngleToWind(45);
-				} else {
 					pilot.holdAngleToWind(-45);
+				} else {
+					pilot.holdAngleToWind(45);
 				}
 				
 				pilotSet = true;

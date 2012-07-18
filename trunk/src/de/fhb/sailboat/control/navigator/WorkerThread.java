@@ -207,15 +207,36 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	 * @return if the angle can be reached
 	 */
 	public boolean isBeatNecessary(double desiredAngle) {
-		if (worldModel.getWindModel().calcAverageWind() != null) {
-			double windGoalDiffernce = worldModel.getWindModel().calcAverageWind().getDirection()
-				+ desiredAngle; //TODO average useful?
+		Wind averageWind = worldModel.getWindModel().calcAverageWind();
+		
+		if (averageWind != null) {
+			double angleToDrive = desiredAngle - worldModel.getCompassModel().getCompass().getYaw();
+			double windGoalDiffernce = angleToDrive - transformAngle(averageWind.getDirection());
 			
-			return windGoalDiffernce < MAX_BEAT_ANGLE && 
-				windGoalDiffernce > MIN_BEAT_ANGLE;
+			return windGoalDiffernce <= MAX_BEAT_ANGLE && windGoalDiffernce >= MIN_BEAT_ANGLE;
+	
 		} else {
 			return false;
 		}
+	}
+	
+
+	/**
+	 * Transforms the specified angle to the range from -180 to +180. 
+	 * 
+	 * @param angle the angle to be transformed
+	 * @return the angle in range from -180 to +180
+	 */
+	public int transformAngle(int angle) {
+		
+		angle=angle%360;
+		
+		if(angle > 180) 
+			angle-=360;
+		else if(angle < -180) 
+			angle+=360;
+		
+		return angle;
 	}
 	
 	/**
