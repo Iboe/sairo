@@ -102,10 +102,10 @@ public class DriveAngleThread extends Thread {
 		rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle)); 
 		
 		if (deltaAngle < 0) {
-			//rudder to the very left, assumung very left is the smallest value
+			//rudder to the very left, assuming very left is the smallest value
 			rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_LEFT-LocomotionSystem.RUDDER_NORMAL);
 		} else {
-			//rudder to the very right, assumung very right is the biggest value
+			//rudder to the very right, assuming very right is the biggest value
 			rudderPos=(rudderPos/MAX_RELEVANT_ANGLE)*(LocomotionSystem.RUDDER_RIGHT-LocomotionSystem.RUDDER_NORMAL);
 		}
 		

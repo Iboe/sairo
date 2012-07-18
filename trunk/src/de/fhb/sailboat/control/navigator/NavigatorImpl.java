@@ -72,6 +72,11 @@ public class NavigatorImpl implements Navigator {
 		}
 	}
 	
+	/**
+	 * Instructs the pilot to directly set the specified values to the actuators.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void handlePrimitiveCommands(PrimitiveCommandTask task) {
 		stopThread();
 		
@@ -90,20 +95,40 @@ public class NavigatorImpl implements Navigator {
 		task.setExecuted(true);
 	}
 	
+	/**
+	 * Instructs the pilot to hold the specified angle relative to the current compass angle.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void driveCompassCourse(CompassCourseTask task) {
 		stopThread();
 		pilot.driveAngle(task.getAngle());
 	}
 	
+	/**
+	 * Instructs the pilot to hold the specified angle relative to the current wind direction. 
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void holdAngleToWind(HoldAngleToWindTask task) {
 		stopThread();
 		pilot.holdAngleToWind(task.getAngle());
 	}
 	
+	/**
+	 * Executes the current task of the list of tasks, that shall be repeated.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void handleRepeatTask(RepeatTask task) {
 		doTask(task.getCurrentTask());
 	}
 	
+	/**
+	 * Holds the current position. The task is never set to be finished.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void stop(StopTask task) {
 		ReachCircleTask reachCircleTask = new ReachCircleTask(
 				worldModel.getGPSModel().getPosition(), 10);
@@ -114,6 +139,11 @@ public class NavigatorImpl implements Navigator {
 		navigateToCircle(reachCircleTask);
 	}
 	
+	/**
+	 * Starts a thread which drives diagonal to the goal until it can be reached directly.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void beat(BeatTask task) {
 		if (workerThread == null) {
 			workerThread = new BeatWorker(pilot, this);
@@ -130,7 +160,7 @@ public class NavigatorImpl implements Navigator {
 	}
 	
 	/**
-	 * Starts new thread which repeatedly calculates angle to goal.
+	 * Starts a thread which repeatedly calculates angle to the center of the circle.
 	 * 
 	 * @param task the task to be executed
 	 */
@@ -149,6 +179,11 @@ public class NavigatorImpl implements Navigator {
 		}
 	}
 	
+	/**
+	 * Starts a thread which repeatedly calculates angle to the center of the polygon.
+	 * 
+	 * @param task the task to be executed
+	 */
 	private void navigateToPolygon(ReachPolygonTask task) {
 		if (workerThread == null) {
 			workerThread = new ReachPolygonWorker(pilot, this);
@@ -164,6 +199,9 @@ public class NavigatorImpl implements Navigator {
 		}
 	}
 	
+	/**
+	 * Stops the workerThread by interrupting it.
+	 */
 	private void stopThread() {
 		if (workerThread != null) {
 			workerThread.interrupt();

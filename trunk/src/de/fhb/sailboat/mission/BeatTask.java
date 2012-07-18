@@ -34,7 +34,6 @@ public class BeatTask implements Task {
 
 	@Override
 	public String toString() {
-		return "BeatTask [continueTask=" + continueTask + ", goal=" + goal
-				+ "]";
+		return "BeatTask [continueTask=" + continueTask + ", goal=" + goal + "]";
 	}
 }

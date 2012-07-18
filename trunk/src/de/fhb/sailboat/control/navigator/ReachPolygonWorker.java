@@ -8,8 +8,11 @@ import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 
 /**
- * Calculates relative angle from current position to the centroid of the polygon 
- * defined in task and hands it over to the pilot.
+ * Calculates the relative angle from the current position to the centroid of the polygon 
+ * defined in the task to be executed and hands it over to the pilot.
+ * 
+ * @author hscheel
+ * 
  */
 public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 

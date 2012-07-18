@@ -10,6 +10,15 @@ import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+/**
+ * Base class for navigation threads. Subclasses are responsible for executing a specific 
+ * {@link Task} in a concurrent way. This class provides general methods for navigation, 
+ * that can be used in multiple subclasses. 
+ * 
+ * @author hscheel
+ *
+ * @param <T> the {@link Task}, that a subclass executes
+ */
 public abstract class WorkerThread<T extends Task> extends Thread {
 
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
@@ -44,6 +53,12 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	
 	private double dx12, dy12, startGoalDistance;
 	
+	/**
+	 * Creates a new initialized instance.
+	 * 
+	 * @param pilot the pilot to send the commands to
+	 * @param navigator the navigator who created this instance
+	 */
 	public WorkerThread(Pilot pilot, Navigator navigator) {
 		this.navigator = navigator;
 		this.pilot = pilot;
@@ -85,6 +100,12 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		
 	}
 	
+	/**
+	 * Calculates the difference between the starting position and the goal of the 
+	 * task to be executed. This is used for the calcIdealLine-methods. If the starting
+	 * position or the goal is <code>null</code>, the distance is set to 0. 
+	 *  
+	 */
 	private void calcStartGoalDifference() {
 		if (startPosition != null && goal != null) {
 			dx12 = goal.getLongitude() - startPosition.getLongitude();
@@ -113,10 +134,10 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	}
 	
 	/**
-	 * Calculates absolute angle from current position to goal.
+	 * Calculates the absolute angle from the current position to the goal.
 	 * 
-	 * @param goal the GPS point to reach
-	 * @return angle from current position to goal
+	 * @param goal the {@link GPS} to reach
+	 * @return angle from the current position to goal
 	 */
 	public double calcAngleToGPS(GPS goal) {
 		double angle;
@@ -184,10 +205,11 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	}
 	
 	/**
-	 * Insert better name!
+	 * Calculates the angle from the current position to the line between a start position 
+	 * to the goal.
 	 * 
-	 * @param currentPos
-	 * @return
+	 * @param currentPos the current position of the boat
+	 * @return the angle to reach the line
 	 */
 	public double calcIdealLineAngle(GPS currentPos) {
 		double dist = calcIdealLineDist(currentPos);
@@ -219,7 +241,6 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 			return false;
 		}
 	}
-	
 
 	/**
 	 * Transforms the specified angle to the range from -180 to +180. 
@@ -267,10 +288,21 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		return 0;
 	}
 	
+	/**
+	 * NOT READY! MUST NOT BE USED!
+	 * @return nonsense
+	 */
 	protected Wind calcRealWind() {
 		return worldModel.getWindModel().getWind();
 	}
 	
+	/**
+	 * Calculates the amount of a two dimensional vector.
+	 * 
+	 * @param x first value of the vector
+	 * @param y second value of the vector
+	 * @return (x² + y²)^0.5
+	 */
 	private double amountOfVector(double x, double y) {
 		return Math.sqrt(x * x + y * y);
 	}
