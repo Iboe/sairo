@@ -2,6 +2,13 @@ package de.fhb.sailboat.mission;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Task for driving towards a circle, consisting of a {@link GPS} point as center and a radius.
+ * The task is finished if the boat position is inside of the circle. 
+ * 
+ * @author hscheel
+ *
+ */
 public class ReachCircleTask implements Task {
 
 	private final GPS center;
@@ -26,6 +33,9 @@ public class ReachCircleTask implements Task {
 		return radius;
 	}
 
+	/**
+	 * Checks if the {@link GPS} point is inside the circle.
+	 */
 	@Override
 	public boolean isFinished(GPS position) {
 		Bearing bearing = Bearing.calculateBearing(center.getLongitude(), center.getLatitude(), 

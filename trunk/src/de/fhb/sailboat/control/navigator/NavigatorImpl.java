@@ -45,6 +45,10 @@ public class NavigatorImpl implements Navigator {
 		this.worldModel = WorldModelImpl.getInstance();
 	}
 	
+	/**
+	 * Executes the specified task or throws an {@link UnsupportedOperationException} if the 
+	 * task is not supported.
+	 */
 	@Override
 	public void doTask(Task task) {
 		LOG.info("execute task: {}", task);

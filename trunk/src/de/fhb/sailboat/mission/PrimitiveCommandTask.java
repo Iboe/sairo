@@ -2,6 +2,12 @@ package de.fhb.sailboat.mission;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Task for setting values for the actuators directly. It is finished after the values have been set.
+ * 
+ * @author hscheel
+ *
+ */
 public class PrimitiveCommandTask implements Task {
 
 	private final Integer sail;
@@ -9,6 +15,14 @@ public class PrimitiveCommandTask implements Task {
 	private final Integer propellor;
 	private boolean executed;
 	
+	/**
+	 * Creates a new instance based on the values for actuators to be set. Each value can be set to 
+	 * <code>null</code>, so the current value of the related actuator is not changed.
+	 * 
+	 * @param sail the length of the rope controlling the sail
+	 * @param rudder the position of the rudder
+	 * @param propellor the speed and direction of the propellor
+	 */
 	public PrimitiveCommandTask(Integer sail, Integer rudder, Integer propellor) {
 		this.sail = sail;
 		this.rudder = rudder;
@@ -37,7 +51,7 @@ public class PrimitiveCommandTask implements Task {
 	}
 
 	/**
-	 * Describes if task was already executed.
+	 * Describes if the values were already set.
 	 * 
 	 * @return execution state of this task
 	 */

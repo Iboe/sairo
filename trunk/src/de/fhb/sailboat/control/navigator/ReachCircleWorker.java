@@ -24,6 +24,10 @@ public class ReachCircleWorker extends WorkerThread<ReachCircleTask> {
 		super(pilot, navigator);
 	}
 	
+	/**
+	 * Calculates the angle towards the goal and hands it over to the pilot. Checks if beating
+	 * is necessary.
+	 */
 	@Override
 	public void run() {
 		while (!isInterrupted()) {

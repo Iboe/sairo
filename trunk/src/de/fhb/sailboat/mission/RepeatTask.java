@@ -28,7 +28,7 @@ public class RepeatTask implements Task {
 	 * repetitions is 0.
 	 * 
 	 * @param tasks the tasks to be executed
-	 * @param repetitions repeats the task n times, or infinite if < 0
+	 * @param repetitions repeats the task n times, or infinite if a value lower 0 is handed over
 	 */
 	public RepeatTask(List<Task> tasks, int repetitions) {
 		if (tasks == null || tasks.isEmpty() || repetitions == 0) {
@@ -41,6 +41,10 @@ public class RepeatTask implements Task {
 		this.currentTask = tasks.get(0);
 	}
 	
+	/**
+	 * The task is finished after all tasks have been executed the specified times. Will not finish,
+	 * if infinite repetition was specified.
+	 */
 	@Override
 	public boolean isFinished(GPS position) {
 		if (currentTask.isFinished(position)) {

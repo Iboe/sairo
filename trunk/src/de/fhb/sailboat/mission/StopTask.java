@@ -28,6 +28,9 @@ public class StopTask implements Task{
 		this.turnPropellorOff = turnPropellorOff;
 	}
 	
+	/**
+	 * The task does not finish, so <code>false</code> is returned. 
+	 */
 	@Override
 	public boolean isFinished(GPS position) {
 		return false;
