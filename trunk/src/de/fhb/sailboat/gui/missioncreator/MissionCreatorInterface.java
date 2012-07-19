@@ -7,11 +7,20 @@ package de.fhb.sailboat.gui.missioncreator;
 public class MissionCreatorInterface extends javax.swing.JDialog {
 
     /**
+     * MissionCreatorLogic to be used. Hosts all non-interface application logic.
+     */
+    private MissionCreatorLogic missionCreatorLogic;
+    
+    private String editOptionPane_Text = "";
+    private String editOptionPane_Value = "";
+    
+    /**
      * Creates new form MissionCreatorInterface
      */
     public MissionCreatorInterface(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.missionCreatorLogic = new MissionCreatorLogic();
     }
 
     /**
@@ -23,21 +32,110 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
+        missionTreePopup = new javax.swing.JPopupMenu();
+        treePopupNewMenu = new javax.swing.JMenu();
+        treePopupNewMenuList = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu = new javax.swing.JMenu();
+        treePopupNewMenuTaskMenu_Navigation = new javax.swing.JMenu();
+        treePopupNewMenuTaskMenu_Navigation_ReachCircle = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control = new javax.swing.JMenu();
+        treePopupNewMenuTaskMenu_Control_PropellorFullForward = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control_PropellorFullStop = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control_PropellorFullBackward = new javax.swing.JMenuItem();
+        treePopupDelete = new javax.swing.JMenuItem();
+        treePopupEdit = new javax.swing.JMenuItem();
+        treePopupCopy = new javax.swing.JMenuItem();
+        treePopupCut = new javax.swing.JMenuItem();
+        treePopupPaste = new javax.swing.JMenuItem();
+        editOptionPane = new javax.swing.JOptionPane();
         missionTreeScrollPane = new javax.swing.JScrollPane();
         missionTree = new javax.swing.JTree();
-        CategoryLabel = new javax.swing.JLabel();
-        CategoryComboBox = new javax.swing.JComboBox();
-        TaskLabel = new javax.swing.JLabel();
-        TaskComboBox = new javax.swing.JComboBox();
-        mapPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         MissionMenu = new javax.swing.JMenu();
         MissionMenuNew = new javax.swing.JMenuItem();
         MissionMenuSave = new javax.swing.JMenuItem();
         MissionMenuLoad = new javax.swing.JMenuItem();
 
-        jMenuItem1.setText("jMenuItem1");
+        missionTreePopup.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                missionTreePopupInitialize(evt);
+            }
+        });
+
+        treePopupNewMenu.setText("Neu...");
+
+        treePopupNewMenuList.setText("Liste");
+        treePopupNewMenu.add(treePopupNewMenuList);
+
+        treePopupNewMenuTaskMenu.setText("Aufgabe");
+
+        treePopupNewMenuTaskMenu_Navigation.setText("Navigation");
+
+        treePopupNewMenuTaskMenu_Navigation_ReachCircle.setText("Punkt anfahren (Radius)");
+        treePopupNewMenuTaskMenu_Navigation.add(treePopupNewMenuTaskMenu_Navigation_ReachCircle);
+
+        treePopupNewMenuTaskMenu.add(treePopupNewMenuTaskMenu_Navigation);
+
+        treePopupNewMenuTaskMenu_Control.setText("Steuerung");
+
+        treePopupNewMenuTaskMenu_Control_PropellorFullForward.setText("Propellor Vorwärts");
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullForward);
+
+        treePopupNewMenuTaskMenu_Control_PropellorFullStop.setText("Propellor Stop");
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullStop);
+
+        treePopupNewMenuTaskMenu_Control_PropellorFullBackward.setText("Propellor Rückwärts");
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullBackward);
+
+        treePopupNewMenuTaskMenu.add(treePopupNewMenuTaskMenu_Control);
+
+        treePopupNewMenu.add(treePopupNewMenuTaskMenu);
+
+        missionTreePopup.add(treePopupNewMenu);
+
+        treePopupDelete.setText("Entfernen");
+        treePopupDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupDeleteActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupDelete);
+
+        treePopupEdit.setText("Bearbeiten");
+        treePopupEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupEditActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupEdit);
+
+        treePopupCopy.setText("Kopieren");
+        treePopupCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupCopyActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupCopy);
+
+        treePopupCut.setText("Ausschneiden");
+        treePopupCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupCutActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupCut);
+
+        treePopupPaste.setText("Einfügen");
+        treePopupPaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupPasteActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupPaste);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MissionCreator");
@@ -60,28 +158,9 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         missionTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        missionTree.setComponentPopupMenu(missionTreePopup);
+        missionTree.setInheritsPopupMenu(true);
         missionTreeScrollPane.setViewportView(missionTree);
-
-        CategoryLabel.setText("Kategorie");
-
-        CategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Eins", "Zwei", "Drei", "Vier", "Fünf" }));
-
-        TaskLabel.setText("Task");
-
-        TaskComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hund", "Katze", "Maus", "Kauz" }));
-
-        mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Karte"));
-
-        javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
-        mapPanel.setLayout(mapPanelLayout);
-        mapPanelLayout.setHorizontalGroup(
-            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 313, Short.MAX_VALUE)
-        );
-        mapPanelLayout.setVerticalGroup(
-            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         MissionMenu.setText("Mission");
 
@@ -117,45 +196,79 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TaskLabel)
-                    .addComponent(CategoryLabel)
-                    .addComponent(TaskComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(CategoryLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TaskLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TaskComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
-            .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>
 
-    private void MissionMenuSaveActionPerformed(java.awt.event.ActionEvent evt) {
+    private void MissionMenuSaveActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void MissionMenuNewActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void MissionMenuLoadActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void treePopupDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+        System.out.println(this.missionTree.getSelectionModel().getSelectionPath().getLastPathComponent().toString());
+    }
+
+    private void treePopupEditActionPerformed(java.awt.event.ActionEvent evt) {
+ 
+    }
+
+    private void treePopupCopyActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void MissionMenuNewActionPerformed(java.awt.event.ActionEvent evt) {
+    private void treePopupCutActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void MissionMenuLoadActionPerformed(java.awt.event.ActionEvent evt) {
+    private void treePopupPasteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    /*
+     * Called upon opening the missionTree-PopUp (to be exactly: upon it getting visible). Used to enable/ disable
+     * menu items accordingly to current selection(s).
+     */
+    private void missionTreePopupInitialize(javax.swing.event.PopupMenuEvent evt) {
+        // Check if any selection was made at all
+        if (this.missionTree.getSelectionCount() > 0) {
+            this.treePopupCopy.setEnabled(true);    // enable copy-command
+            this.treePopupCut.setEnabled(true);     // enable cut-command
+            this.treePopupDelete.setEnabled(true);  // enable delete-command
+            
+            // Check if exactly one item was selected
+            if (this.missionTree.getSelectionCount() == 1) {
+                this.treePopupEdit.setEnabled(true);    // enable edit-command
+            }
+            else {
+                this.treePopupEdit.setEnabled(false);   // disable edit-command
+            }
+        }
+        else {
+            // None selected
+            this.treePopupCopy.setEnabled(false);   // disable copy-command
+            this.treePopupCut.setEnabled(false);    // diable cut-command
+            this.treePopupDelete.setEnabled(false); // disable delete-command
+            this.treePopupEdit.setEnabled(false);   // disable edit-command
+            // check if something was saved to missionTreeClipboard in logic, if not disable paste-command
+            if (this.missionCreatorLogic.getMissionTreeClipboard().isEmpty()) {
+                this.treePopupPaste.setEnabled(false);
+            }
+            else this.treePopupPaste.setEnabled(true);
+        }
     }
 
     /**
@@ -207,19 +320,30 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
             }
         });
     }
+    
     // Variables declaration - do not modify
-    private javax.swing.JComboBox CategoryComboBox;
-    private javax.swing.JLabel CategoryLabel;
     private javax.swing.JMenu MissionMenu;
     private javax.swing.JMenuItem MissionMenuLoad;
     private javax.swing.JMenuItem MissionMenuNew;
     private javax.swing.JMenuItem MissionMenuSave;
-    private javax.swing.JComboBox TaskComboBox;
-    private javax.swing.JLabel TaskLabel;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel mapPanel;
+    private javax.swing.JOptionPane editOptionPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTree missionTree;
+    private javax.swing.JPopupMenu missionTreePopup;
     private javax.swing.JScrollPane missionTreeScrollPane;
+    private javax.swing.JMenuItem treePopupCopy;
+    private javax.swing.JMenuItem treePopupCut;
+    private javax.swing.JMenuItem treePopupDelete;
+    private javax.swing.JMenuItem treePopupEdit;
+    private javax.swing.JMenu treePopupNewMenu;
+    private javax.swing.JMenuItem treePopupNewMenuList;
+    private javax.swing.JMenu treePopupNewMenuTaskMenu;
+    private javax.swing.JMenu treePopupNewMenuTaskMenu_Control;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_PropellorFullBackward;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_PropellorFullForward;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_PropellorFullStop;
+    private javax.swing.JMenu treePopupNewMenuTaskMenu_Navigation;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Navigation_ReachCircle;
+    private javax.swing.JMenuItem treePopupPaste;
     // End of variables declaration
 }
