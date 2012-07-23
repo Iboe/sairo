@@ -40,7 +40,6 @@ import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fhb.sailboat.control.pilot.DriveAngleThread;
 import de.fhb.sailboat.data.GPS;
 
 /**

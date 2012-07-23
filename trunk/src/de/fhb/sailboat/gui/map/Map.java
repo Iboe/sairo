@@ -24,6 +24,10 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUIModel;
+import de.fhb.sailboat.gui.GUIModelImpl;
+import de.fhb.sailboat.mission.ReachCircleTask;
+import de.fhb.sailboat.mission.ReachPolygonTask;
+import de.fhb.sailboat.mission.Task;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -195,6 +199,32 @@ public class Map extends JPanel {
 		mapArea.setLayout(new BorderLayout());
 		mapArea.add(map, BorderLayout.CENTER);
 		mapArea.add(markerCheckBoxes, BorderLayout.SOUTH);
+
+		/*GUIModel model = new GUIModelImpl();
+
+		List<Task> list = new ArrayList<Task>();
+
+		for (int i = 0; i <= 3; i++) {
+			list.add(new ReachCircleTask(new GPS(REGATTASTRECKE.getLatitude()
+					+ i, REGATTASTRECKE.getLongitude() + i), 0));
+		}
+
+		List<GPS> points = new ArrayList<GPS>();
+		points.add(FH_BRANDENBURG);
+		points.add(REGATTASTRECKE);
+		points.add(new GPS(FH_BRANDENBURG.getLatitude()
+				+ REGATTASTRECKE.getLatitude(), FH_BRANDENBURG.getLatitude()
+				+ REGATTASTRECKE.getLongitude()));
+		list.add(new ReachPolygonTask(points));
+
+		model.getMissionTasksLeft().setTasks(list);
+		model.getCurrentWholeMission().setTasks(list);
+
+		visualize.visualize(model);
+
+		model.getMissionTasksLeft().getTasks().remove(0);
+
+		visualize.visualize(model);*/
 
 		return mapArea;
 	}

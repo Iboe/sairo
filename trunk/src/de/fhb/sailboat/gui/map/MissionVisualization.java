@@ -48,13 +48,21 @@ public class MissionVisualization {
 
 	public void visualize(GUIModel model) {
 
+		clearMap();
+
 		Mission current = model.getMissionTasksLeft();
-		
+
 		this.model = model;
 
-		if (whole == null)
-			whole = model.getMissionTasksLeft();
+		if (whole == null) {
+			whole = new MissionImpl();
+			whole.setTasks(new ArrayList<Task>());
+			for (int i = 0; i < model.getMissionTasksLeft().getTasks().size(); i++)
+				whole.getTasks().add(
+						model.getMissionTasksLeft().getTasks().get(i));
+		}
 
+		System.out.println(whole.getTasks().size());
 		if (current.getTasks().size() < whole.getTasks().size()) {
 			Mission solved = getSolved(current);
 			visualizeTasks(current, solved);
@@ -100,15 +108,15 @@ public class MissionVisualization {
 					.getPoints(), color));
 			map.addMapPolygon(polygonList.get(polygonList.size() - 1));
 
-		} else if (task instanceof CompassCourseTask) {
-			drawLine(model.getGps().getPosition(), ((CompassCourseTask) task).getAngle(),
-					color);
+		} else if (task instanceof CompassCourseTask)
+			drawLine(model.getGps().getPosition(),
+					((CompassCourseTask) task).getAngle(), color);
 
-		} else if (task instanceof HoldAngleToWindTask) {
-			drawLine(model.getGps().getPosition(), ((HoldAngleToWindTask) task).getAngle(),
-					color);
+		else if (task instanceof HoldAngleToWindTask)
+			drawLine(model.getGps().getPosition(),
+					((HoldAngleToWindTask) task).getAngle(), color);
 
-		} else if (task instanceof RepeatTask) {
+		else if (task instanceof RepeatTask) {
 			// TODO
 		} else if (task instanceof StopTask) {
 			// TODO
@@ -122,11 +130,11 @@ public class MissionVisualization {
 	 */
 	private Mission getSolved(Mission current) {
 		Mission solved = new MissionImpl();
+		solved.setTasks(new ArrayList<Task>());
 
-		for (int i = 0; i < whole.getTasks().size() - current.getTasks().size()
-				- 1; i++) {
+		for (int i = 0; i < whole.getTasks().size() - current.getTasks().size(); i++)
 			solved.getTasks().add(whole.getTasks().get(i));
-		}
+
 		return solved;
 	}
 
@@ -166,6 +174,16 @@ public class MissionVisualization {
 		list.add(b);
 		polygonList.add(new MapPolygonImpl(list, color));
 		map.addMapPolygon(polygonList.get(polygonList.size() - 1));
+	}
+
+	public void clearMap() {
+		for (int i = 0; i < this.markerList.size(); i++)
+			map.removeMapMarker(this.markerList.get(i));
+		this.markerList.clear();
+
+		for (int i = 0; i < this.polygonList.size(); i++)
+			map.removeMapPolygon(this.polygonList.get(i));
+		this.polygonList.clear();
 	}
 
 }
