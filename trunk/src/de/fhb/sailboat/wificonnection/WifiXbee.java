@@ -7,20 +7,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.log4j.Logger;
 
 import com.rapplogic.xbee.api.ApiId;
-import com.rapplogic.xbee.api.AtCommandResponse;
 import com.rapplogic.xbee.api.PacketListener;
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeAddress64;
 import com.rapplogic.xbee.api.XBeeException;
 import com.rapplogic.xbee.api.XBeeResponse;
 import com.rapplogic.xbee.api.XBeeTimeoutException;
-import com.rapplogic.xbee.api.wpan.RxResponseIoSample;
-import com.rapplogic.xbee.api.zigbee.ZNetRxBaseResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
-import com.rapplogic.xbee.api.zigbee.ZNetTxStatusResponse;
-import com.rapplogic.xbee.examples.zigbee.ZNetSenderExample;
-import com.rapplogic.xbee.util.ByteUtils;
 
 public class WifiXbee implements IwifiXbee {
 
