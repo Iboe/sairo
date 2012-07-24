@@ -9,7 +9,7 @@ public interface IwifiXbee {
 	/*
 	 * Receives data from another Xbee
 	 */
-	public void read();
+	public void read(boolean receiveInt);
 	
 	/*
 	 * To Start the Xbee Module
@@ -28,4 +28,10 @@ public interface IwifiXbee {
 	public void sendDataXbee(String data) throws XBeeException,
 	InterruptedException, IOException;
 	
+	
+	/*
+	 * Sends Data to other xbee 
+	 */
+	public void sendDataXbee(int[] data) throws XBeeException,
+	InterruptedException, IOException;
 }

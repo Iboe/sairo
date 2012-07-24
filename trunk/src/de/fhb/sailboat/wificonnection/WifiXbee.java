@@ -24,13 +24,15 @@ import com.rapplogic.xbee.util.ByteUtils;
 
 public class WifiXbee implements IwifiXbee {
 
-	//Class Instance
+	// Class Instance
 	private WifiXbee instance = null;
-	
+
 	// Instance for Data Maipulation
 	private XbeeDataManipulation myManiPu = new XbeeDataManipulation();
 
 	public String resp;
+
+	public int[] respInt;
 
 	public String getResp() {
 		return resp;
@@ -40,10 +42,13 @@ public class WifiXbee implements IwifiXbee {
 		this.resp = resp;
 	}
 
+	private void setResp(int[] resp) {
+		this.respInt = resp;
+	}
+
 	// Comport Xbee
 	private final String COM_PORT = System.getProperty(WifiXbee.class
-			.getSimpleName()
-			+ ".comPort");
+			.getSimpleName() + ".comPort");
 
 	private char[] dataToSend = new char[] {};
 	// Baudrate XBee
@@ -71,9 +76,9 @@ public class WifiXbee implements IwifiXbee {
 	public void initializeXbee() {
 
 		try {
-			
+
 			if (instance != null) {
-				
+
 			} else {
 				xbee.open(COM_PORT, BAUD_RATE);
 				xbee.addPacketListener(new PacketListener() {
@@ -81,7 +86,7 @@ public class WifiXbee implements IwifiXbee {
 						queue.offer(response);
 					}
 				});
-				//instance = WifiXbee.newInstance();
+				// instance = WifiXbee.newInstance();
 			}
 		} catch (Exception e) {
 			LOG.error("XBee failed to initialize: " + e);
@@ -92,9 +97,9 @@ public class WifiXbee implements IwifiXbee {
 	/*
 	 * Reads Data from xbee
 	 */
-	public void read() {
+	public void read(boolean receiveInt) {
 		try {
-			receiveDataXbee();
+			receiveDataXbee(receiveInt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,7 +108,8 @@ public class WifiXbee implements IwifiXbee {
 	/*
 	 * Receives data from another Xbee
 	 */
-	private void receiveDataXbee() throws XBeeException, InterruptedException {
+	private void receiveDataXbee(boolean receiveInt) throws XBeeException,
+			InterruptedException {
 
 		while ((response = queue.poll()) != null) { // we got something!
 			try {
@@ -113,7 +119,11 @@ public class WifiXbee implements IwifiXbee {
 					ZNetRxResponse ioSample = (ZNetRxResponse) response;
 
 					int[] intArray = ioSample.getData();
-					setResp(this.myManiPu.IntArryToString(intArray));
+					if (receiveInt) {
+						setResp(intArray);
+					} else {
+						setResp(this.myManiPu.IntArryToString(intArray));
+					}
 				} else {
 					// not the right respons delivered (ignoring)
 					LOG.debug("Xbee lieferte nicht das erwartete Signal.");
@@ -145,6 +155,29 @@ public class WifiXbee implements IwifiXbee {
 			// Shows the send Attributes
 			LOG.debug(xbee.sendSynchronous(
 					new ZNetTxRequest(address, arryToSend), 5000).toString());
+
+		} catch (XBeeTimeoutException e) {
+
+			LOG.warn("Send Timed out: " + e.toString());
+		}
+	}
+
+	/*
+	 * Sends Data to other xbee
+	 */
+	public void sendDataXbee(int[] data) throws XBeeException,
+			InterruptedException, IOException {
+
+		// replace with SH + SL of your end device
+		XBeeAddress64 address = new XBeeAddress64(XBEE_RECEIVER_ADRESS);
+
+		try {
+			// Sends the array to other Xbee
+			xbee.sendSynchronous(new ZNetTxRequest(address, data), 5000);
+
+			// Shows the send Attributes
+			LOG.debug(xbee.sendSynchronous(new ZNetTxRequest(address, data),
+					5000).toString());
 
 		} catch (XBeeTimeoutException e) {
 
