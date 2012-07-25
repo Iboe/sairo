@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.gui.map.GPSTransformations;
 import de.fhb.sailboat.gui.map.Map;
+import de.fhb.sailboat.mission.Mission;
 
 /**
  * This class represents the program logic used by a GUInterface. It handles updating, sending and converting of value displayed
@@ -44,6 +45,11 @@ public class GUILogicImpl implements GUILogic {
         this.gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
         this.controller = new GUIControllerImpl();
         this.planner = planner;
+    }
+    
+    @Override
+    public void commitMission(Mission mission) {
+        this.controller.commitMission(planner, mission);
     }
 
     /**

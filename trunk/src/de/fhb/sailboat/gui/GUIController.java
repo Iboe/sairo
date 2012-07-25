@@ -5,6 +5,7 @@ import java.util.List;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
+import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -18,6 +19,8 @@ import de.fhb.sailboat.worldmodel.WindModel;
 public interface GUIController {
 
 	GUIModelImpl model = null;	// GUIModel is used to store values locally
+	
+	public void commitMission(Planner planner, Mission mission);
 	
 	// temporary test mission commit methods
 	public void commitCircleMarkerList(Planner planner);

@@ -5,6 +5,7 @@
 package de.fhb.sailboat.gui;
 
 import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.mission.Mission;
 
 /**
  * This class represents the program logic used by a GUInterface. It handles updating, sending and converting of value displayed
@@ -18,6 +19,12 @@ public interface GUILogic {
     
     Planner planner = null;;						// the Planner is used for sending mission sets
     GUIController controller = null;				// the GUIController is used for getting and setting values from and to the world model/ local database
+    
+    /**
+     * Commit a mission to planner.
+     * @param mission
+     */
+    public void commitMission(Mission mission);
     
     /**
      * Initializes a Map Object and assigns it to the given panel.

@@ -32,15 +32,15 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 public class GUIControllerImpl implements GUIController {
 
 	// Constants
-	final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward
-	final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));	// propellor off
-	final static int PROPELLOR_MIN = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MIN"));			// full backward
-	final static int RUDDER_LEFT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_LEFT"));
-	final static int RUDDER_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_NORMAL"));
-	final static int RUDDER_RIGHT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_RIGHT"));
-	final static int SAIL_IN = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_IN"));
-	final static int SAIL_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_NORMAL"));
-	final static int SAIL_OUT = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_OUT"));
+	public final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward
+	public final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));	// propellor off
+	public final static int PROPELLOR_MIN = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MIN"));			// full backward
+	public final static int RUDDER_LEFT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_LEFT"));
+	public final static int RUDDER_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_NORMAL"));
+	public final static int RUDDER_RIGHT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_RIGHT"));
+	public final static int SAIL_IN = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_IN"));
+	public final static int SAIL_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_NORMAL"));
+	public final static int SAIL_OUT = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_OUT"));
 	
 	
 	// Variables
@@ -51,6 +51,11 @@ public class GUIControllerImpl implements GUIController {
 	public GUIControllerImpl() {
 		this.model = new GUIModelImpl();
 		this.worldModel = WorldModelImpl.getInstance();
+	}
+	
+	@Override
+	public void commitMission(Planner planner, Mission mission) {
+		planner.doMission(mission);
 	}
 
 	public void commitCircleMarkerList(Planner planner) {

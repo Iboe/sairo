@@ -850,7 +850,7 @@ public class GUInterface extends javax.swing.JFrame {
     }                                         
 
     private void missionMenuMissionCreatorActionPerformed(java.awt.event.ActionEvent evt) {
-        MissionCreatorInterface mc = new MissionCreatorInterface(this, false);
+    	MissionCreatorInterface mc = new MissionCreatorInterface(this, false, this.guiLogic);
         mc.setVisible(true);
     }
 

@@ -1,26 +1,63 @@
 package de.fhb.sailboat.gui.missioncreator;
 
+import de.fhb.sailboat.gui.GUILogic;
+import de.fhb.sailboat.gui.map.Map;
+import javax.swing.JOptionPane;
+import javax.swing.tree.TreeSelectionModel;
+
 /**
- *
+ * This class represents the graphical interface of the MissionCreator dialog.
+ * 
  * @author Patrick Rutter
  */
 public class MissionCreatorInterface extends javax.swing.JDialog {
 
+    private final static String INPUTTEXT = "Eingabe";
+    private final static String INPUTTEXT_LIST = "Listennamen angeben:";
+    private final static String INPUTTEXT_TASK = "Tasknamen angeben:";
+    private final static String INPUTTEXT_ANGLE = "Winkel angeben:";
+    private final static String INPUTTEXT_LISTNAME = "Neue Liste";
+    
+    private final static String INPUTTEXT_NAVIGATION_PREFIX = "NAV";
+    private final static String INPUTTEXT_REACHCIRCLE = INPUTTEXT_NAVIGATION_PREFIX + " " + "ReachCircle";
+    private final static String INPUTTEXT_COMPASSCOURSE = INPUTTEXT_NAVIGATION_PREFIX + " " + "CompassCourse";
+    private final static String INPUTTEXT_HOLDANGLETOWIND = INPUTTEXT_NAVIGATION_PREFIX + " " + "HoldAngleToWind";
+    
+    private final static String INPUTTEXT_CONTROL_PREFIX = "STR";
+    private final static String INPUTTEXT_PROPELLORFORWARD = INPUTTEXT_CONTROL_PREFIX + " " + "PropellorFullForward";
+    private final static String INPUTTEXT_PROPELLORSTOP = INPUTTEXT_CONTROL_PREFIX + " " + "PropellorStop";
+    private final static String INPUTTEXT_PROPELLORBACKWARD = INPUTTEXT_CONTROL_PREFIX + " " + "PropellorFullBackward";
+    private final static String INPUTTEXT_RUDDERRIGHT = INPUTTEXT_CONTROL_PREFIX + " " + "RudderRight";
+    private final static String INPUTTEXT_RUDDERNEUTRAL = INPUTTEXT_CONTROL_PREFIX + " " + "RudderNeutral";
+    private final static String INPUTTEXT_RUDDERLEFT = INPUTTEXT_CONTROL_PREFIX + " " + "RudderLeft";
+    private final static String INPUTTEXT_STOP = INPUTTEXT_CONTROL_PREFIX + " " + "Stop";
+    
+    private final static String ERRORTEXT = "Fehler";
+    private final static String ERRORTEXT_ILLEGAL_INPUTNODE = "Unter Tasks können keine anderen Objekte erstellt werden!";
+    private final static String ERRORTEXT_ILLEGAL_ANGLE = "Illegale Winkelangabe!";
+    
     /**
      * MissionCreatorLogic to be used. Hosts all non-interface application logic.
      */
     private MissionCreatorLogic missionCreatorLogic;
     
-    private String editOptionPane_Text = "";
-    private String editOptionPane_Value = "";
+    /**
+     * Used for visualising mission
+     */
+    private Map missionMap;
     
     /**
      * Creates new form MissionCreatorInterface
      */
-    public MissionCreatorInterface(java.awt.Frame parent, boolean modal) {
+    public MissionCreatorInterface(java.awt.Frame parent, boolean modal, GUILogic guiLogic) {
         super(parent, modal);
         initComponents();
-        this.missionCreatorLogic = new MissionCreatorLogic();
+        this.missionCreatorLogic = new MissionCreatorLogic(guiLogic);
+        this.missionCreatorLogic.missionTreeInitialize(missionTree);
+        this.missionTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        
+        this.missionMap = new Map();
+        missionMap.mapPanel(missionMapPanel);
     }
 
     /**
@@ -38,23 +75,34 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         treePopupNewMenuTaskMenu = new javax.swing.JMenu();
         treePopupNewMenuTaskMenu_Navigation = new javax.swing.JMenu();
         treePopupNewMenuTaskMenu_Navigation_ReachCircle = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Navigation_CompassCourse = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWind = new javax.swing.JMenuItem();
         treePopupNewMenuTaskMenu_Control = new javax.swing.JMenu();
         treePopupNewMenuTaskMenu_Control_PropellorFullForward = new javax.swing.JMenuItem();
         treePopupNewMenuTaskMenu_Control_PropellorFullStop = new javax.swing.JMenuItem();
         treePopupNewMenuTaskMenu_Control_PropellorFullBackward = new javax.swing.JMenuItem();
-        treePopupDelete = new javax.swing.JMenuItem();
-        treePopupEdit = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control_RudderRight = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control_RudderNeutral = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control_RudderLeft = new javax.swing.JMenuItem();
+        treePopupNewMenuTaskMenu_Control_Stop = new javax.swing.JMenuItem();
         treePopupCopy = new javax.swing.JMenuItem();
-        treePopupCut = new javax.swing.JMenuItem();
         treePopupPaste = new javax.swing.JMenuItem();
+        treePopupCut = new javax.swing.JMenuItem();
+        treePopupEdit = new javax.swing.JMenuItem();
+        treePopupDelete = new javax.swing.JMenuItem();
         editOptionPane = new javax.swing.JOptionPane();
         missionTreeScrollPane = new javax.swing.JScrollPane();
         missionTree = new javax.swing.JTree();
+        missionMapPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         MissionMenu = new javax.swing.JMenu();
         MissionMenuNew = new javax.swing.JMenuItem();
         MissionMenuSave = new javax.swing.JMenuItem();
         MissionMenuLoad = new javax.swing.JMenuItem();
+        TestMenu = new javax.swing.JMenu();
+        TestMenuMakeMission = new javax.swing.JMenuItem();
+        TestMenuMakeAndSend = new javax.swing.JMenuItem();
+        TestMenuMakeAndVisualize = new javax.swing.JMenuItem();
 
         missionTreePopup.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
@@ -69,6 +117,11 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         treePopupNewMenu.setText("Neu...");
 
         treePopupNewMenuList.setText("Liste");
+        treePopupNewMenuList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuListActionPerformed(evt);
+            }
+        });
         treePopupNewMenu.add(treePopupNewMenuList);
 
         treePopupNewMenuTaskMenu.setText("Aufgabe");
@@ -76,42 +129,94 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         treePopupNewMenuTaskMenu_Navigation.setText("Navigation");
 
         treePopupNewMenuTaskMenu_Navigation_ReachCircle.setText("Punkt anfahren (Radius)");
+        treePopupNewMenuTaskMenu_Navigation_ReachCircle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Navigation_ReachCircleActionPerformed(evt);
+            }
+        });
         treePopupNewMenuTaskMenu_Navigation.add(treePopupNewMenuTaskMenu_Navigation_ReachCircle);
+
+        treePopupNewMenuTaskMenu_Navigation_CompassCourse.setText("Kompasskurs halten");
+        treePopupNewMenuTaskMenu_Navigation_CompassCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Navigation_CompassCourseActionPerformed(evt);
+            }
+        });
+        treePopupNewMenuTaskMenu_Navigation.add(treePopupNewMenuTaskMenu_Navigation_CompassCourse);
+
+        treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWind.setText("Winkel zum Wind halten");
+        treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWindActionPerformed(evt);
+            }
+        });
+        treePopupNewMenuTaskMenu_Navigation.add(treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWind);
 
         treePopupNewMenuTaskMenu.add(treePopupNewMenuTaskMenu_Navigation);
 
         treePopupNewMenuTaskMenu_Control.setText("Steuerung");
 
         treePopupNewMenuTaskMenu_Control_PropellorFullForward.setText("Propellor Vorwärts");
+        treePopupNewMenuTaskMenu_Control_PropellorFullForward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_PropellorFullForwardActionPerformed(evt);
+            }
+        });
         treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullForward);
 
         treePopupNewMenuTaskMenu_Control_PropellorFullStop.setText("Propellor Stop");
+        treePopupNewMenuTaskMenu_Control_PropellorFullStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_PropellorFullStopActionPerformed(evt);
+            }
+        });
         treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullStop);
 
         treePopupNewMenuTaskMenu_Control_PropellorFullBackward.setText("Propellor Rückwärts");
+        treePopupNewMenuTaskMenu_Control_PropellorFullBackward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_PropellorFullBackwardActionPerformed(evt);
+            }
+        });
         treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullBackward);
+
+        treePopupNewMenuTaskMenu_Control_RudderRight.setText("Ruder rechts");
+        treePopupNewMenuTaskMenu_Control_RudderRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_RudderRightActionPerformed(evt);
+            }
+        });
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_RudderRight);
+
+        treePopupNewMenuTaskMenu_Control_RudderNeutral.setText("Ruder neutral");
+        treePopupNewMenuTaskMenu_Control_RudderNeutral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_RudderNeutralActionPerformed(evt);
+            }
+        });
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_RudderNeutral);
+
+        treePopupNewMenuTaskMenu_Control_RudderLeft.setText("Ruder links");
+        treePopupNewMenuTaskMenu_Control_RudderLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_RudderLeftActionPerformed(evt);
+            }
+        });
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_RudderLeft);
+
+        treePopupNewMenuTaskMenu_Control_Stop.setText("Stop");
+        treePopupNewMenuTaskMenu_Control_Stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupNewMenuTaskMenu_Control_StopActionPerformed(evt);
+            }
+        });
+        treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_Stop);
 
         treePopupNewMenuTaskMenu.add(treePopupNewMenuTaskMenu_Control);
 
         treePopupNewMenu.add(treePopupNewMenuTaskMenu);
 
         missionTreePopup.add(treePopupNewMenu);
-
-        treePopupDelete.setText("Entfernen");
-        treePopupDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                treePopupDeleteActionPerformed(evt);
-            }
-        });
-        missionTreePopup.add(treePopupDelete);
-
-        treePopupEdit.setText("Bearbeiten");
-        treePopupEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                treePopupEditActionPerformed(evt);
-            }
-        });
-        missionTreePopup.add(treePopupEdit);
 
         treePopupCopy.setText("Kopieren");
         treePopupCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -121,14 +226,6 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         });
         missionTreePopup.add(treePopupCopy);
 
-        treePopupCut.setText("Ausschneiden");
-        treePopupCut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                treePopupCutActionPerformed(evt);
-            }
-        });
-        missionTreePopup.add(treePopupCut);
-
         treePopupPaste.setText("Einfügen");
         treePopupPaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,30 +234,53 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         });
         missionTreePopup.add(treePopupPaste);
 
+        treePopupCut.setText("Ausschneiden");
+        treePopupCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupCutActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupCut);
+
+        treePopupEdit.setText("Bearbeiten");
+        treePopupEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupEditActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupEdit);
+
+        treePopupDelete.setText("Entfernen");
+        treePopupDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treePopupDeleteActionPerformed(evt);
+            }
+        });
+        missionTreePopup.add(treePopupDelete);
+
+        editOptionPane.setWantsInput(true);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MissionCreator");
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Mission");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Tonne anfahren");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("ReachCircleTask 1");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("BreakCourseTask 1");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("ReachCircleTask 2");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Tonne umsegeln");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("RoundCourseTask 1");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Zur Ziellinie fahren");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("ReachLineTask 1");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         missionTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         missionTree.setComponentPopupMenu(missionTreePopup);
         missionTree.setInheritsPopupMenu(true);
         missionTreeScrollPane.setViewportView(missionTree);
+
+        missionMapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout missionMapPanelLayout = new javax.swing.GroupLayout(missionMapPanel);
+        missionMapPanel.setLayout(missionMapPanelLayout);
+        missionMapPanelLayout.setHorizontalGroup(
+            missionMapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 386, Short.MAX_VALUE)
+        );
+        missionMapPanelLayout.setVerticalGroup(
+            missionMapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         MissionMenu.setText("Mission");
 
@@ -190,100 +310,290 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
 
         menuBar.add(MissionMenu);
 
+        TestMenu.setText("Test");
+
+        TestMenuMakeMission.setText("Missionsgnerator testen");
+        TestMenuMakeMission.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TestMenuMakeMissionActionPerformed(evt);
+            }
+        });
+        TestMenu.add(TestMenuMakeMission);
+
+        TestMenuMakeAndSend.setText("Mission generieren & senden");
+        TestMenuMakeAndSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TestMenuMakeAndSendActionPerformed(evt);
+            }
+        });
+        TestMenu.add(TestMenuMakeAndSend);
+
+        TestMenuMakeAndVisualize.setText("Mission generiern & visualisieren");
+        TestMenuMakeAndVisualize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TestMenuMakeAndVisualizeActionPerformed(evt);
+            }
+        });
+        TestMenu.add(TestMenuMakeAndVisualize);
+
+        menuBar.add(TestMenu);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(missionMapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+            .addComponent(missionTreeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+            .addComponent(missionMapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>
 
     private void MissionMenuSaveActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+        this.missionCreatorLogic.nope();
     }                                               
 
     private void MissionMenuNewActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+        // TODO add prompt to save missions before resetting
+        this.missionCreatorLogic.missionTreeInitialize(missionTree);
     }                                              
 
     private void MissionMenuLoadActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+        this.missionCreatorLogic.nope();
     }                                               
 
-    private void treePopupDeleteActionPerformed(java.awt.event.ActionEvent evt) {
-        System.out.println(this.missionTree.getSelectionModel().getSelectionPath().getLastPathComponent().toString());
-    }
+    private void treePopupDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        this.missionCreatorLogic.missionTreeDelete(missionTree);
+    }                                               
 
-    private void treePopupEditActionPerformed(java.awt.event.ActionEvent evt) {
- 
-    }
+    private void treePopupEditActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        String value = "";
+        value = JOptionPane.showInputDialog(this, value, this.missionTree.getSelectionModel().getSelectionPath().getLastPathComponent().toString());
+        
+        this.missionCreatorLogic.missionTreeEdit(missionTree, value);
+    }                                             
 
-    private void treePopupCopyActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+    private void treePopupCopyActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        this.missionCreatorLogic.missionTreeCopy(missionTree);
+    }                                             
 
-    private void treePopupCutActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+    private void treePopupCutActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        this.missionCreatorLogic.missionTreeCut(missionTree);
+    }                                            
 
-    private void treePopupPasteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+    private void treePopupPasteActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            this.missionCreatorLogic.missionTreePaste(missionTree);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }                                              
 
     /*
      * Called upon opening the missionTree-PopUp (to be exactly: upon it getting visible). Used to enable/ disable
      * menu items accordingly to current selection(s).
      */
-    private void missionTreePopupInitialize(javax.swing.event.PopupMenuEvent evt) {
+    private void missionTreePopupInitialize(javax.swing.event.PopupMenuEvent evt) {                                            
         // Check if any selection was made at all
         if (this.missionTree.getSelectionCount() > 0) {
-            this.treePopupCopy.setEnabled(true);    // enable copy-command
-            this.treePopupCut.setEnabled(true);     // enable cut-command
+            this.treePopupCopy.setEnabled(false);   // disable copy-command
+            this.treePopupCut.setEnabled(false);    // diable cut-command
             this.treePopupDelete.setEnabled(true);  // enable delete-command
             
             // Check if exactly one item was selected
+            // TODO enable handling of multiple selections like this handling starts, currently only single selections are allowed (set)
             if (this.missionTree.getSelectionCount() == 1) {
+                this.treePopupNewMenu.setEnabled(true); // enable new-menu-command
                 this.treePopupEdit.setEnabled(true);    // enable edit-command
+                this.treePopupCopy.setEnabled(true);    // enable copy-command
+                this.treePopupCut.setEnabled(true);     // enable cut-command
             }
             else {
                 this.treePopupEdit.setEnabled(false);   // disable edit-command
             }
+            
+            // check if something was saved to missionTreeClipboard in logic, if not disable paste-command
+            if (this.missionCreatorLogic.isEmptyClipboard()) {
+                this.treePopupPaste.setEnabled(false);
+            }
+            else this.treePopupPaste.setEnabled(true);
         }
         else {
             // None selected
+            this.treePopupNewMenu.setEnabled(false); // disable new-menu-command
             this.treePopupCopy.setEnabled(false);   // disable copy-command
             this.treePopupCut.setEnabled(false);    // diable cut-command
             this.treePopupDelete.setEnabled(false); // disable delete-command
             this.treePopupEdit.setEnabled(false);   // disable edit-command
             // check if something was saved to missionTreeClipboard in logic, if not disable paste-command
-            if (this.missionCreatorLogic.getMissionTreeClipboard().isEmpty()) {
+            if (this.missionCreatorLogic.isEmptyClipboard()) {
                 this.treePopupPaste.setEnabled(false);
             }
             else this.treePopupPaste.setEnabled(true);
         }
+    }                                           
+
+    private void treePopupNewMenuListActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_LIST, this.INPUTTEXT_LISTNAME);
+            this.missionCreatorLogic.missionTreeNew_List(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }                                                    
+
+    private void treePopupNewMenuTaskMenu_Control_PropellorFullForwardActionPerformed(java.awt.event.ActionEvent evt) {                                                                                      
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORFORWARD);
+            this.missionCreatorLogic.missionTree_NewPropellorFullForward_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }                                                                                     
+
+    private void treePopupNewMenuTaskMenu_Navigation_ReachCircleActionPerformed(java.awt.event.ActionEvent evt) {                                                                                
+        // TODO add your handling code here:
+    }                                                                               
+
+    private void treePopupNewMenuTaskMenu_Navigation_CompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                                                  
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String str = JOptionPane.showInputDialog(this, this.INPUTTEXT_ANGLE, "");
+        
+            if (str.length() != 0) {
+                String value = "";
+                value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_COMPASSCOURSE + " " + str + "°");
+            
+                int angle = Integer.parseInt(str);
+                this.missionCreatorLogic.missionTree_NewCompassCourse_Task(missionTree, value, angle);
+            }
+            else JOptionPane.showMessageDialog(null, this.ERRORTEXT_ILLEGAL_ANGLE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }                                                                                 
+
+    private void treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                                                          
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String str = JOptionPane.showInputDialog(this, this.INPUTTEXT_ANGLE, "");
+             
+            if (str.length() != 0) {
+                String value = "";
+                value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_HOLDANGLETOWIND + " " + str + "°");
+            
+                int angle = Integer.parseInt(str);
+                this.missionCreatorLogic.missionTree_NewHoldAngleToWind_Task(missionTree, value, angle);
+            }
+            else JOptionPane.showMessageDialog(null, this.ERRORTEXT_ILLEGAL_ANGLE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }                                                                                         
+
+    private void treePopupNewMenuTaskMenu_Control_PropellorFullStopActionPerformed(java.awt.event.ActionEvent evt) {
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORSTOP);
+            this.missionCreatorLogic.missionTree_NewPropellorStop_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
+    private void treePopupNewMenuTaskMenu_Control_PropellorFullBackwardActionPerformed(java.awt.event.ActionEvent evt) {
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORBACKWARD);
+            this.missionCreatorLogic.missionTree_NewPropellorFullBackward_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void treePopupNewMenuTaskMenu_Control_StopActionPerformed(java.awt.event.ActionEvent evt) {
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_STOP);
+            this.missionCreatorLogic.missionTree_Stop_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void TestMenuMakeMissionActionPerformed(java.awt.event.ActionEvent evt) {
+        MissionObject test;
+        test = new MissionObject(missionTree);
+        JOptionPane.showMessageDialog(this, "Erfolgreich generiert mit " + test.getMission().getTasks().size() + " Tasks.", "Ergebnis", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    private void TestMenuMakeAndSendActionPerformed(java.awt.event.ActionEvent evt) {
+        MissionObject instruction = new MissionObject(missionTree);
+        this.missionCreatorLogic.commitMission(instruction);
+    }
+
+    private void TestMenuMakeAndVisualizeActionPerformed(java.awt.event.ActionEvent evt) {
+        MissionObject instruction = new MissionObject(missionTree);
+        de.fhb.sailboat.gui.GUIModel dummyModel = new de.fhb.sailboat.gui.GUIModelImpl();
+        dummyModel.setCurrentWholeMission(instruction.getMission());
+        dummyModel.setMissionTasksLeft(instruction.getMission());
+        
+        missionMap.visualizeMission(dummyModel);
+    }
+
+    private void treePopupNewMenuTaskMenu_Control_RudderRightActionPerformed(java.awt.event.ActionEvent evt) {
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_RUDDERRIGHT);
+            this.missionCreatorLogic.missionTree_NewRudderRight_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void treePopupNewMenuTaskMenu_Control_RudderNeutralActionPerformed(java.awt.event.ActionEvent evt) {
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_RUDDERNEUTRAL);
+            this.missionCreatorLogic.missionTree_NewRudderNeutral_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void treePopupNewMenuTaskMenu_Control_RudderLeftActionPerformed(java.awt.event.ActionEvent evt) {
+        if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
+            String value = "";
+            value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_RUDDERLEFT);
+            this.missionCreatorLogic.missionTree_NewRudderLeft_Task(missionTree, value);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_INPUTNODE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+    /*public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -301,10 +611,6 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(MissionCreatorInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /*
-         * Create and display the dialog
-         */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -319,15 +625,19 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
-    
+    }*/
     // Variables declaration - do not modify
     private javax.swing.JMenu MissionMenu;
     private javax.swing.JMenuItem MissionMenuLoad;
     private javax.swing.JMenuItem MissionMenuNew;
     private javax.swing.JMenuItem MissionMenuSave;
+    private javax.swing.JMenu TestMenu;
+    private javax.swing.JMenuItem TestMenuMakeAndSend;
+    private javax.swing.JMenuItem TestMenuMakeAndVisualize;
+    private javax.swing.JMenuItem TestMenuMakeMission;
     private javax.swing.JOptionPane editOptionPane;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JPanel missionMapPanel;
     private javax.swing.JTree missionTree;
     private javax.swing.JPopupMenu missionTreePopup;
     private javax.swing.JScrollPane missionTreeScrollPane;
@@ -342,7 +652,13 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
     private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_PropellorFullBackward;
     private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_PropellorFullForward;
     private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_PropellorFullStop;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_RudderLeft;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_RudderNeutral;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_RudderRight;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Control_Stop;
     private javax.swing.JMenu treePopupNewMenuTaskMenu_Navigation;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Navigation_CompassCourse;
+    private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWind;
     private javax.swing.JMenuItem treePopupNewMenuTaskMenu_Navigation_ReachCircle;
     private javax.swing.JMenuItem treePopupPaste;
     // End of variables declaration
