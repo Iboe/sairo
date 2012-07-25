@@ -37,6 +37,9 @@ public class MissionVisualization {
 	private List<MapMarker> markerList;
 	private List<MapPolygon> polygonList;
 
+	// variable for determining whether it's a new mission or the old one
+	private int taskCountLastCall = 0;
+
 	private GUIModel model;
 
 	public MissionVisualization(JMapViewer map) {
@@ -54,7 +57,9 @@ public class MissionVisualization {
 
 		this.model = model;
 
-		if (whole == null) {
+		if (whole == null
+				|| taskCountLastCall < model.getMissionTasksLeft().getTasks()
+						.size()) {
 			whole = new MissionImpl();
 			whole.setTasks(new ArrayList<Task>());
 			for (int i = 0; i < model.getMissionTasksLeft().getTasks().size(); i++)
@@ -62,13 +67,13 @@ public class MissionVisualization {
 						model.getMissionTasksLeft().getTasks().get(i));
 		}
 
-		System.out.println(whole.getTasks().size());
 		if (current.getTasks().size() < whole.getTasks().size()) {
 			Mission solved = getSolved(current);
 			visualizeTasks(current, solved);
 		} else {
 			visualizeTasks(whole);
 		}
+		taskCountLastCall = current.getTasks().size();
 	}
 
 	private void visualizeTasks(Mission whole) {

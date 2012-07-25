@@ -6,6 +6,11 @@ import java.util.List;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * 
+ * @author Paul Lehmann
+ * 
+ */
 public interface MapPolygon {
 
 	public List<GPS> getPoints();

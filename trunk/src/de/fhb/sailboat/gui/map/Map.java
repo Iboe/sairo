@@ -203,12 +203,6 @@ public class Map extends JPanel {
 		/*GUIModel model = new GUIModelImpl();
 
 		List<Task> list = new ArrayList<Task>();
-
-		for (int i = 0; i <= 3; i++) {
-			list.add(new ReachCircleTask(new GPS(REGATTASTRECKE.getLatitude()
-					+ i, REGATTASTRECKE.getLongitude() + i), 0));
-		}
-
 		List<GPS> points = new ArrayList<GPS>();
 		points.add(FH_BRANDENBURG);
 		points.add(REGATTASTRECKE);
@@ -216,6 +210,12 @@ public class Map extends JPanel {
 				+ REGATTASTRECKE.getLatitude(), FH_BRANDENBURG.getLatitude()
 				+ REGATTASTRECKE.getLongitude()));
 		list.add(new ReachPolygonTask(points));
+		for (int i = 0; i <= 3; i++) {
+			list.add(new ReachCircleTask(new GPS(REGATTASTRECKE.getLatitude()
+					+ i, REGATTASTRECKE.getLongitude() + i), 0));
+		}
+
+		
 
 		model.getMissionTasksLeft().setTasks(list);
 		model.getCurrentWholeMission().setTasks(list);
