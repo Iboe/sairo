@@ -42,6 +42,11 @@ public class DriveAngleThread extends Thread {
 	private double rudderPos=0;
 	private int deltaAngle=0;
 	
+	// sailPos
+	private double lastSailPos = 0;
+	private double sailPos=0;
+	
+	
 	public DriveAngleThread(LocomotionSystem locSystem) {
 		this.locSystem = locSystem;
 		compassModel = WorldModelImpl.getInstance().getCompassModel();
@@ -79,11 +84,77 @@ public class DriveAngleThread extends Thread {
 			}
 		}
 	}
-	
+	/**
+	 * Calculate the (optimal) Sail-Position by influences of:
+	 * - windspeed
+	 * - winddirection (! atmospheric vs. relative wind ! )
+	 * - heel ("Krängung")
+	 * 
+	 * as in Stelzer et al. "Fuzzy Logic Control System for Autonomous Sailboats":
+	 * 1) Calculate desired Heeling
+	 * 2) fuzzy set for "heeling" = Desired H. - Actual Heeling
+	 * 		- Too low (*)
+	 * 		- Too high (*)
+	 * 		- Optimal
+	 * 3) React with sail change, if (*)
+	 * 		- too low ==> tighten
+	 * 		- too high ==> ease off
+	 * 		- optimal ==> keep
+	 * 
+	 * @author schmidst
+	 */
 	private void calculateSailPosition() {
+		double pctChange;
 		
+		
+		
+		
+		pctChange= 0;  // Keep;  other values: -10, -5, 5, 10
+		if (pctChange != 0) 
+		{
+			sailPos = calculateSailChange(pctChange);
+			locSystem.setSail((int) sailPos);
+		}
 	}
 
+	/**
+	 * calculate actual Value for SailPos
+	 * also set new Value as new lastSailPos
+	 * 
+	 * @param pctChange percent Value to change lastSailPos
+	 * @return sailChangeValue new to set Value 
+	 * @author schmidst
+	 */
+	private double calculateSailChange(double pctChange)
+	{
+		double sailChangeValue = 0;
+		double tightMax = LocomotionSystem.SAIL_SHEET_IN;
+		double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
+		//double normal = LocomotionSystem.SAIL_NORMAL;
+		
+		sailChangeValue = lastSailPos + (pctChange * lastSailPos );
+		if (sailChangeValue < tightMax) sailChangeValue = tightMax;
+		if (sailChangeValue > easeMax) sailChangeValue = easeMax;
+		
+		lastSailPos = sailChangeValue;
+		return sailChangeValue;
+		
+	}
+	/**
+	 * 
+	 * @return double desired heeling in percent/degree ? TODO
+	 * @author schmidst
+	 */
+	private double desiredHeeling()
+	{
+		// h = max(0,(h{max} - k*|a|)* (min(v,v{max})/v{max}))
+		// a = atmospheric wind in degree ( -180 to 180° )
+		// k = 
+		// h{max} = max. heeling of the boat for a of v{max} or above
+		
+		return 0;
+	}
+	
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
