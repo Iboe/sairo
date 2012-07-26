@@ -35,6 +35,20 @@ public interface Pilot {
 	static final String D_PROPERTY = Pilot.class.getSimpleName() + ".dFactor";
 	
 	/**
+	 * Name of the property defining the ratio of k for desired heeling.
+	 */
+	static final String K_PROPERTY = Pilot.class.getSimpleName() + ".sailKfactor";
+	
+	/**
+	 * Name of the property defining the max. Heeling of the boat.
+	 */
+	static final String Hmax_PROPERTY = Pilot.class.getSimpleName() + ".sailHmax";	
+	
+	/**
+	 * Name of the property defining the max wind speed for desired heeling.
+	 */
+	static final String Vmax_PROPERTY = Pilot.class.getSimpleName() + ".sailVmax";	
+	/**
 	 * Telling the pilot to change to a certain direction (angle), relative to the current compass direction.
 	 * The angle range goes from -180° to 180°.
 	 * If an angle above 180° is given, it will automatically transform it to the corresponding negative angle. 

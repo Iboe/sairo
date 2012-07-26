@@ -12,7 +12,13 @@ import de.fhb.sailboat.data.Compass;
 
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
-
+/**
+ * Implementation of a certain Compass-Sensor-Module
+ * Opens a new Thread for continously pushing Sensor-Data into Worldmodel
+ * (every $clock milliseconds)
+ * @author schmidst
+ *
+ */
 public class CompassSensor {
 	
 	COMPort myCOM;

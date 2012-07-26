@@ -20,6 +20,10 @@ public class DriveAngleThread extends Thread {
 	public static final double P = Double.parseDouble(System.getProperty(Pilot.P_PROPERTY));
 	public static final double I = Double.parseDouble(System.getProperty(Pilot.I_PROPERTY));
 	public static final double D = Double.parseDouble(System.getProperty(Pilot.D_PROPERTY));
+
+	public static final double k = Double.parseDouble(System.getProperty(Pilot.K_PROPERTY));
+	public static final double Hmax = Double.parseDouble(System.getProperty(Pilot.Hmax_PROPERTY));
+	public static final double Vmax = Double.parseDouble(System.getProperty(Pilot.Vmax_PROPERTY));
 	
 	private static final Logger LOG = LoggerFactory.getLogger(DriveAngleThread.class);
 	
@@ -96,6 +100,7 @@ public class DriveAngleThread extends Thread {
 	 * 		- Too low (*)
 	 * 		- Too high (*)
 	 * 		- Optimal
+	 * TODO what's the role of pitch-values?
 	 * 3) React with sail change, if (*)
 	 * 		- too low ==> tighten
 	 * 		- too high ==> ease off
@@ -106,10 +111,25 @@ public class DriveAngleThread extends Thread {
 	private void calculateSailPosition() {
 		double pctChange;
 		
+		double desiredHeeling = desiredHeeling();
+		double actualHeeling = compassModel.getCompass().getRoll();
+		double heeling = desiredHeeling - actualHeeling;
+		// TODO get real values!
+		// way too low
+		if ( heeling < -5 )
+				pctChange = -10;
+		// too low
+		if ( heeling < 0 )
+			pctChange = -5;
+		// to high
+		if ( heeling > 0 )
+			pctChange = 5;
+		// way too high
+		if ( heeling > 5 )
+			pctChange = 10;
 		
-		
-		
-		pctChange= 0;  // Keep;  other values: -10, -5, 5, 10
+		// DEBUG / Non-violent
+		pctChange= 0;  // Keep; 
 		if (pctChange != 0) 
 		{
 			sailPos = calculateSailChange(pctChange);
@@ -148,11 +168,17 @@ public class DriveAngleThread extends Thread {
 	private double desiredHeeling()
 	{
 		// h = max(0,(h{max} - k*|a|)* (min(v,v{max})/v{max}))
+		double h = 0;
 		// a = atmospheric wind in degree ( -180 to 180° )
+		double a = windModel.getWind().getDirection();
 		// k = 
 		// h{max} = max. heeling of the boat for a of v{max} or above
+		// v{max}
+		// v actual windspeed
+		double v = windModel.getWind().getSpeed();
 		
-		return 0;
+		
+		return h;
 	}
 	
 	private void calculateRudderPosisition() {
