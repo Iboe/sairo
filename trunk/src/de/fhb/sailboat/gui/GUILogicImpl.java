@@ -147,7 +147,7 @@ public class GUILogicImpl implements GUILogic {
         String value = "";
 
         if (!testMode) {
-            value = value + controller.getCompass().getCompass().getPitch() + COMPASS_UNIT;
+            value = value + controller.getCompass().getCompass().getRoll() + COMPASS_UNIT;
         } else {
             Random random = new Random();
             value = value + random.nextInt(361) + COMPASS_UNIT;
