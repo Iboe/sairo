@@ -1,5 +1,6 @@
 package de.fhb.sailboat.gui.missioncreator;
 
+import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUIControllerImpl;
 import de.fhb.sailboat.gui.GUILogic;
 import de.fhb.sailboat.mission.Task;
@@ -133,6 +134,12 @@ public class MissionCreatorLogic {
     
     public void missionTree_Stop_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.StopTask();
+        missionTreeNew_Task(missionTree, name, load);
+    }
+    
+    public void missionTree_NewReachCircle_Task(JTree missionTree, String name, GPS position) {
+        // TODO Radius festsetzen
+        Task load = new de.fhb.sailboat.mission.ReachCircleTask(position, 3);
         missionTreeNew_Task(missionTree, name, load);
     }
 
