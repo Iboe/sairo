@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.CompassModel;
+import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
@@ -30,6 +31,7 @@ public class DriveAngleThread extends Thread {
 	private final LocomotionSystem locSystem;
 	private final CompassModel compassModel;
 	private final WindModel windModel;
+	private final GPSModel gpsModel;
 	
 	//local variables determining the direction to drive
 	private int desiredAngle;
@@ -55,6 +57,7 @@ public class DriveAngleThread extends Thread {
 		this.locSystem = locSystem;
 		compassModel = WorldModelImpl.getInstance().getCompassModel();
 		windModel = WorldModelImpl.getInstance().getWindModel();
+		gpsModel = WorldModelImpl.getInstance().getGPSModel();
 	}
 	
 	public void run() {
@@ -110,11 +113,15 @@ public class DriveAngleThread extends Thread {
 	 */
 	private void calculateSailPosition() {
 		double pctChange;
-		
+		// 1) 
 		double desiredHeeling = desiredHeeling();
+		// 2)
 		double actualHeeling = compassModel.getCompass().getRoll();
 		double heeling = desiredHeeling - actualHeeling;
 		// TODO get real values!
+		
+		// 3)
+		
 		// way too low
 		if ( heeling < -5 )
 				pctChange = -10;
@@ -168,19 +175,37 @@ public class DriveAngleThread extends Thread {
 	private double desiredHeeling()
 	{
 		// h = max(0,(h{max} - k*|a|)* (min(v,v{max})/v{max}))
-		double h = 0;
+		double h = 0d;
+		// v actual windspeed
+		double v = windModel.getWind().getSpeed();
 		// a = atmospheric wind in degree ( -180 to 180° )
-		double a = windModel.getWind().getDirection();
+		double a = calculateAtmosphericWind(windModel.getWind().getDirection(), v, 0d);
 		// k = 
 		// h{max} = max. heeling of the boat for a of v{max} or above
 		// v{max}
-		// v actual windspeed
-		double v = windModel.getWind().getSpeed();
+		
 		
 		
 		return h;
 	}
 	
+	/**
+	 * Calculate the atmospheric Wind Direction out of the relative Wind Direction and the speed of the boat
+	 * 
+	 * @param r relative wind direction in °
+	 * @param v speed of relative wind in m/s
+	 * @param vb speed of boat according gps in m/s
+	 * @return atmospheric Wind Direction in °
+	 * 
+	 * TODO put somewhere else, so everybody can use this
+	 */
+	private double calculateAtmosphericWind(double r, double v, double vb) {
+		double a = 0d;
+		
+		
+		
+		return a;
+	}
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
