@@ -22,6 +22,7 @@ public interface IwifiXbee {
 	 */
 	public String getResp();
 	
+	public int[] getRespInt();
 	/*
 	 * Sends Data to other xbee 
 	 */

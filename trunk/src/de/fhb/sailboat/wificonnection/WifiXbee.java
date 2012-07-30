@@ -36,6 +36,11 @@ public class WifiXbee implements IwifiXbee {
 		this.resp = resp;
 	}
 
+	public int[] getRespInt()
+	{
+		return respInt;
+	}
+	
 	private void setResp(int[] resp) {
 		this.respInt = resp;
 	}
