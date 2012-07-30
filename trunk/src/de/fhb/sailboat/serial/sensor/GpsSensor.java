@@ -1,6 +1,7 @@
 package de.fhb.sailboat.serial.sensor;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
@@ -36,7 +37,6 @@ public class GpsSensor {
 		return this.longitude;
 	}
 
-
 	private int getSatelites() {
 		return this.satelites;
 	}
@@ -53,10 +53,10 @@ public class GpsSensor {
 		public void run() {
 
 			while (!isInterrupted()) {
-				
+
 				// create empty value array
 				String[] valueArray = null;
-				
+
 				// read the values (7 for 7 rows)
 				try {
 					valueArray = gpsInstance.myCOM.readLine(7);
@@ -64,22 +64,23 @@ public class GpsSensor {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				// wenn Werte gelesen wurden
 				if (valueArray != null) {
-					
+
 					// alle Werte abarbeiten
 					for (String value : valueArray) {
 						String myNmea[] = nmea.stringToArray(value);
 						if (myNmea != null) {
 							if (myNmea[0].equals("$GPGGA")) {
-								if (!myNmea[1].equals("0.0") && !myNmea[3].equals("0.0")) {
+								if (!myNmea[1].equals("0.0")
+										&& !myNmea[3].equals("0.0")) {
 									// Schreiben in Weltmodell
 									double latitude = Double
 											.parseDouble(myNmea[2]);
 									double longitude = Double
 											.parseDouble(myNmea[4]);
-									
+
 									this.satelites = Integer
 											.parseInt(myNmea[7]);
 
@@ -92,11 +93,11 @@ public class GpsSensor {
 									minLong *= 10. / 600.;
 
 									// To show values
-									//LOG.debug(MessageFormat.format(
-									//		"Latitude: {0},"
-									//				+ " Longtitude: {1},"
-									//				+ " Satelites: {2}",
-									//		minLat, minLong, satelites));
+									// LOG.debug(MessageFormat.format(
+									// "Latitude: {0},"
+									// + " Longtitude: {1},"
+									// + " Satelites: {2}",
+									// minLat, minLong, satelites));
 
 									GPS myGps = new GPS(gradLat + minLat,
 											gradLong + minLong, this.satelites);
@@ -109,6 +110,22 @@ public class GpsSensor {
 										// TODO Auto-generated catch block
 										LOG.fatal("Error Occured:" + e);
 										e.printStackTrace();
+									}
+								}
+							} else if (myNmea[0].equals("$GPGGA")) {
+								if (!myNmea[1].equals("0.0")
+										&& !myNmea[3].equals("0.0")) {
+									{
+										double speed = Double
+												.parseDouble(myNmea[7]) * 0.51444;
+										DecimalFormat f = new DecimalFormat(
+												"#0.00");
+										GPS myGps = new GPS(
+												Double.parseDouble(f
+														.format(speed)));
+										// WorldModelImpl.getInstance().getGPSModel()
+										// .setPosition(myGps);
+
 									}
 								}
 							}
