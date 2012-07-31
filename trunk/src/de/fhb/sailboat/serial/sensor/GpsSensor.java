@@ -2,11 +2,8 @@ package de.fhb.sailboat.serial.sensor;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
-
-import com.sun.org.apache.bcel.internal.generic.CASTORE;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
@@ -99,10 +96,10 @@ public class GpsSensor {
 									// "Latitude: {0},"
 									// + " Longtitude: {1},"
 									// + " Satelites: {2}",
-									// minLat, minLong, satelites));
+									// minLat, minLong, satelites, lastSpeed));
 
 									GPS myGps = new GPS(gradLat + minLat,
-											gradLong + minLong, this.satelites, lastSpeed); //Micha: here assigning lastSpeed of the other parse operation
+											gradLong + minLong, this.satelites, lastSpeed); 
 									WorldModelImpl.getInstance().getGPSModel()
 											.setPosition(myGps);
 
@@ -114,25 +111,21 @@ public class GpsSensor {
 										e.printStackTrace();
 									}
 								}
-							} else if (myNmea[0].equals("$GPGGA")) {
+							} else if (myNmea[0].equals("$GPRMC")) {
 
-								if (!myNmea[1].equals("0.0")
-										&& !myNmea[3].equals("0.0")) {
+								if (!myNmea[3].equals("0.0")
+										&& !myNmea[5].equals("0.0")) {
 									{
 										double speed = Double
 												.parseDouble(myNmea[7]) * 0.51444;
 										DecimalFormat f = new DecimalFormat(
 												"#0.00");
-										//GPS myGps = new GPS(
-										//		Double.parseDouble(f
-										//				.format(speed)));
+										
 										
 										//Micha: Just parsing the speed and saving it in lastSpeed. 
 										//		 That's assigned to the GPS Object generated for latitude and longitude in the first if-clause 
-										lastSpeed=Double.parseDouble(f.format(speed));
-										
-										// WorldModelImpl.getInstance().getGPSModel()
-										// .setPosition(myGps);
+										lastSpeed=Double.parseDouble(f.format(speed));									
+									
 
 									}
 								}
