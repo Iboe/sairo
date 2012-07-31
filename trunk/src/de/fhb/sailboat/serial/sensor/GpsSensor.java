@@ -115,6 +115,7 @@ public class GpsSensor {
 									}
 								}
 							} else if (myNmea[0].equals("$GPGGA")) {
+
 								if (!myNmea[1].equals("0.0")
 										&& !myNmea[3].equals("0.0")) {
 									{
@@ -136,6 +137,7 @@ public class GpsSensor {
 									}
 								}
 							}
+
 						}
 					}
 				}
