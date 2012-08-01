@@ -18,13 +18,13 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 	 * The angle relative to the wind, where the boat can drive fastest to the left.
 	 */
 	public static final int BEAT_ANGLE_LEFT = Integer.parseInt(System.getProperty(
-			BeatWorker.class.getSimpleName() + "beatAngleLeft"));
+			BeatWorker.class.getSimpleName() + ".beatAngleLeft"));
 	
 	/**
 	 * The angle relative to the wind, where the boat can drive fastest to the right.
 	 */
 	public static final int BEAT_ANGLE_RIGHT = Integer.parseInt(System.getProperty(
-			BeatWorker.class.getSimpleName() + "beatAngleRight"));
+			BeatWorker.class.getSimpleName() + ".beatAngleRight"));
 	
 	/**
 	 * The compass angle that the boat should have towards the goal, when the beating should stop.

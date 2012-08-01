@@ -38,6 +38,7 @@ public class DriveAngleThread extends Thread {
 	private DriveAngleMode mode;
 	
 	//local variables for the pid controller
+	private SimplePIDController simplePIDController;
 	private double p = 0;
 	private double i = 0;
 	private double d = 0;
@@ -58,6 +59,7 @@ public class DriveAngleThread extends Thread {
 		compassModel = WorldModelImpl.getInstance().getCompassModel();
 		windModel = WorldModelImpl.getInstance().getWindModel();
 		gpsModel = WorldModelImpl.getInstance().getGPSModel();
+		simplePIDController = new SimplePIDController();
 	}
 	
 	public void run() {
@@ -88,6 +90,7 @@ public class DriveAngleThread extends Thread {
 			}
 			catch (InterruptedException e) {
 				LOG.debug("interrupted while waiting");
+				interrupt();
 			}
 		}
 	}
@@ -233,7 +236,8 @@ public class DriveAngleThread extends Thread {
 		
 		//adding offset, to match with the absolute rudder values
 		rudderPos += LocomotionSystem.RUDDER_NORMAL;
-		rudderPos = pidController(rudderPos);
+		//rudderPos = pidController(rudderPos);
+		rudderPos = simplePIDController.control(rudderPos);
 		locSystem.setRudder((int) rudderPos);
 	}
 	

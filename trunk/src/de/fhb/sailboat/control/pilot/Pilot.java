@@ -89,4 +89,6 @@ public interface Pilot {
 	 * @param value the value to set for the motor controlling the propellor
 	 */
 	void setPropellor(int value);
+	
+	void stopThread();
 }

@@ -58,4 +58,14 @@ public class PilotImpl implements Pilot {
 	public void setSail(int value) {
 		locSystem.setSail(value);
 	}
+	
+	/**
+	 * Stops the workerThread by interrupting it.
+	 */
+	public void stopThread() {
+		if (driveAngleThread != null) {
+			driveAngleThread.interrupt();
+			driveAngleThread = null;
+		}
+	}
 }

@@ -83,6 +83,7 @@ public class NavigatorImpl implements Navigator {
 	 */
 	private void handlePrimitiveCommands(PrimitiveCommandTask task) {
 		stopThread();
+		pilot.stopThread();
 		
 		if (task.getPropellor() != null) {
 			pilot.setPropellor(task.getPropellor().intValue());
