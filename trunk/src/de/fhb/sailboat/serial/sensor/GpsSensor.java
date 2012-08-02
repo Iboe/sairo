@@ -119,7 +119,7 @@ public class GpsSensor {
 										double speed = Double
 												.parseDouble(myNmea[7]) * 0.51444;
 										DecimalFormat f = new DecimalFormat(
-												"#0.00");
+												"#0,00");
 										
 										
 										//Micha: Just parsing the speed and saving it in lastSpeed. 
