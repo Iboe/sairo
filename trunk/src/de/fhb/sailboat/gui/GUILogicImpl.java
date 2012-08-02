@@ -257,7 +257,7 @@ public class GUILogicImpl implements GUILogic {
     public void sendReachCompass() {
     	String str = JOptionPane.showInputDialog(null,
 				"Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
-		if (str.length() != 0) {
+		if (str != null && str.length() != 0) {
 			this.controller.commitReachCompassTask(Integer.parseInt(str),
 					planner);
 		}
