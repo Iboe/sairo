@@ -98,7 +98,7 @@ public class DriveAngleThread extends Thread {
 	 * Calculate the (optimal) Sail-Position by influences of:
 	 * - windspeed
 	 * - winddirection (! atmospheric vs. relative wind ! )
-	 * - heel ("Kr�ngung")
+	 * - heel ("Krängung")
 	 * 
 	 * as in Stelzer et al. "Fuzzy Logic Control System for Autonomous Sailboats":
 	 * 1) Calculate desired Heeling
@@ -181,8 +181,8 @@ public class DriveAngleThread extends Thread {
 		double h = 0d;
 		// v actual windspeed
 		double v = windModel.getWind().getSpeed();
-		// a = atmospheric wind in degree ( -180 to 180� )
-		double a = calculateAtmosphericWind(windModel.getWind().getDirection(), v, 0d);
+		// a = atmospheric wind in degree ( -180 to 180° )
+		double a = calculateAtmosphericWind(compassModel.getCompass().getYaw(), windModel.getWind().getDirection(), v, gpsModel.getPosition().getSpeed());
 		// k = 
 		// h{max} = max. heeling of the boat for a of v{max} or above
 		// v{max}
@@ -195,19 +195,35 @@ public class DriveAngleThread extends Thread {
 	/**
 	 * Calculate the atmospheric Wind Direction out of the relative Wind Direction and the speed of the boat
 	 * 
-	 * @param r relative wind direction in �
+	 * @param k course of the boat
+	 * @param r relative wind direction in °
 	 * @param v speed of relative wind in m/s
 	 * @param vb speed of boat according gps in m/s
-	 * @return atmospheric Wind Direction in �
+	 * @return atmospheric Wind Direction in °
 	 * 
 	 * TODO put somewhere else, so everybody can use this
+	 * Source: http://www.rainerstumpe.de/HTML/body_wind02.html
 	 */
-	private double calculateAtmosphericWind(double r, double v, double vb) {
-		double a = 0d;
+	public double calculateAtmosphericWind(double k, double r, double b, double c) {
+		double lambda, gamma, alpha, beta, t1, t2, cosa, a2, a, sina, sinb;
+		gamma = 0d;
 		
+		alpha = (360 - r) + k;
+		// a2 = (b + c)2 - 4·b·c·cos2(α/2)
+		t1 = (b + c) * (b + c);
+		cosa = Math.cos(alpha/2);
+		t2 = 4 * b * c * (cosa * cosa);
+		a2 = t1 - t2;
+		a = Math.sqrt(a2);
 		
+		// sin β = b/a · sin α
+		sinb = b/a * Math.sin(alpha);
+		beta = Math.asin(sinb);  // 
+		lambda = 180 - alpha - beta;
 		
-		return a;
+		gamma = r - lambda;
+		
+		return gamma;
 	}
 	private void calculateRudderPosisition() {
 		
