@@ -14,6 +14,8 @@ public class GPS {
 	private int nrSatelites;
 	private double speed;
 
+
+
 	/**
 	 * Initialization constructor.<br>
 	 * Creates a new GPS object with a given latitude and longitude.
@@ -118,6 +120,14 @@ public class GPS {
 		return nrSatelites;
 	}
 
+	/**
+	 * return speed
+	 * @return
+	 */
+	public double getSpeed() {
+		return speed;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
