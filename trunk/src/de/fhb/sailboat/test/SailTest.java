@@ -5,8 +5,8 @@ public class SailTest {
 	public static void main(String[] args) {
 //		double a;
 		System.out.printf("Windgeschw. | Windrichtung | desired Heeling\n\n");
-		for (int i = 0; i < 10; i++) {
-			for (int j = -180; j <= 180;) {
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j <= 360;) {
 				System.out.printf("%s | %s | %s\n", i, j, desiredHeeling(i, j));
 				j+=10;
 			}
@@ -26,8 +26,8 @@ public class SailTest {
 		// for now, lets take the rel Wind Direction
 		//double a = windModel.getWind().getDirection();
 		double k = 1;
-		double Hmax = 45d;
-		double Vmax = 10d;
+		double Hmax = 45d;  
+		double Vmax = 15d;
 		
 		// v{max}
 		double x;
