@@ -10,6 +10,11 @@ import java.awt.Stroke;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 
+/**
+ * 
+ * @author Paul Lehmann / JMapViewer (adapted for this project)
+ *
+ */
 public class MapRectangleImpl implements MapRectangle {
 
 	private Coordinate topLeft;

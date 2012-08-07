@@ -45,12 +45,13 @@ import de.fhb.sailboat.data.GPS;
 /**
  * Provides a simple panel that displays pre-rendered map tiles loaded from the
  * OpenStreetMap project.
+ * 
  * @author Paul Lehmann / JMapViewer (adapted for this project)
  */
 public class JMapViewer extends JPanel implements TileLoaderListener {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(JMapViewer.class);
 
 	/**
@@ -561,10 +562,10 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 
 		if (mapMarkersVisible && mapMarkerList != null) {
 			try {
-			for (MapMarker marker : mapMarkerList) {
-				paintMarker(g, marker);
-			}
-			} catch (ConcurrentModificationException ex){
+				for (MapMarker marker : mapMarkerList) {
+					paintMarker(g, marker);
+				}
+			} catch (ConcurrentModificationException ex) {
 				LOG.warn("ConcurrentModificationException");
 			}
 		}

@@ -26,13 +26,13 @@ public class MapPolygonImpl implements MapPolygon {
 		this(points, Color.BLUE, new BasicStroke(2));
 	}
 
-	public MapPolygonImpl(List<GPS> currentPoly, Color color) {
-		this(currentPoly, color, new BasicStroke(3));
+	public MapPolygonImpl(List<GPS> points, Color color) {
+		this(points, color, new BasicStroke(3));
 
 	}
 
-	public MapPolygonImpl(List<GPS> currentPoly, Color color, Stroke stroke) {
-		this.points = currentPoly;
+	public MapPolygonImpl(List<GPS> points, Color color, Stroke stroke) {
+		this.points = points;
 		this.color = color;
 		this.stroke = stroke;
 	}
@@ -72,16 +72,16 @@ public class MapPolygonImpl implements MapPolygon {
 	}
 
 	public String toString() {
-		String x = "MapPolygon: [";
+		String polygon = "MapPolygon: [";
 
 		for (int i = 0; i < this.points.size() - 1; i++) {
-			x += this.points.get(i).getLatitude() + ", "
+			polygon += this.points.get(i).getLatitude() + ", "
 					+ this.points.get(i).getLongitude() + "; ";
 		}
 
-		x += this.points.get(this.points.size() - 1).getLatitude() + ", "
+		polygon += this.points.get(this.points.size() - 1).getLatitude() + ", "
 				+ this.points.get(this.points.size() - 1).getLongitude() + "]";
 
-		return x;
+		return polygon;
 	}
 }

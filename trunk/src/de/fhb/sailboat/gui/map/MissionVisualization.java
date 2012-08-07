@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
@@ -76,6 +75,33 @@ public class MissionVisualization {
 		taskCountLastCall = current.getTasks().size();
 	}
 
+	public void visualize(Mission mission) {
+
+		clearMap();
+
+		Mission current = model.getMissionTasksLeft();
+
+		this.model = null;
+
+		if (whole == null
+				|| taskCountLastCall < model.getMissionTasksLeft().getTasks()
+						.size()) {
+			whole = new MissionImpl();
+			whole.setTasks(new ArrayList<Task>());
+			for (int i = 0; i < model.getMissionTasksLeft().getTasks().size(); i++)
+				whole.getTasks().add(
+						model.getMissionTasksLeft().getTasks().get(i));
+		}
+
+		if (current.getTasks().size() < whole.getTasks().size()) {
+			Mission solved = getSolved(current);
+			visualizeTasks(current, solved);
+		} else {
+			visualizeTasks(whole);
+		}
+		taskCountLastCall = current.getTasks().size();
+	}
+
 	private void visualizeTasks(Mission whole) {
 		visualizeTasks(whole, null);
 	}
@@ -113,15 +139,17 @@ public class MissionVisualization {
 					.getPoints(), color));
 			map.addMapPolygon(polygonList.get(polygonList.size() - 1));
 
-		} else if (task instanceof CompassCourseTask)
-			drawLine(model.getGps().getPosition(),
-					((CompassCourseTask) task).getAngle(), color);
+		} else if (task instanceof CompassCourseTask) {
+			if (model != null)
+				drawLine(model.getGps().getPosition(),
+						((CompassCourseTask) task).getAngle(), color);
 
-		else if (task instanceof HoldAngleToWindTask)
-			drawLine(model.getGps().getPosition(),
-					((HoldAngleToWindTask) task).getAngle(), color);
+		} else if (task instanceof HoldAngleToWindTask) {
+			/*if (model != null)
+				drawLine(model.getGps().getPosition(),
+						((HoldAngleToWindTask) task).getAngle(), color);*/
 
-		else if (task instanceof RepeatTask) {
+		} else if (task instanceof RepeatTask) {
 			// TODO
 		} else if (task instanceof StopTask) {
 			// TODO

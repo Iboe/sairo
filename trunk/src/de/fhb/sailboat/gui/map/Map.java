@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
@@ -24,10 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUIModel;
-import de.fhb.sailboat.gui.GUIModelImpl;
-import de.fhb.sailboat.mission.ReachCircleTask;
-import de.fhb.sailboat.mission.ReachPolygonTask;
-import de.fhb.sailboat.mission.Task;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -93,14 +89,13 @@ public class Map extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				if (SwingUtilities.isLeftMouseButton(arg0)) {
 					Coordinate target = map.getPosition(arg0.getPoint());
-
+					
 					switch (markerMode) {
 					case 0:
 						break;
 
 					case 1:
 						addMapMarker(GPSTransformations.coordinateToGPS(target));
-
 						break;
 
 					case 2:
@@ -170,12 +165,10 @@ public class Map extends JPanel {
 				while (true) {
 					if (currentZoom != map.getZoom()) {
 						currentZoom = map.getZoom();
-						int meterPerPixel = (int) (PIXEL_TO_CALCULATE_SCALE
-								* (EARTH_CIRCUMFERENCE * Math.cos(Math
-										.toRadians(map.getPosition(10,
-												mapArea.getHeight() - 10)
-												.getLat()))) / Math.pow(2,
-								map.getZoom() + 8));
+						int meterPerPixel = (int) (PIXEL_TO_CALCULATE_SCALE * (EARTH_CIRCUMFERENCE
+								* Math.cos(Math.toRadians(map.getPosition(10,
+										mapArea.getHeight() - 10).getLat())) / Math
+								.pow(2, map.getZoom() + 8)));
 
 						meterPerPixelPanel.getMeterPerPixelLabel().setText("");
 						meterPerPixelPanel.getMeterPerPixelLabel().setText(
@@ -200,31 +193,29 @@ public class Map extends JPanel {
 		mapArea.add(map, BorderLayout.CENTER);
 		mapArea.add(markerCheckBoxes, BorderLayout.SOUTH);
 
-		/*GUIModel model = new GUIModelImpl();
-
-		List<Task> list = new ArrayList<Task>();
-		List<GPS> points = new ArrayList<GPS>();
-		points.add(FH_BRANDENBURG);
-		points.add(REGATTASTRECKE);
-		points.add(new GPS(FH_BRANDENBURG.getLatitude()
-				+ REGATTASTRECKE.getLatitude(), FH_BRANDENBURG.getLatitude()
-				+ REGATTASTRECKE.getLongitude()));
-		list.add(new ReachPolygonTask(points));
-		for (int i = 0; i <= 3; i++) {
-			list.add(new ReachCircleTask(new GPS(REGATTASTRECKE.getLatitude()
-					+ i, REGATTASTRECKE.getLongitude() + i), 0));
-		}
-
-		
-
-		model.getMissionTasksLeft().setTasks(list);
-		model.getCurrentWholeMission().setTasks(list);
-
-		visualize.visualize(model);
-
-		model.getMissionTasksLeft().getTasks().remove(0);
-
-		visualize.visualize(model);*/
+		/*
+		 * GUIModel model = new GUIModelImpl();
+		 * 
+		 * List<Task> list = new ArrayList<Task>(); List<GPS> points = new
+		 * ArrayList<GPS>(); points.add(FH_BRANDENBURG);
+		 * points.add(REGATTASTRECKE); points.add(new
+		 * GPS(FH_BRANDENBURG.getLatitude() + REGATTASTRECKE.getLatitude(),
+		 * FH_BRANDENBURG.getLatitude() + REGATTASTRECKE.getLongitude()));
+		 * list.add(new ReachPolygonTask(points)); for (int i = 0; i <= 3; i++)
+		 * { list.add(new ReachCircleTask(new GPS(REGATTASTRECKE.getLatitude() +
+		 * i, REGATTASTRECKE.getLongitude() + i), 0)); }
+		 * 
+		 * 
+		 * 
+		 * model.getMissionTasksLeft().setTasks(list);
+		 * model.getCurrentWholeMission().setTasks(list);
+		 * 
+		 * visualize.visualize(model);
+		 * 
+		 * model.getMissionTasksLeft().getTasks().remove(0);
+		 * 
+		 * visualize.visualize(model);
+		 */
 
 		return mapArea;
 	}
