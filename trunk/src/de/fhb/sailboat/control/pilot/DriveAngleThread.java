@@ -182,14 +182,25 @@ public class DriveAngleThread extends Thread {
 		// v actual windspeed
 		double v = windModel.getWind().getSpeed();
 		// a = atmospheric wind in degree ( -180 to 180° )
-		double a = calculateAtmosphericWind(compassModel.getCompass().getYaw(), windModel.getWind().getDirection(), v, gpsModel.getPosition().getSpeed());
+		//double a = calculateAtmosphericWind(compassModel.getCompass().getYaw(), windModel.getWind().getDirection(), v, gpsModel.getPosition().getSpeed());
+		// for now, lets take the rel Wind Direction
+		double a = windModel.getWind().getDirection();
 		// k = 
 		// h{max} = max. heeling of the boat for a of v{max} or above
 		// v{max}
+		double x;
+		if ( v <= Vmax) {
+			x = v/Vmax;
+		} else {
+			x = 1;
+		}
 		
+		h = ((Hmax - k*Math.abs(a)) * x );
 		
-		
-		return h;
+		if (h > 0) 
+			return h;
+		else
+			return 0;
 	}
 	
 	/**
@@ -204,6 +215,7 @@ public class DriveAngleThread extends Thread {
 	 * TODO put somewhere else, so everybody can use this
 	 * Source: http://www.rainerstumpe.de/HTML/body_wind02.html
 	 */
+	@Deprecated
 	public double calculateAtmosphericWind(double k, double r, double b, double c) {
 		double lambda, gamma, alpha, beta, t1, t2, cosa, a2, a, sina, sinb;
 		gamma = 0d;
@@ -225,6 +237,8 @@ public class DriveAngleThread extends Thread {
 		
 		return gamma;
 	}
+	
+	
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
