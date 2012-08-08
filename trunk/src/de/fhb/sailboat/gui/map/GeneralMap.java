@@ -32,7 +32,7 @@ import de.fhb.sailboat.gui.GUIModel;
  * @author Paul Lehmann
  */
 
-public class MapMother extends JPanel {
+public class GeneralMap extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class MapMother extends JPanel {
 	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
 	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
 
-	private static final Logger LOG = LoggerFactory.getLogger(MapMother.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GeneralMap.class);
 
 	protected List<MapMarker> markerList;
 
@@ -50,7 +50,7 @@ public class MapMother extends JPanel {
 
 	protected List<MapMarker> obstacles;
 
-	public MapMother() {
+	public GeneralMap() {
 		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
 		this.visualize = new MissionVisualization(map);

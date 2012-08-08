@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 
-public class MissionCreatingMap extends MapMother {
+public class MissionCreatingMap extends GeneralMap {
 
 	private static final long serialVersionUID = 1L;
 
