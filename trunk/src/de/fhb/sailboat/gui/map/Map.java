@@ -48,6 +48,7 @@ public class Map extends JPanel {
 
 	private List<MapMarker> markerList;
 	private MapMarker currentPosition;
+	private List<MapMarker> obstacles;
 
 	private List<GPS> positionHistoryList;
 	private MapPolygon positionHistory = null;
@@ -70,6 +71,7 @@ public class Map extends JPanel {
 		this.polyHelpList = new ArrayList<MapMarker>();
 		this.positionHistoryList = new ArrayList<GPS>();
 		this.visualize = new MissionVisualization(map);
+		this.obstacles = new ArrayList<MapMarker>();
 	}
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
@@ -89,7 +91,7 @@ public class Map extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				if (SwingUtilities.isLeftMouseButton(arg0)) {
 					Coordinate target = map.getPosition(arg0.getPoint());
-					
+
 					switch (markerMode) {
 					case 0:
 						break;
@@ -333,6 +335,19 @@ public class Map extends JPanel {
 		visualize.visualize(model);
 	}
 
+	public void addObstacle(GPS gps) {
+		obstacles.add(new MapMarkerDot(Color.BLACK, gps.getLatitude(), gps
+				.getLongitude()));
+		map.addMapMarker(obstacles.get(obstacles.size() - 1));
+	}
+
+	public void removeObstacles() {
+		for (int i = 0; i < obstacles.size(); i++) {
+			map.removeMapMarker(obstacles.get(i));
+		}
+		obstacles = new ArrayList<MapMarker>();
+	}
+
 	/**
 	 * Removes line of positions.
 	 */
@@ -436,4 +451,14 @@ public class Map extends JPanel {
 		this.currentPoly = currentPoly;
 	}
 
+	public List<MapMarker> getObstacles() {
+		return obstacles;
+	}
+
+	public void setObstacles(List<MapMarker> obstacles) {
+		this.obstacles = obstacles;
+		for (int i = 0; i < obstacles.size(); i++) {
+			map.addMapMarker(obstacles.get(i));
+		}
+	}
 }

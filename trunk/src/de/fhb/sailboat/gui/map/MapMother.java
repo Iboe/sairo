@@ -3,6 +3,7 @@ package de.fhb.sailboat.gui.map;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -35,12 +36,7 @@ public class MapMother extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int NO_MARK = 0;
-	private static final int MARKER = 1;
-	private static final int POLYGON = 2;
-	private static final int EVERY_X_GPS_POSITION = 3;
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
-	private static final int EARTH_CIRCUMFERENCE = 40074000;
 	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
 	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
 
@@ -51,6 +47,8 @@ public class MapMother extends JPanel {
 	protected JMapViewer map;
 
 	protected MissionVisualization visualize;
+
+	protected List<MapMarker> obstacles;
 
 	public MapMother() {
 		this.map = new JMapViewer();
@@ -93,6 +91,19 @@ public class MapMother extends JPanel {
 
 	public void visualizeMission(GUIModel model) {
 		visualize.visualize(model);
+	}
+
+	public void addObstacle(GPS gps) {
+		obstacles.add(new MapMarkerDot(Color.BLACK, gps.getLatitude(), gps
+				.getLongitude()));
+		map.addMapMarker(obstacles.get(obstacles.size() - 1));
+	}
+
+	public void removeObstacles() {
+		for (int i = 0; i < obstacles.size(); i++) {
+			map.removeMapMarker(obstacles.get(i));
+		}
+		obstacles = new ArrayList<MapMarker>();
 	}
 
 	/**
@@ -163,5 +174,16 @@ public class MapMother extends JPanel {
 
 	public void setMarkerList(List<MapMarker> markerList) {
 		this.markerList = markerList;
+	}
+
+	public List<MapMarker> getObstacles() {
+		return obstacles;
+	}
+
+	public void setObstacles(List<MapMarker> obstacles) {
+		this.obstacles = obstacles;
+		for (int i = 0; i < obstacles.size(); i++) {
+			map.addMapMarker(obstacles.get(i));
+		}
 	}
 }

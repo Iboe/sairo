@@ -1,6 +1,5 @@
 package de.fhb.sailboat.gui.map;
 
-import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -13,7 +12,6 @@ import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,10 +62,14 @@ public class MissionCreatingMap extends MapMother {
 						break;
 
 					case 1:
-						if (currentPoly != null) 
+						if (currentPoly != null)
 							map.removeMapPolygon(currentPoly);
 						addPointToPolygon(GPSTransformations
 								.coordinateToGPS(target));
+						break;
+
+					case 2:
+						addObstacle(GPSTransformations.coordinateToGPS(target));
 						break;
 
 					default:
