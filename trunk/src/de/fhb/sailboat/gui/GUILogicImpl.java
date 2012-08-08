@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.fhb.sailboat.gui;
 
 import java.text.DecimalFormat;
@@ -15,9 +11,9 @@ import de.fhb.sailboat.gui.map.Map;
 import de.fhb.sailboat.mission.Mission;
 
 /**
- * This class represents the program logic used by a GUInterface. It handles updating, sending and converting of value displayed
- * and set via the GUI.
- * 
+ * This class represents the program logic used by a GUInterface. It handles
+ * updating, sending and converting of value displayed and set via the GUI.
+ *
  * @author Patrick Rutter
  */
 public class GUILogicImpl implements GUILogic {
@@ -28,16 +24,16 @@ public class GUILogicImpl implements GUILogic {
     final static public String COMPASS_UNIT = "°";                  // this will be appended to azimuth, pitch & roll display strings
     final static public String WIND_VELOCITY_UNIT = " m/s";         // this will be appended to windVelocity display strings
     final static public String WIND_DIRECTION_UNIT = "°";           // this will be appended to windDirection display strings
-    
-    
     private GUIController controller;								// the GUIController is used for getting and setting values from and to the world model/ local database
     private Planner planner;										// the Planner is used for sending mission sets
     private Map missionMap;											// the Map is used to visualize the missionArea and landmarks/ points of interest
     private boolean testMode;                                       // if true random values will be generated for each update, instead of trying to retrieve true values (only hard code setting)
     private DecimalFormat gpsDecimalFormat;							// used to format display strings
-    
+
     /**
-     * Constructs and initializes the GUILogic with the assigned planner reference.
+     * Constructs and initializes the GUILogic with the assigned planner
+     * reference.
+     *
      * @param planner
      */
     public GUILogicImpl(Planner planner) {
@@ -46,14 +42,15 @@ public class GUILogicImpl implements GUILogic {
         this.controller = new GUIControllerImpl();
         this.planner = planner;
     }
-    
+
     @Override
     public void commitMission(Mission mission) {
         this.controller.commitMission(planner, mission);
     }
 
     /**
-     * Initializes a Map Object and assigns it to the given panel. The map will fit itself to the size of the given panel and can be resized.
+     * Initializes a Map Object and assigns it to the given panel. The map will
+     * fit itself to the size of the given panel and can be resized.
      */
     public void initializeMissionMap(javax.swing.JPanel missionMapPanel) {
         missionMap = new Map();
@@ -61,7 +58,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current longitude of the boat and sets the given label to the resulting value. 
+     * Gets the current longitude of the boat and sets the given label to the
+     * resulting value.
      */
     public void updateGPSLongitude(javax.swing.JLabel gpsLongitudeLabel) {
         String value = "";
@@ -77,7 +75,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current latitude of the boat and sets the given label to the resulting value. 
+     * Gets the current latitude of the boat and sets the given label to the
+     * resulting value.
      */
     public void updateGPSLatitude(javax.swing.JLabel gpsLatitudeLabel) {
         String value = "";
@@ -93,7 +92,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current number of received satellites and sets the given label to the resulting value. 
+     * Gets the current number of received satellites and sets the given label
+     * to the resulting value.
      */
     public void updateGPSSatelites(javax.swing.JLabel gpsSatelites) {
         String value = "";
@@ -109,7 +109,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current azimuth of the boat and sets the given label to the resulting value. 
+     * Gets the current azimuth of the boat and sets the given label to the
+     * resulting value.
      */
     public void updateCompassAzimuth(javax.swing.JLabel compassAzimuth) {
         String value = "";
@@ -125,7 +126,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current pitch of the boat and sets the given label to the resulting value. 
+     * Gets the current pitch of the boat and sets the given label to the
+     * resulting value.
      */
     public void updateCompassPitch(javax.swing.JLabel compassPitch) {
         String value = "";
@@ -141,7 +143,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current roll of the boat and sets the given label to the resulting value. 
+     * Gets the current roll of the boat and sets the given label to the
+     * resulting value.
      */
     public void updateCompassRoll(javax.swing.JLabel compassRoll) {
         String value = "";
@@ -157,7 +160,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current wind velocity recognized by the boat and sets the given label to the resulting value. 
+     * Gets the current wind velocity recognized by the boat and sets the given
+     * label to the resulting value.
      */
     public void updateWindVelocity(javax.swing.JLabel windVelocity) {
         String value = "";
@@ -173,7 +177,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Gets the current wind direction recognized by the boat and sets the given label to the resulting value. 
+     * Gets the current wind direction recognized by the boat and sets the given
+     * label to the resulting value.
      */
     public void updateWindDirection(javax.swing.JLabel windDirection) {
         String value = "";
@@ -189,7 +194,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Able to put out info in the given TextArea. Currently only displays debug info.
+     * Able to put out info in the given TextArea. Currently only displays debug
+     * info.
      */
     public void updateSystemInfo(javax.swing.JTextArea systemTabTextArea) {
         String value = "";
@@ -197,7 +203,7 @@ public class GUILogicImpl implements GUILogic {
         if (!testMode) {
             value = value + "Einzelpunkte:\n" + missionMap.getMarkerList().toString() + "\nPolygon:\n" + missionMap.getPolygonList().toString();
         } else {
-        	value = value + "Einzelpunkte:\n" + missionMap.getMarkerList().toString() + "\nPolygon:\n" + missionMap.getPolygonList().toString();
+            value = value + "Einzelpunkte:\n" + missionMap.getMarkerList().toString() + "\nPolygon:\n" + missionMap.getPolygonList().toString();
         }
 
         systemTabTextArea.setText(value);
@@ -226,6 +232,25 @@ public class GUILogicImpl implements GUILogic {
     public void updateLogic() {
         controller.updateAll();
         missionMap.followBoat(controller.getGps().getPosition());
+
+        // visualize mission if mission is present and has changed
+        //TODO beat paul into writing the promised overload for visualize
+        /*
+         * if (this.controller.getCurrentWholeMission() != null) { if
+         * (this.controller.isMissionUpdated()) { if
+         * ((this.controller.getCurrentWholeMission().getTasks() != null) &&
+         * (this.controller.getCurrentMission().getTasks() != null))
+         * this.missionMap.visualizeMission(this.controller.getCurrentMission(),
+         * this.controller.getCurrentWholeMission()); }
+        }
+         */
+
+        GUIModelImpl paul = new GUIModelImpl();
+        paul.setCurrentWholeMission(this.controller.getCurrentWholeMission());
+        paul.setMissionTasksLeft(this.controller.getCurrentMission());
+        if ((this.controller.getCurrentWholeMission().getTasks() != null) && (this.controller.getCurrentMission().getTasks() != null)) {
+            if ((!this.controller.getCurrentWholeMission().getTasks().isEmpty()) && (!this.controller.getCurrentMission().getTasks().isEmpty())) missionMap.visualizeMission(paul);
+        }
     }
 
     /**
@@ -234,82 +259,81 @@ public class GUILogicImpl implements GUILogic {
     public void closeGUI() {
         System.exit(0);
     }
-    
+
     // the following are methods for primitive tests and should be removed in future releases (namely after missionCreatorDialog is finished)
     @Override
     public void sendCircleMarkers() {
-    	if (missionMap.getMap().getMapMarkerList().size() > 0) {
-			this.controller.setCircleMarkerList(GPSTransformations
-					.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
-			this.controller.commitCircleMarkerList(planner);
-			sendResetMissionMap();
-		}
+        if (missionMap.getMap().getMapMarkerList().size() > 0) {
+            this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
+            this.controller.commitCircleMarkerList(planner);
+            sendResetMissionMap();
+        }
     }
-    
+
     @Override
     public void sendPolyMapMarkers() {
-    	this.controller.setPolyList(missionMap.getPolygonList());
-		this.controller.commitPolyList(planner);
-		sendResetMissionMap();
+        this.controller.setPolyList(missionMap.getPolygonList());
+        this.controller.commitPolyList(planner);
+        sendResetMissionMap();
     }
-    
+
     @Override
     public void sendReachCompass() {
-    	String str = JOptionPane.showInputDialog(null,
-				"Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
-		if (str != null && str.length() != 0) {
-			this.controller.commitReachCompassTask(Integer.parseInt(str),
-					planner);
-		}
+        String str = JOptionPane.showInputDialog(null,
+                "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+        if (str != null && str.length() != 0) {
+            this.controller.commitReachCompassTask(Integer.parseInt(str),
+                    planner);
+        }
     }
-    
+
     @Override
     public void sendHoldAngleToWind() {
-    	String str = JOptionPane.showInputDialog(null,
-				"Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
-		if (str.length() != 0) {
-			this.controller.commitHoldAngleToWind(Integer.parseInt(str),
-					planner);
-		}
+        String str = JOptionPane.showInputDialog(null,
+                "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+        if (str.length() != 0) {
+            this.controller.commitHoldAngleToWind(Integer.parseInt(str),
+                    planner);
+        }
     }
-    
+
     @Override
     public void sendStop() {
-    	int choice = JOptionPane.showConfirmDialog(null,
-				"Wirklich Mission stoppen?", "Bitte bestätigen",
-				JOptionPane.YES_NO_OPTION);
-		if (choice == JOptionPane.YES_OPTION) {
-			this.controller.commitStopTask(planner);
-		}
+        int choice = JOptionPane.showConfirmDialog(null,
+                "Wirklich Mission stoppen?", "Bitte bestätigen",
+                JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            this.controller.commitStopTask(planner);
+        }
     }
-    
+
     @Override
     public void sendResetActors() {
-    	int choice = JOptionPane.showConfirmDialog(null,
-				"Wirklich Motor, Segel und Ruder zurücksetzen?", "Bitte bestätigen",
-				JOptionPane.YES_NO_OPTION);
-		if (choice == JOptionPane.YES_OPTION) {
-			this.controller.resetActorsTask(planner);
-		}
+        int choice = JOptionPane.showConfirmDialog(null,
+                "Wirklich Motor, Segel und Ruder zurücksetzen?", "Bitte bestätigen",
+                JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            this.controller.resetActorsTask(planner);
+        }
     }
-    
+
     @Override
     public void sendResetMissionMap() {
         missionMap.removeEveryObject();
         missionMap.removeTrail();
         missionMap.getMap().repaint();
     }
-    
+
     @Override
     public void setSailMode(boolean sailMode) {
         this.controller.setSailMode(sailMode);
     }
-    
+
     public GUIController getController() {
-    	return this.controller;
+        return this.controller;
     }
-    
+
     public Planner getPlanner() {
-    	return this.planner;
+        return this.planner;
     }
 }

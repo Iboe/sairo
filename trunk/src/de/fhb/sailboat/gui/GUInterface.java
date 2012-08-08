@@ -91,8 +91,6 @@ public class GUInterface extends javax.swing.JFrame {
         windowMenuInfo = new javax.swing.JCheckBoxMenuItem();
         windowMenuRemote = new javax.swing.JCheckBoxMenuItem();
         missionTestMenu = new javax.swing.JMenu();
-        missionTestMenuReachCircle = new javax.swing.JMenuItem();
-        missionTestMenuReachPolygon = new javax.swing.JMenuItem();
         missionTestMenuCompassCourse = new javax.swing.JMenuItem();
         missionTestMenuHoldAngleToWind = new javax.swing.JMenuItem();
         missionTestMenuStopTask = new javax.swing.JMenuItem();
@@ -614,22 +612,6 @@ public class GUInterface extends javax.swing.JFrame {
 
         missionTestMenu.setText("Testmissionen");
 
-        missionTestMenuReachCircle.setText("ReachCircleTask(s) senden");
-        missionTestMenuReachCircle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                missionTestMenuReachCircleActionPerformed(evt);
-            }
-        });
-        missionTestMenu.add(missionTestMenuReachCircle);
-
-        missionTestMenuReachPolygon.setText("ReachPolygonTask senden");
-        missionTestMenuReachPolygon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                missionTestMenuReachPolygonActionPerformed(evt);
-            }
-        });
-        missionTestMenu.add(missionTestMenuReachPolygon);
-
         missionTestMenuCompassCourse.setText("CompassCourseTask senden");
         missionTestMenuCompassCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -748,14 +730,6 @@ public class GUInterface extends javax.swing.JFrame {
         remoteDialog.setVisible(windowMenuRemote.isSelected());
     }                                                
 
-    private void missionTestMenuReachCircleActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        guiLogic.sendCircleMarkers();
-    }                                                          
-
-    private void missionTestMenuReachPolygonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        guiLogic.sendPolyMapMarkers();
-    }                                                           
-
     private void missionTestMenuCompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         guiLogic.sendReachCompass();
     }                                                            
@@ -777,7 +751,7 @@ public class GUInterface extends javax.swing.JFrame {
     }                                                       
 
     private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        guiLogic.sendResetActors();
+        guiLogic.sendResetMissionMap();
     }                                                       
 
     private void remoteDialogWindowClosing(java.awt.event.WindowEvent evt) {                                           
@@ -849,10 +823,10 @@ public class GUInterface extends javax.swing.JFrame {
         propellorStateUpdate();
     }                                         
 
-    private void missionMenuMissionCreatorActionPerformed(java.awt.event.ActionEvent evt) {
-    	MissionCreatorInterface mc = new MissionCreatorInterface(this, false, this.guiLogic);
+    private void missionMenuMissionCreatorActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        MissionCreatorInterface mc = new MissionCreatorInterface(this, false, this.guiLogic);
         mc.setVisible(true);
-    }
+    }                                                         
 
     /**
      * This method will be called wehenever the radioButtons for the propellor in the remoteDialog are modified. If the (new) status of the radioButtons differs from what is
@@ -1013,8 +987,6 @@ public class GUInterface extends javax.swing.JFrame {
     private javax.swing.JMenu missionTestMenu;
     private javax.swing.JMenuItem missionTestMenuCompassCourse;
     private javax.swing.JMenuItem missionTestMenuHoldAngleToWind;
-    private javax.swing.JMenuItem missionTestMenuReachCircle;
-    private javax.swing.JMenuItem missionTestMenuReachPolygon;
     private javax.swing.JMenuItem missionTestMenuResetActors;
     private javax.swing.JMenuItem missionTestMenuResetMap;
     private javax.swing.JCheckBoxMenuItem missionTestMenuSailMode;

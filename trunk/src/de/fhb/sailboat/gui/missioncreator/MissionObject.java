@@ -2,10 +2,12 @@ package de.fhb.sailboat.gui.missioncreator;
 
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.Task;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
 /**
@@ -13,17 +15,31 @@ import javax.swing.tree.TreeModel;
  * 
  * @author Patrick Rutter
  */
-public class MissionObject {
+public class MissionObject implements Serializable{
     
-    private MissionImpl mission;
+    /***
+     * Extension for files containing this class serialized. Used for FileChoosers.
+     */
+    final public static transient String FILE_EXTENSION = ".fhsm";
+    
+    /***
+     * Description for the file extension. Used for FileChoosers.
+     */
+    final public static transient String FILE_DESCRIPTION = "Missionsdateien, erstellt mit dem MissionCreator des FHB-Sairo-Projektes.";
+    
+    private DefaultMutableTreeNode root;
     
     public MissionObject(JTree missionTree) {
-        makeMission(missionTree);
+        root = ((DefaultMutableTreeNode)((DefaultTreeModel)missionTree.getModel()).getRoot());
     }
     
-    private void makeMission(JTree missionTree) {
+    private MissionImpl makeMission() {
+        MissionImpl mission = null;
+        
+        JTree tree = new JTree(root);
+        
         List<Task> tasklist = new ArrayList();
-        TreeModel model = missionTree.getModel();
+        TreeModel model = tree.getModel();
         DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
         
         parseChilds(root, tasklist);
@@ -33,6 +49,8 @@ public class MissionObject {
         
         //debug
         //System.out.println("Created mission with " + tasklist.size() + " entries.");
+        
+        return mission;
     }
     
     private void parseChilds(DefaultMutableTreeNode parent, List<Task> tasklist) {
@@ -56,6 +74,10 @@ public class MissionObject {
     }
 
     public MissionImpl getMission() {
-        return mission;
+        return makeMission();
+    }
+    
+    public DefaultMutableTreeNode getRoot() {
+        return root;
     }
 }

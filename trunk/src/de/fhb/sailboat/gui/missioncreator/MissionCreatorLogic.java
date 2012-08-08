@@ -5,6 +5,7 @@ import de.fhb.sailboat.gui.GUIControllerImpl;
 import de.fhb.sailboat.gui.GUILogic;
 import de.fhb.sailboat.mission.Task;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -142,6 +143,16 @@ public class MissionCreatorLogic {
         Task load = new de.fhb.sailboat.mission.ReachCircleTask(position, 3);
         missionTreeNew_Task(missionTree, name, load);
     }
+    
+    public void missionTree_NewReachPolygon_Task(JTree missionTree, String name, List<GPS> polygon) {
+        Task load = new de.fhb.sailboat.mission.ReachPolygonTask(polygon);
+        missionTreeNew_Task(missionTree, name, load);
+    }
+    
+    public void missionTree_NewCrossLine_Task(JTree missionTree, String name, GPS start, GPS end) {
+        Task load = new de.fhb.sailboat.mission.CrossLineTask(start, end);
+        missionTreeNew_Task(missionTree, name, load);
+    }
 
     /**
      * Copies the current seleceted node in the missionTree to the "clipboard", overwriting previously copied entries.
@@ -250,5 +261,28 @@ public class MissionCreatorLogic {
      */
     public void nope() {
         JOptionPane.showMessageDialog(null, "Funktion wurde noch nicht implementiert.", "Nope", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    /**
+     * Saves the current mission contained by the missionTree to the given filename.
+     * @param missionTree
+     * @param filename 
+     */
+    public void saveMission(JTree missionTree, String filename) {
+        MissionObject mission = new MissionObject(missionTree);
+        MissionSaver.save(filename, mission);
+    }
+    
+    /**
+     * Loads the file with the given filename and sets the missionTree to the mission contained within that file, if possible.
+     * @param missionTree
+     * @param filename 
+     */
+    public void loadMission(JTree missionTree, String filename) {
+        MissionObject mission = MissionLoader.load(filename);
+        if (mission != null) {
+            JTree tree = new JTree(mission.getRoot());
+            missionTree.setModel(tree.getModel());
+        }
     }
 }

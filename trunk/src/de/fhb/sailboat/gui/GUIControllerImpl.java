@@ -347,4 +347,16 @@ public class GUIControllerImpl implements GUIController {
 	public void setSailMode(boolean sailMode) {
 		this.model.setSailMode(sailMode);
 	}
+	
+	public Mission getCurrentMission() {
+		return this.model.getMissionTasksLeft();
+	}
+	
+	public Mission getCurrentWholeMission() {
+		return this.model.getCurrentWholeMission();
+	}
+	
+	public boolean isMissionUpdated() {
+		return this.model.isMissionUpdated();
+	}
 }

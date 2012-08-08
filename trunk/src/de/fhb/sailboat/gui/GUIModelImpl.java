@@ -25,6 +25,8 @@ public class GUIModelImpl implements GUIModel{
 	// CONSTANTS
 	
 	// VARIABLES
+	private boolean missionUpdated;
+	
 	private WindModel wind;
 	
 	private CompassModel compass;
@@ -46,6 +48,7 @@ public class GUIModelImpl implements GUIModel{
 	private StringBuffer missionReport;
 	
 	public GUIModelImpl() {
+		this.missionUpdated = false;
 		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();
 		this.compass.setCompass(new Compass(170,0,0));
@@ -145,7 +148,15 @@ public class GUIModelImpl implements GUIModel{
 
 	@Override
 	public void setMissionTasksLeft(Mission missionTasksLeft) {
-		this.missionTasksLeft = missionTasksLeft;
+		if ((missionTasksLeft.getTasks() != null) && (this.missionTasksLeft.getTasks() != null)) {
+			if (!missionTasksLeft.getTasks().equals(
+					this.missionTasksLeft.getTasks())) {
+				this.missionTasksLeft = missionTasksLeft;
+				this.missionUpdated = true;
+			}
+		} else {
+			this.missionTasksLeft = missionTasksLeft;
+		}
 	}
 
 	@Override
@@ -181,5 +192,15 @@ public class GUIModelImpl implements GUIModel{
 	@Override
 	public void setRudder(int rudder) {
 		this.rudder = rudder;
+	}
+	
+	@Override
+	/**
+	 * Returns true if the mission has been updated (=tasks been altered). Calling this method will set the update status back to false (!).
+	 */
+	public boolean isMissionUpdated() {
+		boolean myReturn = this.missionUpdated;
+		this.missionUpdated = false;
+		return myReturn;
 	}
 }

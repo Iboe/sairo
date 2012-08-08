@@ -63,4 +63,6 @@ public interface GUIModel {
 	public int getRudder();
 	
 	public int getSail();
+	
+	public boolean isMissionUpdated();
 }

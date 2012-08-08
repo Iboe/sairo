@@ -17,8 +17,6 @@ import de.fhb.sailboat.worldmodel.WindModel;
  * 
  */
 public interface GUIController {
-
-	GUIModelImpl model = null;	// GUIModel is used to store values locally
 	
 	public void commitMission(Planner planner, Mission mission);
 	
@@ -95,4 +93,10 @@ public interface GUIController {
 	public void setRudder();
 	
 	public void setSail();
+	
+	public Mission getCurrentMission();
+	
+	public Mission getCurrentWholeMission();
+	
+	public boolean isMissionUpdated();
 }
