@@ -12,6 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Noch nicht benutzen!!!
+ * 
+ * @author Paul Lehmann
+ * 
+ */
 public class GUIMap extends GeneralMap {
 
 	private static final long serialVersionUID = 1L;
