@@ -13,6 +13,7 @@ import de.fhb.sailboat.data.GPS;
  */
 public class CrossLineTask implements Task {
 
+	private static final long serialVersionUID = 1967777624355818256L;
 	private final GPS startPoint;
 	private final GPS endPoint;
 	

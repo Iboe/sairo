@@ -10,6 +10,7 @@ import de.fhb.sailboat.data.GPS;
  */
 public class StopTask implements Task{
 
+	private static final long serialVersionUID = -2985405903689552908L;
 	private final boolean turnPropellorOff;
 	
 	/**

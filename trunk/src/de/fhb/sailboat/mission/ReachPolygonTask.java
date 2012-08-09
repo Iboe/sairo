@@ -14,6 +14,7 @@ import de.fhb.sailboat.data.GPS;
  */
 public class ReachPolygonTask implements Task {
 
+	private static final long serialVersionUID = 4273233541958542186L;
 	/**
 	 * {@link Polygon} uses integer values for its points, so the {@link GPS}
 	 * coordinates have to scaled up to achieve the required precision

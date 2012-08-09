@@ -11,6 +11,7 @@ import de.fhb.sailboat.data.GPS;
  */
 public class CompassCourseTask implements Task {
 
+	private static final long serialVersionUID = 1926498008220645097L;
 	private final int angle;
 	
 	/**

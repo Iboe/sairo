@@ -1,5 +1,7 @@
 package de.fhb.sailboat.mission;
 
+import java.io.Serializable;
+
 import de.fhb.sailboat.data.GPS;
 
 /**
@@ -9,7 +11,7 @@ import de.fhb.sailboat.data.GPS;
  * @author hscheel
  *
  */
-public interface Task {
+public interface Task extends Serializable{
 
 	//TODO Endebedingungen: Zeit, Strecke, Linie erreicht
 	
