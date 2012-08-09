@@ -55,6 +55,7 @@ public class DriveAngleThread extends Thread {
 	// sailPos
 	private double lastSailPos = 0;
 	private double sailPos=0;
+	double desiredHeeling=0;
 	
 	
 	public DriveAngleThread(LocomotionSystem locSystem) {
@@ -83,7 +84,7 @@ public class DriveAngleThread extends Thread {
 				}
 				
 				message += ", desiredAngle=" + desiredAngle + ", delta=" + deltaAngle + 
-					", rudderPos=" + rudderPos;
+					", rudderPos=" + rudderPos +", desiredHeeling=" + desiredHeeling + ", sailPos=" + sailPos;
 				LOG.debug("Summarize: {}", message);
 				counter = 0;
 			}
@@ -120,7 +121,7 @@ public class DriveAngleThread extends Thread {
 	private void calculateSailPosition() {
 		double pctChange = 0;
 		// 1) 
-		double desiredHeeling = desiredHeeling();
+		desiredHeeling = desiredHeeling();
 		// 2)
 		double actualHeeling = compassModel.getCompass().getRoll();
 		double heeling = desiredHeeling - actualHeeling;
