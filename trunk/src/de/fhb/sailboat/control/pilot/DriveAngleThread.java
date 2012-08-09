@@ -26,6 +26,9 @@ public class DriveAngleThread extends Thread {
 	public static final double Hmax = Double.parseDouble(System.getProperty(Pilot.Hmax_PROPERTY));
 	public static final double Vmax = Double.parseDouble(System.getProperty(Pilot.Vmax_PROPERTY));
 	
+	public static final double tightMax = LocomotionSystem.SAIL_SHEET_IN;
+	public static final double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
+	
 	private static final Logger LOG = LoggerFactory.getLogger(DriveAngleThread.class);
 	
 	private final LocomotionSystem locSystem;
@@ -115,7 +118,7 @@ public class DriveAngleThread extends Thread {
 	 * @author schmidst
 	 */
 	private void calculateSailPosition() {
-		double pctChange;
+		double pctChange = 0;
 		// 1) 
 		double desiredHeeling = desiredHeeling();
 		// 2)
@@ -137,13 +140,20 @@ public class DriveAngleThread extends Thread {
 		// way too high
 		if ( heeling > 5 )
 			pctChange = 10;
+
 		
 		// DEBUG / Non-violent
-		pctChange= 0;  // Keep; 
+		//pctChange= 0;  // Keep; 
 		if (pctChange != 0) 
 		{
 			sailPos = calculateSailChange(pctChange);
 			locSystem.setSail((int) sailPos);
+		} else if (lastSailPos == 0) 
+		{
+			// quasi initialize
+			sailPos = tightMax * 1.1;	// set to approximatly 34 TODO better value?
+			locSystem.setSail((int) sailPos);
+			lastSailPos = sailPos;
 		}
 	}
 
@@ -158,8 +168,7 @@ public class DriveAngleThread extends Thread {
 	private double calculateSailChange(double pctChange)
 	{
 		double sailChangeValue = 0;
-		double tightMax = LocomotionSystem.SAIL_SHEET_IN;
-		double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
+		
 		//double normal = LocomotionSystem.SAIL_NORMAL;
 		
 		sailChangeValue = lastSailPos + (pctChange * lastSailPos );
@@ -171,8 +180,9 @@ public class DriveAngleThread extends Thread {
 		
 	}
 	/**
+	 * desiredHeeling in addiction to windSpeed and -direction
 	 * 
-	 * @return double desired heeling in percent/degree ? TODO
+	 * @return double desired heeling in percent/degree ?
 	 * @author schmidst
 	 */
 	private double desiredHeeling()
@@ -181,9 +191,7 @@ public class DriveAngleThread extends Thread {
 		double h = 0d;
 		// v actual windspeed
 		double v = windModel.getWind().getSpeed();
-		// a = atmospheric wind in degree ( -180 to 180° )
-		//double a = calculateAtmosphericWind(compassModel.getCompass().getYaw(), windModel.getWind().getDirection(), v, gpsModel.getPosition().getSpeed());
-		// for now, lets take the rel Wind Direction
+		// a actual wind direction on the boat
 		double a = windModel.getWind().getDirection();
 		// k = 
 		// h{max} = max. heeling of the boat for a of v{max} or above
@@ -203,42 +211,11 @@ public class DriveAngleThread extends Thread {
 			return 0;
 	}
 	
+
+	
 	/**
-	 * Calculate the atmospheric Wind Direction out of the relative Wind Direction and the speed of the boat
 	 * 
-	 * @param k course of the boat
-	 * @param r relative wind direction in °
-	 * @param v speed of relative wind in m/s
-	 * @param vb speed of boat according gps in m/s
-	 * @return atmospheric Wind Direction in °
-	 * 
-	 * TODO put somewhere else, so everybody can use this
-	 * Source: http://www.rainerstumpe.de/HTML/body_wind02.html
 	 */
-	@Deprecated
-	public double calculateAtmosphericWind(double k, double r, double b, double c) {
-		double lambda, gamma, alpha, beta, t1, t2, cosa, a2, a, sina, sinb;
-		gamma = 0d;
-		
-		alpha = (360 - r) + k;
-		// a2 = (b + c)2 - 4·b·c·cos2(α/2)
-		t1 = (b + c) * (b + c);
-		cosa = Math.cos(alpha/2);
-		t2 = 4 * b * c * (cosa * cosa);
-		a2 = t1 - t2;
-		a = Math.sqrt(a2);
-		
-		// sin β = b/a · sin α
-		sinb = b/a * Math.sin(alpha);
-		beta = Math.asin(sinb);  // 
-		lambda = 180 - alpha - beta;
-		
-		gamma = r - lambda;
-		
-		return gamma;
-	}
-	
-	
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
