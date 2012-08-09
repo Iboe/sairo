@@ -106,12 +106,19 @@ public class MissionCreatingMap extends GeneralMap {
 
 	public void addPointToPolygon(GPS target) {
 		polyList.add(target);
-		currentPoly = new MapPolygonImpl(polyList, Color.BLACK);
+		markerList.add(new MapMarkerDot(Color.RED, target.getLatitude(), target
+				.getLongitude()));
+		map.addMapMarker(markerList.get(markerList.size() - 1));
+		currentPoly = new MapPolygonImpl(polyList,
+				Color.BLACK);
 		map.addMapPolygon(currentPoly);
 	}
 
 	private void clearMarkerList() {
-		this.markerList.remove(0);
+		if (this.markerList.size() > 0) {
+			map.removeMapMarker(this.markerList.get(0));
+			this.markerList.remove(0);
+		}
 	}
 
 	public void clear() {

@@ -1,22 +1,13 @@
 package de.fhb.sailboat.gui.map;
 
-import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
-
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
@@ -25,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUIModel;
+import de.fhb.sailboat.mission.Mission;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -91,6 +83,10 @@ public class GeneralMap extends JPanel {
 
 	public void visualizeMission(GUIModel model) {
 		visualize.visualize(model);
+	}
+	
+	public void visualizeMission(Mission mission) {
+		visualize.visualize(mission);
 	}
 
 	public void addObstacle(GPS gps) {
