@@ -24,37 +24,38 @@ public class aksentest {
 		
 		aksen.setDebug(true);
 		
-		int i = 0;
-		int x;
-		while(i < 100) {
-			// Log evere 10th run
-			if (i%10 == 0)
-				LOG.info("Test-Run "+ i);
-			// Alternate Rudder- or Sail-Command
-			
-			switch(i%2) {
-			case 1:
-				x = myRandom(aksen.RUDDER_LEFT, aksen.RUDDER_RIGHT);
-				LOG.trace("Set Rudder to "+ x);
-				start = System.currentTimeMillis();
-				aksen.setRudder(x);
-				end = System.currentTimeMillis();
-				break;
-			case 0:
-			default:
-				
-				x = myRandom(aksen.SAIL_SHEET_IN, aksen.SAIL_SHEET_OUT);
-				LOG.trace("Set Sail to "+ x);
-				
-				aksen.setSail(x);
-			}
-			long t = end - start;
-			LOG.trace("Time elapses this run: "+ t);
-			i++;
-			
-		}
+//		int i = 0;
+//		int x;
+//		while(i < 100) {
+//			// Log evere 10th run
+//			if (i%10 == 0)
+//				LOG.info("Test-Run "+ i);
+//			// Alternate Rudder- or Sail-Command
+//			
+//			switch(i%2) {
+//			case 1:
+//				x = myRandom(aksen.RUDDER_LEFT, aksen.RUDDER_RIGHT);
+//				LOG.trace("Set Rudder to "+ x);
+//				start = System.currentTimeMillis();
+//				aksen.setRudder(x);
+//				end = System.currentTimeMillis();
+//				break;
+//			case 0:
+//			default:
+//				
+//				x = myRandom(aksen.SAIL_SHEET_IN, aksen.SAIL_SHEET_OUT);
+//				LOG.trace("Set Sail to "+ x);
+//				
+//				aksen.setSail(x);
+//			}
+//			long t = end - start;
+//			LOG.trace("Time elapses this run: "+ t);
+//			i++;
+//			
+//		}
 		//aksen.resetRudder();
 		//aksen.resetSail();
+		aksen.setSail(114);
 		//System.out.println("Antwort: "+ aksen.lastAnswer());
 		//System.out.println("Frage Ladezustand ab:");
 		//System.out.println("IST: "+ aksen.getBatteryState());

@@ -28,6 +28,8 @@ public class DriveAngleThread extends Thread {
 	
 	public static final double tightMax = LocomotionSystem.SAIL_SHEET_IN;
 	public static final double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
+	public static final double sailNormal = LocomotionSystem.SAIL_NORMAL;
+	
 	
 	private static final Logger LOG = LoggerFactory.getLogger(DriveAngleThread.class);
 	
@@ -53,8 +55,8 @@ public class DriveAngleThread extends Thread {
 	private int deltaAngle=0;
 	
 	// sailPos
-	private double lastSailPos = 0;
-	private double sailPos=0;
+	private double lastSailPos;
+	private double sailPos;
 	double desiredHeeling=0;
 	
 	
@@ -84,7 +86,7 @@ public class DriveAngleThread extends Thread {
 				}
 				
 				message += ", desiredAngle=" + desiredAngle + ", delta=" + deltaAngle + 
-					", rudderPos=" + rudderPos +", desiredHeeling=" + desiredHeeling + ", sailPos=" + sailPos;
+					", rudderPos=" + rudderPos +", sailPos=" + sailPos;
 				LOG.debug("Summarize: {}", message);
 				counter = 0;
 			}
@@ -97,6 +99,22 @@ public class DriveAngleThread extends Thread {
 				interrupt();
 			}
 		}
+	}
+	/**
+	 * set desired Sail-Pos by using Wind-Direction
+	 * 
+	 * @author schmidst
+	 */
+	private void calculateSailPosition() {
+		
+		sailPos = sailNormal;
+		System.out.println("lastsailpos="+ lastSailPos + "; sailpos="+ sailPos + " vgl: "+ Double.compare(sailPos, lastSailPos));
+		
+		if (Double.compare(sailPos, lastSailPos) == 1)
+		{
+			locSystem.setSail((int) sailPos);
+		}
+		lastSailPos = sailPos;
 	}
 	/**
 	 * Calculate the (optimal) Sail-Position by influences of:
@@ -118,14 +136,14 @@ public class DriveAngleThread extends Thread {
 	 * 
 	 * @author schmidst
 	 */
-	private void calculateSailPosition() {
+	private double calculateSailByHeeling() {
+		double sP = lastSailPos;
 		double pctChange = 0;
 		// 1) 
 		desiredHeeling = desiredHeeling();
 		// 2)
 		double actualHeeling = compassModel.getCompass().getRoll();
 		double heeling = desiredHeeling - actualHeeling;
-		// TODO get real values!
 		
 		// 3)
 		
@@ -142,22 +160,14 @@ public class DriveAngleThread extends Thread {
 		if ( heeling > 5 )
 			pctChange = 10;
 
-		
 		// DEBUG / Non-violent
-		//pctChange= 0;  // Keep; 
-		if (pctChange != 0) 
-		{
-			sailPos = calculateSailChange(pctChange);
-			locSystem.setSail((int) sailPos);
-		} else if (lastSailPos == 0) 
-		{
-			// quasi initialize
-			sailPos = tightMax * 1.1;	// set to approximatly 34 TODO better value?
-			locSystem.setSail((int) sailPos);
-			lastSailPos = sailPos;
-		}
+		//if (pctChange != 0 && sP != lastSailPos) 
+		//{
+			sP = calculateSailChange(pctChange);
+		//}
+		
+		return sP;
 	}
-
 	/**
 	 * calculate actual Value for SailPos
 	 * also set new Value as new lastSailPos
@@ -169,9 +179,7 @@ public class DriveAngleThread extends Thread {
 	private double calculateSailChange(double pctChange)
 	{
 		double sailChangeValue = 0;
-		
-		//double normal = LocomotionSystem.SAIL_NORMAL;
-		
+
 		sailChangeValue = lastSailPos + (pctChange * lastSailPos );
 		if (sailChangeValue < tightMax) sailChangeValue = tightMax;
 		if (sailChangeValue > easeMax) sailChangeValue = easeMax;
