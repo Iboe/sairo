@@ -57,6 +57,7 @@ public class DriveAngleThread extends Thread {
 	// sailPos
 	private double lastSailPos;
 	private double sailPos;
+	Calculations calc;
 	double desiredHeeling=0;
 	
 	
@@ -66,6 +67,7 @@ public class DriveAngleThread extends Thread {
 		windModel = WorldModelImpl.getInstance().getWindModel();
 		gpsModel = WorldModelImpl.getInstance().getGPSModel();
 		simplePIDController = new SimplePIDController();
+		calc = new Calculations();
 	}
 	
 	public void run() {
@@ -106,13 +108,48 @@ public class DriveAngleThread extends Thread {
 	 * @author schmidst
 	 */
 	private void calculateSailPosition() {
-		
+		// Minimize Commands send to LocSystem
+		boolean minCom = true;
+		// Normal Position as Standard
 		sailPos = sailNormal;
-		System.out.println("lastsailpos="+ lastSailPos + "; sailpos="+ sailPos + " vgl: "+ Double.compare(sailPos, lastSailPos));
+		// get true wind, if necessary
+		// w_v actual windspeed
+		double w_s = windModel.getWind().getSpeed();
+		// w_d actual wind direction on the boat
+		double w_d = windModel.getWind().getDirection();		
+		// b_s speed of the boat according gps
+		double b_s = gpsModel.getPosition().getSpeed();
 		
-		if (Double.compare(sailPos, lastSailPos) == 1)
+		// 1. calculate true wind, if wind/boatspeed > 0
+		if (w_s > 0)
 		{
-			locSystem.setSail((int) sailPos);
+			calc.trueWind(w_d, w_s, b_s);
+			double t_d = calc.getTrue_diff();  // Wertebereich?
+			t_d = (double) Math.abs(transformAngle((int) t_d));
+			if (Double.isNaN(t_d))
+			{
+				sailPos = easeMax;
+			}
+			
+			// TODO better fragmentation
+			if (t_d > 0 && t_d < 45) sailPos = (tightMax);
+			else if (t_d < 85) sailPos = tightMax+( (sailNormal-tightMax)/2 );
+			else if (t_d < 95) sailPos = sailNormal;
+			else if (t_d < 135) sailPos = easeMax-( (easeMax-sailNormal)/2);
+			else sailPos = easeMax;
+			System.out.println(t_d + " / " + sailPos);
+		}
+		
+		// only send Command if really a new Sail-Position calculated
+		if (minCom)
+		{
+			if (Double.compare(sailPos, lastSailPos) == 1)
+			{
+				locSystem.setSail((int) sailPos);
+			}
+		} else 
+		{
+			locSystem.setSail((int) sailPos);	
 		}
 		lastSailPos = sailPos;
 	}

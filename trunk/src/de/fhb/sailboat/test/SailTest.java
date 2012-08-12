@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import de.fhb.sailboat.control.pilot.Calculations;
+
 public class SailTest {
 
 	File file;
@@ -14,17 +16,19 @@ public class SailTest {
 		File file = new File("FileWriterTest.txt");
 		try {
 			FileWriter writer = new FileWriter(file ,false);
-			writer.write(String.format("Windgeschw.\tWindrichtung\tk\tdesired Heeling\n"));
-		
-		
-		for (int l = 0; l <= 10; l++)
+			writer.write(String.format("WindAngle.\tWindSpeed\tBoatSpeed\tTrueWindAngle\tTrueWindSpeed\n"));
+			Calculations c = new Calculations();
+		// Angle
+		for (int i = -18; i <= 18; i++)
 		{
-			for (int i = 0; i <= 15; i++) {
-				for (int j = 0; j <= 360;) {
-					double k = (double) l/10;
-					String str = String.format("%d\t%d\t%s\t%f\n", i, j, k, desiredHeeling(k, i, j)); 
+			// WindSpeed
+			for (int j = 0; j <= 10; j++) {
+				// BoatSpeed
+				for (int k = 0; k <= 10;k++) {
+					
+					c.trueWind((double) i*10, (double) j, (double) k);
+					String str = String.format("%d\t%d\t%d\t%f\t%f\n", i*10, j, k, c.getTrue_diff(), c.getTrue_speed()); 
 					writer.write(str);
-					j+=10;
 				}
 			writer.flush();
 			}
@@ -37,33 +41,5 @@ public class SailTest {
 		}		
 	}
 	
-	private static double desiredHeeling(double k, double v, double a)
-	{
-		// h = max(0,(h{max} - k*|a|)* (min(v,v{max})/v{max}))
-		double h = 0d;
-		// v actual windspeed
-		//double v = windModel.getWind().getSpeed();
-		// a = atmospheric wind in degree ( -180 to 180° )
-		//double a = calculateAtmosphericWind(compassModel.getCompass().getYaw(), windModel.getWind().getDirection(), v, gpsModel.getPosition().getSpeed());
-		// for now, lets take the rel Wind Direction
-		//double a = windModel.getWind().getDirection();
-		
-		double Hmax = 45d;  
-		double Vmax = 15d;
-		
-		// v{max}
-		double x;
-		if ( v <= Vmax) {
-			x = v/Vmax;
-		} else {
-			x = 1;
-		}
-		
-		h = ((Hmax - k*Math.abs(a)) * x );
-		
-		if (h > 0) 
-			return h;
-		else
-			return 0;
-	}
+
 }

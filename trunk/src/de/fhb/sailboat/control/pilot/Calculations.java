@@ -2,40 +2,68 @@ package de.fhb.sailboat.control.pilot;
 
 public class Calculations {
 
+	private double true_diff;
+	private double true_speed;
 	
+	public double getTrue_diff() {
+		return true_diff;
+	}
+
+	public double getTrue_speed() {
+		return true_speed;
+	}
+
 	/**
 	 * Calculate the atmospheric Wind Direction out of the relative Wind Direction and the speed of the boat
 	 * 
-	 * @param k course of the boat
-	 * @param r relative wind direction in °
-	 * @param v speed of relative wind in m/s
-	 * @param vb speed of boat according gps in m/s
+	 * @param angle	angle between boat-heading and apparent wind in degree
+	 * @param w_s apparent wind-Speed in m/s
+	 * @param b_s boat-speed in m/s
+
 	 * @return atmospheric Wind Direction in °
 	 * 
-	 * Source: http://www.rainerstumpe.de/HTML/body_wind02.html
+	 * Source: http://www.csgnetwork.com/twscorcalc.html
 	 * 
 	 * TODO untested and not really good working
 	 */
 
-	public double calculateAtmosphericWind(double k, double r, double b, double c) {
-		double lambda, gamma, alpha, beta, t1, t2, cosa, a2, a, sinb;
-		gamma = 0d;
+	public void trueWind(double angle, double w_s, double b_s) {
 		
-		alpha = (360 - r) + k;
-		// a2 = (b + c)2 - 4·b·c·cos2(α/2)
-		t1 = (b + c) * (b + c);
-		cosa = Math.cos(alpha/2); // [-Pi/2, Pi/2] TODO in °
-		t2 = 4 * b * c * (cosa * cosa);
-		a2 = t1 - t2;
-		a = Math.sqrt(a2);
+		// 1. convert angle to rad
+		angle = deg2rad(angle);
+		// 2. convert w_s to knots and then to units to boat-speed
+		w_s = w_s/(0.51+4/900); // in knots
+		b_s = b_s/(0.51+4/900);	// in knots
+		w_s = w_s/b_s;  // 
+
+		double tan_alpha = (Math.sin(angle) / w_s - Math.cos(angle));
+		double alpha = Math.atan(tan_alpha);
 		
-		// sin β = b/a · sin α
-		sinb = b/a * Math.sin(alpha);
-		beta = Math.asin(sinb);  // 
-		lambda = 180 - alpha - beta;
+		true_diff = rad2deg(angle + alpha);
+		double tspeed = Math.sin(angle)/Math.sin(alpha);
 		
-		gamma = r - lambda;
+		true_speed = tspeed * b_s;
 		
-		return gamma;
 	}
+
+	public double deg2rad(double deg)
+	{
+
+		double conv_factor = (2.0 * Math.PI)/360.0;
+
+		return(deg * conv_factor);
+
+	}
+
+
+
+	public double rad2deg(double rad)
+
+	  {
+
+		double conv_factor = 360/(2.0 * Math.PI);
+
+		return(rad * conv_factor);
+
+	  }
 }
