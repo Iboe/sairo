@@ -79,7 +79,7 @@ public class MissionVisualization {
 
 		clearMap();
 
-		Mission current = model.getMissionTasksLeft();
+		Mission current = mission;
 
 		this.model = null;
 
