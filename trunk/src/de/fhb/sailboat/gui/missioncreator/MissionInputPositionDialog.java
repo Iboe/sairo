@@ -334,8 +334,8 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
 
     private void radiusspinnerStateChanged(javax.swing.event.ChangeEvent evt) {                                           
         // make sure value of radius doesnt go into illegal range
-        if ((int)this.radiusSpinner.getValue() < RADIUS_MIN) this.radiusSpinner.setValue(new Integer(1));
-        this.radius = (int)this.radiusSpinner.getValue();
+        if ((Integer)this.radiusSpinner.getValue() < RADIUS_MIN) this.radiusSpinner.setValue(new Integer(1));
+        this.radius = (Integer)this.radiusSpinner.getValue();
     }                                          
 
     /**
