@@ -42,7 +42,12 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
 	boolean debug = false; 
+	
+	int status;
 
+	public int getStatus() {
+		return status;
+	}
 	/**
 	 * Constructor
 	 * 
@@ -100,9 +105,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 			
 			if(status == -1) {
 				//TODO Exception? Eskalieren?
-				LOG.warn("Command: "+ lastCom +": incorrect/not send");
+				LOG.warn(lastCom +": incorrect/not send");
 			} else {
-				LOG.info("Command: "+ lastCom +": correct");
+				LOG.info(lastCom +": correct");
 			}
 		}
 		else
@@ -123,24 +128,24 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void setSail(int angle) {
 		this.lastCom = "setSail to "+ angle;
-		if(isDebug())	
-		{
-			int status = this.AKSENServoCommand(SAIL_NUMBER, angle);
+//		if(isDebug())	
+//		{
+			status = this.AKSENServoCommand(SAIL_NUMBER, angle);
 			
 			if(status == -1) {
 				//TODO Exception? Eskalieren?
-				LOG.warn("Command: "+ lastCom +": incorrect/not send");
+				LOG.warn(lastCom +": incorrect/not send");
 			} else {
-				LOG.info("Command: "+ lastCom +": correct");
+				LOG.info(lastCom +": correct");
 			}
-		}
-		else
-		{
-			// send command-string to AKSEN-Board
-			String com = this.buildCommand(SAIL_NUMBER, angle);
-	
-			this.AKSENCommand(com);
-		}	
+//		}
+//		else
+//		{
+//			// send command-string to AKSEN-Board
+//			String com = this.buildCommand(SAIL_NUMBER, angle);
+//	
+//			this.AKSENCommand(com);
+//		}	
 		worldModel.getActuatorModel().setSail(new Actuator(angle));
 	}
 
@@ -158,9 +163,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 			
 			if(status == -1) {
 				//TODO Exception? Eskalieren?
-				LOG.warn("Command: "+ lastCom +": incorrect/not send");
+				LOG.warn(lastCom +": incorrect/not send");
 			} else {
-				LOG.info("Command: "+ lastCom +": correct");
+				LOG.info(lastCom +": correct");
 			}
 		}
 		else
@@ -271,6 +276,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				while (r != expected) {
 					i++;
 					this.myCOM.writeByte(send);
+					Thread.sleep(wait_sleep);
 					r = (byte) this.myCOM.readByte();
 					if (i == n) {
 						break;
@@ -287,6 +293,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					for (int j = 0; j < b.length; j++) {
 						r=0x00;
 						this.myCOM.writeByte(b[j]);
+						Thread.sleep(wait_sleep);
 						r = (byte) this.myCOM.readByte();
 					}
 					if (r == 110) {
@@ -302,7 +309,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					r = 0x00;
 					
 					this.myCOM.writeByte(send);
-					
+					Thread.sleep(wait_sleep);
 					r = (byte) this.myCOM.readByte();					
 					// didn't got the correct answer? try to resend whole command in next loop
 					if(r != expected) {

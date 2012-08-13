@@ -24,6 +24,7 @@ public interface LocomotionSystem {
 	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
 	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MAX"));
 
+	public int getStatus();
 
 	
 	/**
