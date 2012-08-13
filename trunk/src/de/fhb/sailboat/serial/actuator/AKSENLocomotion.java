@@ -137,7 +137,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 				//TODO Exception? Eskalieren?
 				LOG.warn(lastCom +": incorrect/not send");
 			} else {
-				LOG.info(lastCom +": correct");
 				worldModel.getActuatorModel().setSail(new Actuator(angle));
 			}
 //		}
