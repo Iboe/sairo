@@ -18,9 +18,6 @@ public class DriveAngleThread extends Thread {
 			Pilot.MAX_RELEVANT_ANGLE_PROPERTY));
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Pilot.WAIT_TIME_PROPERTY));
-	public static final double P = Double.parseDouble(System.getProperty(Pilot.P_PROPERTY));
-	public static final double I = Double.parseDouble(System.getProperty(Pilot.I_PROPERTY));
-	public static final double D = Double.parseDouble(System.getProperty(Pilot.D_PROPERTY));
 
 	public static final double k = Double.parseDouble(System.getProperty(Pilot.K_PROPERTY));
 	public static final double Hmax = Double.parseDouble(System.getProperty(Pilot.Hmax_PROPERTY));
@@ -29,7 +26,6 @@ public class DriveAngleThread extends Thread {
 	public static final double tightMax = LocomotionSystem.SAIL_SHEET_IN;
 	public static final double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
 	public static final double sailNormal = LocomotionSystem.SAIL_NORMAL;
-	
 	
 	private static final Logger LOG = LoggerFactory.getLogger(DriveAngleThread.class);
 	

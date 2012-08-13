@@ -1,7 +1,5 @@
 package de.fhb.sailboat.mission;
 
-import java.io.Serializable;
-
 import de.fhb.sailboat.data.GPS;
 
 /**
