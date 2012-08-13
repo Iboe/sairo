@@ -32,6 +32,21 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 	public static final int MAX_ANGLE_TO_DRIVE = 90;
 	
 	/**
+	 * Indicates that the pilot is set to beat to the left
+	 */
+	private final byte beatLeft = 1;
+	
+	/**
+	 * Indicates that the pilot is set to beat to the right
+	 */
+	private final byte beatRight = -1;
+	
+	/**
+	 * Indicates that the pilot is not set to beat
+	 */
+	private final byte beatNone = 0;
+	
+	/**
 	 * Creates a new initialized instance.
 	 * 
 	 * @param pilot the pilot to send the commands to
@@ -47,7 +62,7 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 	 */
 	@Override
 	public void run() {
-		boolean pilotSet = false;
+		byte currentBeat = beatNone;
 		
 		while(!isInterrupted()) {
 			double angle = calcAngleToGPS(task.getGoal()) - 
@@ -56,16 +71,17 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 			if (angle >= MAX_ANGLE_TO_DRIVE || angle <= -MAX_ANGLE_TO_DRIVE) {
 				break;
 			}
-			
-			if (!pilotSet) {
-				if (angle >= 0) {
+		
+			if (angle >= 0) {
+				if (currentBeat != beatRight) {
 					pilot.holdAngleToWind(BEAT_ANGLE_RIGHT);
-				} else {
+				}
+			} else {
+				if (currentBeat != beatLeft) {
 					pilot.holdAngleToWind(BEAT_ANGLE_LEFT);
 				}
-				
-				pilotSet = true;
 			}
+			
 			waitForNextCycle();
 		}
 		
