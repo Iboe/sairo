@@ -162,13 +162,20 @@ public class COMPort{
 		try {
 			OutputStream os = this._serialPortObject.getOutputStream();
 			byte[] b = text.getBytes();
-
+			//Byte r, expected = 0x65;
 			for (int i = 0; i < b.length; i++) {
 				os.write(b[i]);
 				// minimal sleep to give Devices time to handle the data
 				Thread.sleep(wait_sleep);
+
 			}
-		
+//			r = (byte) readByte();
+//			if(r != expected) {
+//				LOG.info("Couldn't execute Command: "+ r);
+//			} else {
+//				// We expect everything went well:
+//
+//			}		
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			LOG.warn("Sleep-Failure");

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
+import de.fhb.sailboat.worldmodel.ActuatorModel;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -33,6 +34,7 @@ public class DriveAngleThread extends Thread {
 	private final CompassModel compassModel;
 	private final WindModel windModel;
 	private final GPSModel gpsModel;
+	private final ActuatorModel actuatorModel;
 	
 	//local variables determining the direction to drive
 	private int desiredAngle;
@@ -57,6 +59,7 @@ public class DriveAngleThread extends Thread {
 		compassModel = WorldModelImpl.getInstance().getCompassModel();
 		windModel = WorldModelImpl.getInstance().getWindModel();
 		gpsModel = WorldModelImpl.getInstance().getGPSModel();
+		actuatorModel = WorldModelImpl.getInstance().getActuatorModel();
 		simplePIDController = new SimplePIDController();
 		calc = new Calculations();
 	}
@@ -144,7 +147,11 @@ public class DriveAngleThread extends Thread {
 		{
 			locSystem.setSail((int) sailPos);	
 		}
-		lastSailPos = sailPos;
+		// Command in Worldmodel? (aka command send correct)
+		if (actuatorModel.getSail().getValue() == sailPos)
+		{
+			lastSailPos = sailPos;
+		}
 	}
 	/**
 	 * Calculate the (optimal) Sail-Position by influences of:

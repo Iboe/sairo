@@ -769,14 +769,14 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
     private void updateMissionMap() {
         
         //FIXME beat paul into finishing the promised overload for visualize
-        /*GUIModelImpl paul = new GUIModelImpl();
+        GUIModelImpl paul = new GUIModelImpl();
         Mission mission = new MissionObject(this.missionTree).getMission();
         paul.setCurrentWholeMission(mission);
         paul.setMissionTasksLeft(mission);
-        if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(paul);*/
+        if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(paul);
         
-        Mission mission = new MissionObject(this.missionTree).getMission();
-        if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(mission);
+        /*Mission mission = new MissionObject(this.missionTree).getMission();
+        if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(mission);*/
     }
     
     /*public static void main(String args[]) {

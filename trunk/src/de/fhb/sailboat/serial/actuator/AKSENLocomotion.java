@@ -124,6 +124,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * Send one Sail-Command to AKSEN-Board
 	 * @param int angle
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setSail(int)
+	 * @TODO Buffer?
 	 */
 	@Override
 	public void setSail(int angle) {
@@ -137,6 +138,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				LOG.warn(lastCom +": incorrect/not send");
 			} else {
 				LOG.info(lastCom +": correct");
+				worldModel.getActuatorModel().setSail(new Actuator(angle));
 			}
 //		}
 //		else
@@ -146,7 +148,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 //	
 //			this.AKSENCommand(com);
 //		}	
-		worldModel.getActuatorModel().setSail(new Actuator(angle));
+//		worldModel.getActuatorModel().setSail(new Actuator(angle));
 	}
 
 	/** 

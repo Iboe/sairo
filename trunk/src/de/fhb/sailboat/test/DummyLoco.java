@@ -76,4 +76,10 @@ public class DummyLoco implements LocomotionSystem {
 		
 	}
 
+	@Override
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
