@@ -135,6 +135,25 @@ public class DriveAngleThread extends Thread {
 			else if (t_d < 135) sailPos = easeMax-( (easeMax-sailNormal)/2);
 			else sailPos = easeMax;
 		}
+		// adjust sailPos, if heeling is too high
+		double actualHeeling = compassModel.getCompass().getRoll();
+		double pctChange = 0;
+		// way too low
+		if ( actualHeeling > 5 )
+				pctChange = 5;
+		// too low
+		if ( actualHeeling > 10 )
+			pctChange = 10;
+		// to high
+		if ( actualHeeling > 20 )
+			pctChange = 20;
+		// way too high
+		if ( actualHeeling > 35 )
+			pctChange = 50;
+		
+		sailPos = sailPos + (pctChange * sailPos );
+		if (sailPos < tightMax) sailPos = tightMax;
+		if (sailPos > easeMax) sailPos = easeMax;
 		
 		// only send Command if really a new Sail-Position calculated
 		if (minCom)
