@@ -29,7 +29,8 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 	/**
 	 * The compass angle that the boat should have towards the goal, when the beating should stop.
 	 */
-	public static final int MAX_ANGLE_TO_DRIVE = 90;
+	public static final int MAX_ANGLE_TO_DRIVE = Integer.parseInt(System.getProperty(
+			BeatWorker.class.getSimpleName() + ".maxAngleToDrive"));
 	
 	/**
 	 * Indicates that the pilot is set to beat to the left
