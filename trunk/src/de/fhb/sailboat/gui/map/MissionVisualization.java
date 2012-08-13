@@ -84,13 +84,13 @@ public class MissionVisualization {
 		this.model = null;
 
 		if (whole == null
-				|| taskCountLastCall < model.getMissionTasksLeft().getTasks()
+				|| taskCountLastCall < mission.getTasks()
 						.size()) {
 			whole = new MissionImpl();
 			whole.setTasks(new ArrayList<Task>());
-			for (int i = 0; i < model.getMissionTasksLeft().getTasks().size(); i++)
+			for (int i = 0; i < mission.getTasks().size(); i++)
 				whole.getTasks().add(
-						model.getMissionTasksLeft().getTasks().get(i));
+						mission.getTasks().get(i));
 		}
 
 		if (current.getTasks().size() < whole.getTasks().size()) {

@@ -14,6 +14,9 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  */
 public class MissionInputPositionDialog extends javax.swing.JDialog {
 
+    private final static int RADIUS_MIN = 1;        // minimum value of radius property of ReachCircle Tasks
+    private final static int RADIUS_DEFAULT = 3;    // default starting value if radius spinner
+    
     private final static String ERRORTEXT = "Fehler";
     private final static String ERRORTEXT_ILLEGAL_VALUE = "Illegale Koordinaten - Unzulässige Zeichen!";
     
@@ -33,26 +36,56 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
     private int state;
     
     /**
+     * Radius for ReachCircle Tasks
+     */
+    private int radius;
+    
+    /**
      * The map used for input and displaying of positions.
      */
     private MissionCreatingMap missionMap;
     
     /**
-     * Creates new form MissionInputPositionDialog
+     * Creates a new inputPosition dialog
+     * @param parent parent frame (centering)
+     * @param modal is this modeal? If true return to parent will be impossible unless input is finished
+     * @param initialName initial name of the added node to rthe missionTree by this
+     * @param title title text of this dialog
+     * @param mode  mode of the input - 0 = single GPS value; 1 = polygon (lines are drawn); 2 = obstacle (single GPS value)
      */
-    public MissionInputPositionDialog(java.awt.Frame parent, boolean modal, String initialName, String title, boolean singleGPSMode) {
+    public MissionInputPositionDialog(java.awt.Frame parent, boolean modal, String initialName, String title, int mode) {
         super(parent, modal);
         initComponents();
         
         this.state = -1;
+        this.radius = RADIUS_DEFAULT;
         this.setTitle(title);
         this.nameTextField.setText(initialName);
         
         this.missionMap = new MissionCreatingMap();
-        if (singleGPSMode) {
-            this.missionMap.setMarkerMode(0);
-        } else {
-            this.missionMap.setMarkerMode(1);
+        switch (mode) {
+            case (0) : {
+                this.missionMap.setMarkerMode(0);
+                this.radiusSpinner.setEnabled(true);
+                this.radiusSpinner.setValue(new Integer(RADIUS_DEFAULT));
+                this.radiusLabel.setEnabled(true);
+                break;
+            }
+            case (1) : {
+                this.missionMap.setMarkerMode(1);
+                this.radiusSpinner.setEnabled(false);
+                this.radiusSpinner.setValue(new Integer(RADIUS_DEFAULT));
+                this.radiusLabel.setEnabled(false);
+                break;
+            }
+            case (2) : {
+                this.missionMap.setMarkerMode(2);
+                this.radiusSpinner.setEnabled(false);
+                this.radiusSpinner.setValue(new Integer(RADIUS_DEFAULT));
+                this.radiusLabel.setEnabled(false);
+                break;
+            }
+            default : break;
         }
         
         missionMap.mapPanel(missionMapPanel);
@@ -81,6 +114,8 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         abortButton = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
+        radiusSpinner = new javax.swing.JSpinner();
+        radiusLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Positionseingabe");
@@ -120,7 +155,7 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
             .addComponent(latitudeTextField)
             .addComponent(longitudeLabel)
             .addComponent(longitudeTextField)
-            .addComponent(addCoordButton, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+            .addComponent(addCoordButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         directInputPanelLayout.setVerticalGroup(
             directInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,6 +224,14 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
 
         nameLabel.setText("Taskname");
 
+        radiusSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                radiusspinnerStateChanged(evt);
+            }
+        });
+
+        radiusLabel.setText("Radius");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,19 +247,30 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
                             .addComponent(controlPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(abortButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(missionMapPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nameLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(nameTextField))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nameTextField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nameLabel)
+                                .addGap(235, 235, 235)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radiusSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radiusLabel))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(radiusLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radiusSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(missionMapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,8 +290,8 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
 
     private void addCoordButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         if ((isLegalDoubleString(this.latitudeTextField.getText())) && (isLegalDoubleString(this.longitudeTextField.getText()))) { 
-            // if single mode remove all present markers
-            if (this.missionMap.getMarkerMode() == 0) this.missionMap.removeEveryObject();
+            // if single mode (GPS/ obstacle) remove all present markers
+            if (this.missionMap.getMarkerMode() != 1) this.missionMap.removeEveryObject();
             
             Double lat = Double.parseDouble(this.latitudeTextField.getText());
             Double lon = Double.parseDouble(this.longitudeTextField.getText());
@@ -278,6 +332,12 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         this.setVisible(false);
     }                                           
 
+    private void radiusspinnerStateChanged(javax.swing.event.ChangeEvent evt) {                                           
+        // make sure value of radius doesnt go into illegal range
+        if ((int)this.radiusSpinner.getValue() < RADIUS_MIN) this.radiusSpinner.setValue(new Integer(1));
+        this.radius = (int)this.radiusSpinner.getValue();
+    }                                          
+
     /**
      * Returns the number of MapMarkers placed on the map during dialog use,
      * enabling iterating through them via index and getGPSinListAt().
@@ -301,6 +361,16 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         return myReturn;
     }
     
+    public int getObstacleListSize() {
+        return this.missionMap.getObstacles().size();
+    }
+    
+    public MapMarker getObstacleAt(int index) {
+        MapMarker myReturn = null;
+        if (index < this.missionMap.getObstacles().size()) myReturn = this.missionMap.getObstacles().get(index);
+        return myReturn;
+    }
+    
     /**
      * Returns the name chosen for the task during the dialog.
      * @return chosen name
@@ -316,6 +386,14 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
      */
     public int getState() {
         return state;
+    }
+
+    /**
+     * Gets the selected radius for ReachCircle Tasks
+     * @return 
+     */
+    public int getRadius() {
+        return radius;
     }
     
     /**
@@ -351,6 +429,11 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         } else myReturn = false;
         
         return myReturn;
+    }
+    
+    // FIXME remove this test stub
+    public List<MapMarker> getObstacleList() {
+        return this.missionMap.getObstacles();
     }
     
     /**
@@ -415,6 +498,8 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
     private javax.swing.JPanel missionMapPanel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel radiusLabel;
+    private javax.swing.JSpinner radiusSpinner;
     private javax.swing.JButton removeAllButton;
     private javax.swing.JButton removeLastButton;
     // End of variables declaration                   

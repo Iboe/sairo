@@ -99,4 +99,6 @@ public interface GUIController {
 	public Mission getCurrentWholeMission();
 	
 	public boolean isMissionUpdated();
+	
+	public GUIModel getModel();
 }

@@ -15,7 +15,7 @@ import javax.swing.tree.TreeModel;
  * 
  * @author Patrick Rutter
  */
-public class MissionObject implements Serializable{
+public class MissionObject {
     
     /***
      * Extension for files containing this class serialized. Used for FileChoosers.
@@ -48,7 +48,7 @@ public class MissionObject implements Serializable{
         mission.setTasks(tasklist);
         
         //debug
-        //System.out.println("Created mission with " + tasklist.size() + " entries.");
+        System.out.println("Created mission with " + tasklist.size() + " entries.");
         
         return mission;
     }

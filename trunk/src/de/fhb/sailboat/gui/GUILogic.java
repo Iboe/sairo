@@ -1,6 +1,7 @@
 package de.fhb.sailboat.gui;
 
 import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.gui.map.Map;
 import de.fhb.sailboat.mission.Mission;
 
 /**
@@ -100,5 +101,7 @@ public interface GUILogic {
     public void sendResetActors();
     public void sendResetMissionMap();
     public void setSailMode(boolean sailMode);
+    
+    public Map getMissionMap();
     
 }

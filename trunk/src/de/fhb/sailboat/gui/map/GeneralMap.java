@@ -46,6 +46,7 @@ public class GeneralMap extends JPanel {
 		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
 		this.visualize = new MissionVisualization(map);
+		this.obstacles = new ArrayList<MapMarker>();
 	}
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {

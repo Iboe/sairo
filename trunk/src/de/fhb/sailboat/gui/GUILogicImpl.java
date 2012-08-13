@@ -245,12 +245,13 @@ public class GUILogicImpl implements GUILogic {
         }
          */
 
-        GUIModelImpl paul = new GUIModelImpl();
+        /*GUIModelImpl paul = new GUIModelImpl();
         paul.setCurrentWholeMission(this.controller.getCurrentWholeMission());
         paul.setMissionTasksLeft(this.controller.getCurrentMission());
         if ((this.controller.getCurrentWholeMission().getTasks() != null) && (this.controller.getCurrentMission().getTasks() != null)) {
             if ((!this.controller.getCurrentWholeMission().getTasks().isEmpty()) && (!this.controller.getCurrentMission().getTasks().isEmpty())) missionMap.visualizeMission(paul);
-        }
+        }*/
+        missionMap.visualizeMission(this.controller.getModel());
     }
 
     /**
@@ -335,5 +336,9 @@ public class GUILogicImpl implements GUILogic {
 
     public Planner getPlanner() {
         return this.planner;
+    }
+    
+    public Map getMissionMap() {
+        return this.missionMap;
     }
 }

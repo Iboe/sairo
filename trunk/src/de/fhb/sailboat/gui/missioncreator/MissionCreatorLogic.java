@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 /**
  * This class holds the logic behind the workings of the MissionCreator dialog.
@@ -138,7 +139,7 @@ public class MissionCreatorLogic {
         missionTreeNew_Task(missionTree, name, load);
     }
     
-    public void missionTree_NewReachCircle_Task(JTree missionTree, String name, GPS position) {
+    public void missionTree_NewReachCircle_Task(JTree missionTree, String name, GPS position, int radius) {
         // TODO Radius festsetzen
         Task load = new de.fhb.sailboat.mission.ReachCircleTask(position, 3);
         missionTreeNew_Task(missionTree, name, load);
@@ -152,6 +153,19 @@ public class MissionCreatorLogic {
     public void missionTree_NewCrossLine_Task(JTree missionTree, String name, GPS start, GPS end) {
         Task load = new de.fhb.sailboat.mission.CrossLineTask(start, end);
         missionTreeNew_Task(missionTree, name, load);
+    }
+    
+    public void missionTree_NewObstacle(JTree missionTree, String name, MapMarker obstacle) {
+        DefaultMutableTreeNode item = new DefaultMutableTreeNode(new MissionTreeObject(name, obstacle), false);
+        
+        // get current selection
+        DefaultMutableTreeNode selected = (DefaultMutableTreeNode)missionTree.getLastSelectedPathComponent();
+        
+        // insert new leaf (list)
+        ((DefaultTreeModel)missionTree.getModel()).insertNodeInto(item, selected, selected.getChildCount());
+        
+        // expand selection
+        missionTree.expandPath(missionTree.getSelectionPath());
     }
 
     /**

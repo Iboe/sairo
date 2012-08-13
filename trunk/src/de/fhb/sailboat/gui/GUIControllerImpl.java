@@ -359,4 +359,8 @@ public class GUIControllerImpl implements GUIController {
 	public boolean isMissionUpdated() {
 		return this.model.isMissionUpdated();
 	}
+	
+	public GUIModel getModel() {
+		return this.model;
+	}
 }
