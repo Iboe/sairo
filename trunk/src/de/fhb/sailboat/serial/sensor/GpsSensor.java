@@ -70,10 +70,11 @@ public class GpsSensor {
 					// alle Werte abarbeiten
 					for (String value : valueArray) {
 						String myNmea[] = nmea.stringToArray(value);
-						if (myNmea != null) {
+						if (myNmea != null && myNmea.length!=0) {
 							if (myNmea[0].equals("$GPGGA")) {
 								if (!myNmea[1].equals("0.0")
 										&& !myNmea[3].equals("0.0")) {
+									
 									// Schreiben in Weltmodell
 									double latitude = Double
 											.parseDouble(myNmea[2]);
@@ -116,16 +117,16 @@ public class GpsSensor {
 								if (!myNmea[3].equals("0.0")
 										&& !myNmea[5].equals("0.0")) {
 									{
-										if(myNmea[7] != null && !myNmea[7].isEmpty()){
-											double speed = Double.parseDouble(myNmea[7]) * 0.51444;
-											DecimalFormat f = new DecimalFormat(
+										
+										double speed = Double.parseDouble(myNmea[7]) * 0.51444;
+										DecimalFormat f = new DecimalFormat(
 													"#0,00");
 										
 										
-											//Micha: Just parsing the speed and saving it in lastSpeed. 
-											//		 That's assigned to the GPS Object generated for latitude and longitude in the first if-clause 
-											lastSpeed=Double.parseDouble(f.format(speed));	
-										}
+										//Micha: Just parsing the speed and saving it in lastSpeed. 
+										//		 That's assigned to the GPS Object generated for latitude and longitude in the first if-clause 
+										lastSpeed=Double.parseDouble(f.format(speed));	
+										
 									}
 								}
 							}
