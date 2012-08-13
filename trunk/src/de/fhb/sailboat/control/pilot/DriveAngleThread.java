@@ -42,15 +42,10 @@ public class DriveAngleThread extends Thread {
 	private int desiredAngle;
 	private DriveAngleMode mode;
 	
-	//local variables for the pid controller
 	private SimplePIDController simplePIDController;
-	private double p = 0;
-	private double i = 0;
-	private double d = 0;
 	
 	//local variables for calculation of the rudder position, they are not 
 	//in the corresponding method, so they can be logged in the run() method 
-	private double lastRudderPos = 0;
 	private double rudderPos=0;
 	private int deltaAngle=0;
 	
@@ -79,17 +74,20 @@ public class DriveAngleThread extends Thread {
 			calculateSailPosition();
 			
 			if (++counter == 3) {
-				String message = "";
+				StringBuffer message = new StringBuffer();
 				
 				if (mode == DriveAngleMode.COMPASS) {
-					message = "compass=" + compassModel.getCompass().getYaw();
+					message.append("compass=").append(compassModel.getCompass().getYaw());
 				} else if (mode == DriveAngleMode.WIND) {
-					message = "wind=" + windModel.getWind().getDirection();
+					message.append("wind=").append(windModel.getWind().getDirection());
 				}
 				
-				message += ", desiredAngle=" + desiredAngle + ", delta=" + deltaAngle + 
-					", rudderPos=" + rudderPos +", sailPos=" + sailPos;
-				LOG.debug("Summarize: {}", message);
+				message.append(", desiredAngle=").append(desiredAngle);
+				message.append(", delta=").append(deltaAngle); 
+				message.append(", rudderPos=").append(rudderPos);
+				message.append(", sailPos=").append(sailPos);
+				
+				LOG.debug("Summarize: {}", message.toString());
 				counter = 0;
 			}
 			
@@ -137,7 +135,6 @@ public class DriveAngleThread extends Thread {
 			else if (t_d < 95) sailPos = sailNormal;
 			else if (t_d < 135) sailPos = easeMax-( (easeMax-sailNormal)/2);
 			else sailPos = easeMax;
-			System.out.println(t_d + " / " + sailPos);
 		}
 		
 		// only send Command if really a new Sail-Position calculated
@@ -289,20 +286,10 @@ public class DriveAngleThread extends Thread {
 		
 		//adding offset, to match with the absolute rudder values
 		rudderPos += LocomotionSystem.RUDDER_NORMAL;
-		//rudderPos = pidController(rudderPos);
 		rudderPos = simplePIDController.control(rudderPos);
 		locSystem.setRudder((int) rudderPos);
 	}
-	
-	private double pidController(double rudderPos) {
-		p = rudderPos * P;
-		i = (i + rudderPos) * I;
-		d = (rudderPos - lastRudderPos) * D;
-		lastRudderPos = rudderPos;
 		
-		return p + i + d;
-	}
-	
 	/**
 	 * Transforms the specified angle to the range from -180 to +180. 
 	 * 
