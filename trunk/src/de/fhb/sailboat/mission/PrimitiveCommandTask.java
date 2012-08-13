@@ -10,7 +10,6 @@ import de.fhb.sailboat.data.GPS;
  */
 public class PrimitiveCommandTask implements Task {
 
-	private static final long serialVersionUID = -5072098346843293620L;
 	private final Integer sail;
 	private final Integer rudder;
 	private final Integer propellor;

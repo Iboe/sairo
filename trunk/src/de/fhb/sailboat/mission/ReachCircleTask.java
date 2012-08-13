@@ -11,7 +11,6 @@ import de.fhb.sailboat.data.GPS;
  */
 public class ReachCircleTask implements Task {
 
-	private static final long serialVersionUID = -6404790405405888419L;
 	private final GPS center;
 	private final int radius;
 	

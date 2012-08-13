@@ -14,7 +14,6 @@ import de.fhb.sailboat.data.GPS;
  */
 public class RepeatTask implements Task {
 
-	private static final long serialVersionUID = -4371413511688570770L;
 	private final List<Task> tasks;
 	private final int repetitions;
 	private Task currentTask;

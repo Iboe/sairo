@@ -8,9 +8,8 @@ import de.fhb.sailboat.data.GPS;
  * @author hscheel
  *
  */
-public class StopTask implements Task{
+public class StopTask implements Task {
 
-	private static final long serialVersionUID = -2985405903689552908L;
 	private final boolean turnPropellorOff;
 	
 	/**

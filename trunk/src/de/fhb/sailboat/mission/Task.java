@@ -11,7 +11,7 @@ import de.fhb.sailboat.data.GPS;
  * @author hscheel
  *
  */
-public interface Task extends Serializable{
+public interface Task {
 
 	//TODO Endebedingungen: Zeit, Strecke, Linie erreicht
 	

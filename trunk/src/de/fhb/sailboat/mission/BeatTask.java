@@ -13,7 +13,6 @@ import de.fhb.sailboat.data.GPS;
  */
 public class BeatTask implements Task {
 
-	private static final long serialVersionUID = -7752157695645933653L;
 	private final GPS goal;
 	private final Task continueTask;
 	

@@ -11,7 +11,6 @@ import de.fhb.sailboat.data.GPS;
  */
 public class HoldAngleToWindTask implements Task {
 
-	private static final long serialVersionUID = 7090870114993826318L;
 	private final int angle;
 	
 	/**
