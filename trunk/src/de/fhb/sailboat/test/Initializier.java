@@ -45,7 +45,7 @@ public class Initializier {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Initializier.class);
 	
-	private static final boolean TEST = true;
+	private static final boolean TEST = false;
 	private Planner planner;
 	//private View view;
 	private GUInterface view;
@@ -61,7 +61,7 @@ public class Initializier {
 		if (TEST) {
 			init.setSensorDummyValues();
 			init.initializeCommunication();
-			/*
+		/*	
 			new Thread(){
 
 				@Override
@@ -105,7 +105,7 @@ public class Initializier {
 				
 			}.start();
 			*/
-			//init.createDummyMission();
+			init.createDummyMission();
 			
 		} else {
 			init.initializeSensors();
@@ -123,7 +123,7 @@ public class Initializier {
 	
 	private void initializeSensors() {
 		LOG.info("-----init sensors-----");
-		GpsSensor gps=new GpsSensor(9);
+		GpsSensor gps=new GpsSensor(12);
 		WindSensor wind=new WindSensor(4);
 		
 		CompassSensor compassSensor=new CompassSensor(); //zzt. COM17
@@ -143,7 +143,6 @@ public class Initializier {
 			loco=new DummyLoco();
 		} else {
 			loco=new AKSENLocomotion();
-			
 		}
 		pilot = new PilotImpl(loco);
 		Navigator navigator = new NavigatorImpl(pilot);
@@ -172,8 +171,7 @@ public class Initializier {
 		List<Task> tasks = new LinkedList<Task>();
 		
 		if (position != null) {
-			GPS goal = new GPS(position.getLatitude() + 200, 
-					position.getLongitude());
+			GPS goal = new GPS(200, 100);
 			GPS goal2 = new GPS(position.getLatitude() + 300, 
 					position.getLongitude());
 			GPS goal3 = new GPS(52.24615, 12.32274); //mensa
@@ -184,21 +182,21 @@ public class Initializier {
 			polygon.add(new GPS(-2,2));
 			polygon.add(new GPS(0,2));
 			
-			//tasks.add(new ReachCircleTask(goal, 5));
-			tasks.add(new ReachPolygonTask(polygon));
-			tasks.add(new ReachCircleTask(goal2, 5));
-			tasks.add(new ReachCircleTask(goal3, 5));
+			tasks.add(new ReachCircleTask(goal, 5));
+			//tasks.add(new ReachPolygonTask(polygon));
+			//tasks.add(new ReachCircleTask(goal2, 5));
+			//tasks.add(new ReachCircleTask(goal3, 5));
 			mission.setTasks(tasks);
 			planner.doMission(mission);
 		}
-		try {
+		/*try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
 		tasks.remove(0);
-		planner.doMission(mission);
+		planner.doMission(mission);*/
 	}
 	
 	/**
