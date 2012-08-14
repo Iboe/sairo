@@ -176,7 +176,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void setPropellor(int angle) {
-		this.lastCom = "setPropellor to "+ angle;
+		lastCom = "setPropellor to "+ angle;
 		if(isDebug())	
 		{
 			int status = this.AKSENServoCommand(PROPELLOR_NUMBER, angle);
@@ -196,6 +196,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 			this.AKSENCommand(com);
 		}	
 		worldModel.getActuatorModel().setPropeller(new Actuator(angle));
+		lastCom = "";
 	}
 
 	/** 
