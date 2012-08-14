@@ -98,7 +98,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * @see de.fhb.sailboat.serial.actuator.LocomotionSystem#setRudder(int)
 	 */
 	public void setRudder(int angle) {
-		this.lastCom = "setRudder to "+ angle;
+		lastCom = "setRudder to "+ angle;
 		if(isDebug())	
 		{
 			int status = this.AKSENServoCommand(RUDDER_NUMBER, angle);
@@ -108,6 +108,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 				LOG.warn(lastCom +": incorrect/not send");
 			} else {
 				LOG.info(lastCom +": correct");
+				worldModel.getActuatorModel().setRudder(new Actuator(angle));
+				
 			}
 		}
 		else
@@ -116,8 +118,11 @@ public class AKSENLocomotion implements LocomotionSystem {
 			String com = this.buildCommand(RUDDER_NUMBER, angle);
 	
 			this.AKSENCommand(com);
-		}	
-		worldModel.getActuatorModel().setRudder(new Actuator(angle));
+			worldModel.getActuatorModel().setRudder(new Actuator(angle));
+
+		}
+		lastCom = "";
+		
 	}
 
 	/** 
@@ -128,17 +133,25 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void setSail(int angle) {
-		this.lastCom = "setSail to "+ angle;
-//		if(isDebug())	
-//		{
-			status = this.AKSENServoCommand(SAIL_NUMBER, angle);
-			
-			if(status == -1) {
-				//TODO Exception? Eskalieren?
-				LOG.warn(lastCom +": incorrect/not send");
-			} else {
-				worldModel.getActuatorModel().setSail(new Actuator(angle));
+		
+		try {
+			if (!"".equals(lastCom))
+			{
+				Thread.sleep(wait_sleep*10);
 			}
+
+		
+			this.lastCom = "setSail to "+ angle;
+	//		if(isDebug())	
+	//		{
+				status = this.AKSENServoCommand(SAIL_NUMBER, angle);
+				
+				if(status == -1) {
+					//TODO Exception? Eskalieren?
+					LOG.warn(lastCom +": incorrect/not send");
+				} else {
+					worldModel.getActuatorModel().setSail(new Actuator(angle));
+				}
 //		}
 //		else
 //		{
@@ -148,6 +161,12 @@ public class AKSENLocomotion implements LocomotionSystem {
 //			this.AKSENCommand(com);
 //		}	
 //		worldModel.getActuatorModel().setSail(new Actuator(angle));
+				
+				lastCom = "";
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** 
@@ -262,7 +281,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 		final int n = 3; // Number of attempts to
 		int k = 0;
 		int i;
-		long temp_wait_sleep = wait_sleep;
 		Byte send,r, expected;
 		try {
 			 while(k < n){
@@ -285,7 +303,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				}
 				// recheck, because of broken loop
 				if ( r != expected) {
-					LOG.info("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts.");
+					LOG.warn("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts.");
 					return -1;
 				} else {
 					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
@@ -324,7 +342,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						expected = 0x65;
 						r = 0x00;
 						this.myCOM.writeByte(send);
-						Thread.sleep(temp_wait_sleep*2);
+						Thread.sleep(wait_sleep*2);
 						r = (byte) this.myCOM.readByte();
 						
 						// didn't got the correct answer? try to resend whole command in next loop

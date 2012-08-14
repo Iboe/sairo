@@ -52,6 +52,7 @@ public class DriveAngleThread extends Thread {
 	private double sailPos;
 	Calculations calc;
 	double desiredHeeling=0;
+	double trueWindDirection;
 	
 	
 	public DriveAngleThread(LocomotionSystem locSystem) {
@@ -127,7 +128,10 @@ public class DriveAngleThread extends Thread {
 			{
 				sailPos = easeMax;
 			}
+			trueWindDirection = t_d;
 			
+			// DEBUG TODO for once, use the apparent wind direction!
+	t_d = w_s;
 			// TODO better fragmentation
 			if (t_d > 0 && t_d < 45) sailPos = (tightMax);
 			else if (t_d < 85) sailPos = tightMax+( (sailNormal-tightMax)/2 );
