@@ -242,6 +242,20 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		}
 	}
 
+	public double calAngleToGPSIncludingBeat(GPS goal) {
+		double angle = calcAngleToGPS(goal);
+		
+		if (isBeatNecessary(angle)) {
+			if (angle > 0) {
+				angle += 45;
+			} else {
+				angle -= 45;
+			}
+		}
+		
+		return angle;
+	}
+	
 	/**
 	 * Transforms the specified angle to the range from -180 to +180. 
 	 * 
