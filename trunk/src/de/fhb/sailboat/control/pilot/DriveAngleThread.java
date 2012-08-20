@@ -133,7 +133,11 @@ public class DriveAngleThread extends Thread {
 			// DEBUG TODO for once, use the apparent wind direction!
 	t_d = w_s;
 			// TODO better fragmentation
-			if (t_d > 0 && t_d < 45) sailPos = (tightMax);
+			if (t_d > 0 && t_d < 38) {
+				// No-Go-Area! No Idea what to do with the sails.
+				sailPos = sailNormal;
+			}
+			else if (t_d < 55) sailPos = (tightMax);
 			else if (t_d < 85) sailPos = tightMax+( (sailNormal-tightMax)/2 );
 			else if (t_d < 95) sailPos = sailNormal;
 			else if (t_d < 135) sailPos = easeMax-( (easeMax-sailNormal)/2);
