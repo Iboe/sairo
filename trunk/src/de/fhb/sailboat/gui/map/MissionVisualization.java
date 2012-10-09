@@ -54,25 +54,24 @@ public class MissionVisualization {
 
 		Mission current = model.getMissionTasksLeft();
 
-		this.model = model;
+		if (current.getTasks() != null) {
+			this.model = model;
 
-		if (whole == null
-				|| taskCountLastCall < model.getMissionTasksLeft().getTasks()
-						.size()) {
-			whole = new MissionImpl();
-			whole.setTasks(new ArrayList<Task>());
-			for (int i = 0; i < model.getMissionTasksLeft().getTasks().size(); i++)
-				whole.getTasks().add(
-						model.getMissionTasksLeft().getTasks().get(i));
-		}
+			if (whole == null || taskCountLastCall < current.getTasks().size()) {
+				whole = new MissionImpl();
+				whole.setTasks(new ArrayList<Task>());
+				for (int i = 0; i < current.getTasks().size(); i++)
+					whole.getTasks().add(current.getTasks().get(i));
+			}
 
-		if (current.getTasks().size() < whole.getTasks().size()) {
-			Mission solved = getSolved(current);
-			visualizeTasks(current, solved);
-		} else {
-			visualizeTasks(whole);
+			if (current.getTasks().size() < whole.getTasks().size()) {
+				Mission solved = getSolved(current);
+				visualizeTasks(current, solved);
+			} else {
+				visualizeTasks(whole);
+			}
+			taskCountLastCall = current.getTasks().size();
 		}
-		taskCountLastCall = current.getTasks().size();
 	}
 
 	public void visualize(Mission mission) {
@@ -81,25 +80,24 @@ public class MissionVisualization {
 
 		Mission current = mission;
 
-		this.model = null;
+		if (current.getTasks() != null) {
+			this.model = null;
 
-		if (whole == null
-				|| taskCountLastCall < mission.getTasks()
-						.size()) {
-			whole = new MissionImpl();
-			whole.setTasks(new ArrayList<Task>());
-			for (int i = 0; i < mission.getTasks().size(); i++)
-				whole.getTasks().add(
-						mission.getTasks().get(i));
-		}
+			if (whole == null || taskCountLastCall < current.getTasks().size()) {
+				whole = new MissionImpl();
+				whole.setTasks(new ArrayList<Task>());
+				for (int i = 0; i < current.getTasks().size(); i++)
+					whole.getTasks().add(current.getTasks().get(i));
+			}
 
-		if (current.getTasks().size() < whole.getTasks().size()) {
-			Mission solved = getSolved(current);
-			visualizeTasks(current, solved);
-		} else {
-			visualizeTasks(whole);
+			if (current.getTasks().size() < whole.getTasks().size()) {
+				Mission solved = getSolved(current);
+				visualizeTasks(current, solved);
+			} else {
+				visualizeTasks(whole);
+			}
+			taskCountLastCall = current.getTasks().size();
 		}
-		taskCountLastCall = current.getTasks().size();
 	}
 
 	private void visualizeTasks(Mission whole) {
@@ -145,9 +143,10 @@ public class MissionVisualization {
 						((CompassCourseTask) task).getAngle(), color);
 
 		} else if (task instanceof HoldAngleToWindTask) {
-			/*if (model != null)
-				drawLine(model.getGps().getPosition(),
-						((HoldAngleToWindTask) task).getAngle(), color);*/
+			/*
+			 * if (model != null) drawLine(model.getGps().getPosition(),
+			 * ((HoldAngleToWindTask) task).getAngle(), color);
+			 */
 
 		} else if (task instanceof RepeatTask) {
 			// TODO

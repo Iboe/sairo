@@ -61,6 +61,7 @@ public class Initializier {
 		if (TEST) {
 			init.setSensorDummyValues();
 			init.initializeCommunication();
+			init.initializeView();
 		/*	
 			new Thread(){
 
