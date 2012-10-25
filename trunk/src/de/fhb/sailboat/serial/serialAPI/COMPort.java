@@ -163,7 +163,9 @@ public class COMPort{
 			OutputStream os = this._serialPortObject.getOutputStream();
 			byte[] b = text.getBytes();
 			//Byte r, expected = 0x65;
-			for (int i = 0; i < b.length; i++) {
+			
+			int loopLength=b.length; //T.Koppe : Loop Counter auslagern => schneller
+			for (int i = 0; i < loopLength; i++) {
 				os.write(b[i]);
 				// minimal sleep to give Devices time to handle the data
 				Thread.sleep(wait_sleep);

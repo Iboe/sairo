@@ -310,7 +310,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
 					String t = s + "," + a;
 					byte[] b = t.getBytes();
-					for (int j = 0; j < b.length; j++) {
+					int loopLength=b.length;  //T.Koppe : Loop count auslagern => schneller
+					for (int j = 0; j < loopLength; j++) {
 						r=0x00;
 						this.myCOM.writeByte(b[j]);
 						Thread.sleep(wait_sleep);
