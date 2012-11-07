@@ -7,6 +7,7 @@ de.fhb.sailboat.control.pilot
 de.fhb.sailboat.data
 de.fhb.sailboat.gui
 de.fhb.sailboat.gui.map
+de.fhb.sailboat.gui.missioncreator
 de.fhb.sailboat.mission
 de.fhb.sailboat.serial.actuator
 de.fhb.sailboat.serial.sensor
