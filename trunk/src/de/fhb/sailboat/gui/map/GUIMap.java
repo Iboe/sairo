@@ -68,7 +68,7 @@ public class GUIMap extends GeneralMap {
 		if (map.getMapMarkerList().contains(currentPosition))
 			map.removeMapMarker(currentPosition);
 
-		currentPosition = new MapMarkerDot(Color.LIGHT_GRAY,
+		currentPosition = new MapMarkerDot(Color.MAGENTA,
 				boatPosition.getLatitude(), boatPosition.getLongitude());
 
 		map.addMapMarker(currentPosition);
@@ -86,7 +86,7 @@ public class GUIMap extends GeneralMap {
 					positionHistoryList.add(positionHistoryList.get(i));
 
 				positionHistory = new MapPolygonImpl(positionHistoryList,
-						Color.LIGHT_GRAY, new BasicStroke(3));
+						Color.MAGENTA, new BasicStroke(3));
 				map.addMapPolygon(positionHistory);
 
 			} else {
@@ -103,7 +103,7 @@ public class GUIMap extends GeneralMap {
 						positionHistoryList.add(positionHistoryList.get(i));
 
 					positionHistory = new MapPolygonImpl(positionHistoryList,
-							Color.LIGHT_GRAY, new BasicStroke(3));
+							Color.MAGENTA, new BasicStroke(3));
 					followCounter = 0;
 					map.addMapPolygon(positionHistory);
 				} else
