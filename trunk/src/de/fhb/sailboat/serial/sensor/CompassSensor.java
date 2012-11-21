@@ -154,10 +154,11 @@ public class CompassSensor {
 						
 						end = System.currentTimeMillis();
 						// Sleep the difference of clock-rate and calculation-time of this run
-						if( end-start > clock)
+						long duration = end-start; //Koppe: 2x end-start => 1x duration
+						if( duration > clock)
 							Thread.sleep(clock);
 						else
-							Thread.sleep(clock-((end - start)));
+							Thread.sleep(clock-((duration)));
 						
 					}
 				}  catch (InterruptedException e) {
