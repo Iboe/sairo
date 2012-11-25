@@ -7,6 +7,12 @@ import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 
+/**
+ * This class tests the LOG-Converter-Class
+ * 
+ * @author Andy Klay <klay@fh-brandenburg.de>
+ *
+ */
 public class TestLogConverter {
 
 	public static void main(String[] args) {
@@ -23,7 +29,8 @@ public class TestLogConverter {
 		converter.saveToBinaryFile(convertedLOG, savePath);
 
 		// wieder oeffnen
-		List<Tripel<Date, String, Object>> reopendList = converter.openFromBinaryFile(savePath);
+		List<Tripel<Date, String, Object>> reopendList = converter
+				.openFromBinaryFile(savePath);
 
 		// ausprinten
 		printOutLog(reopendList);
@@ -42,16 +49,21 @@ public class TestLogConverter {
 			Object object = tripel.getO3();
 
 			if (tripel.getO3() instanceof Compass) {
-				System.out.println("azimuth: "
+				System.out.println("Compass" + " ,azimuth: "
 						+ ((Compass) object).getAzimuth() + " ,pitch: "
 						+ ((Compass) object).getPitch() + " ,roll: "
 						+ ((Compass) object).getRoll());
 
 			} else if (object instanceof GPS) {
-				System.out.println("Test: Das ist ein GPS!");
-
+				System.out.println("GPS" + " ,latitude: "
+						+ ((GPS) object).getLatitude() + " ,longitude: "
+						+ ((GPS) object).getLongitude() + " ,speed: "
+						+ ((GPS) object).getSpeed() + " ,satelites: "
+						+ ((GPS) object).getSatelites());
 			} else if (object instanceof Wind) {
-				System.out.println("Test: Das ist ein Wind!");
+				System.out.println("Wind" + " ,direction: "
+						+ ((Wind) object).getDirection() + " ,speed: "
+						+ ((Wind) object).getSpeed());
 			} else {
 				System.out
 						.println("Ein Fehler bei der umwandlung des LOGs ist aufgetreten!");

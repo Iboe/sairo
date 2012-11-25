@@ -17,14 +17,24 @@ import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 
+/**
+ * This class converts the LOG-Files from Text-Format to a Object-format
+ * for emulation of past use of the System
+ * 
+ * @author Andy Klay <klay@fh-brandenburg.de>
+ *
+ */
 public class LogConverter {
 
 	/**
 	 * converts a LOG-File with Text to a Object Format for Emulation
-	 * @param path - Filepath
+	 * 
+	 * @param path
+	 *            - Filepath
 	 * @return List<Tripel<Date, String, Object>>
 	 */
-	public List<Tripel<Date, String, Object>> convertLogToBinaryFormat(String path) {
+	public List<Tripel<Date, String, Object>> convertLogToBinaryFormat(
+			String path) {
 
 		String logFileInput = loadLogFile(path);
 		List<Tupel<String, Date>> eventList = stripDownToLines(logFileInput);
@@ -131,7 +141,6 @@ public class LogConverter {
 
 		while (linehacker.hasMoreElements()) {
 			String nextLine = (String) linehacker.nextElement();
-			System.out.print(nextLine);
 			Date lineDate = new Date();
 
 			try {
@@ -141,7 +150,7 @@ public class LogConverter {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		return eventList;
@@ -176,21 +185,22 @@ public class LogConverter {
 	private String loadLogFile(String datname) {
 		String content = "";
 		try {
-			FileReader eingabestream = new FileReader(datname);
-			StringBuffer text = new StringBuffer();
-			int gelesen = 0;
+			FileReader inputStream = new FileReader(datname);
+			StringBuffer buffer = new StringBuffer();
+			int read = 0;
 
-			while (gelesen != -1) {
-				gelesen = eingabestream.read();
-				if (gelesen != -1) {
-					text.append((char) gelesen);
+			while (read != -1) {
+				read = inputStream.read();
+				if (read != -1) {
+					buffer.append((char) read);
 				}
 			}
 
-			eingabestream.close();
-			content = text.toString();
+			inputStream.close();
+			content = buffer.toString();
 
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		return content;
