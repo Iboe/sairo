@@ -1,5 +1,7 @@
 package de.fhb.sailboat.data;
 
+import java.io.Serializable;
+
 /**
  * Data object representing an actuator, containing one value for the current
  * state of the actuator.
@@ -7,7 +9,7 @@ package de.fhb.sailboat.data;
  * @author hscheel
  *
  */
-public class Actuator {
+public class Actuator{
 
 	private final int value;
 

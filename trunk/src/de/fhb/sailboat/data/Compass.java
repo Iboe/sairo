@@ -1,5 +1,7 @@
 package de.fhb.sailboat.data;
 
+import java.io.Serializable;
+
 import javax.vecmath.Vector3d;
 
 /**
@@ -10,7 +12,7 @@ import javax.vecmath.Vector3d;
  *
  */
 
-public class Compass {
+public class Compass implements Serializable{
 	private final double azimuth;
 	private final double pitch;
 	private final double roll;
@@ -21,8 +23,8 @@ public class Compass {
 	private final Vector3d accelerationField;
 	private final double usefullsamplerate;
 	
-	public Compass(double yaw, double pitch, double roll) {
-		this.azimuth = yaw;
+	public Compass(double azimuth, double pitch, double roll) {
+		this.azimuth = azimuth;
 		this.pitch = pitch;
 		this.roll = roll;
 		this.temperature = 0;

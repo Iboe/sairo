@@ -1,5 +1,7 @@
 package de.fhb.sailboat.data;
 
+import java.io.Serializable;
+
 /**
  * Data object representing a GPS coordinate, containing the information
  * gathered by a GPS device.
@@ -7,7 +9,7 @@ package de.fhb.sailboat.data;
  * @author hscheel
  * 
  */
-public class GPS {
+public class GPS implements Serializable{
 
 	private double latitude;
 	private double longitude;

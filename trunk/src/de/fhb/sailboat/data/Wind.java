@@ -1,5 +1,7 @@
 package de.fhb.sailboat.data;
 
+import java.io.Serializable;
+
 /**
  * Data object representing the wind conditions on a certain moment, 
  * containing information about speed and direction of the wind.
@@ -7,7 +9,7 @@ package de.fhb.sailboat.data;
  * @author hscheel
  *
  */
-public class Wind {
+public class Wind implements Serializable{
 
 	private final int direction;
 	private final double speed;
