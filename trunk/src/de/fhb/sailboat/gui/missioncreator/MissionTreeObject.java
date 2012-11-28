@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.missioncreator;
+package de.fhb.sailboat.gui.missionCreator;
 
 import de.fhb.sailboat.mission.Task;
 import java.io.Serializable;

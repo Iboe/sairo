@@ -1,7 +1,7 @@
 package de.fhb.sailboat.gui;
 
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
+import de.fhb.sailboat.gui.missionCreator.MissionCreatorInterface;
 
 /**
  * A slim general user interface for an autonomous sailboat. Requires a correct GUILogic class to be
