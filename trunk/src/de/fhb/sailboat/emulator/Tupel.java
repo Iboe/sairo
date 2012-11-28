@@ -1,4 +1,4 @@
-package de.fhb.sailboat.operationPlayer;
+package de.fhb.sailboat.emulator;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package de.fhb.sailboat.operationPlayer;
+package de.fhb.sailboat.emulator;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,7 @@ import de.fhb.sailboat.data.Wind;
  * @author Andy Klay <klay@fh-brandenburg.de>
  *
  */
-public class TestLogConverter {
+public class LogConverterTest {
 
 	public static void main(String[] args) {
 

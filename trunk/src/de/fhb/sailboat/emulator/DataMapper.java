@@ -1,4 +1,4 @@
-package de.fhb.sailboat.operationPlayer;
+package de.fhb.sailboat.emulator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
