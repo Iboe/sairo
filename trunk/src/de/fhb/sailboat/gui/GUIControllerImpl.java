@@ -5,8 +5,8 @@ import java.util.List;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.emulator.EmulatorRunner;
 import de.fhb.sailboat.gui.map.MapPolygon;
-import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
 import de.fhb.sailboat.mission.Mission;
@@ -14,7 +14,6 @@ import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
-import de.fhb.sailboat.mission.RepeatTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.CompassModel;
@@ -362,5 +361,13 @@ public class GUIControllerImpl implements GUIController {
 	
 	public GUIModel getModel() {
 		return this.model;
+	}
+
+	@Override
+	public void startEmulation() {
+
+		this.setSailMode(true);
+		EmulatorRunner emulator=new EmulatorRunner(this.worldModel, "TestSave");
+		emulator.run();
 	}
 }

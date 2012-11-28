@@ -28,9 +28,9 @@ public class EmulatorRunner implements Runnable{
 	 * @param worldModel2
 	 * @param filePath - Path to Mapped-Model-File (prepared Log-Data)
 	 */
-	public EmulatorRunner(WorldModel worldModel2, String filePath) {
+	public EmulatorRunner(WorldModel worldModel, String filePath) {
 		super();
-		this.worldModel = worldModel2;
+		this.worldModel = worldModel;
 		this.filePath= filePath;
 		this.logFileConverter= new LogConverter();
 	}

@@ -25,27 +25,27 @@ public class GUIModelImpl implements GUIModel{
 	// CONSTANTS
 	
 	// VARIABLES
-	private boolean missionUpdated;
+	protected boolean missionUpdated;
 	
-	private WindModel wind;
+	protected WindModel wind;
 	
-	private CompassModel compass;
+	protected CompassModel compass;
 	
-	private GPSModel gps;
+	protected GPSModel gps;
 	
 	// for the planned exercise
-	private List<GPS> circleMarkerList;
-	private List<MapPolygon> polyList;
+	protected List<GPS> circleMarkerList;
+	protected List<MapPolygon> polyList;
 	
-	private boolean sailMode;					// stores current test mission mode
-	private int propellor;						// current propellor mode, 1=maximum backward/ 2=off/ 3=maximum forward
-	private int rudder;							// current rudder value
-	private int sail;							// current sail value
+	protected boolean sailMode;					// stores current test mission mode
+	protected int propellor;						// current propellor mode, 1=maximum backward/ 2=off/ 3=maximum forward
+	protected int rudder;							// current rudder value
+	protected int sail;							// current sail value
 	
-	private Mission currentWholeMission;		// current mission of the sailboat as a whole from start to finish
-	private Mission missionTasksLeft;			// current state of the mission (tasks left)
+	protected Mission currentWholeMission;		// current mission of the sailboat as a whole from start to finish
+	protected Mission missionTasksLeft;			// current state of the mission (tasks left)
 	
-	private StringBuffer missionReport;
+	protected StringBuffer missionReport;
 	
 	public GUIModelImpl() {
 		this.missionUpdated = false;

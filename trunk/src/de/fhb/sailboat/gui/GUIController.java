@@ -101,4 +101,6 @@ public interface GUIController {
 	public boolean isMissionUpdated();
 	
 	public GUIModel getModel();
+
+	public void startEmulation();
 }

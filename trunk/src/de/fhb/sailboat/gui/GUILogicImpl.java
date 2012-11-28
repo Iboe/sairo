@@ -1,6 +1,7 @@
 package de.fhb.sailboat.gui;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -9,6 +10,7 @@ import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.gui.map.GPSTransformations;
 import de.fhb.sailboat.gui.map.Map;
 import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.Task;
 
 /**
  * This class represents the program logic used by a GUInterface. It handles
@@ -340,5 +342,11 @@ public class GUILogicImpl implements GUILogic {
     
     public Map getMissionMap() {
         return this.missionMap;
+    }
+    
+    public void startEmulator(){
+    	//TODO funktioniert nicht
+        this.setSailMode(true);
+    	this.controller.startEmulation();
     }
 }

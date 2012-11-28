@@ -1,5 +1,10 @@
 package de.fhb.sailboat.gui;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.gui.missionCreator.MissionCreatorInterface;
 
@@ -16,6 +21,8 @@ import de.fhb.sailboat.gui.missionCreator.MissionCreatorInterface;
 public class GUInterface extends javax.swing.JFrame {
 
     private GUILogic guiLogic;
+	private JMenu emulatorMenu;
+	private JMenuItem emulatorMenuStart;
 
     /**
      * Initializes the GUInterface form, connects to a chosen Planner and
@@ -98,6 +105,9 @@ public class GUInterface extends javax.swing.JFrame {
         missionTestMenuResetMap = new javax.swing.JMenuItem();
         missionMenu = new javax.swing.JMenu();
         missionMenuMissionCreator = new javax.swing.JMenuItem();
+        
+        emulatorMenu= new javax.swing.JMenu();
+        emulatorMenuStart = new javax.swing.JMenuItem();
 
         infoDialog.setTitle("SaiilboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 305));
@@ -664,6 +674,21 @@ public class GUInterface extends javax.swing.JFrame {
         missionMenu.add(missionMenuMissionCreator);
 
         menuBar.add(missionMenu);
+        
+        emulatorMenu.setText("Emulator");
+        emulatorMenuStart.setText("Start Emulation");
+        emulatorMenuStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startEmulation(evt);
+            }
+
+        });
+        
+        missionMenu.add(missionMenuMissionCreator);
+        
+        emulatorMenu.add(emulatorMenuStart);
+        menuBar.add(emulatorMenu);
+        
 
         setJMenuBar(menuBar);
 
@@ -700,7 +725,12 @@ public class GUInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    protected void startEmulation(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
         guiLogic.closeGUI();
     }                                             
 
@@ -933,7 +963,7 @@ public class GUInterface extends javax.swing.JFrame {
                     }
 
                     try {
-                        Thread.sleep(guiLogic.UPDATE_RATE);
+                        Thread.sleep(GUILogic.UPDATE_RATE);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
