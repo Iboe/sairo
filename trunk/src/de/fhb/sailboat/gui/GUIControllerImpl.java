@@ -5,7 +5,7 @@ import java.util.List;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.emulator.EmulatorRunner;
+import de.fhb.sailboat.emulator.Emulator;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
@@ -46,6 +46,8 @@ public class GUIControllerImpl implements GUIController {
 	private GUIModel model;			// GUIModel is used to store values locally
 
 	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
+	
+	private Emulator emulator;
 
 	public GUIControllerImpl() {
 		this.model = new GUIModelImpl();
@@ -367,10 +369,23 @@ public class GUIControllerImpl implements GUIController {
 	}
 
 	@Override
-	public void startEmulation() {
-
-//		this.setSailMode(true);
-		EmulatorRunner emulator=new EmulatorRunner(this.worldModel, "TestSave.sem");
+	public void startEmulation(String filePath) {
+		emulator=new Emulator(this.worldModel, filePath);
 		emulator.start();
+	}
+
+	@Override
+	public void stopEmulation() {
+		emulator.stop();
+	}
+
+	@Override
+	public void pauseEmulation() {
+		emulator.pause();
+	}
+
+	@Override
+	public void playEmulation() {
+		emulator.play();
 	}
 }

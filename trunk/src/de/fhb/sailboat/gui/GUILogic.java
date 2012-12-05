@@ -104,6 +104,12 @@ public interface GUILogic {
     
     public Map getMissionMap();
     
-    public void startEmulator();
+    public void startEmulator(String filePath);
+
+	public void stopEmulation();
+
+	public void pauseEmulation();
+
+	public void playEmulation();
     
 }

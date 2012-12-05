@@ -343,8 +343,24 @@ public class GUILogicImpl implements GUILogic {
     public Map getMissionMap() {
         return this.missionMap;
     }
-    
-    public void startEmulator(){
-    	this.controller.startEmulation();
-    }
+
+	@Override
+	public void stopEmulation() {
+		this.controller.stopEmulation();
+	}
+
+	@Override
+	public void pauseEmulation() {
+		this.controller.pauseEmulation();	
+	}
+
+	@Override
+	public void startEmulator(String filePath) {
+		this.controller.startEmulation(filePath);
+	}
+
+	@Override
+	public void playEmulation() {
+		this.controller.playEmulation();
+	}
 }

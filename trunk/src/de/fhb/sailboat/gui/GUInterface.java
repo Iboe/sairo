@@ -20,9 +20,13 @@ import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
  */
 public class GUInterface extends javax.swing.JFrame {
 
-    private GUILogic guiLogic;
+    protected static final long GUI_UPDATE_RATE = 500;
+	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
 	private JMenuItem emulatorMenuStart;
+	private JMenuItem emulatorMenuStop;
+	private JMenuItem emulatorMenuPause;
+	private JMenuItem emulatorMenuPlay;
 
     /**
      * Initializes the GUInterface form, connects to a chosen Planner and
@@ -108,6 +112,9 @@ public class GUInterface extends javax.swing.JFrame {
         
         emulatorMenu= new javax.swing.JMenu();
         emulatorMenuStart = new javax.swing.JMenuItem();
+        emulatorMenuStop = new javax.swing.JMenuItem();
+        emulatorMenuPause= new javax.swing.JMenuItem();
+        emulatorMenuPlay = new javax.swing.JMenuItem();
 
         infoDialog.setTitle("SaiilboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 305));
@@ -684,9 +691,37 @@ public class GUInterface extends javax.swing.JFrame {
 
         });
         
+        emulatorMenuPause.setText("PAUSE");
+        emulatorMenuPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pauseEmulation(evt);
+            }
+
+        });
+        
+        emulatorMenuStop.setText("STOP");
+        emulatorMenuStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopEmulation(evt);
+            }
+
+        });
+        
+        emulatorMenuPlay.setText("PLAY");
+        emulatorMenuPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playEmulation(evt);
+            }
+
+        });
+        
+        
         missionMenu.add(missionMenuMissionCreator);
         
         emulatorMenu.add(emulatorMenuStart);
+        emulatorMenu.add(emulatorMenuPause);
+        emulatorMenu.add(emulatorMenuStop);
+        emulatorMenu.add(emulatorMenuPlay);
         menuBar.add(emulatorMenu);
         
 
@@ -725,10 +760,22 @@ public class GUInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    protected void startEmulation(ActionEvent evt) {
-		// TODO Auto-generated method stub
-    	this.guiLogic.startEmulator();
+    protected void playEmulation(ActionEvent evt) {
+    	this.guiLogic.playEmulation();
+	}
+
+	protected void stopEmulation(ActionEvent evt) {
+    	this.guiLogic.stopEmulation();
 		
+	}
+
+	protected void pauseEmulation(ActionEvent evt) {
+    	this.guiLogic.pauseEmulation();
+	}
+
+	protected void startEmulation(ActionEvent evt) {
+		//TODO Datei auswahl
+    	this.guiLogic.startEmulator("TestSave.sem");
 	}
 
 	private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -964,7 +1011,7 @@ public class GUInterface extends javax.swing.JFrame {
                     }
 
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(GUI_UPDATE_RATE);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

@@ -102,5 +102,11 @@ public interface GUIController {
 	
 	public GUIModel getModel();
 
-	public void startEmulation();
+	public void startEmulation(String filePath);
+
+	public void stopEmulation();
+
+	public void pauseEmulation();
+
+	public void playEmulation();
 }
