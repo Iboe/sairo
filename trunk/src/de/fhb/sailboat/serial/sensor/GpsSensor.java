@@ -59,9 +59,8 @@ public class GpsSensor {
 				// read the values (7 for 7 rows)
 				try {
 					valueArray = gpsInstance.myCOM.readLine(7);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 
 				// wenn Werte gelesen wurden
@@ -107,7 +106,6 @@ public class GpsSensor {
 									try {
 										Thread.sleep(500);
 									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
 										LOG.fatal("Error Occured:" + e);
 										e.printStackTrace();
 									}
@@ -118,6 +116,8 @@ public class GpsSensor {
 										&& !myNmea[5].equals("0.0")) {
 									{
 										
+										
+										//XXX Hier Moegliche Fehlerursache bezgl falscher Gescwhindigkeitswerte
 										double speed = Double.parseDouble(myNmea[7]) * 0.51444;
 										DecimalFormat f = new DecimalFormat(
 													"#0,00");
