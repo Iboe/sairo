@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.missionCreator;
+package de.fhb.sailboat.gui.missioncreator;
 
 import java.io.FileInputStream;
 import java.io.IOException;

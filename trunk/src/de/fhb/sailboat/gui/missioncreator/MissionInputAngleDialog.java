@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.missionCreator;
+package de.fhb.sailboat.gui.missioncreator;
 
 /**
  * This dialog enables easy input for angle tasks.

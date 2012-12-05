@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.missionCreator;
+package de.fhb.sailboat.gui.missioncreator;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUIControllerImpl;
