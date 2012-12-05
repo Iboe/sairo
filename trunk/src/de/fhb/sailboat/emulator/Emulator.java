@@ -20,11 +20,12 @@ public class Emulator extends Thread {
 	private WorldModel worldModel;
 	private String filePath;
 	private LogConverter logFileConverter;
-	private long speedInterval = 200;
+	private long speedInterval = 2;
 	private boolean isPaused = false;
 
 	private static long SPEED_INTERVAL_MAX = 500;
 	private static long SPEED_INTERVAL_MIN = 50;
+	public static final String EMULATION_FILES = "sem";
 
 	/**
 	 * creates a Emulator

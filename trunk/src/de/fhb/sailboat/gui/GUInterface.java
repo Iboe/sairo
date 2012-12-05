@@ -1,11 +1,15 @@
 package de.fhb.sailboat.gui;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.filechooser.FileFilter;
 
 import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.emulator.Emulator;
 import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
 
 /**
@@ -20,7 +24,6 @@ import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
  */
 public class GUInterface extends javax.swing.JFrame {
 
-    protected static final long GUI_UPDATE_RATE = 500;
 	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
 	private JMenuItem emulatorMenuStart;
@@ -774,8 +777,45 @@ public class GUInterface extends javax.swing.JFrame {
 	}
 
 	protected void startEmulation(ActionEvent evt) {
-		//TODO Datei auswahl
-    	this.guiLogic.startEmulator("TestSave.sem");
+		
+		//TODO Datei auswahl 
+		JFileChooser fileChooser;	
+		fileChooser = new JFileChooser();
+		fileChooser.setAcceptAllFileFilterUsed( false );
+		FileFilter emulationFileFilter = new FileFilter() {
+			@Override
+			public boolean accept(File filePath) {
+				String name = filePath.getName().toLowerCase();
+				if (filePath.isDirectory())
+					return true;
+				if (name.endsWith("." + Emulator.EMULATION_FILES))
+					return true;
+				return false;
+			}
+
+			@Override
+			public String getDescription() {
+				return  "." + Emulator.EMULATION_FILES;
+			}
+		};
+		
+		fileChooser.setFileFilter(emulationFileFilter);
+//		fileChooser.setCurrentDirectory( new File( ...) ) )
+		
+		if ( fileChooser.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION ) {
+			if ( fileChooser.getSelectedFile().toString()  != null ) {
+//				setArbeitsModus( ... );
+			} else {
+//				setArbeitsModus( START_MODUS );
+			}
+		}
+		
+		
+//    	this.guiLogic.startEmulator("TestSave.sem");
+	}
+	
+	protected void regulateEmulationSpeed(ActionEvent evt) {
+		//TODO
 	}
 
 	private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -1011,7 +1051,7 @@ public class GUInterface extends javax.swing.JFrame {
                     }
 
                     try {
-                        Thread.sleep(GUI_UPDATE_RATE);
+                        Thread.sleep(GUILogic.GUI_UPDATE_RATE);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

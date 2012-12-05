@@ -1,8 +1,14 @@
 package de.fhb.sailboat.emulator;
 
-
 import java.io.Serializable;
 
+
+/**
+ * This class joins three different data to a data-tripel
+ * 
+ * @author Andy Klay <klay@fh-brandenburg.de>
+ *
+ */
 public class Tripel<T,U,V> implements Serializable{
 	 private T object1;
 	 private U object2;

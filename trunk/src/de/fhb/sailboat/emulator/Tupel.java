@@ -2,6 +2,12 @@ package de.fhb.sailboat.emulator;
 
 import java.io.Serializable;
 
+/**
+ * This class joins two different data to a data-tupel
+ * 
+ * @author Andy Klay <klay@fh-brandenburg.de>
+ *
+ */
 public class Tupel<T,V> implements Serializable{
 	 private T object1;
 	 private V object2;
