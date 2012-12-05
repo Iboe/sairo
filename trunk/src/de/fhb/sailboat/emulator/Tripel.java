@@ -1,5 +1,6 @@
 package de.fhb.sailboat.emulator;
 
+
 import java.io.Serializable;
 
 public class Tripel<T,U,V> implements Serializable{

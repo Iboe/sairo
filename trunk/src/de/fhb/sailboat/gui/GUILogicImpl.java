@@ -345,8 +345,6 @@ public class GUILogicImpl implements GUILogic {
     }
     
     public void startEmulator(){
-    	//TODO funktioniert nicht
-        this.setSailMode(true);
     	this.controller.startEmulation();
     }
 }

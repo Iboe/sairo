@@ -6,7 +6,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.gui.missionCreator.MissionCreatorInterface;
+import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
 
 /**
  * A slim general user interface for an autonomous sailboat. Requires a correct GUILogic class to be
@@ -727,6 +727,7 @@ public class GUInterface extends javax.swing.JFrame {
 
     protected void startEmulation(ActionEvent evt) {
 		// TODO Auto-generated method stub
+    	this.guiLogic.startEmulator();
 		
 	}
 
@@ -963,7 +964,7 @@ public class GUInterface extends javax.swing.JFrame {
                     }
 
                     try {
-                        Thread.sleep(GUILogic.UPDATE_RATE);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -1020,7 +1021,7 @@ public class GUInterface extends javax.swing.JFrame {
     private javax.swing.JSlider rudderSlider;
     private javax.swing.JLabel sailLabelLeft;
     private javax.swing.JLabel sailLabelRight;
-    private javax.swing.JPanel sailPanel;
+	private javax.swing.JPanel sailPanel;
     private javax.swing.JSlider sailSlider;
     private javax.swing.JScrollPane systemScrollPane;
     private javax.swing.JPanel systemTabPanel;

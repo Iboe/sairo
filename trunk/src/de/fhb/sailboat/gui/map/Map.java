@@ -64,6 +64,11 @@ public class Map extends JPanel {
 
 	private MissionVisualization visualize;
 
+	private static Color OBSTACLE_COLOR = Color.BLACK;
+	private static Color MAPMARKER_COLOR = Color.RED;
+	private static Color LINE_COLOR = Color.RED;
+	private static Color SHIP_COLOR = Color.CYAN;
+
 	public Map() {
 		this.map = new JMapViewer();
 		this.markerList = new ArrayList<MapMarker>();
@@ -229,8 +234,8 @@ public class Map extends JPanel {
 	 *            gps position
 	 */
 	public void addMapMarker(GPS target) {
-		markerList.add(new MapMarkerDot(Color.RED, target.getLatitude(), target
-				.getLongitude()));
+		markerList.add(new MapMarkerDot(MAPMARKER_COLOR, target.getLatitude(),
+				target.getLongitude()));
 		map.addMapMarker(markerList.get(markerList.size() - 1));
 	}
 
@@ -287,7 +292,7 @@ public class Map extends JPanel {
 		if (map.getMapMarkerList().contains(currentPosition))
 			map.removeMapMarker(currentPosition);
 
-		currentPosition = new MapMarkerDot(Color.LIGHT_GRAY,
+		currentPosition = new MapMarkerDot(SHIP_COLOR,
 				boatPosition.getLatitude(), boatPosition.getLongitude());
 
 		map.addMapMarker(currentPosition);
@@ -305,7 +310,7 @@ public class Map extends JPanel {
 					positionHistoryList.add(positionHistoryList.get(i));
 
 				positionHistory = new MapPolygonImpl(positionHistoryList,
-						Color.LIGHT_GRAY, new BasicStroke(3));
+						Color.GRAY, new BasicStroke(3));
 				map.addMapPolygon(positionHistory);
 
 			} else {
@@ -322,7 +327,7 @@ public class Map extends JPanel {
 						positionHistoryList.add(positionHistoryList.get(i));
 
 					positionHistory = new MapPolygonImpl(positionHistoryList,
-							Color.LIGHT_GRAY, new BasicStroke(3));
+							LINE_COLOR, new BasicStroke(3));
 					followCounter = 0;
 					map.addMapPolygon(positionHistory);
 				} else
@@ -334,13 +339,13 @@ public class Map extends JPanel {
 	public void visualizeMission(GUIModel model) {
 		visualize.visualize(model);
 	}
-	
+
 	public void visualizeMission(Mission mission) {
 		visualize.visualize(mission);
 	}
 
 	public void addObstacle(GPS gps) {
-		obstacles.add(new MapMarkerDot(Color.BLACK, gps.getLatitude(), gps
+		obstacles.add(new MapMarkerDot(OBSTACLE_COLOR, gps.getLatitude(), gps
 				.getLongitude()));
 		map.addMapMarker(obstacles.get(obstacles.size() - 1));
 	}

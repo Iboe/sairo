@@ -308,6 +308,9 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.getGps().getPosition().getSatelites();
 	}
 
+	/**
+	 * says if ship is sailing or moves with
+	 */
 	public boolean isSailMode() {
 		return this.model.isSailMode();
 	}
@@ -366,8 +369,8 @@ public class GUIControllerImpl implements GUIController {
 	@Override
 	public void startEmulation() {
 
-		this.setSailMode(true);
-		EmulatorRunner emulator=new EmulatorRunner(this.worldModel, "TestSave");
-		emulator.run();
+//		this.setSailMode(true);
+		EmulatorRunner emulator=new EmulatorRunner(this.worldModel, "TestSave.sem");
+		emulator.start();
 	}
 }
