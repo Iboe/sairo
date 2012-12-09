@@ -6,6 +6,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
 import de.fhb.sailboat.control.Planner;
@@ -21,8 +22,15 @@ import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
  * unexpected behavior, although most problematic calls will check for a null-Reference.
  *
  * @author Patrick Rutter
+ * @author Andy Klay <klay@fh-brandenburg.de>
  */
 public class GUInterface extends javax.swing.JFrame {
+	
+	
+	/**
+	 * saves the GUImode
+	 */
+	private int modus	= GUILogic.LIVE_MODUS;
 
 	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
@@ -30,6 +38,8 @@ public class GUInterface extends javax.swing.JFrame {
 	private JMenuItem emulatorMenuStop;
 	private JMenuItem emulatorMenuPause;
 	private JMenuItem emulatorMenuPlay;
+
+	private JPanel emulatorPanel;
 
     /**
      * Initializes the GUInterface form, connects to a chosen Planner and
@@ -118,6 +128,9 @@ public class GUInterface extends javax.swing.JFrame {
         emulatorMenuStop = new javax.swing.JMenuItem();
         emulatorMenuPause= new javax.swing.JMenuItem();
         emulatorMenuPlay = new javax.swing.JMenuItem();
+        
+        
+        emulatorPanel = new javax.swing.JPanel();
 
         infoDialog.setTitle("SaiilboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 305));
@@ -419,6 +432,8 @@ public class GUInterface extends javax.swing.JFrame {
         gpsSatelitesDisplayLabel.setMaximumSize(new java.awt.Dimension(70, 14));
         gpsSatelitesDisplayLabel.setMinimumSize(new java.awt.Dimension(70, 14));
         gpsSatelitesDisplayLabel.setPreferredSize(new java.awt.Dimension(70, 14));
+        
+        emulatorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Emulator"));
 
         javax.swing.GroupLayout gpsPanelLayout = new javax.swing.GroupLayout(gpsPanel);
         gpsPanel.setLayout(gpsPanelLayout);
@@ -730,13 +745,13 @@ public class GUInterface extends javax.swing.JFrame {
 
         setJMenuBar(menuBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        mainLayout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(mainLayout);
+        mainLayout.setHorizontalGroup(
+            mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(gpsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -744,12 +759,12 @@ public class GUInterface extends javax.swing.JFrame {
                 .addComponent(missionMapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        mainLayout.setVerticalGroup(
+            mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainLayout.createSequentialGroup()
                         .addComponent(gpsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1012,8 +1027,39 @@ public class GUInterface extends javax.swing.JFrame {
             myReturn = (int)((100.0 / range) * value);
         }
         
-        return myReturn;
+        return myReturn; 
     }
+    
+    
+	/**
+	 * sets the modus of the GUI
+	 * 
+	 * @param modus - constants are in the interface "GUILogic"
+	 */
+	private void setGUIModus(int modus) {
+		
+		//TODO  Umschaltung der Modi
+		switch(modus){
+		
+		case GUILogic.LIVE_MODUS: ;
+		break;
+		
+		case GUILogic.EMULATOR_MODUS: ;
+//		mainLayout.removeLayoutComponent(component)
+//		mainLayout.addLayoutComponent(component, constraints);
+		break;
+		
+		case GUILogic.PLANNING_MODUS: ;
+		break;
+		
+		case GUILogic.SIMULATION_MODUS: ;
+		break;
+		
+		}
+		
+//		.....setVisible( true );
+//		aktualisiereAnzeige();
+	}
 
     /**
      * Creates and starts up a thread which updates the values to be displayed
@@ -1121,5 +1167,7 @@ public class GUInterface extends javax.swing.JFrame {
     private javax.swing.JMenu windowMenu;
     private javax.swing.JCheckBoxMenuItem windowMenuInfo;
     private javax.swing.JCheckBoxMenuItem windowMenuRemote;
+    
+    private javax.swing.GroupLayout mainLayout;
     // End of variables declaration
 }
