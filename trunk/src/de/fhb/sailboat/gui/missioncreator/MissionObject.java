@@ -15,7 +15,7 @@ import javax.swing.tree.TreeModel;
  * 
  * @author Patrick Rutter
  */
-public class MissionObject {
+public class MissionObject implements Serializable{
     
     /***
      * Extension for files containing this class serialized. Used for FileChoosers.

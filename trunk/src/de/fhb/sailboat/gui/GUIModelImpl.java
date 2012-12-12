@@ -34,9 +34,12 @@ public class GUIModelImpl implements GUIModel{
 	protected GPSModel gps;
 	
 	// for the planned exercise
+	@Deprecated
 	protected List<GPS> circleMarkerList;
+	@Deprecated
 	protected List<MapPolygon> polyList;
 	
+	@Deprecated
 	protected boolean sailMode;					// stores current test mission mode
 	protected int propellor;						// current propellor mode, 1=maximum backward/ 2=off/ 3=maximum forward
 	protected int rudder;							// current rudder value
@@ -44,8 +47,6 @@ public class GUIModelImpl implements GUIModel{
 	
 	protected Mission currentWholeMission;		// current mission of the sailboat as a whole from start to finish
 	protected Mission missionTasksLeft;			// current state of the mission (tasks left)
-	
-	protected StringBuffer missionReport;
 	
 	public GUIModelImpl() {
 		this.missionUpdated = false;
@@ -56,7 +57,6 @@ public class GUIModelImpl implements GUIModel{
 		this.sailMode = false;
 		this.currentWholeMission = new MissionImpl();
 		this.missionTasksLeft = new MissionImpl();
-		this.missionReport = new StringBuffer();
 		this.propellor = 2;
 		this.rudder = 0;
 		this.sail = 0;
@@ -97,31 +97,37 @@ public class GUIModelImpl implements GUIModel{
 	}
 
 	@Override
+	@Deprecated
 	public List<GPS> getCircleMarkerList() {
 		return circleMarkerList;
 	}
 
 	@Override
+	@Deprecated
 	public void setCircleMarkerList(List<GPS> markerList) {
 		this.circleMarkerList = markerList;
 	}
 
 	@Override
+	@Deprecated
 	public List<MapPolygon> getPolyList() {
 		return polyList;
 	}
 
 	@Override
+	@Deprecated
 	public void setPolyList(List<MapPolygon> polyList) {
 		this.polyList = polyList;
 	}
 
 	@Override
+	@Deprecated
 	public boolean isSailMode() {
 		return sailMode;
 	}
 
 	@Override
+	@Deprecated
 	public void setSailMode(boolean sailMode) {
 		this.sailMode = sailMode;
 	}
@@ -134,11 +140,6 @@ public class GUIModelImpl implements GUIModel{
 	@Override
 	public Mission getMissionTasksLeft() {
 		return missionTasksLeft;
-	}
-
-	@Override
-	public StringBuffer getMissionReport() {
-		return missionReport;
 	}
 
 	@Override
@@ -157,11 +158,6 @@ public class GUIModelImpl implements GUIModel{
 		} else {
 			this.missionTasksLeft = missionTasksLeft;
 		}
-	}
-
-	@Override
-	public void setMissionReport(StringBuffer missionReport) {
-		this.missionReport = missionReport;
 	}
 
 	@Override

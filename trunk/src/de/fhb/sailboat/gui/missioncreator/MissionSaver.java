@@ -14,7 +14,7 @@ public class MissionSaver {
     /***
      * Default path for saving missions.
      */
-    final public static String DEFAULT_SAVE_PATH = "C:/mission";
+    final public static String DEFAULT_SAVE_PATH = "C:/";
     
     /***
      * Saves the given MissionObject to the given Filename

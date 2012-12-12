@@ -101,14 +101,22 @@ public interface GUILogic {
     public GUIController getController();
     public Planner getPlanner();
     
-    // the following are methods for primitive tests and should be removed in future releases (f.e. aftersome form of  missionCreatorDialog is finished)
+    // the following are methods for primitive tests and are kept only for reference
+    @Deprecated
     public void sendCircleMarkers();
+    @Deprecated
     public void sendPolyMapMarkers();
+    @Deprecated
     public void sendReachCompass();
+    @Deprecated
     public void sendHoldAngleToWind();
+    @Deprecated
     public void sendStop();
+    @Deprecated
     public void sendResetActors();
+    @Deprecated
     public void sendResetMissionMap();
+    @Deprecated
     public void setSailMode(boolean sailMode);
     
     public Map getMissionMap();

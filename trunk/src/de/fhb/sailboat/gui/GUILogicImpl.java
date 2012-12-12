@@ -196,8 +196,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Able to put out info in the given TextArea. Currently only displays debug
-     * info.
+     * Able to put out info in the given TextArea. Currently not used.
      */
     public void updateSystemInfo(javax.swing.JTextArea systemTabTextArea) {
         String value = "";
@@ -212,7 +211,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     /**
-     * Able to put out info in the given TextArea.
+     * Able to put out info in the given TextArea. Currently not used.
      */
     public void updateMissionInfo(javax.swing.JTextArea missionTabTextArea) {
         String value = "";
@@ -263,8 +262,9 @@ public class GUILogicImpl implements GUILogic {
         System.exit(0);
     }
 
-    // the following are methods for primitive tests and should be removed in future releases (namely after missionCreatorDialog is finished)
+    // the following are methods for primitive tests and are kept only for future reference, refer to MissionCreator for mission handling
     @Override
+    @Deprecated
     public void sendCircleMarkers() {
         if (missionMap.getMap().getMapMarkerList().size() > 0) {
             this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
@@ -274,6 +274,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void sendPolyMapMarkers() {
         this.controller.setPolyList(missionMap.getPolygonList());
         this.controller.commitPolyList(planner);
@@ -281,6 +282,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void sendReachCompass() {
         String str = JOptionPane.showInputDialog(null,
                 "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
@@ -291,6 +293,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void sendHoldAngleToWind() {
         String str = JOptionPane.showInputDialog(null,
                 "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
@@ -301,6 +304,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void sendStop() {
         int choice = JOptionPane.showConfirmDialog(null,
                 "Wirklich Mission stoppen?", "Bitte bestätigen",
@@ -311,6 +315,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void sendResetActors() {
         int choice = JOptionPane.showConfirmDialog(null,
                 "Wirklich Motor, Segel und Ruder zurücksetzen?", "Bitte bestätigen",
@@ -321,6 +326,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void sendResetMissionMap() {
         missionMap.removeEveryObject();
         missionMap.removeTrail();
@@ -328,6 +334,7 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    @Deprecated
     public void setSailMode(boolean sailMode) {
         this.controller.setSailMode(sailMode);
     }

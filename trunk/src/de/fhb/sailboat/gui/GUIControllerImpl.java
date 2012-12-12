@@ -59,6 +59,7 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
+	@Deprecated
 	public void commitCircleMarkerList(Planner planner) {
 		List<GPS> markerList = this.model.getCircleMarkerList();
 
@@ -83,6 +84,7 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
+	@Deprecated
 	public void commitPolyList(Planner planner) {
 		List<MapPolygon> polyList = this.model.getPolyList();
 
@@ -106,6 +108,7 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
+	@Deprecated
 	public void commitReachCompassTask(int angle, Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -125,6 +128,7 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
+	@Deprecated
 	public void commitHoldAngleToWind(int angle, Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -144,6 +148,7 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
+	@Deprecated
 	public void commitStopTask(Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -159,6 +164,7 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 	
+	@Deprecated
 	public void resetActorsTask(Planner planner) {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
@@ -221,67 +227,6 @@ public class GUIControllerImpl implements GUIController {
 		}
 	}
 
-	/**
-	 * Currently a unused stub. Tries to generate a report on the status of the current mission.
-	 */
-	/*
-	public void generateMissionReport() {
-		if ((this.model.getCurrentWholeMission().getTasks().size() > 0)
-				&& (this.model.getMissionTasksLeft().getTasks().size() > 0)) {
-			Mission currentWholeMission = this.model.getCurrentWholeMission();
-			Mission missionTasksLeft = this.model.getMissionTasksLeft();
-			StringBuffer missionReport = new StringBuffer();
-			Task task;
-			int crossPoint = currentWholeMission.getTasks().size()
-					- missionTasksLeft.getTasks().size();
-
-			missionReport.append("Mission Status:\n");
-			for (int i = 0; i < currentWholeMission.getTasks().size(); i++) {
-				task = currentWholeMission.getTasks().get(i);
-
-				missionReport.append("Task " + i + " ");
-				if (task == null) {
-					throw new NullPointerException();
-				} else if (task instanceof ReachCircleTask) {
-					missionReport.append("ReachCircleTask");
-					missionReport.append(" zu "
-							+ ((ReachCircleTask) task).getCenter().toString());
-				} else if (task instanceof ReachPolygonTask) {
-					missionReport.append("ReachPolygonTask");
-					missionReport.append(" zu "
-							+ ((ReachPolygonTask) task).getPoints().size()
-							+ " Punkten");
-				} else if (task instanceof PrimitiveCommandTask) {
-					missionReport.append("PrimitiveCommandTask");
-					missionReport.append(" bei P"
-							+ ((PrimitiveCommandTask) task).getPropellor()
-							+ " R" + ((PrimitiveCommandTask) task).getRudder()
-							+ " S" + ((PrimitiveCommandTask) task).getSail());
-				} else if (task instanceof CompassCourseTask) {
-					missionReport.append("CompassCourseTask");
-					missionReport.append(" zu "
-							+ ((CompassCourseTask) task).getAngle() + "°");
-				} else if (task instanceof HoldAngleToWindTask) {
-					missionReport.append("HoldAngleToWindTask");
-					missionReport.append(" zu "
-							+ ((HoldAngleToWindTask) task).getAngle() + "°");
-				} else if (task instanceof RepeatTask) {
-					missionReport.append("RepeatTask");
-				} else if (task instanceof StopTask) {
-					missionReport.append("StopTask");
-				} else if (task instanceof BeatTask) {
-					missionReport.append("BeatTask");
-				}
-				if (i < crossPoint) {
-					missionReport.append(" FERTIG\n");
-				} else {
-					missionReport.append("\n");
-				}
-			}
-		}
-	}
-	*/
-
 	// Setter (values given by View to store in Model)
 	public void setCircleMarkerList(List<GPS> pointList) {
 		this.model.setCircleMarkerList(pointList);
@@ -310,9 +255,7 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.getGps().getPosition().getSatelites();
 	}
 
-	/**
-	 * says if ship is sailing or moves with
-	 */
+	@Deprecated
 	public boolean isSailMode() {
 		return this.model.isSailMode();
 	}
@@ -348,6 +291,7 @@ public class GUIControllerImpl implements GUIController {
 		this.model.setSail(this.worldModel.getActuatorModel().getSail().getValue());
 	}
 
+	@Deprecated
 	public void setSailMode(boolean sailMode) {
 		this.model.setSailMode(sailMode);
 	}

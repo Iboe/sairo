@@ -42,6 +42,10 @@ public interface GUIController {
 	 */
 	public void commitPrimitiveCommand(Planner planner, Integer propellor, Integer rudder, Integer sail);
 	
+	/**
+	 * Resets the actors of the boat.
+	 * @param planner
+	 */
 	public void resetActorsTask(Planner planner);
 	
 	// update routines
@@ -65,10 +69,14 @@ public interface GUIController {
 	//public void generateMissionReport();
 
 	// Setter (values given by View to store in Model)
+	
+	@Deprecated
 	public void setCircleMarkerList(List<GPS> pointList);
 
+	@Deprecated
 	public void setPolyList(List<MapPolygon> polyList);
 	
+	@Deprecated
 	public void setSailMode(boolean sailMode);
 
 	// Getter ("tunneled" from Model)
@@ -80,6 +88,7 @@ public interface GUIController {
 
 	public int getGpsSatelites();
 
+	@Deprecated
 	public boolean isSailMode();
 
 	public int getPropellor();
