@@ -22,8 +22,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.gui.GUIModel;
 import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.worldmodel.WorldModel;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -33,41 +35,42 @@ import de.fhb.sailboat.mission.Mission;
 
 public class Map extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 
-	private static final int NO_MARK = 0;
-	private static final int MARKER = 1;
-	private static final int POLYGON = 2;
-	private static final int EVERY_X_GPS_POSITION = 3;
+	protected static final int NO_MARK = 0;
+	protected static final int MARKER = 1;
+	protected static final int POLYGON = 2;
+	protected static final int EVERY_X_GPS_POSITION = 10;
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
-	private static final int EARTH_CIRCUMFERENCE = 40074000;
-	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
-	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+	protected static final int EARTH_CIRCUMFERENCE = 40074000;
+	protected static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
+	protected static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
 
-	private static final Logger LOG = LoggerFactory.getLogger(Map.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(Map.class);
 
-	private List<MapMarker> markerList;
-	private MapMarker currentPosition;
-	private List<MapMarker> obstacles;
+	protected List<MapMarker> markerList;
+	protected MapMarker currentPosition;
+	protected List<MapMarker> obstacles;
 
-	private List<GPS> positionHistoryList;
-	private MapPolygon positionHistory = null;
-	private List<MapPolygon> polygonList;
-	private List<MapMarker> polyHelpList;
-	private List<GPS> currentPoly = null;
+	protected List<GPS> positionHistoryList;
+	protected MapPolygon positionHistory = null;
+	protected List<MapPolygon> polygonList;
+	protected List<MapMarker> polyHelpList;
+	protected List<GPS> currentPoly = null;
+	protected ArrayList<MapMarker> windMarkerList;
 
-	private JMapViewer map;
+	protected JMapViewer map;
 
-	private int markerMode = NO_MARK;
-	private int followCounter = 0;
-	private int currentZoom;
+	protected int markerMode = NO_MARK;
+	protected int followCounter = 0;
+	protected int currentZoom;
 
-	private MissionVisualization visualize;
+	protected MissionVisualization visualize;
 
-	private static Color OBSTACLE_COLOR = Color.BLACK;
-	private static Color MAPMARKER_COLOR = Color.RED;
-	private static Color LINE_COLOR = Color.RED;
-	private static Color SHIP_COLOR = Color.CYAN;
+	protected static Color OBSTACLE_COLOR = Color.BLACK;
+	protected static Color MAPMARKER_COLOR = Color.RED;
+	protected static Color LINE_COLOR = Color.RED;
+	protected static Color SHIP_COLOR = Color.CYAN;
 
 	public Map() {
 		this.map = new JMapViewer();
@@ -77,6 +80,7 @@ public class Map extends JPanel {
 		this.positionHistoryList = new ArrayList<GPS>();
 		this.visualize = new MissionVisualization(map);
 		this.obstacles = new ArrayList<MapMarker>();
+		this.windMarkerList = new ArrayList<MapMarker>();
 	}
 
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
@@ -278,6 +282,66 @@ public class Map extends JPanel {
 		}
 	}
 
+	
+	
+	public void followBoat(GPS boatPosition,Wind windInformation){
+		
+		MapMarker marker =new WindMarkerLine(boatPosition.getLatitude(), boatPosition.getLongitude(), windInformation.getDirection());
+		this.windMarkerList.add(marker);
+		
+		if (map.getMapMarkerList().contains(currentPosition))
+			map.removeMapMarker(currentPosition);
+
+		currentPosition = new MapMarkerDot(SHIP_COLOR,
+				boatPosition.getLatitude(), boatPosition.getLongitude());
+
+		map.addMapMarker(currentPosition);
+
+
+		//nix drin
+		if (positionHistoryList.size() < 1) {
+			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
+					boatPosition.getLongitude()));
+		} else {
+			//zwei elemente
+			if (positionHistoryList.size() == 1) {
+
+				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
+						boatPosition.getLongitude()));
+
+				for (int i = positionHistoryList.size() - 2; i >= 0; i--)
+					positionHistoryList.add(positionHistoryList.get(i));
+
+				positionHistory = new MapPolygonImpl(positionHistoryList,
+						Color.GRAY, new BasicStroke(3));
+				map.addMapPolygon(positionHistory);
+
+			} else {
+				if (followCounter == EVERY_X_GPS_POSITION) {
+					map.removeMapPolygon(positionHistory);
+					int j = (positionHistoryList.size() / 2) + 1;
+					//j=wie viele elemente vonm zurückgegehn
+					while (j < positionHistoryList.size())
+						positionHistoryList.remove(j);
+
+					positionHistoryList.add(new GPS(boatPosition.getLatitude(),
+							boatPosition.getLongitude()));
+
+					for (int i = positionHistoryList.size() - 2; i >= 0; i--)
+						positionHistoryList.add(positionHistoryList.get(i));
+
+					positionHistory = new MapPolygonImpl(positionHistoryList,
+							LINE_COLOR, new BasicStroke(3));
+					followCounter = 0;
+					map.addMapPolygon(positionHistory);
+					map.addMapMarker(marker);
+				} else{
+					followCounter++;
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Creates a line with a node every (EVERY_X_GPS_POSITION + 1)
 	 * positions/function calls representing the positions of the boat in the
@@ -286,9 +350,10 @@ public class Map extends JPanel {
 	 * 
 	 * @param boatPosition
 	 *            current Position of the boat
+	 * @deprecated outdated, replaced by followBoat(GPS boatPosition, Wind windInformation)
 	 */
 	public void followBoat(GPS boatPosition) {
-
+		
 		if (map.getMapMarkerList().contains(currentPosition))
 			map.removeMapMarker(currentPosition);
 
@@ -330,8 +395,9 @@ public class Map extends JPanel {
 							LINE_COLOR, new BasicStroke(3));
 					followCounter = 0;
 					map.addMapPolygon(positionHistory);
-				} else
+				} else{
 					followCounter++;
+				}
 			}
 		}
 	}
@@ -376,12 +442,12 @@ public class Map extends JPanel {
 		removePolygonsFromMap();
 	}
 
-	private void removeMapMarkerFromMap() {
+	protected void removeMapMarkerFromMap() {
 		map.getMapMarkerList().clear();
 		this.getMarkerList().clear();
 	}
 
-	private void removePolygonsFromMap() {
+	protected void removePolygonsFromMap() {
 		map.getMapPolygonList().clear();
 		this.getPolygonList().clear();
 		currentPoly = null;
@@ -392,7 +458,7 @@ public class Map extends JPanel {
 	 * 
 	 * @param gps
 	 */
-	private void navigateTo(GPS gps) {
+	protected void navigateTo(GPS gps) {
 		navigateTo(gps, 18);
 	}
 
@@ -402,7 +468,7 @@ public class Map extends JPanel {
 	 * @param gps
 	 * @param zoomLevel
 	 */
-	private void navigateTo(GPS gps, int zoomLevel) {
+	protected void navigateTo(GPS gps, int zoomLevel) {
 		map.setDisplayPositionByLatLon(gps.getLatitude(), gps.getLongitude(),
 				zoomLevel);
 	}

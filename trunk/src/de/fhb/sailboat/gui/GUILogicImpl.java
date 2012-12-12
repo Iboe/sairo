@@ -232,7 +232,10 @@ public class GUILogicImpl implements GUILogic {
      */
     public void updateLogic() {
         controller.updateAll();
+//        missionMap.followBoat(controller.getGps().getPosition());
         missionMap.followBoat(controller.getGps().getPosition());
+        //TODO
+        missionMap.followBoat(controller.getGps().getPosition(), controller.getWind().getWind());
 
         // visualize mission if mission is present and has changed
         //TODO beat paul into writing the promised overload for visualize

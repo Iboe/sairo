@@ -826,7 +826,7 @@ public class GUInterface extends javax.swing.JFrame {
 		}
 		
 		
-//    	this.guiLogic.startEmulator("TestSave.sem");
+    	this.guiLogic.startEmulator("TestSave.sem");
 	}
 	
 	protected void regulateEmulationSpeed(ActionEvent evt) {
