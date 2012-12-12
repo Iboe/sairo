@@ -118,14 +118,21 @@ public class GpsSensor {
 										
 										
 										//XXX Hier Moegliche Fehlerursache bezgl falscher Gescwhindigkeitswerte
-										double speed = Double.parseDouble(myNmea[7]) * 0.51444;
-										DecimalFormat f = new DecimalFormat(
-													"#0,00");
-										
-										
-										//Micha: Just parsing the speed and saving it in lastSpeed. 
-										//		 That's assigned to the GPS Object generated for latitude and longitude in the first if-clause 
-										lastSpeed=Double.parseDouble(f.format(speed));	
+										//umrechnung von Knoten auf m/s
+										if(!myNmea[7].isEmpty()){
+											
+											double speed = Double.parseDouble(myNmea[7]) * 0.51444;
+											DecimalFormat f = new DecimalFormat(
+														"#0,00");
+											
+											
+											//Micha: Just parsing the speed and saving it in lastSpeed. 
+											//		 That's assigned to the GPS Object generated for latitude and longitude in the first if-clause 
+											lastSpeed=Double.parseDouble(f.format(speed));	
+											
+											
+										}
+
 										
 									}
 								}
