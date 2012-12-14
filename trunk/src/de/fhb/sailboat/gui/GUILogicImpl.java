@@ -20,7 +20,17 @@ import de.fhb.sailboat.mission.Task;
  */
 public class GUILogicImpl implements GUILogic {
 
-    public final static int UPDATE_RATE = 500;                      // sleep in ms after each gui loop
+
+	public static final int LIVE_MODUS = 0;
+	
+	public static final int EMULATOR_MODUS = 1;
+	
+	public static final int PLANNING_MODUS = 2;
+	
+	public static final int SIMULATION_MODUS = 3;
+    
+    public final static long GUI_UPDATE_RATE = 20;	// sleep in ms after each gui loop
+	
     final static public String GPS_DECIMAL_FORMAT = "00.000000";    // format string for GPS longitude/ latitude display style
     final static public String GPS_UNIT = "°";                      // this will be appended to longitude/ latitude display strings
     final static public String COMPASS_UNIT = "°";                  // this will be appended to azimuth, pitch & roll display strings
@@ -232,10 +242,7 @@ public class GUILogicImpl implements GUILogic {
      */
     public void updateLogic() {
         controller.updateAll();
-//        missionMap.followBoat(controller.getGps().getPosition());
-        missionMap.followBoat(controller.getGps().getPosition());
-        //TODO
-        missionMap.followBoat(controller.getGps().getPosition(), controller.getWind().getWind());
+        missionMap.followBoat(controller.getGps().getPosition(), controller.getWind().getWind(), controller.getCompass().getCompass());
 
         // visualize mission if mission is present and has changed
         //TODO beat paul into writing the promised overload for visualize

@@ -30,7 +30,7 @@ public class GUInterface extends javax.swing.JFrame {
 	/**
 	 * saves the GUImode
 	 */
-	private int modus	= GUILogic.LIVE_MODUS;
+	private int modus	= GUILogicImpl.LIVE_MODUS;
 
 	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
@@ -830,7 +830,8 @@ public class GUInterface extends javax.swing.JFrame {
 	}
 	
 	protected void regulateEmulationSpeed(ActionEvent evt) {
-		//TODO
+		//TODO hierbei Anpassung von GUi-Aktualisierungsrate start bei 500, min 20, max 800
+		//in 20er schritten
 	}
 
 	private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -1041,18 +1042,18 @@ public class GUInterface extends javax.swing.JFrame {
 		//TODO  Umschaltung der Modi
 		switch(modus){
 		
-		case GUILogic.LIVE_MODUS: ;
+		case GUILogicImpl.LIVE_MODUS: ;
 		break;
 		
-		case GUILogic.EMULATOR_MODUS: ;
+		case GUILogicImpl.EMULATOR_MODUS: ;
 //		mainLayout.removeLayoutComponent(component)
 //		mainLayout.addLayoutComponent(component, constraints);
 		break;
 		
-		case GUILogic.PLANNING_MODUS: ;
+		case GUILogicImpl.PLANNING_MODUS: ;
 		break;
 		
-		case GUILogic.SIMULATION_MODUS: ;
+		case GUILogicImpl.SIMULATION_MODUS: ;
 		break;
 		
 		}
@@ -1097,7 +1098,7 @@ public class GUInterface extends javax.swing.JFrame {
                     }
 
                     try {
-                        Thread.sleep(GUILogic.GUI_UPDATE_RATE);
+                        Thread.sleep(GUILogicImpl.GUI_UPDATE_RATE);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

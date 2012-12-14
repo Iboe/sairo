@@ -13,15 +13,7 @@ import de.fhb.sailboat.mission.Mission;
 public interface GUILogic {
 	
 	
-	public static final int LIVE_MODUS = 0;
-	
-	public static final int EMULATOR_MODUS = 1;
-	
-	public static final int PLANNING_MODUS = 2;
-	
-	public static final int SIMULATION_MODUS = 3;
-    
-    public final static long GUI_UPDATE_RATE = 200;	// sleep in ms after each gui loop
+
     
     Planner planner = null;;						// the Planner is used for sending mission sets
     GUIController controller = null;				// the GUIController is used for getting and setting values from and to the world model/ local database

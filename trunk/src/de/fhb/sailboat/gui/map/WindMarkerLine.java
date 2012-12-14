@@ -5,29 +5,57 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.Stroke;
+import java.awt.geom.AffineTransform;
 
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
+import de.fhb.sailboat.data.Compass;
+import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.data.Wind;
+
 public class WindMarkerLine implements MapMarker{
 
-    double lat;
-    double lon;
-    int windDirection;
-    Color color;
-	private Stroke stroke;
+    private double lat;
+    private double lon;
+    private int windDirection;
+    private double windSpeed;
+    private double compassDirection;
+    private double realWindDirection;
+   
+    private Color color;
+    private Stroke stroke;
 
-    public WindMarkerLine(double lat, double lon, int windDirection) {
-        this(Color.BLACK, lat, lon, windDirection);
+    public WindMarkerLine(GPS gps, Wind wind, Compass compass) {
+        this(Color.BLACK, gps.getLatitude(), gps.getLongitude(), wind.getDirection(),wind.getSpeed(), compass.getAzimuth());
     }
 
-    public WindMarkerLine(Color color, double lat, double lon, int windDirection) {
+    public WindMarkerLine(Color color, double lat, double lon, int windDirection, double windSpeed, double compassDirection) {
         super();
         this.color = color;
         this.lat = lat;
         this.lon = lon;
         this.windDirection=windDirection;
+        this.windSpeed=windSpeed;
+        this.compassDirection=compassDirection;
+        this.realWindDirection=this.calcRealwindDirection();
+        
         this.stroke=new BasicStroke(2);
+    }
+    
+    private double calcRealwindDirection(){
+    	
+    	double real=windDirection -(int)(compassDirection);
+
+    	
+    	if(real<0)
+    		real=360-real;
+//    	System.out.println("Grad: "+real);
+    	real= (((2*Math.PI)/360)*real);
+//    	System.out.println("Radmaß: "+ real);
+    	
+    	return real;
     }
 
     public double getLat() {
@@ -39,10 +67,10 @@ public class WindMarkerLine implements MapMarker{
     }
 
     public void paint(Graphics g, Point position) {
-    	//TODO aendern Berechnung der echten winrichtung darstellung nach Richtung und Staerke
-        int size_h = 4;
-        int size = size_h * 2;
+        
         Color oldColor= g.getColor();
+        AffineTransform origTransform = ((Graphics2D) g).getTransform();   
+        
         g.setColor(color);
         
 		Stroke oldStroke = null;
@@ -53,14 +81,20 @@ public class WindMarkerLine implements MapMarker{
 		}
 		
 		/*************************************************************************/
-//        g.drawLine(position.x - size_h, position.y - size_h, size, size);
-        g.drawLine(position.x , position.y , position.x+10, position.y+10);
-        g.setColor(Color.BLACK);
-//        g.drawOval(position.x - size_h, position.y - size_h, size, size);
+		
+        AffineTransform transformer= new AffineTransform();
+        transformer.translate(position.x, position.y);
+        transformer.rotate(this.realWindDirection);
+        ((Graphics2D) g).setTransform(transformer);
+
+        //TODO mit Windstaerke?
+//        g.drawLine(0 , 0 , 0,-(int)(windSpeed*10));
+        g.drawLine(0 , 0 , 0,-20);
+        g.fillOval(-3, -22, 5, 5);
+        
+		/*************************************************************************/
+        ((Graphics2D) g).setTransform(origTransform);
         g.setColor(oldColor);
-        
-        
-        /******************************************************/
 		if (g instanceof Graphics2D) {
 			((Graphics2D) g).setStroke(oldStroke);
 		}
@@ -68,8 +102,7 @@ public class WindMarkerLine implements MapMarker{
 
     @Override
     public String toString() {
-    	//TODO aendern
-        return "MapMarker at " + lat + " " + lon;
+        return "WindMapMarker at " + lat + " " + lon +" "+realWindDirection;
     }
 
 }

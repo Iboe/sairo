@@ -21,6 +21,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.gui.GUIModel;
@@ -284,9 +285,9 @@ public class Map extends JPanel {
 
 	
 	
-	public void followBoat(GPS boatPosition,Wind windInformation){
+	public void followBoat(GPS boatPosition, Wind windInformation, Compass compassInformation){
 		
-		MapMarker marker =new WindMarkerLine(boatPosition.getLatitude(), boatPosition.getLongitude(), windInformation.getDirection());
+		MapMarker marker =new WindMarkerLine(boatPosition, windInformation, compassInformation);
 		this.windMarkerList.add(marker);
 		
 		if (map.getMapMarkerList().contains(currentPosition))
