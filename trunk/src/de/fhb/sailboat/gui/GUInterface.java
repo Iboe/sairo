@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.emulator.Emulator;
 import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
+import de.fhb.sailboat.missionplayer.Player;
 
 /**
  * A slim general user interface for an autonomous sailboat. Requires a correct GUILogic class to be

@@ -1,4 +1,4 @@
-package de.fhb.sailboat.emulator;
+package de.fhb.sailboat.missionplayer;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

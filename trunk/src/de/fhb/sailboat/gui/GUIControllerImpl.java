@@ -5,7 +5,6 @@ import java.util.List;
 
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.emulator.Emulator;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
@@ -16,6 +15,7 @@ import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
+import de.fhb.sailboat.missionplayer.Player;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -52,7 +52,7 @@ public class GUIControllerImpl implements GUIController {
 
 	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
 	
-	private Emulator emulator;
+	private Player emulator;
 	
 	public void setUpdateIntervall(int miliSecs) {
 		if (miliSecs <= GUI_UPDATE_RATE_MAX && miliSecs >= GUI_UPDATE_RATE_MIN) {
@@ -329,7 +329,7 @@ public class GUIControllerImpl implements GUIController {
 
 	@Override
 	public void startEmulation(String filePath) {
-		emulator=new Emulator(this.worldModel, filePath);
+		emulator=new Player(this.worldModel, filePath);
 		emulator.start();
 	}
 

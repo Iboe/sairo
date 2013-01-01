@@ -1,4 +1,4 @@
-package de.fhb.sailboat.emulator;
+package de.fhb.sailboat.missionplayer;
 
 import java.util.Date;
 import java.util.List;
@@ -15,7 +15,7 @@ import de.fhb.sailboat.worldmodel.WorldModel;
  * @author Andy Klay <klay@fh-brandenburg.de>
  * 
  */
-public class Emulator extends Thread {
+public class Player extends Thread {
 
 	private WorldModel worldModel;
 	private String filePath;
@@ -34,7 +34,7 @@ public class Emulator extends Thread {
 	 * @param filePath
 	 *            - Path to Mapped-Model-File (prepared Log-Data)
 	 */
-	public Emulator(WorldModel worldModel, String filePath) {
+	public Player(WorldModel worldModel, String filePath) {
 		super();
 		this.worldModel = worldModel;
 		this.filePath = filePath;

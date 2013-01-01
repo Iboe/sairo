@@ -10,7 +10,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import de.fhb.sailboat.emulator.Emulator;
+import de.fhb.sailboat.missionplayer.Player;
 
 
 /**
@@ -166,14 +166,14 @@ public class PlayerDialog extends RootDialog{
 				String name = filePath.getName().toLowerCase();
 				if (filePath.isDirectory())
 					return true;
-				if (name.endsWith("." + Emulator.EMULATION_FILES))
+				if (name.endsWith("." + Player.EMULATION_FILES))
 					return true;
 				return false;
 			}
 
 			@Override
 			public String getDescription() {
-				return  "." + Emulator.EMULATION_FILES;
+				return  "." + Player.EMULATION_FILES;
 			}
 		};
 		

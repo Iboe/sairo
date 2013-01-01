@@ -1,4 +1,4 @@
-package de.fhb.sailboat.emulator;
+package de.fhb.sailboat.missionplayer;
 
 import java.util.Date;
 import java.util.List;
