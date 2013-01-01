@@ -40,16 +40,9 @@ public class GUInterface extends javax.swing.JFrame {
 
 	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
-	private JMenuItem emulatorMenuStart;
-	private JMenuItem emulatorMenuStop;
-	private JMenuItem emulatorMenuPause;
-	private JMenuItem emulatorMenuPlay;
-
-	private JPanel emulatorPanel;
 	
 	private ParallelGroup liveModeGroup;
 	private ParallelGroup actualModeGroup;
-	private ParallelGroup testModeGroup;
 	
 	private javax.swing.JPanel testPanel;
 
@@ -68,7 +61,6 @@ public class GUInterface extends javax.swing.JFrame {
         guiLogic = new GUILogicImpl(planner);           // GUILogic classes may be switched here
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
         guiLoop();
-        
         
 		//Fenster wird in der Mitte des Bildschirms platziert
 		Point p = RootDialog.calculateCenter( new Rectangle( new Point( 0, 0 ), Toolkit.getDefaultToolkit()
@@ -149,14 +141,14 @@ public class GUInterface extends javax.swing.JFrame {
         missionMenuMissionCreator = new javax.swing.JMenuItem();
         
         emulatorMenu= new javax.swing.JMenu();
-        emulatorMenuStart = new javax.swing.JMenuItem();
-        emulatorMenuStop = new javax.swing.JMenuItem();
-        emulatorMenuPause= new javax.swing.JMenuItem();
-        emulatorMenuPlay = new javax.swing.JMenuItem();
+//        emulatorMenuStart = new javax.swing.JMenuItem();
+//        emulatorMenuStop = new javax.swing.JMenuItem();
+//        emulatorMenuPause= new javax.swing.JMenuItem();
+//        emulatorMenuPlay = new javax.swing.JMenuItem();
         emulatorMenuView = new javax.swing.JCheckBoxMenuItem();
         
         
-        emulatorPanel = new javax.swing.JPanel();
+//        emulatorPanel = new javax.swing.JPanel();
 
         infoDialog.setTitle("SaiilboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 305));
@@ -463,7 +455,7 @@ public class GUInterface extends javax.swing.JFrame {
         gpsSatelitesDisplayLabel.setMinimumSize(new java.awt.Dimension(70, 14));
         gpsSatelitesDisplayLabel.setPreferredSize(new java.awt.Dimension(70, 14));
         
-        emulatorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Emulator"));
+//        emulatorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Emulator"));
 
         javax.swing.GroupLayout gpsPanelLayout = new javax.swing.GroupLayout(gpsPanel);
         gpsPanel.setLayout(gpsPanelLayout);
@@ -754,39 +746,6 @@ public class GUInterface extends javax.swing.JFrame {
         menuBar.add(missionMenu);
         
         emulatorMenu.setText("Player");
-        emulatorMenuStart.setText("Start Emulation");
-        emulatorMenuStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startEmulation(evt);
-            }
-
-        });
-        
-        emulatorMenuPause.setText("PAUSE");
-        emulatorMenuPause.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pauseEmulation(evt);
-            }
-
-        });
-        
-        emulatorMenuStop.setText("STOP");
-        emulatorMenuStop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopEmulation(evt);
-            }
-
-        });
-        
-        emulatorMenuPlay.setText("PLAY");
-        emulatorMenuPlay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playEmulation(evt);
-            }
-
-        });
-        
-
         emulatorMenuView.setText("Playersteuerung");
         emulatorMenuView.addItemListener(new java.awt.event.ItemListener() {
 			@Override
@@ -795,14 +754,7 @@ public class GUInterface extends javax.swing.JFrame {
 			}
         });
         
-        
-        
-        missionMenu.add(missionMenuMissionCreator);
-        
-        emulatorMenu.add(emulatorMenuStart);
-        emulatorMenu.add(emulatorMenuPause);
-        emulatorMenu.add(emulatorMenuStop);
-        emulatorMenu.add(emulatorMenuPlay);
+        missionMenu.add(missionMenuMissionCreator); 
         emulatorMenu.add(emulatorMenuView);
         menuBar.add(emulatorMenu);
         
@@ -811,16 +763,10 @@ public class GUInterface extends javax.swing.JFrame {
 
         mainLayout = new javax.swing.GroupLayout(getContentPane());
         
-       //XXX Here
        liveModeGroup=mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(gpsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE);
-       
-//       testModeGroup=mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//               .addComponent(testPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-//               .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-//               .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE);
        
        actualModeGroup=liveModeGroup;
         
@@ -867,28 +813,6 @@ public class GUInterface extends javax.swing.JFrame {
 		}else{
 	    	playerDialog.setVisible(false);
 		}
-	}
-
-	protected void playEmulation(ActionEvent evt) {
-		//TODO delete
-	}
-
-	protected void stopEmulation(ActionEvent evt) {
-		//TODO delete
-	}
-
-	protected void pauseEmulation(ActionEvent evt) {
-		//TODO delete
-	}
-
-	protected void startEmulation(ActionEvent evt) {
-		
-		//TODO delete
-	}
-	
-	protected void regulateEmulationSpeed(ActionEvent evt) {
-		//TODO hierbei Anpassung von GUi-Aktualisierungsrate start bei 500, min 20, max 800
-		//in 20er schritten
 	}
 
 	private void fileMenuCloseActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -1089,35 +1013,35 @@ public class GUInterface extends javax.swing.JFrame {
     }
     
     
-	/**
-	 * sets the modus of the GUI
-	 * 
-	 * @param modus - constants are in the interface "GUILogic"
-	 */
-	private void setGUIModus(int modus) {
-		
-		//TODO  Umschaltung der Modi
-		switch(modus){
-		
-		case GUILogicImpl.LIVE_MODUS: ;
-		break;
-		
-		case GUILogicImpl.EMULATOR_MODUS: ;
-//		mainLayout.removeLayoutComponent(component)
-//		mainLayout.addLayoutComponent(component, constraints);
-		break;
-		
-		case GUILogicImpl.PLANNING_MODUS: ;
-		break;
-		
-		case GUILogicImpl.SIMULATION_MODUS: ;
-		break;
-		
-		}
-		
-//		.....setVisible( true );
-//		aktualisiereAnzeige();
-	}
+//	/**
+//	 * sets the modus of the GUI
+//	 * 
+//	 * @param modus - constants are in the interface "GUILogic"
+//	 */
+//	private void setGUIModus(int modus) {
+//		
+//		//TODO  Umschaltung der Modi
+//		switch(modus){
+//		
+//		case GUILogicImpl.LIVE_MODUS: ;
+//		break;
+//		
+//		case GUILogicImpl.EMULATOR_MODUS: ;
+////		mainLayout.removeLayoutComponent(component)
+////		mainLayout.addLayoutComponent(component, constraints);
+//		break;
+//		
+//		case GUILogicImpl.PLANNING_MODUS: ;
+//		break;
+//		
+//		case GUILogicImpl.SIMULATION_MODUS: ;
+//		break;
+//		
+//		}
+//		
+////		.....setVisible( true );
+////		aktualisiereAnzeige();
+//	}
 
     /**
      * Creates and starts up a thread which updates the values to be displayed

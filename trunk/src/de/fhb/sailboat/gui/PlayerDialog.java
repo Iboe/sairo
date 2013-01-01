@@ -4,6 +4,7 @@
  */
 package de.fhb.sailboat.gui;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -47,6 +48,7 @@ public class PlayerDialog extends RootDialog{
         openButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        loadTestButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,27 +82,36 @@ public class PlayerDialog extends RootDialog{
 
         jLabel1.setText("Playing-Speed");
 
+        loadTestButton.setText("loadTest");
+        loadTestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadTestButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(openButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(playButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pauseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(stopButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(speedSilder, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(speedSilder, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(openButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(playButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(pauseButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(stopButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(loadTestButton))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,18 +125,23 @@ public class PlayerDialog extends RootDialog{
                     .addComponent(playButton)
                     .addComponent(pauseButton)
                     .addComponent(openButton)
-                    .addComponent(stopButton))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(stopButton)
+                    .addComponent(loadTestButton))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	private void loadTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestButtonActionPerformed
+		this.controller.startEmulation("TestSave.sem");
+	}//GEN-LAST:event_loadTestButtonActionPerformed
+
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		this.controller.playEmulation();
 	}
 
-	private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
+	private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
 		JFileChooser fileChooser;	
 		fileChooser = new JFileChooser();
 		fileChooser.setAcceptAllFileFilterUsed( false );
@@ -148,15 +164,11 @@ public class PlayerDialog extends RootDialog{
 		};
 		
 		fileChooser.setFileFilter(emulationFileFilter);
-//		fileChooser.setCurrentDirectory( new File( ...) ) )
-		
 		if ( fileChooser.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION ) {
 			if ( fileChooser.getSelectedFile().toString()  != null ) {
 				this.controller.startEmulation(fileChooser.getSelectedFile().toString());
 			}
-		}
-		
-//		this.controller.startEmulation("TestSave.sem");   	
+		}	
 	}
 
 	private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,58 +178,17 @@ public class PlayerDialog extends RootDialog{
 	private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
 		this.controller.stopEmulation();
 	}
+	
+	protected void regulateEmulationSpeed(ActionEvent evt) {
+		//TODO hierbei Anpassung von GUi-Aktualisierungsrate start bei 500, min 20, max 800
+		//in 20er schritten
+	}
 
-//	/**
-//	 * @param args the command line arguments
-//	 */
-//	public static void main(String args[]) {
-//		/*
-//		 * Set the Nimbus look and feel
-//		 */
-//		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /*
-//		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-//		 * default look and feel. For details see
-//		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//		 */
-//		try {
-//			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//				if ("Nimbus".equals(info.getName())) {
-//					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//					break;
-//				}
-//			}
-//		} catch (ClassNotFoundException ex) {
-//			java.util.logging.Logger.getLogger(PlayerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (InstantiationException ex) {
-//			java.util.logging.Logger.getLogger(PlayerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (IllegalAccessException ex) {
-//			java.util.logging.Logger.getLogger(PlayerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//			java.util.logging.Logger.getLogger(PlayerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		}
-//		//</editor-fold>
-//
-//		/*
-//		 * Create and display the dialog
-//		 */
-//		java.awt.EventQueue.invokeLater(new Runnable() {
-//
-//			public void run() {
-//				PlayerDialog dialog = new PlayerDialog(new javax.swing.JFrame(), true);
-//				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//
-//					@Override
-//					public void windowClosing(java.awt.event.WindowEvent e) {
-//						System.exit(0);
-//					}
-//				});
-//				dialog.setVisible(true);
-//			}
-//		});
-//	}
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton loadTestButton;
     private javax.swing.JButton openButton;
     private javax.swing.JButton pauseButton;
     private javax.swing.JButton playButton;
