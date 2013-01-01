@@ -118,4 +118,10 @@ public interface GUIController {
 	public void pauseEmulation();
 
 	public void playEmulation();
+	
+	public void regulateEmulationSpeed(int value);
+	
+	public int getActualUpdateRate();
+	
+	public void setActualUpdateRateBackToDefault();
 }

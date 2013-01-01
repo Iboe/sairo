@@ -20,11 +20,11 @@ public class Emulator extends Thread {
 	private WorldModel worldModel;
 	private String filePath;
 	private LogConverter logFileConverter;
-	private long speedInterval = 20;
+	private int speedInterval = SPEED_INTERVAL_MIN;
 	private boolean isPaused = false;
 
-	private static long SPEED_INTERVAL_MAX = 500;
-	private static long SPEED_INTERVAL_MIN = 50;
+	private static int SPEED_INTERVAL_MAX = 500;
+	private static int SPEED_INTERVAL_MIN = 50;
 	public static final String EMULATION_FILES = "sem";
 
 	/**
@@ -88,7 +88,7 @@ public class Emulator extends Thread {
 	 * 
 	 * @param miliSecs
 	 */
-	public void setSpeedIntervall(long miliSecs) {
+	public void setSpeedIntervall(int miliSecs) {
 		if (miliSecs <= SPEED_INTERVAL_MAX && miliSecs >= SPEED_INTERVAL_MIN) {
 			this.speedInterval = miliSecs;
 		}

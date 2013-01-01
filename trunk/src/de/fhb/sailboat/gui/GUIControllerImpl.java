@@ -30,6 +30,11 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class GUIControllerImpl implements GUIController {
 
+    public final static int GUI_UPDATE_RATE_DEFAULT = 200;	// sleep in ms after each gui loop
+    private int actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
+	private static int GUI_UPDATE_RATE_MAX = 500;
+	private static int GUI_UPDATE_RATE_MIN = 20;
+	
 	// Constants
 	public final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward
 	public final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));	// propellor off
@@ -48,6 +53,16 @@ public class GUIControllerImpl implements GUIController {
 	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
 	
 	private Emulator emulator;
+	
+	public void setUpdateIntervall(int miliSecs) {
+		if (miliSecs <= GUI_UPDATE_RATE_MAX && miliSecs >= GUI_UPDATE_RATE_MIN) {
+			this.actualUpdateRate = miliSecs;
+		}
+	}
+
+	public int getActualUpdateRate() {
+		return actualUpdateRate;
+	}
 
 	public GUIControllerImpl() {
 		this.model = new GUIModelImpl();
@@ -331,5 +346,16 @@ public class GUIControllerImpl implements GUIController {
 	@Override
 	public void playEmulation() {
 		emulator.play();
+	}
+
+	@Override
+	public void regulateEmulationSpeed(int value) {
+		emulator.setSpeedIntervall(value);
+		this.setUpdateIntervall(value);
+	}
+
+	@Override
+	public void setActualUpdateRateBackToDefault() {
+	    actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
 	}
 }

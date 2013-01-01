@@ -284,7 +284,16 @@ public class Map extends JPanel {
 	}
 
 	
-	
+	/**
+	 * Creates a line with a node every (EVERY_X_GPS_POSITION + 1)
+	 * positions/function calls representing the positions of the boat in the
+	 * current mission. Should be reset with removeTrail() at the start of a new
+	 * mission.
+	 * 
+	 * @param boatPosition
+	 *            current Position of the boat
+	 *            
+	 */
 	public void followBoat(GPS boatPosition, Wind windInformation, Compass compassInformation){
 		
 		MapMarker marker =new WindMarkerLine(boatPosition, windInformation, compassInformation);
@@ -336,66 +345,6 @@ public class Map extends JPanel {
 					followCounter = 0;
 					map.addMapPolygon(positionHistory);
 					map.addMapMarker(marker);
-				} else{
-					followCounter++;
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Creates a line with a node every (EVERY_X_GPS_POSITION + 1)
-	 * positions/function calls representing the positions of the boat in the
-	 * current mission. Should be reset with removeTrail() at the start of a new
-	 * mission.
-	 * 
-	 * @param boatPosition
-	 *            current Position of the boat
-	 * @deprecated outdated, replaced by followBoat(GPS boatPosition, Wind windInformation)
-	 */
-	public void followBoat(GPS boatPosition) {
-		
-		if (map.getMapMarkerList().contains(currentPosition))
-			map.removeMapMarker(currentPosition);
-
-		currentPosition = new MapMarkerDot(SHIP_COLOR,
-				boatPosition.getLatitude(), boatPosition.getLongitude());
-
-		map.addMapMarker(currentPosition);
-
-		if (positionHistoryList.size() < 1) {
-			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-					boatPosition.getLongitude()));
-		} else {
-			if (positionHistoryList.size() == 1) {
-
-				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-						boatPosition.getLongitude()));
-
-				for (int i = positionHistoryList.size() - 2; i >= 0; i--)
-					positionHistoryList.add(positionHistoryList.get(i));
-
-				positionHistory = new MapPolygonImpl(positionHistoryList,
-						Color.GRAY, new BasicStroke(3));
-				map.addMapPolygon(positionHistory);
-
-			} else {
-				if (followCounter == EVERY_X_GPS_POSITION) {
-					map.removeMapPolygon(positionHistory);
-					int j = (positionHistoryList.size() / 2) + 1;
-					while (j < positionHistoryList.size())
-						positionHistoryList.remove(j);
-
-					positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-							boatPosition.getLongitude()));
-
-					for (int i = positionHistoryList.size() - 2; i >= 0; i--)
-						positionHistoryList.add(positionHistoryList.get(i));
-
-					positionHistory = new MapPolygonImpl(positionHistoryList,
-							LINE_COLOR, new BasicStroke(3));
-					followCounter = 0;
-					map.addMapPolygon(positionHistory);
 				} else{
 					followCounter++;
 				}

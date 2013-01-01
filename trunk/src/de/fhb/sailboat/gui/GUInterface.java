@@ -76,8 +76,6 @@ public class GUInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
     	
-
-
         infoDialog = new javax.swing.JDialog();
         infoTabPlane = new javax.swing.JTabbedPane();
         systemTabPanel = new javax.swing.JPanel();
@@ -750,7 +748,7 @@ public class GUInterface extends javax.swing.JFrame {
         emulatorMenuView.addItemListener(new java.awt.event.ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				playerControlDialogChanged( e);
+				playerControlDialogChanged(e);
 			}
         });
         
@@ -812,6 +810,7 @@ public class GUInterface extends javax.swing.JFrame {
 	    	playerDialog.setVisible(true);
 		}else{
 	    	playerDialog.setVisible(false);
+	    	this.guiLogic.getController().setActualUpdateRateBackToDefault();
 		}
 	}
 
@@ -1079,7 +1078,7 @@ public class GUInterface extends javax.swing.JFrame {
                     }
 
                     try {
-                        Thread.sleep(GUILogicImpl.GUI_UPDATE_RATE);
+                        Thread.sleep(guiLogic.getController().getActualUpdateRate());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

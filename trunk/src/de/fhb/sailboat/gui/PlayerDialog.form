@@ -86,6 +86,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JSlider" name="speedSilder">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="speedSilderStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="openButton">
       <Properties>

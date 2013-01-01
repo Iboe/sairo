@@ -29,7 +29,7 @@ public class GUILogicImpl implements GUILogic {
 	
 	public static final int SIMULATION_MODUS = 3;
     
-    public final static long GUI_UPDATE_RATE = 20;	// sleep in ms after each gui loop
+
 	
     final static public String GPS_DECIMAL_FORMAT = "00.000000";    // format string for GPS longitude/ latitude display style
     final static public String GPS_UNIT = "°";                      // this will be appended to longitude/ latitude display strings
@@ -41,6 +41,7 @@ public class GUILogicImpl implements GUILogic {
     private Map missionMap;											// the Map is used to visualize the missionArea and landmarks/ points of interest
     private boolean testMode;                                       // if true random values will be generated for each update, instead of trying to retrieve true values (only hard code setting)
     private DecimalFormat gpsDecimalFormat;							// used to format display strings
+
 
     /**
      * Constructs and initializes the GUILogic with the assigned planner

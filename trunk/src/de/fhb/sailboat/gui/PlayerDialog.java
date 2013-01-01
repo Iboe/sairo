@@ -45,6 +45,10 @@ public class PlayerDialog extends RootDialog{
         playButton = new javax.swing.JButton();
         pauseButton = new javax.swing.JButton();
         speedSilder = new javax.swing.JSlider();
+        speedSilder.setMaximum(20);
+        speedSilder.setMaximum(200);
+        
+        
         openButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -63,6 +67,12 @@ public class PlayerDialog extends RootDialog{
         pauseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pauseButtonActionPerformed(evt);
+            }
+        });
+
+        speedSilder.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                speedSilderStateChanged(evt);
             }
         });
 
@@ -137,6 +147,10 @@ public class PlayerDialog extends RootDialog{
 		this.controller.startEmulation("TestSave.sem");
 	}//GEN-LAST:event_loadTestButtonActionPerformed
 
+	private void speedSilderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSilderStateChanged
+		this.controller.regulateEmulationSpeed(speedSilder.getValue());
+	}//GEN-LAST:event_speedSilderStateChanged
+
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		this.controller.playEmulation();
 	}
@@ -178,13 +192,6 @@ public class PlayerDialog extends RootDialog{
 	private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
 		this.controller.stopEmulation();
 	}
-	
-	protected void regulateEmulationSpeed(ActionEvent evt) {
-		//TODO hierbei Anpassung von GUi-Aktualisierungsrate start bei 500, min 20, max 800
-		//in 20er schritten
-	}
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
