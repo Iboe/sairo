@@ -1,8 +1,14 @@
 package de.fhb.sailboat.gui;
 
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.io.File;
 
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -40,6 +46,16 @@ public class GUInterface extends javax.swing.JFrame {
 	private JMenuItem emulatorMenuPlay;
 
 	private JPanel emulatorPanel;
+	
+	private ParallelGroup liveModeGroup;
+	private ParallelGroup actualModeGroup;
+	private ParallelGroup testModeGroup;
+	
+	private javax.swing.JPanel testPanel;
+
+	private JCheckBoxMenuItem emulatorMenuView;
+
+	private PlayerDialog playerDialog;
 
     /**
      * Initializes the GUInterface form, connects to a chosen Planner and
@@ -52,6 +68,12 @@ public class GUInterface extends javax.swing.JFrame {
         guiLogic = new GUILogicImpl(planner);           // GUILogic classes may be switched here
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
         guiLoop();
+        
+        
+		//Fenster wird in der Mitte des Bildschirms platziert
+		Point p = RootDialog.calculateCenter( new Rectangle( new Point( 0, 0 ), Toolkit.getDefaultToolkit()
+				.getScreenSize() ), getSize() );
+		this.setLocation( p );
     }
 
     @SuppressWarnings("unchecked")
@@ -61,6 +83,8 @@ public class GUInterface extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+    	
+
 
         infoDialog = new javax.swing.JDialog();
         infoTabPlane = new javax.swing.JTabbedPane();
@@ -89,6 +113,7 @@ public class GUInterface extends javax.swing.JFrame {
         propellorMaxRadioButton = new javax.swing.JRadioButton();
         propellorRadioGroup = new javax.swing.ButtonGroup();
         gpsPanel = new javax.swing.JPanel();
+        testPanel = new javax.swing.JPanel();
         gpsLongitudeLabel = new javax.swing.JLabel();
         gpsLongitudeDisplayLabel = new javax.swing.JLabel();
         gpsLatitudeLabel = new javax.swing.JLabel();
@@ -128,6 +153,7 @@ public class GUInterface extends javax.swing.JFrame {
         emulatorMenuStop = new javax.swing.JMenuItem();
         emulatorMenuPause= new javax.swing.JMenuItem();
         emulatorMenuPlay = new javax.swing.JMenuItem();
+        emulatorMenuView = new javax.swing.JCheckBoxMenuItem();
         
         
         emulatorPanel = new javax.swing.JPanel();
@@ -393,6 +419,10 @@ public class GUInterface extends javax.swing.JFrame {
         gpsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("GPS"));
         gpsPanel.setName("");
         gpsPanel.setPreferredSize(new java.awt.Dimension(200, 80));
+        
+        testPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("TEST"));
+        testPanel.setName("");
+        testPanel.setPreferredSize(new java.awt.Dimension(200, 80));
 
         gpsLongitudeLabel.setText("Longitude:");
         gpsLongitudeLabel.setFocusable(false);
@@ -455,6 +485,29 @@ public class GUInterface extends javax.swing.JFrame {
                         .addComponent(gpsSatelitesDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+        
+        javax.swing.GroupLayout testPanelLayout = new javax.swing.GroupLayout(testPanel);
+        testPanel.setLayout(testPanelLayout);
+        testPanelLayout.setHorizontalGroup(
+            gpsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gpsPanelLayout.createSequentialGroup()
+                .addGroup(gpsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(gpsPanelLayout.createSequentialGroup()
+                        .addComponent(gpsLongitudeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gpsLongitudeDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gpsPanelLayout.createSequentialGroup()
+                        .addComponent(gpsLatitudeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gpsLatitudeDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gpsPanelLayout.createSequentialGroup()
+                        .addComponent(gpsSatelitesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gpsSatelitesDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        
+        
         gpsPanelLayout.setVerticalGroup(
             gpsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gpsPanelLayout.createSequentialGroup()
@@ -700,7 +753,7 @@ public class GUInterface extends javax.swing.JFrame {
 
         menuBar.add(missionMenu);
         
-        emulatorMenu.setText("Emulator");
+        emulatorMenu.setText("Player");
         emulatorMenuStart.setText("Start Emulation");
         emulatorMenuStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -733,6 +786,16 @@ public class GUInterface extends javax.swing.JFrame {
 
         });
         
+
+        emulatorMenuView.setText("Playersteuerung");
+        emulatorMenuView.addItemListener(new java.awt.event.ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				playerControlDialogChanged( e);
+			}
+        });
+        
+        
         
         missionMenu.add(missionMenuMissionCreator);
         
@@ -740,25 +803,38 @@ public class GUInterface extends javax.swing.JFrame {
         emulatorMenu.add(emulatorMenuPause);
         emulatorMenu.add(emulatorMenuStop);
         emulatorMenu.add(emulatorMenuPlay);
+        emulatorMenu.add(emulatorMenuView);
         menuBar.add(emulatorMenu);
         
 
         setJMenuBar(menuBar);
 
         mainLayout = new javax.swing.GroupLayout(getContentPane());
+        
+       //XXX Here
+       liveModeGroup=mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(gpsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE);
+       
+//       testModeGroup=mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//               .addComponent(testPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+//               .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+//               .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE);
+       
+       actualModeGroup=liveModeGroup;
+        
         getContentPane().setLayout(mainLayout);
         mainLayout.setHorizontalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gpsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(compassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(actualModeGroup)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(missionMapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addContainerGap())
         );
+        
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
@@ -772,61 +848,42 @@ public class GUInterface extends javax.swing.JFrame {
                         .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 228, Short.MAX_VALUE))
                     .addComponent(missionMapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap()
+                )
         );
 
         pack();
+        
+        
     }// </editor-fold>
 
-    protected void playEmulation(ActionEvent evt) {
-    	this.guiLogic.playEmulation();
+    protected void playerControlDialogChanged(ItemEvent e) {
+		if(playerDialog==null){
+	    	playerDialog = new PlayerDialog(this, false,this.guiLogic.getController());
+		}
+		
+		if(e.getStateChange()==ItemEvent.SELECTED){
+	    	playerDialog.setVisible(true);
+		}else{
+	    	playerDialog.setVisible(false);
+		}
+	}
+
+	protected void playEmulation(ActionEvent evt) {
+		//TODO delete
 	}
 
 	protected void stopEmulation(ActionEvent evt) {
-    	this.guiLogic.stopEmulation();
-		
+		//TODO delete
 	}
 
 	protected void pauseEmulation(ActionEvent evt) {
-    	this.guiLogic.pauseEmulation();
+		//TODO delete
 	}
 
 	protected void startEmulation(ActionEvent evt) {
 		
-		//TODO Datei auswahl 
-		JFileChooser fileChooser;	
-		fileChooser = new JFileChooser();
-		fileChooser.setAcceptAllFileFilterUsed( false );
-		FileFilter emulationFileFilter = new FileFilter() {
-			@Override
-			public boolean accept(File filePath) {
-				String name = filePath.getName().toLowerCase();
-				if (filePath.isDirectory())
-					return true;
-				if (name.endsWith("." + Emulator.EMULATION_FILES))
-					return true;
-				return false;
-			}
-
-			@Override
-			public String getDescription() {
-				return  "." + Emulator.EMULATION_FILES;
-			}
-		};
-		
-		fileChooser.setFileFilter(emulationFileFilter);
-//		fileChooser.setCurrentDirectory( new File( ...) ) )
-		
-		if ( fileChooser.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION ) {
-			if ( fileChooser.getSelectedFile().toString()  != null ) {
-//				setArbeitsModus( ... );
-			} else {
-//				setArbeitsModus( START_MODUS );
-			}
-		}
-		
-		
-    	this.guiLogic.startEmulator("TestSave.sem");
+		//TODO delete
 	}
 	
 	protected void regulateEmulationSpeed(ActionEvent evt) {
