@@ -266,10 +266,6 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.getGps();
 	}
 
-	public int getGpsSatelites() {
-		return this.model.getGps().getPosition().getSatelites();
-	}
-
 //	@Deprecated
 //	public boolean isSailMode() {
 //		return this.model.isSailMode();

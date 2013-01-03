@@ -86,8 +86,6 @@ public interface GUIController {
 
 	public GPSModel getGps();
 
-	public int getGpsSatelites();
-
 //	@Deprecated
 //	public boolean isSailMode();
 
