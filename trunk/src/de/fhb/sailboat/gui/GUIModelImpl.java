@@ -36,7 +36,7 @@ public class GUIModelImpl implements GUIModel{
 	@Deprecated
 	protected List<MapPolygon> polyList;
 	
-//	@Deprecated
+	@Deprecated
 	protected boolean sailMode;					// stores current test mission mode
 	protected int propellor;						// current propellor mode, 1=maximum backward/ 2=off/ 3=maximum forward
 	protected int rudder;							// current rudder value

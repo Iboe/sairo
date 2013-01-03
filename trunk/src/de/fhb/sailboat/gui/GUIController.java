@@ -42,10 +42,10 @@ public interface GUIController {
 	 */
 	public void commitPrimitiveCommand(Planner planner, Integer propellor, Integer rudder, Integer sail);
 	
-//	/**
-//	 * Resets the actors of the boat.
-//	 * @param planner
-//	 */
+	/**
+	 * Resets the actors of the boat.
+	 * @param planner
+	 */
 	public void resetActorsTask(Planner planner);
 	
 	// update routines
@@ -84,7 +84,7 @@ public interface GUIController {
 
 	public GPSModel getGps();
 
-//	@Deprecated
+	@Deprecated
 	public boolean isSailMode();
 
 	public int getPropellor();

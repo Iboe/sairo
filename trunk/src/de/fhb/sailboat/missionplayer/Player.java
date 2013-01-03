@@ -23,9 +23,9 @@ public class Player extends Thread {
 	private int speedInterval = SPEED_INTERVAL_MIN;
 	private boolean isPaused = false;
 
-	private static int SPEED_INTERVAL_MAX = 500;
-	private static int SPEED_INTERVAL_MIN = 50;
-	public static final String EMULATION_FILES = "sem";
+	private static int SPEED_INTERVAL_MAX = Integer.parseInt(System.getProperty("PLAYER_UPDATE_RATE_MAX"));
+	private static int SPEED_INTERVAL_MIN = Integer.parseInt(System.getProperty("PLAYER_UPDATE_RATE_MIN"));
+	public static final String PLAYER_FILES = System.getProperty("PLAYER_FILES");
 
 	/**
 	 * creates a Emulator
@@ -48,10 +48,7 @@ public class Player extends Thread {
 			throw new RuntimeException("Keine abzuspielende Datei mitgegeben!");
 		}
 
-		// loads the log data and convert it to objects for playing 
-//		List<Tripel<Date, String, Object>> runnableDataList = this.logFileConverter
-//				.openFromBinaryFile(this.filePath);
-		
+		// loads the log data and convert it to objects for playing 	
 		List<Tripel<Date, String, Object>> runnableDataList = this.logFileConverter.convertLogToBinaryFormat(this.filePath);
 
 		// runs through the datasets

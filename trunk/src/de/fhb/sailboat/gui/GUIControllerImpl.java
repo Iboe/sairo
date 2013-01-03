@@ -30,10 +30,10 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class GUIControllerImpl implements GUIController {
 
-    public final static int GUI_UPDATE_RATE_DEFAULT = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_DEFAULT"));	;	// sleep in ms after each gui loop
+    public final static int GUI_UPDATE_RATE_DEFAULT = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_DEFAULT"));	// sleep in ms after each gui loop
     private int actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
-	private static int GUI_UPDATE_RATE_MAX = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_MAX"));	;
-	private static int GUI_UPDATE_RATE_MIN = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_MIN"));	;
+	private static int GUI_UPDATE_RATE_MAX = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_MAX"));
+	private static int GUI_UPDATE_RATE_MIN = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_MIN"));
 	
 	// Constants
 	public final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward

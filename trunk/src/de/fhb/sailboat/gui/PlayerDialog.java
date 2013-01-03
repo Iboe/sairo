@@ -4,7 +4,6 @@
  */
 package de.fhb.sailboat.gui;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -144,7 +143,7 @@ public class PlayerDialog extends RootDialog{
     }// </editor-fold>//GEN-END:initComponents
 
 	private void loadTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestButtonActionPerformed
-		this.controller.startPlayer("TestSave.sem");
+		this.controller.startPlayer("collectedLogs/sailboat_data_12.10.17.log");
 	}//GEN-LAST:event_loadTestButtonActionPerformed
 
 	private void speedSilderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSilderStateChanged
@@ -166,14 +165,14 @@ public class PlayerDialog extends RootDialog{
 				String name = filePath.getName().toLowerCase();
 				if (filePath.isDirectory())
 					return true;
-				if (name.endsWith("." + Player.EMULATION_FILES))
+				if (name.endsWith("." + Player.PLAYER_FILES))
 					return true;
 				return false;
 			}
 
 			@Override
 			public String getDescription() {
-				return  "." + Player.EMULATION_FILES;
+				return  "." + Player.PLAYER_FILES;
 			}
 		};
 		
