@@ -21,15 +21,15 @@ public interface GUIController {
 	public void commitMission(Planner planner, Mission mission);
 	
 	// temporary test mission commit methods
-	public void commitCircleMarkerList(Planner planner);
-
-	public void commitPolyList(Planner planner);
-
-	public void commitReachCompassTask(int angle, Planner planner);
-
-	public void commitHoldAngleToWind(int angle, Planner planner);
-
-	public void commitStopTask(Planner planner);
+//	public void commitCircleMarkerList(Planner planner);
+//
+//	public void commitPolyList(Planner planner);
+//
+//	public void commitReachCompassTask(int angle, Planner planner);
+//
+//	public void commitHoldAngleToWind(int angle, Planner planner);
+//
+//	public void commitStopTask(Planner planner);
 	
 	// remote control methods
 	/**
@@ -42,11 +42,11 @@ public interface GUIController {
 	 */
 	public void commitPrimitiveCommand(Planner planner, Integer propellor, Integer rudder, Integer sail);
 	
-	/**
-	 * Resets the actors of the boat.
-	 * @param planner
-	 */
-	public void resetActorsTask(Planner planner);
+//	/**
+//	 * Resets the actors of the boat.
+//	 * @param planner
+//	 */
+//	public void resetActorsTask(Planner planner);
 	
 	// update routines
 	/**
@@ -70,14 +70,14 @@ public interface GUIController {
 
 	// Setter (values given by View to store in Model)
 	
-	@Deprecated
-	public void setCircleMarkerList(List<GPS> pointList);
+//	@Deprecated
+//	public void setCircleMarkerList(List<GPS> pointList);
 
-	@Deprecated
-	public void setPolyList(List<MapPolygon> polyList);
+//	@Deprecated
+//	public void setPolyList(List<MapPolygon> polyList);
 	
-	@Deprecated
-	public void setSailMode(boolean sailMode);
+//	@Deprecated
+//	public void setSailMode(boolean sailMode);
 
 	// Getter ("tunneled" from Model)
 	public CompassModel getCompass();
@@ -88,8 +88,8 @@ public interface GUIController {
 
 	public int getGpsSatelites();
 
-	@Deprecated
-	public boolean isSailMode();
+//	@Deprecated
+//	public boolean isSailMode();
 
 	public int getPropellor();
 	

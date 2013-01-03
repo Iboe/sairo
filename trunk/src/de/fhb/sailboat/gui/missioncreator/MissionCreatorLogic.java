@@ -27,11 +27,11 @@ public class MissionCreatorLogic {
     /**
      * Copied/ Cut items from missionTree are saved to this list
      */
-    private ArrayList missionTreeClipboard;
+    private ArrayList<Object> missionTreeClipboard;
     
     public MissionCreatorLogic(GUILogic guiLogic) {
         this.guiLogic = guiLogic;
-        this.missionTreeClipboard = new ArrayList();    // initialize clipboard
+        this.missionTreeClipboard = new ArrayList<Object>();    // initialize clipboard
     }
     
     public void missionTreeInitialize(JTree missionTree) {

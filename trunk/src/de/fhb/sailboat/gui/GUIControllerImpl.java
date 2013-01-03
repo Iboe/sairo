@@ -74,126 +74,126 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
-	@Deprecated
-	public void commitCircleMarkerList(Planner planner) {
-		List<GPS> markerList = this.model.getCircleMarkerList();
-
-		MissionImpl mission = new MissionImpl();
-		List<Task> tasks = new ArrayList<Task>();
-
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-		for (int i = 0; i < markerList.size(); i++) {
-			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
-					.getLatitude(), markerList.get(i).getLongitude()), 3));
-		}
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-
-		mission.setTasks(tasks);
-		System.out.println(mission.getTasks().toString());
-		this.model.setCurrentWholeMission(mission); // Store send mission in
-													// model for reporting of
-													// advancements
-
-		planner.doMission(mission);
-	}
-
-	@Deprecated
-	public void commitPolyList(Planner planner) {
-		List<MapPolygon> polyList = this.model.getPolyList();
-
-		MissionImpl mission = new MissionImpl();
-		List<Task> tasks = new ArrayList<Task>();
-
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-		for (int i = 0; i < polyList.size(); i++) {
-			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
-		}
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-
-		mission.setTasks(tasks);
-
-		this.model.setCurrentWholeMission(mission); // Store send mission in
-													// model for reporting of
-													// advancements
-
-		planner.doMission(mission);
-	}
-
-	@Deprecated
-	public void commitReachCompassTask(int angle, Planner planner) {
-		MissionImpl mission = new MissionImpl();
-		List<Task> tasks = new ArrayList<Task>();
-
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-		tasks.add(new CompassCourseTask(angle));
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-
-		mission.setTasks(tasks);
-
-		this.model.setCurrentWholeMission(mission); // Store send mission in
-													// model for reporting of
-													// advancements
-
-		planner.doMission(mission);
-	}
-
-	@Deprecated
-	public void commitHoldAngleToWind(int angle, Planner planner) {
-		MissionImpl mission = new MissionImpl();
-		List<Task> tasks = new ArrayList<Task>();
-
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-		tasks.add(new HoldAngleToWindTask(angle));
-		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-
-		mission.setTasks(tasks);
-
-		this.model.setCurrentWholeMission(mission); // Store send mission in
-													// model for reporting of
-													// advancements
-
-		planner.doMission(mission);
-	}
-
-	@Deprecated
-	public void commitStopTask(Planner planner) {
-		MissionImpl mission = new MissionImpl();
-		List<Task> tasks = new ArrayList<Task>();
-
-		tasks.add(new StopTask());
-
-		mission.setTasks(tasks);
-
-		this.model.setCurrentWholeMission(mission); // Store send mission in
-													// model for reporting of
-													// advancements
-
-		planner.doMission(mission);
-	}
-	
-	@Deprecated
-	public void resetActorsTask(Planner planner) {
-		MissionImpl mission = new MissionImpl();
-		List<Task> tasks = new ArrayList<Task>();
-
-		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_NORMAL));
-
-		mission.setTasks(tasks);
-
-		this.model.setCurrentWholeMission(mission); // Store send mission in
-													// model for reporting of
-													// advancements
-
-		planner.doMission(mission);
-	}
+//	@Deprecated
+//	public void commitCircleMarkerList(Planner planner) {
+//		List<GPS> markerList = this.model.getCircleMarkerList();
+//
+//		MissionImpl mission = new MissionImpl();
+//		List<Task> tasks = new ArrayList<Task>();
+//
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+//		for (int i = 0; i < markerList.size(); i++) {
+//			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
+//					.getLatitude(), markerList.get(i).getLongitude()), 3));
+//		}
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+//
+//		mission.setTasks(tasks);
+//		System.out.println(mission.getTasks().toString());
+//		this.model.setCurrentWholeMission(mission); // Store send mission in
+//													// model for reporting of
+//													// advancements
+//
+//		planner.doMission(mission);
+//	}
+//
+//	@Deprecated
+//	public void commitPolyList(Planner planner) {
+//		List<MapPolygon> polyList = this.model.getPolyList();
+//
+//		MissionImpl mission = new MissionImpl();
+//		List<Task> tasks = new ArrayList<Task>();
+//
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+//		for (int i = 0; i < polyList.size(); i++) {
+//			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
+//		}
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+//
+//		mission.setTasks(tasks);
+//
+//		this.model.setCurrentWholeMission(mission); // Store send mission in
+//													// model for reporting of
+//													// advancements
+//
+//		planner.doMission(mission);
+//	}
+//
+//	@Deprecated
+//	public void commitReachCompassTask(int angle, Planner planner) {
+//		MissionImpl mission = new MissionImpl();
+//		List<Task> tasks = new ArrayList<Task>();
+//
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+//		tasks.add(new CompassCourseTask(angle));
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+//
+//		mission.setTasks(tasks);
+//
+//		this.model.setCurrentWholeMission(mission); // Store send mission in
+//													// model for reporting of
+//													// advancements
+//
+//		planner.doMission(mission);
+//	}
+//
+//	@Deprecated
+//	public void commitHoldAngleToWind(int angle, Planner planner) {
+//		MissionImpl mission = new MissionImpl();
+//		List<Task> tasks = new ArrayList<Task>();
+//
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+//		tasks.add(new HoldAngleToWindTask(angle));
+//		if (!isSailMode())
+//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+//
+//		mission.setTasks(tasks);
+//
+//		this.model.setCurrentWholeMission(mission); // Store send mission in
+//													// model for reporting of
+//													// advancements
+//
+//		planner.doMission(mission);
+//	}
+//
+//	@Deprecated
+//	public void commitStopTask(Planner planner) {
+//		MissionImpl mission = new MissionImpl();
+//		List<Task> tasks = new ArrayList<Task>();
+//
+//		tasks.add(new StopTask());
+//
+//		mission.setTasks(tasks);
+//
+//		this.model.setCurrentWholeMission(mission); // Store send mission in
+//													// model for reporting of
+//													// advancements
+//
+//		planner.doMission(mission);
+//	}
+//	
+//	@Deprecated
+//	public void resetActorsTask(Planner planner) {
+//		MissionImpl mission = new MissionImpl();
+//		List<Task> tasks = new ArrayList<Task>();
+//
+//		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_NORMAL));
+//
+//		mission.setTasks(tasks);
+//
+//		this.model.setCurrentWholeMission(mission); // Store send mission in
+//													// model for reporting of
+//													// advancements
+//
+//		planner.doMission(mission);
+//	}
 	
 	/**
 	 * Commits a special manual command to either sail, rudder or propellor actor. Used primary by remoteDialog for remote control.
@@ -242,16 +242,16 @@ public class GUIControllerImpl implements GUIController {
 		}
 	}
 
-	// Setter (values given by View to store in Model)
-	public void setCircleMarkerList(List<GPS> pointList) {
-		this.model.setCircleMarkerList(pointList);
-		System.out.println("Set passed.");
-	}
-
-	public void setPolyList(List<MapPolygon> polyList) {
-		this.model.setPolyList(polyList);
-		System.out.println("Set passed.");
-	}
+//	// Setter (values given by View to store in Model)
+//	public void setCircleMarkerList(List<GPS> pointList) {
+//		this.model.setCircleMarkerList(pointList);
+//		System.out.println("Set passed.");
+//	}
+//
+//	public void setPolyList(List<MapPolygon> polyList) {
+//		this.model.setPolyList(polyList);
+//		System.out.println("Set passed.");
+//	}
 
 	// Getter ("tunneled" from Model)
 	public CompassModel getCompass() {
@@ -270,11 +270,11 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.getGps().getPosition().getSatelites();
 	}
 
-	@Deprecated
-	public boolean isSailMode() {
-		return this.model.isSailMode();
-	}
-	
+//	@Deprecated
+//	public boolean isSailMode() {
+//		return this.model.isSailMode();
+//	}
+//	
 	public int getPropellor() {
 		return this.model.getPropellor();
 	}
@@ -306,11 +306,11 @@ public class GUIControllerImpl implements GUIController {
 		this.model.setSail(this.worldModel.getActuatorModel().getSail().getValue());
 	}
 
-	@Deprecated
-	public void setSailMode(boolean sailMode) {
-		this.model.setSailMode(sailMode);
-	}
-	
+//	@Deprecated
+//	public void setSailMode(boolean sailMode) {
+//		this.model.setSailMode(sailMode);
+//	}
+//	
 	public Mission getCurrentMission() {
 		return this.model.getMissionTasksLeft();
 	}

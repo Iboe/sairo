@@ -1,25 +1,28 @@
 package de.fhb.sailboat.gui.missioncreator;
 
-import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.GUILogic;
-import de.fhb.sailboat.gui.GUIModelImpl;
-import de.fhb.sailboat.gui.map.MissionCreatingMap;
-import de.fhb.sailboat.mission.Mission;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.TreeSelectionModel;
+
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+
+import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.GUILogic;
+import de.fhb.sailboat.gui.RootDialog;
+import de.fhb.sailboat.gui.map.MissionCreatingMap;
+import de.fhb.sailboat.mission.Mission;
 
 /**
  * This class represents the graphical interface of the MissionCreator dialog.
  * 
  * @author Patrick Rutter
  */
-public class MissionCreatorInterface extends javax.swing.JDialog {
+public class MissionCreatorInterface extends RootDialog{
 
     private final static String INPUTTEXT = "Eingabe";
     private final static String INPUTTEXT_LIST = "Listennamen angeben:";
@@ -823,40 +826,6 @@ public class MissionCreatorInterface extends javax.swing.JDialog {
         return this.missionMap.getObstacles();
     }
     
-    /*public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MissionCreatorInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MissionCreatorInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MissionCreatorInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MissionCreatorInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                MissionCreatorInterface dialog = new MissionCreatorInterface(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }*/
     // Variables declaration - do not modify
     private javax.swing.JMenu MissionMenu;
     private javax.swing.JMenuItem MissionMenuLoad;

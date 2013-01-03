@@ -21,13 +21,13 @@ import de.fhb.sailboat.mission.Task;
 public class GUILogicImpl implements GUILogic {
 
 
-	public static final int LIVE_MODUS = 0;
-	
-	public static final int EMULATOR_MODUS = 1;
-	
-	public static final int PLANNING_MODUS = 2;
-	
-	public static final int SIMULATION_MODUS = 3;
+//	public static final int LIVE_MODUS = 0;
+//	
+//	public static final int EMULATOR_MODUS = 1;
+//	
+//	public static final int PLANNING_MODUS = 2;
+//	
+//	public static final int SIMULATION_MODUS = 3;
     
 
 	
@@ -273,82 +273,82 @@ public class GUILogicImpl implements GUILogic {
         System.exit(0);
     }
 
-    // the following are methods for primitive tests and are kept only for future reference, refer to MissionCreator for mission handling
-    @Override
-    @Deprecated
-    public void sendCircleMarkers() {
-        if (missionMap.getMap().getMapMarkerList().size() > 0) {
-            this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
-            this.controller.commitCircleMarkerList(planner);
-            sendResetMissionMap();
-        }
-    }
-
-    @Override
-    @Deprecated
-    public void sendPolyMapMarkers() {
-        this.controller.setPolyList(missionMap.getPolygonList());
-        this.controller.commitPolyList(planner);
-        sendResetMissionMap();
-    }
-
-    @Override
-    @Deprecated
-    public void sendReachCompass() {
-        String str = JOptionPane.showInputDialog(null,
-                "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
-        if (str != null && str.length() != 0) {
-            this.controller.commitReachCompassTask(Integer.parseInt(str),
-                    planner);
-        }
-    }
-
-    @Override
-    @Deprecated
-    public void sendHoldAngleToWind() {
-        String str = JOptionPane.showInputDialog(null,
-                "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
-        if (str.length() != 0) {
-            this.controller.commitHoldAngleToWind(Integer.parseInt(str),
-                    planner);
-        }
-    }
-
-    @Override
-    @Deprecated
-    public void sendStop() {
-        int choice = JOptionPane.showConfirmDialog(null,
-                "Wirklich Mission stoppen?", "Bitte bestätigen",
-                JOptionPane.YES_NO_OPTION);
-        if (choice == JOptionPane.YES_OPTION) {
-            this.controller.commitStopTask(planner);
-        }
-    }
-
-    @Override
-    @Deprecated
-    public void sendResetActors() {
-        int choice = JOptionPane.showConfirmDialog(null,
-                "Wirklich Motor, Segel und Ruder zurücksetzen?", "Bitte bestätigen",
-                JOptionPane.YES_NO_OPTION);
-        if (choice == JOptionPane.YES_OPTION) {
-            this.controller.resetActorsTask(planner);
-        }
-    }
-
-    @Override
-    @Deprecated
-    public void sendResetMissionMap() {
-        missionMap.removeEveryObject();
-        missionMap.removeTrail();
-        missionMap.getMap().repaint();
-    }
-
-    @Override
-    @Deprecated
-    public void setSailMode(boolean sailMode) {
-        this.controller.setSailMode(sailMode);
-    }
+//    // the following are methods for primitive tests and are kept only for future reference, refer to MissionCreator for mission handling
+//    @Override
+//    @Deprecated
+//    public void sendCircleMarkers() {
+//        if (missionMap.getMap().getMapMarkerList().size() > 0) {
+//            this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
+//            this.controller.commitCircleMarkerList(planner);
+//            sendResetMissionMap();
+//        }
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void sendPolyMapMarkers() {
+//        this.controller.setPolyList(missionMap.getPolygonList());
+//        this.controller.commitPolyList(planner);
+//        sendResetMissionMap();
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void sendReachCompass() {
+//        String str = JOptionPane.showInputDialog(null,
+//                "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+//        if (str != null && str.length() != 0) {
+//            this.controller.commitReachCompassTask(Integer.parseInt(str),
+//                    planner);
+//        }
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void sendHoldAngleToWind() {
+//        String str = JOptionPane.showInputDialog(null,
+//                "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
+//        if (str.length() != 0) {
+//            this.controller.commitHoldAngleToWind(Integer.parseInt(str),
+//                    planner);
+//        }
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void sendStop() {
+//        int choice = JOptionPane.showConfirmDialog(null,
+//                "Wirklich Mission stoppen?", "Bitte bestätigen",
+//                JOptionPane.YES_NO_OPTION);
+//        if (choice == JOptionPane.YES_OPTION) {
+//            this.controller.commitStopTask(planner);
+//        }
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void sendResetActors() {
+//        int choice = JOptionPane.showConfirmDialog(null,
+//                "Wirklich Motor, Segel und Ruder zurücksetzen?", "Bitte bestätigen",
+//                JOptionPane.YES_NO_OPTION);
+//        if (choice == JOptionPane.YES_OPTION) {
+//            this.controller.resetActorsTask(planner);
+//        }
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void sendResetMissionMap() {
+//        missionMap.removeEveryObject();
+//        missionMap.removeTrail();
+//        missionMap.getMap().repaint();
+//    }
+//
+//    @Override
+//    @Deprecated
+//    public void setSailMode(boolean sailMode) {
+//        this.controller.setSailMode(sailMode);
+//    }
 
     public GUIController getController() {
         return this.controller;

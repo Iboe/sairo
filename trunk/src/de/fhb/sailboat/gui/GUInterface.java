@@ -33,10 +33,10 @@ import de.fhb.sailboat.missionplayer.Player;
 public class GUInterface extends javax.swing.JFrame {
 	
 	
-	/**
-	 * saves the GUImode
-	 */
-	private int modus	= GUILogicImpl.LIVE_MODUS;
+//	/**
+//	 * saves the GUImode
+//	 */
+//	private int modus	= GUILogicImpl.LIVE_MODUS;
 
 	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
@@ -836,23 +836,23 @@ public class GUInterface extends javax.swing.JFrame {
     }                                                
 
     private void missionTestMenuCompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        guiLogic.sendReachCompass();
+//        guiLogic.sendReachCompass();
     }                                                            
 
     private void missionTestMenuHoldAngleToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        guiLogic.sendHoldAngleToWind();
+//        guiLogic.sendHoldAngleToWind();
     }                                                              
 
     private void missionTestMenuStopTaskActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        guiLogic.sendStop();
+//        guiLogic.sendStop();
     }                                                       
 
     private void missionTestMenuResetActorsActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        guiLogic.sendResetActors();
+//        guiLogic.sendResetActors();
     }                                                          
 
     private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        guiLogic.sendResetMissionMap();
+//        guiLogic.sendResetMissionMap();
     }                                                       
 
     private void remoteDialogWindowClosing(java.awt.event.WindowEvent evt) {                                           
