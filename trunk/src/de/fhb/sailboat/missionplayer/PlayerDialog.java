@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.fhb.sailboat.gui;
+package de.fhb.sailboat.missionplayer;
 
 import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import de.fhb.sailboat.missionplayer.Player;
+import de.fhb.sailboat.gui.MainController;
+import de.fhb.sailboat.gui.RootDialog;
 
 
 /**
@@ -19,12 +20,12 @@ import de.fhb.sailboat.missionplayer.Player;
  */
 public class PlayerDialog extends RootDialog{
 	
-	private  GUIController controller;
+	private  MainController controller;
 
 	/**
 	 * Creates new form NewJDialog
 	 */
-	public PlayerDialog(java.awt.Frame parent, boolean modal, GUIController controller) {
+	public PlayerDialog(java.awt.Frame parent, boolean modal, MainController controller) {
 		super(parent, modal);
 		initComponents();
 		setResizable(false);

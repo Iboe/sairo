@@ -20,7 +20,7 @@ import de.fhb.sailboat.worldmodel.WindModelImpl;
  * @author Patrick Rutter
  *
  */
-public class GUIModelImpl implements GUIModel{
+public class MainControllerModelImpl implements MainControllerModel{
 	
 	protected boolean missionUpdated;
 	
@@ -45,7 +45,7 @@ public class GUIModelImpl implements GUIModel{
 	protected Mission currentWholeMission;		// current mission of the sailboat as a whole from start to finish
 	protected Mission missionTasksLeft;			// current state of the mission (tasks left)
 	
-	public GUIModelImpl() {
+	public MainControllerModelImpl() {
 		this.missionUpdated = false;
 		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();

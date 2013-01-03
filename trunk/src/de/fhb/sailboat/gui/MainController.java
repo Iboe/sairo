@@ -16,7 +16,7 @@ import de.fhb.sailboat.worldmodel.WindModel;
  * @author Patrick Rutter
  * 
  */
-public interface GUIController {
+public interface MainController {
 	
 	public void commitMission(Planner planner, Mission mission);
 	
@@ -105,7 +105,7 @@ public interface GUIController {
 	
 	public boolean isMissionUpdated();
 	
-	public GUIModel getModel();
+	public MainControllerModel getModel();
 
 	public void startPlayer(String filePath);
 

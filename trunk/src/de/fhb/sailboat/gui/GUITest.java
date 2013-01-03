@@ -7,7 +7,7 @@ public class GUITest {
 	public static void main(String[] args) {
 		PropertiesInitializer propsInit = new PropertiesInitializer();
 		propsInit.initializeProperties();
-        GUInterface view = new GUInterface(null);
+        GUI view = new GUI(null);
         view.setVisible(true);
     }
 	

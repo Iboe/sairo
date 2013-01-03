@@ -14,7 +14,7 @@ import de.fhb.sailboat.worldmodel.WindModel;
  * @author Patrick Rutter
  *
  */
-public interface GUIModel {
+public interface MainControllerModel {
 
 	public CompassModel getCompass();
 	

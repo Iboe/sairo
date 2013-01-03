@@ -8,7 +8,7 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
 import de.fhb.sailboat.communication.clientModules.WindReceiver;
-import de.fhb.sailboat.gui.GUInterface;
+import de.fhb.sailboat.gui.GUI;
 import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
 import de.fhb.sailboat.ufer.prototyp.View;
 
@@ -35,7 +35,7 @@ public class UferGUITest {
 		if(!client.initialize())
 			System.out.println("Error connecting to BOAT!");
 		
-		GUInterface view=new GUInterface(null);
+		GUI view=new GUI(null);
 		view.setVisible(true);
 
 	}

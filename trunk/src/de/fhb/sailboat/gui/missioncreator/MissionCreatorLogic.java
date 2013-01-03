@@ -1,7 +1,7 @@
 package de.fhb.sailboat.gui.missioncreator;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.GUIControllerImpl;
+import de.fhb.sailboat.gui.MainControllerImpl;
 import de.fhb.sailboat.gui.GUILogic;
 import de.fhb.sailboat.mission.Task;
 import java.util.ArrayList;
@@ -95,32 +95,32 @@ public class MissionCreatorLogic {
     }
     
     public void missionTree_NewPropellorFullForward_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, GUIControllerImpl.PROPELLOR_MAX);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MAX);
         missionTreeNew_Task(missionTree, name, load);
     }
     
     public void missionTree_NewPropellorStop_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, GUIControllerImpl.PROPELLOR_NORMAL);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_NORMAL);
         missionTreeNew_Task(missionTree, name, load);
     }
     
     public void missionTree_NewPropellorFullBackward_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, GUIControllerImpl.PROPELLOR_MIN);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MIN);
         missionTreeNew_Task(missionTree, name, load);
     }
     
     public void missionTree_NewRudderRight_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, GUIControllerImpl.RUDDER_RIGHT, null);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, MainControllerImpl.RUDDER_RIGHT, null);
         missionTreeNew_Task(missionTree, name, load);
     }
     
     public void missionTree_NewRudderNeutral_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, GUIControllerImpl.RUDDER_NORMAL, null);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, MainControllerImpl.RUDDER_NORMAL, null);
         missionTreeNew_Task(missionTree, name, load);
     }
     
     public void missionTree_NewRudderLeft_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, GUIControllerImpl.RUDDER_LEFT, null);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, MainControllerImpl.RUDDER_LEFT, null);
         missionTreeNew_Task(missionTree, name, load);
     }
     

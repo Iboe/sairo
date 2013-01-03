@@ -14,7 +14,7 @@ public interface GUILogic {
 	
     
     Planner planner = null;;						// the Planner is used for sending mission sets
-    GUIController controller = null;				// the GUIController is used for getting and setting values from and to the world model/ local database
+    MainController controller = null;				// the GUIController is used for getting and setting values from and to the world model/ local database
     
     /**
      * Commit a mission to planner.
@@ -88,7 +88,7 @@ public interface GUILogic {
      */
     public void closeGUI();
     
-    public GUIController getController();
+    public MainController getController();
     
     public Planner getPlanner();
     

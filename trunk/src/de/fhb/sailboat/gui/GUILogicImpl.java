@@ -34,7 +34,7 @@ public class GUILogicImpl implements GUILogic {
     final static public String COMPASS_UNIT = "°";                  // this will be appended to azimuth, pitch & roll display strings
     final static public String WIND_VELOCITY_UNIT = " m/s";         // this will be appended to windVelocity display strings
     final static public String WIND_DIRECTION_UNIT = "°";           // this will be appended to windDirection display strings
-    private GUIController controller;								// the GUIController is used for getting and setting values from and to the world model/ local database
+    private MainController controller;								// the GUIController is used for getting and setting values from and to the world model/ local database
     private Planner planner;										// the Planner is used for sending mission sets
     private Map missionMap;											// the Map is used to visualize the missionArea and landmarks/ points of interest
     private boolean testMode;                                       // if true random values will be generated for each update, instead of trying to retrieve true values (only hard code setting)
@@ -50,7 +50,7 @@ public class GUILogicImpl implements GUILogic {
     public GUILogicImpl(Planner planner) {
         this.testMode = false;
         this.gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
-        this.controller = new GUIControllerImpl();
+        this.controller = new MainControllerImpl();
         this.planner = planner;
     }
 
@@ -348,7 +348,7 @@ public class GUILogicImpl implements GUILogic {
         this.controller.setSailMode(sailMode);
     }
 
-    public GUIController getController() {
+    public MainController getController() {
         return this.controller;
     }
 

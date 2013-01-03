@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.GUIModel;
+import de.fhb.sailboat.gui.MainControllerModel;
 import de.fhb.sailboat.mission.Mission;
 
 /**
@@ -82,7 +82,7 @@ public class GeneralMap extends JPanel {
 		map.addMapMarker(markerList.get(markerList.size() - 1));
 	}
 
-	public void visualizeMission(GUIModel model) {
+	public void visualizeMission(MainControllerModel model) {
 		visualize.visualize(model);
 	}
 	

@@ -28,7 +28,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * @author Patrick Rutter
  * 
  */
-public class GUIControllerImpl implements GUIController {
+public class MainControllerImpl implements MainController {
 
     public final static int GUI_UPDATE_RATE_DEFAULT = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_DEFAULT"));	// sleep in ms after each gui loop
     private int actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
@@ -48,7 +48,7 @@ public class GUIControllerImpl implements GUIController {
 	
 	
 	// Variables
-	private GUIModel model;			// GUIModel is used to store values locally
+	private MainControllerModel model;			// GUIModel is used to store values locally
 
 	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
 	
@@ -64,8 +64,8 @@ public class GUIControllerImpl implements GUIController {
 		return actualUpdateRate;
 	}
 
-	public GUIControllerImpl() {
-		this.model = new GUIModelImpl();
+	public MainControllerImpl() {
+		this.model = new MainControllerModelImpl();
 		this.worldModel = WorldModelImpl.getInstance();
 	}
 	
@@ -318,7 +318,7 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.isMissionUpdated();
 	}
 	
-	public GUIModel getModel() {
+	public MainControllerModel getModel() {
 		return this.model;
 	}
 

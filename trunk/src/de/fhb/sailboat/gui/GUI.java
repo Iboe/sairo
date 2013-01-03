@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileFilter;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
 import de.fhb.sailboat.missionplayer.Player;
+import de.fhb.sailboat.missionplayer.PlayerDialog;
 
 /**
  * A slim general user interface for an autonomous sailboat. Requires a correct GUILogic class to be
@@ -30,7 +31,7 @@ import de.fhb.sailboat.missionplayer.Player;
  * @author Patrick Rutter
  * @author Andy Klay <klay@fh-brandenburg.de>
  */
-public class GUInterface extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame {
 	
 	
 //	/**
@@ -56,7 +57,7 @@ public class GUInterface extends javax.swing.JFrame {
      *
      * @param planner A Planner-Instance which Missions are committed to.
      */
-    public GUInterface(Planner planner) {
+    public GUI(Planner planner) {
         initComponents();
         guiLogic = new GUILogicImpl(planner);           // GUILogic classes may be switched here
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
@@ -869,9 +870,9 @@ public class GUInterface extends javax.swing.JFrame {
         // get current propellor setting, relate it to min, null and max and set the propellor control (radioButtons) to the right value.
         int propellor = guiLogic.getController().getPropellor();
 
-        if (propellor > GUIControllerImpl.PROPELLOR_NORMAL) {
+        if (propellor > MainControllerImpl.PROPELLOR_NORMAL) {
             propellorMinRadioButton.setSelected(true);
-        } else if (propellor == GUIControllerImpl.PROPELLOR_NORMAL) {
+        } else if (propellor == MainControllerImpl.PROPELLOR_NORMAL) {
             propellorNullRadioButton.setSelected(true);
         } else {
             propellorMaxRadioButton.setSelected(true);
@@ -879,11 +880,11 @@ public class GUInterface extends javax.swing.JFrame {
         
         // get current rudder position and set the value to the rudder control slider
         int rudder = guiLogic.getController().getRudder();
-        rudderSlider.setValue(convertFromNativeValue(rudder, GUIControllerImpl.RUDDER_LEFT, GUIControllerImpl.RUDDER_NORMAL, GUIControllerImpl.RUDDER_RIGHT));
+        rudderSlider.setValue(convertFromNativeValue(rudder, MainControllerImpl.RUDDER_LEFT, MainControllerImpl.RUDDER_NORMAL, MainControllerImpl.RUDDER_RIGHT));
         
         // get current sail position and set the value to the rudder control slider
         int sail = guiLogic.getController().getSail();
-        sailSlider.setValue(convertFromNativeValue(sail, GUIControllerImpl.SAIL_IN, GUIControllerImpl.SAIL_NORMAL, GUIControllerImpl.SAIL_OUT));
+        sailSlider.setValue(convertFromNativeValue(sail, MainControllerImpl.SAIL_IN, MainControllerImpl.SAIL_NORMAL, MainControllerImpl.SAIL_OUT));
     }                                            
 
     /**
@@ -893,7 +894,7 @@ public class GUInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void sailStateChanged(javax.swing.event.ChangeEvent evt) {                                  
-        int newSail = convertToNativeValue(sailSlider.getValue(), GUIControllerImpl.SAIL_IN, GUIControllerImpl.SAIL_NORMAL, GUIControllerImpl.SAIL_OUT);
+        int newSail = convertToNativeValue(sailSlider.getValue(), MainControllerImpl.SAIL_IN, MainControllerImpl.SAIL_NORMAL, MainControllerImpl.SAIL_OUT);
         if (guiLogic.getController().getSail() != newSail) {
             this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), null, null, newSail);
         }
@@ -906,7 +907,7 @@ public class GUInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void rudderStateChanged(javax.swing.event.ChangeEvent evt) {                                    
-        int newRudder = convertToNativeValue(rudderSlider.getValue(), GUIControllerImpl.RUDDER_LEFT, GUIControllerImpl.RUDDER_NORMAL, GUIControllerImpl.RUDDER_RIGHT);
+        int newRudder = convertToNativeValue(rudderSlider.getValue(), MainControllerImpl.RUDDER_LEFT, MainControllerImpl.RUDDER_NORMAL, MainControllerImpl.RUDDER_RIGHT);
         if (guiLogic.getController().getSail() != newRudder) {
             this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), null, newRudder, null);
         }
@@ -937,18 +938,18 @@ public class GUInterface extends javax.swing.JFrame {
      */
     private void propellorStateUpdate() {
         if (propellorMinRadioButton.isSelected()) {
-            if (guiLogic.getController().getPropellor() != GUIControllerImpl.PROPELLOR_MIN) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_MIN, null, null);
+            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_MIN) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_MIN, null, null);
             }
         }
         else if (propellorNullRadioButton.isSelected()) {
-            if (guiLogic.getController().getPropellor() != GUIControllerImpl.PROPELLOR_NORMAL) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_NORMAL, null, null);
+            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_NORMAL) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_NORMAL, null, null);
             }
         }
         else {
-            if (guiLogic.getController().getPropellor() != GUIControllerImpl.PROPELLOR_MAX) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), GUIControllerImpl.PROPELLOR_MAX, null, null);
+            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_MAX) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_MAX, null, null);
             }
         }
     }

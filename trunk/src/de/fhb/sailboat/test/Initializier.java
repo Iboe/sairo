@@ -26,7 +26,7 @@ import de.fhb.sailboat.control.pilot.Pilot;
 import de.fhb.sailboat.control.pilot.PilotImpl;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.GUInterface;
+import de.fhb.sailboat.gui.GUI;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
@@ -48,7 +48,7 @@ public class Initializier {
 	private static final boolean TEST = false;
 	private Planner planner;
 	//private View view;
-	private GUInterface view;
+	private GUI view;
 	private LocomotionSystem loco=null;
 	
 	public static void main(String[] args) {
@@ -161,7 +161,7 @@ public class Initializier {
 	}
 	
 	private void initializeView() {
-		view = new GUInterface(planner);
+		view = new GUI(planner);
 		view.setVisible(true);
 	}
 	

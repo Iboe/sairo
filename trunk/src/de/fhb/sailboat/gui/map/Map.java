@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
-import de.fhb.sailboat.gui.GUIModel;
+import de.fhb.sailboat.gui.MainControllerModel;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.worldmodel.WorldModel;
 
@@ -352,7 +352,7 @@ public class Map extends JPanel {
 		}
 	}
 
-	public void visualizeMission(GUIModel model) {
+	public void visualizeMission(MainControllerModel model) {
 		visualize.visualize(model);
 	}
 
