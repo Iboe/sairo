@@ -28,23 +28,23 @@ public interface GUIModel {
 	
 	public GPSModel getGps();
 
-//	@Deprecated
-//	public List<GPS> getCircleMarkerList();
-//
-//	@Deprecated
-//	public void setCircleMarkerList(List<GPS> markerList);
-//
-//	@Deprecated
-//	public List<MapPolygon> getPolyList();
-//
-//	@Deprecated
-//	public void setPolyList(List<MapPolygon> polyList);
-//
-//	@Deprecated
-//	public boolean isSailMode();
-//
-//	@Deprecated
-//	public void setSailMode(boolean sailMode);
+	@Deprecated
+	public List<GPS> getCircleMarkerList();
+
+	@Deprecated
+	public void setCircleMarkerList(List<GPS> markerList);
+
+	@Deprecated
+	public List<MapPolygon> getPolyList();
+
+	@Deprecated
+	public void setPolyList(List<MapPolygon> polyList);
+
+	@Deprecated
+	public boolean isSailMode();
+
+	@Deprecated
+	public void setSailMode(boolean sailMode);
 
 	public Mission getCurrentWholeMission();
 

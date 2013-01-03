@@ -30,10 +30,10 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class GUIControllerImpl implements GUIController {
 
-    public final static int GUI_UPDATE_RATE_DEFAULT = 200;	// sleep in ms after each gui loop
+    public final static int GUI_UPDATE_RATE_DEFAULT = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_DEFAULT"));	;	// sleep in ms after each gui loop
     private int actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
-	private static int GUI_UPDATE_RATE_MAX = 500;
-	private static int GUI_UPDATE_RATE_MIN = 20;
+	private static int GUI_UPDATE_RATE_MAX = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_MAX"));	;
+	private static int GUI_UPDATE_RATE_MIN = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_MIN"));	;
 	
 	// Constants
 	public final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward
@@ -52,7 +52,7 @@ public class GUIControllerImpl implements GUIController {
 
 	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
 	
-	private Player emulator;
+	private Player player;
 	
 	public void setUpdateIntervall(int miliSecs) {
 		if (miliSecs <= GUI_UPDATE_RATE_MAX && miliSecs >= GUI_UPDATE_RATE_MIN) {
@@ -74,126 +74,126 @@ public class GUIControllerImpl implements GUIController {
 		planner.doMission(mission);
 	}
 
-//	@Deprecated
-//	public void commitCircleMarkerList(Planner planner) {
-//		List<GPS> markerList = this.model.getCircleMarkerList();
-//
-//		MissionImpl mission = new MissionImpl();
-//		List<Task> tasks = new ArrayList<Task>();
-//
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-//		for (int i = 0; i < markerList.size(); i++) {
-//			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
-//					.getLatitude(), markerList.get(i).getLongitude()), 3));
-//		}
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-//
-//		mission.setTasks(tasks);
-//		System.out.println(mission.getTasks().toString());
-//		this.model.setCurrentWholeMission(mission); // Store send mission in
-//													// model for reporting of
-//													// advancements
-//
-//		planner.doMission(mission);
-//	}
-//
-//	@Deprecated
-//	public void commitPolyList(Planner planner) {
-//		List<MapPolygon> polyList = this.model.getPolyList();
-//
-//		MissionImpl mission = new MissionImpl();
-//		List<Task> tasks = new ArrayList<Task>();
-//
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-//		for (int i = 0; i < polyList.size(); i++) {
-//			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
-//		}
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-//
-//		mission.setTasks(tasks);
-//
-//		this.model.setCurrentWholeMission(mission); // Store send mission in
-//													// model for reporting of
-//													// advancements
-//
-//		planner.doMission(mission);
-//	}
-//
-//	@Deprecated
-//	public void commitReachCompassTask(int angle, Planner planner) {
-//		MissionImpl mission = new MissionImpl();
-//		List<Task> tasks = new ArrayList<Task>();
-//
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-//		tasks.add(new CompassCourseTask(angle));
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-//
-//		mission.setTasks(tasks);
-//
-//		this.model.setCurrentWholeMission(mission); // Store send mission in
-//													// model for reporting of
-//													// advancements
-//
-//		planner.doMission(mission);
-//	}
-//
-//	@Deprecated
-//	public void commitHoldAngleToWind(int angle, Planner planner) {
-//		MissionImpl mission = new MissionImpl();
-//		List<Task> tasks = new ArrayList<Task>();
-//
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
-//		tasks.add(new HoldAngleToWindTask(angle));
-//		if (!isSailMode())
-//			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
-//
-//		mission.setTasks(tasks);
-//
-//		this.model.setCurrentWholeMission(mission); // Store send mission in
-//													// model for reporting of
-//													// advancements
-//
-//		planner.doMission(mission);
-//	}
-//
-//	@Deprecated
-//	public void commitStopTask(Planner planner) {
-//		MissionImpl mission = new MissionImpl();
-//		List<Task> tasks = new ArrayList<Task>();
-//
-//		tasks.add(new StopTask());
-//
-//		mission.setTasks(tasks);
-//
-//		this.model.setCurrentWholeMission(mission); // Store send mission in
-//													// model for reporting of
-//													// advancements
-//
-//		planner.doMission(mission);
-//	}
-//	
-//	@Deprecated
-//	public void resetActorsTask(Planner planner) {
-//		MissionImpl mission = new MissionImpl();
-//		List<Task> tasks = new ArrayList<Task>();
-//
-//		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_NORMAL));
-//
-//		mission.setTasks(tasks);
-//
-//		this.model.setCurrentWholeMission(mission); // Store send mission in
-//													// model for reporting of
-//													// advancements
-//
-//		planner.doMission(mission);
-//	}
+	@Deprecated
+	public void commitCircleMarkerList(Planner planner) {
+		List<GPS> markerList = this.model.getCircleMarkerList();
+
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		for (int i = 0; i < markerList.size(); i++) {
+			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
+					.getLatitude(), markerList.get(i).getLongitude()), 3));
+		}
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+
+		mission.setTasks(tasks);
+		System.out.println(mission.getTasks().toString());
+		this.model.setCurrentWholeMission(mission); // Store send mission in
+													// model for reporting of
+													// advancements
+
+		planner.doMission(mission);
+	}
+
+	@Deprecated
+	public void commitPolyList(Planner planner) {
+		List<MapPolygon> polyList = this.model.getPolyList();
+
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		for (int i = 0; i < polyList.size(); i++) {
+			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
+		}
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+
+		mission.setTasks(tasks);
+
+		this.model.setCurrentWholeMission(mission); // Store send mission in
+													// model for reporting of
+													// advancements
+
+		planner.doMission(mission);
+	}
+
+	@Deprecated
+	public void commitReachCompassTask(int angle, Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		tasks.add(new CompassCourseTask(angle));
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+
+		mission.setTasks(tasks);
+
+		this.model.setCurrentWholeMission(mission); // Store send mission in
+													// model for reporting of
+													// advancements
+
+		planner.doMission(mission);
+	}
+
+	@Deprecated
+	public void commitHoldAngleToWind(int angle, Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		tasks.add(new HoldAngleToWindTask(angle));
+		if (!isSailMode())
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+
+		mission.setTasks(tasks);
+
+		this.model.setCurrentWholeMission(mission); // Store send mission in
+													// model for reporting of
+													// advancements
+
+		planner.doMission(mission);
+	}
+
+	@Deprecated
+	public void commitStopTask(Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		tasks.add(new StopTask());
+
+		mission.setTasks(tasks);
+
+		this.model.setCurrentWholeMission(mission); // Store send mission in
+													// model for reporting of
+													// advancements
+
+		planner.doMission(mission);
+	}
+	
+	@Deprecated
+	public void resetActorsTask(Planner planner) {
+		MissionImpl mission = new MissionImpl();
+		List<Task> tasks = new ArrayList<Task>();
+
+		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_NORMAL));
+
+		mission.setTasks(tasks);
+
+		this.model.setCurrentWholeMission(mission); // Store send mission in
+													// model for reporting of
+													// advancements
+
+		planner.doMission(mission);
+	}
 	
 	/**
 	 * Commits a special manual command to either sail, rudder or propellor actor. Used primary by remoteDialog for remote control.
@@ -243,15 +243,15 @@ public class GUIControllerImpl implements GUIController {
 	}
 
 //	// Setter (values given by View to store in Model)
-//	public void setCircleMarkerList(List<GPS> pointList) {
-//		this.model.setCircleMarkerList(pointList);
-//		System.out.println("Set passed.");
-//	}
-//
-//	public void setPolyList(List<MapPolygon> polyList) {
-//		this.model.setPolyList(polyList);
-//		System.out.println("Set passed.");
-//	}
+	public void setCircleMarkerList(List<GPS> pointList) {
+		this.model.setCircleMarkerList(pointList);
+		System.out.println("Set passed.");
+	}
+
+	public void setPolyList(List<MapPolygon> polyList) {
+		this.model.setPolyList(polyList);
+		System.out.println("Set passed.");
+	}
 
 	// Getter ("tunneled" from Model)
 	public CompassModel getCompass() {
@@ -266,10 +266,10 @@ public class GUIControllerImpl implements GUIController {
 		return this.model.getGps();
 	}
 
-//	@Deprecated
-//	public boolean isSailMode() {
-//		return this.model.isSailMode();
-//	}
+	@Deprecated
+	public boolean isSailMode() {
+		return this.model.isSailMode();
+	}
 //	
 	public int getPropellor() {
 		return this.model.getPropellor();
@@ -302,11 +302,10 @@ public class GUIControllerImpl implements GUIController {
 		this.model.setSail(this.worldModel.getActuatorModel().getSail().getValue());
 	}
 
-//	@Deprecated
-//	public void setSailMode(boolean sailMode) {
-//		this.model.setSailMode(sailMode);
-//	}
-//	
+	@Deprecated
+	public void setSailMode(boolean sailMode) {
+		this.model.setSailMode(sailMode);
+	}
 	public Mission getCurrentMission() {
 		return this.model.getMissionTasksLeft();
 	}
@@ -324,29 +323,29 @@ public class GUIControllerImpl implements GUIController {
 	}
 
 	@Override
-	public void startEmulation(String filePath) {
-		emulator=new Player(this.worldModel, filePath);
-		emulator.start();
+	public void startPlayer(String filePath) {
+		player=new Player(this.worldModel, filePath);
+		player.start();
 	}
 
 	@Override
-	public void stopEmulation() {
-		emulator.stop();
+	public void stopPlaying() {
+		player.stop();
 	}
 
 	@Override
-	public void pauseEmulation() {
-		emulator.pause();
+	public void pausePlaying() {
+		player.pause();
 	}
 
 	@Override
-	public void playEmulation() {
-		emulator.play();
+	public void playPlayer() {
+		player.play();
 	}
 
 	@Override
-	public void regulateEmulationSpeed(int value) {
-		emulator.setSpeedIntervall(value);
+	public void setPlayingSpeed(int value) {
+		player.setSpeedIntervall(value);
 		this.setUpdateIntervall(value);
 	}
 

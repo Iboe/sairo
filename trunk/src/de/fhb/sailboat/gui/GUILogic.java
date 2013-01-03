@@ -12,8 +12,6 @@ import de.fhb.sailboat.mission.Mission;
  */
 public interface GUILogic {
 	
-	
-
     
     Planner planner = null;;						// the Planner is used for sending mission sets
     GUIController controller = null;				// the GUIController is used for getting and setting values from and to the world model/ local database
@@ -91,34 +89,27 @@ public interface GUILogic {
     public void closeGUI();
     
     public GUIController getController();
+    
     public Planner getPlanner();
     
     // the following are methods for primitive tests and are kept only for reference
-//    @Deprecated
-//    public void sendCircleMarkers();
-//    @Deprecated
-//    public void sendPolyMapMarkers();
-//    @Deprecated
-//    public void sendReachCompass();
-//    @Deprecated
-//    public void sendHoldAngleToWind();
-//    @Deprecated
-//    public void sendStop();
-//    @Deprecated
-//    public void sendResetActors();
-//    @Deprecated
-//    public void sendResetMissionMap();
-//    @Deprecated
-//    public void setSailMode(boolean sailMode);
+    @Deprecated
+    public void sendCircleMarkers();
+    @Deprecated
+    public void sendPolyMapMarkers();
+    @Deprecated
+    public void sendReachCompass();
+    @Deprecated
+    public void sendHoldAngleToWind();
+    @Deprecated
+    public void sendStop();
+    @Deprecated
+    public void sendResetActors();
+    @Deprecated
+    public void sendResetMissionMap();
+    @Deprecated
+    public void setSailMode(boolean sailMode);
     
     public Map getMissionMap();
-    
-//    public void startEmulator(String filePath);
-//
-//	public void stopEmulation();
-//
-//	public void pauseEmulation();
-//
-//	public void playEmulation();
     
 }

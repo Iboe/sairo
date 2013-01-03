@@ -144,15 +144,15 @@ public class PlayerDialog extends RootDialog{
     }// </editor-fold>//GEN-END:initComponents
 
 	private void loadTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestButtonActionPerformed
-		this.controller.startEmulation("TestSave.sem");
+		this.controller.startPlayer("TestSave.sem");
 	}//GEN-LAST:event_loadTestButtonActionPerformed
 
 	private void speedSilderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSilderStateChanged
-		this.controller.regulateEmulationSpeed(speedSilder.getValue());
+		this.controller.setPlayingSpeed(speedSilder.getValue());
 	}//GEN-LAST:event_speedSilderStateChanged
 
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		this.controller.playEmulation();
+		this.controller.playPlayer();
 	}
 
 	private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -180,17 +180,17 @@ public class PlayerDialog extends RootDialog{
 		fileChooser.setFileFilter(emulationFileFilter);
 		if ( fileChooser.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION ) {
 			if ( fileChooser.getSelectedFile().toString()  != null ) {
-				this.controller.startEmulation(fileChooser.getSelectedFile().toString());
+				this.controller.startPlayer(fileChooser.getSelectedFile().toString());
 			}
 		}	
 	}
 
 	private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		this.controller.pauseEmulation();
+		this.controller.pausePlaying();
 	}
 
 	private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-		this.controller.stopEmulation();
+		this.controller.stopPlaying();
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

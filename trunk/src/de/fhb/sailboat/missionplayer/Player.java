@@ -48,9 +48,11 @@ public class Player extends Thread {
 			throw new RuntimeException("Keine abzuspielende Datei mitgegeben!");
 		}
 
-		// loads the prepared data for emulating
-		List<Tripel<Date, String, Object>> runnableDataList = this.logFileConverter
-				.openFromBinaryFile(this.filePath);
+		// loads the log data and convert it to objects for playing 
+//		List<Tripel<Date, String, Object>> runnableDataList = this.logFileConverter
+//				.openFromBinaryFile(this.filePath);
+		
+		List<Tripel<Date, String, Object>> runnableDataList = this.logFileConverter.convertLogToBinaryFormat(this.filePath);
 
 		// runs through the datasets
 		for (Tripel<Date, String, Object> tripel : runnableDataList) {

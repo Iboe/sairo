@@ -20,16 +20,16 @@ public interface GUIController {
 	
 	public void commitMission(Planner planner, Mission mission);
 	
-	// temporary test mission commit methods
-//	public void commitCircleMarkerList(Planner planner);
-//
-//	public void commitPolyList(Planner planner);
-//
-//	public void commitReachCompassTask(int angle, Planner planner);
-//
-//	public void commitHoldAngleToWind(int angle, Planner planner);
-//
-//	public void commitStopTask(Planner planner);
+//	 temporary test mission commit methods
+	public void commitCircleMarkerList(Planner planner);
+
+	public void commitPolyList(Planner planner);
+
+	public void commitReachCompassTask(int angle, Planner planner);
+
+	public void commitHoldAngleToWind(int angle, Planner planner);
+
+	public void commitStopTask(Planner planner);
 	
 	// remote control methods
 	/**
@@ -46,7 +46,7 @@ public interface GUIController {
 //	 * Resets the actors of the boat.
 //	 * @param planner
 //	 */
-//	public void resetActorsTask(Planner planner);
+	public void resetActorsTask(Planner planner);
 	
 	// update routines
 	/**
@@ -70,14 +70,12 @@ public interface GUIController {
 
 	// Setter (values given by View to store in Model)
 	
-//	@Deprecated
-//	public void setCircleMarkerList(List<GPS> pointList);
-
-//	@Deprecated
-//	public void setPolyList(List<MapPolygon> polyList);
-	
-//	@Deprecated
-//	public void setSailMode(boolean sailMode);
+	@Deprecated
+	public void setCircleMarkerList(List<GPS> pointList);
+	@Deprecated
+	public void setPolyList(List<MapPolygon> polyList);
+	@Deprecated
+	public void setSailMode(boolean sailMode);
 
 	// Getter ("tunneled" from Model)
 	public CompassModel getCompass();
@@ -87,7 +85,7 @@ public interface GUIController {
 	public GPSModel getGps();
 
 //	@Deprecated
-//	public boolean isSailMode();
+	public boolean isSailMode();
 
 	public int getPropellor();
 	
@@ -109,15 +107,15 @@ public interface GUIController {
 	
 	public GUIModel getModel();
 
-	public void startEmulation(String filePath);
+	public void startPlayer(String filePath);
 
-	public void stopEmulation();
+	public void stopPlaying();
 
-	public void pauseEmulation();
+	public void pausePlaying();
 
-	public void playEmulation();
+	public void playPlayer();
 	
-	public void regulateEmulationSpeed(int value);
+	public void setPlayingSpeed(int value);
 	
 	public int getActualUpdateRate();
 	

@@ -22,9 +22,6 @@ import de.fhb.sailboat.worldmodel.WindModelImpl;
  */
 public class GUIModelImpl implements GUIModel{
 	
-	// CONSTANTS
-	
-	// VARIABLES
 	protected boolean missionUpdated;
 	
 	protected WindModel wind;
@@ -34,13 +31,13 @@ public class GUIModelImpl implements GUIModel{
 	protected GPSModel gps;
 	
 	// for the planned exercise
-//	@Deprecated
-//	protected List<GPS> circleMarkerList;
-//	@Deprecated
-//	protected List<MapPolygon> polyList;
+	@Deprecated
+	protected List<GPS> circleMarkerList;
+	@Deprecated
+	protected List<MapPolygon> polyList;
 	
 //	@Deprecated
-//	protected boolean sailMode;					// stores current test mission mode
+	protected boolean sailMode;					// stores current test mission mode
 	protected int propellor;						// current propellor mode, 1=maximum backward/ 2=off/ 3=maximum forward
 	protected int rudder;							// current rudder value
 	protected int sail;							// current sail value
@@ -54,7 +51,7 @@ public class GUIModelImpl implements GUIModel{
 		this.compass = new CompassModelImpl();
 		this.compass.setCompass(new Compass(170,0,0));
 		this.gps = new GPSModelImpl();
-//		this.sailMode = false;
+		this.sailMode = false;
 		this.currentWholeMission = new MissionImpl();
 		this.missionTasksLeft = new MissionImpl();
 		this.propellor = 2;
@@ -96,41 +93,41 @@ public class GUIModelImpl implements GUIModel{
 		return gps;
 	}
 
-//	@Override
-//	@Deprecated
-//	public List<GPS> getCircleMarkerList() {
-//		return circleMarkerList;
-//	}
-//
-//	@Override
-//	@Deprecated
-//	public void setCircleMarkerList(List<GPS> markerList) {
-//		this.circleMarkerList = markerList;
-//	}
-//
-//	@Override
-//	@Deprecated
-//	public List<MapPolygon> getPolyList() {
-//		return polyList;
-//	}
-//
-//	@Override
-//	@Deprecated
-//	public void setPolyList(List<MapPolygon> polyList) {
-//		this.polyList = polyList;
-//	}
-//
-//	@Override
-//	@Deprecated
-//	public boolean isSailMode() {
-//		return sailMode;
-//	}
-//
-//	@Override
-//	@Deprecated
-//	public void setSailMode(boolean sailMode) {
-//		this.sailMode = sailMode;
-//	}
+	@Override
+	@Deprecated
+	public List<GPS> getCircleMarkerList() {
+		return circleMarkerList;
+	}
+
+	@Override
+	@Deprecated
+	public void setCircleMarkerList(List<GPS> markerList) {
+		this.circleMarkerList = markerList;
+	}
+
+	@Override
+	@Deprecated
+	public List<MapPolygon> getPolyList() {
+		return polyList;
+	}
+
+	@Override
+	@Deprecated
+	public void setPolyList(List<MapPolygon> polyList) {
+		this.polyList = polyList;
+	}
+
+	@Override
+	@Deprecated
+	public boolean isSailMode() {
+		return sailMode;
+	}
+
+	@Override
+	@Deprecated
+	public void setSailMode(boolean sailMode) {
+		this.sailMode = sailMode;
+	}
 
 	@Override
 	public Mission getCurrentWholeMission() {
