@@ -12,7 +12,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  *
  * AKSEN-Board Communication
  * -------------------------
- * - open Com-Port
+ * - open Com-Portd
  * - Send Data in following expression:
  * 		1) (S)end: s	- acquire Connection
  *         (R)eceive: a	- Acknowledge
