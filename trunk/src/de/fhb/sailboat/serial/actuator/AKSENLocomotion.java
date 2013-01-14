@@ -304,7 +304,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				}
 				// recheck, because of broken loop
 				if ( r != expected) {
-					LOG.warn("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts.");
+					LOG.warn("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts. Received: " + r); // Tobias Koppe : Wenn Verbindung nicht aufgebaut werden konnte, empfangenes Zeichen anzeigen
 					return -1;
 				} else {
 					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
@@ -350,7 +350,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						// didn't got the correct answer? try to resend whole command in next loop
 						// r might be 110
 						if(r != expected) {
-							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString());
+							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString() +". Received: " + r); // Tobias Koppe : Wenn Befehl nicht ausgefuehrt werden konnte, empfangenes Zeichen anzeigen
 							status = 0;
 							
 							continue;
