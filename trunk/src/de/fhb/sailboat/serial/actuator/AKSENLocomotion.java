@@ -335,7 +335,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					// didn't got the correct answer? try to resend whole command in next loop
 					if(r != expected) {
 						if(k==n)
-							LOG.info("Couldn't end InstructionSet on AKSEN in "+ n +" attempts.");
+							LOG.info("Couldn't send InstructionSet on AKSEN in "+ n +" attempts. Received: " + r); // Tobias Koppe : Wenn nicht gesendet werden konnte, empfangenes Zeichen anzeigen
 						continue;
 					} else {
 						//* 4) S: a, hex: 61, dec 097			- execute Instruction on AKSEN
