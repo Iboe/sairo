@@ -294,6 +294,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				r = 0x00;
 				i = 0;
 				while (r != expected) {
+					incSleepTime();
 					i++;
 					this.myCOM.writeByte(send);
 					Thread.sleep(wait_sleep);
@@ -305,8 +306,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 				// recheck, because of broken loop
 				if ( r != expected) {
 					LOG.warn("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts. Received: " + r); // Tobias Koppe : Wenn Verbindung nicht aufgebaut werden konnte, empfangenes Zeichen anzeigen
+					incSleepTime();
 					return -1;
 				} else {
+					decSleepTime();
 					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
 					String t = s + "," + a;
 					byte[] b = t.getBytes();
@@ -336,8 +339,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 					if(r != expected) {
 						if(k==n)
 							LOG.info("Couldn't send InstructionSet on AKSEN in "+ n +" attempts. Received: " + r); // Tobias Koppe : Wenn nicht gesendet werden konnte, empfangenes Zeichen anzeigen
+							incSleepTime();
 						continue;
 					} else {
+						decSleepTime();
 						//* 4) S: a, hex: 61, dec 097			- execute Instruction on AKSEN
 						send = 0x61;
 						//*     R: e, hex: 65, dec: 101			- executed (=ACK)
@@ -352,9 +357,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 						if(r != expected) {
 							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString() +". Received: " + r); // Tobias Koppe : Wenn Befehl nicht ausgefuehrt werden konnte, empfangenes Zeichen anzeigen
 							status = 0;
-							
+							incSleepTime();
 							continue;
 						} else {
+							decSleepTime();
 							// We expect everything went well:
 							status = 1;
 							break;
@@ -389,4 +395,12 @@ public class AKSENLocomotion implements LocomotionSystem {
 		return state;
 	}
 
+	private void incSleepTime(){
+		this.wait_sleep++;
+	}
+	
+	private void decSleepTime(){
+		this.wait_sleep--;
+	}
+	
 }
