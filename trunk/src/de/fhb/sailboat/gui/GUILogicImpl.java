@@ -276,7 +276,7 @@ public class GUILogicImpl implements GUILogic {
     @Deprecated
     public void sendCircleMarkers() {
         if (missionMap.getMap().getMapMarkerList().size() > 0) {
-            this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
+            //this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
             this.controller.commitCircleMarkerList(planner);
             sendResetMissionMap();
         }

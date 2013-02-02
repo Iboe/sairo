@@ -19,9 +19,11 @@ import de.fhb.sailboat.gui.MainControllerModel;
 import de.fhb.sailboat.mission.Mission;
 
 /**
- * Primary Map-class which uses all the other classes.
+ * Class for dividing between a map for representing in the GUI and a map
+ * recognizing the interactions with it. Not sure if this should be done or not..
  * 
  * @author Paul Lehmann
+ * 
  */
 
 public class GeneralMap extends JPanel {

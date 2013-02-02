@@ -814,8 +814,8 @@ public class View extends JFrame {
 
 	private void sendCircleMapMarkers() {
 		if (map.getMap().getMapMarkerList().size() > 0) {
-			this.controller.setCircleMarkerList(GPSTransformations
-					.mapMarkerListToGpsList(map.getMap().getMapMarkerList()));
+			//this.controller.setCircleMarkerList(GPSTransformations
+					//.mapMarkerListToGpsList(map.getMap().getMapMarkerList()));
 			this.controller.commitCircleMarkerList(planner);
 			resetMap();
 		}

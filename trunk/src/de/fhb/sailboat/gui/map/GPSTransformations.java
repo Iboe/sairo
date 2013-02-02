@@ -16,22 +16,21 @@ import de.fhb.sailboat.data.GPS;
  */
 public class GPSTransformations {
 
+	/**
+	 * Transforms the Coordinate format of JMapViewer into our GPS format.
+	 * @param coordinate the one to be transformed
+	 * @return transformed data
+	 */
 	public static GPS coordinateToGPS(Coordinate coordinate) {
 		return new GPS(coordinate.getLat(), coordinate.getLon(), 0);
 	}
 
+	/**
+	 * Transforms the our GPS format into JMapViewer's Coordinate format.
+	 * @param gps the one to be transformed
+	 * @return transformed data
+	 */
 	public static Coordinate gpsToCoordinate(GPS gps) {
 		return new Coordinate(gps.getLatitude(), gps.getLongitude());
-	}
-
-	public static List<GPS> mapMarkerListToGpsList(List<MapMarker> mapMarkerList) {
-		List<GPS> list = new ArrayList<GPS>();
-
-		for (int i = 0; i < mapMarkerList.size(); i++) {
-			list.add(new GPS(mapMarkerList.get(i).getLat(), mapMarkerList
-					.get(i).getLon()));
-		}
-
-		return list;
 	}
 }

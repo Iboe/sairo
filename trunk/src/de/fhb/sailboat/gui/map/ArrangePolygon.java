@@ -13,7 +13,7 @@ import de.fhb.sailboat.data.GPS;
 public class ArrangePolygon {
 
 	/**
-	 * arranges the points so that they build a "well-looking" polygon
+	 * Arranges the points so that they build a "well-looking" polygon.
 	 * 
 	 * @param polygon
 	 *            old list without any order
@@ -22,9 +22,15 @@ public class ArrangePolygon {
 	public static List<GPS> arrange(List<GPS> polygon) {
 		List<GPS> arrangedPolygon = new ArrayList<GPS>();
 		List<Double> distances = new ArrayList<Double>();
+
+		// Take the first element in the list of the old polygon and remove it
+		// in that list.
 		arrangedPolygon.add(polygon.get(0));
 		polygon.remove(0);
 
+		// Retrieve the point with the lowest distance to the element we took
+		// last. Take this minimum as next element and delete it from the old
+		// list.
 		while (polygon.size() > 1) {
 			for (int i = 0; i < polygon.size(); i++) {
 				distances.add(euklidDistance(
@@ -35,6 +41,8 @@ public class ArrangePolygon {
 			polygon.remove(returnMinimum(distances));
 			distances = new ArrayList<Double>();
 		}
+		// If there is just one element left in the old list, add it to the new
+		// list.
 		if (polygon.size() > 0)
 			arrangedPolygon.add(polygon.get(0));
 
@@ -42,11 +50,11 @@ public class ArrangePolygon {
 	}
 
 	/**
-	 * Calculates distance between two given points
+	 * Calculates distance between two given points.
 	 * 
 	 * @param a
 	 * @param b
-	 * @return distance
+	 * @return distance in degrees
 	 */
 	private static double euklidDistance(GPS a, GPS b) {
 		return Math.sqrt(Math.pow(a.getLatitude() - b.getLatitude(), 2)

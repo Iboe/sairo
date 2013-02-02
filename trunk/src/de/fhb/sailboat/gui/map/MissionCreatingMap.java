@@ -18,6 +18,15 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Class for dividing between a map for representing in the GUI and a map
+ * recognizing the interactions with it. Not sure if this should be done or
+ * not..
+ * 
+ * @author Paul Lehmann
+ * 
+ */
+
 public class MissionCreatingMap extends GeneralMap {
 
 	private static final long serialVersionUID = 1L;
@@ -109,8 +118,7 @@ public class MissionCreatingMap extends GeneralMap {
 		markerList.add(new MapMarkerDot(Color.RED, target.getLatitude(), target
 				.getLongitude()));
 		map.addMapMarker(markerList.get(markerList.size() - 1));
-		currentPoly = new MapPolygonImpl(polyList,
-				Color.BLACK);
+		currentPoly = new MapPolygonImpl(polyList, Color.BLACK);
 		map.addMapPolygon(currentPoly);
 	}
 

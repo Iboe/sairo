@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.data.GPS;
 
 /**
- * Noch nicht benutzen!!!
+ * Class for dividing between a map for representing in the GUI and a map
+ * recognizing the interactions with it. Not sure if this should be done or not..
  * 
  * @author Paul Lehmann
  * 

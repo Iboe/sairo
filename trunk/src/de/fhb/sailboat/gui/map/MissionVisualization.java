@@ -48,6 +48,10 @@ public class MissionVisualization {
 		polygonList = new ArrayList<MapPolygon>();
 	}
 
+	/**
+	 * Visualizes the current mission with access to data of the boat.
+	 * @param model
+	 */
 	public void visualize(MainControllerModel model) {
 
 		clearMap();
@@ -74,6 +78,10 @@ public class MissionVisualization {
 		}
 	}
 
+	/**
+	 * Visualizes the current mission without access to data of the boat. 
+	 * @param mission
+	 */
 	public void visualize(Mission mission) {
 
 		clearMap();
