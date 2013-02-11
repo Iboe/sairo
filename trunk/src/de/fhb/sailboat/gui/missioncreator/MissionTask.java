@@ -48,7 +48,7 @@ public class MissionTask implements java.io.Serializable {
 
     private void storeTask(Task task) {
         this.name = task.getClass().getSimpleName();
-        parameters = new ArrayList<>();
+        parameters = new ArrayList<Object>();
         
         switch (supported.valueOf(name.toUpperCase())) {
             case REACHCIRCLETASK: {
@@ -149,7 +149,7 @@ public class MissionTask implements java.io.Serializable {
                          * 
                          * Take note that one additional point (to close the polygon) is always created!!
                          */
-                        ArrayList<GPS> myPolygon = new ArrayList<>();
+                        ArrayList<GPS> myPolygon = new ArrayList<GPS>();
                         for (int i = 0; i < parameters.size(); i = i + 2) {
                             myPolygon.add(new GPS((Double)parameters.get(i), (Double)parameters.get(i+1)));
                         }

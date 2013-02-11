@@ -85,7 +85,10 @@ public class LogConverter {
 			objectInputStream.close();
 			return input;
 
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
 
