@@ -54,6 +54,10 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
+    /**
+     * Commits the given Mission.
+     * @param mission
+     */
     public void commitMission(Mission mission) {
         this.controller.commitMission(planner, mission);
     }
@@ -61,6 +65,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Initializes a Map Object and assigns it to the given panel. The map will
      * fit itself to the size of the given panel and can be resized.
+     * @param missionMapPanel
      */
     public void initializeMissionMap(javax.swing.JPanel missionMapPanel) {
         missionMap = new Map();
@@ -70,6 +75,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current longitude of the boat and sets the given label to the
      * resulting value.
+     * @param gpsLongitudeLabel
      */
     public void updateGPSLongitude(javax.swing.JLabel gpsLongitudeLabel) {
         String value = "";
@@ -87,6 +93,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current latitude of the boat and sets the given label to the
      * resulting value.
+     * @param gpsLatitudeLabel
      */
     public void updateGPSLatitude(javax.swing.JLabel gpsLatitudeLabel) {
         String value = "";
@@ -104,6 +111,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current number of received satellites and sets the given label
      * to the resulting value.
+     * @param gpsSatelites
      */
     public void updateGPSSatelites(javax.swing.JLabel gpsSatelites) {
         String value = "";
@@ -121,6 +129,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current azimuth of the boat and sets the given label to the
      * resulting value.
+     * @param compassAzimuth
      */
     public void updateCompassAzimuth(javax.swing.JLabel compassAzimuth) {
         String value = "";
@@ -138,6 +147,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current pitch of the boat and sets the given label to the
      * resulting value.
+     * @param compassPitch
      */
     public void updateCompassPitch(javax.swing.JLabel compassPitch) {
         String value = "";
@@ -155,6 +165,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current roll of the boat and sets the given label to the
      * resulting value.
+     * @param compassRoll
      */
     public void updateCompassRoll(javax.swing.JLabel compassRoll) {
         String value = "";
@@ -172,6 +183,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current wind velocity recognized by the boat and sets the given
      * label to the resulting value.
+     * @param windVelocity
      */
     public void updateWindVelocity(javax.swing.JLabel windVelocity) {
         String value = "";
@@ -189,6 +201,7 @@ public class GUILogicImpl implements GUILogic {
     /**
      * Gets the current wind direction recognized by the boat and sets the given
      * label to the resulting value.
+     * @param windDirection
      */
     public void updateWindDirection(javax.swing.JLabel windDirection) {
         String value = "";
@@ -205,6 +218,7 @@ public class GUILogicImpl implements GUILogic {
 
     /**
      * Able to put out info in the given TextArea. Currently not used.
+     * @param systemTabTextArea
      */
     public void updateSystemInfo(javax.swing.JTextArea systemTabTextArea) {
         String value = "";
@@ -220,6 +234,7 @@ public class GUILogicImpl implements GUILogic {
 
     /**
      * Able to put out info in the given TextArea. Currently not used.
+     * @param missionTabTextArea
      */
     public void updateMissionInfo(javax.swing.JTextArea missionTabTextArea) {
         String value = "";
