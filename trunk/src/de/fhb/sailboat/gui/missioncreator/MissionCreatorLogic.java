@@ -3,6 +3,9 @@ package de.fhb.sailboat.gui.missioncreator;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.MainControllerImpl;
 import de.fhb.sailboat.gui.GUILogic;
+import de.fhb.sailboat.gui.map.MissionCreatingMap;
+import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.Task;
 import java.util.ArrayList;
 import java.util.List;
@@ -266,8 +269,9 @@ public class MissionCreatorLogic {
      * Commits a mission to the boat via GUILogic interface.
      * @param instructions MissionObject containing the mission
      */
-    public void commitMission(MissionObject instructions) {
+    public void commitMission(MissionObject instructions) {//, MissionCreatingMap map) {
         this.guiLogic.commitMission(instructions.getMission());
+        //map.visualizeMission(new MissionImpl());
     }
     
     /**
