@@ -6,7 +6,6 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import de.fhb.sailboat.control.Planner;
-import de.fhb.sailboat.gui.map.GPSTransformations;
 import de.fhb.sailboat.gui.map.Map;
 import de.fhb.sailboat.mission.Mission;
 

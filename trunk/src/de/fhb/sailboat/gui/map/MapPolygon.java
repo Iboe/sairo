@@ -7,9 +7,9 @@ import java.util.List;
 import de.fhb.sailboat.data.GPS;
 
 /**
+ * Interface for Polygons.
  * 
  * @author Paul Lehmann
- * 
  */
 public interface MapPolygon {
 

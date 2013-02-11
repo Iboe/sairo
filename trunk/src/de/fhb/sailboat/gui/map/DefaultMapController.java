@@ -7,6 +7,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import de.fhb.sailboat.gui.map.utilities.JMapController;
+import de.fhb.sailboat.gui.map.utilities.JMapViewer;
+
 
 /**
  * Default map controller which implements map moving by pressing the right

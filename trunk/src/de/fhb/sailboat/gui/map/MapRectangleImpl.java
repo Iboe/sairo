@@ -11,9 +11,10 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 
 /**
+ * Class which represents a rectangle which can be displayed on the map.
  * 
  * @author Paul Lehmann / JMapViewer (adapted for this project)
- *
+ * 
  */
 public class MapRectangleImpl implements MapRectangle {
 

@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.map;
+package de.fhb.sailboat.gui.map.utilities;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,6 +41,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.map.DefaultMapController;
+import de.fhb.sailboat.gui.map.MapPolygon;
 
 /**
  * Provides a simple panel that displays pre-rendered map tiles loaded from the

@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.map.utilities.GPSTransformations;
 
 /**
  * Class for dividing between a map for representing in the GUI and a map
@@ -31,7 +32,7 @@ public class MissionCreatingMap extends GeneralMap {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
+	//private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
 	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
 
 	private static final Logger LOG = LoggerFactory
@@ -46,6 +47,13 @@ public class MissionCreatingMap extends GeneralMap {
 		super();
 	}
 
+	/**
+	 * Returns usable Panel with the map in it.
+	 * 
+	 * @param mapArea
+	 *            Panel in which the map shall be displayed
+	 * @return usable Panel with the map in it
+	 */
 	@Override
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
 
@@ -113,6 +121,12 @@ public class MissionCreatingMap extends GeneralMap {
 		return mapArea;
 	}
 
+	/**
+	 * Adds point to polygon.
+	 * 
+	 * @param target
+	 *            next polygon point
+	 */
 	public void addPointToPolygon(GPS target) {
 		polyList.add(target);
 		markerList.add(new MapMarkerDot(Color.RED, target.getLatitude(), target
@@ -122,6 +136,9 @@ public class MissionCreatingMap extends GeneralMap {
 		map.addMapPolygon(currentPoly);
 	}
 
+	/**
+	 * Clears marker list.
+	 */
 	private void clearMarkerList() {
 		if (this.markerList.size() > 0) {
 			map.removeMapMarker(this.markerList.get(0));
@@ -129,6 +146,9 @@ public class MissionCreatingMap extends GeneralMap {
 		}
 	}
 
+	/**
+	 * Clears Map.
+	 */
 	public void clear() {
 		map.removeMapMarker(this.markerList.get(0));
 		clearMarkerList();

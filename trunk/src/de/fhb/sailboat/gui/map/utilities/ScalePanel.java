@@ -1,9 +1,11 @@
-package de.fhb.sailboat.gui.map;
+package de.fhb.sailboat.gui.map.utilities;
 
 import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import de.fhb.sailboat.gui.map.Map;
 
 /**
  * Panel for displaying the scale below the map.

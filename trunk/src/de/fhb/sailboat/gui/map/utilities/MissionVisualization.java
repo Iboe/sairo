@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.map;
+package de.fhb.sailboat.gui.map.utilities;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -8,6 +8,9 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.MainControllerModel;
+import de.fhb.sailboat.gui.map.MapMarkerDot;
+import de.fhb.sailboat.gui.map.MapPolygon;
+import de.fhb.sailboat.gui.map.MapPolygonImpl;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
@@ -50,7 +53,9 @@ public class MissionVisualization {
 
 	/**
 	 * Visualizes the current mission with access to data of the boat.
+	 * 
 	 * @param model
+	 *            boat data
 	 */
 	public void visualize(MainControllerModel model) {
 
@@ -79,8 +84,10 @@ public class MissionVisualization {
 	}
 
 	/**
-	 * Visualizes the current mission without access to data of the boat. 
+	 * Visualizes the current mission without access to data of the boat.
+	 * 
 	 * @param mission
+	 *            mission to be displayed
 	 */
 	public void visualize(Mission mission) {
 
@@ -108,10 +115,24 @@ public class MissionVisualization {
 		}
 	}
 
+	/**
+	 * Visualize tasks in a mission if no task is solved yet.
+	 * 
+	 * @param whole
+	 *            whole mission
+	 */
 	private void visualizeTasks(Mission whole) {
 		visualizeTasks(whole, null);
 	}
 
+	/**
+	 * Visualize tasks in a mission and the solved tasks.
+	 * 
+	 * @param current
+	 *            current mission
+	 * @param solved
+	 *            solved tasks
+	 */
 	private void visualizeTasks(Mission current, Mission solved) {
 		if (solved == null) {
 			// visualize whole mission
@@ -132,6 +153,14 @@ public class MissionVisualization {
 		}
 	}
 
+	/**
+	 * Visualize a single task.
+	 * 
+	 * @param task
+	 *            task to be visualized
+	 * @param color
+	 *            color in which the task should be displayed
+	 */
 	private void visualizeTask(Task task, Color color) {
 
 		if (task instanceof ReachCircleTask) {
@@ -167,6 +196,8 @@ public class MissionVisualization {
 
 	/**
 	 * Writes Tasks which are solved into solvedTasks.
+	 * 
+	 * @return solved tasks
 	 */
 	private Mission getSolved(Mission current) {
 		Mission solved = new MissionImpl();
@@ -178,6 +209,16 @@ public class MissionVisualization {
 		return solved;
 	}
 
+	/**
+	 * Draws a line from point a in an angle.
+	 * 
+	 * @param a
+	 *            start of line
+	 * @param angle
+	 *            angle of line
+	 * @param color
+	 *            color of line
+	 */
 	private void drawLine(GPS a, int angle, Color color) {
 		double longitude;
 		if (angle > 180 || angle < 0) {
@@ -216,6 +257,9 @@ public class MissionVisualization {
 		map.addMapPolygon(polygonList.get(polygonList.size() - 1));
 	}
 
+	/**
+	 * Clears map.
+	 */
 	public void clearMap() {
 		for (int i = 0; i < this.markerList.size(); i++)
 			map.removeMapMarker(this.markerList.get(i));

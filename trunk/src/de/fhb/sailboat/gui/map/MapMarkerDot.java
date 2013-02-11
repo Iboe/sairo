@@ -1,7 +1,5 @@
 package de.fhb.sailboat.gui.map;
 
-//License: GPL. Copyright 2008 by Jan Peter Stotz
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;

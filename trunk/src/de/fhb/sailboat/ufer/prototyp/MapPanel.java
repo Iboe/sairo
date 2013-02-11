@@ -21,12 +21,12 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.map.ArrangePolygon;
-import de.fhb.sailboat.gui.map.GPSTransformations;
-import de.fhb.sailboat.gui.map.JMapViewer;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.gui.map.MapPolygonImpl;
-import de.fhb.sailboat.gui.map.ScalePanel;
+import de.fhb.sailboat.gui.map.utilities.ArrangePolygon;
+import de.fhb.sailboat.gui.map.utilities.GPSTransformations;
+import de.fhb.sailboat.gui.map.utilities.JMapViewer;
+import de.fhb.sailboat.gui.map.utilities.ScalePanel;
 /**
  * 
  * @author Paul Lehmann

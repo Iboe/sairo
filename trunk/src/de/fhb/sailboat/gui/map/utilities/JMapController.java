@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.map;
+package de.fhb.sailboat.gui.map.utilities;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;

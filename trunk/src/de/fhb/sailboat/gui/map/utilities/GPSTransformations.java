@@ -1,15 +1,10 @@
-package de.fhb.sailboat.gui.map;
-
-import java.util.ArrayList;
-import java.util.List;
+package de.fhb.sailboat.gui.map.utilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-
 import de.fhb.sailboat.data.GPS;
 
 /**
- * Class for transforming GPS-objects in Coordinate-objects and vice versa
+ * Class for transforming GPS-objects in Coordinate-objects and vice versa.
  * 
  * @author Paul Lehmann
  * 

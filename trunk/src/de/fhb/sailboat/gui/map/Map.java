@@ -25,8 +25,13 @@ import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.gui.MainControllerModel;
+import de.fhb.sailboat.gui.map.utilities.ArrangePolygon;
+import de.fhb.sailboat.gui.map.utilities.GPSTransformations;
+import de.fhb.sailboat.gui.map.utilities.JMapViewer;
+import de.fhb.sailboat.gui.map.utilities.MissionVisualization;
+import de.fhb.sailboat.gui.map.utilities.ScalePanel;
+import de.fhb.sailboat.gui.map.utilities.WindMarkerLine;
 import de.fhb.sailboat.mission.Mission;
-import de.fhb.sailboat.worldmodel.WorldModel;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -84,6 +89,13 @@ public class Map extends JPanel {
 		this.windMarkerList = new ArrayList<MapMarker>();
 	}
 
+	/**
+	 * Returns usable Panel with the map in it.
+	 * 
+	 * @param mapArea
+	 *            Panel in which the map shall be displayed
+	 * @return usable Panel with the map in it
+	 */
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
 
 		// startpositions, Regattastrecke or FH Brandenburg
@@ -233,7 +245,7 @@ public class Map extends JPanel {
 	}
 
 	/**
-	 * Adds a MapMarker at a given gps-position
+	 * Adds a MapMarker at a given gps-position.
 	 * 
 	 * @param target
 	 *            gps position
@@ -283,7 +295,6 @@ public class Map extends JPanel {
 		}
 	}
 
-	
 	/**
 	 * Creates a line with a node every (EVERY_X_GPS_POSITION + 1)
 	 * positions/function calls representing the positions of the boat in the
@@ -292,13 +303,15 @@ public class Map extends JPanel {
 	 * 
 	 * @param boatPosition
 	 *            current Position of the boat
-	 *            
+	 * 
 	 */
-	public void followBoat(GPS boatPosition, Wind windInformation, Compass compassInformation){
-		
-		MapMarker marker =new WindMarkerLine(boatPosition, windInformation, compassInformation);
+	public void followBoat(GPS boatPosition, Wind windInformation,
+			Compass compassInformation) {
+
+		MapMarker marker = new WindMarkerLine(boatPosition, windInformation,
+				compassInformation);
 		this.windMarkerList.add(marker);
-		
+
 		if (map.getMapMarkerList().contains(currentPosition))
 			map.removeMapMarker(currentPosition);
 
@@ -307,13 +320,12 @@ public class Map extends JPanel {
 
 		map.addMapMarker(currentPosition);
 
-
-		//nix drin
+		// nix drin
 		if (positionHistoryList.size() < 1) {
 			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
 					boatPosition.getLongitude()));
 		} else {
-			//zwei elemente
+			// zwei elemente
 			if (positionHistoryList.size() == 1) {
 
 				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
@@ -330,7 +342,7 @@ public class Map extends JPanel {
 				if (followCounter == EVERY_X_GPS_POSITION) {
 					map.removeMapPolygon(positionHistory);
 					int j = (positionHistoryList.size() / 2) + 1;
-					//j=wie viele elemente vonm zurückgegehn
+					// j=wie viele elemente vonm zurückgegehn
 					while (j < positionHistoryList.size())
 						positionHistoryList.remove(j);
 
@@ -345,27 +357,48 @@ public class Map extends JPanel {
 					followCounter = 0;
 					map.addMapPolygon(positionHistory);
 					map.addMapMarker(marker);
-				} else{
+				} else {
 					followCounter++;
 				}
 			}
 		}
 	}
 
+	/**
+	 * Visualize mission.
+	 * 
+	 * @param model
+	 *            data model with current data
+	 */
 	public void visualizeMission(MainControllerModel model) {
 		visualize.visualize(model);
 	}
 
+	/**
+	 * Visualize mission.
+	 * 
+	 * @param mission
+	 *            mission to be visualized
+	 */
 	public void visualizeMission(Mission mission) {
 		visualize.visualize(mission);
 	}
 
+	/**
+	 * Adds obstacle at given gps position.
+	 * 
+	 * @param gps
+	 *            position for the obstacle
+	 */
 	public void addObstacle(GPS gps) {
 		obstacles.add(new MapMarkerDot(OBSTACLE_COLOR, gps.getLatitude(), gps
 				.getLongitude()));
 		map.addMapMarker(obstacles.get(obstacles.size() - 1));
 	}
 
+	/**
+	 * Removes all obstacles.
+	 */
 	public void removeObstacles() {
 		for (int i = 0; i < obstacles.size(); i++) {
 			map.removeMapMarker(obstacles.get(i));
@@ -392,11 +425,17 @@ public class Map extends JPanel {
 		removePolygonsFromMap();
 	}
 
+	/**
+	 * Removes all MapMarkers.
+	 */
 	protected void removeMapMarkerFromMap() {
 		map.getMapMarkerList().clear();
 		this.getMarkerList().clear();
 	}
 
+	/**
+	 * Removes all Polygons.
+	 */
 	protected void removePolygonsFromMap() {
 		map.getMapPolygonList().clear();
 		this.getPolygonList().clear();
@@ -407,6 +446,7 @@ public class Map extends JPanel {
 	 * Move the map to a point at maximum zoomlevel.
 	 * 
 	 * @param gps
+	 *            position
 	 */
 	protected void navigateTo(GPS gps) {
 		navigateTo(gps, 18);
@@ -416,7 +456,9 @@ public class Map extends JPanel {
 	 * Move the map to a point and to a given zoom.
 	 * 
 	 * @param gps
+	 *            position
 	 * @param zoomLevel
+	 *            zommlevel
 	 */
 	protected void navigateTo(GPS gps, int zoomLevel) {
 		map.setDisplayPositionByLatLon(gps.getLatitude(), gps.getLongitude(),
@@ -429,8 +471,9 @@ public class Map extends JPanel {
 	 * Loads tiles around a given coordinate.
 	 * 
 	 * @param coordinate
+	 *            target area
 	 * @param zoomlevel
-	 * @return
+	 *            zoomlevel
 	 * @throws InterruptedException
 	 */
 	public void loadTilesInCache(Coordinate coordinate, int zoomlevel)

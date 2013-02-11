@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.map.utilities.JMapViewer;
+import de.fhb.sailboat.gui.map.utilities.MissionVisualization;
 
 /**
  * Class for dividing between a map for representing in the GUI and a map

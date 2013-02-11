@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.map;
+package de.fhb.sailboat.gui.map.utilities;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

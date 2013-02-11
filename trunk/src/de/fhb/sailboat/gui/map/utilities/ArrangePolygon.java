@@ -1,4 +1,4 @@
-package de.fhb.sailboat.gui.map;
+package de.fhb.sailboat.gui.map.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import de.fhb.sailboat.data.GPS;
 
 /**
- * Class for rearranging the polygon (list of points)
+ * Class for rearranging the polygon (list of points).
  * 
  * @author Paul Lehmann
  */
@@ -53,7 +53,9 @@ public class ArrangePolygon {
 	 * Calculates distance between two given points.
 	 * 
 	 * @param a
+	 *            point a
 	 * @param b
+	 *            point b
 	 * @return distance in degrees
 	 */
 	private static double euklidDistance(GPS a, GPS b) {
@@ -65,6 +67,7 @@ public class ArrangePolygon {
 	 * Returns index of the minimum in a list.
 	 * 
 	 * @param list
+	 *            list of numbers
 	 * @return index of minimum
 	 */
 	private static int returnMinimum(List<Double> list) {

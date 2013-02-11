@@ -16,11 +16,14 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.MainControllerModel;
+import de.fhb.sailboat.gui.map.utilities.JMapViewer;
+import de.fhb.sailboat.gui.map.utilities.MissionVisualization;
 import de.fhb.sailboat.mission.Mission;
 
 /**
  * Class for dividing between a map for representing in the GUI and a map
- * recognizing the interactions with it. Not sure if this should be done or not..
+ * recognizing the interactions with it. Not sure if this should be done or
+ * not..
  * 
  * @author Paul Lehmann
  * 
@@ -31,7 +34,7 @@ public class GeneralMap extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
-	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
+	// private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
 	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
 
 	private static final Logger LOG = LoggerFactory.getLogger(GeneralMap.class);
@@ -51,6 +54,13 @@ public class GeneralMap extends JPanel {
 		this.obstacles = new ArrayList<MapMarker>();
 	}
 
+	/**
+	 * Returns usable Panel with the map in it.
+	 * 
+	 * @param mapArea
+	 *            Panel in which the map shall be displayed
+	 * @return usable Panel with the map in it
+	 */
 	public JPanel mapPanel(final javax.swing.JPanel mapArea) {
 
 		// startpositions, Regattastrecke or FH Brandenburg
@@ -73,7 +83,7 @@ public class GeneralMap extends JPanel {
 	}
 
 	/**
-	 * Adds a MapMarker at a given gps-position
+	 * Adds a MapMarker at a given gps-position.
 	 * 
 	 * @param target
 	 *            gps position
@@ -84,20 +94,41 @@ public class GeneralMap extends JPanel {
 		map.addMapMarker(markerList.get(markerList.size() - 1));
 	}
 
+	/**
+	 * Visualize mission.
+	 * 
+	 * @param model
+	 *            data model with current data
+	 */
 	public void visualizeMission(MainControllerModel model) {
 		visualize.visualize(model);
 	}
-	
+
+	/**
+	 * Visualize mission.
+	 * 
+	 * @param mission
+	 *            mission to be visualized
+	 */
 	public void visualizeMission(Mission mission) {
 		visualize.visualize(mission);
 	}
 
+	/**
+	 * Adds obstacle to the map.
+	 * 
+	 * @param gps
+	 *            position for the obstacle
+	 */
 	public void addObstacle(GPS gps) {
 		obstacles.add(new MapMarkerDot(Color.BLACK, gps.getLatitude(), gps
 				.getLongitude()));
 		map.addMapMarker(obstacles.get(obstacles.size() - 1));
 	}
 
+	/**
+	 * Removes all Obstacles.
+	 */
 	public void removeObstacles() {
 		for (int i = 0; i < obstacles.size(); i++) {
 			map.removeMapMarker(obstacles.get(i));
@@ -113,6 +144,9 @@ public class GeneralMap extends JPanel {
 		visualize.clearMap();
 	}
 
+	/**
+	 * Removes all MapMarkers.
+	 */
 	private void removeMapMarkerFromMap() {
 		map.getMapMarkerList().clear();
 		this.getMarkerList().clear();
@@ -122,6 +156,7 @@ public class GeneralMap extends JPanel {
 	 * Move the map to a point at maximum zoomlevel.
 	 * 
 	 * @param gps
+	 *            target to move the map to
 	 */
 	protected void navigateTo(GPS gps) {
 		navigateTo(gps, 18);
@@ -131,7 +166,9 @@ public class GeneralMap extends JPanel {
 	 * Move the map to a point and to a given zoom.
 	 * 
 	 * @param gps
+	 *            target to move the map to
 	 * @param zoomLevel
+	 *            wanted zoomlevel
 	 */
 	protected void navigateTo(GPS gps, int zoomLevel) {
 		map.setDisplayPositionByLatLon(gps.getLatitude(), gps.getLongitude(),
@@ -144,8 +181,9 @@ public class GeneralMap extends JPanel {
 	 * Loads tiles around a given coordinate.
 	 * 
 	 * @param coordinate
+	 *            target area for which this fundtion shall load the tiles
 	 * @param zoomlevel
-	 * @return
+	 *            wanted zoomlevel
 	 * @throws InterruptedException
 	 */
 	public void loadTilesInCache(Coordinate coordinate, int zoomlevel)
