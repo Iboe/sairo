@@ -23,12 +23,12 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 public class MissionCreatorLogic {
     
     /**
-     * Used as interface to send missions
+     * Used as interface to send missions.
      */
     private GUILogic guiLogic;
     
     /**
-     * Copied/ Cut items from missionTree are saved to this list
+     * Copied/ Cut items from missionTree are saved to this list.
      */
     private ArrayList<Object> missionTreeClipboard;
     
@@ -37,6 +37,10 @@ public class MissionCreatorLogic {
         this.missionTreeClipboard = new ArrayList<Object>();    // initialize clipboard
     }
     
+    /**
+     * Initialize missionTree.
+     * @param missionTree
+     */
     public void missionTreeInitialize(JTree missionTree) {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(new MissionTreeObject("Mission"));
         
@@ -97,67 +101,132 @@ public class MissionCreatorLogic {
         return (((MissionTreeObject)selected.getUserObject()).getTask() == null);
     }
     
+    /**
+     * Creates a PropellorFullForward task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewPropellorFullForward_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MAX);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a PropellorStop task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewPropellorStop_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_NORMAL);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a PropellorFullBackward task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewPropellorFullBackward_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MIN);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a RudderRight task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewRudderRight_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, MainControllerImpl.RUDDER_RIGHT, null);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a RudderNeutral task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewRudderNeutral_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, MainControllerImpl.RUDDER_NORMAL, null);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a RudderLeft task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewRudderLeft_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, MainControllerImpl.RUDDER_LEFT, null);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a CompassCourse task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewCompassCourse_Task(JTree missionTree, String name, int angle) {
         Task load = new de.fhb.sailboat.mission.CompassCourseTask(angle);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a HoldAngleToWind task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewHoldAngleToWind_Task(JTree missionTree, String name, int angle) {
         Task load = new de.fhb.sailboat.mission.HoldAngleToWindTask(angle);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a Stop task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_Stop_Task(JTree missionTree, String name) {
         Task load = new de.fhb.sailboat.mission.StopTask();
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a ReachCircle task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewReachCircle_Task(JTree missionTree, String name, GPS position, int radius) {
         // TODO Radius festsetzen
         Task load = new de.fhb.sailboat.mission.ReachCircleTask(position, 3);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a ReachPolygon task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewReachPolygon_Task(JTree missionTree, String name, List<GPS> polygon) {
         Task load = new de.fhb.sailboat.mission.ReachPolygonTask(polygon);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a CrossLine task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewCrossLine_Task(JTree missionTree, String name, GPS start, GPS end) {
         Task load = new de.fhb.sailboat.mission.CrossLineTask(start, end);
         missionTreeNew_Task(missionTree, name, load);
     }
     
+    /**
+     * Creates a Obstacle task.
+     * @param missionTree
+     * @param name
+     */
     public void missionTree_NewObstacle(JTree missionTree, String name, MapMarker obstacle) {
         DefaultMutableTreeNode item = new DefaultMutableTreeNode(new MissionTreeObject(name, obstacle), false);
         

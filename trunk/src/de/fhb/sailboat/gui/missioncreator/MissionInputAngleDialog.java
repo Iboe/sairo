@@ -13,7 +13,7 @@ public class MissionInputAngleDialog extends javax.swing.JDialog {
     public static int APPROVE_OPTION = 0;
     
     /**
-     * The name given to the task. The chosen angle will ALWAYS be attached to this for overview
+     * The name given to the task. The chosen angle will ALWAYS be attached to this for overview.
      */
     private String chosenName;
     
@@ -29,6 +29,10 @@ public class MissionInputAngleDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form MissionInputAngleDialog
+     * @param parent
+     * @param modal
+     * @param initialName
+     * @param title
      */
     public MissionInputAngleDialog(java.awt.Frame parent, boolean modal, String initialName, String title) {
         super(parent, modal);
@@ -149,6 +153,10 @@ public class MissionInputAngleDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>
 
+    /**
+     * Updates Slider state.
+     * @param evt
+     */
     private void angleSliderStateChanged(javax.swing.event.ChangeEvent evt) {
         this.angleSliderLabel.setText(this.angleSlider.getValue() + "°");
     }

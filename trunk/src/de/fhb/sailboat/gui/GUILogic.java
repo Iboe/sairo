@@ -24,56 +24,67 @@ public interface GUILogic {
     
     /**
      * Initializes a Map Object and assigns it to the given panel.
+     * @param missionMapPanel
      */
     public void initializeMissionMap(javax.swing.JPanel missionMapPanel);
     
     /**
-     * Gets the current longitude of the boat and sets the given label to the resulting value. 
+     * Gets the current longitude of the boat and sets the given label to the resulting value.
+     * @param gpsLongitudeLabel
      */
     public void updateGPSLongitude(javax.swing.JLabel gpsLongitudeLabel);
     
     /**
-     * Gets the current latitude of the boat and sets the given label to the resulting value. 
+     * Gets the current latitude of the boat and sets the given label to the resulting value.
+     * @param gpsLatitudeLabel
      */
     public void updateGPSLatitude(javax.swing.JLabel gpsLatitudeLabel);
     
     /**
-     * Gets the current number of received satellites and sets the given label to the resulting value. 
+     * Gets the current number of received satellites and sets the given label to the resulting value.
+     * @param gpsSatelites
      */
     public void updateGPSSatelites(javax.swing.JLabel gpsSatelites);
     
     /**
-     * Gets the current azimuth of the boat and sets the given label to the resulting value. 
+     * Gets the current azimuth of the boat and sets the given label to the resulting value.
+     * @param compassAzimuth
      */
     public void updateCompassAzimuth(javax.swing.JLabel compassAzimuth);
     
     /**
-     * Gets the current pitch of the boat and sets the given label to the resulting value. 
+     * Gets the current pitch of the boat and sets the given label to the resulting value.
+     * @param compassPitch
      */
     public void updateCompassPitch(javax.swing.JLabel compassPitch);
     
     /**
-     * Gets the current roll of the boat and sets the given label to the resulting value. 
+     * Gets the current roll of the boat and sets the given label to the resulting value.
+     * @param compassRoll
      */
     public void updateCompassRoll(javax.swing.JLabel compassRoll);
     
     /**
-     * Gets the current wind velocity recognized by the boat and sets the given label to the resulting value. 
+     * Gets the current wind velocity recognized by the boat and sets the given label to the resulting value.
+     * @param windVelocity
      */
     public void updateWindVelocity(javax.swing.JLabel windVelocity);
     
     /**
-     * Gets the current wind direction recognized by the boat and sets the given label to the resulting value. 
+     * Gets the current wind direction recognized by the boat and sets the given label to the resulting value.
+     * @param windDirection
      */
     public void updateWindDirection(javax.swing.JLabel windDirection);
     
     /**
      * Able to put out info in the given TextArea.
+     * @param systemTabTextArea
      */
     public void updateSystemInfo(javax.swing.JTextArea systemTabTextArea);
     
     /**
      * Able to put out info in the given TextArea.
+     * @param missionTabTextArea
      */
     public void updateMissionInfo(javax.swing.JTextArea missionTabTextArea);
     
@@ -88,8 +99,16 @@ public interface GUILogic {
      */
     public void closeGUI();
     
+    /**
+     * Gets the  MainController.
+     * @return MainController
+     */
     public MainController getController();
     
+    /**
+     * Get the Planner.
+     * @return Planner
+     */
     public Planner getPlanner();
     
     // the following are methods for primitive tests and are kept only for reference

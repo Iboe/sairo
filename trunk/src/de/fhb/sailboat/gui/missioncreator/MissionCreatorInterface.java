@@ -62,12 +62,15 @@ public class MissionCreatorInterface extends RootDialog{
     private MissionCreatorLogic missionCreatorLogic;
     
     /**
-     * Used for visualising mission
+     * Used for visualising mission.
      */
     private MissionCreatingMap missionMap;
     
     /**
-     * Creates new form MissionCreatorInterface
+     * Creates new form MissionCreatorInterface.
+     * @param parent
+     * @param modal
+     * @param guiLogic
      */
     public MissionCreatorInterface(java.awt.Frame parent, boolean modal, GUILogic guiLogic) {
         super(parent, modal);
@@ -397,6 +400,10 @@ public class MissionCreatorInterface extends RootDialog{
         pack();
     }// </editor-fold>
 
+    /**
+     * Opens a dialog for and deals with the saving of composed missions.
+     * @param evt
+     */
     private void MissionMenuSaveActionPerformed(java.awt.event.ActionEvent evt) {                                                
         JFileChooser fc = new JFileChooser();
         fc.setFileFilter(new FileFilter() {
@@ -424,11 +431,19 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                               
 
+    /**
+     * Resets the missionTree (current mission composing).
+     * @param evt
+     */
     private void MissionMenuNewActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add prompt to save missions before resetting
         this.missionCreatorLogic.missionTreeInitialize(missionTree);
     }                                              
 
+    /**
+     * Opens a dialog for and deals with the loading of composed missions.
+     * @param evt
+     */
     private void MissionMenuLoadActionPerformed(java.awt.event.ActionEvent evt) {                                                
         JFileChooser fc = new JFileChooser("C:/");
         fc.setFileFilter(new FileFilter() {
@@ -454,10 +469,18 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                               
 
+    /**
+     * Deletes the currently selected node.
+     * @param evt
+     */
     private void treePopupDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                                
         this.missionCreatorLogic.missionTreeDelete(missionTree);
     }                                               
 
+    /**
+     * Renames the currentrly selected node.
+     * @param evt
+     */
     private void treePopupEditActionPerformed(java.awt.event.ActionEvent evt) {                                              
         String value = "";
         value = JOptionPane.showInputDialog(this, value, this.missionTree.getSelectionModel().getSelectionPath().getLastPathComponent().toString());
@@ -465,14 +488,26 @@ public class MissionCreatorInterface extends RootDialog{
         this.missionCreatorLogic.missionTreeEdit(missionTree, value);
     }                                             
 
+    /**
+     * Copies the currently selected node.
+     * @param evt
+     */
     private void treePopupCopyActionPerformed(java.awt.event.ActionEvent evt) {                                              
         this.missionCreatorLogic.missionTreeCopy(missionTree);
     }                                             
 
+    /**
+     * Cuts the currently selected node.
+     * @param evt
+     */
     private void treePopupCutActionPerformed(java.awt.event.ActionEvent evt) {                                             
         this.missionCreatorLogic.missionTreeCut(missionTree);
     }                                            
 
+    /**
+     * Pastes currently cut/ copied node after selection (inf if list).
+     * @param evt
+     */
     private void treePopupPasteActionPerformed(java.awt.event.ActionEvent evt) {                                               
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             this.missionCreatorLogic.missionTreePaste(missionTree);
@@ -482,9 +517,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                              
 
-    /*
+    /**
      * Called upon opening the missionTree-PopUp (to be exactly: upon it getting visible). Used to enable/ disable
      * menu items accordingly to current selection(s).
+     * @param evt
      */
     private void missionTreePopupInitialize(javax.swing.event.PopupMenuEvent evt) {                                            
         // Check if any selection was made at all
@@ -526,6 +562,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                           
 
+    /**
+     * Creates a new list in the missionTree.
+     * @param evt
+     */
     private void treePopupNewMenuListActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -538,6 +578,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                    
 
+    /**
+     * Creates a new PropellorFullForward node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_PropellorFullForwardActionPerformed(java.awt.event.ActionEvent evt) {                                                                                      
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -550,6 +594,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                                     
 
+    /**
+     * Creates a new ReachCircle node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Navigation_ReachCircleActionPerformed(java.awt.event.ActionEvent evt) {                                                                                
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) { 
             MissionInputPositionDialog pd = new MissionInputPositionDialog(null, true, this.INPUTTEXT_REACHCIRCLE, this.INPUTTEXT_POSITION, 0);
@@ -576,6 +624,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                               
 
+    /**
+     * Creates a new CompassCourse node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Navigation_CompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                                                  
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             /*String str = JOptionPane.showInputDialog(this, this.INPUTTEXT_ANGLE, "");
@@ -608,6 +660,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                                 
 
+    /**
+     * Creates a new HoldAngleCourseToWind node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Navigation_HoldAngleCourseToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                                                          
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             /*String str = JOptionPane.showInputDialog(this, this.INPUTTEXT_ANGLE, "");
@@ -640,6 +696,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                                         
 
+    /**
+     * Creates a new PropellorFullStop node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_PropellorFullStopActionPerformed(java.awt.event.ActionEvent evt) {                                                                                   
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -652,6 +712,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                                  
 
+    /**
+     * Creates a new PropellorFullBackward node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_PropellorFullBackwardActionPerformed(java.awt.event.ActionEvent evt) {                                                                                       
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -664,6 +728,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                                      
 
+    /**
+     * Creates a new Stop node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_StopActionPerformed(java.awt.event.ActionEvent evt) {                                                                      
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -676,17 +744,29 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                     
 
+    /**
+     * Tests the creation of missions by outputting the result of such.
+     * @param evt
+     */
     private void TestMenuMakeMissionActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         MissionObject test;
         test = new MissionObject(missionTree);
         JOptionPane.showMessageDialog(this, "Erfolgreich generiert mit " + test.getMission().getTasks().size() + " Tasks.", "Ergebnis", JOptionPane.PLAIN_MESSAGE);
     }                                                   
 
+    /**
+     * Creates a mission and attempts to send it to the boat.
+     * @param evt
+     */
     private void TestMenuMakeAndSendActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         MissionObject instruction = new MissionObject(missionTree);
         this.missionCreatorLogic.commitMission(instruction);
     }                                                   
 
+    /**
+     * Creates a new RudderRight node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_RudderRightActionPerformed(java.awt.event.ActionEvent evt) {                                                                             
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -699,6 +779,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                            
 
+    /**
+     * Creates a new RudderNeutral node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_RudderNeutralActionPerformed(java.awt.event.ActionEvent evt) {                                                                               
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -711,6 +795,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                              
 
+    /**
+     * Creates a new RudderLeft node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Control_RudderLeftActionPerformed(java.awt.event.ActionEvent evt) {                                                                            
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
@@ -723,6 +811,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                           
 
+    /**
+     * Creates a new ReachPolygon node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Navigation_ReachPolygonActionPerformed(java.awt.event.ActionEvent evt) {                                                                                 
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) { 
             MissionInputPositionDialog pd = new MissionInputPositionDialog(null, true, this.INPUTTEXT_REACHPOLYGON, this.INPUTTEXT_POSITION, 1);
@@ -754,6 +846,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                                
 
+    /**
+     * Creates a new CrossLine node.
+     * @param evt
+     */
     private void treePopupNewMenuTaskMenu_Navigation_CrossLineActionPerformed(java.awt.event.ActionEvent evt) {                                                                              
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) { 
             MissionInputPositionDialog pd = new MissionInputPositionDialog(null, true, this.INPUTTEXT_CROSSLINE, this.INPUTTEXT_POSITION, 1);
@@ -781,6 +877,10 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }                                                                             
 
+    /**
+     * Creates a new Obstacle node.
+     * @param evt
+     */
     private void treePopupNewObstacleActionPerformed(java.awt.event.ActionEvent evt) {
          if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) { 
             MissionInputPositionDialog pd = new MissionInputPositionDialog(null, true, this.INPUTTEXT_OBSTACLENAME, this.INPUTTEXT_OBSTACLE, 2);
@@ -808,9 +908,12 @@ public class MissionCreatorInterface extends RootDialog{
         }
     }
 
+    /**
+     * Updates the mission map.
+     */
     private void updateMissionMap() {
         
-        //FIXME beat paul into finishing the promised overload for visualize
+        //FIXME *convince* paul into finishing the promised overload for visualize
         /*GUIModelImpl paul = new GUIModelImpl();
         Mission mission = new MissionObject(this.missionTree).getMission();
         paul.setCurrentWholeMission(mission);
@@ -821,9 +924,12 @@ public class MissionCreatorInterface extends RootDialog{
         if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(mission);
     }
     
-    // FIXME remove this test stub
+    /**
+     * Gets the currently set obstacles.
+     * @return
+     */
     public List<MapMarker> getObstacleList() {
-        return this.missionMap.getObstacles();
+    	return this.missionMap.getObstacles();
     }
     
     // Variables declaration - do not modify
