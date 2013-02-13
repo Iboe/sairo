@@ -80,7 +80,7 @@ public class CompassSensor {
 					try {
 						valueArray = cInstance.myCOM.readLine(10);
 					} catch (IOException e1) {
-						LOG.warn("no senosr data available", e1);
+						LOG.warn("no sensor data available", e1);
 					}
 					
 					// wenn Werte gelesen wurden
@@ -171,15 +171,6 @@ public class CompassSensor {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void shutdown()
 	{
 		if(sensorThread != null && !sensorThread.isInterrupted())
@@ -301,7 +292,5 @@ public class CompassSensor {
 			return (lower + upper) / 2.0;
 		    }	
 		}
-	
-	
 	}
 }

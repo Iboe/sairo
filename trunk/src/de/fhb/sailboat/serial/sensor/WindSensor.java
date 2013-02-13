@@ -1,13 +1,9 @@
 package de.fhb.sailboat.serial.sensor;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
 
-import com.sun.org.apache.bcel.internal.generic.CASTORE;
-
-import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -37,11 +33,7 @@ public class WindSensor {
 		return this.airDirection;
 	}
 
-	
-
 	static class WindSensorThread extends Thread {
-		
-		
 		WindSensor windInstance;
 		int satelites;
 		private static Logger LOG = Logger.getLogger("Windsensor: ");
@@ -61,7 +53,6 @@ public class WindSensor {
 				try {
 					valueArray = windInstance.myCOM.readLine(1);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
@@ -74,8 +65,8 @@ public class WindSensor {
 						if (myNmea != null) {
 							if (myNmea[0].equals("$WIMWV")) {
 								
-									//LOG.debug("WindDirection: " + Integer.parseInt(myNmea[1]) +
-									//		" WindSpeed: "+ Double.parseDouble(myNmea[3]));								
+									LOG.debug("WindDirection: " + Integer.parseInt(myNmea[1]) +
+											" WindSpeed: "+ Double.parseDouble(myNmea[3]));								
 									
 									Wind wind = new Wind(Integer.parseInt(myNmea[1]), 
 											Double.parseDouble(myNmea[3]));
@@ -85,7 +76,6 @@ public class WindSensor {
 									try {
 										Thread.sleep(500);
 									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
 										LOG.fatal("Error Occured:" + e);
 										e.printStackTrace();
 									

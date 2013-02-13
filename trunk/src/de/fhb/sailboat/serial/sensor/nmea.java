@@ -2,7 +2,6 @@ package de.fhb.sailboat.serial.sensor;
 
 public class nmea {
 
-
 	@Deprecated
 	public static String[] stringToArray(String dataString) {
 
