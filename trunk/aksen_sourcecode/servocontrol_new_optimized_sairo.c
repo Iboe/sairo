@@ -418,6 +418,7 @@ char zeichen, unerwartetes_zeichen = 0;							// um Eingabe von unerwarteten Zei
 				else
 				{
 					unerwartetes_zeichen = 1;
+					serielle_putchar('n');
 				}
 
 			}												// Ende der inneren While-Schleife
@@ -474,30 +475,28 @@ char zeichen, unerwartetes_zeichen = 0;							// um Eingabe von unerwarteten Zei
 			if((bef_element == 0) && (!unerwartetes_zeichen) && (!ungueltiger_winkel))		// komplette Befehle empfangen?
 			{
 				serielle_putchar(anz_pakete+48);					// erfolgreichen Paketempfang bestätigen
-				//serielle_putchar(':');
-				//serielle_putchar(servonr+48);
-				//serielle_putchar(',');
-				//serielle_putchar(winkel);
+				serielle_putchar(':');
+				serielle_putchar(servonr+48);
+				serielle_putchar(',');
+				serielle_putchar(winkel);
 				zeichen=serielle_getchar();							// auf Bestätigung warten
 				if(zeichen == 'a'){ 								// ACK
 					fuehreBefehleAus(befehlsliste, anz_pakete);		// Komplettes Programm (alle Befehle) abarbeiten
 				}
 				else if(zeichen=='n')								// empfangene Packete nicht korrekt, Empfang wird abgebrochen
 				{								
-					//lcd_cls();
-					//lcd_puts("ERR 3way handshake");
+					serielle_putchar('n');
 				}
 				else
 				{
 					unerwartetes_zeichen = 1;					// Error, Übertragung oder Programm fehlerhaft
-					//lcd_cls();
-					//lcd_puts("illegal char");
+					serielle_putchar('n');
 				}
 			}
 			else 
 			{
-				//lcd_cls();
-				//lcd_puts("resend command");
+
+				serielle_putchar('n');
 			}
 		}
 		else if (zeichen == 'v')
@@ -510,19 +509,14 @@ char zeichen, unerwartetes_zeichen = 0;							// um Eingabe von unerwarteten Zei
 			serielle_putchar(analog_wert);
 			spannung = (analog_wert / 51.0 - 0.198) / 0.565;   // Abbildung 0...5 V auf Werte 0...255 ergibt n = 51 
 															   // dazu umgestellte Formel Uaus = 0,565 * Uein + 0,198
-
-	
-			//sleep(500);
+			sleep(500);
 		}
 		else
 		{
 			unerwartetes_zeichen = 1;							// SYN erwartet, breche Übertragung ab
-			//sleep(5000);
-
-			//lcd_cls();
-			//lcd_puts("syn erwartet");
+			sleep(5000);
 			serielle_putchar('n');
-			//sleep(1000);
+			sleep(1000);
 		}
 }
 
