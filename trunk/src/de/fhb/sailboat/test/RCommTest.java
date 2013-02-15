@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.*;
+import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
+import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
 import de.fhb.sailboat.communication.serverModules.CompassTransmitter;
@@ -24,6 +26,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * @author Michael Kant
  *
  */
+@Deprecated
 public class RCommTest {
 
 	/**
