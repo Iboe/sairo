@@ -87,34 +87,39 @@ public class ModuleWorker extends Thread {
 					
 					byte[] sendBuffer=dataForwarder.toByteArray();
 					
-					while(errorCount < CommunicationBase.MAX_TRX_COUNT){
+					if(sendBuffer.length > 0){
 						
-						try{
-						
-							synchronized(sender){
-								
-								LOG.debug("Sending packet ("+sendBuffer.length+" Bytes) from module: "+commModule.getClass().getSimpleName());
-								sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
-								CommunicationBase.writeCompactIndex(sender, sendBuffer.length);								
-								sender.write(sendBuffer);
-								sender.flush();
-								errorCount=0;
-								break;
-							}
-						}
-						catch (IOException e) {
+						while(errorCount < CommunicationBase.MAX_TRX_COUNT){
 							
-							if(errorCount < CommunicationBase.MAX_TRX_COUNT){
-								
-								errorCount++;
-								LOG.warn("IO error: "+e.getMessage());
+							try{
+							
+								synchronized(sender){
+									
+									LOG.debug("Sending packet ("+sendBuffer.length+" Bytes) from module: "+commModule.getClass().getSimpleName());
+									sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
+									CommunicationBase.writeCompactIndex(sender, sendBuffer.length);								
+									sender.write(sendBuffer);
+									sender.flush();
+									errorCount=0;
+									break;
+								}
 							}
-							else{
+							catch (IOException e) {
 								
-								break;
+								if(errorCount < CommunicationBase.MAX_TRX_COUNT){
+									
+									errorCount++;
+									LOG.warn("IO error: "+e.getMessage());
+								}
+								else{
+									
+									break;
+								}
 							}
 						}
 					}
+					else 
+						LOG.warn("Discarding empty packet from module: "+commModule.getClass().getSimpleName());
 					
 					if(errorCount >= CommunicationBase.MAX_TRX_COUNT){
 						
