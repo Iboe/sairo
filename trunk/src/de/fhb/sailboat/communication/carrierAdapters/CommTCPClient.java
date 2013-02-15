@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.fhb.sailboat.communication;
+package de.fhb.sailboat.communication.carrierAdapters;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,6 +11,8 @@ import java.net.UnknownHostException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.fhb.sailboat.communication.CommunicationBase;
 
 /**
  * Provides a TCP client endpoint as {@link CommunicationBase}.<br>

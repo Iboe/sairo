@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.fhb.sailboat.communication;
+package de.fhb.sailboat.communication.carrierAdapters;
 
 import java.io.IOException;
 import java.io.DataInputStream;
@@ -10,6 +10,8 @@ import java.net.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.fhb.sailboat.communication.CommunicationBase;
 
 /**
  * Provides a TCP server endpoint as {@link CommunicationBase}.<br>
