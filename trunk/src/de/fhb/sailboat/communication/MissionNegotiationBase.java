@@ -115,12 +115,13 @@ public class MissionNegotiationBase {
 		TM_Idle(0),
 		TM_MissionBegin(1),
 		TM_MissionBegin_ACK(2),
-		TM_Task_Wait(3),
-		TM_Task_ACK(4),
-		TM_MissionEnd(5),
-		TM_MissionEnd_ACK(6),
-		TM_MissionCancel(7),
-		TM_MissionCancel_ACK(8);
+		TM_Task_New(3),
+		TM_Task_Wait(4),
+		TM_Task_ACK(5),
+		TM_MissionEnd(6),
+		TM_MissionEnd_ACK(7),
+		TM_MissionCancel(8),
+		TM_MissionCancel_ACK(9);
 		
 		private int modeId;
 		
