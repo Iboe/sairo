@@ -66,12 +66,20 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 		
 		opCode=(byte)(signature & 0x0F);
 		
+		LOG.debug("receivedObject - Mode: "+mode+" - received: " +eOperationType.getByValue(opCode)); 
+		
 		switch(mode){
 		
 			case TM_Idle:
 				if(opCode == eOperationType.OT_BeginMission.getValue()){
 					
+					LOG.info("Mission receive started!");
 					mode=eTransmissionMode.TM_MissionBegin_ACK;
+					base.requestTransmission(this);
+				}
+				else if(opCode == eOperationType.OT_CancelMission.getValue()){
+					
+					mode=eTransmissionMode.TM_MissionCancel_ACK;
 					base.requestTransmission(this);
 				}
 				else
@@ -87,7 +95,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 				else if(opCode == eOperationType.OT_CancelMission.getValue()){
 					
 					mode=eTransmissionMode.TM_MissionCancel_ACK;
-					//TODO: initiate mission cancel acknowledge
+					base.requestTransmission(this);
 				}
 				else
 					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");
@@ -126,6 +134,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 				else if(opCode == eOperationType.OT_CancelMission.getValue()){
 					
 					mode=eTransmissionMode.TM_MissionCancel_ACK;
+					base.requestTransmission(this);
 					//TODO: initiate mission cancel acknowledge
 				}
 				else
@@ -136,6 +145,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 				if(opCode == eOperationType.OT_EndMission_ACK.getValue()){
 					
 					//TODO: planner.doMission(new MissionImpl(missionAssembly))
+					LOG.info("Mission receive finished!");
 					missionAssembly=null;
 					mode=eTransmissionMode.TM_Idle;
 					
@@ -152,6 +162,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 			case TM_MissionCancel_ACK:
 				if(opCode == eOperationType.OT_CancelMission_ACK.getValue()){
 					
+					LOG.info("Mission receive canceled!");
 					missionAssembly.clear();
 					missionAssembly=null;
 					mode=eTransmissionMode.TM_Idle;
@@ -183,7 +194,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 		
 		int opCode;
 		
-			if(error != eErrorType.ET_None){
+			if(error == eErrorType.ET_None){
 				
 				switch(mode){
 				
@@ -206,6 +217,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 						opCode=eOperationType.OT_NoOp.getValue();
 					break;
 				}
+				LOG.warn("requestObject - Mode: "+mode+" - sending: " +eOperationType.getByValue(opCode));
 			}
 			else {
 				
