@@ -13,7 +13,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fhb.sailboat.communication.CommTCPServer;
+import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.serverModules.CompassTransmitter;
 import de.fhb.sailboat.communication.serverModules.GPSTransmitter;

@@ -3,7 +3,7 @@
  */
 package de.fhb.sailboat.test;
 
-import de.fhb.sailboat.communication.CommTCPClient;
+import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
