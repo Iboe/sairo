@@ -24,10 +24,20 @@ public class CommTCPClient extends CommunicationBase {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CommTCPClient.class);
 	
-	private Socket destination;
+	/**
+	 * Destination IP address to connect to.
+	 */
 	private String destinationIP;
+	
+	/**
+	 * Port to address at the destination IP.
+	 */
 	private int destinationPort;
 	
+	/**
+	 * Reference to the socket, created with the given IP and port.
+	 */
+	private Socket destination;
 	
 	/**
 	 * Initialization constructor.<br>

@@ -24,6 +24,8 @@ import de.fhb.sailboat.mission.Task;
 /**
  * Transmitter module for receiving and deserializing a mission with all its {@link Task}s.<br>
  * The module ensures a reliable receiving process of the mission, using three-way-handshake and mission transmission modes.
+ * This {@link TransmissionModule} is a sending and receiving module.
+ * 
  * @author Michael Kant
  *
  */

@@ -10,7 +10,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.jmx.snmp.tasks.TaskServer;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
@@ -26,6 +25,7 @@ import de.fhb.sailboat.mission.Task;
 /**
  * Transmitter module for serializing and sending a mission with all its {@link Task}s over the underlying {@link OutputStream}.<br>
  * The module ensures a reliable transmission of the mission to the connected endpoint, using three-way-handshake and mission transmission modes.
+ * This {@link TransmissionModule} is a sending and receiving module.
  * 
  * @author Michael Kant
  *
@@ -34,14 +34,25 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 
 	private static final Logger LOG = LoggerFactory.getLogger(MissionTransmitter.class);
 	
+	/**
+	 * Current transmission mode of this {@link MissionTransmitter}.
+	 */
 	private eTransmissionMode mode;
+	
+	/**
+	 * Reference to the {@link CommunicationBase} instance where this module is registered at.
+	 */
 	private CommunicationBase base;
+	
+	/**
+	 * Current pending list of tasks to be transmitted.
+	 */
 	private List<Task> missionAssembly;
 	//private Task pendingTask;
 	
 	/**
-	 * 
-	 * @param base
+	 * Initialization constructor.
+	 * @param base The {@link CommunicationBase} where this module was registered.
 	 */
 	public MissionTransmitter(CommunicationBase base){
 	
@@ -87,6 +98,7 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		
 	}
 	/**
+	 * Sending a control command to control the propellor, the sail or the rudder.<br>
 	 * Not supported yet.
 	 */
 	@Override
@@ -95,6 +107,10 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		
 	}
 
+	/**
+	 * Stopping the current mission.<br>
+	 * Not supported yet.
+	 */
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
@@ -224,7 +240,9 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 
 	@Override
 	public void connectionReset() {
-		// TODO Auto-generated method stub
+		
+		mode=eTransmissionMode.TM_Idle;
+		LOG.warn("The connection was reset. The mission transmission was aborted.");
 		
 	}
 

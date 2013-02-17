@@ -14,8 +14,11 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.serverModules.MissionReceiver;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.ReachCircleTask;
+import de.fhb.sailboat.mission.Task;
 
 /**
+ * Implements the concrete de-/serialization protocol for {@link Task}s of the type {@link ReachCircleTask}.
+ * @see de.fhb.sailboat.mission.ReachCircleTask
  * @author Michael Kant
  *
  */
@@ -28,6 +31,10 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 		super(task);
 	}
 
+	/**
+	 * First it serializes the desired {@link GPS} position that comes with the given {@link ReachCircleTask}.<br>
+	 * Then it serializes the given radius and returns the byte array.
+	 */
 	@Override
 	protected byte[] serializeTask(ReachCircleTask t) {
 		

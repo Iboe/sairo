@@ -32,19 +32,34 @@ public class MissionNegotiationBase {
 		OT_EndMission_ACK(11),
 		OT_NewTask_ACK(12);
 		
-		
+		/**
+		 * Internal id, associated with the enum value.
+		 */
 		private int typeId;
 		
+		/**
+		 * Private constructor.
+		 * @param id The id associated with the operation type.
+		 */
 		private eOperationType(int id){
 		
 			typeId=id;
 		}
 		
+		/**
+		 * Returns the id value of the current {@link eOperationType} instance.
+		 * @return the id value of the current {@link eOperationType} instance.
+		 */
 		public int getValue(){
 			
 			return typeId;
 		}
 		
+		/**
+		 * Getting the enum instance that's related to the given id.
+		 * @param val The id to get the enum instance for.
+		 * @return The enum instance if the id is valid, otherwise null.
+		 */
 		public static eOperationType getByValue(int val)
 	    {
 			eOperationType opType = null;
@@ -74,19 +89,34 @@ public class MissionNegotiationBase {
 		ET_WrongOPType(1),
 		ET_BadOPType(2);
 		
-		
+		/**
+		 * Internal id, associated with the enum value.
+		 */
 		private int typeId;
 		
+		/**
+		 * Private constructor.
+		 * @param id The id associated with the operation type.
+		 */
 		private eErrorType(int id){
 		
 			typeId=id;
 		}
 		
+		/**
+		 * Returns the id value of the current {@link eErrorType} instance.
+		 * @return the id value of the current {@link eErrorType} instance.
+		 */
 		public int getValue(){
 			
 			return typeId;
 		}
 		
+		/**
+		 * Getting the enum instance that's related to the given id.
+		 * @param val The id to get the enum instance for.
+		 * @return The enum instance if the id is valid, otherwise null.
+		 */
 		public static eErrorType getByValue(int val)
 	    {
 			eErrorType errType = null;
@@ -105,7 +135,7 @@ public class MissionNegotiationBase {
 	}
 	
 	/**
-	 * Enumeration, describing the state of the mission transmission.
+	 * Enumeration, describing the possible states of the mission transmission.
 	 * 
 	 * @author Michael Kant
 	 *
@@ -123,13 +153,24 @@ public class MissionNegotiationBase {
 		TM_MissionCancel(8),
 		TM_MissionCancel_ACK(9);
 		
+		/**
+		 * Internal id, associated with the enum value.
+		 */
 		private int modeId;
 		
+		/**
+		 * Private constructor.
+		 * @param id The id associated with the operation type.
+		 */
 		private eTransmissionMode(int id){
 		
 			modeId=id;
 		}
 		
+		/**
+		 * Returns the id value of the current {@link eTransmissionMode} instance.
+		 * @return the id value of the current {@link eTransmissionMode} instance.
+		 */
 		public int getValue(){
 			
 			return modeId;

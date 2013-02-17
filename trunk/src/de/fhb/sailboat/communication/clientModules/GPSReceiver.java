@@ -46,15 +46,18 @@ public class GPSReceiver implements TransmissionModule {
 		int lon=0,lat=0,sat=0;
 		GPS newGPS;
 		
+		//Reading the GPS latitude, longitude and satellites number, encoded as compact indices.
+		//The other values are not transmitted for the time being.
 		lat=CommunicationBase.readCompactIndex(stream);
 		lon=CommunicationBase.readCompactIndex(stream);
 		sat=CommunicationBase.readCompactIndex(stream);
 		
+		//Creating a new GPS object with the decoded values.
 		newGPS=new GPS(((double)(lat))/10000,((double)(lon))/10000,sat);
 		worldModel.getGPSModel().setPosition(newGPS);
 	}
 
-	/* (non-Javadoc)
+	/* Passive modules got no cycles to skip.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
 	 */
 	@Override
@@ -63,7 +66,7 @@ public class GPSReceiver implements TransmissionModule {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/* This module just receives.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#requestObject(java.io.DataOutputStream)
 	 */
 	@Override
@@ -73,7 +76,7 @@ public class GPSReceiver implements TransmissionModule {
 
 	}
 
-	/* (non-Javadoc)
+	/* Passive modules got no transmission intervals.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
 	 */
 	@Override
@@ -82,7 +85,7 @@ public class GPSReceiver implements TransmissionModule {
 		return 0;
 	}
 
-	/* (non-Javadoc)
+	/* Priority is just relevant for transmitting modules.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getPriority()
 	 */
 	@Override

@@ -21,9 +21,19 @@ public class ModuleWorker extends Thread {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ModuleWorker.class);
 	
+	/**
+	 * {@link CommunicationBase} instance where the associated {@link TransmissionModule} is registered at.
+	 */
 	private CommunicationBase commBase;
+	
+	/**
+	 * Associated {@link TransmissionModule} instance.
+	 */
 	private TransmissionModule commModule;
 	
+	/**
+	 * Id of the associated {@link TransmissionModule} instance.
+	 */
 	private byte moduleId;
 	
 	//private byte[] sendBuffer;
@@ -32,7 +42,7 @@ public class ModuleWorker extends Thread {
 	 * Initialization constructor.
 	 * @param commBase The {@link CommunicationBase} object where this object was created from.
 	 * @param commModule The associated {@link TransmissionModule}, which will be controlled.
-	 * @param The ID of the associated {@link TransmissionModule}. It's added to the outgoing packets, when sending data.
+	 * @param moduleId The ID of the associated {@link TransmissionModule}. It's added to the outgoing packets, when sending data.
 	 */
 	public ModuleWorker(CommunicationBase commBase, TransmissionModule commModule, byte moduleId) {
 		
@@ -48,7 +58,8 @@ public class ModuleWorker extends Thread {
 	}
 	
 	/**
-	 * Thread loop that's responsible for calling the interface methods on the associated {@link TransmissionModule}.<br>
+	 * Thread loop that's responsible for calling the interface methods <br>
+	 * on the associated {@link TransmissionModule}.
 	 * @see TransmissionModule
 	 */
 	public synchronized void run(){
@@ -56,6 +67,7 @@ public class ModuleWorker extends Thread {
 		int errorCount=0;
 		int cycleInterval=0;
 		
+		//Runs as long as the thread is not interrupted and there's still a reference to the associated CommunicationBase and the TransmissionModule.
 		while(!isInterrupted() || this.commBase == null || this.commModule != null){
 			
 			DataOutputStream sender=commBase.getSender();
@@ -63,32 +75,35 @@ public class ModuleWorker extends Thread {
 			try {
 				cycleInterval=commModule.getTransmissionInterval();
 				
-				//sleeping a defined amount of time before starting the new loop cycle
-				//if the given time amount is 0, it will just wait and start a loop cycle on explicit notification
+				//Sleeping a defined amount of time before starting the new loop cycle.
+				//If the given time amount is 0, it will just wait and start a loop cycle on explicit notification.
 				if(cycleInterval > 0){
 					
 					wait(cycleInterval);
-					//ensuring that no execution happens if the interval was set to 0 while sleeping
+					//Ensuring that no execution happens if the interval was set to 0 while sleeping.
 					if(cycleInterval <= 0)
 						wait();
 				}
 				else wait();
 				
-				
+				//Just transmitting if a connection is established and a sender is set.
 				if(commBase.isConnected() && sender != null){
 				
-					//skipping the next cycle for the associated TransmissionModule if requested
+					//Skipping the next cycle for the associated TransmissionModule, if requested.
 					if(commModule.skipNextCycle())
 						continue;
 					
 					ByteArrayOutputStream dataForwarder=new ByteArrayOutputStream(CommunicationBase.MAX_PACKET_SIZE);
 					
+					//Calling the TransmissionModules requestObject method to obtain the data to be sent.
 					commModule.requestObject(new DataOutputStream(dataForwarder));
 					
 					byte[] sendBuffer=dataForwarder.toByteArray();
 					
+					//Just sending data if the TransmissionModule returned bytes to transmit.
 					if(sendBuffer.length > 0){
 						
+						//Just trying to send the data if the error count doesn't exceed the maximum value.
 						while(errorCount < CommunicationBase.MAX_TRX_COUNT){
 							
 							try{
@@ -96,8 +111,13 @@ public class ModuleWorker extends Thread {
 								synchronized(sender){
 									
 									LOG.debug("Sending packet ("+sendBuffer.length+" Bytes) from module: "+commModule.getClass().getSimpleName());
+									//Writing the first byte to the stream, which contains the START_SIGNATURE in the four most significant bits
+									//and the TransmissionModule id in the four least significant bits
 									sender.writeByte(CommunicationBase.START_SIGNATURE|moduleId);
-									CommunicationBase.writeCompactIndex(sender, sendBuffer.length);								
+									//Writing the next Byte(s) to the stream, which encodes the size of the data to be sent.
+									//The data size is encoded as compact index, which means that the amount of required bytes is determined within the encoding process.
+									CommunicationBase.writeCompactIndex(sender, sendBuffer.length);
+									//Finally sending the data.
 									sender.write(sendBuffer);
 									sender.flush();
 									errorCount=0;

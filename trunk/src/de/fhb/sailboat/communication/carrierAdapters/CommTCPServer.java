@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
+import de.fhb.sailboat.communication.TransmissionModule;
 
 /**
  * Provides a TCP server endpoint as {@link CommunicationBase}.<br>
@@ -25,15 +26,25 @@ public class CommTCPServer extends CommunicationBase{
 
 	private static final Logger LOG = LoggerFactory.getLogger(CommTCPServer.class);
 	
+	/**
+	 * ServerSocket which listens on the given listenPort.
+	 */
 	private ServerSocket listenServer;
+	
+	/**
+	 * Client socket that respresents the connected client.
+	 */
 	private Socket connectedClient;
 	
+	/**
+	 * Thread that listens for incoming connections and accepts or rejects them.
+	 */
 	private Thread acceptThread;
 	
 	/**
 	 * Initialization constructor.<br>
 	 * Creates a {@link ServerSocket}, listening on the given port.
-	 * @param listenPort The port to listen on
+	 * @param listenPort The port to listen on.
 	 */
 	public CommTCPServer(int listenPort){
 		
@@ -132,7 +143,6 @@ public class CommTCPServer extends CommunicationBase{
 	
 	/**
 	 * Checks whether a remote client connection is established.
-	 * 
 	 */
 	@Override
 	public boolean isConnected(){
@@ -161,6 +171,13 @@ public class CommTCPServer extends CommunicationBase{
 		return bClosed;
 	}
 	
+	/**
+	 * The class that implements the accept thread. <br>
+	 * It starts an internal thread, that listens for incoming connection requests <br> 
+	 * and accepts or rejects them.
+	 * @author Michael Kant
+	 *
+	 */
 	private class AcceptThread extends Thread {
 		
 		public void run()
@@ -189,11 +206,11 @@ public class CommTCPServer extends CommunicationBase{
 				} 
 				catch (SocketException e){
 					
-					
+					LOG.warn("SocketException was caused: "+e.getMessage());
 				}
 				catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
+					LOG.warn("IOException was caused: "+e.getMessage());
 				}
 			}
 			LOG.debug("Accept Thread finished.");

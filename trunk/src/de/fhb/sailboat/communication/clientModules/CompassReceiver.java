@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.data.Compass;
+import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
@@ -30,6 +31,9 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 	
 	private WorldModel worldModel;
 	
+	/**
+	 * Default constructor.
+	 */
 	public CompassReceiver() {
 	
 		worldModel=WorldModelImpl.getInstance();
@@ -45,13 +49,17 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		int yaw=0;
 		Compass newCompass;
 		
+		//Reading the compass yaw value, encoded as compact index.
+		//The other compass values are not transmitted for the time being.
 		yaw=CommunicationBase.readCompactIndex(stream);
 		
+		//Creating a new Compass object with the decoded yaw value.
 		newCompass=new Compass(((double)(yaw))/10,0,0);
+		//Adding it to the world model.
 		worldModel.getCompassModel().setCompass(newCompass);
 	}
 
-	/* (non-Javadoc)
+	/* Passive modules got no cycles to skip.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
 	 */
 	@Override
@@ -60,7 +68,7 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/* This module just receives.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#requestObject(java.io.DataOutputStream)
 	 */
 	@Override
@@ -70,7 +78,7 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 
 	}
 
-	/* (non-Javadoc)
+	/* Passive modules got no transmission intervals.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
 	 */
 	@Override
@@ -79,7 +87,7 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		return 0;
 	}
 
-	/* (non-Javadoc)
+	/* Priority is just relevant for transmitting modules.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getPriority()
 	 */
 	@Override

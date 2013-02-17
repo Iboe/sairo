@@ -38,16 +38,36 @@ public abstract class CommunicationBase {
 	 * Maximum number of modules that can be added.
 	 */
 	public static final int MAX_MODULES=16;
+	
 	/**
 	 * Maximum re-try attempts on a failed transmission. 
 	 */
 	public static final int MAX_TRX_COUNT=3;
 	
+	/**
+	 * Max number of bytes that can be sent within one single transmission. <br>
+	 * One transmission involves a transmission request from one transmission module.
+	 */
 	public static final int MAX_PACKET_SIZE = 64;
 	
+	/**
+	 * List which contains the registered {@link TransmissionModule}s of this {@link CommunicationBase} instance.
+	 */
 	private TransmissionModule[] modules;
+	
+	/**
+	 * List which contains the {@link ModuleWorker}s that are associated to the {@link TransmissionModule}s.
+	 */
 	private ModuleWorker[] workers;
+	
+	/**
+	 * Number of {@link TransmissionModule}s that are registered to this {@link CommunicationBase}.
+	 */
 	private int numModules;
+	
+	/**
+	 * Reference to the internal {@link ReceiverThread} instance.
+	 */
 	private Thread recvThread;
 	
 	private DataOutputStream sender = null;
@@ -100,7 +120,7 @@ public abstract class CommunicationBase {
 	 * Instigating an object transmission request on the given {@link TransmissionModule} manually. <br>
 	 * This is useful for getting a passive {@link TransmissionModule} (which got no active transmission cycle) to send data on demand.<br>
 	 * It can also be used to instigate a manual object transmission request within an active {@link TransmissionModule} outside of its usual transmission cycle.<br>
-	 * If the given requester is not reqistered on the {@link CommunicationBase}, the method will return false.
+	 * If the given requester is not registered on the {@link CommunicationBase}, the method will return false.
 	 * 
 	 * @param requester The {@link TransmissionModule} where to instigate the request.
 	 * @return True, if the request was instigated successfully, otherwise false. 
@@ -268,7 +288,7 @@ public abstract class CommunicationBase {
 	/**
 	 * Causes the underlying connection to be closed.<br>
 	 * This method must be implemented in a derived class, since it's responsible for implementing the concrete connection.
-	 * @return
+	 * @return True, if the connection closed successfully, otherwise false.
 	 */
 	public abstract boolean closeConnection();
 	
@@ -376,7 +396,8 @@ public abstract class CommunicationBase {
 	
 	
 	/**
-	 * The class that implements the receive thread.
+	 * The class that implements the receive thread. <br>
+	 * It starts an internal thread, that listens for incoming data on the underlying connection and forwards the data to the corresponding {@link TransmissionModule}. 
 	 * 
 	 * @author Michael Kant
 	 *
@@ -384,32 +405,45 @@ public abstract class CommunicationBase {
 	private class ReceiverThread extends Thread {
 	
 		/**
-		 * Defines the receive loop.
+		 * Defines the receive loop, which reads and forwards the incomin data to the desired {@link TransmissionModule}.
 		 */
 		public synchronized void run(){
 			
 			int errorCount=0;
 			byte signature=0,keyId=-1;
 			int dataLength=0,readBytes=0;
+			
+			//Thread loop, runs until the thread is marked as interrupted.
 			while(!isInterrupted()){
 				
 				try {
+					//Checks whether the connection is still active, if not the thread will go into sleep mode.
 					if(isConnected() && receiver != null){
 					
 						synchronized(receiver){
 							
+							//Reading the first byte of the stream.
+							//It should contain the signature within the four most significant bits 
+							//and the id of the desired TransmissionModule in the four least significant bits.
 							signature=receiver.readByte();
 						
+							//Checks if the four most significant bits contains the START_SIGNATURE.
 							if((signature & ~0x0f) == START_SIGNATURE) {
 								
+								//Extracts the TransmissionModule id out of the least significant bits.
 								keyId=(byte)(signature & 0x0F);
 								
 								LOG.debug("Incoming object data..");
 								
+								//Reading the next Byte(s) of the stream, which contain the size of the data chunk.
+								//The size is encoded as compact index, which means the amount of bytes to be read is determined within the decoding process.
 								dataLength=CommunicationBase.readCompactIndex(receiver);
 								
+								//Ensures that the given TransmissionModule id is valid and that a TransmissionModule is associated with that id.
 								if(keyId >= 0 && keyId < MAX_MODULES && modules[keyId] != null){
 									
+									//Checks that the given packet size doesn't exceed the max valid packet size.
+									//Too large packets are being skipped.
 									if( dataLength > MAX_PACKET_SIZE)
 									{
 										LOG.warn("Received too large packet for module: "+modules[keyId].getClass().getSimpleName());
@@ -417,9 +451,13 @@ public abstract class CommunicationBase {
 									}
 									else{
 										
+										//Finally reads the amount of bytes that was determined with the prior chunk size information.
 										readBytes=receiver.read(receiveBuffer, 0, dataLength);
+										//Verifies whether the desired amount of bytes was actually read from the stream.
+										//If not, it will discard the packet and give out an incomplete packet warning.
 										if(readBytes == dataLength)
 										{
+											//Resetting the dataForwarder to point to the begin of the receive buffer again.
 											dataForwarder.reset();
 											LOG.debug("Forwarding packet ("+dataLength+" Bytes) to module: "+modules[keyId].getClass().getSimpleName());
 											String bytes="";
@@ -428,6 +466,7 @@ public abstract class CommunicationBase {
 												bytes+=Integer.toHexString(receiveBuffer[i]&0xff)+ " ";
 												
 											LOG.debug(bytes);
+											//Finally forwards the data to the desired TransmissionModule
 											modules[keyId].receivedObject(new DataInputStream(dataForwarder));
 											errorCount=0;	
 										}
