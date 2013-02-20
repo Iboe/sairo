@@ -3,6 +3,9 @@
  */
 package de.fhb.sailboat.communication.mission;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhb.sailboat.mission.Task;
 
 /**
@@ -14,6 +17,7 @@ import de.fhb.sailboat.mission.Task;
  */
 public abstract class SerializedTaskBase<T extends Task> implements SerializedTask {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SerializedTaskBase.class);
 	/**
 	 * The Task instance, associated to this {@link SerializedTask}.
 	 */
@@ -42,17 +46,17 @@ public abstract class SerializedTaskBase<T extends Task> implements SerializedTa
 	/**
 	 * Initialization constructor. Takes a byte array that represents a serialized {@link Task}, along with its checksum.
 	 * 
-	 * @param taskData Binary data, respresenting the {@link Task} to be deserialized.
-	 * @param checksum Corresponding checksum to validate the serialized data.
+	 * @param serializedData Binary data, respresenting the {@link Task} to be deserialized, including the checksum.
 	 */
-	public SerializedTaskBase(byte[] taskData, int checksum){
+	public SerializedTaskBase(byte[] serializedData){
 		
-		if(taskData != null){
+		if(serializedData != null){
 			
-			this.taskData=new byte[taskData.length];
-			for(int i=0;i<taskData.length;this.taskData[i]=taskData[i++]);
+			this.taskData=new byte[serializedData.length-1];
+			int i=0;
+			for(i=0;i<this.taskData.length;this.taskData[i]=serializedData[i++]);
 			
-			this.checksum=checksum;
+			this.checksum=serializedData[i] & 0xff;
 		}
 	}
 	
@@ -78,32 +82,64 @@ public abstract class SerializedTaskBase<T extends Task> implements SerializedTa
 	@Override
 	public Class<? extends Task> getTaskType() {
 		
-		return task.getClass();
+		Task task=getTask();
+		return task != null ? task.getClass() : null;
 	}
 	
 	/**
-	 * Returns the serialized form of the associated {@link Task}. If it doesn't exist yet, it will be generated.
+	 * Returns the serialized form of the associated {@link Task} including the checksum. If it doesn't exist yet, it will be generated.
 	 */
 	@Override
 	public byte[] getSerializedData() {
 		
-		if(taskData == null){
+		byte[] data=null,taskData=null;
+		int i=0;
+		
+		taskData=getTaskData();
+		
+		if(taskData != null){
 			
-			taskData=serializeTask(task);
-			checksum=generateChecksum(taskData);
+			data=new byte[taskData.length+1];
+			for(i=0;i<taskData.length;data[i]=taskData[i++]);
+			data[i]=(byte)checksum;
 		}
 		
-		return taskData;
+		return data;
 	}
 
 	@Override
 	public T getTask() {
 		
-		if(task == null)
+		if(task == null){
+		
+			LOG.trace("getTask() - task is null, de-serializing task.");
 			if(isValid())
 				task=deserializeTask(taskData);
-			
+			else
+				LOG.warn("getTask() - taskData is invalid.");
+		}	
 		return task;
+	}
+	
+	/**
+	 * Returns the serialized form of the associated {@link Task}.
+	 * @return The serialized form of the associated {@link Task} as byte array.
+	 */
+	public byte[] getTaskData(){
+		
+		if(taskData == null){
+			
+			LOG.trace("getTaskData() - taskData is null, serializing task.");
+			
+			if(task != null)
+				taskData=serializeTask(task);
+			else
+				LOG.warn("getTaskData() - no Task to serialize!");
+			
+			if(taskData != null)
+				checksum=generateChecksum(taskData);
+		}
+		return taskData;
 	}
 
 	/**
@@ -113,21 +149,23 @@ public abstract class SerializedTaskBase<T extends Task> implements SerializedTa
 	@Override
 	public boolean isValid() {
 		
-		return generateChecksum(getSerializedData()) == checksum;
+		return generateChecksum(getTaskData()) == checksum && checksum != -1;
 	}
+	
+	
 
 	/**
 	 * Generates a simple checksum, that sums up all byte values and caps the result with modulo 255.
 	 * @param data The data to generate the checksum for.
 	 * @return The checksum of the given data.
 	 */
-	protected int generateChecksum(byte[] data){
+	public static int generateChecksum(byte[] data){
 		
 		int csum=-1;
 		
 		if(data != null)
 			for(int i=0;i<data.length;i++)
-				i+=data[i] & 0xff;
+				csum+=data[i] & 0xff;
 		
 		return csum & 0xff;
 	}	
