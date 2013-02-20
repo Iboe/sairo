@@ -30,6 +30,11 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 
 		super(task);
 	}
+	
+	public SerializedReachCircleTask(byte[] data) {
+
+		super(data);
+	}
 
 	/**
 	 * First it serializes the desired {@link GPS} position that comes with the given {@link ReachCircleTask}.<br>
@@ -88,7 +93,7 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 			}
 			catch (IOException e) {
 				
-				LOG.warn("Deserializing caused an " + e.getClass().getSimpleName() +" exteption to be thrown: "+e.getMessage());
+				LOG.warn("Deserializing caused an " + e.getClass().getSimpleName() +" exception to be thrown: "+e.getMessage());
 			}
 		}
 			
