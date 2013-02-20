@@ -5,6 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 
+/**
+ * A plain dummy implementation of the {@link LocomotionSystem} interface, 
+ * which prints the values to be set on the console.
+ * @author Michael Kant
+ *
+ */
 public class DummyLoco implements LocomotionSystem {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DummyLoco.class);
