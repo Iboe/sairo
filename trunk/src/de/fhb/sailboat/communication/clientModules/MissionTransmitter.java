@@ -15,6 +15,7 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.MissionNegotiationBase.eOperationType;
+import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.communication.serverModules.MissionReceiver;
 import de.fhb.sailboat.control.Planner;
 
@@ -48,8 +49,9 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	 * Current pending list of tasks to be transmitted.
 	 */
 	private List<Task> missionAssembly;
-	//private Task pendingTask;
+	private Task pendingTask;
 	
+	private TaskSerializer serializer;
 	/**
 	 * Initialization constructor.
 	 * @param base The {@link CommunicationBase} where this module was registered.
@@ -59,7 +61,8 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		this.base=base;
 		mode=eTransmissionMode.TM_Idle;
 		missionAssembly=null;
-		//pendingTask=null;
+		serializer=new TaskSerializer();
+		pendingTask=null;
 		//error=eErrorType.ET_None;
 	}
 	
@@ -153,6 +156,7 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 			//LOG.debug("receivedObject - TM_Task_New.");
 			if(opCode == eOperationType.OT_NewTask_ACK.getValue()){
 				
+				pendingTask=null; //setting the pending task to null if the other end acknowledged
 				mode=eTransmissionMode.TM_Task_ACK;
 				base.requestTransmission(this);
 			}
@@ -180,6 +184,23 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 				base.requestTransmission(this);
 			}
 		break;
+		
+		case TM_MissionCancel:
+			//LOG.debug("receivedObject - TM_MissionBegin.");
+			if(opCode == eOperationType.OT_CancelMission_ACK.getValue()){
+				
+				mode=eTransmissionMode.TM_MissionCancel_ACK;
+				base.requestTransmission(this);
+			}
+		break;
+		
+		case TM_MissionCancel_ACK:
+			//LOG.debug("receivedObject - TM_MissionEnd_ACK.");
+			if(opCode == eOperationType.OT_CancelMission_ACK.getValue()){
+				
+				base.requestTransmission(this);
+			}
+		break;
 			
 		}		
 	}
@@ -194,6 +215,7 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	public void requestObject(DataOutputStream stream) throws IOException {
 		
 		switch(mode){
+		
 		case TM_Idle:
 			break;
 		case TM_MissionBegin:
@@ -209,8 +231,29 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		break;
 		case TM_Task_New:
 			LOG.debug("requestObject - TM_Task_New.");
-			if(missionAssembly != null && missionAssembly.size() > 0);
-			//stream.write(missionAssembly.get(0)... TODO: transmit task
+			if(missionAssembly != null && missionAssembly.size() > 0){
+				
+				if(pendingTask == null){
+					
+					pendingTask=missionAssembly.get(0);
+					missionAssembly.remove(0);
+				}
+				
+				byte[] data=serializer.serializeTask(pendingTask);
+				
+				if(data != null){
+					stream.write(eOperationType.OT_NewTask.getValue());
+					stream.write(data.length);
+					stream.write(data);
+				}
+				else{
+					
+					LOG.warn("Unable to serialize Task: "+pendingTask);
+					LOG.info("Aborting mission transmission.");
+					mode=eTransmissionMode.TM_MissionCancel;
+					stream.write(eOperationType.OT_CancelMission.getValue());
+				}
+			}
 			else
 			{
 				LOG.debug("requestObject - TM_Task_New - NO TASK LEFT!.");
@@ -225,7 +268,6 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		case TM_MissionEnd:
 			LOG.debug("requestObject - TM_MissionEnd.");
 			stream.write(eOperationType.OT_EndMission.getValue());
-			//mode=eTransmissionMode.TM_MissionBegin_ACK;
 		break;
 		
 		case TM_MissionEnd_ACK:
@@ -233,8 +275,15 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 			stream.write(eOperationType.OT_EndMission_ACK.getValue());
 			mode=eTransmissionMode.TM_Idle;
 		break;
-		
-		//case TM_
+		case TM_MissionCancel:
+			LOG.debug("requestObject - TM_MissionCancel.");
+			stream.write(eOperationType.OT_CancelMission.getValue());
+		break;
+		case TM_MissionCancel_ACK:
+			LOG.debug("requestObject - TM_MissionCancel_ACK.");
+			stream.write(eOperationType.OT_CancelMission_ACK.getValue());
+			mode=eTransmissionMode.TM_Idle;
+		break;
 		}
 	}
 
@@ -257,6 +306,8 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		case TM_MissionBegin_ACK:
 		case TM_MissionEnd:
 		case TM_MissionEnd_ACK:
+		case TM_MissionCancel:
+		case TM_MissionCancel_ACK:
 			interval=2000;
 		break;
 		case TM_Task_New:

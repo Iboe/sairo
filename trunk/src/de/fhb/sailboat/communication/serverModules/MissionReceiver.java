@@ -17,8 +17,10 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
+import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.Task;
 
 /**
@@ -38,6 +40,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 	private CommunicationBase base;
 	private List<Task> missionAssembly;
 	private Task pendingTask;
+	private TaskSerializer deserializer;
 	
 	private eErrorType error;
 	
@@ -52,6 +55,8 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 		mode=eTransmissionMode.TM_Idle;
 		missionAssembly=null;
 		pendingTask=null;
+		deserializer=new TaskSerializer();
+		
 		error=eErrorType.ET_None;
 	}
 	
@@ -106,10 +111,29 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 			case TM_Task_Wait:
 				if(opCode == eOperationType.OT_NewTask.getValue()){
 					
-					//TODO: pendingTask=
+					byte[] taskData;
+					int size=stream.read();
+					if(size > 0){
+						
+						taskData=new byte[size];
+						if(stream.read(taskData) == size){
+							
+							pendingTask=deserializer.deserializeTask(taskData);
+							
+							if(pendingTask != null){
+								
+								mode=eTransmissionMode.TM_Task_ACK;
+								base.requestTransmission(this);
+							}
+						}
+					}
+					
+				}
+				//if we receive a task ACK while waiting for new tasks, the other end didn't get our first ACK.. thus, resending 
+				else if(opCode == eOperationType.OT_NewTask_ACK.getValue()){
+					
 					mode=eTransmissionMode.TM_Task_ACK;
 					base.requestTransmission(this);
-					
 				}
 				else if(opCode == eOperationType.OT_CancelMission.getValue()){
 					
@@ -137,7 +161,6 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 					
 					mode=eTransmissionMode.TM_MissionCancel_ACK;
 					base.requestTransmission(this);
-					//TODO: initiate mission cancel acknowledge
 				}
 				else
 					LOG.warn("Mode: "+mode+" - Invalid operation type ("+ eOperationType.getByValue(opCode) +") for the current mode.");
@@ -146,7 +169,9 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 			case TM_MissionEnd_ACK:
 				if(opCode == eOperationType.OT_EndMission_ACK.getValue()){
 					
-					//TODO: planner.doMission(new MissionImpl(missionAssembly))
+					Mission m=new MissionImpl();
+					m.setTasks(missionAssembly);
+					planner.doMission(m);
 					LOG.info("Mission receive finished!");
 					missionAssembly=null;
 					mode=eTransmissionMode.TM_Idle;
