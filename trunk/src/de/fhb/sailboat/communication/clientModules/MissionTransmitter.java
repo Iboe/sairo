@@ -49,9 +49,17 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	 * Current pending list of tasks to be transmitted.
 	 */
 	private List<Task> missionAssembly;
+	
+	/**
+	 * Current pending Task in transmission process.
+	 */
 	private Task pendingTask;
 	
+	/**
+	 * {@link TaskSerializer} instance that's used for serializing the mission tasks.
+	 */
 	private TaskSerializer serializer;
+	
 	/**
 	 * Initialization constructor.
 	 * @param base The {@link CommunicationBase} where this module was registered.
@@ -324,7 +332,4 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		return 0;
 	}
 
-	
-
-	
 }

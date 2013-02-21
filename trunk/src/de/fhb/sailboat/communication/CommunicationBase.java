@@ -252,13 +252,16 @@ public abstract class CommunicationBase {
 			
 			if(modules[i] != null)
 				LOG.debug("Removing: "+modules[i].getClass().getSimpleName());
+			
 			modules[i]=null;
 			if(workers[i] != null){
 				
 				workers[i].interrupt();
 				try {
+					
 					workers[i].join(1000);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e) {
 					
 					e.printStackTrace();
 				}
@@ -269,8 +272,10 @@ public abstract class CommunicationBase {
 			
 			recvThread.interrupt();
 			try {
+				
 				recvThread.join(2000);
-			} catch (InterruptedException e) {
+			} 
+			catch (InterruptedException e) {
 				
 				e.printStackTrace();
 			}

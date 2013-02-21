@@ -17,6 +17,7 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
+import de.fhb.sailboat.communication.clientModules.MissionTransmitter;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.mission.Mission;
@@ -36,17 +37,42 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 	private static final Logger LOG = LoggerFactory.getLogger(MissionReceiver.class);
 	
 	private Planner planner;
+	
+	/**
+	 * Current transmission mode of this {@link MissionReceiver}.
+	 */
 	private eTransmissionMode mode;
+	
+	/**
+	 * Reference to the {@link CommunicationBase} instance where this module is registered at.
+	 */
 	private CommunicationBase base;
+	
+	/**
+	 * Current pending list of tasks received.
+	 */
 	private List<Task> missionAssembly;
+	
+	/**
+	 * Current pending Task in transmission process.
+	 */
 	private Task pendingTask;
+	
+	/**
+	 * {@link TaskSerializer} instance that's used for deserializing the mission tasks.
+	 */
 	private TaskSerializer deserializer;
 	
+	/**
+	 * Current error mode for handling errors. NOT USED YET.
+	 */
 	private eErrorType error;
 	
 	/**
+	 * Initialization constructor.
 	 * 
-	 * @param base
+	 * @param base The {@link CommunicationBase} where this module was registered.
+	 * @param planner The {@link Planner} to pass a received mission to.
 	 */
 	public MissionReceiver(CommunicationBase base, Planner planner){
 	
