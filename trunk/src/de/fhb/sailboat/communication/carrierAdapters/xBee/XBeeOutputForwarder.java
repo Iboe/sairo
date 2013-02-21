@@ -16,7 +16,7 @@ import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeAddress64;
 import com.rapplogic.xbee.api.XBeeException;
 import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
-import com.sun.media.Log;
+
 
 /**
  * @author Michael Kant
