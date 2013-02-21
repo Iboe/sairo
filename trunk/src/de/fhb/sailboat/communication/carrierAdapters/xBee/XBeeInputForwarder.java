@@ -5,14 +5,17 @@ package de.fhb.sailboat.communication.carrierAdapters.xBee;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Stack;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.rapplogic.xbee.api.ApiId;
 import com.rapplogic.xbee.api.PacketListener;
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeResponse;
+import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 
 /**
  * @author KI-Lab
@@ -23,12 +26,12 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 	private static final Logger LOG = LoggerFactory.getLogger(XBeeInputForwarder.class);
 	
 	private XBee xBee;
-	private Stack<Integer> buffer;
+	private BlockingQueue<Integer> buffer;
 	
 	public XBeeInputForwarder(XBee xbee){
 
 		this.xBee=xbee;
-		this.buffer=new Stack<Integer>();
+		this.buffer=new LinkedBlockingQueue<Integer>();
 		
 		if(xBee != null){
 			
@@ -42,6 +45,14 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 	public int read() throws IOException {
 		
 		int b=-1;
+		
+		try {
+			b=buffer.take();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		/*
 		synchronized(this){
 			
 			do{
@@ -49,7 +60,7 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 				synchronized(buffer){
 				
 					if(buffer.size() > 0)
-						b=buffer.pop();
+						b=buffer.poll();
 				}
 				if(b == -1){
 					
@@ -67,24 +78,42 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 				}
 			} 
 			while(b == -1);
-		}
+		}*/
 		return b;
 	}
 	
 	@Override
 	public void processResponse(XBeeResponse resp) {
 		
-		System.out.println("GOT RESPONSE: "+resp);
-		synchronized(buffer){
-		
-			int[] bytes=resp.getRawPacketBytes();
+		if(resp.getApiId() == ApiId.ZNET_RX_RESPONSE){
 			
-			if(bytes.length > 0){
+			System.out.println("GOT RESPONSE: "+resp);
+		
+			int[] bytes=((ZNetRxResponse) resp).getData();
+			
+			
+			try {
 				
-				for(int b : bytes)
-					buffer.push(b);
-				this.notify();
+				for(Integer b : bytes)
+					buffer.put(b);
+			} 
+			catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			/*
+			synchronized(buffer){
+				if(bytes.length > 0){
+					
+					for(Integer b : bytes)
+						buffer.add(b);
+					
+					synchronized(this){
+						
+						this.notify();
+					}
+				}
+			}*/
 		}
 	}
 }
