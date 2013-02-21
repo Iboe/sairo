@@ -23,12 +23,12 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 	private static final Logger LOG = LoggerFactory.getLogger(XBeeInputForwarder.class);
 	
 	private XBee xBee;
-	private Stack< Integer > buffer;
+	private Stack<Integer> buffer;
 	
 	public XBeeInputForwarder(XBee xbee){
 
 		this.xBee=xbee;
-		buffer=null;
+		this.buffer=new Stack<Integer>();
 		
 		if(xBee != null){
 			
