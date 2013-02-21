@@ -18,7 +18,7 @@ import com.rapplogic.xbee.api.XBeeResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 
 /**
- * @author KI-Lab
+ * @author Michael Kant
  *
  */
 public class XBeeInputForwarder extends InputStream implements PacketListener {
