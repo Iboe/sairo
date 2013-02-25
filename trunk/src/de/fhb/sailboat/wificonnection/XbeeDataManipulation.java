@@ -1,5 +1,6 @@
 package de.fhb.sailboat.wificonnection;
 
+@Deprecated
 class XbeeDataManipulation {
 
 	/*

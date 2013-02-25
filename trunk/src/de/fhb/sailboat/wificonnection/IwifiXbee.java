@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.rapplogic.xbee.api.XBeeException;
 
+@Deprecated
 public interface IwifiXbee {
 
 	/*

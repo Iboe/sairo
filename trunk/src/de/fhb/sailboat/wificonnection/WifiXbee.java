@@ -16,6 +16,7 @@ import com.rapplogic.xbee.api.XBeeTimeoutException;
 import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
 
+@Deprecated
 public class WifiXbee implements IwifiXbee {
 
 	// Class Instance
