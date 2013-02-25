@@ -22,7 +22,7 @@ public class CompassCourseTask implements Task {
 		this.angle = angle;
 	}
 	
-	/**
+	/*
 	 * The task does not finish, so <code>false</code> is returned. 
 	 */
 	@Override
@@ -30,6 +30,11 @@ public class CompassCourseTask implements Task {
 		return false;
 	}
 
+	/**
+	 * Getter for the desired angle, which should be hold with respect to the compass.
+	 * 
+	 * @return the desired angle
+	 */
 	public int getAngle() {
 		return angle;
 	}

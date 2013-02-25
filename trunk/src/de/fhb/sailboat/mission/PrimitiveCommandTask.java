@@ -19,9 +19,9 @@ public class PrimitiveCommandTask implements Task {
 	 * Creates a new instance based on the values for actuators to be set. Each value can be set to 
 	 * <code>null</code>, so the current value of the related actuator is not changed.
 	 * 
-	 * @param sail the length of the rope controlling the sail
-	 * @param rudder the position of the rudder
-	 * @param propellor the speed and direction of the propellor
+	 * @param sail the desired position for the sail
+	 * @param rudder the desired position for the rudder
+	 * @param propellor the desired speed and direction for the propellor
 	 */
 	public PrimitiveCommandTask(Integer sail, Integer rudder, Integer propellor) {
 		this.sail = sail;
@@ -34,18 +34,38 @@ public class PrimitiveCommandTask implements Task {
 		return isExecuted();
 	}
 
+	/**
+	 * Getter for the desired position for the sail.
+	 * 
+	 * @return the desired position for the sail
+	 */
 	public Integer getSail() {
 		return sail;
 	}
 
+	/**
+	 * Getter for the desired position for the rudder.
+	 * 
+	 * @return the desired position for the rudder
+	 */
 	public Integer getRudder() {
 		return rudder;
 	}
 
+    /**
+	 * Getter for the value indicating the desired speed and direction for the propellor.
+	 * 
+	 * @return the desired speed and direction for the propellor
+	 */
 	public Integer getPropellor() {
 		return propellor;
 	}
 
+    /**
+	 * Setter for the flag, which indicates if this {@link Task} was executed.
+	 * 
+	 * @param <code>true</code> if this {@link Task} was executed, <code>false</code> otherwise
+	 */
 	public void setExecuted(boolean executed) {
 		this.executed = executed;
 	}

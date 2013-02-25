@@ -36,50 +36,57 @@ package de.fhb.sailboat.mission;
 public class Bearing {
 
     /**
-     * the azimuth, degrees, 0 = north, clockwise positive
+     * the azimuth, degrees, 0 = north, clockwise positive.
      */
     private double azimuth;
 
     /**
-     * the back azimuth, degrees, 0 = north, clockwise positive
+     * the back azimuth, degrees, 0 = north, clockwise positive.
      */
     private double backazimuth;
 
     /**
-     * separation in meters
+     * separation in meters.
      */
     private double distance;
 
     /**
-     * Earth radius in meters
+     * Earth radius in meters.
      */
     public static final double EARTH_RADIUS = 6378137.0;
 
     /**
-     * Some constant
+     * Some constant.
      */
     private static final double F = 1.0 / 298.257223563;
 
     /**
-     * epsilon
+     * epsilon.
      */
     private static final double EPS = 0.5E-13;
 
     /**
-     * constant R
+     * constant R.
      */
     private static final double R = 1.0 - F;
 
     /**
-     * conversion for degrees to radians
+     * conversion for degrees to radians.
      */
     private static final double rad = Math.toRadians(1.0);
 
     /**
-     * conversion for radians to degrees
+     * conversion for radians to degrees.
      */
     private static final double deg = Math.toDegrees(1.0);
 
+    /**
+     * Creates a new fully initialized instance.
+     * 
+     * @param azimuth the azimuth in degrees
+     * @param backazimuth the backazimuth in degrees
+     * @param distance the separation in meters
+     */
     public Bearing(double azimuth, double backazimuth, double distance) {
         this.azimuth = azimuth;
         this.backazimuth = backazimuth;
@@ -87,7 +94,7 @@ public class Bearing {
     }
 
     /**
-     * Get the azimuth in degrees, 0 = north, clockwise positive
+     * Get the azimuth in degrees, 0 = north, clockwise positive.
      *
      * @return azimuth in degrees
      */
@@ -96,7 +103,7 @@ public class Bearing {
     }
 
     /**
-     * Get the back azimuth in degrees, 0 = north, clockwise positive
+     * Get the back azimuth in degrees, 0 = north, clockwise positive.
      *
      * @return back azimuth in degrees
      */
@@ -105,7 +112,7 @@ public class Bearing {
     }
 
     /**
-     * Get the distance in meters
+     * Get the distance in meters .
      *
      * @return distance in m
      */

@@ -27,15 +27,25 @@ public class CrossLineTask implements Task {
 		this.endPoint = endPoint;
 	}
 	
+	/**
+	 * Getter for the {@link GPS} position of the start point of the line to cross.
+	 * 
+	 * @return the position of the start point of the line
+	 */
 	public GPS getStartPoint() {
 		return startPoint;
 	}
 	
+	/**
+	 * Getter for the {@link GPS} position of the end point of the line to cross.
+	 * 
+	 * @return the position of the end point of the line
+	 */
 	public GPS getEndPoint() {
 		return endPoint;
 	}
 
-	/**
+	/*
 	 * Checks if the line was already crossed.
 	 * 
 	 * This is not implemented yet.

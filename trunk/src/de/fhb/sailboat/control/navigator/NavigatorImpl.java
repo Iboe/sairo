@@ -32,7 +32,7 @@ public class NavigatorImpl implements Navigator {
 	private Thread workerThread = null;
 	
 	/**
-	 * Creates a new instance with the specified {@link Pilot} to hand over commands 
+	 * Creates a new instance with the specified {@link Pilot} to hand over commands.
 	 * 
 	 * @param pilot the pilot to hand over commands, must not be null
 	 */
@@ -48,6 +48,8 @@ public class NavigatorImpl implements Navigator {
 	/**
 	 * Executes the specified task or throws an {@link UnsupportedOperationException} if the 
 	 * task is not supported.
+	 * 
+	 * @param task the {@link Task} to be executed
 	 */
 	@Override
 	public void doTask(Task task) {

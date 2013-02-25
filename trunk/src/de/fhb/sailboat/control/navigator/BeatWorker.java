@@ -33,17 +33,17 @@ public class BeatWorker extends WorkerThread<BeatTask> {
 			BeatWorker.class.getSimpleName() + ".maxAngleToDrive"));
 	
 	/**
-	 * Indicates that the pilot is set to beat to the left
+	 * Indicates that the pilot is set to beat to the left.
 	 */
 	private final byte beatLeft = 1;
 	
 	/**
-	 * Indicates that the pilot is set to beat to the right
+	 * Indicates that the pilot is set to beat to the right.
 	 */
 	private final byte beatRight = -1;
 	
 	/**
-	 * Indicates that the pilot is not set to beat
+	 * Indicates that the pilot is not set to beat.
 	 */
 	private final byte beatNone = 0;
 	

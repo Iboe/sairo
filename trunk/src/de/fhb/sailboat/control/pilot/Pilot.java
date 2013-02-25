@@ -9,7 +9,7 @@ public interface Pilot {
 
 	
 	/**
-	 * Name of the property defining the max relevant angle where the boat rudder 
+	 * Name of the property defining the max relevant angle where the boat rudder
 	 * reaches the maximum deflection. 
 	 */
 	static final String MAX_RELEVANT_ANGLE_PROPERTY = Pilot.class.getSimpleName() + ".maxRelevantAngle";
@@ -20,12 +20,12 @@ public interface Pilot {
 	static final String WAIT_TIME_PROPERTY = Pilot.class.getSimpleName() + ".waitTime";
 	
 	/**
-	 * Name of the property defining the ratio of p for the pid controller
+	 * Name of the property defining the ratio of p for the pid controller.
 	 */
 	static final String P_PROPERTY = Pilot.class.getSimpleName() + ".pFactor";
 
 	/**
-	 * Name of the property defining the ratio of i for the pid controller
+	 * Name of the property defining the ratio of i for the pid controller.
 	 */
 	static final String I_PROPERTY = Pilot.class.getSimpleName() + ".iFactor";
 

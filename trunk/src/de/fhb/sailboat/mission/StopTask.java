@@ -28,7 +28,7 @@ public class StopTask implements Task {
 		this.turnPropellorOff = turnPropellorOff;
 	}
 	
-	/**
+	/*
 	 * The task does not finish, so <code>false</code> is returned. 
 	 */
 	@Override
@@ -36,6 +36,12 @@ public class StopTask implements Task {
 		return false;
 	}
 
+    /**
+	 * Getter for the flag, which indicates if the propellor is turned off.
+	 * 
+	 * @return <code>true</code> if the propellor is turned off, <code>false</code> if it 
+	 * is turned on
+	 */
 	public boolean isTurnPropellorOff() {
 		return turnPropellorOff;
 	}

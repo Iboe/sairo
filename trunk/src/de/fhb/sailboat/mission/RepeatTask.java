@@ -41,7 +41,7 @@ public class RepeatTask implements Task {
 		this.currentTask = tasks.get(0);
 	}
 	
-	/**
+	/*
 	 * The task is finished after all tasks have been executed the specified times. Will not finish,
 	 * if infinite repetition was specified.
 	 */
@@ -67,6 +67,11 @@ public class RepeatTask implements Task {
 		return false;
 	}
 
+    /**
+	 * Getter for the current {@link Task} that is executed.
+	 * 
+	 * @return the current {@link Task} that is executed
+	 */
 	public Task getCurrentTask() {
 		return currentTask;
 	}

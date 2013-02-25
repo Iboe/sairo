@@ -16,7 +16,7 @@ public class ReachPolygonTask implements Task {
 
 	/**
 	 * {@link Polygon} uses integer values for its points, so the {@link GPS}
-	 * coordinates have to scaled up to achieve the required precision
+	 * coordinates have to scaled up to achieve the required precision.
 	 */
 	private static final int PRECISION = 100000;
 	private final List<GPS> points;
@@ -43,11 +43,16 @@ public class ReachPolygonTask implements Task {
 		polygon = buildPolygon();
 	}
 	
+	/**
+	 * Getter for the {@link GPS} positions of the edges of the polygon to reach.
+	 * 
+	 * @return the {@link GPS} positions of the edges of the polygon
+	 */
 	public List<GPS> getPoints() {
 		return points;
 	}
 
-	/**
+	/*
 	 * Checks if the {@link GPS} point is inside of the polygon.
 	 */
 	@Override

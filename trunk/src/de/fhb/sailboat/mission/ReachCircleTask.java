@@ -25,15 +25,25 @@ public class ReachCircleTask implements Task {
 		this.radius = radius;
 	}
 	
+	/**
+	 * Getter for the {@link GPS} position of the center of the circle to reach.
+	 * 
+	 * @return the {@link GPS} position of the center of the circle
+	 */
 	public GPS getCenter() {
 		return center;
 	}
 	
+	/**
+	 * Getter for the radius of the circle to reach.
+	 * 
+	 * @return the radius of the circle
+	 */
 	public int getRadius() {
 		return radius;
 	}
 
-	/**
+	/*
 	 * Checks if the {@link GPS} point is inside the circle.
 	 */
 	@Override

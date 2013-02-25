@@ -3,6 +3,7 @@ package de.fhb.sailboat.control.pilot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.worldmodel.ActuatorModel;
 import de.fhb.sailboat.worldmodel.CompassModel;
@@ -10,24 +11,58 @@ import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+/**
+ * Class for calculating values for the actuators in a concurrent way. Tries to hold an angle
+ * given by the {@link Navigator} until a new command is activated. The calculated values are 
+ * handed over to the {@link LocomotionSystem} for passing them to the actuators.
+ * 
+ * @author hscheel
+ *
+ */
 public class DriveAngleThread extends Thread {
 	
 	/**
-	 * @see Pilot.MAX_RELEVANT_ANGLE_PROPERTY
+	 * @see {@link Pilot}.MAX_RELEVANT_ANGLE_PROPERTY
 	 */
 	public static final int MAX_RELEVANT_ANGLE = Integer.parseInt(System.getProperty(
 			Pilot.MAX_RELEVANT_ANGLE_PROPERTY));
+	
+	/**
+	 * @see {@link Pilot}.WAIT_TIME_PROPERTY
+	 */
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Pilot.WAIT_TIME_PROPERTY));
 
+	/**
+	 * @see {@link Pilot}.K_PROPERTY
+	 */
 	public static final double k = Double.parseDouble(System.getProperty(Pilot.K_PROPERTY));
+	
+	/**
+	 * @see {@link Pilot}.Hmax_PROPERTY
+	 */
 	public static final double Hmax = Double.parseDouble(System.getProperty(Pilot.Hmax_PROPERTY));
+	
+	/**
+	 * @see {@link Pilot}.Vmax_PROPERTY
+	 */
 	public static final double Vmax = Double.parseDouble(System.getProperty(Pilot.Vmax_PROPERTY));
 	
+	/**
+	 * @see {@link LocomotionSystem}.SAIL_SHEET_IN;
+	 */
 	public static final double tightMax = LocomotionSystem.SAIL_SHEET_IN;
-	public static final double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
-	public static final double sailNormal = LocomotionSystem.SAIL_NORMAL;
 	
+	/**
+	 * @see {@link LocomotionSystem}.SAIL_SHEET_OUT;
+	 */
+	public static final double easeMax = LocomotionSystem.SAIL_SHEET_OUT;
+	
+	/**
+	 * @see {@link LocomotionSystem}.SAIL_NORMAL;
+	 */
+	public static final double sailNormal = LocomotionSystem.SAIL_NORMAL;
+
 	private static final Logger LOG = LoggerFactory.getLogger(DriveAngleThread.class);
 	
 	private final LocomotionSystem locSystem;
@@ -50,11 +85,16 @@ public class DriveAngleThread extends Thread {
 	// sailPos
 	private double lastSailPos;
 	private double sailPos;
-	Calculations calc;
-	double desiredHeeling=0;
-	double trueWindDirection;
+	private Calculations calc;
+	private double desiredHeeling = 0;
+	private double trueWindDirection;;
 	
-	
+	/**
+	 * Creates a new instance, which calculates commands for the {@link LocomotionSystem}
+	 * handed over. Has to be started with run().
+	 * 
+	 * @param locSystem the {@link LocomotionSystem} which executes the calculated commands  
+	 */
 	public DriveAngleThread(LocomotionSystem locSystem) {
 		this.locSystem = locSystem;
 		compassModel = WorldModelImpl.getInstance().getCompassModel();
@@ -65,14 +105,20 @@ public class DriveAngleThread extends Thread {
 		calc = new Calculations();
 	}
 	
+        /*
+	 * Starts the {@link Thread}. Calculates positions for the rudder and the sail until
+	 * it is interrupted. 
+	 */
+	@Override
 	public void run() {
 		int counter = 0;
 		
 		while(!isInterrupted() ) {
-			
+
 			calculateRudderPosisition();
 			calculateSailPosition();
 			
+			// log status every three cycles
 			if (++counter == 3) {
 				StringBuffer message = new StringBuffer();
 				
@@ -100,9 +146,10 @@ public class DriveAngleThread extends Thread {
 			}
 		}
 	}
+
 	/**
-	 * set desired Sail-Pos by using Wind-Direction
-	 * 
+	 * Set desired Sail-Pos by using Wind-Direction.
+	 *
 	 * @author schmidst
 	 */
 	private void calculateSailPosition() {
@@ -180,6 +227,7 @@ public class DriveAngleThread extends Thread {
 			lastSailPos = sailPos;
 		}
 	}
+	
 	/**
 	 * Calculate the (optimal) Sail-Position by influences of:
 	 * - windspeed
@@ -197,7 +245,8 @@ public class DriveAngleThread extends Thread {
 	 * 		- too low ==> tighten
 	 * 		- too high ==> ease off
 	 * 		- optimal ==> keep
-	 * 
+	 *
+     * @return the value for the sail to set
 	 * @author schmidst
 	 */
 	private double calculateSailByHeeling() {
@@ -232,12 +281,12 @@ public class DriveAngleThread extends Thread {
 		
 		return sP;
 	}
+
 	/**
-	 * calculate actual Value for SailPos
-	 * also set new Value as new lastSailPos
+	 * Calculates actual Value for SailPos and sets new Value as new lastSailPos.
 	 * 
 	 * @param pctChange percent Value to change lastSailPos
-	 * @return sailChangeValue new to set Value 
+	 * @return the value for the sail to set
 	 * @author schmidst
 	 */
 	private double calculateSailChange(double pctChange)
@@ -252,6 +301,7 @@ public class DriveAngleThread extends Thread {
 		return sailChangeValue;
 		
 	}
+
 	/**
 	 * desiredHeeling in addiction to windSpeed and -direction
 	 * 
@@ -283,11 +333,10 @@ public class DriveAngleThread extends Thread {
 		else
 			return 0;
 	}
-	
 
-	
 	/**
-	 * 
+	 * Calculates the new position for the rudder and hands it over to the {@link LocomotionSystem}. 
+	 * Tries to hold the desired angle dependent to the currently active {@link DriveAngleMode}.
 	 */
 	private void calculateRudderPosisition() {
 		
@@ -304,7 +353,7 @@ public class DriveAngleThread extends Thread {
 			}
 		}
 		
-		rudderPos=Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle)); 
+		rudderPos = Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle));
 		
 		if (deltaAngle < 0) {
 			//rudder to the very left, assuming very left is the smallest value
@@ -327,14 +376,14 @@ public class DriveAngleThread extends Thread {
 	 * @return the angle in range from -180 to +180
 	 */
 	public int transformAngle(int angle) {
+		angle = angle % 360;
 		
-		angle=angle%360;
-		
-		if(angle > 180) 
-			angle-=360;
-		else if(angle < -180) 
-			angle+=360;
-		
+		if (angle > 180) {
+			angle -= 360;
+		} else if (angle < -180) {
+			angle += 360;
+		}
+
 		return angle;
 	}
 
@@ -351,6 +400,11 @@ public class DriveAngleThread extends Thread {
 		}
 	}
 	
+	/**
+	 * Getter for the desired angle, set by the {@link Navigator}.
+	 * 
+	 * @return the angle to hold
+	 */
 	public double getDesiredAngle() {
 		return desiredAngle;
 	}

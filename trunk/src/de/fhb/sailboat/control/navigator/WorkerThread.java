@@ -42,7 +42,7 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	protected T task;
 	
 	/**
-	 * Initial GPS position of the boat, when the {@link WorkerThread} was started.
+	 * Initial {@link GPS} position of the boat, when the {@link WorkerThread} was started.
 	 */
 	protected GPS startPosition;
 	
@@ -56,8 +56,8 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	/**
 	 * Creates a new initialized instance.
 	 * 
-	 * @param pilot the pilot to send the commands to
-	 * @param navigator the navigator who created this instance
+	 * @param pilot the {@link Pilot} to send the commands to
+	 * @param navigator the {@link Navigator} who created this instance
 	 */
 	public WorkerThread(Pilot pilot, Navigator navigator) {
 		this.navigator = navigator;
@@ -68,20 +68,21 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	}
 	
 	/**
-	 * Sets the task and triggers calculations for the new task.
+	 * Sets the {@link Task} and triggers calculations for the new task.
 	 * 
-	 * @param task the new task to execute
+	 * @param task the new {@link Task} to execute
 	 */
 	public final void setTask(T task) {
 		setTask(task, null, null);
 	}
 	
 	/**
-	 * Sets the task and triggers calculations for the new task. Additional, the
+	 * Sets the {@link Task} and triggers calculations for the new task. Additional, the
 	 * position of the boat at the start of the task is set. 
 	 * 
-	 * @param task the new task to execute
-	 * 
+	 * @param task the new {@link Task} to execute
+	 * @param startPosition the {@link GPS} position of the beginning of the task
+	 * @param goal the {@link GPS} position of the end of the task
 	 */
 	public final void setTask(T task, GPS startPosition, GPS goal) {
 		this.startPosition = startPosition;
@@ -177,15 +178,13 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		return angle;
 	}
 	
-	/**
+    /**
 	 * Calculates the distance from the current position to the ideal line between a start and the goal position.<br>
 	 * A negative value means that the given currentPos is left from the ideal line, based on the direction of travel<br>
 	 * A positive value means that the given currentPos is right from the ideal line, based on the direction of travel<br>
 	 * The interpretation of the resulting distance is matter of the caller. e.g. A transformation into meters had to be done yet, if required.
 	 * (Internal note: perhaps we can misuse that function to perform a cross line task too!)
 	 * 
-	 * @param start Start position that defines the line 
-	 * @param goal Destination position that defines the line
 	 * @param currentPos Current position for which the distance to that line shall be calculated
 	 * @return The distance of the given currentPos to the imaginary line between start and goal
 	 */
@@ -242,6 +241,13 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		}
 	}
 
+    /**
+	 * Calculates the absolute angle from the current position to the goal. Adds an offset to the
+	 * calculated angle, if beating is necessary.
+	 * 
+	 * @param goal the {@link GPS} to reach
+	 * @return angle from the current position to goal
+	 */
 	public double calAngleToGPSIncludingBeat(GPS goal) {
 		double angle = calcAngleToGPS(goal);
 		
@@ -282,42 +288,5 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 	 */
 	public double toDegree(double radian) {
 		return (radian / Math.PI * 180);
-	}
-	
-	/**
-	 * NOT READY! MUST NOT BE USED!
-	 * @return nonsense
-	 */
-	protected double calcAngleToGoal() {
-		final int beatingParameter = 1;
-		int boatPosition = 0;
-		int targetPosition = 0;
-		
-		int vectorBoatToTarget = targetPosition - boatPosition;
-		double currentAngle = worldModel.getCompassModel().getCompass().getYaw();
-		double newAngle = currentAngle;
-		double windDirectionInverse = 360 - calcRealWind().getDirection();
-		double n = 1 + beatingParameter / Math.abs(vectorBoatToTarget);
-		
-		return 0;
-	}
-	
-	/**
-	 * NOT READY! MUST NOT BE USED!
-	 * @return nonsense
-	 */
-	protected Wind calcRealWind() {
-		return worldModel.getWindModel().getWind();
-	}
-	
-	/**
-	 * Calculates the amount of a two dimensional vector.
-	 * 
-	 * @param x first value of the vector
-	 * @param y second value of the vector
-	 * @return (x² + y²)^0.5
-	 */
-	private double amountOfVector(double x, double y) {
-		return Math.sqrt(x * x + y * y);
 	}
 }

@@ -17,7 +17,7 @@ import de.fhb.sailboat.mission.ReachPolygonTask;
 public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 
 	private GPS centroid;
-	
+
 	/**
 	 * Creates a new initialized instance.
 	 * 
@@ -55,7 +55,7 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 	
 	/**
 	 * Calculate the centroid of the polygon, link to formula: 
-	 * http://de.wikipedia.org/wiki/Geometrischer_Schwerpunkt#Polygon 
+	 * http://de.wikipedia.org/wiki/Geometrischer_Schwerpunkt#Polygon.
 	 * 
 	 * @return the centroid of the polygon defined in task
 	 */

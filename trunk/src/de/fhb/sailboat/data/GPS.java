@@ -13,7 +13,7 @@ public class GPS implements Serializable{
 
 	private double latitude;
 	private double longitude;
-	private int nrSatelites;
+	private int satelliteCount;
 	private double speed;
 
 
@@ -22,11 +22,10 @@ public class GPS implements Serializable{
 	 * Initialization constructor.<br>
 	 * Creates a new GPS object with a given latitude and longitude.
 	 * 
-	 * @param latitude The latitude of the GPS object
-	 * @param longitude The longitude of the GPS object
+	 * @param latitude the latitude of the GPS object
+	 * @param longitude the longitude of the GPS object
 	 */
 	public GPS(double latitude, double longitude) {
-
 		this(latitude, longitude, -1);
 	}
 
@@ -35,12 +34,12 @@ public class GPS implements Serializable{
 	 * Creates a new GPS object with a given latitude, longitude and the number<br>
 	 * of satellites that were involved when obtaining the values.
 	 * 
-	 * @param latitude The latitude of the GPS object
-	 * @param longitude The longitude of the GPS object
+	 * @param latitude the latitude of the GPS object
+	 * @param longitude the longitude of the GPS object
+	 * @param satelliteCount number of satellites in range
 	 */
-	public GPS(double latitude, double longitude, int nrSatelites) {
-		
-		this(latitude, longitude, nrSatelites, 0);	
+	public GPS(double latitude, double longitude, int satelliteCount) {
+		this(latitude, longitude, satelliteCount, 0);
 	}
 	
 	/**
@@ -48,11 +47,11 @@ public class GPS implements Serializable{
 	 * Creates a new GPS object with a given latitude, longitude and the <br> 
 	 * approximated speed.
 	 * 
-	 * @param latitude The latitude of the GPS object
-	 * @param longitude The longitude of the GPS object
+	 * @param latitude the latitude of the GPS object
+	 * @param longitude the longitude of the GPS object
+	 * @param speed the approximated speed
 	 */
 	public GPS(double latitude, double longitude, double speed) {
-		
 		this(latitude, longitude, -1, speed);
 	}
 	
@@ -61,13 +60,13 @@ public class GPS implements Serializable{
 	 * Creates a new GPS object with a given latitude, longitude, the number<br>
 	 * of satellites that were involved when obtaining the values and the approximated speed.
 	 * 
-	 * @param latitude The latitude of the GPS object
-	 * @param longitude The longitude of the GPS object
+	 * @param latitude the latitude of the GPS object
+	 * @param longitude the longitude of the GPS object
 	 */
 	public GPS(double latitude, double longitude, int nrSatelites, double speed) {
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.nrSatelites = nrSatelites;
+		this.satelliteCount = nrSatelites;
 		this.speed = speed;
 	}
 
@@ -119,7 +118,7 @@ public class GPS implements Serializable{
 	}
 
 	public int getSatelites() {
-		return nrSatelites;
+		return satelliteCount;
 	}
 
 	/**
@@ -145,6 +144,6 @@ public class GPS implements Serializable{
 	@Override
 	public String toString() {
 		return "GPS [latitude: " + latitude + ", longitude: " + longitude
-				+ ", satelites: " + nrSatelites + ", speed: " + speed + "]";
+				+ ", satelites: " + satelliteCount + ", speed: " + speed + "]";
 	}
 }

@@ -10,8 +10,6 @@ import de.fhb.sailboat.data.GPS;
  *
  */
 public interface Task {
-
-	//TODO Endebedingungen: Zeit, Strecke, Linie erreicht
 	
 	/**
 	 * Returns if the task has reached its goal.

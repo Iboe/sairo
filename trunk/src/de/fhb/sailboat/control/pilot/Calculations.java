@@ -1,7 +1,16 @@
 package de.fhb.sailboat.control.pilot;
 
+/**
+ * Helper class that contains methods, that can be used in different classes responsible 
+ * for navigation.
+ * 
+ * @author schmidst
+ *
+ */
 public class Calculations {
 
+	private static final double convertDeg2Rad = (2 * Math.PI) / 360;
+	private static final double convertRad2Deg = 360 / (2 * Math.PI);
 	private double true_diff;
 	private double true_speed;
 	
@@ -14,19 +23,15 @@ public class Calculations {
 	}
 
 	/**
-	 * Calculate the atmospheric Wind Direction out of the relative Wind Direction and the speed of the boat
+	 * Calculates the atmospheric wind direction out of the relative wind direction and the speed of the boat.
 	 * 
 	 * @param angle	angle between boat-heading and apparent wind in degree
 	 * @param w_s apparent wind-Speed in m/s
 	 * @param b_s boat-speed in m/s
-
-	 * @return atmospheric Wind Direction in °
-	 * 
 	 * Source: http://www.csgnetwork.com/twscorcalc.html
 	 * 
 	 * TODO untested and not really good working
 	 */
-
 	public void trueWind(double angle, double w_s, double b_s) {
 		
 		// 1. convert angle to rad
@@ -46,24 +51,23 @@ public class Calculations {
 		
 	}
 
-	public double deg2rad(double deg)
-	{
-
-		double conv_factor = (2.0 * Math.PI)/360.0;
-
-		return(deg * conv_factor);
-
+    /**
+	 * Converts an angle from degrees to radian.
+	 * 
+	 * @param deg the angle in degrees
+	 * @return the radian angle
+	 */
+	public double deg2rad(double deg) {
+		return(deg * convertDeg2Rad);
 	}
 
-
-
-	public double rad2deg(double rad)
-
-	  {
-
-		double conv_factor = 360/(2.0 * Math.PI);
-
-		return(rad * conv_factor);
-
-	  }
+	/**
+	 * Converts an angle from radian to degrees.
+	 * 
+	 * @param rad the radian angle 
+	 * @return the angle in degrees
+	 */
+	public double rad2deg(double rad) {
+		return(rad * convertRad2Deg);
+	}
 }

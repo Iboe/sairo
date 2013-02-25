@@ -24,7 +24,7 @@ public class BeatTask implements Task {
 	public BeatTask(GPS goal) {
 		this(null, goal);
 	}
-	
+
 	/**
 	 * Creates a new instance with the {@link GPS} point to be reached and the {@link Task}, 
 	 * that was executed before and is to be continued after the beating.
@@ -40,7 +40,7 @@ public class BeatTask implements Task {
 		this.goal = goal;
 	}
 	
-	/**
+	/*
 	 * Always returns <code>false</code>, since the task should just be canceled by the {@link BeatWorker}
 	 * that executes this task. This is needed to continue the original task. 
 	 */
@@ -51,10 +51,20 @@ public class BeatTask implements Task {
 		return false;
 	}
 
+    /**
+	 * Getter for the {@link Task} to be continued after the beating.
+	 * 
+	 * @return the {@link Task} whose execution should be continued
+	 */
 	public Task getContinueTask() {
 		return continueTask;
 	}
 
+    /**
+	 * Getter for the {@link GPS} position of the current goal.
+	 * 
+	 * @return the position of the current goal 
+	 */
 	public GPS getGoal() {
 		return goal;
 	}

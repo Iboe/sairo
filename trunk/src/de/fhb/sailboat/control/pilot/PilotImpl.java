@@ -1,8 +1,5 @@
 package de.fhb.sailboat.control.pilot;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 
 /**
@@ -13,15 +10,20 @@ import de.fhb.sailboat.serial.actuator.LocomotionSystem;
  */
 public class PilotImpl implements Pilot {
 
-	private static final Logger LOG = LoggerFactory.getLogger(PilotImpl.class);
-	
 	private final LocomotionSystem locSystem;
 	
 	private DriveAngleThread driveAngleThread;
 	
-	public PilotImpl(LocomotionSystem ls){
-		driveAngleThread=null;
-		locSystem=ls;
+	/**
+	 * Creates a new initialized instance, which uses the {@link LocomotionSystem} handed over
+	 * to pass over the calculated positions to the actuators.
+	 * 
+	 * @param locomotaion the {@link LocomotionSystem} for the further execution of the 
+	 * calculated positions
+	 */
+	public PilotImpl(LocomotionSystem locomotaion){
+		driveAngleThread = null;
+		locSystem = locomotaion;
 	}
 	
 	@Override
@@ -34,6 +36,13 @@ public class PilotImpl implements Pilot {
 		driveAngle(angle, DriveAngleMode.WIND);
 	}
 
+        /**
+	 * Executes the current command by passing the desired angle to a {@link DriveAngleThread}. Starts 
+	 * a new thread if necessary.
+	 * 
+	 * @param angle the desired angle to hold
+	 * @param mode the {@link DriveAngleMode} that determines the way of the thread to work
+	 */
 	private synchronized void driveAngle(int angle, DriveAngleMode mode) {
 		if (driveAngleThread != null && driveAngleThread.isAlive()) {
 			driveAngleThread.driveAngle(angle, mode);

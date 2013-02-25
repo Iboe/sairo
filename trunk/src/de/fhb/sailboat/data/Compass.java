@@ -5,71 +5,67 @@ import java.io.Serializable;
 import javax.vecmath.Vector3d;
 
 /**
- * Data object representing a compass, containing the information about the 
- * inclination of the boat in different directions.
+ * Data object representing a compass. It contains information about the 
+ * inclination of the boat in different directions, the temperature, the magnetic 
+ * values and the acceleration. 
  * 
  * @author hscheel
  *
  */
-
 public class Compass implements Serializable{
 	private final double azimuth;
 	private final double pitch;
 	private final double roll;
 	private final double temperature;
-	private final double magnatic;
-	private final Vector3d magnaticField;
+	private final double magnetic;
+	private final Vector3d magneticField;
 	private final double acceleration;
 	private final Vector3d accelerationField;
-	private final double usefullsamplerate;
+	private final double usefulSampleRate;
 	
+	/**
+	 * Constructs a new partial initialized instance. The other values are set to 0.
+	 * 
+	 * @param azimuth the direction of the boat
+	 * @param pitch the angle between the bow of the boat and the water surface
+	 * @param roll the heeling of the boat
+	 */
 	public Compass(double azimuth, double pitch, double roll) {
 		this.azimuth = azimuth;
 		this.pitch = pitch;
 		this.roll = roll;
 		this.temperature = 0;
-		this.magnatic = 0;
-		this.magnaticField = new Vector3d(0, 0, 0);
+		this.magnetic = 0;
+		this.magneticField = new Vector3d(0, 0, 0);
 		this.acceleration = 0;
 		this.accelerationField = new Vector3d(0, 0, 0);
-		this.usefullsamplerate = 0;
+		this.usefulSampleRate = 0;
 	}
 	
-	public double getYaw() {
-	
-		if( azimuth > 180)
-			return azimuth - 360;
-		else
-			return azimuth;
-	}
-
-
 	/**
+	 * Constructs a new fully initialized instance.
 	 * 
-	 * @param a for azimuth value
-	 * @param p for pitch value
-	 * @param r for roll value
-	 * @param t for temperature value
-	 * @param m for magnatic value
-	 * @param mx for magnatic-x value
-	 * @param my for magnatic-y value
-	 * @param mz for magnatic-z value
-	 * @param ac for acceleration value
-	 * @param acx for acceleration-x value
-	 * @param acy for acceleration-y value
-	 * @param acz for acceleration-z value
-	 * @param u for usefullsamplerate value
+	 * @param azimuth the direction of the boat
+	 * @param pitch the angle between the bow of the boat and the water surface
+	 * @param roll the heeling of the boat
+	 * @param temperature the temperature inside the compass-box
+	 * @param magnetic for magnetic value
+	 * @param magneticField for magnetic values in x-, y- and z-direction
+	 * @param acceleration for acceleration value
+	 * @param accelerationField for acceleration values in x-, y- and z-direction
+	 * @param usefulSampleRate for useful sample rate value
 	 */
-	public Compass(double a, double p, double r, double t, double m, Vector3d mvect, double ac, Vector3d acvect, double u) {
-		this.azimuth = a;
-		this.pitch = p;
-		this.roll = r;
-		this.temperature = t;
-		this.magnatic = m;
-		this.magnaticField = mvect;
-		this.acceleration = ac;
-		this.accelerationField = acvect;
-		this.usefullsamplerate = u;
+	public Compass(double azimuth, double pitch, double roll, double temperature, double magnetic, 
+			Vector3d magneticField, double acceleration, Vector3d accelerationField, double usefulSampleRate) {
+		this.azimuth = azimuth;
+		this.pitch = pitch;
+		this.roll = roll;
+		this.temperature = temperature;
+		this.magnetic = magnetic;
+		this.magneticField = magneticField;
+		this.acceleration = acceleration;
+		this.accelerationField = accelerationField;
+		this.usefulSampleRate = usefulSampleRate;
 	}
 
 	/**
@@ -77,8 +73,8 @@ public class Compass implements Serializable{
 	 * Directions:
 	 * North:	   0°
 	 * East:	   90°
-	 * South:	[-]180°
-	 * West:	  -90°
+	 * South:	   360°
+	 * West:	   270°
 	 *   
 	 * @return the direction
 	 */
@@ -87,7 +83,7 @@ public class Compass implements Serializable{
 	}
 	
 	/**
-	 * Getter for the pitch angle. It describes the angle between bow of the boat and the water surface.
+	 * Getter for the pitch angle. It describes the angle between the bow of the boat and the water surface.
 	 *        |__|                   ^
 	 *   --   |  |            ---    |  pitch angle
 	 *     \--|--|-----------/       |
@@ -102,7 +98,7 @@ public class Compass implements Serializable{
 	}
 	
 	/**
-	 * Getter for the roll angle. It describes heeling of the boat.
+	 * Getter for the roll angle. It describes the heeling of the boat.
 	 *               ^ 
 	 *       |__|     \
 	 *       |  |      |   roll angle
@@ -118,41 +114,77 @@ public class Compass implements Serializable{
 	}
 	
 	/**
-	 * Getter for the temperature. If not calibrated, this is the temperature
-	 * inside the compass-box
+	 * Transforms the current azimuth value into the range from -180° to 180°.
+	 * Directions:
+	 * North:	   0°
+	 * East:	   90°
+	 * South:	[-]180°
+	 * West:	  -90°
 	 * 
-	 * @return temperature in °C celcius degrees
+	 * @return the transformed value of azimuth
+	 */
+	public double getYaw() {
+		if (azimuth > 180) {
+			return azimuth - 360;
+		} else {
+			return azimuth;
+		}
+	}
+
+	/**
+	 * Getter for the temperature. If not calibrated, this is the temperature
+	 * inside the compass-box.
+	 * 
+	 * @return temperature in °C (degree Celsius)
 	 */
 	public double getTemperature() {
 		return temperature;
 	}
 
-	public double getMagnatic() {
-		return magnatic;
+	/**
+	 * Getter for the overall magnetic value, measured at the boat.  
+	 *
+	 * @return the overall magnetic value
+	 */
+	public double getMagnetic() {
+		return magnetic;
 	}
 
-	public Vector3d getMagnaticField() {
-		return magnaticField;
+	/**
+	 * Getter for the magnetic values in x-, y- and z-direction.
+	 *
+	 * @return the magnetic values as vector with three elements
+	 */
+	public Vector3d getMagneticField() {
+		return magneticField;
 	}
 
+    /**
+	 * Getter for the overall acceleration of the boat.
+	 * 
+	 * @return the overall acceleration
+	 */
 	public double getAcceleration() {
 		return acceleration;
 	}
 
+    /**
+	 * Getter for the acceleration values in x-, y- and z-direction.
+	 * 
+	 * @return the acceleration values as vector with three elements
+	 */
 	public Vector3d getAccelerationField() {
 		return accelerationField;
 	}
 	
 	/**
-	 * Returns quality/goodness of the value
-	 * e.g. 6 out of 10 sample per clock-run where usefull:
-	 * 	60% = 0.6 
+	 * Returns quality of the values. E.g. 6 out of 10 samples per clock-run are useful:
+	 * 60% = 0.6 
 	 * 
-	 * 
-	 * @return rate in percent
+	 * @return quality rate in percent
 	 */
-	public double getUsefullsamplerate() {
-		return usefullsamplerate;
+	public double getUsefulSampleRate() {
+		return usefulSampleRate;
 	}
 
 	@Override

@@ -82,7 +82,10 @@ public class PlannerImpl implements Planner {
 		stopThread();
 		navigator.doTask(new StopTask(false));
 	}
-
+	
+ 	/**
+	 * Stops the {@link WorkerThread} by interrupting it.
+	 */
 	private void stopThread() {
 		if (workerThread != null && workerThread.isAlive()) {
 			workerThread.interrupt();

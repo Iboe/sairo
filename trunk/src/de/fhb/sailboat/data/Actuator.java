@@ -22,6 +22,11 @@ public class Actuator{
 		this.value = value;
 	}
 
+    /**
+	 * Getter for the current value of the actuator.
+	 * 
+	 * @return the current value of the actuator
+	 */
 	public int getValue() {
 		return value;
 	}
