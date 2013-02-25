@@ -73,6 +73,7 @@ public class CommXBeeConnector extends CommunicationBase{
 				xBee.open(comPort, baudRate);
 				setReceiver(new DataInputStream(new XBeeInputForwarder(xBee)));
 				setSender(new DataOutputStream(new XBeeOutputForwarder(xBee,destinationAddress)));
+				bInitialized=true;
 			} 
 			catch (XBeeException e) {
 				
