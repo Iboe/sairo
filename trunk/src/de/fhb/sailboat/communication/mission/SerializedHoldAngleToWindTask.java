@@ -44,11 +44,14 @@ public class SerializedHoldAngleToWindTask extends SerializedTaskBase<HoldAngleT
 		
 	}
 
+	/**
+	 * Turning the given {@link HoldAngleToWindTask} into a sequence of bytes.
+	 * @return The byte sequence, representing the  given {@link HoldAngleToWindTask}.
+	 */
 	@Override
 	protected byte[] serializeTask(HoldAngleToWindTask t) {
 
 		byte[] data=null;
-		int lon=0,lat=0;
 		
 		if(t != null){
 			
@@ -69,6 +72,10 @@ public class SerializedHoldAngleToWindTask extends SerializedTaskBase<HoldAngleT
 		return data;
 	}
 
+	/**
+	 * Turning the given sequence of bytes into a {@link HoldAngleToWindTask} object.
+	 * @return {@link HoldAngleToWindTask} object that was produced out of the given byte sequence, or <code>null</code> if the byte sequence was invalid.
+	 */
 	@Override
 	protected HoldAngleToWindTask deserializeTask(byte[] data) {
 

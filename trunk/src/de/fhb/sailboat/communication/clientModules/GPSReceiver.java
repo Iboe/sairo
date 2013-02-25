@@ -31,6 +31,9 @@ public class GPSReceiver implements TransmissionModule {
 	
 	private WorldModel worldModel;
 	
+	/**
+	 * Default constructor.
+	 */
 	public GPSReceiver() {
 	
 		worldModel=WorldModelImpl.getInstance();

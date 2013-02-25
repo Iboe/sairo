@@ -31,6 +31,9 @@ public class WindReceiver implements TransmissionModule {
 	
 	private WorldModel worldModel;
 	
+	/**
+	 * Default constructor.
+	 */
 	public WindReceiver() {
 	
 		worldModel=WorldModelImpl.getInstance();

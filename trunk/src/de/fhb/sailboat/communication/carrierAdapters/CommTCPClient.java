@@ -55,6 +55,7 @@ public class CommTCPClient extends CommunicationBase {
 	
 	/**
 	 * Opens a socket to the given destination IP and port.
+	 * @return true, if the socket was created successfully, otherwise false.
 	 */
 	@Override
 	public boolean initialize(){

@@ -76,7 +76,8 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	
 	//Planner methods
 	/**
-	 * Takes the given mission and instigates the transmission to the remote endpoint.
+	 * Takes the given mission and instigates the transmission process to the remote end point.
+	 * @param mission The mission to transmit.
 	 */
 	@Override
 	public void doMission(Mission mission) {
@@ -111,6 +112,8 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	/**
 	 * Sending a control command to control the propellor, the sail or the rudder.<br>
 	 * Not supported yet.
+	 * 
+	 * @param task The primitive command to transmit.
 	 */
 	@Override
 	public void doPrimitiveCommand(PrimitiveCommandTask task) {

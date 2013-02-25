@@ -4,7 +4,6 @@
 package de.fhb.sailboat.communication;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.DataInputStream;
@@ -228,6 +227,7 @@ public abstract class CommunicationBase {
 	
 	/**
 	 * Initializes the receive thread that redirects the incoming data to the corresponding {@link TransmissionModule}s.
+	 * @return true, if the receiver thread was started successfully, otherwise false. 
 	 */
 	public boolean initialize(){
 		

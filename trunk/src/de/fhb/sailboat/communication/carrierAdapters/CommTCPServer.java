@@ -63,6 +63,7 @@ public class CommTCPServer extends CommunicationBase{
 	/**
 	 * Creating and starting the accept thread, that's responsible for accepting/rejecting incoming client connections.
 	 * @see AcceptThread#run()
+	 * @return true, if the {@link ServerSocket} {@link AcceptThread} was started successfully, otherwise false.
 	 */
 	@Override
 	public boolean initialize(){
@@ -143,6 +144,7 @@ public class CommTCPServer extends CommunicationBase{
 	
 	/**
 	 * Checks whether a remote client connection is established.
+	 * @return true, if a client connection is established, otherwise false.
 	 */
 	@Override
 	public boolean isConnected(){
@@ -152,6 +154,7 @@ public class CommTCPServer extends CommunicationBase{
 	
 	/**
 	 * Terminates the connection to the remote client.
+	 * @return true, if an established connection was closed successfully, otherwise false.
 	 */
 	@Override
 	public boolean closeConnection(){
@@ -180,6 +183,9 @@ public class CommTCPServer extends CommunicationBase{
 	 */
 	private class AcceptThread extends Thread {
 		
+		/**
+		 * Run method where the code of the accept thread is being executed.
+		 */
 		public void run()
 		{
 			Socket client;

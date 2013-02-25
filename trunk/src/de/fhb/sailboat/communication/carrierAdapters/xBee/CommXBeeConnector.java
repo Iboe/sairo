@@ -16,7 +16,7 @@ import com.rapplogic.xbee.api.XBeeException;
 import de.fhb.sailboat.communication.CommunicationBase;
 
 /**
- * Provides an XBee radio modem connection endpoint as {@link CommunicationBase}.<br>
+ * Provides an XBee radio modem connection end point as {@link CommunicationBase}.<br>
  * The data stream wrappers to the XBee API are implemented by {@link XBeeInputForwarder} and {@link XBeeOutputForwarder}.<br>
  * 
  * @author Michael Kant
