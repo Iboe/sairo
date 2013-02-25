@@ -18,6 +18,8 @@ import com.rapplogic.xbee.api.XBeeResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 
 /**
+ * Wrapper class to wrap the XBee API events for receiving data by a common {@link IntputStream}.<br>
+ * 
  * @author Michael Kant
  *
  */
@@ -25,9 +27,21 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 
 	private static final Logger LOG = LoggerFactory.getLogger(XBeeInputForwarder.class);
 	
+	/**
+	 * Reference to the {@link XBee} object to get the data from.
+	 */
 	private XBee xBee;
+	
+	/**
+	 * Internal buffer for the received data.
+	 */
 	private BlockingQueue<Integer> buffer;
 	
+	/**
+	 * Initialization constructor.
+	 * 
+	 * @param xbee The {@link XBee} reference to use for receiving data.
+	 */
 	public XBeeInputForwarder(XBee xbee){
 
 		this.xBee=xbee;
@@ -38,7 +52,10 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 			xbee.addPacketListener(this);
 		}
 	}
-	/* (non-Javadoc)
+	/** 
+	 * Overriding the read function to read out of the internal byte buffer,<br> 
+	 * which is filled by the {@link #processResponse(XBeeResponse)} function of the XBee API.
+	 * 
 	 * @see java.io.InputStream#read()
 	 */
 	@Override
@@ -87,7 +104,7 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 		
 		if(resp.getApiId() == ApiId.ZNET_RX_RESPONSE){
 			
-			System.out.println("GOT RESPONSE: "+resp);
+			LOG.debug("GOT RESPONSE: "+resp);
 		
 			int[] bytes=((ZNetRxResponse) resp).getData();
 			
