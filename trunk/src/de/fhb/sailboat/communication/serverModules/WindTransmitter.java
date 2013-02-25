@@ -12,12 +12,19 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
+import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
+import de.fhb.sailboat.worldmodel.CompassModel;
+import de.fhb.sailboat.worldmodel.WindModel;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
+ * Receiver module for the {@link WindModel}'s {@link Wind} data.<br>
+ * The wind direction and speed are being read from the input stream and put back into a new {@link Wind} object.<br>
+ * This is a passive module.
+ * 
  * @author Michael Kant
  *
  */

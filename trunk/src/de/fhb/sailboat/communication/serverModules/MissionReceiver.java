@@ -6,7 +6,6 @@ package de.fhb.sailboat.communication.serverModules;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
-import de.fhb.sailboat.communication.clientModules.GPSReceiver;
-import de.fhb.sailboat.communication.clientModules.MissionTransmitter;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.Planner;
 import de.fhb.sailboat.mission.Mission;
@@ -26,7 +23,9 @@ import de.fhb.sailboat.mission.Task;
 
 /**
  * Transmitter module for receiving and deserializing a mission with all its {@link Task}s.<br>
- * The module ensures a reliable receiving process of the mission, using three-way-handshake and mission transmission modes.
+ * The module ensures a reliable receiving process of the mission, using three-way-handshake by mission transmission modes.<br>
+ * It's using the {@link TaskSerializer} for deserializing received {@link Task}s.
+ * 
  * This {@link TransmissionModule} is a sending and receiving module.
  * 
  * @author Michael Kant

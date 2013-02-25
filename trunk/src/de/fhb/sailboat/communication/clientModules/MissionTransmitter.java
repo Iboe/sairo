@@ -14,9 +14,7 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
-import de.fhb.sailboat.communication.MissionNegotiationBase.eOperationType;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
-import de.fhb.sailboat.communication.serverModules.MissionReceiver;
 import de.fhb.sailboat.control.Planner;
 
 import de.fhb.sailboat.mission.Mission;
@@ -26,6 +24,8 @@ import de.fhb.sailboat.mission.Task;
 /**
  * Transmitter module for serializing and sending a mission with all its {@link Task}s over the underlying {@link OutputStream}.<br>
  * The module ensures a reliable transmission of the mission to the connected endpoint, using three-way-handshake and mission transmission modes.
+ * It's using the {@link TaskSerializer} for serializing {@link Task}s to be sent.
+ * 
  * This {@link TransmissionModule} is a sending and receiving module.
  * 
  * @author Michael Kant
@@ -144,6 +144,8 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		
 		switch(mode){
 		
+		case TM_Idle:
+			break;
 		case TM_MissionBegin:
 			//LOG.debug("receivedObject - TM_MissionBegin.");
 			if(opCode == eOperationType.OT_BeginMission_ACK.getValue()){
@@ -303,6 +305,10 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		
 	}
 
+	/**
+	 * The transmission interval depends on the current operation mode.<br>
+	 * Within the handshakes of mission begin, cancel and end, the interval is 2000ms. Within the task transmission handshakes, the interval is 1000ms. 
+	 */
 	@Override
 	public int getTransmissionInterval() {
 		

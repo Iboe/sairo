@@ -65,7 +65,7 @@ public abstract class SerializedTaskBase<T extends Task> implements SerializedTa
 	 * The format of that data depends on the concrete implementation.
 	 * 
 	 * @param t The {@link Task} to be serialized.
-	 * @return The serialized data as byte array.
+	 * @return The serialized data as byte array or <code>null</code>, if an error occurred.
 	 */
 	protected abstract byte[] serializeTask(T t);
 	
