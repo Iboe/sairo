@@ -16,10 +16,12 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * The class of the communication component.<br>
- * It manages and schedules {@link TransmissionModule}s. <br>
- * The remote communication takes place over the classes DataOutputStream (sender) and DataInputStream (receiver).<br>
- * The underlying protocol of the connection has to be implemented in concrete subclasses.
+ * Serves as abstract base class for communicating end points of distributed applications.<br>
+ * It manages and schedules {@link TransmissionModule}s, which define the data to be exchanged. <br>
+ * The class is abstracted from concrete connections. It's using a reference to a {@link DataOutputStream}<br> 
+ * object for sending data and a reference to a {@link DataInputStream} object for receiving data.<br>
+ * The underlying protocol of the concrete connection must be implemented in concrete subclasses. <br>
+ * Those subclasses must provide the corresponding {@link DataOutputStream} and {@link DataInputStream} objects to the base. 
  * 
  * @author Michael Kant
  *

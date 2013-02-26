@@ -5,8 +5,7 @@ package de.fhb.sailboat.communication;
 
 
 /**
- * Base class for the mission transmitter and receiver. <br> 
- * It contains the enumeration definitions for transmission, operation and error modes.
+ * Base class for the mission transmitter and receiver, which contains the enumeration definitions for transmission, operation and error modes.
  * 
  * @author Michael Kant
  *

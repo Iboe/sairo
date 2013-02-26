@@ -1,18 +1,23 @@
-/**
- * 
- */
+
 package de.fhb.sailboat.communication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.DataOutputStream;
+import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Serves as background thread for calling the requestObject method on the {@link TransmissionModule} instances. <br>
- * A {@link ModuleWorker} is created for each registered module.
+ * The {@link Thread} class, which schedules the transmissions for the associated {@link TransmissionModule}.<br>
+ * For each transmission cycle, it's calling the respective methods of {@link TransmissionModule} in the following order:<br>
+ * 1. {@link TransmissionModule#getTransmissionInterval()} is being called and the thread is suspended for the amount of milliseconds returned.<br>
+ * 2. {@link TransmissionModule#skipNextCycle()} is called. If it returns true, it starts at step 1 again. If it returns false, step 3 follows.<br>
+ * 3. {@link TransmissionModule#requestObject(DataOutputStream)} is called to obtain the data that's supposed to be sent.<br>
+ * 4. If the method {@link TransmissionModule#requestObject(DataOutputStream)} returned data, it will be sent over the inherent {@link OutputStream} object of the associated {@link CommunicationBase}. Finally the cycle starts at step 1 again.<br><br> 
+ * 
+ * A {@link ModuleWorker} instance is created for each registered module.
  * 
  * @author Michael Kant
  *

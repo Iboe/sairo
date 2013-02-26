@@ -8,8 +8,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
- * Interface declaring a {@link TransmissionModule}. Clases implementing the {@link TransmissionModule} are responsible<br>
- * for defining a serialization and deserialization algorithm for a certain type of data.<br>
+ * Declaring the methods that must be defined when implementing a module for exchanging data over the {@link CommunicationBase}.<br> 
+ * 
+ * Classes implementing {@link TransmissionModule} are responsible<br> for defining a serialization and deserialization algorithm for a certain type of data.<br>
  * Transmission modules are to be registered at a {@link CommunicationBase} instance.<br>
  * Since {@link TransmissionModule}s on the server and client usually have different tasks to perform,<br>
  * there must be created a pair of {@link TransmissionModule} classes; one for the client and one for the server.<br>
