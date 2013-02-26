@@ -47,6 +47,7 @@ public class CommXBeeConnector extends CommunicationBase{
 	 * 
 	 * @param comPort The COM port to connect to.
 	 * @param baudRate The baud rate to use.
+	 * @param destinationAddress the destination address of the remote end point. A 64 bit value as a string in the following format (hexadecimal): xx xx xx xx xx xx xx xx 
 	 */
 	public CommXBeeConnector(String comPort, int baudRate, String destinationAddress){
 		
@@ -59,6 +60,8 @@ public class CommXBeeConnector extends CommunicationBase{
 	/**
 	 * Creates a new {@link XBee} object and opens a connection to the desired COM port.<br>
 	 * Then it provides the respective input and output wrapper objects to the {@link CommunicationBase as base} class.
+	 * 
+	 * @return true, if the {@link XBee#open(String, int)} method didn't cause an {@link XBeeException}, otherwise false.
 	 */
 	@Override
 	public boolean initialize(){
@@ -82,8 +85,11 @@ public class CommXBeeConnector extends CommunicationBase{
 		}
 		return bInitialized ? super.initialize() : false;
 	}
-	/* (non-Javadoc)
+	/**
+	 * Gives information about the connectivity state of the XBee modem.
 	 * @see de.fhb.sailboat.communication.CommunicationBase#isConnected()
+	 * 
+	 * @return true, if there's an XBee object present and its {@link XBee#isConnected()} method returns true, otherwise this method returns false.
 	 */
 	@Override
 	public boolean isConnected() {
@@ -91,15 +97,18 @@ public class CommXBeeConnector extends CommunicationBase{
 		return xBee != null && xBee.isConnected();
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Closing the XBee connection, if one was established.
 	 * @see de.fhb.sailboat.communication.CommunicationBase#closeConnection()
+	 * 
+	 * @return true, if there was a connection established and it was closed, otherwise false. 
 	 */
 	@Override
 	public boolean closeConnection() {
 		
 		boolean bClosed=false;
 		
-		if(xBee != null){
+		if(isConnected()){
 			
 			xBee.close();
 			xBee=null;
@@ -108,6 +117,4 @@ public class CommXBeeConnector extends CommunicationBase{
 		
 		return bClosed;
 	}
-
-
 }

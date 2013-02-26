@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
+import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WorldModel;
@@ -30,15 +31,28 @@ public class GPSTransmitter implements TransmissionModule {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GPSTransmitter.class);
 	
+	/**
+	 * The last {@link GPS} object that was sent.
+	 */
 	private GPS lastGPS;
+	
+	/**
+	 * Reference to the global world model.
+	 */
 	private WorldModel worldModel;
 	
+	/**
+	 * Default constructor.
+	 */
 	public GPSTransmitter() {
 	
 		lastGPS=null;
 		worldModel=WorldModelImpl.getInstance();
 	}
-	/* (non-Javadoc)
+	
+	/** 
+	 * Does nothing.
+	 * @param stream The {@link DataInputStream} to read from.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#objectReceived(java.io.DataInputStream)
 	 */
 	@Override
@@ -48,8 +62,11 @@ public class GPSTransmitter implements TransmissionModule {
 
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Skipping the transmission cycle if the {@link GPS} object in the {@link WorldModel} wasn't changed.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
+	 * 
+	 * @return true, if we're about to transmit the exact same {@link GPS} data again, otherwise false.
 	 */
 	@Override
 	public boolean skipNextCycle() {
@@ -100,7 +117,7 @@ public class GPSTransmitter implements TransmissionModule {
 	}
 	
 	/**
-	 * Setting the last sent {@link GPS} to null, so it will transmit the new value when a new connection was established.
+	 * Setting the last sent {@link GPS} to <code>null</code>, so it will transmit the new value when a new connection was established.
 	 */
 	@Override
 	public void connectionReset() {

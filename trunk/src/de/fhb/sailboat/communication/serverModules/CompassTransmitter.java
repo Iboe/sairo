@@ -19,7 +19,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
  * Transmitter module for the {@link CompassModel}'s {@link Compass} data.<br>
- * The yaw/azimuth a {@link Compass} object is being transformed into an integer value<br>
+ * The yaw/azimuth value of the recent {@link CompassModel}'s {@link Compass} object is being transformed into an integer value<br>
  * and written to the output stream as compact index.<br>
  * This is an active module with a transmission interval of 500ms.
  * 
@@ -30,15 +30,28 @@ public class CompassTransmitter implements TransmissionModule{
 
 	private static final Logger LOG = LoggerFactory.getLogger(CompassTransmitter.class);
 	
+	/**
+	 * The last {@link Compass} object that was sent.
+	 */
 	private Compass lastCompass;
+	
+	/**
+	 * Reference to the global world model.
+	 */
 	private WorldModel worldModel;
 	
+	/**
+	 * Default constructor.
+	 */
 	public CompassTransmitter() {
 	
 		lastCompass=null;
 		worldModel=WorldModelImpl.getInstance();
 	}
-	/* (non-Javadoc)
+	
+	/** 
+	 * Does nothing.
+	 * @param stream The {@link DataInputStream} to read from.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#objectReceived(java.io.DataInputStream)
 	 */
 	@Override
@@ -48,8 +61,11 @@ public class CompassTransmitter implements TransmissionModule{
 
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Skipping the transmission cycle if the {@link Compass} object in the {@link WorldModel} wasn't changed.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
+	 * 
+	 * @return true, if we're about to transmit the exact same {@link Compass} data again, otherwise false.
 	 */
 	@Override
 	public boolean skipNextCycle() {
@@ -96,7 +112,7 @@ public class CompassTransmitter implements TransmissionModule{
 	}
 	
 	/**
-	 * Setting the last sent {@link Compass} to null, so it will transmit the new value when a new connection was established.
+	 * Setting the last sent {@link Compass} to <code>null</code>, so it will transmit the new value when a new connection was established.
 	 */
 	@Override
 	public void connectionReset() {

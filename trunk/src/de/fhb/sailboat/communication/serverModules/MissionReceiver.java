@@ -35,6 +35,9 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 
 	private static final Logger LOG = LoggerFactory.getLogger(MissionReceiver.class);
 	
+	/**
+	 * The {@link Planner} reference where to submit the received mission.
+	 */
 	private Planner planner;
 	
 	/**
@@ -225,8 +228,10 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * No transmission requests are allowed while being in the mode {@link eTransmissionMode#TM_Idle} or {@link eTransmissionMode#TM_Task_Wait}.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
+	 * @return true, if the current mode is {@link eTransmissionMode#TM_Idle} or {@link eTransmissionMode#TM_Task_Wait}, otherweise false.
 	 */
 	@Override
 	public boolean skipNextCycle() {
@@ -280,18 +285,24 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 		
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Discarding the currently pending {@link Task} and joining the mode {@link eTransmissionMode#TM_Task_Wait}.<br>
+	 * If the connection is established again, it expects the last pending {@link Task} to receive again.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#connectionReset()
 	 */
 	@Override
 	public void connectionReset() {
 		
-		
+		pendingTask=null;
+		mode=eTransmissionMode.TM_Task_Wait;
 
 	}
 
-	/* (non-Javadoc)
-	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
+	/**
+	 * The transmission interval depends on the current operation mode.<br>
+	 * Within the handshakes of mission begin, cancel and end, the interval is 2000ms. Within the task transmission handshakes, the interval is 1000ms.
+	 * 
+	 * @return Various values, depending on the operation mode. 
 	 */
 	@Override
 	public int getTransmissionInterval() {
@@ -300,10 +311,13 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 		switch(mode){
 		
 			case TM_MissionBegin_ACK:			
-			case TM_Task_ACK:
 			case TM_MissionEnd_ACK:
 			case TM_MissionCancel_ACK:
 				interval=2000;
+			break;
+			
+			case TM_Task_ACK:
+				interval=1000;
 			break;
 			
 			case TM_Idle:

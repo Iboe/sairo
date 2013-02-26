@@ -19,6 +19,8 @@ import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 
 /**
  * Wrapper class to wrap the XBee API events for receiving data by a common {@link IntputStream}.<br>
+ * This class implements the {@link PacketListener} interface of the XBee API to grab incoming data from the XBee modem.<br>
+ * The incoming data is buffered within an internal buffer, which can be read by the implemented {@link #read()} method.
  * 
  * @author Michael Kant
  *
@@ -55,8 +57,10 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 	/** 
 	 * Overriding the read function to read out of the internal byte buffer,<br> 
 	 * which is filled by the {@link #processResponse(XBeeResponse)} function of the XBee API.
-	 * 
 	 * @see java.io.InputStream#read()
+	 * 
+	 * @return The byte that was read from the top of the internal buffer or -1, if reading caused an exception.
+	 * @throws IOException No IO exception should be thrown in this implementation.
 	 */
 	@Override
 	public int read() throws IOException {
@@ -67,7 +71,7 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 			b=buffer.take();
 		} catch (InterruptedException e) {
 			
-			e.printStackTrace();
+			LOG.warn("The thread was interrupted while waiting for input data: "+e.getMessage());
 		}
 		/*
 		synchronized(this){
@@ -99,6 +103,10 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 		return b;
 	}
 	
+	/**
+	 * Implemented method of the {@link PacketListener} interface to obtain the received data.
+	 * @param resp The response object that contain the received data.
+	 */
 	@Override
 	public void processResponse(XBeeResponse resp) {
 		

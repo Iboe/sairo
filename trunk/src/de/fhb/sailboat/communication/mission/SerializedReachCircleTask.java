@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
-import de.fhb.sailboat.communication.serverModules.MissionReceiver;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
@@ -26,19 +25,33 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 
 	private static final Logger LOG = LoggerFactory.getLogger(SerializedReachCircleTask.class);
 
+	/**
+	 * Initialization constructor.
+	 * 
+	 * @param task The {@link ReachCircleTask} to serialize.
+	 */
 	public SerializedReachCircleTask(ReachCircleTask task) {
 
 		super(task);
 	}
 	
+	/**
+	 * Initialization constructor.
+	 * 
+	 * @param data The {@link ReachCircleTask} data to deserialize.
+	 */
 	public SerializedReachCircleTask(byte[] data) {
 
 		super(data);
 	}
 
 	/**
+	 * Turning the given {@link ReachCircleTask} into a sequence of bytes.
 	 * First it serializes the desired {@link GPS} position that comes with the given {@link ReachCircleTask}.<br>
 	 * Then it serializes the given radius and returns the byte array.
+	 * @param t The {@link ReachCircleTask} to serialize.
+	 * 
+	 * @return The byte sequence, representing the given {@link ReachCircleTask}.
 	 */
 	@Override
 	protected byte[] serializeTask(ReachCircleTask t) {
@@ -73,6 +86,11 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 		return data;
 	}
 
+	/**
+	 * Turning the given sequence of bytes into a {@link ReachCircleTask} object.
+	 * @param data The data to retrieve the {@link ReachCircleTask} from.
+	 * @return {@link ReachCircleTask} object that was produced out of the given byte sequence, or <code>null</code> if the byte sequence was invalid.
+	 */
 	@Override
 	protected ReachCircleTask deserializeTask(byte[] data) {
 		
@@ -99,8 +117,4 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 			
 		return task;
 	}
-
-
-	
-
 }

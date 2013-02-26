@@ -29,6 +29,9 @@ public class WindReceiver implements TransmissionModule {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WindReceiver.class);
 	
+	/**
+	 * Reference to the global world model.
+	 */
 	private WorldModel worldModel;
 	
 	/**
@@ -57,8 +60,11 @@ public class WindReceiver implements TransmissionModule {
 		worldModel.getWindModel().setWind(newWind);
 	}
 
-	/* Passive modules got no cycles to skip.
+	/**
+	 * Passive modules got no cycles to skip.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
+	 * 
+	 * @return Always false.
 	 */
 	@Override
 	public boolean skipNextCycle() {
@@ -66,7 +72,10 @@ public class WindReceiver implements TransmissionModule {
 		return false;
 	}
 
-	/* This module just receives.
+	/** 
+	 * This module just receives.
+	 * @param stream The {@link DataOutputStream} to write into.
+	 * @throws IOException Shouldn't occur.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#requestObject(java.io.DataOutputStream)
 	 */
 	@Override
@@ -76,8 +85,11 @@ public class WindReceiver implements TransmissionModule {
 	}
 
 
-	/* Passive modules got no transmission intervals.
+	/**
+	 * Passive modules got no transmission intervals.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
+	 * 
+	 * @return Always 0;
 	 */
 	@Override
 	public int getTransmissionInterval() {
@@ -85,8 +97,11 @@ public class WindReceiver implements TransmissionModule {
 		return 0;
 	}
 
-	/* Priority is just relevant for transmitting modules.
+	/**
+	 * Priority is just relevant for transmitting modules.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getPriority()
+	 * 
+	 * @return Always 0;
 	 */
 	@Override
 	public int getPriority() {

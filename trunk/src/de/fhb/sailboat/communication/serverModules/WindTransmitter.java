@@ -12,10 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
-import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
-import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.WindModel;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
@@ -30,11 +28,21 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class WindTransmitter implements TransmissionModule {
 
-private static final Logger LOG = LoggerFactory.getLogger(WindTransmitter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(WindTransmitter.class);
 	
+	/**
+	 * The last {@link Wind} object that was sent.
+	 */
 	private Wind lastWind;
+	
+	/**
+	 * Reference to the global world model.
+	 */
 	private WorldModel worldModel;
 	
+	/**
+	 * Default constructor.
+	 */
 	public WindTransmitter() {
 		
 		lastWind=null;
@@ -42,8 +50,10 @@ private static final Logger LOG = LoggerFactory.getLogger(WindTransmitter.class)
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see de.fhb.sailboat.communication.TransmissionModule#receivedObject(java.io.DataInputStream)
+	/** 
+	 * Does nothing.
+	 * @param stream The {@link DataInputStream} to read from.
+	 * @see de.fhb.sailboat.communication.TransmissionModule#objectReceived(java.io.DataInputStream)
 	 */
 	@Override
 	public void receivedObject(DataInputStream stream) throws IOException {
@@ -51,8 +61,11 @@ private static final Logger LOG = LoggerFactory.getLogger(WindTransmitter.class)
 		LOG.warn("Received an unexpected incoming transmission.");
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Skipping the transmission cycle if the {@link Wind} object in the {@link WorldModel} wasn't changed.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
+	 * 
+	 * @return true, if we're about to transmit the exact same {@link Wind} data again, otherwise false.
 	 */
 	@Override
 	public boolean skipNextCycle() {
@@ -83,8 +96,8 @@ private static final Logger LOG = LoggerFactory.getLogger(WindTransmitter.class)
 		lastWind=current;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.fhb.sailboat.communication.TransmissionModule#connectionReset()
+	/**
+	 * Setting the last sent {@link Wind} to <code>null</code>, so it will transmit the new value when a new connection was established.
 	 */
 	@Override
 	public void connectionReset() {
@@ -92,7 +105,8 @@ private static final Logger LOG = LoggerFactory.getLogger(WindTransmitter.class)
 		lastWind=null;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Setting an interval of 600ms
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
 	 */
 	@Override

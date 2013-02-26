@@ -10,13 +10,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.Planner;
-
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.Task;
@@ -218,6 +216,10 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		}		
 	}
 
+	/**
+	 * There don't exist cycles to skip.
+	 * @return Always false.
+	 */
 	@Override
 	public boolean skipNextCycle() {
 		// TODO Auto-generated method stub
@@ -300,17 +302,20 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 		}
 	}
 
+	
 	@Override
 	public void connectionReset() {
 		
-		mode=eTransmissionMode.TM_Idle;
-		LOG.warn("The connection was reset. The mission transmission was aborted.");
+		mode=eTransmissionMode.TM_Task_New;
+		LOG.warn("The connection was reset. The mission transmission suspended.");
 		
 	}
 
 	/**
 	 * The transmission interval depends on the current operation mode.<br>
-	 * Within the handshakes of mission begin, cancel and end, the interval is 2000ms. Within the task transmission handshakes, the interval is 1000ms. 
+	 * Within the handshakes of mission begin, cancel and end, the interval is 2000ms. Within the task transmission handshakes, the interval is 1000ms.
+	 * 
+	 * @return Various values, depending on the operation mode. 
 	 */
 	@Override
 	public int getTransmissionInterval() {

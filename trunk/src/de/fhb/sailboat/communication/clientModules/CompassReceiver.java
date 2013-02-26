@@ -27,8 +27,11 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class CompassReceiver implements TransmissionModule {
 
-private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class);
 	
+	/**
+	 * Reference to the global world model.
+	 */
 	private WorldModel worldModel;
 	
 	/**
@@ -59,8 +62,11 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		worldModel.getCompassModel().setCompass(newCompass);
 	}
 
-	/* Passive modules got no cycles to skip.
+	/**
+	 * Passive modules got no cycles to skip.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#skipNextCycle()
+	 * 
+	 * @return Always false.
 	 */
 	@Override
 	public boolean skipNextCycle() {
@@ -68,7 +74,10 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		return false;
 	}
 
-	/* This module just receives.
+	/** 
+	 * This module just receives.
+	 * @param stream The {@link DataOutputStream} to write into.
+	 * @throws IOException Shouldn't occur.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#requestObject(java.io.DataOutputStream)
 	 */
 	@Override
@@ -78,8 +87,11 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 
 	}
 
-	/* Passive modules got no transmission intervals.
+	/** 
+	 * Passive modules got no transmission intervals.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
+	 * 
+	 * @return Always 0;
 	 */
 	@Override
 	public int getTransmissionInterval() {
@@ -87,8 +99,11 @@ private static final Logger LOG = LoggerFactory.getLogger(CompassReceiver.class)
 		return 0;
 	}
 
-	/* Priority is just relevant for transmitting modules.
+	/** 
+	 * Priority is just relevant for transmitting modules.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getPriority()
+	 * 
+	 * @return Always 0;
 	 */
 	@Override
 	public int getPriority() {
