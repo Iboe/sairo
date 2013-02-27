@@ -54,6 +54,7 @@ public class GPSTransmitter implements TransmissionModule {
 	 * Does nothing.
 	 * @param stream The {@link DataInputStream} to read from.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#objectReceived(java.io.DataInputStream)
+	 * @throws IOException Won't be thrown.
 	 */
 	@Override
 	public void receivedObject(DataInputStream stream) throws IOException {
@@ -98,8 +99,10 @@ public class GPSTransmitter implements TransmissionModule {
 	}
 
 	/**
-	 * Setting an interval of 1000ms
+	 * Setting an interval of 1000ms.
 	 * @see de.fhb.sailboat.communication.TransmissionModule#getTransmissionInterval()
+	 * 
+	 * @return The interval of 1000ms.
 	 */
 	@Override
 	public int getTransmissionInterval() {

@@ -37,7 +37,7 @@ public class SerializedHoldAngleToWindTask extends SerializedTaskBase<HoldAngleT
 	/**
 	 * Initialization constructor.
 	 * 
-	 * @param data The {@link HoldAngleToWindTask} data to deserialize.
+	 * @param serializedData The {@link HoldAngleToWindTask} data to deserialize.
 	 */
 	public SerializedHoldAngleToWindTask(byte[] serializedData) {
 		super(serializedData);
