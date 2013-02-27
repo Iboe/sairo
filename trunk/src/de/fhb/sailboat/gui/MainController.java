@@ -2,7 +2,7 @@ package de.fhb.sailboat.gui;
 
 import java.util.List;
 
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.Mission;

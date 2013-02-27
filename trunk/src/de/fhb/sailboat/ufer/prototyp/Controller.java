@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.gui.map.MapPolygon;

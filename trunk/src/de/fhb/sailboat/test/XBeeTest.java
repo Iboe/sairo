@@ -1,16 +1,13 @@
 package de.fhb.sailboat.test;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.Set;
 
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeException;
 
 import de.fhb.sailboat.communication.carrierAdapters.xBee.XBeeInputForwarder;
 import de.fhb.sailboat.communication.carrierAdapters.xBee.XBeeOutputForwarder;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
+import de.fhb.sailboat.start.PropertiesInitializer;
 import de.fhb.sailboat.wificonnection.IwifiXbee;
 import de.fhb.sailboat.wificonnection.WifiXbee;
 

@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
+import de.fhb.sailboat.start.PropertiesInitializer;
 
 /**
  * Class for remote controlling a autonomous sailing boat via a minimalistic

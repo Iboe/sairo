@@ -16,7 +16,7 @@ import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.Task;

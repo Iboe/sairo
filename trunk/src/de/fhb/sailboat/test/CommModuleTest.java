@@ -1,11 +1,8 @@
 package de.fhb.sailboat.test;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.Set;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
@@ -14,11 +11,10 @@ import de.fhb.sailboat.communication.clientModules.GPSReceiver;
 import de.fhb.sailboat.communication.clientModules.MissionTransmitter;
 import de.fhb.sailboat.communication.mission.SerializedReachCircleTask;
 import de.fhb.sailboat.communication.mission.SerializedTask;
-import de.fhb.sailboat.communication.mission.SerializedTaskBase;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.communication.serverModules.GPSTransmitter;
 import de.fhb.sailboat.communication.serverModules.MissionReceiver;
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
 import de.fhb.sailboat.mission.Mission;
@@ -26,7 +22,7 @@ import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.Task;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
+import de.fhb.sailboat.start.PropertiesInitializer;
 
 /**
  * Dedicated (non-junit) test class for the components of the communication system.

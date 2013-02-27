@@ -1,4 +1,4 @@
-package de.fhb.sailboat.control;
+package de.fhb.sailboat.control.planner;
 
 import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;

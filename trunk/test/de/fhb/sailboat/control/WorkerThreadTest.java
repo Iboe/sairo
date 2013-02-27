@@ -1,6 +1,5 @@
 package de.fhb.sailboat.control;
 
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -13,7 +12,7 @@ import de.fhb.sailboat.control.navigator.WorkerThread;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.mission.ReachCircleTask;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
+import de.fhb.sailboat.start.PropertiesInitializer;
 import de.fhb.sailboat.worldmodel.History;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;

@@ -18,8 +18,8 @@ import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
+import de.fhb.sailboat.start.PropertiesInitializer;
 import de.fhb.sailboat.test.DummyLoco;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 

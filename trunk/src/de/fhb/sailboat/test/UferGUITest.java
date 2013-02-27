@@ -3,18 +3,16 @@
  */
 package de.fhb.sailboat.test;
 
-import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
-import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
+import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
 import de.fhb.sailboat.communication.clientModules.MissionTransmitter;
 import de.fhb.sailboat.communication.clientModules.WindReceiver;
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.gui.GUI;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
-import de.fhb.sailboat.ufer.prototyp.View;
+import de.fhb.sailboat.start.PropertiesInitializer;
 
 /**
  * Class with main method to start the Ufer GUI along with a communication client end node separately. 

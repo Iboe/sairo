@@ -1,6 +1,6 @@
 package de.fhb.sailboat.gui;
 
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
+import de.fhb.sailboat.start.PropertiesInitializer;
 
 public class GUITest {
 	

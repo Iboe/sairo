@@ -6,7 +6,7 @@ import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
-import de.fhb.sailboat.test.Initializier.PropertiesInitializer;
+import de.fhb.sailboat.start.PropertiesInitializer;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 public class PilotSailTest {

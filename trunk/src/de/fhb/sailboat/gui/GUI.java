@@ -15,7 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
-import de.fhb.sailboat.control.Planner;
+import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
 import de.fhb.sailboat.missionplayer.Player;
 import de.fhb.sailboat.missionplayer.PlayerDialog;
