@@ -4,6 +4,13 @@ import java.util.List;
 
 import de.fhb.sailboat.data.Compass;
 
+/**
+ * Concrete implementation of the {@link CompassModel}.
+ * 
+ * @author Helge Scheel, Michael Kant
+ *
+ * @see {@link CompassModel}
+ */
 public class CompassModelImpl implements CompassModel {
 
 	private Compass compass;

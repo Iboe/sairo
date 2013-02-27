@@ -4,6 +4,13 @@ import java.util.List;
 
 import de.fhb.sailboat.data.GPS;
 
+/**
+ * Concrete implementation of the {@link GPSModel}.
+ * 
+ * @author Helge Scheel, Michael Kant
+ *
+ * @see {@link GPSModel}
+ */
 public class GPSModelImpl implements GPSModel {
 
 	private GPS position;

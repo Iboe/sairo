@@ -5,6 +5,13 @@ import java.util.List;
 
 import de.fhb.sailboat.data.MapPoint;
 
+/**
+ * Concrete implementation of the {@link MapModel}.
+ * 
+ * @author Helge Scheel, Michael Kant
+ *
+ * @see {@link MapModel}
+ */
 public class MapModelImpl implements MapModel {
 
 	private List<MapPoint> mapPoints;

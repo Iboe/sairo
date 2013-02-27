@@ -4,6 +4,13 @@ import java.util.List;
 
 import de.fhb.sailboat.data.Wind;
 
+/**
+ * Concrete implementation of the {@link WindModel}.
+ * 
+ * @author Helge Scheel, Michael Kant
+ *
+ * @see {@link WindModel}
+ */
 public class WindModelImpl implements WindModel {
 
 	private Wind wind;
