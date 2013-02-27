@@ -17,7 +17,7 @@ public enum MapPointType {
 	
 	/**
 	 * Private constructor for adding the serialization ID.
-	 * @param serialID
+	 * @param serialID The id associated with the enum constant. 
 	 */
 	private MapPointType(int serialID) {
 		this.serialID = serialID;

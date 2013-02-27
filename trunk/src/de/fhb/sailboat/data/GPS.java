@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Data object representing a GPS coordinate, containing the information
  * gathered by a GPS device.
  * 
- * @author hscheel
+ * @author Helge Scheel, Michael Kant
  * 
  */
 public class GPS implements Serializable{
@@ -62,6 +62,8 @@ public class GPS implements Serializable{
 	 * 
 	 * @param latitude the latitude of the GPS object
 	 * @param longitude the longitude of the GPS object
+	 * @param nrSatelites the number of satellites, this GPS data originates from
+	 * @param speed the approximated speed
 	 */
 	public GPS(double latitude, double longitude, int nrSatelites, double speed) {
 		this.latitude = latitude;
@@ -109,21 +111,33 @@ public class GPS implements Serializable{
 		return true;
 	}
 
+	/**
+	 * Returns the latitude of the GPS coordinate. 
+	 * @return The latitude of the GPS coordinate.
+	 */
 	public double getLatitude() {
 		return latitude;
 	}
 
+	/**
+	 * Returns the longitude of the GPS coordinate. 
+	 * @return The longitude of the GPS coordinate.
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
 
+	/**
+	 * Returns the number of satellites where this GPS coordinate originated from. 
+	 * @return The number of satellites where this GPS coordinate originated from.
+	 */
 	public int getSatelites() {
 		return satelliteCount;
 	}
 
 	/**
-	 * return speed
-	 * @return
+	 * Returns the approximated speed.
+	 * @return The approximated speed.
 	 */
 	public double getSpeed() {
 		return speed;

@@ -1,6 +1,5 @@
 package de.fhb.sailboat.data;
 
-import java.io.Serializable;
 
 /**
  * Data object representing an actuator, containing one value for the current

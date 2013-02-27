@@ -4,8 +4,9 @@ package de.fhb.sailboat.data;
  * Data object representing a point on the map, containing a GPS coordinate,
  * a radius indicating the dimension and the type of the point. 
  * 
- * @author hscheel
+ * @author Helge Scheel, Michael Kant
  *
+ * @see {@link GPS}, {@link MapPoint}
  */
 public class MapPoint {
 
@@ -51,14 +52,29 @@ public class MapPoint {
 		return true;
 	}
 
+	/**
+	 * Returns the GPS position of this map point.
+	 * 
+	 * @return The GPS position of this map point.
+	 */
 	public GPS getPosition() {
 		return position;
 	}
 
+	/**
+	 * Returns the radius, associated to the GPS position.
+	 * 
+	 * @return The radius, associated to the GPS position.
+	 */
 	public double getRadius() {
 		return radius;
 	}
 
+	/**
+	 * Returns the type of the map point.
+	 * 
+	 * @return The type of the map point.
+	 */
 	public MapPointType getType() {
 		return type;
 	}

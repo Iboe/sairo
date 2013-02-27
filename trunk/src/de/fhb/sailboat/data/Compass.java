@@ -9,7 +9,7 @@ import javax.vecmath.Vector3d;
  * inclination of the boat in different directions, the temperature, the magnetic 
  * values and the acceleration. 
  * 
- * @author hscheel
+ * @author Helge Scheel, Michael Kant
  *
  */
 public class Compass implements Serializable{

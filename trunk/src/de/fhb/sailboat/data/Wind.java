@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Data object representing the wind conditions on a certain moment, 
  * containing information about speed and direction of the wind.
  * 
- * @author hscheel
+ * @author Helge Scheel, Michael Kant
  *
  */
 public class Wind implements Serializable{
@@ -25,10 +25,20 @@ public class Wind implements Serializable{
 		this.speed = speed;
 	}
 
+	/**
+	 * Returns the direction of the wind.
+	 * 
+	 * @return The direction of the wind.
+	 */
 	public int getDirection() {
 		return direction;
 	}
 	
+	/**
+	 * Returns the speed of the wind.
+	 * 
+	 * @return The speed of the wind.
+	 */
 	public double getSpeed() {
 		return speed;
 	}

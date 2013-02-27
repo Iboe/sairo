@@ -5,7 +5,7 @@ import java.util.List;
 import de.fhb.sailboat.data.MapPoint;
 
 /**
- * Sub-model which represents an internal topological map, consisting of a list of map points.<br> 
+ * Sub-model which represents an internal topological map, consisting of a list of map points, which can represent miscellaneous world objects.<br> 
  * Each map point is represented by {@link MapPoint} object.
  * 
  * @see {@link MapPoint}
