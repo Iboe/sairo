@@ -1,5 +1,6 @@
 /**
- * Contains an interface along with an implementation for wrapping the XBee API. 
+ * Contains an interface along with an implementation for establishing a radio modem connection,<br> 
+ * using the wifi XBee application programming interface. 
  * 
  * 
  * @author Unknown
