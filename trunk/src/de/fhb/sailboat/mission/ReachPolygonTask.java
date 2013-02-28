@@ -88,6 +88,6 @@ public class ReachPolygonTask implements Task {
 	
 	@Override
 	public String toString() {
-		return "ReachPolygonTask [points=" + points + "]";
+		return "ReachPolygonTask (vertex-amount: "+points.size()+") [points=" + points + "]";
 	} 
 }
