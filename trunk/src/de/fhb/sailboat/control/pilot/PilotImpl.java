@@ -3,7 +3,9 @@ package de.fhb.sailboat.control.pilot;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 
 /**
- * Implementation for the Pilot interface.
+ * Implementation of {@link Pilot} which supports to hold a certain boat direction according to a given compass value<br> 
+ * or according to a given relative wind direction.<br>
+ * Control commands are directly forwarded to the underlying {@link LocomotionSystem}. 
  * 
  * @author Michael Kant
  *

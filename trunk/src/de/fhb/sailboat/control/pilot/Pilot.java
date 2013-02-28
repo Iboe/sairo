@@ -1,7 +1,13 @@
 package de.fhb.sailboat.control.pilot;
 
+import de.fhb.sailboat.control.navigator.Navigator;
+import de.fhb.sailboat.data.Actuator;
+
 
 /**
+ * Interface for executing simple directional orders of the {@link Navigator} and for 
+ * forwarding direct control commands for the {@link Actuator}s.<br>
+ * Implementations are responsible for following those orders, until new orders arrive.
  * 
  * @author Michael Kant
  */
