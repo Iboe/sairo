@@ -17,8 +17,8 @@ import de.fhb.sailboat.mission.Task;
 /**
  * Implements the concrete de-/serialization protocol for {@link Task}s of the type {@link HoldAngleToWindTask}.
  * @see de.fhb.sailboat.mission.HoldAngleToWindTask
+ * 
  * @author Michael Kant
- *
  */
 public class SerializedHoldAngleToWindTask extends SerializedTaskBase<HoldAngleToWindTask> {
 
