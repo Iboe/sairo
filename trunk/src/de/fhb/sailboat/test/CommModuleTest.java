@@ -2,6 +2,7 @@ package de.fhb.sailboat.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import de.fhb.sailboat.communication.CommunicationBase;
@@ -21,6 +22,7 @@ import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
+import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.start.PropertiesInitializer;
 
@@ -107,6 +109,7 @@ public class CommModuleTest {
 		taskList.add(new HoldAngleToWindTask(27));
 		taskList.add(new ReachCircleTask(new GPS(12.345,54.321), 2710));
 		taskList.add(new ReachCircleTask(new GPS(10.1101,13.337), 7353));
+		taskList.add(new ReachPolygonTask(getTestPolygon()));
 		m.setTasks(taskList);
 		
 		for(Task t : taskList)
@@ -114,6 +117,17 @@ public class CommModuleTest {
 		
 		plannerProxy.doMission(m);
 		
+	}
+	
+	private List<GPS> getTestPolygon(){
+		
+		List<GPS> polygon=new LinkedList<GPS>();
+		
+		polygon.add(new GPS(12.345,23.456));
+		polygon.add(new GPS(34.567,45.678));
+		polygon.add(new GPS(9.8765,8.7654));
+		polygon.add(new GPS(6.5432,5.4321));
+		return polygon;
 	}
 	
 	public void testSerialTasks(){
