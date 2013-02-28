@@ -303,7 +303,7 @@ public class DriveAngleThread extends Thread {
 	}
 
 	/**
-	 * desiredHeeling in addiction to windSpeed and -direction
+	 * desiredHeeling in addiction to windSpeed and -direction.
 	 * 
 	 * @return double desired heeling in percent/degree ?
 	 * @author schmidst

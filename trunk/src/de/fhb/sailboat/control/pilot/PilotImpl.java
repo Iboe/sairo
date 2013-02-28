@@ -38,7 +38,7 @@ public class PilotImpl implements Pilot {
 		driveAngle(angle, DriveAngleMode.WIND);
 	}
 
-        /**
+    /**
 	 * Executes the current command by passing the desired angle to a {@link DriveAngleThread}. Starts 
 	 * a new thread if necessary.
 	 * 
@@ -70,9 +70,7 @@ public class PilotImpl implements Pilot {
 		locSystem.setSail(value);
 	}
 	
-	/**
-	 * Stops the workerThread by interrupting it.
-	 */
+	@Override
 	public void stopThread() {
 		if (driveAngleThread != null) {
 			driveAngleThread.interrupt();

@@ -6,14 +6,18 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * Class for loading the properties. This is separated from the {@link Initializier} to be
- * accessible from tests. 
+ * Class for loading the properties. Loads the properties from a configuration file and puts them
+ * into the {@link System} properties, so every class can access them easily.
+ * This is separated from the {@link Initializier} to be accessible from tests. 
  *  
  * @author hscheel
  *
  */
 public class PropertiesInitializer {
 
+	/**
+	 * The name of the configuration file.
+	 */
 	private static final String CONFIG_FILE = "config.properties";
 	
 	/**

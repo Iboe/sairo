@@ -64,7 +64,7 @@ public class PrimitiveCommandTask implements Task {
     /**
 	 * Setter for the flag, which indicates if this {@link Task} was executed.
 	 * 
-	 * @param <code>true</code> if this {@link Task} was executed, <code>false</code> otherwise
+	 * @param executed <code>true</code> if this {@link Task} was executed, <code>false</code> otherwise
 	 */
 	public void setExecuted(boolean executed) {
 		this.executed = executed;
@@ -73,7 +73,7 @@ public class PrimitiveCommandTask implements Task {
 	/**
 	 * Describes if the values were already set.
 	 * 
-	 * @return execution state of this task
+	 * @return <code>true</code> if this {@link Task} was executed, <code>false</code> otherwise
 	 */
 	public boolean isExecuted() {
 		return executed;

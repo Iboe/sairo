@@ -96,5 +96,8 @@ public interface Pilot {
 	 */
 	void setPropellor(int value);
 	
+	/**
+	 * Stops the workerThread by interrupting it.
+	 */
 	void stopThread();
 }

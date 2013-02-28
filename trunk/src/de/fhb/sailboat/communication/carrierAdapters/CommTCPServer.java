@@ -3,16 +3,17 @@
  */
 package de.fhb.sailboat.communication.carrierAdapters;
 
-import java.io.IOException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.net.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
-import de.fhb.sailboat.communication.TransmissionModule;
 
 /**
  * Provides a TCP server endpoint as {@link CommunicationBase}.<br>
@@ -22,8 +23,14 @@ import de.fhb.sailboat.communication.TransmissionModule;
  * @author Michael Kant
  *
  */
-public class CommTCPServer extends CommunicationBase{
+public class CommTCPServer extends CommunicationBase {
 
+	/**
+	 * The port for listen to.
+	 */
+	public static final int LISTEN_PORT = Integer.parseInt(System.getProperty(
+			CommTCPServer.class.getSimpleName() + ".listenPort"));
+			
 	private static final Logger LOG = LoggerFactory.getLogger(CommTCPServer.class);
 	
 	/**

@@ -21,16 +21,33 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public abstract class WorkerThread<T extends Task> extends Thread {
 
+	/**
+	 * @see {@link Navigator}.WAIT_TIME_PROPERTY
+	 */
 	public static final int WAIT_TIME = Integer.parseInt(System.getProperty(
 			Navigator.WAIT_TIME_PROPERTY));
 	
+	/**
+	 * @see {@link Navigator}.MAX_LINE_DIST_PROPERTY
+	 */
 	public static final double MAX_LINE_DIST = Double.parseDouble(System.getProperty(
 			Navigator.MAX_LINE_DIST_PROPERTY));
+	
+	/**
+	 * @see {@link Navigator}.MAX_LINE_ANGLE_PROPERTY
+	 */
 	public static final double MAX_LINE_ANGLE = Double.parseDouble(System.getProperty(
 			Navigator.MAX_LINE_ANGLE_PROPERTY));
 	
+	/**
+	 * @see {@link Navigator}.MAX_BEAT_ANGLE_PROPERTY
+	 */
 	public static final int MAX_BEAT_ANGLE = Integer.parseInt(System.getProperty(
 			Navigator.MAX_BEAT_ANGLE_PROPERTY));
+	
+	/**
+	 * @see {@link Navigator}.MIN_BEAT_ANGLE_PROPERTY
+	 */
 	public static final int MIN_BEAT_ANGLE = Integer.parseInt(System.getProperty(
 			Navigator.MIN_BEAT_ANGLE_PROPERTY));
 	
