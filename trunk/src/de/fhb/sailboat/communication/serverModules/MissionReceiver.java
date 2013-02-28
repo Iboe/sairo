@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
+import de.fhb.sailboat.communication.MissionNegotiationBase.eTransmissionMode;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.mission.Mission;
@@ -294,8 +295,17 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 	public void connectionReset() {
 		
 		pendingTask=null;
-		mode=eTransmissionMode.TM_Task_Wait;
-
+		
+		if(mode == eTransmissionMode.TM_Task_Wait || mode == eTransmissionMode.TM_Task_ACK){
+			
+			mode=eTransmissionMode.TM_Task_Wait;
+			LOG.warn("The connection was reset. The mission recipience suspended.");
+		}
+		else if(mode != eTransmissionMode.TM_Idle){
+			
+			mode=eTransmissionMode.TM_Idle;
+			LOG.warn("The connection was reset. The mission recipience aborted.");
+		}
 	}
 
 	/**

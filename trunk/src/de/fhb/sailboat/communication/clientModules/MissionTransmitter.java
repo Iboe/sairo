@@ -306,8 +306,18 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	@Override
 	public void connectionReset() {
 		
-		mode=eTransmissionMode.TM_Task_New;
-		LOG.warn("The connection was reset. The mission transmission suspended.");
+		if(mode == eTransmissionMode.TM_Task_New || mode == eTransmissionMode.TM_Task_ACK){
+		
+			mode=eTransmissionMode.TM_Task_New;
+			LOG.warn("The connection was reset. The mission transmission suspended.");
+		}
+		else if(mode != eTransmissionMode.TM_Idle){
+			
+			mode=eTransmissionMode.TM_Idle;
+			LOG.warn("The connection was reset. The mission transmission aborted.");
+		}
+		
+		
 		
 	}
 
