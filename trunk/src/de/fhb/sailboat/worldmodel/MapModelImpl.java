@@ -16,6 +16,9 @@ public class MapModelImpl implements MapModel {
 
 	private List<MapPoint> mapPoints;
 	
+	/**
+	 * Default constructor, which creates an empty list to be filled with {@link MapPoint}s.
+	 */
 	public MapModelImpl() {
 		mapPoints = new LinkedList<MapPoint>();
 	}

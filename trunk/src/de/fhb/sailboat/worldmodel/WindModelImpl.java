@@ -16,6 +16,9 @@ public class WindModelImpl implements WindModel {
 	private Wind wind;
 	private History<Wind> history;
 	
+	/**
+	 * Default constructor, which sets an initial default {@link Wind} value into the {@link WindModel}.
+	 */
 	public WindModelImpl() {
 		this.history = new History<Wind>(System.getProperty(
 				WindModel.HISTORY_SIZE_PROPERTY));

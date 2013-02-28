@@ -16,6 +16,9 @@ public class GPSModelImpl implements GPSModel {
 	private GPS position;
 	private History<GPS> history;
 	
+	/**
+	 * Default constructor, which sets an initial default {@link GPS} value into the {@link GPSModel}.
+	 */
 	public GPSModelImpl() {
 		this.history = new History<GPS>(System.getProperty(
 				GPSModel.HISTORY_SIZE_PROPERTY));

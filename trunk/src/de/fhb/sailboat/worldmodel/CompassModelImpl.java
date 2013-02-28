@@ -16,6 +16,9 @@ public class CompassModelImpl implements CompassModel {
 	private Compass compass;
 	private History<Compass> history;
 	
+	/**
+	 * Default constructor, which sets the initial default {@link Compass} value into the {@link CompassModel}.
+	 */
 	public CompassModelImpl() {
 		this.history = new History<Compass>(System.getProperty(
 				CompassModel.HISTORY_SIZE_PROPERTY));
