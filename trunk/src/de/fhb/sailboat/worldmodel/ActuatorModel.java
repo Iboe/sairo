@@ -36,13 +36,13 @@ public interface ActuatorModel {
 	
 	/**
 	 * Sets the {@link Actuator} object which contains the current rudder value.
-	 * @param sail the {@link Actuator} object which contains the current rudder value.
+	 * @param rudder the {@link Actuator} object which contains the current rudder value.
 	 */
 	void setRudder(Actuator rudder);
 	
 	/**
 	 * Sets the {@link Actuator} object which contains the current propeller value.
-	 * @param sail the {@link Actuator} object which contains the current propeller value.
+	 * @param propeller the {@link Actuator} object which contains the current propeller value.
 	 */
 	void setPropeller(Actuator propeller);
 }

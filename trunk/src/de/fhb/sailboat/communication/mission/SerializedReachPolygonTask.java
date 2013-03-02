@@ -27,24 +27,25 @@ public class SerializedReachPolygonTask extends SerializedTaskBase<ReachPolygonT
 
 	private static final Logger LOG = LoggerFactory.getLogger(SerializedReachPolygonTask.class);
 
+	
 	/**
 	 * Initialization constructor.
 	 * 
-	 * @param task The {@link ReachPolygonTask} to serialize.
+	 * @param serializedData The {@link ReachPolygonTask} data to deserialize.
 	 */
 	public SerializedReachPolygonTask(byte[] serializedData) {
+	
 		super(serializedData);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * Initialization constructor.
 	 * 
-	 * @param data The {@link ReachPolygonTask} data to deserialize.
+	 * @param task The {@link ReachPolygonTask} to serialize.
 	 */
 	public SerializedReachPolygonTask(ReachPolygonTask task) {
+		
 		super(task);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

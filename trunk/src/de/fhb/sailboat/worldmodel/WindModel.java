@@ -18,7 +18,7 @@ public interface WindModel {
 	
 	/**
 	 * Sets the {@link Wind} object which contains the current wind values.
-	 * @param compass The {@link Wind} object which contains the current wind values.
+	 * @param wind The {@link Wind} object which contains the current wind values.
 	 */
 	void setWind(Wind wind);
 	

@@ -18,7 +18,7 @@ public interface GPSModel {
 	
 	/**
 	 * Sets the {@link GPS} object which contains the coordinates of the current position.
-	 * @param compass The {@link GPS} object which contains the coordinates of the current position.
+	 * @param position The {@link GPS} object which contains the coordinates of the current position.
 	 */
 	void setPosition(GPS position);
 	
