@@ -23,14 +23,15 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
 /**
  * Dedicated testing class for the communication component in the de.fhb.sailboat.communication package.
+ * 
  * @author Michael Kant
- *
  */
 @Deprecated
 public class RCommTest {
 
 	/**
-	 * @param args
+	 * Entry point of the test application.
+	 * @param args No parameters expected.
 	 */
 	public static void main(String[] args) throws InterruptedException{
 		

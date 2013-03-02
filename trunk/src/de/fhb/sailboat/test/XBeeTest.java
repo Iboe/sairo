@@ -11,12 +11,22 @@ import de.fhb.sailboat.start.PropertiesInitializer;
 import de.fhb.sailboat.wificonnection.IwifiXbee;
 import de.fhb.sailboat.wificonnection.WifiXbee;
 
+/**
+ * Testing the wifi XBee API wrapper classes {@link XBeeInputForwarder} for receiving data<br>
+ * and {@link XBeeOutputForwarder} for sending data over an XBee radio modem connection.<br><br>
+ * 
+ * This class also contains the test method {@link #xBeeAPITest()} for testing the deprecated classes of the package de.fhb.sailboat.wificonnection.
+ * 
+ * @author Michael Kant
+ */
 public class XBeeTest {
 
 	private static final String CONFIG_FILE = "config.properties";
 
 	/**
-	 * @param args
+	 * Entry point of the test application.
+	 * 
+	 * @param args No parameters expected.
 	 * @throws InterruptedException
 	 * @throws XBeeException
 	 * @throws IOException 
@@ -26,6 +36,9 @@ public class XBeeTest {
 		XBeeOutputForwarderTest();
 	}
 	
+	/**
+	 * Tests the {@link XBeeOutputForwarder} by sending the string 'Hallo Welt!!'.
+	 */
 	public static void XBeeOutputForwarderTest(){
 		
 		XBee xb=new XBee();
@@ -55,7 +68,9 @@ public class XBeeTest {
 		}
 	}
 	
-
+	/**
+	 * Tests the {@link XBeeInputForwarder} by trying to receive an input.
+	 */
 	public static void XBeeInputForwarderTest(){
 		
 		XBee xb=new XBee();

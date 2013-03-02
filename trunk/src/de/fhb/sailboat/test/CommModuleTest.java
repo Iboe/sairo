@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.fhb.sailboat.communication.CommunicationBase;
+import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
 import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
@@ -27,7 +28,9 @@ import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.start.PropertiesInitializer;
 
 /**
- * Dedicated (non-junit) test class for the components of the communication system.
+ * Dedicated (non-junit) test class for the components of the communication system.<br>
+ * Starting this class with the start parameter --server creates a {@link CommTCPServer} on port 6699 along with the {@link TransmissionModule}s {@link GPSReceiver} and {@link MissionTransmitter}.<br>
+ * Starting this class with the start parameter --client creates a {@link CommTCPClient} with the destination 127.0.0.1:6699 along with the {@link TransmissionModule}s {@link GPSTransmitter} and {@link MissionReceiver}.<br> 
  * 
  * @author Michael Kant
  *
@@ -36,7 +39,9 @@ public class CommModuleTest {
 
 	private CommunicationBase base;
 	/**
-	 * @param args
+	 * Starting the test application.
+	 * 
+	 * @param args Possible parameters are described in the class description.
 	 */
 	public static void main(String[] args) {
 		
@@ -69,6 +74,9 @@ public class CommModuleTest {
 		}
 	}
 	
+	/**
+	 * Starts a {@link CommTCPServer} on port 6699 with the {@link CommTCPServer} on port 6699 along with the {@link TransmissionModule}s {@link GPSReceiver} and {@link MissionTransmitter}.<br>
+	 */
 	public void startServer(){
 		
 		base=new CommTCPServer(6699);
@@ -81,6 +89,13 @@ public class CommModuleTest {
 			System.out.println("Server started.");
 	}
 	
+	/**
+	 * Starts a {@link CommTCPClient} to the destination 127.0.0.1 on port 6699 with the {@link CommTCPClient} with the destination 127.0.0.1:6699 along with the {@link TransmissionModule}s {@link GPSTransmitter} and {@link MissionReceiver}.<br>
+	 * The test contains a mission transmission with a mission consisting of:<br>
+	 * - 3 {@link ReachCircleTask}s
+	 * - 1 {@link HoldAngleToWindTask}
+	 * - 1 {@link ReachPolygonTask}
+	 */
 	public void startClient(){
 		
 		MissionTransmitter plannerProxy;
@@ -130,6 +145,13 @@ public class CommModuleTest {
 		return polygon;
 	}
 	
+	/**
+	 * Tests the {@link SerializedReachCircleTask} by the following steps:<br>
+	 * 1. Serializes a {@link ReachCircleTask}, using a {@link SerializedReachCircleTask} and stores the serialized data.<br>
+	 * 2. Deserializes the {@link ReachCircleTask} again, using the serialized data.<br>
+	 * 3. Modifies the serialized data by changing a single byte to make it invalid.<br>
+	 * 4. Tries to deserialize the modified data in expectation of a fault within the deserialization process. 
+	 */
 	public void testSerialTasks(){
 		
 		ReachCircleTask t=new ReachCircleTask(new GPS(52.12453,24.84726),1337);
@@ -170,6 +192,9 @@ public class CommModuleTest {
 		System.out.println("-Task: "+st3.getTask());
 	}
 	
+	/**
+	 * Testing ability of the {@link TaskSerializer} to serialize and deserialize given {@link Task}s, using the configured mapping between {@link Task}s and {@link SerializedTask}s.<br>
+	 */
 	public void testTaskSerializer(){
 		
 		TaskSerializer ts;
@@ -207,9 +232,18 @@ public class CommModuleTest {
 		}
 	}
 
-	
+	/**
+	 * Dummy {@link Planner}, to simply print the content of the given mission into the console.
+	 *  
+	 * @author Michael Kant
+	 *
+	 */
 	public static class PlannerDummy implements Planner {
 
+		/**
+		 * Doesn't execute the given {@link Mission} but prints its content out on the console.
+		 * @param mission The mission to print out.
+		 */
 		@Override
 		public void doMission(Mission mission) {
 			
@@ -218,18 +252,24 @@ public class CommModuleTest {
 				System.out.println("Task: " + t);
 		}
 
+		/**
+		 * Does nothing.
+		 */
 		@Override
 		public void stop() {
 			// TODO Auto-generated method stub
 			
 		}
 
+		/**
+		 * Does nothing.
+		 * @param task The {@link Task} to do nothing with.
+		 */
 		@Override
 		public void doPrimitiveCommand(PrimitiveCommandTask task) {
 			// TODO Auto-generated method stub
 			
 		}
-		
 	}
 	
 }

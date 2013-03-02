@@ -2,9 +2,14 @@ package de.fhb.sailboat.test;
 
 import org.apache.log4j.Logger;
 
-import de.fhb.sailboat.serial.sensor.GpsSensor;
 import de.fhb.sailboat.serial.sensor.WindSensor;
 
+/**
+ * Testing the {@link WindSensor} class.
+ * 
+ * @author Unknown
+ *
+ */
 public class WindTest {
 	private static Logger LOG = Logger.getLogger(WindTest.class);
 

@@ -22,7 +22,8 @@ import de.fhb.sailboat.start.PropertiesInitializer;
 public class UferGUITest {
 
 	/**
-	 * @param args
+	 * Entry point of the application.
+	 * @param args No parameters expected.
 	 */
 	public static void main(String[] args) {
 		

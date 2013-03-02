@@ -17,74 +17,63 @@ public class DummyLoco implements LocomotionSystem {
 	
 	@Override
 	public void setSail(int value) {
-		// TODO Auto-generated method stub
 
+		LOG.debug("LOCO: attempt to set sail to: "+value);
 	}
 
 	@Override
 	public void setRudder(int value) { 
 		
-		LOG.trace("LOCO: attempt to set: "+value);
-
+		LOG.debug("LOCO: attempt to set rudder to: "+value);
 	}
 
 	@Override
 	public void setPropellor(int value) {
-		// TODO Auto-generated method stub
 
+		LOG.debug("LOCO: attempt to set propellor to: "+value);
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void resetRudder() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resetSail() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resetPropellor() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public int getBatteryState() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setDebug(boolean debug) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public long getWait_Sleep() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setWait_Sleep(int wait_sleep) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getStatus() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

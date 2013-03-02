@@ -1,20 +1,28 @@
 package de.fhb.sailboat.test;
 
 import org.slf4j.Logger;
+
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
+import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.start.PropertiesInitializer;
-public class aksentest {
 
-	/**
-	 * @param args
-	 */
+/**
+ * Simple test of the {@link LocomotionSystem} using the concrete implementation {@link AKSENLocomotion} by setting the sail to a desired value.<br>
+ * 
+ * @author Michael Kant
+ */
+public class aksentest {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(aksentest.class);
 	private static long start;
 	private static long end;
 	
+	/**
+	 * Entry point of the test application.
+	 * @param args No parameters expected.
+	 */
 	public static void main(String[] args) {
 		
 		PropertiesInitializer propsInit = new PropertiesInitializer();
@@ -64,6 +72,7 @@ public class aksentest {
 	}
 	
 	public static int myRandom(int low, int high) {  
+		
         return (int) (Math.random() * (high - low) + low);  
     }  
 

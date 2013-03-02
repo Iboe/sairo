@@ -9,8 +9,20 @@ import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.start.PropertiesInitializer;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+/**
+ * Testing the correct sail adjustment of the {@link Pilot} layer, <br>
+ * by setting specific compass, wind and gps values into the world model,<br>
+ * and executing the {@link Pilot#driveAngle(int)} method with an angle of 45°.
+ * 
+ * @author Michael Kant
+ *
+ */
 public class PilotSailTest {
 
+	/**
+	 * Entry point of the test application.
+	 * @param args No parameters expected.
+	 */
 	public static void main(String[] args) {
 		PropertiesInitializer propsInit = new PropertiesInitializer();
 		propsInit.initializeProperties();		

@@ -6,11 +6,24 @@ import java.io.IOException;
 
 import de.fhb.sailboat.control.pilot.Calculations;
 
+/**
+ * Testing the functions {@link Calculations#getTrue_diff()} for calculating the true wind angle <br>
+ * and {@link Calculations#getTrue_speed()} for calculating the true wind speed.<br>
+ * The test is performed by a set of input value combinations of relative wind angle, wind speed and boat speed.<br>
+ * The results along with its inout values are written into a file as table.
+ * 
+ * @author S. Schmidt
+ *
+ */
 public class SailTest {
 
 	File file;
 	FileWriter writer;
 
+	/**
+	 * Entry point of the test application.
+	 * @param args No parameters expected.
+	 */
 	public static void main(String[] args) {
 
 		File file = new File("FileWriterTest.txt");
@@ -40,6 +53,4 @@ public class SailTest {
 			e.printStackTrace();
 		}		
 	}
-	
-
 }

@@ -6,8 +6,21 @@ import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
+/**
+ * Testing the {@link Pilot} layer with the implementation {@link PilotImpl}.<br>
+ * The test includes the execution of the method {@link Pilot#driveAngle(int)} with the following desired compass angles: <br>
+ * 30°, 45°, 65°, 200°, -160°, -30°<br>
+ * The result is either printed on the console (using {@link DummyLoco}) or sent to the actuator (using {@link AKSENLocomotion}) and must be visually evaluated by the tester.
+ * 
+ * @author Michael Kant
+ *
+ */
 public class PilotTest {
 
+	/**
+	 * Entry point of the test application.
+	 * @param args No parameters expected.
+	 */
 	public static void main(String[] args) {
 		
 		//Pilot p=new PilotImpl(new DummyLoco());
