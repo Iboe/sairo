@@ -42,7 +42,12 @@ public class COMPort{
 		}
 		
 		CommPortIdentifier identObject = getIdentifier(port);
+		if(identObject!=null){
 		this._identObject = identObject;
+		}
+		else{
+			throw new NullPointerException(this.getClass().getSimpleName() + " identObject is null");
+		}
 	}
 	
 	private CommPortIdentifier getIdentifier(int port){
@@ -52,10 +57,9 @@ public class COMPort{
 		// Create a port identifier Object
 		try {
 			identObject = CommPortIdentifier.getPortIdentifier("COM" + port);
-			//System.out.println("COM" + port + " wurde initialisiert.");
+			LOG.info("COM" + port + " wurde initialisiert.");
 			LOG.info("Port " + port + " initialized.");
 		} catch (NoSuchPortException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -88,8 +92,7 @@ public class COMPort{
 					);
 					
 				} catch (UnsupportedCommOperationException ex) {
-					// TODO Auto-generated catch block
-					System.out.println("Da ist etwas schief gelaufen. Fehlercode: 758436");
+					LOG.info("Da ist etwas schief gelaufen. Fehlercode: 758436");
 					System.err.println(ex.getMessage());
 				}
 				
