@@ -13,7 +13,7 @@ import org.hyperic.sigar.SigarException;
 
 public class Memory {
 
-	private static final Logger LOG = Logger.getLogger(CPU.class);
+	private static final Logger LOG = Logger.getLogger(Memory.class);
 	
 	private boolean monitoring;
 	
