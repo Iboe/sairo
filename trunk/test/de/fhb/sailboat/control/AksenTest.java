@@ -16,7 +16,7 @@ public class AksenTest {
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotionImpl.class);
 	private static final String COM_PORT = System.getProperty(AKSENLocomotionImpl.class.getSimpleName() + ".comPort");
 	private static final String BAUDRATE = System.getProperty(AKSENLocomotionImpl.class.getSimpleName() + ".baudrate");
-	
+
 	private final String TAG = this.getClass().getSimpleName() + ".";
 	
 	public static void main (String[] args){
@@ -55,6 +55,7 @@ public class AksenTest {
 			LOG.info(TAG + methodName + "Lese von AKSEN Board ...");
 			receive = (byte) this.comPort.readByte();
 			LOG.info(TAG + methodName + "Gelesenes Zeichen von AKSEN: " + receive);
+			ak
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
