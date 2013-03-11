@@ -46,7 +46,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	private ArrayList<String> aksenStateList = new ArrayList<String>();
 	
 	// DEBUG-Mode with 3-Way-Command-Handshake w/ AKSEN
-	boolean debug = false; 
+	boolean debug = true; 
 	
 	int status;
 	
@@ -61,6 +61,18 @@ public class AKSENLocomotion implements LocomotionSystem {
 		this.myCOM = myCOM;
 		myCOM.open();
 
+	}
+	
+	public AKSENLocomotion(boolean debug){
+		if(!debug){
+		worldModel = WorldModelImpl.getInstance();
+		}
+		else{
+			worldModel=null;
+		}
+		COMPort myCOM = new COMPort(2,9600, 0);
+		this.myCOM = myCOM;
+		myCOM.open();
 	}
 
 	/** 
