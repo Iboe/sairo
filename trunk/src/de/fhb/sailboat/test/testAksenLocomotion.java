@@ -26,10 +26,10 @@ public class testAksenLocomotion {
 	private final Logger log = Logger.getLogger("org.apache");
 	private final Level logLevel = Level.DEBUG;
 	
-	private final int testCrazyRudderCount = 100;
-	private final int testCrazySailCount = 100;
-	private final int testCrazyPropellorCount = 100;
-	private final int testCrazyAksenboardCount = 100;
+	private final int testCrazyRudderCount = 10;
+	private final int testCrazySailCount = 10;
+	private final int testCrazyPropellorCount = 10;
+	private final int testCrazyAksenboardCount = 40;
 
 	int SAIL_SHEET_IN = 31;
 	int SAIL_SHEET_OUT = 114;
@@ -46,12 +46,19 @@ public class testAksenLocomotion {
 	public testAksenLocomotion() {
 		init();
 		testSetPropellor();
+		aksen.resetPropellor();
 		testSetRudder();
-		testSetSail();
+		aksen.resetRudder();
+//		testSetSail();
 		testSetPropellorCrazy();
+		aksen.resetPropellor();
 		testSetRudderCrazy();
-		testSetSailCrazy();
+		aksen.resetRudder();
+//		testSetSailCrazy();
 		testCrazyAksenBoard();
+		aksen.resetPropellor();
+		aksen.resetRudder();
+		aksen.closePort();
 	}
 
 	public void init(){
@@ -84,8 +91,14 @@ public class testAksenLocomotion {
 		log.info(TAG + "started crazy test for aksenboard");
 		Random rndGen = new Random();
 		for (int i = 0; i <= testCrazyAksenboardCount; i++) {
-			int rndCmd = rndGen.nextInt(2);
-			int rnd = rndGen.nextInt(2);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int rndCmd = rndGen.nextInt(3)-1;
+			int rnd = rndGen.nextInt(3)-1;
 			log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + ";" + rnd + "]");
 			// rndCmd = 0 - setRudder ; 1 - setSail ; 2 - setPropellor
 			switch (rndCmd) {
@@ -94,7 +107,7 @@ public class testAksenLocomotion {
 				break;
 			}
 			case 1: {
-				setRndSail(rnd);
+//				setRndSail(rnd);
 				break;
 			}
 			case 2: {
@@ -114,10 +127,30 @@ public class testAksenLocomotion {
 		log.info(TAG + "started test for setting rudder");
 		log.info(TAG + "setting: RUDDER LEFT");
 		aksen.setRudder(RUDDER_LEFT);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		log.info(TAG + "setting: RUDDER NORMAL");
 		aksen.setRudder(RUDDER_NORMAL);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		log.info(TAG + "setting: RUDDER RIGHT");
 		aksen.setRudder(RUDDER_RIGHT);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.info("Reset RDDER");
+		aksen.resetRudder();
 	}
 
 	public void setRndRudder(int rnd) {
@@ -153,7 +186,13 @@ public class testAksenLocomotion {
 		Random rndGen = new Random();
 		int rnd = 0;
 		for (int i = 0; i <= testCrazyRudderCount; i++) {
-			rnd = rndGen.nextInt(2);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			rnd = rndGen.nextInt(3)-1;
 			log.info(TAG + " testrun: " + i + " with rnd case: " + rnd);
 			setRndRudder(rnd);
 		}
@@ -192,18 +231,43 @@ public class testAksenLocomotion {
 		Random rndGen = new Random();
 		int rnd = 0;
 		for (int i = 0; i <= testCrazySailCount; i++) {
-			rnd = rndGen.nextInt(2);
+			rnd = rndGen.nextInt(3)-1;
 			setRndSail(rnd);
 		}
 	}
 
 	public void testSetPropellor() {
 		aksen.setPropellor(PROPELLOR_MAX);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		aksen.setPropellor(PROPELLOR_NORMAL);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		aksen.setPropellor(PROPELLOR_MIN);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		aksen.setPropellor(PROPELLOR_NORMAL);
 	}
 
 	public void setRndPropellor(int rnd) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		switch (rnd) {
 		case 0: {
 			aksen.setPropellor(PROPELLOR_MIN);
@@ -231,7 +295,7 @@ public class testAksenLocomotion {
 		Random rndGen = new Random();
 		int rnd = 0;
 		for (int i = 0; i <= testCrazyPropellorCount; i++) {
-			rnd = rndGen.nextInt(2);
+			rnd = rndGen.nextInt(3)-1;
 			setRndPropellor(rnd);
 		}
 	}
