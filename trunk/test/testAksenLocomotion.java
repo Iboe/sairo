@@ -29,6 +29,16 @@ public class testAksenLocomotion {
 	private final int testCrazyPropellorCount = 100;
 	private final int testCrazyAksenboardCount = 100;
 
+	int SAIL_SHEET_IN = 31;
+	int SAIL_SHEET_OUT = 114;
+	int SAIL_SHEET_NORMAL = 73;
+	int RUDDER_LEFT = 34;
+	int RUDDER_NORMAL = 68;
+	int RUDDER_RIGHT = 108;
+	int PROPELLOR_MIN = 170;
+	int PROPELLOR_NORMAL = 125;
+	int PROPELLOR_MAX = 80;
+
 	private AKSENLocomotion aksen;
 
 	public testAksenLocomotion() {
