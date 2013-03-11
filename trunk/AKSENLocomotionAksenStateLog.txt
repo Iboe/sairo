@@ -1,0 +1,4055 @@
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 15 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 13 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 14 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 13 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 13 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 14 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 12 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 12 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 12 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 12 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 13 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 17 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setPropellor to 125: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 13 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 13 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 8 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 8 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 8 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 8 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setPropellor to 125: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 57 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: ?
+INFO - Run 1: Couldn't execute Commands on AKSEN -1 vs 101. Received: -1
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: e
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 14 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 1 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 17 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 1 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 1 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 1 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 21 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 1 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: n
+WARN - setPropellor to 125: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 8 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setPropellor to 125: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setPropellor to 125: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 9 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 14 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 92 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 108: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 21 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 17 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: ?
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 34: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: ?
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setPropellor to 125: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: e
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 58 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: ?
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: ?
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: ?
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: ?
+INFO - new aksenboard state: send: e
+INFO - new aksenboard state: received: 1
+INFO - new aksenboard state: send: a
+INFO - new aksenboard state: received: ?
+INFO - Run 1: Couldn't execute Commands on AKSEN -1 vs 101. Received: -1
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: e
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - setRudder to 68: correct
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 21 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 23 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 9 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 15 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 36 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 6 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,108
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 0
+INFO - new aksenboard state: send: 0 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 108: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 9 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 22 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 18 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 2 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,34
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 3
+INFO - new aksenboard state: send: 3 -- received: n
+INFO - new aksenboard state: send: 4
+INFO - new aksenboard state: send: 4 -- received: n
+WARN - setRudder to 34: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 7 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 2,125
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: 2
+INFO - new aksenboard state: send: 2 -- received: n
+INFO - new aksenboard state: send: 5
+INFO - new aksenboard state: send: 5 -- received: n
+WARN - setPropellor to 125: incorrect/not send
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 4 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 16 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 5 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: n
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: send: s
+INFO - new aksenboard state: received: a
+INFO - Needed time to execute aquire connection and got achknowledge: 3 ms
+INFO - new aksenboard state: will send servo command : 1,68
+INFO - new aksenboard state: send: 1
+INFO - new aksenboard state: send: 1 -- received: n
+INFO - new aksenboard state: send: ,
+INFO - new aksenboard state: send: , -- received: n
+INFO - new aksenboard state: send: 6
+INFO - new aksenboard state: send: 6 -- received: n
+INFO - new aksenboard state: send: 8
+INFO - new aksenboard state: send: 8 -- received: n
+WARN - setRudder to 68: incorrect/not send

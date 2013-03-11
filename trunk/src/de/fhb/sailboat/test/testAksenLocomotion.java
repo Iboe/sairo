@@ -26,7 +26,7 @@ public class testAksenLocomotion {
 	private final Logger log = Logger.getLogger("org.apache");
 	private final Level logLevel = Level.DEBUG;
 	
-	private final int testCrazyRudderCount = 10;
+	private final int testCrazyRudderCount = 20;
 	private final int testCrazySailCount = 10;
 	private final int testCrazyPropellorCount = 10;
 	private final int testCrazyAksenboardCount = 40;
@@ -190,7 +190,7 @@ public class testAksenLocomotion {
 		int rnd = 0;
 		for (int i = 0; i <= testCrazyRudderCount; i++) {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(0);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

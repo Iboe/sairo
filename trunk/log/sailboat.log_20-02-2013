@@ -1,0 +1,97 @@
+INFO  2013-02-20 16:21:34,604 [de.fhb.sailboat.communication.mission.TaskSerializer] Loading mapping list of Tasks and Serialized Tasks..
+DEBUG 2013-02-20 16:21:34,607 [de.fhb.sailboat.communication.mission.TaskSerializer] Size: 2
+INFO  2013-02-20 16:21:34,617 [de.fhb.sailboat.communication.mission.TaskSerializer] Loaded: ReachCircleTask <-> SerializedReachCircleTask
+INFO  2013-02-20 16:21:34,624 [de.fhb.sailboat.communication.mission.TaskSerializer] Loaded: HoldAngleToWindTask <-> SerializedHoldAngleToWindTask
+INFO  2013-02-20 16:21:34,625 [de.fhb.sailboat.communication.mission.TaskSerializer] 2 task mappings loaded.
+WARN  2013-02-20 16:21:34,634 [de.fhb.sailboat.communication.mission.TaskSerializer] deserializeTask() - Invalid task data received for desired task: ReachCircleTask
+INFO  2013-02-20 16:22:38,193 [de.fhb.sailboat.communication.CommunicationBase] Registering Transmission-Module: GPSTransmitter
+INFO  2013-02-20 16:22:38,211 [de.fhb.sailboat.communication.mission.TaskSerializer] Loading mapping list of Tasks and Serialized Tasks..
+DEBUG 2013-02-20 16:22:38,212 [de.fhb.sailboat.communication.mission.TaskSerializer] Size: 2
+INFO  2013-02-20 16:22:38,220 [de.fhb.sailboat.communication.mission.TaskSerializer] Loaded: ReachCircleTask <-> SerializedReachCircleTask
+INFO  2013-02-20 16:22:38,226 [de.fhb.sailboat.communication.mission.TaskSerializer] Loaded: HoldAngleToWindTask <-> SerializedHoldAngleToWindTask
+INFO  2013-02-20 16:22:38,226 [de.fhb.sailboat.communication.mission.TaskSerializer] 2 task mappings loaded.
+INFO  2013-02-20 16:22:38,231 [de.fhb.sailboat.communication.CommunicationBase] Registering Transmission-Module: MissionReceiver
+DEBUG 2013-02-20 16:22:38,239 [de.fhb.sailboat.communication.CommunicationBase] Initializing recv thread.
+DEBUG 2013-02-20 16:22:38,244 [de.fhb.sailboat.communication.CommunicationBase] No receiver is set.. waiting.
+DEBUG 2013-02-20 16:22:39,199 [de.fhb.sailboat.communication.ModuleWorker] No sender is set.. waiting.
+DEBUG 2013-02-20 16:23:26,871 [de.fhb.sailboat.communication.carrierAdapters.CommTCPServer] Accepted incoming client from: /172.16.17.65:2573
+DEBUG 2013-02-20 16:23:26,874 [de.fhb.sailboat.communication.ModuleWorker] Thread was notified, continuing the cycle.
+DEBUG 2013-02-20 16:23:26,875 [de.fhb.sailboat.communication.ModuleWorker] No sender is set.. waiting.
+DEBUG 2013-02-20 16:23:27,876 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (3 Bytes) from module: GPSTransmitter
+DEBUG 2013-02-20 16:24:04,639 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:04,840 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:04,840 [de.fhb.sailboat.communication.CommunicationBase] 1 
+DEBUG 2013-02-20 16:24:04,845 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Idle - received: OT_BeginMission
+INFO  2013-02-20 16:24:04,846 [de.fhb.sailboat.communication.serverModules.MissionReceiver] Mission receive started!
+DEBUG 2013-02-20 16:24:04,846 [de.fhb.sailboat.communication.ModuleWorker] Thread was notified, continuing the cycle.
+DEBUG 2013-02-20 16:24:06,651 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+WARN  2013-02-20 16:24:06,847 [de.fhb.sailboat.communication.serverModules.MissionReceiver] requestObject - Mode: TM_MissionBegin_ACK - sending: OT_BeginMission_ACK
+DEBUG 2013-02-20 16:24:06,848 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (1 Bytes) from module: MissionReceiver
+DEBUG 2013-02-20 16:24:06,880 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:06,880 [de.fhb.sailboat.communication.CommunicationBase] 1 
+DEBUG 2013-02-20 16:24:06,881 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_MissionBegin_ACK - received: OT_BeginMission
+WARN  2013-02-20 16:24:06,881 [de.fhb.sailboat.communication.serverModules.MissionReceiver] Mode: TM_MissionBegin_ACK - Invalid operation type (OT_BeginMission) for the current mode.
+DEBUG 2013-02-20 16:24:06,882 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:07,109 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:07,109 [de.fhb.sailboat.communication.CommunicationBase] 9 
+DEBUG 2013-02-20 16:24:07,110 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_MissionBegin_ACK - received: OT_BeginMission_ACK
+DEBUG 2013-02-20 16:24:07,885 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:08,099 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (12 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:08,100 [de.fhb.sailboat.communication.CommunicationBase] 4 a 0 40 f3 3f 6e fe 1d 79 14 87 
+DEBUG 2013-02-20 16:24:08,101 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_Wait - received: OT_NewTask
+WARN  2013-02-20 16:24:08,109 [de.fhb.sailboat.communication.serverModules.MissionReceiver] requestObject - Mode: TM_Task_ACK - sending: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:08,110 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (1 Bytes) from module: MissionReceiver
+DEBUG 2013-02-20 16:24:08,324 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:08,533 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:08,534 [de.fhb.sailboat.communication.CommunicationBase] c 
+DEBUG 2013-02-20 16:24:08,534 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_ACK - received: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:09,343 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:09,574 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (5 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:09,575 [de.fhb.sailboat.communication.CommunicationBase] 4 3 1 1b 1a 
+DEBUG 2013-02-20 16:24:09,575 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_Wait - received: OT_NewTask
+WARN  2013-02-20 16:24:09,576 [de.fhb.sailboat.communication.serverModules.MissionReceiver] requestObject - Mode: TM_Task_ACK - sending: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:09,577 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (1 Bytes) from module: MissionReceiver
+DEBUG 2013-02-20 16:24:09,808 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:10,005 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:10,006 [de.fhb.sailboat.communication.CommunicationBase] c 
+DEBUG 2013-02-20 16:24:10,007 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_ACK - received: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:10,819 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:11,020 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (12 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:11,022 [de.fhb.sailboat.communication.CommunicationBase] 4 a 0 7a 88 f 6a a7 42 56 2a e3 
+DEBUG 2013-02-20 16:24:11,023 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_Wait - received: OT_NewTask
+WARN  2013-02-20 16:24:11,024 [de.fhb.sailboat.communication.serverModules.MissionReceiver] requestObject - Mode: TM_Task_ACK - sending: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:11,025 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (1 Bytes) from module: MissionReceiver
+DEBUG 2013-02-20 16:24:11,244 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:11,477 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:11,477 [de.fhb.sailboat.communication.CommunicationBase] c 
+DEBUG 2013-02-20 16:24:11,478 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_ACK - received: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:12,255 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:12,465 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (12 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:12,466 [de.fhb.sailboat.communication.CommunicationBase] 4 a 0 6c ab c 7a a3 10 79 72 3a 
+DEBUG 2013-02-20 16:24:12,467 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_Wait - received: OT_NewTask
+WARN  2013-02-20 16:24:12,468 [de.fhb.sailboat.communication.serverModules.MissionReceiver] requestObject - Mode: TM_Task_ACK - sending: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:12,469 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (1 Bytes) from module: MissionReceiver
+DEBUG 2013-02-20 16:24:12,691 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:12,886 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:12,887 [de.fhb.sailboat.communication.CommunicationBase] c 
+DEBUG 2013-02-20 16:24:12,887 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_ACK - received: OT_NewTask_ACK
+DEBUG 2013-02-20 16:24:16,940 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:17,165 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:17,166 [de.fhb.sailboat.communication.CommunicationBase] 3 
+DEBUG 2013-02-20 16:24:17,166 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_Task_Wait - received: OT_EndMission
+WARN  2013-02-20 16:24:17,167 [de.fhb.sailboat.communication.serverModules.MissionReceiver] requestObject - Mode: TM_MissionEnd_ACK - sending: OT_EndMission_ACK
+DEBUG 2013-02-20 16:24:17,168 [de.fhb.sailboat.communication.ModuleWorker] Sending packet (1 Bytes) from module: MissionReceiver
+DEBUG 2013-02-20 16:24:17,412 [de.fhb.sailboat.communication.CommunicationBase] Incoming object data..
+DEBUG 2013-02-20 16:24:17,649 [de.fhb.sailboat.communication.CommunicationBase] Forwarding packet (1 Bytes) to module: MissionReceiver
+DEBUG 2013-02-20 16:24:17,650 [de.fhb.sailboat.communication.CommunicationBase] b 
+DEBUG 2013-02-20 16:24:17,650 [de.fhb.sailboat.communication.serverModules.MissionReceiver] receivedObject - Mode: TM_MissionEnd_ACK - received: OT_EndMission_ACK
+INFO  2013-02-20 16:24:17,654 [de.fhb.sailboat.communication.serverModules.MissionReceiver] Mission receive finished!
+WARN  2013-02-20 16:25:31,859 [de.fhb.sailboat.communication.CommunicationBase] Error reading socket: Connection reset
+WARN  2013-02-20 16:25:31,859 [de.fhb.sailboat.communication.CommunicationBase] IO error: Connection reset
+WARN  2013-02-20 16:25:31,862 [de.fhb.sailboat.communication.CommunicationBase] Error reading socket: Connection reset
+WARN  2013-02-20 16:25:31,863 [de.fhb.sailboat.communication.CommunicationBase] IO error: Connection reset
+WARN  2013-02-20 16:25:31,864 [de.fhb.sailboat.communication.CommunicationBase] Error reading socket: Connection reset
+WARN  2013-02-20 16:25:31,864 [de.fhb.sailboat.communication.CommunicationBase] IO error: Connection reset
+WARN  2013-02-20 16:25:31,864 [de.fhb.sailboat.communication.CommunicationBase] Error reading socket: Connection reset
+WARN  2013-02-20 16:25:31,865 [de.fhb.sailboat.communication.CommunicationBase] Too many receive attempts.. closing connection.
+DEBUG 2013-02-20 16:25:31,913 [de.fhb.sailboat.communication.ModuleWorker] No sender is set.. waiting.

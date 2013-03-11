@@ -64,7 +64,7 @@ public class testAksenLocomotion {
 			log.info(TAG + "logger state: " + log.getLevel().toString());
 			PropertiesInitializer propsInit = new PropertiesInitializer();
 			propsInit.initializeProperties();
-			aksen = new AKSENLocomotion();
+			aksen = new AKSENLocomotion(true);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
