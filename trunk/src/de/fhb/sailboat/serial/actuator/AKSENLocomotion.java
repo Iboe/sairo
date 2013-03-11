@@ -284,10 +284,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 						time = System.currentTimeMillis();
 					}
 					this.myCOM.writeByte(send);
-					setAksenState(send.toString());
+					setAksenState("send: " + (char)Integer.parseInt(send.toString()));
 					Thread.sleep(wait_sleep);
 					received = (byte) this.myCOM.readByte();
-					setAksenState(received.toString());
+					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 					if(debug){
 						LOG.info("Needed time to execute aquire connection and got achknowledge: " + (System.currentTimeMillis()-time) + " ms");
 					}
@@ -310,9 +310,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 					for (int j = 0; j < loopLength; j++) {
 						received=0x00;
 						this.myCOM.writeByte(b[j]);
+						setAksenState("send: " + b[j]);
 						Thread.sleep(wait_sleep);
 						received = (byte) this.myCOM.readByte();
-						setAksenState(received.toString());
+						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 					}
 					if (received == 110) {
 						continue;
@@ -327,10 +328,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 					received = 0x00;
 					
 					this.myCOM.writeByte(send);
-					setAksenState(send.toString());
+					setAksenState("send: " + (char)Integer.parseInt(send.toString()));
 					Thread.sleep(wait_sleep);
 					received = (byte) this.myCOM.readByte();
-					setAksenState(received.toString());
+					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 					// didn't got the correct answer? try to resend whole command in next loop
 					if(received != expected) {
 						if(attempt==maxAttempts)
@@ -345,10 +346,10 @@ public class AKSENLocomotion implements LocomotionSystem {
 						expected = 0x65;
 						received = 0x00;
 						this.myCOM.writeByte(send);
-						setAksenState(send.toString());
+						setAksenState("send: " + (char)Integer.parseInt(send.toString()));
 						Thread.sleep(wait_sleep*2);
 						received = (byte) this.myCOM.readByte();
-						setAksenState(received.toString());
+						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 						// didn't got the correct answer? try to resend whole command in next loop
 						// r might be 110
 						if(received != expected) {
