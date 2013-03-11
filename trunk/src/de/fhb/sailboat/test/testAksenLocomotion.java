@@ -28,8 +28,8 @@ public class testAksenLocomotion {
 	
 	private final int testCrazyRudderCount = 20;
 	private final int testCrazySailCount = 10;
-	private final int testCrazyPropellorCount = 10;
-	private final int testCrazyAksenboardCount = 40;
+	private final int testCrazyPropellorCount = 20;
+	private final int testCrazyAksenboardCount = 100;
 
 	int SAIL_SHEET_IN = 31;
 	int SAIL_SHEET_OUT = 114;
@@ -40,22 +40,22 @@ public class testAksenLocomotion {
 	int PROPELLOR_MIN = 170;
 	int PROPELLOR_NORMAL = 125;
 	int PROPELLOR_MAX = 80;
-
+	
 	private AKSENLocomotion aksen;
 
 	public testAksenLocomotion() {
 		init();
-//		testSetPropellor();
-//		aksen.resetPropellor();
-//		testSetRudder();
-//		aksen.resetRudder();
+		testSetPropellor();
+		aksen.resetPropellor();
+		testSetRudder();
+		aksen.resetRudder();
 ////		testSetSail();
-//		testSetPropellorCrazy();
-//		aksen.resetPropellor();
+		testSetPropellorCrazy();
+		aksen.resetPropellor();
 		testSetRudderCrazy();
-//		aksen.resetRudder();
+		aksen.resetRudder();
 ////		testSetSailCrazy();
-//		testCrazyAksenBoard();
+		testCrazyAksenBoard();
 		aksen.resetPropellor();
 		aksen.resetRudder();
 		aksen.closePort();
@@ -175,7 +175,7 @@ public class testAksenLocomotion {
 			break;
 		}
 		default: {
-			log.info(TAG + "setting: RUDDER NORMAL");
+			log.info(TAG + "setting: RUDDER TO ANGLE: " + rnd);
 			aksen.setRudder(rnd);
 			break;
 		}
@@ -195,7 +195,7 @@ public class testAksenLocomotion {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			rnd = rndGen.nextInt(3);
+			rnd = rndGen.nextInt(108);
 			log.info(TAG + " testrun: " + i + " with rnd case: " + rnd);
 			setRndRudder(rnd);
 		}
