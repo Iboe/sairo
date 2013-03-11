@@ -40,7 +40,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	private String lastCom; //changed to private , not checked because of threads
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
-	static long wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
+	static long wait_sleep = 20; //sleep for x milliseconds between each byte send to comport
 	
 	private String aksenState="null";
 	private ArrayList<String> aksenStateList = new ArrayList<String>();
@@ -561,11 +561,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 	}
 
 	private void incSleepTime(){
-		this.wait_sleep++;
 	}
 	
 	private void decSleepTime(){
-		this.wait_sleep--;
 	}
 	public String getAksenState() {
 		return aksenState;
