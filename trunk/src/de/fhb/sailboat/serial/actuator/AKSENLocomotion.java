@@ -42,7 +42,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	private String lastCom; //changed to private , not checked because of threads
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
-	static long wait_sleep = 1; //sleep for x milliseconds between each byte send to comport
+	static long wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
 	
 	private String aksenState="null";
 	private ArrayList<String> aksenStateList = new ArrayList<String>();
@@ -301,7 +301,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					Thread.sleep(wait_sleep);
 					received = (byte) this.myCOM.readByte();
 					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-					if(received.equals('n')){
+					if(received==110){
 						LOG.info("Got n from AKSEN Board, it's possible to break this command");
 					}
 					if(debug){
@@ -331,7 +331,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						Thread.sleep(wait_sleep);
 						received = (byte) this.myCOM.readByte();
 						setAksenState("send: " + (char)b[j] + " -- received: " + (char)Integer.parseInt(received.toString()));
-						if(received.equals('n')){
+						if(received==110){
 							LOG.info("Got n from AKSEN Board, it's possible to break this command");
 						}
 					}
@@ -352,7 +352,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					Thread.sleep(wait_sleep);
 					received = (byte) this.myCOM.readByte();
 					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-					if(received.equals('n')){
+					if(received==110){
 						LOG.info("Got n from AKSEN Board, it's possible to break this command");
 					}
 					// didn't got the correct answer? try to resend whole command in next loop
@@ -373,7 +373,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						Thread.sleep(wait_sleep*2);
 						received = (byte) this.myCOM.readByte();
 						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-						if(received.equals('n')){
+						if(received==110){
 							LOG.info("Got n from AKSEN Board, it's possible to break this command");
 						}
 						// didn't got the correct answer? try to resend whole command in next loop
