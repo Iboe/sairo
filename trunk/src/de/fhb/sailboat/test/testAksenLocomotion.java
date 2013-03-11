@@ -46,16 +46,16 @@ public class testAksenLocomotion {
 	public testAksenLocomotion() {
 		init();
 //		testSetPropellor();
-		aksen.resetPropellor();
-		testSetRudder();
-		aksen.resetRudder();
-//		testSetSail();
-		testSetPropellorCrazy();
-		aksen.resetPropellor();
+//		aksen.resetPropellor();
+//		testSetRudder();
+//		aksen.resetRudder();
+////		testSetSail();
+//		testSetPropellorCrazy();
+//		aksen.resetPropellor();
 		testSetRudderCrazy();
-		aksen.resetRudder();
-//		testSetSailCrazy();
-		testCrazyAksenBoard();
+//		aksen.resetRudder();
+////		testSetSailCrazy();
+//		testCrazyAksenBoard();
 		aksen.resetPropellor();
 		aksen.resetRudder();
 		aksen.closePort();

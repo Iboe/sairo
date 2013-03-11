@@ -3,7 +3,9 @@ package de.fhb.sailboat.serial.actuator;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 
 import de.fhb.sailboat.data.Actuator;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
@@ -40,7 +42,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	private String lastCom; //changed to private , not checked because of threads
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
-	static long wait_sleep = 20; //sleep for x milliseconds between each byte send to comport
+	static long wait_sleep = 10; //sleep for x milliseconds between each byte send to comport
 	
 	private String aksenState="null";
 	private ArrayList<String> aksenStateList = new ArrayList<String>();
@@ -60,7 +62,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		COMPort myCOM = new COMPort(7, Integer.parseInt(BAUDRATE), 0);
 		this.myCOM = myCOM;
 		myCOM.open();
-
+		initDebugEnvironment();
 	}
 	
 	public AKSENLocomotion(boolean debug){
@@ -73,6 +75,17 @@ public class AKSENLocomotion implements LocomotionSystem {
 		COMPort myCOM = new COMPort(7,9600, 0);
 		this.myCOM = myCOM;
 		myCOM.open();
+		initDebugEnvironment();
+	}
+	
+	private void initDebugEnvironment(){
+		try {
+			FileAppender fp = new FileAppender(new SimpleLayout(), "AKSENLocomotionAksenStateLog.txt");
+			LOG.addAppender(fp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** 
@@ -288,6 +301,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 					Thread.sleep(wait_sleep);
 					received = (byte) this.myCOM.readByte();
 					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
+					if(received.equals('n')){
+						LOG.info("Got n from AKSEN Board, it's possible to break this command");
+					}
 					if(debug){
 						LOG.info("Needed time to execute aquire connection and got achknowledge: " + (System.currentTimeMillis()-time) + " ms");
 					}
@@ -315,6 +331,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 						Thread.sleep(wait_sleep);
 						received = (byte) this.myCOM.readByte();
 						setAksenState("send: " + (char)b[j] + " -- received: " + (char)Integer.parseInt(received.toString()));
+						if(received.equals('n')){
+							LOG.info("Got n from AKSEN Board, it's possible to break this command");
+						}
 					}
 					if (received == 110) {
 						continue;
@@ -333,6 +352,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 					Thread.sleep(wait_sleep);
 					received = (byte) this.myCOM.readByte();
 					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
+					if(received.equals('n')){
+						LOG.info("Got n from AKSEN Board, it's possible to break this command");
+					}
 					// didn't got the correct answer? try to resend whole command in next loop
 					if(received != expected) {
 						if(attempt==maxAttempts)
@@ -351,6 +373,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 						Thread.sleep(wait_sleep*2);
 						received = (byte) this.myCOM.readByte();
 						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
+						if(received.equals('n')){
+							LOG.info("Got n from AKSEN Board, it's possible to break this command");
+						}
 						// didn't got the correct answer? try to resend whole command in next loop
 						// r might be 110
 						if(received != expected) {

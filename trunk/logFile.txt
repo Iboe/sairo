@@ -1,0 +1,4 @@
+INFO - testAksenLocomotion - logger state: DEBUG
+INFO - testAksenLocomotion - logger state: DEBUG
+INFO - testAksenLocomotion - logger state: DEBUG
+INFO - testAksenLocomotion - logger state: DEBUG
