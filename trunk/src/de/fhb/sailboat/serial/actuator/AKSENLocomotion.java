@@ -57,7 +57,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	public AKSENLocomotion(){
 		worldModel = WorldModelImpl.getInstance();
-		COMPort myCOM = new COMPort(Integer.parseInt(COM_PORT), Integer.parseInt(BAUDRATE), 0);
+		COMPort myCOM = new COMPort(7, Integer.parseInt(BAUDRATE), 0);
 		this.myCOM = myCOM;
 		myCOM.open();
 
@@ -70,7 +70,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		else{
 			worldModel=null;
 		}
-		COMPort myCOM = new COMPort(2,9600, 0);
+		COMPort myCOM = new COMPort(7,9600, 0);
 		this.myCOM = myCOM;
 		myCOM.open();
 	}
