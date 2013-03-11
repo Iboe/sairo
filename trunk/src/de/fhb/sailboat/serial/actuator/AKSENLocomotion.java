@@ -35,9 +35,9 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 public class AKSENLocomotion implements LocomotionSystem {
 	
 	private final WorldModel worldModel;
-	COMPort myCOM;
+	private COMPort myCOM; //changed to private , not checked because of threads
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
-	String lastCom;
+	private String lastCom; //changed to private , not checked because of threads
 	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
 	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
 	static long wait_sleep = 2; //sleep for x milliseconds between each byte send to comport
@@ -49,10 +49,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	boolean debug = false; 
 	
 	int status;
-
-	public int getStatus() {
-		return status;
-	}
+	
 	/**
 	 * Constructor
 	 * 
@@ -65,38 +62,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		myCOM.open();
 
 	}
-	/**
-	 * internal Debug-Mode
-	 * @return boolean debug
-	 */
-	public boolean isDebug() {
-		return debug;
-	}
 
-	/**
-	 * internal Debug-Mode
-	 * Setter
-	 */
-	public void setDebug(boolean debug) {
-		this.debug = debug;
-	}
-
-	/**
-	 * 
-	 * @return int wait_sleep
-	 */
-	@SuppressWarnings("static-access")
-	public long getWait_Sleep() {
-		return this.wait_sleep;
-	}
-	
-	/**
-	 * Setter Wait_Sleep
-	 */
-	@SuppressWarnings("static-access")
-	public void setWait_Sleep(int wait_sleep) {
-		this.wait_sleep = wait_sleep;
-	}
 	/** 
 	 * Send one Rudder-Command to AKSEN-Board
 	 * @param int angle
@@ -126,8 +92,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 			worldModel.getActuatorModel().setRudder(new Actuator(angle));
 
 		}
-		lastCom = "";
 		
+		lastCom = "";
 	}
 
 	/** 
@@ -145,7 +111,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 				Thread.sleep(wait_sleep*10);
 			}
 
-		
 			this.lastCom = "setSail to "+ angle;
 	//		if(isDebug())	
 	//		{
@@ -253,9 +218,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	}
 	
 	private String buildCommand(int s, int a) {
-		//String str = "s"+ s +"," + a + "ea";
-		String str = "s"+ s +"," + a + "ea";
-		return str;
+		return "s"+ s +"," + a + "ea";
 	}
 
 	
@@ -271,7 +234,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 		try {
 					this.myCOM.writeString(com,wait_sleep);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			LOG.warn("IOException", e);
 		}		
 	}
@@ -284,22 +246,26 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	private int AKSENServoCommand(int s, int a) {
 		int status = -1;
-		final int n = 3; // Number of attempts to
-		int k = 0;
+		final int maxAttempts = 3; // Number of attempts to
+		int attempt = 0;
 		int i;
-		Byte send,r, expected;
+		Byte send,received, expected;
 		long time = 0; // If debug is enabled used to measure the executiontime
 		try {
-			 while(k < n){
-				k++;
+			 while(attempt < maxAttempts){
+				attempt++;
 				//* 1) (S)end: s, hex: 0x73, dec : 115	- acquire Connection
 				send = 0x73;
 				//*     (R)eceive: a, hex: 0x61, dec: 97	- Acknowledge
 				expected = 0x61;
-				
-				r = 0x00;
+				received = 0x00;
 				i = 0;
-				while (r != expected) {
+				
+				//This loop sends the character for aquire connection and check the received character if acknowledge gotten
+				//Loopconditions, while acknowledge is not received and count is not until maxAttempts
+				//Increase the waiting time if actually time is not enought, send the char's, set the state of AKSEN Board, 
+				//get the answer from AKSEN Board and compare it with the expected char
+				while (received != expected) {
 					incSleepTime();
 					i++;
 					if(debug){
@@ -308,18 +274,19 @@ public class AKSENLocomotion implements LocomotionSystem {
 					this.myCOM.writeByte(send);
 					setAksenState(send.toString());
 					Thread.sleep(wait_sleep);
-					r = (byte) this.myCOM.readByte();
-					setAksenState(r.toString());
+					received = (byte) this.myCOM.readByte();
+					setAksenState(received.toString());
 					if(debug){
 						LOG.info("Needed time to execute aquire connection and got achknowledge: " + (System.currentTimeMillis()-time) + " ms");
 					}
-					if (i == n) {
+					if (i == maxAttempts) {
 						break;
 					}
 				}
+				
 				// recheck, because of broken loop
-				if ( r != expected) {
-					LOG.warn("Run "+ k +": Couldn't acquire Connection to AKSEN in "+ n +" attempts. Received: " + r); // Tobias Koppe : Wenn Verbindung nicht aufgebaut werden konnte, empfangenes Zeichen anzeigen
+				if ( received != expected) {
+					LOG.warn("Run "+ attempt +": Couldn't acquire Connection to AKSEN in "+ maxAttempts +" attempts. Received: " + received); // Tobias Koppe : Wenn Verbindung nicht aufgebaut werden konnte, empfangenes Zeichen anzeigen
 					incSleepTime();
 					return -1;
 				} else {
@@ -329,13 +296,13 @@ public class AKSENLocomotion implements LocomotionSystem {
 					byte[] b = t.getBytes();
 					int loopLength=b.length;  //T.Koppe : Loop count auslagern => schneller
 					for (int j = 0; j < loopLength; j++) {
-						r=0x00;
+						received=0x00;
 						this.myCOM.writeByte(b[j]);
 						Thread.sleep(wait_sleep);
-						r = (byte) this.myCOM.readByte();
-						setAksenState(r.toString());
+						received = (byte) this.myCOM.readByte();
+						setAksenState(received.toString());
 					}
-					if (r == 110) {
+					if (received == 110) {
 						continue;
 					}
 					//*                                        More commands separated by comma (e.g. 1,90,2,45,0,73)
@@ -345,17 +312,17 @@ public class AKSENLocomotion implements LocomotionSystem {
 					send = 0x65;
 					//*         R: number of recieved commands; 1
 					expected = 0x31;
-					r = 0x00;
+					received = 0x00;
 					
 					this.myCOM.writeByte(send);
 					setAksenState(send.toString());
 					Thread.sleep(wait_sleep);
-					r = (byte) this.myCOM.readByte();
-					setAksenState(r.toString());
+					received = (byte) this.myCOM.readByte();
+					setAksenState(received.toString());
 					// didn't got the correct answer? try to resend whole command in next loop
-					if(r != expected) {
-						if(k==n)
-							LOG.info("Couldn't send InstructionSet on AKSEN in "+ n +" attempts. Received: " + r); // Tobias Koppe : Wenn nicht gesendet werden konnte, empfangenes Zeichen anzeigen
+					if(received != expected) {
+						if(attempt==maxAttempts)
+							LOG.info("Couldn't send InstructionSet on AKSEN in "+ maxAttempts +" attempts. Received: " + received); // Tobias Koppe : Wenn nicht gesendet werden konnte, empfangenes Zeichen anzeigen
 							incSleepTime();
 						continue;
 					} else {
@@ -364,16 +331,16 @@ public class AKSENLocomotion implements LocomotionSystem {
 						send = 0x61;
 						//*     R: e, hex: 65, dec: 101			- executed (=ACK)
 						expected = 0x65;
-						r = 0x00;
+						received = 0x00;
 						this.myCOM.writeByte(send);
 						setAksenState(send.toString());
 						Thread.sleep(wait_sleep*2);
-						r = (byte) this.myCOM.readByte();
-						setAksenState(r.toString());
+						received = (byte) this.myCOM.readByte();
+						setAksenState(received.toString());
 						// didn't got the correct answer? try to resend whole command in next loop
 						// r might be 110
-						if(r != expected) {
-							LOG.info("Run "+ k +": Couldn't execute Commands on AKSEN "+ r.toString() + " vs "+ expected.toString() +". Received: " + r); // Tobias Koppe : Wenn Befehl nicht ausgefuehrt werden konnte, empfangenes Zeichen anzeigen
+						if(received != expected) {
+							LOG.info("Run "+ attempt +": Couldn't execute Commands on AKSEN "+ received.toString() + " vs "+ expected.toString() +". Received: " + received); // Tobias Koppe : Wenn Befehl nicht ausgefuehrt werden konnte, empfangenes Zeichen anzeigen
 							status = 0;
 							incSleepTime();
 							continue;
@@ -394,6 +361,47 @@ public class AKSENLocomotion implements LocomotionSystem {
 		
 		return status;
 	}
+	
+	
+	// Getter and Setter Methods
+	
+	public int getStatus() {
+		return status;
+	}
+	
+	/**
+	 * internal Debug-Mode
+	 * @return boolean debug
+	 */
+	public boolean isDebug() {
+		return debug;
+	}
+
+	/**
+	 * internal Debug-Mode
+	 * Setter
+	 */
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
+
+	/**
+	 * 
+	 * @return int wait_sleep
+	 */
+	@SuppressWarnings("static-access")
+	public long getWait_Sleep() {
+		return this.wait_sleep;
+	}
+	
+	/**
+	 * Setter Wait_Sleep
+	 */
+	@SuppressWarnings("static-access")
+	public void setWait_Sleep(int wait_sleep) {
+		this.wait_sleep = wait_sleep;
+	}
+	
 	/**
 	 * Returns the Battery-State given by AKSENBoard
 	 * 
@@ -404,6 +412,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		try {
 			byte b = 118;	// decimal for String "v"
 			this.myCOM.writeByte(b);
+			setAksenState("v");
 			state = this.myCOM.readByte();
 		} catch (IOException e) {
 			LOG.warn("Couldn't get BatteryState", e);

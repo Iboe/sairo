@@ -24,6 +24,7 @@ public class Memory {
 		sigar = new Sigar();
 	}
 	
+	//TODO Exception oder Warnung wenn RAM Auslastung zu hoch
 	public void startMemoryMonitoring(){
 		monitoring=true;
 		new Thread(){

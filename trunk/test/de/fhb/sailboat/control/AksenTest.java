@@ -55,7 +55,7 @@ public class AksenTest {
 			LOG.info(TAG + methodName + "Lese von AKSEN Board ...");
 			receive = (byte) this.comPort.readByte();
 			LOG.info(TAG + methodName + "Gelesenes Zeichen von AKSEN: " + receive);
-			ak
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

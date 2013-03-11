@@ -36,6 +36,7 @@ public class CPU {
 		}.start();
 	}
 	
+	//TODO Exception oder Warnung wenn CPU Auslastung zu hoch
 	private void startMonitoringCpuThread(){
 		CpuPerc cpuPerc;
 		monitoring=true;
@@ -43,6 +44,9 @@ public class CPU {
 			try {
 				cpuPerc = sigar.getCpuPerc();
 				LOG.info("Used combined (system and user) cpu performance: "+CpuPerc.format(cpuPerc.getCombined())+" %");
+//				if(cpuPerc>=1){
+//					
+//				}
 			} catch (SigarException e) {
 				e.printStackTrace();
 			}
