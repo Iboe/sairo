@@ -7,6 +7,8 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
+import sun.reflect.generics.visitor.Reifier;
+
 import de.fhb.sailboat.data.Actuator;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 import de.fhb.sailboat.worldmodel.WorldModel;
@@ -242,8 +244,14 @@ public class AKSENLocomotion implements LocomotionSystem {
 		this.myCOM.close();
 	}
 	
+	/***
+	 * Builds an correct ServoCommand for sending to AKSEN Board
+	 * @param s number of servo
+	 * @param a value to send to servo
+	 * @return ServoCommand as String
+	 */
 	private String buildCommand(int s, int a) {
-		return "s"+ s +"," + a + "ea";
+		return s +"," + a;
 	}
 
 	
@@ -323,7 +331,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
 					String t = s + "," + a;
 					setAksenState("will send servo command : " + t);
-					byte[] b = t.getBytes();
+					byte[] b = buildCommand(s, a).getBytes();
 					int loopLength=b.length;  //T.Koppe : Loop count auslagern => schneller
 					for (int j = 0; j < loopLength; j++) {
 						received=0x00;
@@ -405,6 +413,52 @@ public class AKSENLocomotion implements LocomotionSystem {
 		return status;
 	}
 	
+	/***
+	 * 
+	 * @param pToWrite
+	 * @param pExpected
+	 * @return
+	 */
+	private int writeToAksen(byte pToWrite, byte pExpected){
+		int success=0;
+		byte received=(Byte) null;
+		int attempts = 3;
+		for(int i=0;i<attempts;i++){
+		try {
+			setAksenState("send: " + (char)pToWrite);
+			this.myCOM.writeByte(pToWrite);
+			Thread.sleep(wait_sleep);
+			received = (byte) this.myCOM.readByte();
+			setAksenState("received: " + (char)received);
+			//Wenn empfangenes Zeichen gleich dem erwarteten
+			if(received == pExpected){
+				return success=1;
+			}
+			//Wenn kein bestimmtes Zeichen erwartet und empfangenes Zeichen nicht 110 (n) oder 102(f)
+			else if(pExpected==(Byte)null && received!=110 && received!=102){
+				return success = 1;
+			}
+			//Wenn empfangenes Zeichen 110(n)
+			else if(received==110){
+				return success=-1;
+			}
+			//Wenn empfangenes Zeichen 102(f)
+			else if(received==102){
+				return success=-1;
+			}
+			//Wenn empfangenes Zeichen ohne Aussage ist / Sonst
+			else{
+				success=0;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		}
+		return success;
+	}
+	
 	/**
 	 * Send Command to AKSEN step by step
 	 * with response observation and command validation
@@ -412,123 +466,52 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * @param a
 	 * @return Status (-1: fail, 1: correct
 	 */
+	//TODO Methode Testen
 	private int AKSENCommandServo(int s, int a) {
-		int status = -1;
-		final int maxAttempts = 3; // Number of attempts to
-		int attempt = 0;
-		int i;
-		Byte send,received, expected;
-		long time = 0; // If debug is enabled used to measure the executiontime
-		try {
-			 while(attempt < maxAttempts){
-				attempt++;
-				//* 1) (S)end: s, hex: 0x73, dec : 115	- acquire Connection
-				send = 0x73;
-				//*     (R)eceive: a, hex: 0x61, dec: 97	- Acknowledge
-				expected = 0x61;
-				received = 0x00;
-				i = 0;
-				
-				//This loop sends the character for aquire connection and check the received character if acknowledge gotten
-				//Loopconditions, while acknowledge is not received and count is not until maxAttempts
-				//Increase the waiting time if actually time is not enought, send the char's, set the state of AKSEN Board, 
-				//get the answer from AKSEN Board and compare it with the expected char
-				while (received != expected) {
-					incSleepTime();
-					i++;
-					if(debug){
-						time = System.currentTimeMillis();
-					}
-					this.myCOM.writeByte(send);
-					setAksenState("send: " + (char)Integer.parseInt(send.toString()));
-					Thread.sleep(wait_sleep);
-					received = (byte) this.myCOM.readByte();
-					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-					if(debug){
-						LOG.info("Needed time to execute aquire connection and got achknowledge: " + (System.currentTimeMillis()-time) + " ms");
-					}
-					if (i == maxAttempts) {
-						break;
-					}
-				}
-				
-				// recheck, because of broken loop
-				if ( received != expected) {
-					LOG.warn("Run "+ attempt +": Couldn't acquire Connection to AKSEN in "+ maxAttempts +" attempts. Received: " + received); // Tobias Koppe : Wenn Verbindung nicht aufgebaut werden konnte, empfangenes Zeichen anzeigen
-					incSleepTime();
-					return -1;
-				} else {
-					decSleepTime();
-					//* 2) S: <servo>,<angle> (e.g. 1,90)	- Instruction set, comma separated (Number of Servomotor and Angle ==> see range for each servo=
-					String t = s + "," + a;
-					byte[] b = t.getBytes();
-					int loopLength=b.length;  //T.Koppe : Loop count auslagern => schneller
-					for (int j = 0; j < loopLength; j++) {
-						received=0x00;
-						this.myCOM.writeByte(b[j]);
-						setAksenState("send: " + b[j]);
-						Thread.sleep(wait_sleep);
-						received = (byte) this.myCOM.readByte();
-						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-					}
-					if (received == 110) {
-						continue;
-					}
-					//*                                        More commands separated by comma (e.g. 1,90,2,45,0,73)
-					// TODO Multi-Instructions
-					//*         R: +, dec:  43, hex: 2b		- for every correct command
-					//*      3) S: e, dec: 101, hex: 65			- end of Instruction set
+		Byte send, expected;
+		// * 1) (S)end: s, hex: 0x73, dec : 115 - acquire Connection
+		// * (R)eceive: a, hex: 0x61, dec: 97 - Acknowledge
+		send = 0x73;
+		expected = 0x61;
+		//Fordere ACK von AKSEN Board an = sende 0x73(s) und erwarte 0x61(a)
+		if (writeToAksen(send, expected) == 1) {
+			//ACK vom AKSEN Board empfangen
+			LOG.info("Got ack from AKSEN Board for connection");
+			// Sende ServoCommand
+			setAksenState("Will send servo command : " + buildCommand(s, a));
+			byte[] b = buildCommand(s, a).getBytes();
+			int loopLength = b.length;
+			for (int j = 0; j < loopLength; j++) {
+				if (writeToAksen(b[j], (Byte) null) == 1) {
+					// Sende weiter um Befehlsliste abzuschliessen und
+					// Auszufuehren
+					// Sende Ende der Befehle
+					// * 3) S: e, dec: 101, hex: 65 - end of Instruction set
 					send = 0x65;
-					//*         R: number of recieved commands; 1
+					// * R: number of recieved commands; 1
 					expected = 0x31;
-					received = 0x00;
-					
-					this.myCOM.writeByte(send);
-					setAksenState("send: " + (char)Integer.parseInt(send.toString()));
-					Thread.sleep(wait_sleep);
-					received = (byte) this.myCOM.readByte();
-					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-					// didn't got the correct answer? try to resend whole command in next loop
-					if(received != expected) {
-						if(attempt==maxAttempts)
-							LOG.info("Couldn't send InstructionSet on AKSEN in "+ maxAttempts +" attempts. Received: " + received); // Tobias Koppe : Wenn nicht gesendet werden konnte, empfangenes Zeichen anzeigen
-							incSleepTime();
-						continue;
+					writeToAksen(send, expected);
+					// Sende Ausfuehren des Befehls
+					// * 4) S: a, hex: 61, dec 097 - execute Instruction on
+					// AKSEN
+					send = 0x61;
+					// * R: e, hex: 65, dec: 101 - executed (=ACK)
+					expected = 0x65;
+					if (writeToAksen(send, expected) == 1) {
+						// Befehl erfolgreich ausgefuehrt
+						return 1;
 					} else {
-						decSleepTime();
-						//* 4) S: a, hex: 61, dec 097			- execute Instruction on AKSEN
-						send = 0x61;
-						//*     R: e, hex: 65, dec: 101			- executed (=ACK)
-						expected = 0x65;
-						received = 0x00;
-						this.myCOM.writeByte(send);
-						setAksenState("send: " + (char)Integer.parseInt(send.toString()));
-						Thread.sleep(wait_sleep*2);
-						received = (byte) this.myCOM.readByte();
-						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
-						// didn't got the correct answer? try to resend whole command in next loop
-						// r might be 110
-						if(received != expected) {
-							LOG.info("Run "+ attempt +": Couldn't execute Commands on AKSEN "+ received.toString() + " vs "+ expected.toString() +". Received: " + received); // Tobias Koppe : Wenn Befehl nicht ausgefuehrt werden konnte, empfangenes Zeichen anzeigen
-							status = 0;
-							incSleepTime();
-							continue;
-						} else {
-							decSleepTime();
-							// We expect everything went well:
-							status = 1;
-							break;
-						}
+						// Abbruch da Fehler bei Senden vom execute instruction
+						LOG.info("Couldn't execute command on AKSEN Board");
 					}
+				} else {
+					// Abbruch da Fehler
+					LOG.info("Couldn't send instruction to AKSEN Board");
+					return -1;
 				}
 			}
-		} catch (IOException e) {
-			LOG.warn("IOException", e);
-		} catch (InterruptedException e) {
-			LOG.warn("InterruptException", e);
 		}
-		
-		return status;
+		return 0;
 	}
 	
 	
