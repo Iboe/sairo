@@ -303,6 +303,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 					if(received==110){
 						LOG.info("Got n from AKSEN Board, it's possible to break this command");
+						return -1;
 					}
 					if(debug){
 						LOG.info("Needed time to execute aquire connection and got achknowledge: " + (System.currentTimeMillis()-time) + " ms");
@@ -333,6 +334,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						setAksenState("send: " + (char)b[j] + " -- received: " + (char)Integer.parseInt(received.toString()));
 						if(received==110){
 							LOG.info("Got n from AKSEN Board, it's possible to break this command");
+							return -1;
 						}
 					}
 					if (received == 110) {
@@ -354,6 +356,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 					if(received==110){
 						LOG.info("Got n from AKSEN Board, it's possible to break this command");
+						return -1;
 					}
 					// didn't got the correct answer? try to resend whole command in next loop
 					if(received != expected) {
@@ -375,6 +378,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						setAksenState("received: " + (char)Integer.parseInt(received.toString()));
 						if(received==110){
 							LOG.info("Got n from AKSEN Board, it's possible to break this command");
+							return -1;
 						}
 						// didn't got the correct answer? try to resend whole command in next loop
 						// r might be 110
