@@ -33,6 +33,13 @@ public class testAksenLocomotion {
 
 	public testAksenLocomotion() {
 		init();
+		testSetPropellor();
+		testSetRudder();
+		testSetSail();
+		testSetPropellorCrazy();
+		testSetRudderCrazy();
+		testSetSailCrazy();
+		testCrazyAksenBoard();
 	}
 
 	public void init(){
