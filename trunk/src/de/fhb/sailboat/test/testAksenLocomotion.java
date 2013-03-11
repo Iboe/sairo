@@ -45,7 +45,7 @@ public class testAksenLocomotion {
 
 	public testAksenLocomotion() {
 		init();
-		testSetPropellor();
+//		testSetPropellor();
 		aksen.resetPropellor();
 		testSetRudder();
 		aksen.resetRudder();
@@ -97,20 +97,23 @@ public class testAksenLocomotion {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			int rndCmd = rndGen.nextInt(3)-1;
-			int rnd = rndGen.nextInt(3)-1;
-			log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + ";" + rnd + "]");
+			int rndCmd = rndGen.nextInt(3);
+			int rnd = rndGen.nextInt(170);
+			
 			// rndCmd = 0 - setRudder ; 1 - setSail ; 2 - setPropellor
 			switch (rndCmd) {
 			case 0: {
+				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "(Rudder);" + rnd + "]");
 				setRndRudder(rnd);
 				break;
 			}
 			case 1: {
+				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "(Sail;" + rnd + "]");
 //				setRndSail(rnd);
 				break;
 			}
 			case 2: {
+				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "Propellor;" + rnd + "]");
 				setRndPropellor(rnd);
 				break;
 			}
@@ -192,7 +195,7 @@ public class testAksenLocomotion {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			rnd = rndGen.nextInt(3)-1;
+			rnd = rndGen.nextInt(3);
 			log.info(TAG + " testrun: " + i + " with rnd case: " + rnd);
 			setRndRudder(rnd);
 		}
@@ -231,7 +234,7 @@ public class testAksenLocomotion {
 		Random rndGen = new Random();
 		int rnd = 0;
 		for (int i = 0; i <= testCrazySailCount; i++) {
-			rnd = rndGen.nextInt(3)-1;
+			rnd = rndGen.nextInt(3);
 			setRndSail(rnd);
 		}
 	}
@@ -295,7 +298,7 @@ public class testAksenLocomotion {
 		Random rndGen = new Random();
 		int rnd = 0;
 		for (int i = 0; i <= testCrazyPropellorCount; i++) {
-			rnd = rndGen.nextInt(3)-1;
+			rnd = rndGen.nextInt(3);
 			setRndPropellor(rnd);
 		}
 	}
