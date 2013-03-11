@@ -9,6 +9,7 @@ import org.apache.log4j.SimpleLayout;
 
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
+import de.fhb.sailboat.start.PropertiesInitializer;
 
 /***
  * Testing all functions of given AKSENLocomotion class
@@ -61,6 +62,10 @@ public class testAksenLocomotion {
 			log.addAppender(consoleAppender);
 			log.addAppender(fileAppender);
 			log.info(TAG + "logger state: " + log.getLevel().toString());
+			PropertiesInitializer propsInit = new PropertiesInitializer();
+			propsInit.initializeProperties();
+			aksen = new AKSENLocomotion();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
