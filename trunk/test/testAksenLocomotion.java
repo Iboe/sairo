@@ -107,11 +107,11 @@ public class testAksenLocomotion {
 	public void testSetRudder() {
 		log.info(TAG + "started test for setting rudder");
 		log.info(TAG + "setting: RUDDER LEFT");
-		aksen.setRudder(LocomotionSystem.RUDDER_LEFT);
+		aksen.setRudder(RUDDER_LEFT);
 		log.info(TAG + "setting: RUDDER NORMAL");
-		aksen.setRudder(LocomotionSystem.RUDDER_NORMAL);
+		aksen.setRudder(RUDDER_NORMAL);
 		log.info(TAG + "setting: RUDDER RIGHT");
-		aksen.setRudder(LocomotionSystem.RUDDER_RIGHT);
+		aksen.setRudder(RUDDER_RIGHT);
 	}
 
 	public void setRndRudder(int rnd) {
@@ -119,22 +119,22 @@ public class testAksenLocomotion {
 		switch (rnd) {
 		case 0: {
 			log.info(TAG + "setting: RUDDER LEFT");
-			aksen.setRudder(LocomotionSystem.RUDDER_LEFT);
+			aksen.setRudder(RUDDER_LEFT);
 			break;
 		}
 		case 1: {
 			log.info(TAG + "setting: RUDDER NORMAL");
-			aksen.setRudder(LocomotionSystem.RUDDER_NORMAL);
+			aksen.setRudder(RUDDER_NORMAL);
 			break;
 		}
 		case 2: {
 			log.info(TAG + "setting: RUDDER RIGHT");
-			aksen.setRudder(LocomotionSystem.RUDDER_RIGHT);
+			aksen.setRudder(RUDDER_RIGHT);
 			break;
 		}
 		default: {
 			log.info(TAG + "setting: RUDDER NORMAL");
-			aksen.setRudder(LocomotionSystem.RUDDER_NORMAL);
+			aksen.setRudder(RUDDER_NORMAL);
 			break;
 		}
 		}
@@ -154,27 +154,27 @@ public class testAksenLocomotion {
 	}
 
 	public void testSetSail() {
-		aksen.setSail(LocomotionSystem.SAIL_SHEET_IN);
-		aksen.setSail(LocomotionSystem.SAIL_NORMAL);
-		aksen.setSail(LocomotionSystem.SAIL_SHEET_OUT);
+		aksen.setSail(SAIL_SHEET_IN);
+		aksen.setSail(SAIL_SHEET_NORMAL);
+		aksen.setSail(SAIL_SHEET_OUT);
 	}
 
 	public void setRndSail(int rnd) {
 		switch (rnd) {
 		case 0: {
-			aksen.setSail(LocomotionSystem.SAIL_SHEET_IN);
+			aksen.setSail(SAIL_SHEET_IN);
 			break;
 		}
 		case 1: {
-			aksen.setSail(LocomotionSystem.SAIL_NORMAL);
+			aksen.setSail(SAIL_SHEET_NORMAL);
 			break;
 		}
 		case 2: {
-			aksen.setSail(LocomotionSystem.SAIL_SHEET_OUT);
+			aksen.setSail(SAIL_SHEET_OUT);
 			break;
 		}
 		default: {
-			aksen.setSail(LocomotionSystem.SAIL_NORMAL);
+			aksen.setSail(SAIL_SHEET_NORMAL);
 			break;
 		}
 		}
@@ -192,27 +192,27 @@ public class testAksenLocomotion {
 	}
 
 	public void testSetPropellor() {
-		aksen.setPropellor(LocomotionSystem.PROPELLOR_MAX);
-		aksen.setPropellor(LocomotionSystem.PROPELLOR_NORMAL);
-		aksen.setPropellor(LocomotionSystem.PROPELLOR_MIN);
+		aksen.setPropellor(PROPELLOR_MAX);
+		aksen.setPropellor(PROPELLOR_NORMAL);
+		aksen.setPropellor(PROPELLOR_MIN);
 	}
 
 	public void setRndPropellor(int rnd) {
 		switch (rnd) {
 		case 0: {
-			aksen.setPropellor(LocomotionSystem.PROPELLOR_MIN);
+			aksen.setPropellor(PROPELLOR_MIN);
 			break;
 		}
 		case 1: {
-			aksen.setPropellor(LocomotionSystem.PROPELLOR_NORMAL);
+			aksen.setPropellor(PROPELLOR_NORMAL);
 			break;
 		}
 		case 2: {
-			aksen.setPropellor(LocomotionSystem.PROPELLOR_MIN);
+			aksen.setPropellor(PROPELLOR_MIN);
 			break;
 		}
 		default: {
-			aksen.setPropellor(LocomotionSystem.PROPELLOR_NORMAL);
+			aksen.setPropellor(PROPELLOR_NORMAL);
 			break;
 		}
 		}
