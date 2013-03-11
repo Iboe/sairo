@@ -108,12 +108,12 @@ public class testAksenLocomotion {
 				break;
 			}
 			case 1: {
-				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "(Sail;" + rnd + "]");
+				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "(Sail);" + rnd + "]");
 //				setRndSail(rnd);
 				break;
 			}
 			case 2: {
-				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "Propellor;" + rnd + "]");
+				log.info(TAG + "testrun: " + i + " with generated case: [" + rndCmd + "(Propellor);" + rnd + "]");
 				setRndPropellor(rnd);
 				break;
 			}
@@ -176,7 +176,7 @@ public class testAksenLocomotion {
 		}
 		default: {
 			log.info(TAG + "setting: RUDDER NORMAL");
-			aksen.setRudder(RUDDER_NORMAL);
+			aksen.setRudder(rnd);
 			break;
 		}
 		}
@@ -285,7 +285,7 @@ public class testAksenLocomotion {
 			break;
 		}
 		default: {
-			aksen.setPropellor(PROPELLOR_NORMAL);
+			aksen.setPropellor(rnd);
 			break;
 		}
 		}
