@@ -426,7 +426,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	private int writeToAksen(byte pToWrite, byte pExpected){
 		int success=0;
-		byte received=(Byte) null;
+		byte received=(byte) 0x00;
 		int attempts = 3;
 		for(int i=0;i<attempts;i++){
 		try {
@@ -440,7 +440,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				return success=1;
 			}
 			//Wenn kein bestimmtes Zeichen erwartet und empfangenes Zeichen nicht 110 (n) oder 102(f)
-			else if(pExpected==(Byte)null && received!=110 && received!=102){
+			else if(pExpected==(byte)0x00 && received!=110 && received!=102){
 				return success = 1;
 			}
 			//Wenn empfangenes Zeichen 110(n)
@@ -487,33 +487,35 @@ public class AKSENLocomotion implements LocomotionSystem {
 			byte[] b = buildCommand(s, a).getBytes();
 			int loopLength = b.length;
 			for (int j = 0; j < loopLength; j++) {
-				if (writeToAksen(b[j], (Byte) null) == 1) {
-					// Sende weiter um Befehlsliste abzuschliessen und
-					// Auszufuehren
-					// Sende Ende der Befehle
-					// * 3) S: e, dec: 101, hex: 65 - end of Instruction set
-					send = 0x65;
-					// * R: number of recieved commands; 1
-					expected = 0x31;
-					writeToAksen(send, expected);
-					// Sende Ausfuehren des Befehls
-					// * 4) S: a, hex: 61, dec 097 - execute Instruction on
-					// AKSEN
-					send = 0x61;
-					// * R: e, hex: 65, dec: 101 - executed (=ACK)
-					expected = 0x65;
-					if (writeToAksen(send, expected) == 1) {
-						// Befehl erfolgreich ausgefuehrt
-						return 1;
-					} else {
-						// Abbruch da Fehler bei Senden vom execute instruction
-						LOG.info("Couldn't execute command on AKSEN Board");
-					}
+				if (writeToAksen(b[j],(byte)0x00) == 1) {
+					//Zeichen erfolgreich übertragen
 				} else {
 					// Abbruch da Fehler
 					LOG.info("Couldn't send instruction to AKSEN Board");
 					return -1;
 				}
+			}
+			// Sende weiter um Befehlsliste abzuschliessen und
+			// Auszufuehren
+			// Sende Ende der Befehle
+			// * 3) S: e, dec: 101, hex: 65 - end of Instruction set
+			send = 0x65;
+			// * R: number of recieved commands; 1
+			expected = 0x31;
+			writeToAksen(send, expected);
+			// Sende Ausfuehren des Befehls
+			// * 4) S: a, hex: 61, dec 097 - execute Instruction on
+			// AKSEN
+			send = 0x61;
+			// * R: e, hex: 65, dec: 101 - executed (=ACK)
+			expected = 0x65;
+			if (writeToAksen(send, expected) == 1) {
+				// Befehl erfolgreich ausgefuehrt
+				return 1;
+			} else {
+				// Abbruch da Fehler bei Senden vom execute instruction
+				LOG.info("Couldn't execute command on AKSEN Board");
+				return -1;
 			}
 		}
 		return 0;
