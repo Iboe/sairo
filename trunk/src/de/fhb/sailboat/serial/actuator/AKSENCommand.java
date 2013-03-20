@@ -1,5 +1,13 @@
 package de.fhb.sailboat.serial.actuator;
 
+/***
+ * This class provides representative strings for the character to communicate
+ * with aksen board
+ * 
+ * @author Tobias Koppe
+ * @version 1.0
+ *
+ */
 public class AKSENCommand {
 
 	public static final char REQUEST_CONNECTION = 's';
