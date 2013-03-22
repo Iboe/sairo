@@ -11,6 +11,7 @@ import sun.reflect.generics.visitor.Reifier;
 
 import de.fhb.sailboat.data.Actuator;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
+import de.fhb.sailboat.serial.serialAPI.SerialSystemTextEnum;
 import de.fhb.sailboat.worldmodel.WorldModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 
@@ -38,6 +39,8 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  */
 public class AKSENLocomotion implements LocomotionSystem {
 	
+	private final String TAG = this.getClass().getName()+" | ";
+	
 	private final WorldModel worldModel;
 	private COMPort myCOM; //changed to private , not checked because of threads
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
@@ -60,9 +63,24 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * initializes new Serial-Port-Connection to AKSEN-BOARD
 	 */
 	public AKSENLocomotion(){
+		LOG.debug("Constructor AKSENLocomotion() called");
 		worldModel = WorldModelImpl.getInstance();
+		if(worldModel==null){
+			LOG.debug(TAG+"worldModel: haven't got an instance");
+			throw new NullPointerException();
+		}
+		else{
+			LOG.debug(TAG + " worldModel: have got an instance - " + this.worldModel.toString());
+		}
+		
 		COMPort myCOM = new COMPort(7, Integer.parseInt(BAUDRATE), 0);
 		this.myCOM = myCOM;
+		
+		if(this.myCOM!=null){
+			//DEPRECATED: LOG.debug(TAG + " COMPort created with Port: " + this.myCOM.getPort() + " Baudrate: " + this.myCOM.get_baud());
+			LOG.debug(TAG+SerialSystemTextEnum.COMPORT_CREATED.toString()+myCOM.getPort()+","+myCOM.get_baud());
+		}
+		
 		myCOM.open();
 		initDebugEnvironment();
 	}
@@ -107,7 +125,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 			} else {
 				LOG.info(lastCom +": correct");
 				worldModel.getActuatorModel().setRudder(new Actuator(angle));
-				
+				setAksenState(AksenSystemTextEnum.AKSEN_COMMAND_RUDDER_LEFT.toString());
 			}
 		}
 		else
@@ -474,6 +492,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	//TODO Methode Testen
 	private int AKSENCommandServo(int s, int a) {
 		Byte send, expected;
+		
 		// * 1) (S)end: s, hex: 0x73, dec : 115 - acquire Connection
 		// * (R)eceive: a, hex: 0x61, dec: 97 - Acknowledge
 		send = 0x73;
@@ -501,7 +520,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 			// * 3) S: e, dec: 101, hex: 65 - end of Instruction set
 			send = 0x65;
 			// * R: number of recieved commands; 1
-			expected = 0x31;
+			expected = 0x00;
 			writeToAksen(send, expected);
 			// Sende Ausfuehren des Befehls
 			// * 4) S: a, hex: 61, dec 097 - execute Instruction on
@@ -584,6 +603,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	
 	private void decSleepTime(){
 	}
+	
 	public String getAksenState() {
 		return aksenState;
 	}

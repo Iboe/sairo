@@ -133,7 +133,7 @@ public enum AksenSystemTextEnum {
 	 */
 	AKSEN_SET_STATE_COMMANDSEXECUTED{
 		public String toString(){
-			return "AKSEN Board set settetd to: inputted commands executed";
+			return "AKSEN Board state set settetd to: inputted commands executed";
 		}
 	},
 	
@@ -142,31 +142,52 @@ public enum AksenSystemTextEnum {
 	 */
 	AKSEN_COMMAND_REQUEST_CONNECTION{
 		public String toString(){
-			return "";
+			return "AKSEN Board state setted to: requesting connection";
 		}
 	},
-	
+
+	/**
+	 * @since 1.1
+	 */
 	AKSEN_COMMAND_GOT_ACKNOWLEDGE{
 		public String toString(){
 			return "";
 		}
 	},
 	
+	/**
+	 * @since 1.1
+	 */
 	AKSEN_COMMAND_RECEIVED{
 		public String toString(){
 			return "";
 		}
 	},
 	
+	/**
+	 * @since 1.1
+	 */
 	AKSEN_COMMAND_END_SENDING_COMMANDS{
 		public String toString(){
 			return "";
 		}
 	},
 	
+	/**
+	 * @since 1.1
+	 */
 	AKSEN_COMMAND_ACKNOWLEDGE_COMMAND_SENDING{
 		public String toString(){
 			return "";
+		}
+	},
+	
+	/**
+	 * @since 1.1
+	 */
+	AKSEN_BUILDSERVOCOMMAND{
+		public String toString(){
+			return "build aksen servocommand: ";
 		}
 	}
 

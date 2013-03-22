@@ -18,7 +18,7 @@ import gnu.io.UnsupportedCommOperationException;
 /**
  * ComPort wrapper Klasse für den vereinfachten Zugriff auf Serielle Schnittstellen
  * @author mstrehse
- *
+ * @version 1.2
  */
 public class COMPort{
 	
@@ -27,6 +27,8 @@ public class COMPort{
 	private int _baud = 9600;
 	private static final Logger LOG = Logger.getLogger(COMPort.class);
 	private static final int SEND_WAIT = 0;//Integer.parseInt(System.getProperty(COMPort.class.getSimpleName() + ".wait_sleep")); // Wait between each written Byte in Milliseconds
+	
+	private int port=0;
 	/**
 	 * Construktor der COM Klasse
 	 * @param int port Nr des Com Ports
@@ -34,7 +36,7 @@ public class COMPort{
 	 * @param int timeout Timeout für Verbindungen in ms (noch nicht vollständig implementiert)
 	 */
 	public COMPort(int port, int baud, int timeout){
-		
+		this.port=port;
 		// timeout is not implemented
 		
 		if(baud != 0){
@@ -198,4 +200,48 @@ public class COMPort{
 		
 		this._serialPortObject.getOutputStream().write(b);
 	}
+	
+	/**
+	 * Write character to Outputstream
+	 * @param c
+	 * @throws IOException
+	 * @author Tobias Koppe
+	 * @since 1.2
+	 */
+	public void writeByte(char c) throws IOException{
+		this._serialPortObject.getOutputStream().write((byte)c);
+	}
+
+	public CommPortIdentifier get_identObject() {
+		return _identObject;
+	}
+
+	public void set_identObject(CommPortIdentifier _identObject) {
+		this._identObject = _identObject;
+	}
+
+	public SerialPort get_serialPortObject() {
+		return _serialPortObject;
+	}
+
+	public void set_serialPortObject(SerialPort _serialPortObject) {
+		this._serialPortObject = _serialPortObject;
+	}
+
+	public int get_baud() {
+		return _baud;
+	}
+
+	public void set_baud(int _baud) {
+		this._baud = _baud;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+	
 }
