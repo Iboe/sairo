@@ -17,9 +17,6 @@ import javax.swing.tree.TreeModel;
  */
 public class MissionObject implements Serializable{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/***
@@ -34,10 +31,18 @@ public class MissionObject implements Serializable{
     
     private DefaultMutableTreeNode root;
     
+    /**
+     * Constructs and initializes the MissionObject object.
+     * @param missionTree
+     */
     public MissionObject(JTree missionTree) {
         root = ((DefaultMutableTreeNode)((DefaultTreeModel)missionTree.getModel()).getRoot());
     }
     
+    /**
+     * Creates and returns a Mission object from this MissionObject.
+     * @return mission
+     */
     private MissionImpl makeMission() {
         MissionImpl mission = null;
         
@@ -58,6 +63,11 @@ public class MissionObject implements Serializable{
         return mission;
     }
     
+    /**
+     * Parses the childs of the given DefaultMutableTreeNode and adds all tasks found to the tasklist representing the mission.
+     * @param parent
+     * @param tasklist
+     */
     private void parseChilds(DefaultMutableTreeNode parent, List<Task> tasklist) {
         DefaultMutableTreeNode child;
         // debug
@@ -78,10 +88,18 @@ public class MissionObject implements Serializable{
         }
     }
 
+    /**
+     * Tunnel for makeMission to directly yield the mission represented by this MissionObject.
+     * @return mission
+     */
     public MissionImpl getMission() {
         return makeMission();
     }
-    
+  
+    /**
+     * Gets the root of the currently stored MissionTree.
+     * @return missionTree
+     */
     public DefaultMutableTreeNode getRoot() {
         return root;
     }

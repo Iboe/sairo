@@ -24,9 +24,6 @@ import de.fhb.sailboat.mission.Mission;
  */
 public class MissionCreatorInterface extends RootDialog{
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final static String INPUTTEXT = "Eingabe";
     private final static String INPUTTEXT_LIST = "Listennamen angeben:";

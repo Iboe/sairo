@@ -13,9 +13,6 @@ import java.util.ArrayList;
  */
 public class MissionTask implements java.io.Serializable {
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -36,6 +33,10 @@ public class MissionTask implements java.io.Serializable {
      */
     private ArrayList<Object> parameters; //
     
+    /**
+     * Constructs and initializes the MissionTask.
+     * @param task
+     */
     public MissionTask(Task task) {
         if (task != null) {
             storeTask(task);
@@ -51,6 +52,10 @@ public class MissionTask implements java.io.Serializable {
         this.parameters.add(param);
     }
 
+    /**
+     * Stores a given Task by decomposing it into the primitve data types needed to construct it.
+     * @param task
+     */
     private void storeTask(Task task) {
         this.name = task.getClass().getSimpleName();
         parameters = new ArrayList<Object>();
@@ -225,6 +230,10 @@ public class MissionTask implements java.io.Serializable {
         
     }
     
+    /**
+     * Returns the name of this Task.
+     * @return
+     */
     public String getName() {
         return name;
     }

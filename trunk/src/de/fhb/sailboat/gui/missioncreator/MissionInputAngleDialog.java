@@ -7,9 +7,6 @@ package de.fhb.sailboat.gui.missioncreator;
  */
 public class MissionInputAngleDialog extends javax.swing.JDialog {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -166,6 +163,10 @@ public class MissionInputAngleDialog extends javax.swing.JDialog {
         this.angleSliderLabel.setText(this.angleSlider.getValue() + "°");
     }
 
+    /**
+     * Completes the dialog while setting the name of the resulting task to a default one if none was chosen.
+     * @param evt
+     */
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.chosenName = this.inputNameTextField.getText();
         if (chosenName.isEmpty()) chosenName = "AngleTask";
@@ -177,6 +178,10 @@ public class MissionInputAngleDialog extends javax.swing.JDialog {
         this.setVisible(false);
     }
 
+    /**
+     * Cancels the dialog.
+     * @param evt
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         state = -1;
         

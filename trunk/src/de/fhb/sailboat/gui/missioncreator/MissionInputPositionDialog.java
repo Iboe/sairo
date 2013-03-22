@@ -14,9 +14,6 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  */
 public class MissionInputPositionDialog extends javax.swing.JDialog {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final static int RADIUS_MIN = 1;        // minimum value of radius property of ReachCircle Tasks
     private final static int RADIUS_DEFAULT = 3;    // default starting value if radius spinner
@@ -292,6 +289,10 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>                        
 
+    /**
+     * Adds a new set of coordinates to the map and thus to the list of selected GPS values for the dialog.
+     * @param evt
+     */
     private void addCoordButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         if ((isLegalDoubleString(this.latitudeTextField.getText())) && (isLegalDoubleString(this.longitudeTextField.getText()))) { 
             // if single mode (GPS/ obstacle) remove all present markers
@@ -305,11 +306,19 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         else JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_VALUE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
     }                                              
 
+    /**
+     * Removes all set coordinates from the map/ list.
+     * @param evt
+     */
     private void removeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
         this.missionMap.removeEveryObject();
         this.missionMap.invalidate();
     }                                               
 
+    /**
+     * Removes only the coordinates input last from the map/ list.
+     * @param evt
+     */
     private void removeLastButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         List<MapMarker> markerList = this.missionMap.getMarkerList();
         if (markerList.size() > 0) {
@@ -320,6 +329,10 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         this.missionMap.invalidate();
     }                                                
 
+    /**
+     * Completes the dialog while setting the name of the task to a default one if none was chosen.
+     * @param evt
+     */
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         this.chosenName = this.nameTextField.getText();
         if (chosenName.isEmpty()) chosenName = "GPSTask";
@@ -329,6 +342,10 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         this.setVisible(false);
     }                                            
 
+    /**
+     * Abots the dialog.
+     * @param evt
+     */
     private void abortButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         state = -1;
         
@@ -336,6 +353,10 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         this.setVisible(false);
     }                                           
 
+    /**
+     * Updates the chosen radius while using the spinner element.
+     * @param evt
+     */
     private void radiusspinnerStateChanged(javax.swing.event.ChangeEvent evt) {                                           
         // make sure value of radius doesnt go into illegal range
         if ((Integer)this.radiusSpinner.getValue() < RADIUS_MIN) this.radiusSpinner.setValue(new Integer(1));
@@ -365,10 +386,19 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         return myReturn;
     }
     
+    /**
+     * Returns the size of the obstacle list, thus the number of obstacles set.
+     * @return number of obstacles sets
+     */
     public int getObstacleListSize() {
         return this.missionMap.getObstacles().size();
     }
     
+    /**
+     * Returns the coordinates of the obstacle at the specified index of the obstacle list.
+     * @param index
+     * @return MapMarker representing the obstacle
+     */
     public MapMarker getObstacleAt(int index) {
         MapMarker myReturn = null;
         if (index < this.missionMap.getObstacles().size()) myReturn = this.missionMap.getObstacles().get(index);
@@ -435,60 +465,14 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         return myReturn;
     }
     
-    // FIXME remove this test stub
+    /**
+     * Returns a reference to the full list of obstacles as MapMarkers.
+     * @return list of MapMarkers
+     */
     public List<MapMarker> getObstacleList() {
         return this.missionMap.getObstacles();
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    //public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        /*try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MissionInputPositionDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MissionInputPositionDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MissionInputPositionDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MissionInputPositionDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
-        //</editor-fold>
-
-        /*
-         * Create and display the dialog
-         */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                MissionInputPositionDialog dialog = new MissionInputPositionDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }*/
     // Variables declaration - do not modify                     
     private javax.swing.JButton abortButton;
     private javax.swing.JButton acceptButton;
