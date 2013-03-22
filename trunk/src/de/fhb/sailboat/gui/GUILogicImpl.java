@@ -288,6 +288,9 @@ public class GUILogicImpl implements GUILogic {
    // the following are methods for primitive tests and are kept only for future reference, refer to MissionCreator for mission handling
     @Override
     @Deprecated
+    /**
+     * Old method for sending ReachCircleTasks.
+     */
     public void sendCircleMarkers() {
         if (missionMap.getMap().getMapMarkerList().size() > 0) {
             //this.controller.setCircleMarkerList(GPSTransformations.mapMarkerListToGpsList(missionMap.getMap().getMapMarkerList()));
@@ -298,6 +301,9 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old method for sending ReachPolygonTasks.
+     */
     public void sendPolyMapMarkers() {
         this.controller.setPolyList(missionMap.getPolygonList());
         this.controller.commitPolyList(planner);
@@ -306,6 +312,9 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old method for sending a ReachCompassTask.
+     */
     public void sendReachCompass() {
         String str = JOptionPane.showInputDialog(null,
                 "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
@@ -317,6 +326,9 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old method for sending a HoldAngleToWindTask.
+     */
     public void sendHoldAngleToWind() {
         String str = JOptionPane.showInputDialog(null,
                 "Bitte gewünschten Winkel eingeben: ", "Winkeleingabe", 1);
@@ -328,6 +340,9 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old method for sending a StopTask.
+     */
     public void sendStop() {
         int choice = JOptionPane.showConfirmDialog(null,
                 "Wirklich Mission stoppen?", "Bitte bestätigen",
@@ -339,6 +354,9 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old method for resetting the actors (propellor, sail, rudder).
+     */
     public void sendResetActors() {
         int choice = JOptionPane.showConfirmDialog(null,
                 "Wirklich Motor, Segel und Ruder zurücksetzen?", "Bitte bestätigen",
@@ -350,6 +368,9 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old methof for resetting the MissionMap ()markers, lines.
+     */
     public void sendResetMissionMap() {
         missionMap.removeEveryObject();
         missionMap.removeTrail();
@@ -358,18 +379,32 @@ public class GUILogicImpl implements GUILogic {
 
     @Override
     @Deprecated
+    /**
+     * Old method used for activating/ deactivation SailMode, resulting in
+     * usage of propellor or not.
+     * @param sailMode true if propellor should be deactivated
+     */
     public void setSailMode(boolean sailMode) {
         this.controller.setSailMode(sailMode);
     }
 
+    /**
+     * Returns a reference to the MainController object.
+     */
     public MainController getController() {
         return this.controller;
     }
 
+    /**
+     * Returns a reference to the Planner object.
+     */
     public Planner getPlanner() {
         return this.planner;
     }
     
+    /**
+     * Returns a reference to the Map object (MissionMap).
+     */
     public Map getMissionMap() {
         return this.missionMap;
     }

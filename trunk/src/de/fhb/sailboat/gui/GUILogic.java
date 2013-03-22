@@ -11,7 +11,6 @@ import de.fhb.sailboat.mission.Mission;
  * @author Patrick Rutter
  */
 public interface GUILogic {
-	
     
     Planner planner = null;;						// the Planner is used for sending mission sets
     MainController controller = null;				// the GUIController is used for getting and setting values from and to the world model/ local database
@@ -113,22 +112,52 @@ public interface GUILogic {
     
     // the following are methods for primitive tests and are kept only for reference
     @Deprecated
+    /**
+     * Old method for sending ReachCircleTasks.
+     */
     public void sendCircleMarkers();
     @Deprecated
+    /**
+     * Old method for sending ReachPolygonTasks.
+     */
     public void sendPolyMapMarkers();
     @Deprecated
+    /**
+     * Old method for sending a ReachCompassTask.
+     */
     public void sendReachCompass();
     @Deprecated
+    /**
+     * Old method for sending a HoldAngleToWindTask.
+     */
     public void sendHoldAngleToWind();
     @Deprecated
+    /**
+     * Old method to send a StopTask.
+     */
     public void sendStop();
     @Deprecated
+    /**
+     * Old method to reset Actors (propellor, sail, rudder).
+     */
     public void sendResetActors();
     @Deprecated
+    /**
+     * Old method for reseting the MissionMap (markers, lines).
+     */
     public void sendResetMissionMap();
     @Deprecated
+    /**
+     * Old method used for activating/ deactivation SailMode, resulting in
+     * usage of propellor or not.
+     * @param sailMode true if propellor should be deactivated
+     */
     public void setSailMode(boolean sailMode);
     
+    /**
+     * Returns the referrence of the MissionMap object.
+     * @return MissionMap
+     */
     public Map getMissionMap();
     
 }
