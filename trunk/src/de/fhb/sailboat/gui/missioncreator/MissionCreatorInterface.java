@@ -24,7 +24,11 @@ import de.fhb.sailboat.mission.Mission;
  */
 public class MissionCreatorInterface extends RootDialog{
 
-    private final static String INPUTTEXT = "Eingabe";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final static String INPUTTEXT = "Eingabe";
     private final static String INPUTTEXT_LIST = "Listennamen angeben:";
     private final static String INPUTTEXT_TASK = "Tasknamen angeben:";
     private final static String INPUTTEXT_ANGLE = "Winkel angeben";
@@ -823,7 +827,7 @@ public class MissionCreatorInterface extends RootDialog{
             if (pd.getState() == MissionInputPositionDialog.APPROVE_OPTION) {
                 if (pd.getGPSListSize() >= 3) {
                     // make GPS list
-                    List<GPS> gpsList = new ArrayList();
+                    List<GPS> gpsList = new ArrayList<GPS>();
                     for (int i = 0; i < pd.getGPSListSize(); i++) {
                         gpsList.add(pd.getGPSinListAt(i));
                     }

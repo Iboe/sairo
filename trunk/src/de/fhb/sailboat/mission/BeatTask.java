@@ -1,6 +1,5 @@
 package de.fhb.sailboat.mission;
 
-import de.fhb.sailboat.control.navigator.BeatWorker;
 import de.fhb.sailboat.data.GPS;
 
 /**

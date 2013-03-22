@@ -20,6 +20,10 @@ import de.fhb.sailboat.gui.RootDialog;
  */
 public class PlayerDialog extends RootDialog{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private  MainController controller;
 
 	/**

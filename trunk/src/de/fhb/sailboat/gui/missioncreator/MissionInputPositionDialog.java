@@ -14,7 +14,11 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  */
 public class MissionInputPositionDialog extends javax.swing.JDialog {
 
-    private final static int RADIUS_MIN = 1;        // minimum value of radius property of ReachCircle Tasks
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final static int RADIUS_MIN = 1;        // minimum value of radius property of ReachCircle Tasks
     private final static int RADIUS_DEFAULT = 3;    // default starting value if radius spinner
     
     private final static String ERRORTEXT = "Fehler";

@@ -10,7 +10,12 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  * @author Patrick Rutter
  */
 public class MissionTreeObject implements Serializable {
-    // The "name" of the MissionTreeObject, will be returned by the toString()-method, and thus, be displayed within the missionTree
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// The "name" of the MissionTreeObject, will be returned by the toString()-method, and thus, be displayed within the missionTree
     // this has NO getter, since toString() pretty much equals that
     private String name;
     

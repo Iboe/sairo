@@ -3,21 +3,12 @@ package de.fhb.sailboat.gui;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.io.File;
-
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFileChooser;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.filechooser.FileFilter;
-
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
-import de.fhb.sailboat.missionplayer.Player;
 import de.fhb.sailboat.missionplayer.PlayerDialog;
 
 /**
@@ -39,6 +30,10 @@ public class GUI extends javax.swing.JFrame {
 //	 */
 //	private int modus	= GUILogicImpl.LIVE_MODUS;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GUILogic guiLogic;
 	private JMenu emulatorMenu;
 	

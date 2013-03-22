@@ -20,7 +20,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import de.fhb.sailboat.control.planner.Planner;
-import de.fhb.sailboat.gui.map.utilities.GPSTransformations;
 import de.fhb.sailboat.ufer.prototyp.utility.UferLogger;
 
 /**

@@ -13,6 +13,10 @@ import javax.vecmath.Vector3d;
  *
  */
 public class Compass implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final double azimuth;
 	private final double pitch;
 	private final double roll;

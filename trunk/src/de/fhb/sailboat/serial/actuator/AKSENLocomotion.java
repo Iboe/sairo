@@ -7,8 +7,6 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
-import sun.reflect.generics.visitor.Reifier;
-
 import de.fhb.sailboat.data.Actuator;
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 import de.fhb.sailboat.serial.serialAPI.SerialSystemTextEnum;

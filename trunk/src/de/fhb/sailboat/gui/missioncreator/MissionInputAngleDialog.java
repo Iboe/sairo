@@ -8,6 +8,11 @@ package de.fhb.sailboat.gui.missioncreator;
 public class MissionInputAngleDialog extends javax.swing.JDialog {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * State that signals a successfull input (using ok-button).
      */
     public static int APPROVE_OPTION = 0;

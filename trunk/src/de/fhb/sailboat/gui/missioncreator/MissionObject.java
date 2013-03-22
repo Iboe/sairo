@@ -17,7 +17,12 @@ import javax.swing.tree.TreeModel;
  */
 public class MissionObject implements Serializable{
     
-    /***
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/***
      * Extension for files containing this class serialized. Used for FileChoosers.
      */
     final public static transient String FILE_EXTENSION = ".fhsm";
@@ -38,7 +43,7 @@ public class MissionObject implements Serializable{
         
         JTree tree = new JTree(root);
         
-        List<Task> tasklist = new ArrayList();
+        List<Task> tasklist = new ArrayList<Task>();
         TreeModel model = tree.getModel();
         DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
         

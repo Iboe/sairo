@@ -9,7 +9,11 @@ import java.io.Serializable;
  *
  */
 public class Tupel<T,V> implements Serializable{
-	 private T object1;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private T object1;
 	 private V object2;
 
 	  public Tupel(T o1, V o2) {

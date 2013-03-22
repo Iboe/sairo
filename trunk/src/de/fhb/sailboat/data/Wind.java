@@ -11,6 +11,10 @@ import java.io.Serializable;
  */
 public class Wind implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final int direction;
 	private final double speed;
 	

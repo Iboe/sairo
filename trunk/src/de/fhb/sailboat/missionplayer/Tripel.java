@@ -10,7 +10,11 @@ import java.io.Serializable;
  *
  */
 public class Tripel<T,U,V> implements Serializable{
-	 private T object1;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private T object1;
 	 private U object2;
 	 private V object3;
 

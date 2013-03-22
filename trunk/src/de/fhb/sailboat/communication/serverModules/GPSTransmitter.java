@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
-import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WorldModel;

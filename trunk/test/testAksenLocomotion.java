@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
-import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.start.PropertiesInitializer;
 
 /***

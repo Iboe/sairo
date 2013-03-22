@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class MissionTask implements java.io.Serializable {
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * This enmueration holds the simple classname of every Task supported by MissionTask for handling as given via calling getClass().getSimpleClassName.toUpperCase() .
      * Add any newly added Tasks names here to register them as accepted after handling code for them was written in buildTask() and ???. Be wary of spelling errors.
      */

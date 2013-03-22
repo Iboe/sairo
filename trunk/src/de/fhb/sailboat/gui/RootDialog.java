@@ -11,6 +11,11 @@ import javax.swing.JDialog;
 
 public class RootDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public RootDialog() {
 		super();
 	}
