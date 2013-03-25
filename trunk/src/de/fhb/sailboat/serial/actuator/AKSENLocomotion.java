@@ -387,7 +387,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 					for (int j = 0; j < loopLength; j++) {
 						received = 0x00;
 						this.myCOM.writeByte(b[j]);
-						setAksenState("send: " + (char) b[j]);
 						Thread.sleep(wait_sleep);
 						received = (byte) this.myCOM.readByte();
 						setAksenState("send: " + (char) b[j] + " -- received: "
