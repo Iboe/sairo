@@ -32,6 +32,8 @@ public class testRudderCalibration {
 		init();
 		log.debug(TAG+"start test for testing rudder calibration...");
 		test();
+		aksen.closePort();
+		System.exit(0);
 	}
 	
 	public void init(){
@@ -45,7 +47,7 @@ public class testRudderCalibration {
 			log.info(TAG + "logger state: " + log.getLevel().toString());
 			PropertiesInitializer propsInit = new PropertiesInitializer();
 			propsInit.initializeProperties();
-			aksen = new AKSENLocomotion(true);
+			aksen = new AKSENLocomotion();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -65,7 +67,6 @@ public class testRudderCalibration {
 			br.readLine();
 			aksen.setRudder(RUDDER_LEFT);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
