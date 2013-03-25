@@ -23,11 +23,13 @@ public class CPU {
 	
 	public CPU(){
 		sigar = new Sigar();
+		startMonitoringCpu();
 	}
 	
 	public CPU(Logger pLog){
 		sigar = new Sigar();
 		LOG = pLog;
+		startMonitoringCpu();
 	}
 	
 	/***

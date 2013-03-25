@@ -23,6 +23,7 @@ import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.serial.sensor.CompassSensor;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
 import de.fhb.sailboat.serial.sensor.WindSensor;
+import de.fhb.sailboat.utils.performance.CPU;
 
 /**
  * Initializes the application when the main method is started. Loads properties and initializes all 
@@ -42,6 +43,8 @@ public class Initializier {
 	protected LocomotionSystem loco;
 	protected GUI view;
 	
+	protected static CPU cpuMonitoring;
+	
 	/**
 	 * Entry point for the application. Loads properties and initializes all control layers, all 
 	 * sensors, the user interface and the communication between boat application and user interface.
@@ -50,7 +53,7 @@ public class Initializier {
 	 */
 	public static void main(String[] args) {
 		Initializier init = new Initializier();
-		
+		cpuMonitoring = new CPU();
 		initializeProperties();
 		init.initializeControl();
 		init.initializeSensors();
