@@ -11,6 +11,7 @@ import org.apache.log4j.SimpleLayout;
 
 import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.start.PropertiesInitializer;
+import de.fhb.sailboat.utils.performance.CPU;
 
 
 public class testRudderCalibration {
@@ -27,6 +28,7 @@ public class testRudderCalibration {
 	int RUDDER_RIGHT = 108;
 	
 	private AKSENLocomotion aksen;
+	private CPU cpu;
 	
 	public testRudderCalibration(){
 		init();
@@ -48,7 +50,7 @@ public class testRudderCalibration {
 			PropertiesInitializer propsInit = new PropertiesInitializer();
 			propsInit.initializeProperties();
 			aksen = new AKSENLocomotion();
-			
+			cpu = new CPU(log);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
