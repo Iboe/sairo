@@ -348,7 +348,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 						return -1;
 					}
 					if (debug) {
-						LOG.info("Needed time to execute aquire connection and got achknowledge: "
+						LOG.debug("Needed time to execute aquire connection and got achknowledge: "
 								+ (System.currentTimeMillis() - time) + " ms");
 					}
 					if (i == maxAttempts) {
@@ -423,7 +423,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					// command in next loop
 					if (received != expected) {
 						if (attempt == maxAttempts)
-							LOG.info("Couldn't send InstructionSet on AKSEN in "
+							LOG.warn("Couldn't send InstructionSet on AKSEN in "
 									+ maxAttempts
 									+ " attempts. Received: "
 									+ received); // Tobias Koppe : Wenn nicht
@@ -563,7 +563,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					// Zeichen erfolgreich übertragen
 				} else {
 					// Abbruch da Fehler
-					LOG.info("Couldn't send instruction to AKSEN Board");
+					LOG.warn("Couldn't send instruction to AKSEN Board");
 					return -1;
 				}
 			}
@@ -590,7 +590,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				return 1;
 			} else {
 				// Abbruch da Fehler bei Senden vom execute instruction
-				LOG.info("Couldn't execute command on AKSEN Board");
+				LOG.warn("Couldn't execute command on AKSEN Board");
 				return -1;
 			}
 		}
@@ -666,7 +666,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 
 	public void setAksenState(String aksenState) {
 		this.aksenState = aksenState;
-		LOG.info("new aksenboard state: " + aksenState);
+		LOG.debug("new aksenboard state: " + aksenState);
 		aksenStateList.add("new aksenboard state: " + aksenState);
 	}
 

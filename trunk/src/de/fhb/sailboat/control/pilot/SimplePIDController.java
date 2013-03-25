@@ -10,7 +10,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * Simple implementation of a PID controller for the rudder.
  * 
  * @author hscheel
- *
+ * @version 2
  */
 public class SimplePIDController {
 
@@ -66,6 +66,10 @@ public class SimplePIDController {
 		return output + currentValue;
 	}
 	
+	/***
+	 * @author Tobias Koppe
+	 * @since 2
+	 */
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
