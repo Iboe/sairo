@@ -35,6 +35,7 @@ public class testRudderCalibration {
 		log.debug(TAG+"start test for testing rudder calibration...");
 		test();
 		aksen.closePort();
+		cpu.stopMonitoringCpu();
 		System.exit(0);
 	}
 	
@@ -51,6 +52,7 @@ public class testRudderCalibration {
 			propsInit.initializeProperties();
 			aksen = new AKSENLocomotion();
 			cpu = new CPU(log);
+			cpu.startMonitoringCpu();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

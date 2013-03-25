@@ -12,7 +12,7 @@ import org.hyperic.sigar.SigarException;
  */
 public class CPU {
 
-	private static final Logger LOG = Logger.getLogger(CPU.class);
+	private static Logger LOG = Logger.getLogger(CPU.class);
 	
 	private Sigar sigar;
 	private CPU cpu;
@@ -23,6 +23,11 @@ public class CPU {
 	
 	public CPU(){
 		sigar = new Sigar();
+	}
+	
+	public CPU(Logger pLog){
+		sigar = new Sigar();
+		LOG = pLog;
 	}
 	
 	/***
