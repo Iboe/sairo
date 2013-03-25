@@ -102,7 +102,7 @@ public class GpsSensor {
 											gradLong + minLong, this.satelites, lastSpeed); 
 									WorldModelImpl.getInstance().getGPSModel()
 											.setPosition(myGps);
-
+									LOG.info("GPS coordinates: " + myGps.toString());
 									try {
 										Thread.sleep(500);
 									} catch (InterruptedException e) {

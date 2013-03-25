@@ -145,9 +145,9 @@ public class CompassSensor {
 																dataSet.getAccVect(), 
 																usefullrate);
 								WorldModelImpl.getInstance().getCompassModel().setCompass(this.cInstance.c);
-//								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
-//										+" Temp: "+ dataSet.getTemp()
-//										+" out of "+ i +" useful samples ("+ usefullrate +")");
+								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
+										+" Temp: "+ dataSet.getTemp()
+										+" out of "+ i +" useful samples ("+ usefullrate +")");
 								
 							}
 						}
