@@ -1,0 +1,330 @@
+DEBUG 2013-03-25 12:17:16,714 [Sigar] no sigar-x86-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-x86-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at de.fhb.sailboat.utils.performance.CPU.<init>(CPU.java:25)
+	at de.fhb.sailboat.start.Initializier.main(Initializier.java:56)
+INFO  2013-03-25 12:17:17,202 [de.fhb.sailboat.serial.serialAPI.COMPort] COM7 wurde initialisiert.
+INFO  2013-03-25 12:17:17,203 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 7 initialized.
+INFO  2013-03-25 12:17:17,488 [de.fhb.sailboat.start.Initializier] -----init sensors-----
+INFO  2013-03-25 12:17:17,491 [de.fhb.sailboat.serial.serialAPI.COMPort] COM12 wurde initialisiert.
+INFO  2013-03-25 12:17:17,492 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 12 initialized.
+INFO  2013-03-25 12:17:17,524 [de.fhb.sailboat.serial.serialAPI.COMPort] COM4 wurde initialisiert.
+INFO  2013-03-25 12:17:17,524 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 4 initialized.
+INFO  2013-03-25 12:17:17,688 [de.fhb.sailboat.serial.serialAPI.COMPort] COM5 wurde initialisiert.
+INFO  2013-03-25 12:17:17,688 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 5 initialized.
+INFO  2013-03-25 12:17:17,837 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:18,027 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:18,875 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.9 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 9 useful samples (0.0)
+DEBUG 2013-03-25 12:17:18,922 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:19,391 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:19,422 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:19,765 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:19,860 [de.fhb.sailboat.start.Initializier] -----init sensors done-----
+INFO  2013-03-25 12:17:19,925 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:19,952 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:20,427 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:20,453 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:20,822 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.75 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:20,956 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:21,466 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:21,701 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.85000000000002 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:22,362 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:22,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:22,663 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.0 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:23,229 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:23,388 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:23,630 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:24,117 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:24,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:24,600 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.6 Pitch: 8.3 Roll: 3.3 Temp: 30.75 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:24,629 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:25,131 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:25,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:25,560 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:25,632 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:26,133 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:26,391 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:26,543 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:26,644 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:27,145 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:27,492 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.9 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:27,647 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:28,147 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:28,385 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:28,457 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:28,648 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:29,234 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:29,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:29,519 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:29,735 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:30,236 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:30,388 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:30,489 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.1 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:30,737 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:30,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:31,240 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:31,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:31,510 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.2 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:31,742 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:32,243 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:32,392 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:32,442 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:32,745 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:33,384 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:33,633 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:34,351 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.0 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:34,385 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:34,501 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:35,316 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.0 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:35,368 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:35,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+INFO  2013-03-25 12:17:35,889 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:36,236 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:36,282 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.5 Pitch: 8.3 Roll: 3.3 Temp: 30.7 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:36,391 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:37,119 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:37,248 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:37,626 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:38,128 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:38,213 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.64999999999998 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:38,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:38,629 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:39,130 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:39,183 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.9 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:39,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:39,632 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:40,136 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:40,148 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:40,388 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+INFO  2013-03-25 12:17:40,889 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:41,004 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:41,119 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.6 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:41,391 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:41,871 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:42,089 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.5 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:42,738 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:43,045 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:43,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:43,607 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:44,012 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:44,108 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:44,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:44,618 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:44,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:44,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.9 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:45,119 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:45,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:45,622 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:45,987 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:46,122 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:46,623 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:47,002 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:47,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:47,506 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:47,987 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:48,373 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:48,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+INFO  2013-03-25 12:17:48,887 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:48,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:49,240 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:49,389 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:49,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:50,112 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:50,389 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:50,613 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:50,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:51,131 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:51,634 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:51,990 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:52,134 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:52,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:52,635 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:52,988 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:53,136 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:53,388 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+INFO  2013-03-25 12:17:53,889 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:53,988 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:54,009 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:54,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:54,877 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:54,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.6 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:55,744 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:55,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:56,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:56,611 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:56,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:17:57,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:57,478 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:17:57,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:58,345 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:58,388 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+INFO  2013-03-25 12:17:58,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:58,990 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.85 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:17:59,212 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:17:59,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:17:59,989 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.8 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:00,079 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:00,389 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:00,945 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:00,990 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.64999999999998 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:01,812 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:01,991 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.6 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:02,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:02,679 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:02,990 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.0 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:03,382 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:03,546 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:03,991 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:04,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:04,413 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:04,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:05,009 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.5 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:05,280 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:05,392 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:06,015 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.0 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:06,147 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:06,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:07,016 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:07,019 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 229.7 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:07,522 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:08,015 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.1 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:08,029 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:08,385 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:08,538 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:09,016 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.0 Pitch: 8.3 Roll: 3.3 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:09,044 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:09,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:09,582 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:09,908 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:10,016 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 230.60000000000002 Pitch: 8.3 Roll: 3.25 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:10,409 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:10,485 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:11,015 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 247.0 Pitch: 8.2 Roll: 1.6 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:11,351 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:12,016 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 275.45 Pitch: 7.7 Roll: 3.7 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:12,225 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:12,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:12,726 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:13,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 290.9 Pitch: 8.1 Roll: 4.2 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:13,229 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:13,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:13,729 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:14,016 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.2 Pitch: 8.2 Roll: 3.5 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:14,240 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:14,386 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:14,741 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:14,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:15,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.2 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:15,242 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:15,388 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:16,018 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.2 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:16,151 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:16,389 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:16,652 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:17,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.2 Pitch: 8.3 Roll: 3.4 Temp: 30.8 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:17,157 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:17,665 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:18,022 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:18,166 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:18,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:18,667 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:19,018 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:19,168 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:19,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:19,669 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:20,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.2 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:20,170 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:20,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:20,671 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:20,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:21,018 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:21,178 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:21,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:21,682 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:22,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.1 Pitch: 8.3 Roll: 3.4 Temp: 30.85 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:22,184 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:23,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.1 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:23,055 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+INFO  2013-03-25 12:18:23,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:23,922 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:24,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:24,383 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:24,789 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:25,017 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:25,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:25,656 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:26,018 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.25 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:26,389 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:26,526 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:27,019 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 31.0 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:27,394 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:27,396 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:27,897 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:28,019 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 31.0 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:28,399 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:28,900 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:29,020 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:29,385 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:29,401 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:29,902 [Windsensor: ] WindDirection: 330 WindSpeed: 0.1
+DEBUG 2013-03-25 12:18:30,022 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.2 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:30,387 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:30,403 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:30,888 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:31,048 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:31,293 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+INFO  2013-03-25 12:18:31,390 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:32,066 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:18:32,160 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:33,028 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:33,070 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.5 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:33,384 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:33,895 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:34,086 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:34,385 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:18:34,762 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:18:35,085 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 30.9 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:18:35,402 [de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread] GPS coordinates: GPS [latitude: 0.0, longitude: 0.0, satelites: 0, speed: 0.0]
+DEBUG 2013-03-25 12:24:23,485 [Sigar] no sigar-x86-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-x86-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at de.fhb.sailboat.utils.performance.CPU.<init>(CPU.java:25)
+	at de.fhb.sailboat.start.Initializier.main(Initializier.java:56)
+INFO  2013-03-25 12:24:24,487 [de.fhb.sailboat.serial.serialAPI.COMPort] COM7 wurde initialisiert.
+INFO  2013-03-25 12:24:24,488 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 7 initialized.
+INFO  2013-03-25 12:24:24,586 [de.fhb.sailboat.start.Initializier] -----init sensors-----
+INFO  2013-03-25 12:24:24,590 [de.fhb.sailboat.serial.serialAPI.COMPort] COM12 wurde initialisiert.
+INFO  2013-03-25 12:24:24,591 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 12 initialized.
+INFO  2013-03-25 12:24:24,732 [de.fhb.sailboat.serial.serialAPI.COMPort] COM4 wurde initialisiert.
+INFO  2013-03-25 12:24:24,733 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 4 initialized.
+INFO  2013-03-25 12:24:24,817 [de.fhb.sailboat.serial.serialAPI.COMPort] COM5 wurde initialisiert.
+INFO  2013-03-25 12:24:24,817 [de.fhb.sailboat.serial.serialAPI.COMPort] Port 5 initialized.
+DEBUG 2013-03-25 12:24:25,088 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:25,591 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:25,840 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:26,094 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:26,654 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:26,862 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.6 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+INFO  2013-03-25 12:24:26,960 [de.fhb.sailboat.start.Initializier] -----init sensors done-----
+DEBUG 2013-03-25 12:24:27,219 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:27,856 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:28,143 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:28,665 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:28,901 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:29,180 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:29,684 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:29,796 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:30,270 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:30,756 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:30,789 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:31,364 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:31,723 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:31,926 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:32,428 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:32,760 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.4 Pitch: 8.3 Roll: 3.4 Temp: 31.4 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:32,932 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:33,455 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
+DEBUG 2013-03-25 12:24:33,659 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 291.3 Pitch: 8.3 Roll: 3.4 Temp: 31.5 out of 10 useful samples (1.0)
+DEBUG 2013-03-25 12:24:33,959 [Windsensor: ] WindDirection: 330 WindSpeed: 0.0
