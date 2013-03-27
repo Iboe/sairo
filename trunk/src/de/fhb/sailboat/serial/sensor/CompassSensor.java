@@ -32,7 +32,7 @@ public class CompassSensor {
 	boolean keepRunning = true;
 	Thread sensorThread;
 
-	long clock = 1000;			// clock-rate in milliseconds; Compass sends actually 10 Samples/s, Sample-Buffer stores 10 Samples
+	long clock = 25; //1000			// clock-rate in milliseconds; Compass sends actually 10 Samples/s, Sample-Buffer stores 10 Samples
 	
 	// intern
 	int errorcount = 0;
