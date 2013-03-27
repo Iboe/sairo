@@ -27,36 +27,38 @@ public class evaluateCompassCourse {
 			while((zeile = bfReader.readLine()) != null){
 				if(zeile.contains(logTextblocks.compassThreadName)){
 					System.out.println("Found compass log");
-					String timeStamp="";
-					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
-					int startDate=0;
-					for(int j=0;j<zeile.length();j++){
-						if(Character.isDigit(zeile.charAt(j))){
-							startDate = j;
-							j=zeile.length()+1;
-						}
-					}
-					int untilDate = zeile.indexOf("[")-1;
-					timeStamp=zeile.substring(startDate, untilDate);
-					timeStamp=timeStamp.replace(',',':');
-					
-					Date d = simpleDateFormat.parse(timeStamp);
+//					String timeStamp="";
+//					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+//					int startDate=0;
+//					for(int j=0;j<zeile.length();j++){
+//						if(Character.isDigit(zeile.charAt(j))){
+//							startDate = j;
+//							j=zeile.length()+1;
+//						}
+//					}
+//					int untilDate = zeile.indexOf("[")-1;
+//					timeStamp=zeile.substring(startDate, untilDate);
+//					timeStamp=timeStamp.replace(',',':');
+//					
+//					Date d = simpleDateFormat.parse(timeStamp);
+					Date d=filter.filterTimestamp(zeile);
 					System.out.println("TimeStap: " + d.toString());
 					int startAzimuth = zeile.indexOf(logTextblocks.compassAzimuthMark)+logTextblocks.compassAzimuthMark.length();
 					int endAzimuth = zeile.indexOf(logTextblocks.compassPitchMark)-1;
 					String azimuth = zeile.substring(startAzimuth,endAzimuth);
 					System.out.println("SubString start: " + startAzimuth +" end: " + endAzimuth + " = " + azimuth);
 					compassCourseList.add(new CompassCourse(Float.valueOf(azimuth), d));
-					CSVWriter.CSVWriterWriteCompassCourses("sairo_compasscourseslist.csv", compassCourseList);
+					CSVWriter.CSVWriterWriteCompassCourses("sailboat_data.log_27_03_2013_Labor_01_compasscourses.csv", compassCourseList);
 				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 	

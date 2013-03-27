@@ -366,6 +366,7 @@ public class DriveAngleThread extends Thread {
 		//adding offset, to match with the absolute rudder values
 		rudderPos += LocomotionSystem.RUDDER_NORMAL;
 		rudderPos = simplePIDController.control(rudderPos);
+		LOG.debug("Set rudder angle to: " + rudderPos);
 		locSystem.setRudder((int) rudderPos);
 	}
 		

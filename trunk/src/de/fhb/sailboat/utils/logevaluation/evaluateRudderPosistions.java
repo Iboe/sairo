@@ -53,7 +53,7 @@ public class evaluateRudderPosistions {
 				}
 			}
 			bfReader.close();
-			CSVWriter.CSVWriterWriteRudderPositions("sairo_rudderposList.csv", rudderPositions);
+			CSVWriter.CSVWriterWriteRudderPositions("sailboat_data.log_27_03_2013_Labor_01_rudderpositions.csv", rudderPositions);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

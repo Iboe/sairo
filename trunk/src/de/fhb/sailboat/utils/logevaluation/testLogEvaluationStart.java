@@ -9,7 +9,9 @@ public class testLogEvaluationStart {
 
 	public static void main(String args[]){
 		//evaluateAksenLog test = new evaluateAksenLog("./log/sailboat.log_25_03_2013");
-		//evaluateRudderPosistions test = new evaluateRudderPosistions("./log/sailboat.log_25_03_2013");
-		evaluateCompassCourse test = new evaluateCompassCourse("./log/sailboat.log_25_03_2013");
+		System.out.println("Start evaluate rudder posistions");
+		evaluateRudderPosistions testRudder = new evaluateRudderPosistions("./log/sailboat.log_27_03_2013_Labor_01");
+		System.out.println("Start evaluate compass courses");
+		evaluateCompassCourse testCompassCourse = new evaluateCompassCourse("./log/sailboat.log_27_03_2013_Labor_01");
 	}
 }
