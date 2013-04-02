@@ -56,7 +56,7 @@ public class CompassSensor {
 	static class CompassSensorThread extends Thread {
 		CompassSensor cInstance;
 		// clock in milliseconds
-		long clock = 100;	// default Value
+		long clock; //vorher clock = 100
 		long start, end;
 		private static Logger LOG = Logger.getLogger(CompassSensorThread.class);
 

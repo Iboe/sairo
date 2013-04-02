@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.fhb.sailboat.data.CompassCourse;
+import de.fhb.sailboat.data.PilotDriveAngleRudderCommand;
 import de.fhb.sailboat.data.RudderPosition;
 
 /***
@@ -19,6 +20,7 @@ public class CSVWriter {
 
 	private static ArrayList<RudderPosition> rudderPositionList;
 	private static ArrayList<CompassCourse> compassCoursesList;
+	private static ArrayList<PilotDriveAngleRudderCommand> pilotDriveAngleRudderCommandList;
 	
 	private static DateFormat dFormate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
 	private static DateFormat dFormatDifference = new SimpleDateFormat("hh:mm:ss:SS");
@@ -52,6 +54,26 @@ public class CSVWriter {
 				sb.append(dFormate.format(compassCoursesList.get(i).getTimeStamp()));
 				sb.append(";");
 				sb.append(compassCoursesList.get(i).getCompassCourseAzimuth());
+				sb.append("\n");
+				fWriter.write(sb.toString());
+			}
+			fWriter.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void CSVWriterWritePilotDriveAngleRudderCommands(String pFileName , ArrayList<PilotDriveAngleRudderCommand> pList){
+		pilotDriveAngleRudderCommandList = pList;
+		try {
+			FileWriter fWriter = new FileWriter(pFileName);
+			for(int i=0;i<pilotDriveAngleRudderCommandList.size();i++){
+				StringBuilder sb=new StringBuilder();
+				sb.append(dFormate.format(pilotDriveAngleRudderCommandList.get(i).getTimeStamp()));
+				sb.append(";");
+				sb.append(pilotDriveAngleRudderCommandList.get(i).getRudderPosition());
 				sb.append("\n");
 				fWriter.write(sb.toString());
 			}

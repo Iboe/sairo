@@ -1,6 +1,9 @@
 package de.fhb.sailboat.mission;
 
+import org.apache.log4j.Logger;
+
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.serial.sensor.CompassSensor;
 
 /**
  * Task for driving a course only based on the compass. The boat heads towards a specific compass 
@@ -11,6 +14,8 @@ import de.fhb.sailboat.data.GPS;
  */
 public class CompassCourseTask implements Task {
 
+	private static final Logger LOG = Logger.getLogger(CompassCourseTask.class);
+	
 	private final int angle;
 	
 	/**
@@ -20,6 +25,7 @@ public class CompassCourseTask implements Task {
 	 */
 	public CompassCourseTask(int angle) {
 		this.angle = angle;
+		LOG.debug(this.toString());
 	}
 	
 	/*

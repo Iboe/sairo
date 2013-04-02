@@ -28,6 +28,7 @@ public class evaluateRudderPosistions {
 			String zeile=null;
 			while ((zeile = bfReader.readLine()) != null) {
 				if (zeile.contains(logTextblocks.settingRudderTo)) {
+					System.out.println("Analyze: " + zeile);
 					String timeStamp="";
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
 					int startDate=0;

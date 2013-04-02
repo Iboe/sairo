@@ -13,5 +13,7 @@ public class testLogEvaluationStart {
 		evaluateRudderPosistions testRudder = new evaluateRudderPosistions("./log/sailboat.log_27_03_2013_Labor_01");
 		System.out.println("Start evaluate compass courses");
 		evaluateCompassCourse testCompassCourse = new evaluateCompassCourse("./log/sailboat.log_27_03_2013_Labor_01");
+		System.out.println("Start evaluate pilot.driveangle rudder commands");
+		evaluatePilot testPilot = new evaluatePilot("./log/sailboat.log_27_03_2013_Labor_02");
 	}
 }

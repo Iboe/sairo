@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,21 +24,7 @@ public class evaluateCompassCourse {
 			String zeile=null;
 			while((zeile = bfReader.readLine()) != null){
 				if(zeile.contains(logTextblocks.compassThreadName)){
-					System.out.println("Found compass log");
-//					String timeStamp="";
-//					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
-//					int startDate=0;
-//					for(int j=0;j<zeile.length();j++){
-//						if(Character.isDigit(zeile.charAt(j))){
-//							startDate = j;
-//							j=zeile.length()+1;
-//						}
-//					}
-//					int untilDate = zeile.indexOf("[")-1;
-//					timeStamp=zeile.substring(startDate, untilDate);
-//					timeStamp=timeStamp.replace(',',':');
-//					
-//					Date d = simpleDateFormat.parse(timeStamp);
+					System.out.println("Analyze: " + zeile);
 					Date d=filter.filterTimestamp(zeile);
 					System.out.println("TimeStap: " + d.toString());
 					int startAzimuth = zeile.indexOf(logTextblocks.compassAzimuthMark)+logTextblocks.compassAzimuthMark.length();
@@ -56,9 +40,6 @@ public class evaluateCompassCourse {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
 		
 	}
 	
