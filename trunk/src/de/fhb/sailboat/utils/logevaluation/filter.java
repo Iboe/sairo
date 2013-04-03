@@ -11,6 +11,13 @@ import java.util.Date;
  */
 public class filter {
 
+	/***
+	 * This method filters the timestamp from given string
+	 * @author Tobias Koppe
+	 * @version 1
+	 * @param p
+	 * @return
+	 */
 	public static Date filterTimestamp(String p){
 		String timeStamp=null;
 		Date d=null;

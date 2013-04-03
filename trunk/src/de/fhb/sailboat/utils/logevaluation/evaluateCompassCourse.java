@@ -18,21 +18,29 @@ public class evaluateCompassCourse {
 
 	private ArrayList<CompassCourse> compassCourseList = new ArrayList<CompassCourse>();
 	
-	public evaluateCompassCourse(String pFileName){
+	/***
+	 * Evaluates the logs of compasscourses
+	 * @author Tobias Koppe
+	 * @version 1
+	 * @param pLogfileName
+	 * @param pCsvFileName
+	 */
+	public evaluateCompassCourse(String pLogfileName, String pCsvFileName){
+		System.out.println("Loaded logfile: " + pLogfileName);
 		try {
-			BufferedReader bfReader = new BufferedReader(new FileReader(pFileName));
+			BufferedReader bfReader = new BufferedReader(new FileReader(pLogfileName));
 			String zeile=null;
 			while((zeile = bfReader.readLine()) != null){
 				if(zeile.contains(logTextblocks.compassThreadName)){
 					System.out.println("Analyze: " + zeile);
 					Date d=filter.filterTimestamp(zeile);
-					System.out.println("TimeStap: " + d.toString());
 					int startAzimuth = zeile.indexOf(logTextblocks.compassAzimuthMark)+logTextblocks.compassAzimuthMark.length();
 					int endAzimuth = zeile.indexOf(logTextblocks.compassPitchMark)-1;
 					String azimuth = zeile.substring(startAzimuth,endAzimuth);
-					System.out.println("SubString start: " + startAzimuth +" end: " + endAzimuth + " = " + azimuth);
 					compassCourseList.add(new CompassCourse(Float.valueOf(azimuth), d));
-					CSVWriter.CSVWriterWriteCompassCourses("sailboat_data.log_27_03_2013_Labor_01_compasscourses.csv", compassCourseList);
+					if(pCsvFileName!=null){
+					CSVWriter.CSVWriterWriteCompassCourses(pCsvFileName, compassCourseList);
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {

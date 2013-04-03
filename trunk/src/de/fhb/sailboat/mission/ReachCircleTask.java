@@ -1,5 +1,7 @@
 package de.fhb.sailboat.mission;
 
+import org.apache.log4j.Logger;
+
 import de.fhb.sailboat.data.GPS;
 
 /**
@@ -11,6 +13,8 @@ import de.fhb.sailboat.data.GPS;
  */
 public class ReachCircleTask implements Task {
 
+	private static final Logger LOG = Logger.getLogger(ReachCircleTask.class);
+	
 	private final GPS center;
 	private final int radius;
 	
@@ -23,6 +27,7 @@ public class ReachCircleTask implements Task {
 	public ReachCircleTask(GPS center, int radius) {
 		this.center = center;
 		this.radius = radius;
+		LOG.debug(this.toString());
 	}
 	
 	/**
@@ -54,8 +59,11 @@ public class ReachCircleTask implements Task {
 		return bearing.getDistance() < radius;
 	}
 
+	/***
+	 * @author Tobias Koppe
+	 */
 	@Override
 	public String toString() {
-		return "ReachCircleTask [center=" + center + ", radius=" + radius + "]";
+		return MissionSystemTextEnum.REACHCIRCLETASK + " [center=" + center + ", radius=" + radius + "]";
 	}
 }

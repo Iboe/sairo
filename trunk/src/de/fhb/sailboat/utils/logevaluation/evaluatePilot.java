@@ -18,22 +18,21 @@ public class evaluatePilot {
 
 	private ArrayList<PilotDriveAngleRudderCommand> commandList;
 	
-	public evaluatePilot(String pFileName){
+	public evaluatePilot(String pLogfileName, String pCsvFileName){
 		this.commandList = new ArrayList<PilotDriveAngleRudderCommand>();
 		try {
-			BufferedReader bfReader = new BufferedReader(new FileReader(pFileName));
+			BufferedReader bfReader = new BufferedReader(new FileReader(pLogfileName));
 			String zeile = null;
 			while((zeile = bfReader.readLine()) != null){
 				if(zeile.contains(logTextblocks.driveAngleThreadName) && zeile.contains(logTextblocks.driverSetRudderTo)){
 					System.out.println("Analyze: " + zeile);
 					int start = zeile.indexOf(logTextblocks.driverSetRudderTo)+ logTextblocks.driverSetRudderTo.length();
 					float pos = Float.valueOf(zeile.substring(start, zeile.length()).trim());
-					System.out.println("Found pos: " + pos);
 					Date timeStamp = filter.filterTimestamp(zeile);
-					System.out.println("Find timeStamp: " + timeStamp.toString());
 					this.commandList.add(new PilotDriveAngleRudderCommand(timeStamp, pos));
-					System.out.println("Found Pilot.DriveAngle ruddercommand: " + this.commandList.get(this.commandList.size()-1));
-					CSVWriter.CSVWriterWritePilotDriveAngleRudderCommands("pilotDriveAngleRudderCommand.csv", commandList);
+					if(pCsvFileName!=null){
+					CSVWriter.CSVWriterWritePilotDriveAngleRudderCommands(pCsvFileName, commandList);
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {

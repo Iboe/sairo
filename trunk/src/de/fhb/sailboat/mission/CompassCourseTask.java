@@ -3,7 +3,6 @@ package de.fhb.sailboat.mission;
 import org.apache.log4j.Logger;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.serial.sensor.CompassSensor;
 
 /**
  * Task for driving a course only based on the compass. The boat heads towards a specific compass 
@@ -45,8 +44,11 @@ public class CompassCourseTask implements Task {
 		return angle;
 	}
 
+	/***
+	 * @author Tobias Koppe
+	 */
 	@Override
 	public String toString() {
-		return "CompassCourseTask [angle=" + angle + "]";
+		return MissionSystemTextEnum.COMPASSCOURSETASK + " [angle=" + angle + "]";
 	}
 }

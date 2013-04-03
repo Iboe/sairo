@@ -16,9 +16,16 @@ public class logTextblocks {
 	public static final String driveAngleThreadName="de.fhb.sailboat.control.pilot.DriveAngleThread";
 	
 	/**
-	 * Textblocks foe evaluate pilot log
+	 * Textblocks for evaluate pilot log
 	 */
 	public static final String driverSetRudderTo="Set rudder angle to: ";
+	
+	/**
+	 * Textblocks for evaluate simple pid controller
+	 */
+	
+	public static final String simplePidControllerControllRudder="SimplePIDController controll rudder:";
+	public static final String simplePidControllerControllRudderDifference="difference";
 	
 	/**
 	 * Textblocks for evaluate compass log
