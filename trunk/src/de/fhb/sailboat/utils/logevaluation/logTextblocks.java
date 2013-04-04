@@ -26,6 +26,8 @@ public class logTextblocks {
 	
 	public static final String simplePidControllerControllRudder="SimplePIDController controll rudder:";
 	public static final String simplePidControllerControllRudderDifference="difference";
+	public static final String simplePidControllerControllRudderCurrentValue="currentValue";
+	public static final String simplePidControllerControllRudderOutput="output";
 	
 	/**
 	 * Textblocks for evaluate compass log

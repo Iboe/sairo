@@ -1,7 +1,8 @@
 package de.fhb.sailboat.utils.logevaluation;
 
 /***
- * 
+ * This class represents the evaluator for logfiles,
+ * he hold the configuration and modules for evaluation
  * @author Tobias Koppe
  * @version 1
  */
@@ -15,6 +16,11 @@ public class logEvaluator {
 	
 	private String logFileName;
 	private String csvFileName;
+	
+	private evaluateCompassCourse compass;
+	private evaluatePilot pilot;
+	private evaluateRudderPosistions rudderPos;
+	private evaluateSimplePidController pid;
 	
 	public logEvaluator(String pLogFileName, String pCsvFileName){
 		this.logFileName = pLogFileName;
@@ -30,18 +36,32 @@ public class logEvaluator {
 		this.setEvaluateSimplePidController(false);
 	}
 	
+	/***
+	 * This method write all evaluated data to configured csv file
+	 * @author Tobias Koppe
+	 * @version 1
+	 */
+	public void writeAllEvaluationsToCsv(){
+		CSVWriter.CSVWriterWrite(getLogFileName()+".csv", compass.getCompassCourseList(), pid.getSimplePidControllerStateList(), pilot.getCommandList(), rudderPos.getRudderPositions());
+	}
+	
+	/***
+	 * This method start the evaluation process for configured modules
+	 * @author Tobias Koppe
+	 * @version 1
+	 */
 	public void evaluate(){
 		if(this.isEvaluateCompassCourse()){
-			evaluateCompassCourse compass = new evaluateCompassCourse(getLogFileName(), getCsvFileName());
+			compass = new evaluateCompassCourse(getLogFileName());
 		}
 		if(this.isEvaluatePilot()){
-			evaluatePilot pilot = new evaluatePilot(getLogFileName(), getCsvFileName());
+			pilot = new evaluatePilot(getLogFileName());
 		}
 		if(this.isEvaluateRudderPositions()){
-			evaluateRudderPosistions rudderPos = new evaluateRudderPosistions(getLogFileName(), getCsvFileName());
+			rudderPos = new evaluateRudderPosistions(getLogFileName());
 		}
 		if(this.isEvaluateSimplePidController()){
-			evaluateSimplePidController pid = new evaluateSimplePidController(getLogFileName(), getCsvFileName());
+			pid = new evaluateSimplePidController(getLogFileName());
 		}
 	}
 	

@@ -10,7 +10,7 @@ import java.util.Date;
 import de.fhb.sailboat.data.PilotDriveAngleRudderCommand;
 
 /***
- * 
+ * This class represents the module for evaluate the rudder commands from the pilot module
  * @author Tobias Koppe
  * @version 1
  */
@@ -18,7 +18,14 @@ public class evaluatePilot {
 
 	private ArrayList<PilotDriveAngleRudderCommand> commandList;
 	
-	public evaluatePilot(String pLogfileName, String pCsvFileName){
+	/***
+	 * Evaluates the logentries of pilot rudder command in pLogfileName and save
+	 * the result in commandList
+	 * @author Tobias Koppe
+	 * @version 1
+	 * @param pLogfileName
+	 */
+	public evaluatePilot(String pLogfileName){
 		this.commandList = new ArrayList<PilotDriveAngleRudderCommand>();
 		try {
 			BufferedReader bfReader = new BufferedReader(new FileReader(pLogfileName));
@@ -30,16 +37,23 @@ public class evaluatePilot {
 					float pos = Float.valueOf(zeile.substring(start, zeile.length()).trim());
 					Date timeStamp = filter.filterTimestamp(zeile);
 					this.commandList.add(new PilotDriveAngleRudderCommand(timeStamp, pos));
-					if(pCsvFileName!=null){
-					CSVWriter.CSVWriterWritePilotDriveAngleRudderCommands(pCsvFileName, commandList);
-					}
 				}
 			}
+			bfReader.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String zeile=null;
 	}
+
+	public ArrayList<PilotDriveAngleRudderCommand> getCommandList() {
+		return commandList;
+	}
+
+	public void setCommandList(ArrayList<PilotDriveAngleRudderCommand> commandList) {
+		this.commandList = commandList;
+	}
+	
+	
 }

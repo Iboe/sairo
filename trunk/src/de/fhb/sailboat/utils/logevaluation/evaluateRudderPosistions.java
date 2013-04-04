@@ -4,15 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import de.fhb.sailboat.data.RudderPosition;
 
 /***
- * 
+ * This class represents the module for evaluate logentries for
+ * command setting rudder to in {@link AKSENLocomotion}
  * @author Tobias Koppe
  * @version 1
  */
@@ -20,7 +19,14 @@ public class evaluateRudderPosistions {
 	
 	private ArrayList<RudderPosition> rudderPositions;
 	
-	public evaluateRudderPosistions(String pLogFileName, String pCsvFileName){
+	/***
+	 * Evaluates the logentries of aksen command setting rudder to in pLogfileName and save
+	 * the result in rudderPositions
+	 * @author Tobias Koppe
+	 * @version 1
+	 * @param pLogfileName
+	 */
+	public evaluateRudderPosistions(String pLogFileName){
 		rudderPositions = new ArrayList<RudderPosition>();
 		BufferedReader bfReader=null;
 		try {
@@ -39,14 +45,19 @@ public class evaluateRudderPosistions {
 				}
 			}
 			bfReader.close();
-			if(pCsvFileName!=null){
-			CSVWriter.CSVWriterWriteRudderPositions(pCsvFileName, rudderPositions);
-			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<RudderPosition> getRudderPositions() {
+		return rudderPositions;
+	}
+
+	public void setRudderPositions(ArrayList<RudderPosition> rudderPositions) {
+		this.rudderPositions = rudderPositions;
 	}
 	
 	
