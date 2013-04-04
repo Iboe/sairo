@@ -1,9 +1,10 @@
 package de.fhb.sailboat.data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /***
- * 
+ * Thias class represents a rudder command from pilot module with saving the rudderPosition and timestamp
  * @author Tobias Koppe
  *
  */
@@ -11,10 +12,14 @@ public class PilotDriveAngleRudderCommand {
 
 	private Date timeStamp;
 	private float rudderPosition;
+	private String timeStampString;
+	
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
 	
 	public PilotDriveAngleRudderCommand(Date timeStamp, float rudderPosition) {
 		this.timeStamp = timeStamp;
 		this.rudderPosition = rudderPosition;
+		this.timeStampString = simpleDateFormat.format(getTimeStamp());
 	}
 	public Date getTimeStamp() {
 		return timeStamp;
@@ -27,6 +32,13 @@ public class PilotDriveAngleRudderCommand {
 	}
 	public void setRudderPosition(float rudderPosition) {
 		this.rudderPosition = rudderPosition;
+	}
+	
+	public String getTimeStampString() {
+		return timeStampString;
+	}
+	public void setTimeStampString(String timeStampString) {
+		this.timeStampString = timeStampString;
 	}
 	
 	@Override

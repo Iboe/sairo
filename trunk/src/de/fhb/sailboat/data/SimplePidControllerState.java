@@ -1,47 +1,60 @@
 package de.fhb.sailboat.data;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /***
- * 
+ * This class represents a simplepidcontroller state with saving the difference, rudderposition and timestamp
  * @author Tobias Koppe
  *
  */
 public class SimplePidControllerState {
 
-	private double inputSignal;
-	private double currentValue;
 	private double difference;
-	private double output;
+	private double rudderPos;
+	private Date timeStamp;
+	private String timeStampString;
 	
-	public SimplePidControllerState(double inputSignal, double currentValue,
-			double difference, double output) {
-		super();
-		this.inputSignal = inputSignal;
-		this.currentValue = currentValue;
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+	
+	public SimplePidControllerState(double difference, double rudderPos,
+			Date timeStamp) {
 		this.difference = difference;
-		this.output = output;
+		this.rudderPos = rudderPos;
+		this.timeStamp = timeStamp;
+		this.timeStampString = simpleDateFormat.format(getTimeStamp());
 	}
-	public double getInputSignal() {
-		return inputSignal;
-	}
-	public void setInputSignal(double inputSignal) {
-		this.inputSignal = inputSignal;
-	}
-	public double getCurrentValue() {
-		return currentValue;
-	}
-	public void setCurrentValue(double currentValue) {
-		this.currentValue = currentValue;
-	}
+
 	public double getDifference() {
 		return difference;
 	}
+
 	public void setDifference(double difference) {
 		this.difference = difference;
 	}
-	public double getOutput() {
-		return output;
+
+	public double getRudderPos() {
+		return rudderPos;
 	}
-	public void setOutput(double output) {
-		this.output = output;
+
+	public void setRudderPos(double rudderPos) {
+		this.rudderPos = rudderPos;
 	}
+
+	public Date getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(Date timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+
+	public String getTimeStampString() {
+		return timeStampString;
+	}
+
+	public void setTimeStampString(String timeStampString) {
+		this.timeStampString = timeStampString;
+	}
+	
 }
