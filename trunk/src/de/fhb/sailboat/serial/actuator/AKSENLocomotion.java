@@ -81,7 +81,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 		}
 
 		myCOM.open();
-		initDebugEnvironment();
 	}
 
 	public AKSENLocomotion(boolean debug) {
@@ -93,18 +92,6 @@ public class AKSENLocomotion implements LocomotionSystem {
 		COMPort myCOM = new COMPort(7, 9600, 0);
 		this.myCOM = myCOM;
 		myCOM.open();
-		initDebugEnvironment();
-	}
-
-	private void initDebugEnvironment() {
-		try {
-			FileAppender fp = new FileAppender(new SimpleLayout(),
-					"AKSENLocomotionAksenStateLog.txt");
-			LOG.addAppender(fp);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
