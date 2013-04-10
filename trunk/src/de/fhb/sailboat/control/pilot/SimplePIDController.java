@@ -31,6 +31,8 @@ public class SimplePIDController {
 	private double nextToLastInput;
 	private double lastOutput;
 	
+	private double esum;
+	
 	//Fields for toString
 	double inputSignal;
 	double currentValue;
@@ -54,12 +56,25 @@ public class SimplePIDController {
 	 * @return the position of the the rudder to set (calculated value + current position)
 	 */
 	public double control(double pInputSignal) {
+		//PID-Controller
+		//nextToLastInput = (Differenz - Differenz_alt)/Abtastrate
 		inputSignal = pInputSignal;
 		currentValue = actuatorModel.getRudder().getValue();
-		difference = inputSignal - currentValue;
+		difference = inputSignal - currentValue; // Differenz IstWert-SollWert
 		output = lastOutput + q1 * difference + q2 * lastInput + q3 * nextToLastInput;
 		
-		nextToLastInput = lastInput;
+		//Berechnung P Teil
+		double pPart = P*difference;
+		//Berechnung I Teil
+		esum = esum+difference;
+		double iPart = I*esum*SAMPLING_TIME;
+		//Berechnung D Teil
+		//Aenderung nextToLast muesste (Differenz-Differenz_alt sein)
+		//nextToLastInput = lastInput; -> falsch ?
+		nextToLastInput=(difference-lastInput)/SAMPLING_TIME;
+		double dPart = D*nextToLastInput;
+		//Wert ausgeben
+		output=pPart+iPart+dPart;
 		lastInput = difference;
 		lastOutput = output;
 		LOG.debug(this.toString());

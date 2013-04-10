@@ -55,7 +55,7 @@ public class ReachCircleTask implements Task {
 	public boolean isFinished(GPS position) {
 		Bearing bearing = Bearing.calculateBearing(center.getLongitude(), center.getLatitude(), 
 				position.getLongitude(), position.getLatitude());
-		
+		LOG.debug(this.toString() + " finished");
 		return bearing.getDistance() < radius;
 	}
 

@@ -15,12 +15,19 @@ public class testLogEvaluationStart {
 //		evaluateCompassCourse testCompassCourse = new evaluateCompassCourse("./log/sailboat.log_27_03_2013_Labor_01");
 //		System.out.println("Start evaluate pilot.driveangle rudder commands");
 //		evaluatePilot testPilot = new evaluatePilot("./log/sailboat.log_27_03_2013_Labor_02");
-		logEvaluator evaluator = new logEvaluator("./log/sailboat.log_27_03_2013_Labor_02","testvsc.csv");
+		logEvaluator evaluator = new logEvaluator("./log/sailboat.log_27_03_2013_Labor_02","");
 		evaluator.setEvaluateCompassCourse(true);
 		evaluator.setEvaluatePilot(true);
 		evaluator.setEvaluateRudderPositions(true);
 		evaluator.setEvaluateSimplePidController(true);
 		evaluator.evaluate();
 		evaluator.writeAllEvaluationsToCsv();
+		logEvaluator evaluator1 = new logEvaluator("./log/sailboat.log_27_03_2013_Labor_01","");
+		evaluator1.setEvaluateCompassCourse(true);
+		evaluator1.setEvaluatePilot(true);
+		evaluator1.setEvaluateRudderPositions(true);
+		evaluator1.setEvaluateSimplePidController(true);
+		evaluator1.evaluate();
+		evaluator1.writeAllEvaluationsToCsv();
 	}
 }

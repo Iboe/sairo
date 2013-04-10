@@ -13,7 +13,7 @@ public class WindSensor {
 	private double airSpeed;
 	private int airDirection;
 	COMPort myCOM;
-	private static Logger LOG = Logger.getLogger(GpsSensor.class);
+	private static Logger LOG = Logger.getLogger(WindSensor.class);
 
 	
 	public WindSensor(int port) {
@@ -36,7 +36,7 @@ public class WindSensor {
 	static class WindSensorThread extends Thread {
 		WindSensor windInstance;
 		int satelites;
-		private static Logger LOG = Logger.getLogger("Windsensor: ");
+		private static Logger LOG = Logger.getLogger(WindSensor.class);
 
 		public WindSensorThread(WindSensor sensorInstance) {
 			this.windInstance = sensorInstance;

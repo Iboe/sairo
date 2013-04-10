@@ -81,6 +81,9 @@ public class DriveAngleThread extends Thread {
 	//in the corresponding method, so they can be logged in the run() method 
 	private double rudderPos=0;
 	private int deltaAngle=0;
+	private long time_old;
+	private double Ta; //Ta in PID-Regler
+	private double Kd;
 	
 	// sailPos
 	private double lastSailPos;
@@ -341,6 +344,8 @@ public class DriveAngleThread extends Thread {
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
+			time_old=System.currentTimeMillis(); //Neu
+			Ta=(System.currentTimeMillis()-time_old)/1000; //Neu
 			if (DriveAngleMode.COMPASS.equals(mode)) {
 				deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
 				deltaAngle = transformAngle(deltaAngle);
@@ -365,7 +370,7 @@ public class DriveAngleThread extends Thread {
 		
 		//adding offset, to match with the absolute rudder values
 		rudderPos += LocomotionSystem.RUDDER_NORMAL;
-		rudderPos = simplePIDController.control(rudderPos);
+		//rudderPos = simplePIDController.control(rudderPos);
 		LOG.debug("Set rudder angle to: " + rudderPos);
 		locSystem.setRudder((int) rudderPos);
 	}

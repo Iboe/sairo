@@ -24,7 +24,12 @@ public class logEvaluator {
 	
 	public logEvaluator(String pLogFileName, String pCsvFileName){
 		this.logFileName = pLogFileName;
+		if(this.csvFileName==null){
+			this.csvFileName = pLogFileName+".csv";
+		}
+		else{
 		this.csvFileName = pCsvFileName;
+		}
 		initialize();
 	}
 
@@ -42,7 +47,7 @@ public class logEvaluator {
 	 * @version 1
 	 */
 	public void writeAllEvaluationsToCsv(){
-		CSVWriter.CSVWriterWrite(getLogFileName()+".csv", compass.getCompassCourseList(), pid.getSimplePidControllerStateList(), pilot.getCommandList(), rudderPos.getRudderPositions());
+		CSVWriter.CSVWriterWrite(getCsvFileName(), compass.getCompassCourseList(), pid.getSimplePidControllerStateList(), pilot.getCommandList(), rudderPos.getRudderPositions());
 	}
 	
 	/***

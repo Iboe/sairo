@@ -1,7 +1,7 @@
 package de.fhb.sailboat.exceptions;
 
 /***
- * This Exception is throwed if an failure created about AKSEN System
+ * This Exception is throwed by aksensystem
  * @author Tobias Koppe
  *
  */

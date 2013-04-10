@@ -83,6 +83,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 		myCOM.open();
 	}
 
+	@Deprecated
 	public AKSENLocomotion(boolean debug) {
 		if (!debug) {
 			worldModel = WorldModelImpl.getInstance();
@@ -94,6 +95,46 @@ public class AKSENLocomotion implements LocomotionSystem {
 		myCOM.open();
 	}
 
+	/***
+	 * Clipping the actually value if needed, means, if a value is out of the described range
+	 * the value will be set to limitation value
+	 * @author Tobias Koppe
+	 * @param pValue inputs the actually value before clipping
+	 * @param pActuator inputs the type of actuator
+	 * @return clipped value for actuator
+	 */
+	private int clipActuatorValues(int pValue, int pActuator){
+		int returnValue=0;
+		if(pActuator==RUDDER_NUMBER){
+			if(pValue<RUDDER_LEFT){
+				returnValue=RUDDER_LEFT;
+			}
+			else if(pValue>RUDDER_RIGHT){
+				returnValue=RUDDER_RIGHT;
+			}
+			LOG.debug("clipping value for rudder from " + pValue + " to " + returnValue);
+		}
+		else if (pActuator==PROPELLOR_NUMBER){
+			if(pValue>PROPELLOR_MIN){
+				returnValue=PROPELLOR_MIN;
+			}
+			else if(pValue<PROPELLOR_MAX){
+				returnValue=PROPELLOR_MAX;
+			}
+			LOG.debug("clipping value for propellor from " + pValue + " to " + returnValue);
+		}
+		else if(pActuator==SAIL_NUMBER){
+			if(pValue<SAIL_SHEET_IN){
+				returnValue=SAIL_SHEET_IN;
+			}
+			else if(pValue>SAIL_SHEET_OUT){
+				returnValue=SAIL_SHEET_OUT;
+			}
+			LOG.debug("clipping value for sail sheet from " + pValue + " to " + returnValue);
+		}
+		return returnValue;
+	}
+	
 	/**
 	 * Send one Rudder-Command to AKSEN-Board
 	 * 
@@ -102,9 +143,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	public void setRudder(int angle) {
 		lastCom = "setRudder to " + angle;
-		if (isDebug()) {
+		angle = clipActuatorValues(angle, RUDDER_NUMBER);
 			int status = this.AKSENServoCommand(RUDDER_NUMBER, angle);
-
 			if (status == -1) {
 				// TODO Exception? Eskalieren?
 				LOG.warn(lastCom + ": incorrect/not send");
@@ -112,17 +152,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 				LOG.info(lastCom + ": correct");
 				worldModel.getActuatorModel().setRudder(new Actuator(angle));
 				setAksenState(AksenSystemTextEnum.AKSEN_COMMAND_RUDDER_LEFT
-						.toString());
-			}
-		} else {
-			// send command-string to AKSEN-Board
-			String com = this.buildCommand(RUDDER_NUMBER, angle);
-
-			this.AKSENCommand(com);
-			worldModel.getActuatorModel().setRudder(new Actuator(angle));
-
+						.toString());	
 		}
-
 		lastCom = "";
 	}
 
@@ -135,36 +166,22 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void setSail(int angle) {
-
+		angle = clipActuatorValues(angle, SAIL_NUMBER);
 		try {
 			if (!"".equals(lastCom)) {
 				Thread.sleep(wait_sleep * 10);
 			}
-
 			this.lastCom = "setSail to " + angle;
-			// if(isDebug())
-			// {
 			status = this.AKSENServoCommand(SAIL_NUMBER, angle);
-
 			if (status == -1) {
 				// TODO Exception? Eskalieren?
 				LOG.warn(lastCom + ": incorrect/not send");
 			} else {
+				//TODO LOG.debug hinzufuegen
 				worldModel.getActuatorModel().setSail(new Actuator(angle));
 			}
-			// }
-			// else
-			// {
-			// // send command-string to AKSEN-Board
-			// String com = this.buildCommand(SAIL_NUMBER, angle);
-			//
-			// this.AKSENCommand(com);
-			// }
-			// worldModel.getActuatorModel().setSail(new Actuator(angle));
-
 			lastCom = "";
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -178,22 +195,15 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void setPropellor(int angle) {
 		lastCom = "setPropellor to " + angle;
-		if (isDebug()) {
+		angle = clipActuatorValues(angle, PROPELLOR_NORMAL);
 			int status = this.AKSENServoCommand(PROPELLOR_NUMBER, angle);
-
 			if (status == -1) {
 				// TODO Exception? Eskalieren?
 				LOG.warn(lastCom + ": incorrect/not send");
 			} else {
+				worldModel.getActuatorModel().setPropeller(new Actuator(angle));
 				LOG.info(lastCom + ": correct");
 			}
-		} else {
-			// send command-string to AKSEN-Board
-			String com = this.buildCommand(PROPELLOR_NUMBER, angle);
-
-			this.AKSENCommand(com);
-		}
-		worldModel.getActuatorModel().setPropeller(new Actuator(angle));
 		lastCom = "";
 	}
 

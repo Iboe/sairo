@@ -32,6 +32,7 @@ public class CompassCourseTask implements Task {
 	 */
 	@Override
 	public boolean isFinished(GPS position) {
+		LOG.debug(this.toString()+" finished");
 		return false;
 	}
 
