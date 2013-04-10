@@ -21,6 +21,24 @@ public class logTextblocks {
 	public static final String driverSetRudderTo="Set rudder angle to: ";
 	
 	/**
+	 * Textblocks for evaluate windsensor log
+	 */
+	
+	public static final String windSensorClassName="";
+	public static final String windSensorWindDirection="WindDirection";
+	public static final String windSensorWindSpeed="WindSpeed";
+	
+	/***
+	 * Textblocks for evaluate gps sensor log
+	 */
+	
+	public static final String gpsSensorThreadName="de.fhb.sailboat.serial.sensor.GpsSensor$GpsSensorThread";
+	public static final String gpsSensorLongitude="longitude";
+	public static final String gpsSensorLatitude="latitude";
+	public static final String gpsSensorSatelites="satelites";
+	public static final String gpsSensorSpeed="speed";
+	
+	/**
 	 * Textblocks for evaluate simple pid controller
 	 */
 	

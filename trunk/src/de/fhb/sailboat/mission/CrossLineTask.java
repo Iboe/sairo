@@ -1,5 +1,7 @@
 package de.fhb.sailboat.mission;
 
+import org.apache.log4j.Logger;
+
 import de.fhb.sailboat.data.GPS;
 
 /**
@@ -16,6 +18,8 @@ public class CrossLineTask implements Task {
 	private final GPS startPoint;
 	private final GPS endPoint;
 	
+	private static final Logger LOG = Logger.getLogger(CrossLineTask.class);
+	
 	/**
 	 * Creates a new instance defining the line to cross by it end points.
 	 * 
@@ -25,6 +29,7 @@ public class CrossLineTask implements Task {
 	public CrossLineTask(GPS startpoint, GPS endPoint) {
 		this.startPoint = startpoint;
 		this.endPoint = endPoint;
+		LOG.debug(this.toString());
 	}
 	
 	/**
@@ -52,6 +57,7 @@ public class CrossLineTask implements Task {
 	 */
 	@Override
 	public boolean isFinished(GPS position) {
+		LOG.debug(this.toString() + " finished");
 		throw new IllegalStateException("not implemented yet");
 	}
 

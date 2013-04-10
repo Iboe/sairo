@@ -1,5 +1,7 @@
 package de.fhb.sailboat.mission;
 
+import org.apache.log4j.Logger;
+
 import de.fhb.sailboat.data.GPS;
 
 /**
@@ -12,6 +14,8 @@ import de.fhb.sailboat.data.GPS;
  */
 public class BeatTask implements Task {
 
+	private static final Logger LOG = Logger.getLogger(BeatTask.class);
+	
 	private final GPS goal;
 	private final Task continueTask;
 	
@@ -22,6 +26,7 @@ public class BeatTask implements Task {
 	 */
 	public BeatTask(GPS goal) {
 		this(null, goal);
+		LOG.debug(this.toString());
 	}
 
 	/**
@@ -37,6 +42,7 @@ public class BeatTask implements Task {
 		}
 		this.continueTask = continueTask;
 		this.goal = goal;
+		LOG.debug(this.toString());
 	}
 	
 	/*
@@ -47,6 +53,7 @@ public class BeatTask implements Task {
 	public boolean isFinished(GPS position) {
 		//TODO this implementation causes a high coupling between BeatTask and BeatWorker and breaks up the
 		//use of the isFinished method, so a better solution should be found
+		LOG.debug(this.toString() + " finished");
 		return false;
 	}
 
