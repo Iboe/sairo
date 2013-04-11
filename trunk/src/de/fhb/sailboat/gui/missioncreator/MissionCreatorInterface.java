@@ -1,10 +1,12 @@
 package de.fhb.sailboat.gui.missioncreator;
 
+import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.TreeSelectionModel;
@@ -583,7 +585,8 @@ public class MissionCreatorInterface extends RootDialog{
      * Creates a new PropellorFullForward node.
      * @param evt
      */
-    private void treePopupNewMenuTaskMenu_Control_PropellorFullForwardActionPerformed(java.awt.event.ActionEvent evt) {                                                                                      
+    private void treePopupNewMenuTaskMenu_Control_PropellorFullForwardActionPerformed(java.awt.event.ActionEvent evt) {   
+    	//XXX Proopellor vorwärts, sollte gehen
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
             value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORFORWARD);
@@ -601,7 +604,7 @@ public class MissionCreatorInterface extends RootDialog{
      */
     private void treePopupNewMenuTaskMenu_Navigation_ReachCircleActionPerformed(java.awt.event.ActionEvent evt) {                                                                                
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) { 
-            MissionInputPositionDialog pd = new MissionInputPositionDialog(null, true, this.INPUTTEXT_REACHCIRCLE, this.INPUTTEXT_POSITION, 0);
+            MissionInputPositionDialog pd = new MissionInputPositionDialog((Frame) this.getParent(), true, this.INPUTTEXT_REACHCIRCLE, this.INPUTTEXT_POSITION, 0);
             pd.setVisible(true);
             
             if (pd.getState() == MissionInputPositionDialog.APPROVE_OPTION) {
@@ -717,7 +720,7 @@ public class MissionCreatorInterface extends RootDialog{
      * Creates a new PropellorFullBackward node.
      * @param evt
      */
-    private void treePopupNewMenuTaskMenu_Control_PropellorFullBackwardActionPerformed(java.awt.event.ActionEvent evt) {                                                                                       
+    private void treePopupNewMenuTaskMenu_Control_PropellorFullBackwardActionPerformed(java.awt.event.ActionEvent evt) {  
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
             value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORBACKWARD);

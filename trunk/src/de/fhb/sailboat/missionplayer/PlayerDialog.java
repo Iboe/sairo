@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.fhb.sailboat.missionplayer;
 
 import java.io.File;
@@ -20,9 +16,6 @@ import de.fhb.sailboat.gui.RootDialog;
  */
 public class PlayerDialog extends RootDialog{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private  MainController controller;
 

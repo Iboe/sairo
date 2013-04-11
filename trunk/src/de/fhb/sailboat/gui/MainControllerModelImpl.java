@@ -51,7 +51,7 @@ public class MainControllerModelImpl implements MainControllerModel{
 		this.compass = new CompassModelImpl();
 		this.compass.setCompass(new Compass(170,0,0));
 		this.gps = new GPSModelImpl();
-		//this.sailMode = false;
+		this.sailMode = false;
 		this.currentWholeMission = new MissionImpl();
 		this.missionTasksLeft = new MissionImpl();
 		this.propellor = 2;

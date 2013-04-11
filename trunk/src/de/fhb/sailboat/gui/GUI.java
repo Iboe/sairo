@@ -32,14 +32,14 @@ public class GUI extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private GUILogic guiLogic;
-	private JMenu emulatorMenu;
+	private JMenu playerMenu;
 	
 	private ParallelGroup liveModeGroup;
 	private ParallelGroup actualModeGroup;
 	
 	private javax.swing.JPanel testPanel;
 
-	private JCheckBoxMenuItem emulatorMenuView;
+	private JCheckBoxMenuItem playerMenuView;
 
 	private PlayerDialog playerDialog;
 
@@ -55,7 +55,7 @@ public class GUI extends javax.swing.JFrame {
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
         guiLoop();
         
-		//Fenster wird in der Mitte des Bildschirms platziert
+		//center dialog
 		Point p = RootDialog.calculateCenter( new Rectangle( new Point( 0, 0 ), Toolkit.getDefaultToolkit()
 				.getScreenSize() ), getSize() );
 		this.setLocation( p );
@@ -121,24 +121,17 @@ public class GUI extends javax.swing.JFrame {
         windowMenu = new javax.swing.JMenu();
         windowMenuInfo = new javax.swing.JCheckBoxMenuItem();
         windowMenuRemote = new javax.swing.JCheckBoxMenuItem();
-        /*missionTestMenu = new javax.swing.JMenu();
+        missionTestMenu = new javax.swing.JMenu();
         missionTestMenuCompassCourse = new javax.swing.JMenuItem();
         missionTestMenuHoldAngleToWind = new javax.swing.JMenuItem();
         missionTestMenuStopTask = new javax.swing.JMenuItem();
         missionTestMenuResetActors = new javax.swing.JMenuItem();
-        missionTestMenuResetMap = new javax.swing.JMenuItem();*/
+        missionTestMenuResetMap = new javax.swing.JMenuItem();
         missionMenu = new javax.swing.JMenu();
         missionMenuMissionCreator = new javax.swing.JMenuItem();
         
-        emulatorMenu= new javax.swing.JMenu();
-//        emulatorMenuStart = new javax.swing.JMenuItem();
-//        emulatorMenuStop = new javax.swing.JMenuItem();
-//        emulatorMenuPause= new javax.swing.JMenuItem();
-//        emulatorMenuPlay = new javax.swing.JMenuItem();
-        emulatorMenuView = new javax.swing.JCheckBoxMenuItem();
-        
-        
-//        emulatorPanel = new javax.swing.JPanel();
+        playerMenu= new javax.swing.JMenu();
+        playerMenuView = new javax.swing.JCheckBoxMenuItem();       
 
         infoDialog.setTitle("SaiilboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 305));
@@ -445,7 +438,6 @@ public class GUI extends javax.swing.JFrame {
         gpsSatelitesDisplayLabel.setMinimumSize(new java.awt.Dimension(70, 14));
         gpsSatelitesDisplayLabel.setPreferredSize(new java.awt.Dimension(70, 14));
         
-//        emulatorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Emulator"));
 
         javax.swing.GroupLayout gpsPanelLayout = new javax.swing.GroupLayout(gpsPanel);
         gpsPanel.setLayout(gpsPanelLayout);
@@ -678,8 +670,10 @@ public class GUI extends javax.swing.JFrame {
         windowMenu.add(windowMenuRemote);
 
         menuBar.add(windowMenu);
+        
+        //XXX TESTMISSION BEGINN
 
-        /*missionTestMenu.setText("Testmissionen");
+        missionTestMenu.setText("Testmissionen");
 
         missionTestMenuCompassCourse.setText("CompassCourseTask senden");
         missionTestMenuCompassCourse.addActionListener(new java.awt.event.ActionListener() {
@@ -721,7 +715,9 @@ public class GUI extends javax.swing.JFrame {
         });
         missionTestMenu.add(missionTestMenuResetMap);
 
-        menuBar.add(missionTestMenu);*/
+        menuBar.add(missionTestMenu);
+        
+        //XXX TESTMISSION ENDS
 
         missionMenu.setText("Mission");
 
@@ -735,9 +731,9 @@ public class GUI extends javax.swing.JFrame {
 
         menuBar.add(missionMenu);
         
-        emulatorMenu.setText("Player");
-        emulatorMenuView.setText("Playersteuerung");
-        emulatorMenuView.addItemListener(new java.awt.event.ItemListener() {
+        playerMenu.setText("Player");
+        playerMenuView.setText("Playersteuerung");
+        playerMenuView.addItemListener(new java.awt.event.ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				playerControlDialogChanged(e);
@@ -745,8 +741,8 @@ public class GUI extends javax.swing.JFrame {
         });
         
         missionMenu.add(missionMenuMissionCreator); 
-        emulatorMenu.add(emulatorMenuView);
-        menuBar.add(emulatorMenu);
+        playerMenu.add(playerMenuView);
+        menuBar.add(playerMenu);
         
 
         setJMenuBar(menuBar);
@@ -795,8 +791,8 @@ public class GUI extends javax.swing.JFrame {
 
    
     /**
-     * TODO Add comment.
-     * @param e
+     * react on Event from Player-MenuItem for Checking
+     * @param ItemEvent
      */
     protected void playerControlDialogChanged(ItemEvent e) {
 		if(playerDialog==null){
@@ -852,28 +848,27 @@ public class GUI extends javax.swing.JFrame {
         remoteDialog.setVisible(windowMenuRemote.isSelected());
     }                                                
 
-    /*
+    
     private void missionTestMenuCompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-//        guiLogic.sendReachCompass();
+        guiLogic.sendReachCompass();
     }                                                            
 
     private void missionTestMenuHoldAngleToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-//        guiLogic.sendHoldAngleToWind();
+        guiLogic.sendHoldAngleToWind();
     }                                                              
 
     private void missionTestMenuStopTaskActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-//        guiLogic.sendStop();
+        guiLogic.sendStop();
     }                                                       
 
     private void missionTestMenuResetActorsActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-//        guiLogic.sendResetActors();
+        guiLogic.sendResetActors();
     }                                                          
 
     private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-//        guiLogic.sendResetMissionMap();
+        guiLogic.sendResetMissionMap();
     }   
     
-    */
 
     /**
      * Prepares closure of remoteDialog.
@@ -1127,6 +1122,7 @@ public class GUI extends javax.swing.JFrame {
         };
         new Thread(updater).start();
     }
+    
     // Variables declaration - do not modify
     private javax.swing.JLabel compassAzimuthDisplayLabel;
     private javax.swing.JLabel compassAzimuthLabel;
@@ -1157,12 +1153,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane missionScrollPanel;
     private javax.swing.JPanel missionTabPanel;
     private javax.swing.JTextArea missionTabTextArea;
-    /*private javax.swing.JMenu missionTestMenu;
+    private javax.swing.JMenu missionTestMenu;
     private javax.swing.JMenuItem missionTestMenuCompassCourse;
     private javax.swing.JMenuItem missionTestMenuHoldAngleToWind;
     private javax.swing.JMenuItem missionTestMenuResetActors;
     private javax.swing.JMenuItem missionTestMenuResetMap;
-    private javax.swing.JMenuItem missionTestMenuStopTask;*/
+    private javax.swing.JMenuItem missionTestMenuStopTask;
     private javax.swing.JRadioButton propellorMaxRadioButton;
     private javax.swing.JRadioButton propellorMinRadioButton;
     private javax.swing.JRadioButton propellorNullRadioButton;

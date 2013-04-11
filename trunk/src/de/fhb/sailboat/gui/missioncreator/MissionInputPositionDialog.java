@@ -1,9 +1,18 @@
 package de.fhb.sailboat.gui.missioncreator;
 
 import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.RootDialog;
 import de.fhb.sailboat.gui.map.MissionCreatingMap;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.List;
+
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 /**
@@ -12,7 +21,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  * 
  * @author Patrick Rutter
  */
-public class MissionInputPositionDialog extends javax.swing.JDialog {
+public class MissionInputPositionDialog  extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final static int RADIUS_MIN = 1;        // minimum value of radius property of ReachCircle Tasks
@@ -54,7 +63,7 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
      * @param title title text of this dialog
      * @param mode  mode of the input - 0 = single GPS value; 1 = polygon (lines are drawn); 2 = obstacle (single GPS value)
      */
-    public MissionInputPositionDialog(java.awt.Frame parent, boolean modal, String initialName, String title, int mode) {
+    public MissionInputPositionDialog(java.awt.Frame parent, boolean modal, String initialName, String title, int mode){
         super(parent, modal);
         initComponents();
         
@@ -90,6 +99,12 @@ public class MissionInputPositionDialog extends javax.swing.JDialog {
         }
         
         missionMap.mapPanel(missionMapPanel);
+        
+        //Center dialog
+		Point p = RootDialog.calculateCenter( new Rectangle( new Point( 0, 0 ), Toolkit.getDefaultToolkit()
+				.getScreenSize() ), getSize() );
+		this.setLocation( p );
+        
     }
 
     /**

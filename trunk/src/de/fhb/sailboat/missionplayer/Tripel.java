@@ -5,9 +5,9 @@ import java.io.Serializable;
 
 /**
  * This class joins three different data to a data-tripel
+ * Its a simple VO.
  * 
  * @author Andy Klay <klay@fh-brandenburg.de>
- *
  */
 public class Tripel<T,U,V> implements Serializable{
 	 /**
