@@ -104,7 +104,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 * @return clipped value for actuator
 	 */
 	private int clipActuatorValues(int pValue, int pActuator){
-		int returnValue=0;
+		int returnValue=pValue;
 		if(pActuator==RUDDER_NUMBER){
 			if(pValue<RUDDER_LEFT){
 				returnValue=RUDDER_LEFT;
