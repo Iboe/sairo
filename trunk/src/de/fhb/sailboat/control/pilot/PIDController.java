@@ -31,11 +31,21 @@ public class PIDController {
 	}
 	
 	private void controllCoefficientD(){
-		
+		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
+		//oder stabil ist, Koeffizient D wird solange erhoeht, bis System
+		//nicht zuckt
+		if((lastOutput-output)/Ta>1){
+			Kd=Kd+0.01;
+		}
+		else if((lastOutput-output)/Ta<1){
+			Kp=Kp-0.01;
+		}
 	}
 	
 	private void controllCoefficientI(){
-		
+		if((lastOutput-output)/Ta!=0){
+			Ki=Ki+0.01;
+		}
 	}
 	
 	private void controllCoefficientP(){
