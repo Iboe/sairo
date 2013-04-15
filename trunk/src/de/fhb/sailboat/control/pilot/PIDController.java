@@ -63,13 +63,13 @@ public class PIDController extends Observable{
 //		}
 		
 		if((lastOutput-output)>0){
-			Kd=Kd+0.001;
+			Kd=Kd+0.01;
 		}
 	}
 	
 	private void controllCoefficientI(){
 		if((lastOutput-output)!=0){
-			Ki=Ki+0.0001;
+			Ki=Ki+0.01;
 		}
 	}
 	
