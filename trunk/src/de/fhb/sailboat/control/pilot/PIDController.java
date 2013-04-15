@@ -64,12 +64,18 @@ public class PIDController extends Observable{
 		
 		if((lastOutput-output)>0){
 			Kd=Kd+0.01;
+			Kd=Kd*100;
+			Kd = Math.round(Kd);
+			Kd=Kd/100;
 		}
 	}
 	
 	private void controllCoefficientI(){
 		if((lastOutput-output)!=0){
 			Ki=Ki+0.01;
+			Ki=Ki*100;
+			Ki=Math.round(Ki);
+			Ki=Ki/100;
 		}
 	}
 	
@@ -79,6 +85,9 @@ public class PIDController extends Observable{
 		//anfaengt zu schwingen
 		if((lastOutput-output)<1){
 			Kp=Kp+0.01;
+			Kp = Kp*100;
+			Kp = Math.round(Kp);
+			Kp = Kp/100;
 		}
 	}
 	
