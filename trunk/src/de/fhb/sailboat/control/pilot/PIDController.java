@@ -62,7 +62,7 @@ public class PIDController extends Observable{
 //			Kd=Kd-0.001;
 //		}
 		
-		if(lastOutput>0){
+		if((lastOutput-output)>0){
 			Kd=Kd+0.001;
 		}
 	}
@@ -77,8 +77,8 @@ public class PIDController extends Observable{
 		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
 		//oder stabil ist, Koeffizient P wird solange erhoeht, bis System
 		//anfaengt zu schwingen
-		if(lastOutput<1){
-			Kp=Kp+0.1;
+		if((lastOutput-output)<1){
+			Kp=Kp+0.01;
 		}
 	}
 	
