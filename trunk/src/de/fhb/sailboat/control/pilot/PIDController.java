@@ -71,7 +71,14 @@ public class PIDController {
 	
 	private void calculateDeltaAngle(){
 		eold = deltaAngle;
-		deltaAngle = targetAngle-realAngle;
+		if(realAngle<0){
+			realAngle=360+realAngle;
+		}
+		if(targetAngle>realAngle){
+		deltaAngle = targetAngle-realAngle;}
+		else{
+			deltaAngle=realAngle-targetAngle;
+		}
 	}
 	
 	private double calculateP(){
@@ -96,7 +103,7 @@ public class PIDController {
 		output=calculateP()+calculateI()+calculateD();
 		controllCoefficientP();
 		controllCoefficientD();
-		controllCoefficientI();
+		//controllCoefficientI();
 		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
 		return output;
