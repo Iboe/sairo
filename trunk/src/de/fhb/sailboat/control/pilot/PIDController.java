@@ -130,6 +130,7 @@ public class PIDController extends Observable{
 		else{
 			signFehler=-1;
 		}
+		deltaAngle = Math.abs(deltaAngle);
 	}
 	
 	/***
@@ -168,7 +169,7 @@ public class PIDController extends Observable{
 		controllSamplingTime();
 		calculateDeltaAngle();
 		lastOutput=output;
-		output=calculateP()+calculateI()+calculateD()*signFehler;
+		output=(calculateP()+calculateI()+calculateD())*signFehler;
 		LOG.debug ("sign Error: " + signFehler);
 		output = output*100;
 		output = Math.round(output);
