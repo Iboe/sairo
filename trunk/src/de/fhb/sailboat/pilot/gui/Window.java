@@ -82,6 +82,8 @@ public class Window extends JFrame implements Observer {
 		
 		Graphics gfx = diagramImage.getGraphics();
 		gfx.copyArea(0, 0, 399, 359, -1, 0);
+		gfx.setColor(Color.WHITE);
+		gfx.drawLine(399, 0, 399, 359);
 		
 		// target angle
 		gfx.setColor(Color.BLACK);
@@ -99,7 +101,7 @@ public class Window extends JFrame implements Observer {
 	public void paint(Graphics gfx) {
 		super.paint(gfx);
 		
-		gfx.drawImage(diagramImage, 0, 0, 399, 359, paintCanvas);
+		gfx.drawImage(diagramImage, 0, 300, 399, 659, paintCanvas);
 	}
 
 }
