@@ -26,6 +26,8 @@ public class PIDController extends Observable{
 	double Kd=0; //Koeffizient D
 	double Ta=0; //Samplingrate
 	
+	double lastCall=0;
+	
 	double esum; //Summe Fehler
 	double eold; //Fehler alt
 	double deltaAngle=0; //Failure: TargetAngle-Angle=deltaAngle
@@ -43,6 +45,7 @@ public class PIDController extends Observable{
 	public PIDController(){
 		valueList = new ArrayList<String>();
 		this.gui = new Window();
+		this.gui.setVisible(true);
 		this.addObserver(gui);
 		LOG.debug("PIDController init: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 	}
@@ -92,12 +95,18 @@ public class PIDController extends Observable{
 	}
 	
 	private void controllSamplingTime(){
-		if(Ta!=0){
-			Ta=(System.currentTimeMillis()-Ta)/1000; //1000ms -> 1 second
+		double actCall=System.currentTimeMillis();
+		if(lastCall!=0){
+			Ta=Math.abs((actCall-lastCall)/1000); //1000ms -> 1 second
+			lastCall = actCall;
 		}
 		else{
-			Ta=System.currentTimeMillis();
+			lastCall=System.currentTimeMillis();
 		}
+		Ta = Ta * 100;
+		Ta = Math.round (Ta);
+		Ta = Ta /100;
+		LOG.debug("sampling time shorted: " + Ta);
 	}
 	
 	private void calculateDeltaAngle(){
@@ -147,9 +156,13 @@ public class PIDController extends Observable{
 		calculateDeltaAngle();
 		lastOutput=output;
 		output=calculateP()+calculateI()+calculateD();
+		LOG.debug ("unshorted output: " + output);
+		output = output*100;
+		output = Math.round(output);
+		output = output / 100;
 		controllCoefficientP();
 		controllCoefficientD();
-		controllCoefficientI();
+		//controllCoefficientI();
 		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
 		packValueToList();
