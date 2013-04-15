@@ -34,7 +34,7 @@ public class evaluateRudderPosistions {
 			String zeile=null;
 			while ((zeile = bfReader.readLine()) != null) {
 				if (zeile.contains(logTextblocks.settingRudderTo)) {
-					System.out.println("Analyze: " + zeile);
+					//System.out.println("Analyze: " + zeile);
 					Date d = filter.filterTimestamp(zeile);
 					int startSubString=zeile.indexOf(logTextblocks.settingRudderTo);
 					int countSubString=logTextblocks.settingRudderTo.length()+1;

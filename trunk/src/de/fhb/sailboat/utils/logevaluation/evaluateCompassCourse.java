@@ -33,7 +33,7 @@ public class evaluateCompassCourse {
 			String zeile=null;
 			while((zeile = bfReader.readLine()) != null){
 				if(zeile.contains(logTextblocks.compassThreadName)){
-					System.out.println("Analyze: " + zeile);
+					//System.out.println("Analyze: " + zeile);
 					Date d=filter.filterTimestamp(zeile);
 					int startAzimuth = zeile.indexOf(logTextblocks.compassAzimuthMark)+logTextblocks.compassAzimuthMark.length();
 					int endAzimuth = zeile.indexOf(logTextblocks.compassPitchMark)-1;

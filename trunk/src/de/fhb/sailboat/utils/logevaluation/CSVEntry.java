@@ -24,10 +24,24 @@ public class CSVEntry {
 	private String simplePidRudderPos;
 	private String pilotRudderPos;
 	private String aksenRudderAngle;
+	private String gpsDataLongitude;
+	private String gpsDataLatitude;
+	private String gpsDataSatelites;
+	private String gpsDataSpeed;
+	private String windDataDirection;
+	private String windDataSpeed;
 	
-	public CSVEntry(Date timeStamp, long time,String compassAzimuth,
+	private static String csvHeader="Zeitstempel;Zeit in ms seit 01.01.1970;Kompasskurs Azimuth;Differenz SimplePIDController;" +
+			"Rudderposition SimplePIDController;Pilot Rudderposition;AKSEN Winkel Rudderposition;"+
+			"GPS Longitude;GPS Latitude;GPS Satelliten;GPS Speed;Wind Richtung;Wind Speed"+System.getProperty("line.separator");
+	
+	public CSVEntry(Date timeStamp, long time, String compassAzimuth,
 			String simplePidDiff, String simplePidRudderPos,
-			String pilotRudderPos, String aksenRudderAngle) {
+			String pilotRudderPos, String aksenRudderAngle,
+			String gpsDataLongitude, String gpsDataLatitude,
+			String gpsDataSatelites, String gpsDataSpeed,
+			String windDataDirection, String windDataSpeed) {
+		super();
 		this.timeStamp = timeStamp;
 		this.time = time;
 		this.compassAzimuth = compassAzimuth;
@@ -35,8 +49,16 @@ public class CSVEntry {
 		this.simplePidRudderPos = simplePidRudderPos;
 		this.pilotRudderPos = pilotRudderPos;
 		this.aksenRudderAngle = aksenRudderAngle;
+		this.gpsDataLongitude = gpsDataLongitude;
+		this.gpsDataLatitude = gpsDataLatitude;
+		this.gpsDataSatelites = gpsDataSatelites;
+		this.gpsDataSpeed = gpsDataSpeed;
+		this.windDataDirection = windDataDirection;
+		this.windDataSpeed = windDataSpeed;
 	}
-	
+
+
+
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
@@ -53,6 +75,18 @@ public class CSVEntry {
 		sb.append(pilotRudderPos);
 		sb.append(";");
 		sb.append(aksenRudderAngle);
+		sb.append(";");
+		sb.append(gpsDataLongitude);
+		sb.append(";");
+		sb.append(gpsDataLatitude);
+		sb.append(";");
+		sb.append(gpsDataSatelites);
+		sb.append(";");
+		sb.append(gpsDataSpeed);
+		sb.append(";");
+		sb.append(windDataDirection);
+		sb.append(";");
+		sb.append(windDataSpeed);
 		sb.append(System.getProperty("line.separator"));
 		return sb.toString();
 	}
@@ -100,6 +134,58 @@ public class CSVEntry {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+
+	public String getGpsDataLongitude() {
+		return gpsDataLongitude;
+	}
+
+	public void setGpsDataLongitude(String gpsDataLongitude) {
+		this.gpsDataLongitude = gpsDataLongitude;
+	}
+
+	public String getGpsDataLatitude() {
+		return gpsDataLatitude;
+	}
+
+	public void setGpsDataLatitude(String gpsDataLatitude) {
+		this.gpsDataLatitude = gpsDataLatitude;
+	}
+
+	public String getGpsDataSatelites() {
+		return gpsDataSatelites;
+	}
+
+	public void setGpsDataSatelites(String gpsDataSatelites) {
+		this.gpsDataSatelites = gpsDataSatelites;
+	}
+
+	public String getGpsDataSpeed() {
+		return gpsDataSpeed;
+	}
+
+	public void setGpsDataSpeed(String gpsDataSpeed) {
+		this.gpsDataSpeed = gpsDataSpeed;
+	}
+
+	public String getWindDataDirection() {
+		return windDataDirection;
+	}
+
+	public void setWindDataDirection(String windDataDirection) {
+		this.windDataDirection = windDataDirection;
+	}
+
+	public String getWindDataSpeed() {
+		return windDataSpeed;
+	}
+
+	public void setWindDataSpeed(String windDataSpeed) {
+		this.windDataSpeed = windDataSpeed;
+	}
+
+	public static String getCsvHeader() {
+		return csvHeader;
 	}
 	
 }

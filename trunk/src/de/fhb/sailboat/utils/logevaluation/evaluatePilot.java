@@ -32,7 +32,7 @@ public class evaluatePilot {
 			String zeile = null;
 			while((zeile = bfReader.readLine()) != null){
 				if(zeile.contains(logTextblocks.driveAngleThreadName) && zeile.contains(logTextblocks.driverSetRudderTo)){
-					System.out.println("Analyze: " + zeile);
+					//System.out.println("Analyze: " + zeile);
 					int start = zeile.indexOf(logTextblocks.driverSetRudderTo)+ logTextblocks.driverSetRudderTo.length();
 					float pos = Float.valueOf(zeile.substring(start, zeile.length()).trim());
 					Date timeStamp = filter.filterTimestamp(zeile);

@@ -24,7 +24,7 @@ public class logTextblocks {
 	 * Textblocks for evaluate windsensor log
 	 */
 	
-	public static final String windSensorClassName="";
+	public static final String windSensorClassName="Windsensor: ";
 	public static final String windSensorWindDirection="WindDirection";
 	public static final String windSensorWindSpeed="WindSpeed";
 	

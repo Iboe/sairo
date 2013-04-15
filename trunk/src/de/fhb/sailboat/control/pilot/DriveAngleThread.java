@@ -76,6 +76,7 @@ public class DriveAngleThread extends Thread {
 	private DriveAngleMode mode;
 	
 	private SimplePIDController simplePIDController;
+	private PIDController PIDController;
 	
 	//local variables for calculation of the rudder position, they are not 
 	//in the corresponding method, so they can be logged in the run() method 
@@ -105,6 +106,7 @@ public class DriveAngleThread extends Thread {
 		gpsModel = WorldModelImpl.getInstance().getGPSModel();
 		actuatorModel = WorldModelImpl.getInstance().getActuatorModel();
 		simplePIDController = new SimplePIDController();
+		PIDController = new PIDController();
 		calc = new Calculations();
 	}
 	
@@ -344,19 +346,22 @@ public class DriveAngleThread extends Thread {
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
-			time_old=System.currentTimeMillis(); //Neu
-			Ta=(System.currentTimeMillis()-time_old)/1000; //Neu
-			if (DriveAngleMode.COMPASS.equals(mode)) {
-				deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
-				deltaAngle = transformAngle(deltaAngle);
-				
-			} else if (DriveAngleMode.WIND.equals(mode)) {
-				deltaAngle = (int) (desiredAngle - windModel.getWind().getDirection());
-				//here negating because the wind is not influenced by the boat and 
-				//the wind angle depends on the boat
-				deltaAngle = -transformAngle(deltaAngle); 
-			}
-		}
+//			time_old=System.currentTimeMillis(); //Neu
+//			Ta=(System.currentTimeMillis()-time_old)/1000; //Neu
+//			if (DriveAngleMode.COMPASS.equals(mode)) {
+//				deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
+//				deltaAngle = transformAngle(deltaAngle);
+//				
+//			} else if (DriveAngleMode.WIND.equals(mode)) {
+//				deltaAngle = (int) (desiredAngle - windModel.getWind().getDirection());
+//				//here negating because the wind is not influenced by the boat and 
+//				//the wind angle depends on the boat
+//				deltaAngle = -transformAngle(deltaAngle); 
+//			}
+//		}
+		
+		//Neuimplementierung PIDController
+		deltaAngle = (int) PIDController.controll((transformAngle((int) compassModel.getCompass().getYaw())));
 		
 		rudderPos = Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle));
 		

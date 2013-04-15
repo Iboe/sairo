@@ -13,6 +13,8 @@ public class logEvaluator {
 	private boolean evaluatePilot;
 	private boolean evaluateRudderPositions;
 	private boolean evaluateSimplePidController;
+	private boolean evaluateWindData;
+	private boolean evaluateGPSData;
 	
 	private String logFileName;
 	private String csvFileName;
@@ -21,6 +23,8 @@ public class logEvaluator {
 	private evaluatePilot pilot;
 	private evaluateRudderPosistions rudderPos;
 	private evaluateSimplePidController pid;
+	private evaluateWindData wind;
+	private evaluateGPSData gps;
 	
 	public logEvaluator(String pLogFileName, String pCsvFileName){
 		this.logFileName = pLogFileName;
@@ -39,6 +43,8 @@ public class logEvaluator {
 		this.setEvaluatePilot(false);
 		this.setEvaluateRudderPositions(false);
 		this.setEvaluateSimplePidController(false);
+		this.setEvaluateWindData(false);
+		this.setEvaluateGPSData(false);
 	}
 	
 	/***
@@ -47,7 +53,7 @@ public class logEvaluator {
 	 * @version 1
 	 */
 	public void writeAllEvaluationsToCsv(){
-		CSVWriter.CSVWriterWrite(getCsvFileName(), compass.getCompassCourseList(), pid.getSimplePidControllerStateList(), pilot.getCommandList(), rudderPos.getRudderPositions());
+		CSVWriter.CSVWriterWrite(getCsvFileName(), compass.getCompassCourseList(), pid.getSimplePidControllerStateList(), pilot.getCommandList(), rudderPos.getRudderPositions(),gps.getGpsDataList(),wind.getWindDataList());
 	}
 	
 	/***
@@ -67,6 +73,12 @@ public class logEvaluator {
 		}
 		if(this.isEvaluateSimplePidController()){
 			pid = new evaluateSimplePidController(getLogFileName());
+		}
+		if(this.isEvaluateWindData()){
+			wind = new evaluateWindData(getLogFileName());
+		}
+		if(this.isEvaluateGPSData()){
+			gps = new evaluateGPSData(getLogFileName());
 		}
 	}
 	
@@ -124,6 +136,22 @@ public class logEvaluator {
 
 	public void setCsvFileName(String csvFileName) {
 		this.csvFileName = csvFileName;
+	}
+
+	public boolean isEvaluateWindData() {
+		return evaluateWindData;
+	}
+
+	public void setEvaluateWindData(boolean evaluateWindData) {
+		this.evaluateWindData = evaluateWindData;
+	}
+
+	public boolean isEvaluateGPSData() {
+		return evaluateGPSData;
+	}
+
+	public void setEvaluateGPSData(boolean evaluateGPSData) {
+		this.evaluateGPSData = evaluateGPSData;
 	}
 	
 }

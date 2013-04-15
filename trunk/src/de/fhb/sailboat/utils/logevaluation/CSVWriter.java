@@ -15,9 +15,13 @@ import java.util.Comparator;
 import java.util.Date;
 
 import de.fhb.sailboat.data.CompassCourse;
+import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.data.GPSData;
 import de.fhb.sailboat.data.PilotDriveAngleRudderCommand;
 import de.fhb.sailboat.data.RudderPosition;
 import de.fhb.sailboat.data.SimplePidControllerState;
+import de.fhb.sailboat.data.Wind;
+import de.fhb.sailboat.data.WindData;
 
 /***
  * 
@@ -29,6 +33,8 @@ public class CSVWriter {
 	private static ArrayList<RudderPosition> rudderPositionList;
 	private static ArrayList<CompassCourse> compassCoursesList;
 	private static ArrayList<PilotDriveAngleRudderCommand> pilotDriveAngleRudderCommandList;
+	private static ArrayList<GPSData> gpsDataList;
+	private static ArrayList<WindData> windDataList;
 	
 	private static ArrayList<CSVEntry> csvEntries = new ArrayList<CSVEntry>();
 	
@@ -94,30 +100,36 @@ public class CSVWriter {
 		}
 	}
 	
-	public static void  CSVWriterWrite(String pFileName, ArrayList<CompassCourse> pCompassCourseList,ArrayList<SimplePidControllerState> pSimplePidControllerStateList, ArrayList<PilotDriveAngleRudderCommand> pPilotDriveAngleRudderCommandList, ArrayList<RudderPosition> pRudderPositionList){
+	public static void  CSVWriterWrite(String pFileName, ArrayList<CompassCourse> pCompassCourseList,ArrayList<SimplePidControllerState> pSimplePidControllerStateList, ArrayList<PilotDriveAngleRudderCommand> pPilotDriveAngleRudderCommandList, ArrayList<RudderPosition> pRudderPositionList,ArrayList<GPSData> pGPSDataList, ArrayList<WindData> pWindDataList){
 		try {
 			//Zeitstempel,Kompasskurs Azimuth,Differenz SimplePIDController, Rudderposition SimplePIDController,Pilot Rudderposition, AKSEN Winkel Rudderposition
 			//System.out.println("Write: " + "Zeitstempel;Zeit in ms seit 01.01.1970;Kompasskurs Azimuth;Differenz SimplePIDController;Rudderposition SimplePIDController;Pilot Rudderposition;AKSEN Winkel Rudderposition"+System.getProperty("line.separator"));
 			for(int i=0;i<pCompassCourseList.size();i++){
-				csvEntries.add(new CSVEntry(pCompassCourseList.get(i).getTimeStamp(),pCompassCourseList.get(i).getTimeStamp().getTime(), String.valueOf(pCompassCourseList.get(i).getCompassCourseAzimuth()), "", "", "", ""));
+				csvEntries.add(new CSVEntry(pCompassCourseList.get(i).getTimeStamp(),pCompassCourseList.get(i).getTimeStamp().getTime(), String.valueOf(pCompassCourseList.get(i).getCompassCourseAzimuth()), "", "", "", "","","","","","",""));
 			}
 			for(int i=0;i<pSimplePidControllerStateList.size();i++){
-				csvEntries.add(new CSVEntry(pSimplePidControllerStateList.get(i).getTimeStamp(),pSimplePidControllerStateList.get(i).getTimeStamp().getTime(), "", String.valueOf(pSimplePidControllerStateList.get(i).getDifference()), "", "", ""));
+				csvEntries.add(new CSVEntry(pSimplePidControllerStateList.get(i).getTimeStamp(),pSimplePidControllerStateList.get(i).getTimeStamp().getTime(), "", String.valueOf(pSimplePidControllerStateList.get(i).getDifference()), "", "", "","","","","","",""));
 			}
 			for(int i=0;i<pSimplePidControllerStateList.size();i++){
-				csvEntries.add(new CSVEntry(pSimplePidControllerStateList.get(i).getTimeStamp(),pSimplePidControllerStateList.get(i).getTimeStamp().getTime(), "","", String.valueOf(pSimplePidControllerStateList.get(i).getRudderPos()), "", ""));
+				csvEntries.add(new CSVEntry(pSimplePidControllerStateList.get(i).getTimeStamp(),pSimplePidControllerStateList.get(i).getTimeStamp().getTime(), "","", String.valueOf(pSimplePidControllerStateList.get(i).getRudderPos()), "", "","","","","","",""));
 			}
 			for(int i=0;i<pPilotDriveAngleRudderCommandList.size();i++){
-				csvEntries.add(new CSVEntry(pPilotDriveAngleRudderCommandList.get(i).getTimeStamp(),pPilotDriveAngleRudderCommandList.get(i).getTimeStamp().getTime(), "", "", "", String.valueOf(pPilotDriveAngleRudderCommandList.get(i).getRudderPosition()), ""));
+				csvEntries.add(new CSVEntry(pPilotDriveAngleRudderCommandList.get(i).getTimeStamp(),pPilotDriveAngleRudderCommandList.get(i).getTimeStamp().getTime(), "", "", "", String.valueOf(pPilotDriveAngleRudderCommandList.get(i).getRudderPosition()), "","","","","","",""));
 			}
 			for(int i=0;i<pRudderPositionList.size();i++){
-				csvEntries.add(new CSVEntry(pRudderPositionList.get(i).getTimeStamp(),pRudderPositionList.get(i).getTimeStamp().getTime(), "", "", "", "", String.valueOf(pRudderPositionList.get(i).getAngle())));
+				csvEntries.add(new CSVEntry(pRudderPositionList.get(i).getTimeStamp(),pRudderPositionList.get(i).getTimeStamp().getTime(), "", "", "", "", String.valueOf(pRudderPositionList.get(i).getAngle()),"","","","","",""));
+			}
+			for(int i=0;i<pGPSDataList.size();i++){
+				csvEntries.add(new CSVEntry(pGPSDataList.get(i).getTimeStamp(), pGPSDataList.get(i).getTimeStamp().getTime(), "", "", "", "", "", String.valueOf(pGPSDataList.get(i).getLongitude()), String.valueOf(pGPSDataList.get(i).getLatitude()), String.valueOf(pGPSDataList.get(i).getSatelliteCount()), String.valueOf(pGPSDataList.get(i).getSpeed()), "", ""));
+			}
+			for(int i=0;i<pWindDataList.size();i++){
+				csvEntries.add(new CSVEntry(pWindDataList.get(i).getTimeStamp(), pWindDataList.get(i).getTimeStamp().getTime(), "", "", "", "", "", "", "", "", "", String.valueOf(pWindDataList.get(i).getDirection()), String.valueOf(pWindDataList.get(i).getSpeed())));
 			}
 			//Sortiere Liste
 			//TODO Sortieralgorithmus tauschen
 			boolean unsortet=true;
 			while(unsortet){
-				System.out.println("Sorting list");
+				//System.out.println("Sorting list");
 				unsortet=false;
 				for(int i=0;i<csvEntries.size()-1;i++){
 					if(csvEntries.get(i).getTime()>csvEntries.get(i+1).getTime()){
@@ -130,8 +142,8 @@ public class CSVWriter {
 				}
 			}
 			FileWriter fWriter = new FileWriter(pFileName,false);
-			fWriter.write("Zeitstempel;Zeit in ms seit 01.01.1970;Kompasskurs Azimuth;Differenz SimplePIDController;Rudderposition SimplePIDController;Pilot Rudderposition;AKSEN Winkel Rudderposition"+System.getProperty("line.separator"));
-			System.out.println("Write sorted CSV-entries list: ");
+			fWriter.write(CSVEntry.getCsvHeader());
+			System.out.println("Write sorted CSV-entries list into: " + pFileName);
 			for(int i=0;i<csvEntries.size();i++){
 				fWriter.write(csvEntries.get(i).toString());
 			}

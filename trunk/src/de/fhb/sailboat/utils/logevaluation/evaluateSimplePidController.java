@@ -36,16 +36,16 @@ public class evaluateSimplePidController {
 			while ((zeile = bfReader.readLine()) != null) {
 				if (zeile.contains(logTextblocks.simplePidControllerClassName)
 						&& !zeile.contains("init")) {
-					System.out.println("Analyze: " + zeile);
+					//System.out.println("Analyze: " + zeile);
 					Date d = filter.filterTimestamp(zeile);
-					System.out.println("Found timestamp: " + d.toString());
+					//System.out.println("Found timestamp: " + d.toString());
 					int start = zeile
 							.indexOf(logTextblocks.simplePidControllerControllRudderDifference)
 							+ logTextblocks.simplePidControllerControllRudderDifference
 									.length() + 1;
 					int ende = zeile.indexOf("]", start);
 					String subString = zeile.substring(start, ende);
-					System.out.println("Found difference: " + subString);
+					//System.out.println("Found difference: " + subString);
 					start = zeile
 							.indexOf(logTextblocks.simplePidControllerControllRudderCurrentValue)
 							+ logTextblocks.simplePidControllerControllRudderCurrentValue
@@ -60,7 +60,7 @@ public class evaluateSimplePidController {
 					String output = zeile.substring(start, ende);
 					double rudderPos = Double.valueOf(output)
 							+ Double.valueOf(currentValue);
-					System.out.println("Found rudder pos: " + rudderPos);
+					//System.out.println("Found rudder pos: " + rudderPos);
 					this.simplePidControllerStateList
 							.add(new SimplePidControllerState(Double
 									.valueOf(subString), Double
