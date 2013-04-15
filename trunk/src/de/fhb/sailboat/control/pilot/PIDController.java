@@ -38,7 +38,7 @@ public class PIDController {
 			Kd=Kd+0.01;
 		}
 		else if((lastOutput-output)/Ta<1){
-			Kp=Kp-0.01;
+			Kd=Kd-0.01;
 		}
 	}
 	
