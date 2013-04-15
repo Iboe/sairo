@@ -1,5 +1,9 @@
 package de.fhb.sailboat.pilot.gui;
 
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,6 +29,8 @@ public class Window extends JFrame implements Observer {
 	private JLabel steuersignalLabel;
 	private JLabel abtastrateLabel;
 	private JPanel contentPanel;
+	private BufferedImage diagramImage;
+	private Canvas paintCanvas;
 	
 	public Window() {
 		this.setTitle("PID Debug");
@@ -41,6 +47,10 @@ public class Window extends JFrame implements Observer {
 		steuersignalLabel = new JLabel("Steuersignal: n/a");
 		abtastrateLabel = new JLabel("Abtastrate: n/a Hz");
 		
+		paintCanvas = new Canvas();
+		paintCanvas.setSize(400, 360);
+		diagramImage = new BufferedImage(400, 360, BufferedImage.TYPE_INT_RGB);
+		
 		contentPanel.add(pLabel);
 		contentPanel.add(iLabel);
 		contentPanel.add(dLabel);
@@ -48,6 +58,7 @@ public class Window extends JFrame implements Observer {
 		contentPanel.add(targetAngleLabel);
 		contentPanel.add(steuersignalLabel);
 		contentPanel.add(abtastrateLabel);
+		contentPanel.add(paintCanvas);
 		
 		this.add(contentPanel);
 		this.pack();
@@ -69,6 +80,26 @@ public class Window extends JFrame implements Observer {
 		steuersignalLabel.setText("Steuersignal: " + updateData.get(5));
 		abtastrateLabel.setText("Abtastrate: " + updateData.get(6) + " Hz");
 		
+		Graphics gfx = diagramImage.getGraphics();
+		gfx.copyArea(0, 0, 399, 359, -1, 0);
+		
+		// target angle
+		gfx.setColor(Color.BLACK);
+		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(4))), 400, (int)(Double.parseDouble((String) updateData.get(4))));
+		// real angle
+		gfx.setColor(Color.BLACK);
+		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(3))), 400, (int)(Double.parseDouble((String) updateData.get(3))));
+		// steuersignal
+		gfx.setColor(Color.BLACK);
+		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(5))), 400, (int)(Double.parseDouble((String) updateData.get(5))));
+		
+		
+	}
+	
+	public void paint(Graphics gfx) {
+		super.paint(gfx);
+		
+		gfx.drawImage(diagramImage, 0, 0, 399, 359, paintCanvas);
 	}
 
 }
