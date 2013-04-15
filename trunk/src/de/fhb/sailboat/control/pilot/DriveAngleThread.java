@@ -346,8 +346,6 @@ public class DriveAngleThread extends Thread {
 	private void calculateRudderPosisition() {
 		
 		synchronized (mode) {
-//			time_old=System.currentTimeMillis(); //Neu
-//			Ta=(System.currentTimeMillis()-time_old)/1000; //Neu
 //			if (DriveAngleMode.COMPASS.equals(mode)) {
 //				deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
 //				deltaAngle = transformAngle(deltaAngle);
@@ -361,7 +359,7 @@ public class DriveAngleThread extends Thread {
 //		}
 		
 		//Neuimplementierung PIDController
-		deltaAngle = (int) PIDController.controll((transformAngle((int) compassModel.getCompass().getYaw())),desiredAngle);
+		deltaAngle = (int) PIDController.controll((int) compassModel.getCompass().getYaw(),desiredAngle);
 		}
 		rudderPos = Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle));
 		
