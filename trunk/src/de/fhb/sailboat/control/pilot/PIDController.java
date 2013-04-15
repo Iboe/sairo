@@ -1,50 +1,75 @@
 package de.fhb.sailboat.control.pilot;
 
+import java.util.ArrayList;
+import java.util.Observable;
+
 import org.apache.log4j.Logger;
+
+import de.fhb.sailboat.pilot.gui.Window;
 
 /***
  * This PID-Controller controlls the angle of compass , the target angle of compass and the controlling of rudder
+ * 
+ * algorithm for pid controller :
+ * esum = esum + e
+ * y = Kp * e + Ki * Ta * esum + Kd * (e – ealt)/Ta
+ * ealt = e
  * @author Tobias Koppe
  *
  */
-public class PIDController {
+public class PIDController extends Observable{
 
 	private static final Logger LOG = Logger.getLogger(PIDController.class);
 	
-	double Kp=0;
-	double Ki=0;
-	double Kd=0;
+	double Kp=0; //Koeffizient P
+	double Ki=0; //Koeffizient I
+	double Kd=0; //Koeffizient D
 	double Ta=0; //Samplingrate
 	
-	double esum;
-	double eold;
+	double esum; //Summe Fehler
+	double eold; //Fehler alt
 	double deltaAngle=0; //Failure: TargetAngle-Angle=deltaAngle
 	
-	double targetAngle=0;
-	double realAngle=0;
+	double targetAngle=0; //Zielwinkel
+	double realAngle=0; //Realer WInkel
 	
-	private double lastOutput=0;
-	private double output=0;
+	private double lastOutput=0; //Ausgabe alt
+	private double output=0; //Ausgabe
+	
+	private ArrayList<String> valueList; //List with all values of PID Controller
+	
+	private Window gui;
 	
 	public PIDController(){
+		valueList = new ArrayList<String>();
+		this.gui = new Window();
+		this.addObserver(gui);
 		LOG.debug("PIDController init: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 	}
 	
+	/***
+	 * Controlls the coefficient D
+	 * @author Tobias Koppe
+	 */
 	private void controllCoefficientD(){
 		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
 		//oder stabil ist, Koeffizient D wird solange erhoeht, bis System
 		//nicht zuckt
-		if((lastOutput-output)/Ta>1){
-			Kd=Kd+0.01;
-		}
-		else if((lastOutput-output)/Ta<1){
-			Kd=Kd-0.01;
+//		if((lastOutput-output)/Ta>0){
+//			Kd=Kd+0.001;
+//		}
+//		else if((lastOutput-output)/Ta<1){
+//			Kd=Kd-0.001;
+//		}
+		
+		if(lastOutput>0){
+			Kd=Kd+0.001;
 		}
 	}
 	
 	private void controllCoefficientI(){
-		if((lastOutput-output)/Ta!=0){
-			Ki=Ki+0.01;
+		if((lastOutput-output)!=0){
+			Ki=Ki+0.0001;
 		}
 	}
 	
@@ -52,11 +77,8 @@ public class PIDController {
 		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
 		//oder stabil ist, Koeffizient P wird solange erhoeht, bis System
 		//anfaengt zu schwingen
-		if((lastOutput-output)/Ta<1){
-			Kp=Kp+0.01;
-		}
-		else if((lastOutput-output)/Ta>1){
-			Kp=Kp-0.01;
+		if(lastOutput<1){
+			Kp=Kp+0.1;
 		}
 	}
 	
@@ -71,25 +93,40 @@ public class PIDController {
 	
 	private void calculateDeltaAngle(){
 		eold = deltaAngle;
-		if(realAngle<0){
-			realAngle=360+realAngle;
+		if(realAngle>0){
+			deltaAngle = realAngle-targetAngle;
 		}
-		if(targetAngle>realAngle){
-		deltaAngle = targetAngle-realAngle;}
 		else{
-			deltaAngle=realAngle-targetAngle;
+			deltaAngle = - (realAngle+targetAngle);
 		}
 	}
 	
+	/***
+	 * Calculates the P part of PID
+	 * P = Kp*e
+	 * @author Tobias Koppe
+	 * @return
+	 */
 	private double calculateP(){
 		return Kp*(deltaAngle);
 	}
 	
+	/***
+	 * Calculates the I part of PID
+	 * I=Ki*esum*Ta
+	 * esum = esum + deltaAngle
+	 * @return
+	 */
 	private double calculateI(){
 		esum = esum + deltaAngle;
 		return Ki * esum * Ta;
 	}
 	
+	/***
+	 * Calculates the D part of PID
+	 * D=Kd * (e – e_old)/Ta
+	 * @return
+	 */
 	private double calculateD(){
 		return Kd*(deltaAngle-eold)/Ta;
 	}
@@ -103,10 +140,25 @@ public class PIDController {
 		output=calculateP()+calculateI()+calculateD();
 		controllCoefficientP();
 		controllCoefficientD();
-		//controllCoefficientI();
+		controllCoefficientI();
 		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
+		packValueToList();
+		setChanged();
+		notifyObservers(valueList);
 		return output;
+	}
+	
+	private void packValueToList(){
+		this.valueList.clear();
+		this.valueList.add(String.valueOf(Kp));
+		this.valueList.add(String.valueOf(Ki));
+		this.valueList.add(String.valueOf(Kd));
+		this.valueList.add(String.valueOf(realAngle));
+		this.valueList.add(String.valueOf(targetAngle));
+		this.valueList.add(String.valueOf(deltaAngle));
+		this.valueList.add(String.valueOf(output));
+		this.valueList.add(String.valueOf(Ta));
 	}
 	
 	/***
@@ -122,6 +174,104 @@ public class PIDController {
 		sb.append("targetAngle["+targetAngle+"]");
 		sb.append("deltaAngle["+deltaAngle+"]");
 		sb.append("output["+output+"]");
+		sb.append("samplingTime["+Ta+"]");
 		return sb.toString();
 	}
+
+	public double getKp() {
+		return Kp;
+	}
+
+	public void setKp(double kp) {
+		Kp = kp;
+	}
+
+	public double getKi() {
+		return Ki;
+	}
+
+	public void setKi(double ki) {
+		Ki = ki;
+	}
+
+	public double getKd() {
+		return Kd;
+	}
+
+	public void setKd(double kd) {
+		Kd = kd;
+	}
+
+	public double getTa() {
+		return Ta;
+	}
+
+	public void setTa(double ta) {
+		Ta = ta;
+	}
+
+	public double getEsum() {
+		return esum;
+	}
+
+	public void setEsum(double esum) {
+		this.esum = esum;
+	}
+
+	public double getEold() {
+		return eold;
+	}
+
+	public void setEold(double eold) {
+		this.eold = eold;
+	}
+
+	public double getDeltaAngle() {
+		return deltaAngle;
+	}
+
+	public void setDeltaAngle(double deltaAngle) {
+		this.deltaAngle = deltaAngle;
+	}
+
+	public double getTargetAngle() {
+		return targetAngle;
+	}
+
+	public void setTargetAngle(double targetAngle) {
+		this.targetAngle = targetAngle;
+	}
+
+	public double getRealAngle() {
+		return realAngle;
+	}
+
+	public void setRealAngle(double realAngle) {
+		this.realAngle = realAngle;
+	}
+
+	public double getLastOutput() {
+		return lastOutput;
+	}
+
+	public void setLastOutput(double lastOutput) {
+		this.lastOutput = lastOutput;
+	}
+
+	public double getOutput() {
+		return output;
+	}
+
+	public void setOutput(double output) {
+		this.output = output;
+	}
+
+	public ArrayList<String> getValueList() {
+		return valueList;
+	}
+
+	public void setValueList(ArrayList<String> valueList) {
+		this.valueList = valueList;
+	}
+	
 }
