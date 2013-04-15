@@ -26,6 +26,8 @@ public class PIDController extends Observable{
 	double Kd=0; //Koeffizient D
 	double Ta=0; //Samplingrate
 	
+	int signFehler=0;
+	
 	double lastCall=0;
 	
 	double esum; //Summe Fehler
@@ -111,12 +113,14 @@ public class PIDController extends Observable{
 	
 	private void calculateDeltaAngle(){
 		eold = deltaAngle;
-		if(realAngle>0){
-			deltaAngle = realAngle-targetAngle;
+		deltaAngle=realAngle-targetAngle;
+		if(deltaAngle>0){
+			signFehler=1;
 		}
 		else{
-			deltaAngle = - (realAngle+targetAngle);
+			signFehler=-1;
 		}
+		deltaAngle=Math.abs(deltaAngle);
 	}
 	
 	/***
@@ -155,7 +159,7 @@ public class PIDController extends Observable{
 		controllSamplingTime();
 		calculateDeltaAngle();
 		lastOutput=output;
-		output=calculateP()+calculateI()+calculateD();
+		output=calculateP()+calculateI()+calculateD()*signFehler;
 		LOG.debug ("unshorted output: " + output);
 		output = output*100;
 		output = Math.round(output);
