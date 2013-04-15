@@ -29,8 +29,7 @@ public class Window extends JFrame implements Observer {
 	private JLabel steuersignalLabel;
 	private JLabel abtastrateLabel;
 	private JPanel contentPanel;
-	private BufferedImage diagramImage;
-	private Canvas paintCanvas;
+	public Canvas paintCanvas;
 	
 	public Window() {
 		this.setTitle("PID Debug");
@@ -49,7 +48,6 @@ public class Window extends JFrame implements Observer {
 		
 		paintCanvas = new Canvas();
 		paintCanvas.setSize(400, 360);
-		diagramImage = new BufferedImage(400, 360, BufferedImage.TYPE_INT_RGB);
 		
 		contentPanel.add(pLabel);
 		contentPanel.add(iLabel);
@@ -80,7 +78,7 @@ public class Window extends JFrame implements Observer {
 		steuersignalLabel.setText("Steuersignal: " + updateData.get(5));
 		abtastrateLabel.setText("Abtastrate: " + updateData.get(6) + " Hz");
 		
-		Graphics gfx = diagramImage.getGraphics();
+		Graphics gfx = paintCanvas.getGraphics();
 		gfx.copyArea(0, 0, 399, 359, -1, 0);
 		gfx.setColor(Color.WHITE);
 		gfx.drawLine(399, 0, 399, 359);
@@ -94,14 +92,5 @@ public class Window extends JFrame implements Observer {
 		// steuersignal
 		gfx.setColor(Color.BLACK);
 		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(5))), 400, (int)(Double.parseDouble((String) updateData.get(5))));
-		
-		
 	}
-	
-	public void paint(Graphics gfx) {
-		super.paint(gfx);
-		
-		gfx.drawImage(diagramImage, 0, 300, 399, 659, paintCanvas);
-	}
-
 }
