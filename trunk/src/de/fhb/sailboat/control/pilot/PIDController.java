@@ -21,7 +21,7 @@ public class PIDController extends Observable{
 
 	private static final Logger LOG = Logger.getLogger(PIDController.class);
 	
-	double Kp=0; //Koeffizient P
+	double Kp=1; //Koeffizient P
 	double Ki=0; //Koeffizient I
 	double Kd=0; //Koeffizient D
 	double Ta=0; //Samplingrate
@@ -88,7 +88,7 @@ public class PIDController extends Observable{
 		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
 		//oder stabil ist, Koeffizient P wird solange erhoeht, bis System
 		//anfaengt zu schwingen
-		if((lastOutput-output)<1){
+		if((lastOutput-output)<1 && Kp<3){
 			Kp=Kp+0.01;
 			Kp = Kp*100;
 			Kp = Math.round(Kp);
@@ -112,8 +112,18 @@ public class PIDController extends Observable{
 	}
 	
 	private void calculateDeltaAngle(){
+		double dump=0;
 		eold = deltaAngle;
 		deltaAngle=realAngle-targetAngle;
+		
+			dump = 360-realAngle+targetAngle;
+		if(dump<Math.abs(targetAngle-realAngle)){
+			deltaAngle=dump;
+		}
+		else{
+			deltaAngle = targetAngle-realAngle;
+		}
+		
 		if(deltaAngle>0){
 			signFehler=1;
 		}
