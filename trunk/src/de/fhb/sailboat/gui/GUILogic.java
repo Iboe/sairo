@@ -141,14 +141,14 @@ public interface GUILogic {
      * Old method to reset Actors (propellor, sail, rudder).
      */
     public void sendResetActors();
-    @Deprecated
+    
     /**
-     * Old method for reseting the MissionMap (markers, lines).
+     *  reseting the MissionMap (markers, lines).
      */
     public void sendResetMissionMap();
-    @Deprecated
+    
     /**
-     * Old method used for activating/ deactivation SailMode, resulting in
+     * activating/ deactivation SailMode, resulting in
      * usage of propellor or not.
      * @param sailMode true if propellor should be deactivated
      */

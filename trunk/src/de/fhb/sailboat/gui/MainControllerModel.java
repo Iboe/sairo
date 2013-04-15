@@ -79,14 +79,12 @@ public interface MainControllerModel {
 	 */
 	public void setPolyList(List<MapPolygon> polyList);
 
-	@Deprecated
 	/**
 	 * Old method which returned the current state of sailMode (see setSailMode).
 	 * @return sailMode
 	 */
 	public boolean isSailMode();
 
-	@Deprecated
 	/**
      * Old method used for activating/ deactivation SailMode, resulting in
      * usage of propellor or not.

@@ -55,7 +55,7 @@ public class MainControllerImpl implements MainController {
 	private Player player;
 	
 	/**
-	 * TODO Add comment.
+	 * Sets the actual Update-Rate for GUI
 	 * @param miliSecs
 	 */
 	public void setUpdateIntervall(int miliSecs) {
@@ -65,7 +65,7 @@ public class MainControllerImpl implements MainController {
 	}
 
 	/**
-	 * TODO Add comment.
+	 * Gets the actual updaterate of GUI
 	 * @param miliSecs
 	 */
 	public int getActualUpdateRate() {
@@ -103,10 +103,12 @@ public class MainControllerImpl implements MainController {
 
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
 					.getLatitude(), markerList.get(i).getLongitude()), 3));
 		}
+		
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
@@ -132,9 +134,11 @@ public class MainControllerImpl implements MainController {
 
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		
 		for (int i = 0; i < polyList.size(); i++) {
 			tasks.add(new ReachPolygonTask(polyList.get(i).getPoints()));
 		}
+		
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
@@ -158,7 +162,9 @@ public class MainControllerImpl implements MainController {
 
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
+		
 		tasks.add(new CompassCourseTask(angle));
+		
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
 
@@ -167,7 +173,6 @@ public class MainControllerImpl implements MainController {
 		this.model.setCurrentWholeMission(mission); // Store send mission in
 													// model for reporting of
 													// advancements
-
 		planner.doMission(mission);
 	}
 
@@ -257,7 +262,7 @@ public class MainControllerImpl implements MainController {
 		updateWind();
 		updateCompass();
 		updateGps();
-		//updateMission();
+		updateMission();//XXX Achtung wieder einkommentiert, zeigt er nun etwas an im infofenster??
 		setPropellor();
 		setSail();
 		setRudder();
@@ -286,6 +291,7 @@ public class MainControllerImpl implements MainController {
 
 	/**
 	 * Update current mission data.
+	 * TODO???
 	 */
 	public void updateMission() {
 		if (worldModel.getMission() != this.model.getMissionTasksLeft()) {
@@ -294,7 +300,7 @@ public class MainControllerImpl implements MainController {
 		}
 	}
 
-//	// Setter (values given by View to store in Model)
+	// Setter (values given by View to store in Model)
 	/**
 	 * Old method for creating a list of GPS points for usage with ReachCircleTasks.
 	 * @param pointList
@@ -337,9 +343,8 @@ public class MainControllerImpl implements MainController {
 		return this.model.getGps();
 	}
 
-	@Deprecated
 	/**
-     * Old method used for activating/ deactivation SailMode, resulting in
+     * activating/ deactivation SailMode, resulting in
      * usage of propellor or not.
      * @param sailMode true if propellor should be deactivated
      */
@@ -399,9 +404,8 @@ public class MainControllerImpl implements MainController {
 		this.model.setSail(this.worldModel.getActuatorModel().getSail().getValue());
 	}
 
-	@Deprecated
 	/**
-    * Old method used for activating/ deactivation SailMode, resulting in
+    * activating/ deactivation SailMode, resulting in
     * usage of propellor or not.
     * @param sailMode true if propellor should be deactivated
     */
@@ -443,7 +447,7 @@ public class MainControllerImpl implements MainController {
 
 	@Override
 	/**
-	 * TODO Add comment.
+	 * starts the Player with a specific log-file
 	 */
 	public void startPlayer(String filePath) {
 		player=new Player(this.worldModel, filePath);
@@ -452,7 +456,7 @@ public class MainControllerImpl implements MainController {
 
 	@Override
 	/**
-	 * TODO Add comment.
+	 * stops playing the player-module
 	 */
 	public void stopPlaying() {
 		player.stop();
@@ -460,7 +464,7 @@ public class MainControllerImpl implements MainController {
 
 	@Override
 	/**
-	 * TODO Add comment.
+	 * pause player-module
 	 */
 	public void pausePlaying() {
 		player.pause();
@@ -468,7 +472,7 @@ public class MainControllerImpl implements MainController {
 
 	@Override
 	/**
-	 * TODO Add comment.
+	 * playing the loaded log-file of the player-module
 	 */
 	public void playPlayer() {
 		player.play();
@@ -476,7 +480,7 @@ public class MainControllerImpl implements MainController {
 
 	@Override
 	/**
-	 * TODO Add comment.
+	 * sets the Playing speed of the player-module
 	 */
 	public void setPlayingSpeed(int value) {
 		player.setSpeedIntervall(value);
@@ -485,7 +489,7 @@ public class MainControllerImpl implements MainController {
 
 	@Override
 	/**
-	 * TODO Add comment.
+	 * sets the GUI-update-rate back to default
 	 */
 	public void setActualUpdateRateBackToDefault() {
 	    actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;

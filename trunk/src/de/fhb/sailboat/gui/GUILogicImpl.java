@@ -367,7 +367,6 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
-    @Deprecated
     /**
      * Old methof for resetting the MissionMap ()markers, lines.
      */
@@ -378,9 +377,8 @@ public class GUILogicImpl implements GUILogic {
     }
 
     @Override
-    @Deprecated
     /**
-     * Old method used for activating/ deactivation SailMode, resulting in
+     * activating/ deactivation SailMode, resulting in
      * usage of propellor or not.
      * @param sailMode true if propellor should be deactivated
      */

@@ -12,7 +12,7 @@ import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
 import de.fhb.sailboat.missionplayer.PlayerDialog;
 
 /**
- * A slim general user interface for an autonomous sailboat. Requires a correct GUILogic class to be
+ * User interface for an autonomous sailboat. Requires a correct GUILogic class to be
  * assigned via constructor as well as a Planner. The GUILogic is assigned hard-coded inside the constructor
  * itself and determines all program logic besides basic interface handling (buttons etc).
  * The Planner will be used to send missions and similar instructions and only needs to be assigned via
@@ -42,6 +42,7 @@ public class GUI extends javax.swing.JFrame {
 	private JCheckBoxMenuItem playerMenuView;
 
 	private PlayerDialog playerDialog;
+	private JCheckBoxMenuItem sailmodeMenuCheckBox;
 
     /**
      * Initializes the GUInterface form, connects to a chosen Planner and
@@ -126,14 +127,16 @@ public class GUI extends javax.swing.JFrame {
         missionTestMenuHoldAngleToWind = new javax.swing.JMenuItem();
         missionTestMenuStopTask = new javax.swing.JMenuItem();
         missionTestMenuResetActors = new javax.swing.JMenuItem();
-        missionTestMenuResetMap = new javax.swing.JMenuItem();
+        MenuResetMissionMap = new javax.swing.JMenuItem();
         missionMenu = new javax.swing.JMenu();
         missionMenuMissionCreator = new javax.swing.JMenuItem();
         
         playerMenu= new javax.swing.JMenu();
-        playerMenuView = new javax.swing.JCheckBoxMenuItem();       
+        playerMenuView = new javax.swing.JCheckBoxMenuItem();
+        
+        sailmodeMenuCheckBox = new javax.swing.JCheckBoxMenuItem();     
 
-        infoDialog.setTitle("SaiilboatGUI Info");
+        infoDialog.setTitle("SailboatGUI Info");
         infoDialog.setMinimumSize(new java.awt.Dimension(405, 305));
         infoDialog.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -707,14 +710,13 @@ public class GUI extends javax.swing.JFrame {
         });
         missionTestMenu.add(missionTestMenuResetActors);
 
-        missionTestMenuResetMap.setText("Karte zurücksetzen");
-        missionTestMenuResetMap.addActionListener(new java.awt.event.ActionListener() {
+        MenuResetMissionMap.setText("Karte zurücksetzen");
+        MenuResetMissionMap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                missionTestMenuResetMapActionPerformed(evt);
+                resetMissionMapActionPerformed(evt);
             }
         });
-        missionTestMenu.add(missionTestMenuResetMap);
-
+        
         menuBar.add(missionTestMenu);
         
         //XXX TESTMISSION ENDS
@@ -740,8 +742,20 @@ public class GUI extends javax.swing.JFrame {
 			}
         });
         
-        missionMenu.add(missionMenuMissionCreator); 
+        
+        sailmodeMenuCheckBox.setText("Sailmode On");
+        sailmodeMenuCheckBox.addItemListener(new java.awt.event.ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				changeSailmode(e);
+			}
+        });
+        
+        missionMenu.add(missionMenuMissionCreator);
+        missionMenu.add(sailmodeMenuCheckBox);
+        
         playerMenu.add(playerMenuView);
+        playerMenu.add(MenuResetMissionMap);
         menuBar.add(playerMenu);
         
 
@@ -865,10 +879,21 @@ public class GUI extends javax.swing.JFrame {
         guiLogic.sendResetActors();
     }                                                          
 
-    private void missionTestMenuResetMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+    private void resetMissionMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         guiLogic.sendResetMissionMap();
     }   
     
+    /**
+     * changes the sailmode similar to the checkbox for sailmode
+     * @param e
+     */
+	private void changeSailmode(ItemEvent e) {
+		if(e.getStateChange()==ItemEvent.SELECTED){
+			guiLogic.setSailMode(true);
+		}else{
+			guiLogic.setSailMode(false);
+		}
+	}
 
     /**
      * Prepares closure of remoteDialog.
@@ -886,15 +911,20 @@ public class GUI extends javax.swing.JFrame {
      */
     private void remoteDialogWindowActivated(java.awt.event.WindowEvent evt) {                                             
         // get current propellor setting, relate it to min, null and max and set the propellor control (radioButtons) to the right value.
-        int propellor = guiLogic.getController().getPropellor();
+//        int propellor = guiLogic.getController().getPropellor();
 
-        if (propellor > MainControllerImpl.PROPELLOR_NORMAL) {
-            propellorMinRadioButton.setSelected(true);
-        } else if (propellor == MainControllerImpl.PROPELLOR_NORMAL) {
-            propellorNullRadioButton.setSelected(true);
-        } else {
-            propellorMaxRadioButton.setSelected(true);
-        }
+        //sollte nicht von den aktuellen Propeller-werte fesgemacht werden
+//        if (propellor > MainControllerImpl.PROPELLOR_NORMAL) {
+//            propellorMinRadioButton.setSelected(true);
+//        } else if (propellor == MainControllerImpl.PROPELLOR_NORMAL) {
+//            propellorNullRadioButton.setSelected(true);
+//        } else {
+//            propellorMaxRadioButton.setSelected(false);
+//        }
+        
+        propellorNullRadioButton.setSelected(true);
+        propellorMinRadioButton.setSelected(false);
+        propellorMaxRadioButton.setSelected(false);
         
         // get current rudder position and set the value to the rudder control slider
         int rudder = guiLogic.getController().getRudder();
@@ -1157,7 +1187,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem missionTestMenuCompassCourse;
     private javax.swing.JMenuItem missionTestMenuHoldAngleToWind;
     private javax.swing.JMenuItem missionTestMenuResetActors;
-    private javax.swing.JMenuItem missionTestMenuResetMap;
+    private javax.swing.JMenuItem MenuResetMissionMap;
     private javax.swing.JMenuItem missionTestMenuStopTask;
     private javax.swing.JRadioButton propellorMaxRadioButton;
     private javax.swing.JRadioButton propellorMinRadioButton;
