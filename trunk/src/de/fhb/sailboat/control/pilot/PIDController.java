@@ -77,8 +77,9 @@ public class PIDController {
 		return Kd*(deltaAngle-eold)/Ta;
 	}
 	
-	public double controll(double pRealAngle){
+	public double controll(double pRealAngle, double pTargetAngle){
 		this.realAngle = pRealAngle;
+		this.targetAngle = pTargetAngle;
 		controllSamplingTime();
 		calculateDeltaAngle();
 		lastOutput=output;
