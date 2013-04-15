@@ -120,7 +120,6 @@ public class PIDController extends Observable{
 		else{
 			signFehler=-1;
 		}
-		deltaAngle=Math.abs(deltaAngle);
 	}
 	
 	/***
@@ -160,7 +159,7 @@ public class PIDController extends Observable{
 		calculateDeltaAngle();
 		lastOutput=output;
 		output=calculateP()+calculateI()+calculateD()*signFehler;
-		LOG.debug ("unshorted output: " + output);
+		LOG.debug ("sign Error: " + signFehler);
 		output = output*100;
 		output = Math.round(output);
 		output = output / 100;
@@ -172,6 +171,7 @@ public class PIDController extends Observable{
 		packValueToList();
 		setChanged();
 		notifyObservers(valueList);
+		eold = deltaAngle;
 		return output;
 	}
 	
