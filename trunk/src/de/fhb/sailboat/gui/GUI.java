@@ -747,7 +747,7 @@ public class GUI extends javax.swing.JFrame {
         sailmodeMenuCheckBox.addItemListener(new java.awt.event.ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				changeSailmode(e);
+				changeSailMode(e);
 			}
         });
         
@@ -861,7 +861,6 @@ public class GUI extends javax.swing.JFrame {
     private void windowMenuRemoteActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         remoteDialog.setVisible(windowMenuRemote.isSelected());
     }                                                
-
     
     private void missionTestMenuCompassCourseActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         guiLogic.sendReachCompass();
@@ -887,7 +886,8 @@ public class GUI extends javax.swing.JFrame {
      * changes the sailmode similar to the checkbox for sailmode
      * @param e
      */
-	private void changeSailmode(ItemEvent e) {
+	private void changeSailMode(ItemEvent e) {
+		
 		if(e.getStateChange()==ItemEvent.SELECTED){
 			guiLogic.setSailMode(true);
 		}else{
@@ -923,8 +923,8 @@ public class GUI extends javax.swing.JFrame {
 //        }
         
         propellorNullRadioButton.setSelected(true);
-        propellorMinRadioButton.setSelected(false);
-        propellorMaxRadioButton.setSelected(false);
+//        propellorMinRadioButton.setSelected(false);
+//        propellorMaxRadioButton.setSelected(false);
         
         // get current rudder position and set the value to the rudder control slider
         int rudder = guiLogic.getController().getRudder();

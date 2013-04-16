@@ -50,6 +50,7 @@ public class CompassCourseTask implements Task {
 	 */
 	@Override
 	public String toString() {
-		return MissionSystemTextEnum.COMPASSCOURSETASK + " [angle=" + angle + "]";
+		//????? XXX
+		return MissionSystemTextEnum.COMPASS_COURSE_TASK + " [angle=" + angle + "]";
 	}
 }

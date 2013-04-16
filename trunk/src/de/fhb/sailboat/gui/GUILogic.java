@@ -155,6 +155,12 @@ public interface GUILogic {
     public void setSailMode(boolean sailMode);
     
     /**
+     * get the activating/ deactivation SailMode, resulting in
+     * usage of propellor or not.
+     */
+    public boolean isSailMode();
+    
+    /**
      * Returns the referrence of the MissionMap object.
      * @return MissionMap
      */

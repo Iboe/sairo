@@ -77,6 +77,6 @@ public class BeatTask implements Task {
 
 	@Override
 	public String toString() {
-		return MissionSystemTextEnum.BEATTASK + " [continueTask=" + continueTask + ", goal=" + goal + "]";
+		return MissionSystemTextEnum.BEAT_TASK + " [continueTask=" + continueTask + ", goal=" + goal + "]";
 	}
 }

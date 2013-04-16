@@ -64,6 +64,6 @@ public class ReachCircleTask implements Task {
 	 */
 	@Override
 	public String toString() {
-		return MissionSystemTextEnum.REACHCIRCLETASK + " [center=" + center + ", radius=" + radius + "]";
+		return MissionSystemTextEnum.REACH_CIRCLE_TASK + " [center=" + center + ", radius=" + radius + "]";
 	}
 }

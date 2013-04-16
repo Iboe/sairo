@@ -6,6 +6,7 @@ import de.fhb.sailboat.data.GPS;
  * Task for setting values for the actuators directly. It is finished after the values have been set.
  * 
  * @author hscheel
+ * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  *
  */
 public class PrimitiveCommandTask implements Task {
@@ -81,7 +82,10 @@ public class PrimitiveCommandTask implements Task {
 
 	@Override
 	public String toString() {
-		return "PrimitiveCommandTask [executed=" + executed + ", propellor="
+//		return "PrimitiveCommandTask [executed=" + executed + ", propellor="
+//				+ propellor + ", rudder=" + rudder + ", sail=" + sail + "]";
+		
+	return MissionSystemTextEnum.PRIMITIVE_COMMAND_TASK + " [executed=" + executed + ", propellor="
 				+ propellor + ", rudder=" + rudder + ", sail=" + sail + "]";
 	}
 }

@@ -20,7 +20,7 @@ public class MissionTask implements java.io.Serializable {
      * Add any newly added Tasks names here to register them as accepted after handling code for them was written in buildTask() and ???. Be wary of spelling errors.
      */
     private static enum supported {
-	  REACHCIRCLETASK, REACHPOLYGONTASK, COMPASSCOURSETASK, HOLDANGLETOWINDTASK, STOPTASK
+	  REACHCIRCLETASK, REACHPOLYGONTASK, COMPASSCOURSETASK, HOLDANGLETOWINDTASK, STOPTASK, PRIMITIVECOMMANDTASK
     }
     
     /**

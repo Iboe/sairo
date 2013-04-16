@@ -407,4 +407,13 @@ public class GUILogicImpl implements GUILogic {
         return this.missionMap;
     }
 
+	@Override
+    /**
+     * get the activating/ deactivation SailMode, resulting in
+     * usage of propellor or not.
+     */
+    public boolean isSailMode(){
+		return this.controller.isSailMode();
+	}
+
 }

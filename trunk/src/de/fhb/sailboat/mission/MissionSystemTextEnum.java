@@ -7,21 +7,27 @@ package de.fhb.sailboat.mission;
  */
 public enum MissionSystemTextEnum {
 
-	COMPASSCOURSETASK{
+	COMPASS_COURSE_TASK{
 		public String toString(){
 			return "CompassCourseTask";
 		}
 	},
 	
-	REACHCIRCLETASK{
+	REACH_CIRCLE_TASK{
 		public String toString(){
 			return "ReachCircleTask";
 		}
 	},
 	
-	BEATTASK{
+	BEAT_TASK{
 		public String toString(){
 			return "BeatTask";
 		}
-	}
+	}, 
+	
+	PRIMITIVE_COMMAND_TASK{
+		public String toString(){
+			return "PrimitiveCommandTask";
+		}
+	}, 
 }
