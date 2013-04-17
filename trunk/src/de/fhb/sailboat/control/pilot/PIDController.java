@@ -2,6 +2,7 @@ package de.fhb.sailboat.control.pilot;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import org.apache.log4j.Logger;
 
@@ -46,7 +47,7 @@ public class PIDController extends Observable{
 	
 	public PIDController(){
 		valueList = new ArrayList<String>();
-		this.gui = new Window();
+		this.gui = new Window(this);
 		this.gui.setVisible(true);
 		this.addObserver(gui);
 		LOG.debug("PIDController init: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
@@ -174,8 +175,8 @@ public class PIDController extends Observable{
 		output = output*100;
 		output = Math.round(output);
 		output = output / 100;
-		controllCoefficientP();
-		controllCoefficientD();
+		//controllCoefficientP();
+		//controllCoefficientD();
 		//controllCoefficientI();
 		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
@@ -196,6 +197,9 @@ public class PIDController extends Observable{
 		this.valueList.add(String.valueOf(deltaAngle));
 		this.valueList.add(String.valueOf(output));
 		this.valueList.add(String.valueOf(Ta));
+		this.valueList.add(String.valueOf(Kp));
+		this.valueList.add(String.valueOf(Ki));
+		this.valueList.add(String.valueOf(Kd));
 	}
 	
 	/***
@@ -309,6 +313,12 @@ public class PIDController extends Observable{
 
 	public void setValueList(ArrayList<String> valueList) {
 		this.valueList = valueList;
+	}
+	
+	public void setCoefficients(double pKp, double pKi, double pKd){
+		setKp(pKp);
+		setKi(pKi);
+		setKd(pKd);
 	}
 	
 }

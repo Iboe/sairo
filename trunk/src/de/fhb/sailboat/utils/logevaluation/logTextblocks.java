@@ -12,8 +12,14 @@ public class logTextblocks {
 	 */
 	public static final String aksenlocomotionClassName="de.fhb.sailboat.serial.actuator.AKSENLocomotion";
 	public static final String compassThreadName="de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread";
-	public static final String simplePidControllerClassName="de.fhb.sailboat.control.pilot.SimplePIDController";
+	public static final String simplePidControllerClassName="de.fhb.sailboat.control.simplePIDController";
 	public static final String driveAngleThreadName="de.fhb.sailboat.control.pilot.DriveAngleThread";
+	public static final String pidControllerClassName="de.fhb.sailboat.control.pilot.PIDController";
+	
+	/**
+	 * Textblocks for evaluate pid controller; 
+	 */
+	
 	
 	/**
 	 * Textblocks for evaluate pilot log
@@ -43,8 +49,8 @@ public class logTextblocks {
 	 */
 	
 	public static final String simplePidControllerControllRudder="SimplePIDController controll rudder:";
-	public static final String simplePidControllerControllRudderDifference="difference";
-	public static final String simplePidControllerControllRudderCurrentValue="currentValue";
+	public static final String simplePidControllerControllRudderDifference="deltaAngle";
+	public static final String simplePidControllerControllRudderCurrentValue="inputSignal";
 	public static final String simplePidControllerControllRudderOutput="output";
 	
 	/**
@@ -63,4 +69,5 @@ public class logTextblocks {
 	public static final String receivedValueFailure="new aksenboard state: received: f";
 	public static final String settingRudderTo="setRudder to";
 
+ 
 }

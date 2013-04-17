@@ -358,9 +358,11 @@ public class DriveAngleThread extends Thread {
 //			}
 //		}
 		
+			
 		//Neuimplementierung PIDController
 		deltaAngle = (int) PIDController.controll((int)compassModel.getCompass().getYaw(),desiredAngle);
 		}
+		//
 		
 		rudderPos = Math.min(MAX_RELEVANT_ANGLE, Math.abs(deltaAngle));
 		

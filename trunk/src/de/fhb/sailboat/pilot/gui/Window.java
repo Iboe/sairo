@@ -3,6 +3,10 @@ package de.fhb.sailboat.pilot.gui;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -11,6 +15,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import de.fhb.sailboat.control.pilot.PIDController;
 
 /**
  * 
@@ -29,9 +36,19 @@ public class Window extends JFrame implements Observer {
 	private JLabel steuersignalLabel;
 	private JLabel abtastrateLabel;
 	private JPanel contentPanel;
+	
+	private JLabel kpLabel;
+	private JLabel kiLabel;
+	private JLabel kdLabel;
+	private JTextField kpText;
+	private JTextField kiText;
+	private JTextField kdText;
+	
 	public Canvas paintCanvas;
 	
-	public Window() {
+	public PIDController pidController;
+	
+	public Window(PIDController pidController) {
 		this.setTitle("PID Debug");
 		this.setSize(300, 200);
 		
@@ -46,6 +63,14 @@ public class Window extends JFrame implements Observer {
 		steuersignalLabel = new JLabel("Steuersignal: n/a");
 		abtastrateLabel = new JLabel("Abtastrate: n/a Hz");
 		
+		kpLabel = new JLabel("Kp:");
+		kiLabel = new JLabel("Ki:");
+		kdLabel = new JLabel("Kd:");
+		
+		kpText = new JTextField();
+		kiText = new JTextField();
+		kdText = new JTextField();
+		
 		paintCanvas = new Canvas();
 		paintCanvas.setSize(400, 360);
 		
@@ -56,13 +81,96 @@ public class Window extends JFrame implements Observer {
 		contentPanel.add(targetAngleLabel);
 		contentPanel.add(steuersignalLabel);
 		contentPanel.add(abtastrateLabel);
+		contentPanel.add(kpLabel);
+		contentPanel.add(kpText);
+		contentPanel.add(kiLabel);
+		contentPanel.add(kiText);
+		contentPanel.add(kdLabel);
+		contentPanel.add(kdText);
 		contentPanel.add(paintCanvas);
 		
 		this.add(contentPanel);
+		updateTextFields();
 		this.pack();
 		this.setVisible(true);
 	}
 
+	public void updateTextFields(){
+		try{
+		this.kpText.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					pidController.setKd(Double.valueOf(kpText.getText()));
+				}
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		this.kiText.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					pidController.setKi(Double.valueOf(kiText.getText()));
+				}
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		this.kdText.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					pidController.setKd(Double.valueOf(kdText.getText()));
+				}
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		}
+		catch (NumberFormatException e){
+			
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */

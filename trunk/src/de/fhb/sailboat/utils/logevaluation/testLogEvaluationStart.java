@@ -18,7 +18,7 @@ public class testLogEvaluationStart {
 //		System.out.println("Start evaluate pilot.driveangle rudder commands");
 //		evaluatePilot testPilot = new evaluatePilot("./log/sailboat.log_27_03_2013_Labor_02");
 		
-		logEvaluator evaluator = new logEvaluator("./log/sailboat.log_15_04_2013_01_Outside","");
+		logEvaluator evaluator = new logEvaluator("./log/sailboat.log_15_04_2013_04_Labor_CompassCourse180_NewPIDTest","");
 		evaluator.setEvaluateCompassCourse(true);
 		evaluator.setEvaluatePilot(true);
 		evaluator.setEvaluateRudderPositions(true);
@@ -28,16 +28,16 @@ public class testLogEvaluationStart {
 		evaluator.evaluate();
 		evaluator.writeAllEvaluationsToCsv();
 		
-		logEvaluator log2 = new logEvaluator("./log/sailboat.log_15_04_2013_02_Outside", "");
-		log2.setEvaluateCompassCourse(true);
-		log2.setEvaluatePilot(true);
-		log2.setEvaluateRudderPositions(true);
-		log2.setEvaluateSimplePidController(true);
-		log2.setEvaluateGPSData(true);
-		log2.setEvaluateWindData(true);
-		log2.evaluate();
-		log2.writeAllEvaluationsToCsv();
-		
+//		logEvaluator log2 = new logEvaluator("./log/sailboat.log_15_04_2013_02_Outside", "");
+//		log2.setEvaluateCompassCourse(true);
+//		log2.setEvaluatePilot(true);
+//		log2.setEvaluateRudderPositions(true);
+//		log2.setEvaluateSimplePidController(true);
+//		log2.setEvaluateGPSData(true);
+//		log2.setEvaluateWindData(true);
+//		log2.evaluate();
+//		log2.writeAllEvaluationsToCsv();
+//		
 //		File dir =new File("./log/");
 //		File[] fileArray =dir.listFiles(); 
 //		for(int i=0;i<fileArray.length;i++){
