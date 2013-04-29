@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -44,6 +45,8 @@ public class Window extends JFrame implements Observer {
 	private JTextField kiText;
 	private JTextField kdText;
 	
+	private JButton setCoefficients;
+	
 	public Canvas paintCanvas;
 	
 	public PIDController pidController;
@@ -71,6 +74,8 @@ public class Window extends JFrame implements Observer {
 		kiText = new JTextField();
 		kdText = new JTextField();
 		
+		setCoefficients = new JButton("Set");
+		
 		paintCanvas = new Canvas();
 		paintCanvas.setSize(400, 360);
 		
@@ -87,6 +92,7 @@ public class Window extends JFrame implements Observer {
 		contentPanel.add(kiText);
 		contentPanel.add(kdLabel);
 		contentPanel.add(kdText);
+		contentPanel.add(setCoefficients);
 		contentPanel.add(paintCanvas);
 		
 		this.add(contentPanel);
@@ -96,79 +102,15 @@ public class Window extends JFrame implements Observer {
 	}
 
 	public void updateTextFields(){
-		try{
-		this.kpText.addKeyListener(new KeyListener() {
+		setCoefficients.addActionListener(new ActionListener() {
 			
 			@Override
-			public void keyTyped(KeyEvent arg0) {
-				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
-					pidController.setKd(Double.valueOf(kpText.getText()));
-				}
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
+			public void actionPerformed(ActionEvent arg0) {
+				pidController.setKp(Double.valueOf(kpText.getText()));
+				pidController.setKi(Double.valueOf(kiText.getText()));
+				pidController.setKd(Double.valueOf(kdText.getText()));
 			}
 		});
-		
-		this.kiText.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
-					pidController.setKi(Double.valueOf(kiText.getText()));
-				}
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		this.kdText.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
-					pidController.setKd(Double.valueOf(kdText.getText()));
-				}
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		}
-		catch (NumberFormatException e){
-			
-		}
 	}
 	
 	/* (non-Javadoc)

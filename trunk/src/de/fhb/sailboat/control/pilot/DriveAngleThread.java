@@ -347,7 +347,7 @@ public class DriveAngleThread extends Thread {
 		
 		synchronized (mode) {
 //			if (DriveAngleMode.COMPASS.equals(mode)) {
-//				deltaAngle = (int) (desiredAngle - compassModel.getCompass().getYaw());
+				deltaAngle = (int) (transformAngle(desiredAngle) - compassModel.getCompass().getYaw());
 //				deltaAngle = transformAngle(deltaAngle);
 //				
 //			} else if (DriveAngleMode.WIND.equals(mode)) {
@@ -360,7 +360,7 @@ public class DriveAngleThread extends Thread {
 		
 			
 		//Neuimplementierung PIDController
-		deltaAngle = (int) PIDController.controll((int)compassModel.getCompass().getYaw(),desiredAngle);
+		deltaAngle = (int) PIDController.controll(deltaAngle);
 		}
 		//
 		

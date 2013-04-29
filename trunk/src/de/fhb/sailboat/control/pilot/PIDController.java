@@ -26,8 +26,6 @@ public class PIDController extends Observable{
 	double Kd=0; //Koeffizient D
 	double Ta=0; //Samplingrate
 	
-	int signFehler=0;
-	
 	double lastCall=0;
 	
 	double esum; //Summe Fehler
@@ -52,42 +50,16 @@ public class PIDController extends Observable{
 		LOG.debug("PIDController init: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 	}
 	
-	//TODO Umschreiben auf Berechnung der Frequenz in Herz
 	private void controllSamplingTime(){
 		double actCall=System.currentTimeMillis();
 		if(lastCall!=0){
-			Ta=Math.abs((actCall-lastCall)/1000); //1000ms -> 1 second
+			Ta=1/(Math.abs((actCall-lastCall)/1000)); //1000ms -> 1 second -> 1/seconds -> Hz
 			lastCall = actCall;
 		}
 		else{
 			lastCall=System.currentTimeMillis();
 		}
-		Ta = Ta * 100;
-		Ta = Math.round (Ta);
-		Ta = Ta /100;
 		LOG.debug("sampling time shorted: " + Ta);
-	}
-	
-	private void calculateDeltaAngle(){
-		double dump=0;
-		eold = deltaAngle;
-		deltaAngle=realAngle-targetAngle;
-		
-			dump = 360-realAngle+targetAngle;
-		if(dump<Math.abs(targetAngle-realAngle)){
-			deltaAngle=dump;
-		}
-		else{
-			deltaAngle = targetAngle-realAngle;
-		}
-		
-		if(deltaAngle>0){
-			signFehler=1;
-		}
-		else{
-			signFehler=-1;
-		}
-		deltaAngle = Math.abs(deltaAngle);
 	}
 	
 	/***
@@ -125,17 +97,14 @@ public class PIDController extends Observable{
 		this.setEold(0);
 	}
 	
-	public double controll(double pRealAngle, double pTargetAngle){
-		this.realAngle = pRealAngle;
-		this.targetAngle = pTargetAngle;
+	public double controll(double pDealtaAngle){
+		this.deltaAngle = pDealtaAngle;
+		if(deltaAngle==0){
+			resetController();
+		}
 		controllSamplingTime();
-		calculateDeltaAngle();
 		lastOutput=output;
-		output=(calculateP()+calculateI()+calculateD())*signFehler;
-		LOG.debug ("sign Error: " + signFehler);
-		output = output*100;
-		output = Math.round(output);
-		output = output / 100;
+		output=(calculateP()+calculateI()+calculateD());
 		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
 		packValueToList();
