@@ -2,7 +2,6 @@ package de.fhb.sailboat.control.pilot;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import org.apache.log4j.Logger;
 
@@ -53,50 +52,7 @@ public class PIDController extends Observable{
 		LOG.debug("PIDController init: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 	}
 	
-	/***
-	 * Controlls the coefficient D
-	 * @author Tobias Koppe
-	 */
-	private void controllCoefficientD(){
-		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
-		//oder stabil ist, Koeffizient D wird solange erhoeht, bis System
-		//nicht zuckt
-//		if((lastOutput-output)/Ta>0){
-//			Kd=Kd+0.001;
-//		}
-//		else if((lastOutput-output)/Ta<1){
-//			Kd=Kd-0.001;
-//		}
-		
-		if((lastOutput-output)>0){
-			Kd=Kd+0.01;
-			Kd=Kd*100;
-			Kd = Math.round(Kd);
-			Kd=Kd/100;
-		}
-	}
-	
-	private void controllCoefficientI(){
-		if((lastOutput-output)!=0){
-			Ki=Ki+0.01;
-			Ki=Ki*100;
-			Ki=Math.round(Ki);
-			Ki=Ki/100;
-		}
-	}
-	
-	private void controllCoefficientP(){
-		//Differenz (lastOutput-output)/Samplingtime dient der Feststellung ob Boot um Kurs schwingt
-		//oder stabil ist, Koeffizient P wird solange erhoeht, bis System
-		//anfaengt zu schwingen
-		if((lastOutput-output)<1 && Kp<3){
-			Kp=Kp+0.01;
-			Kp = Kp*100;
-			Kp = Math.round(Kp);
-			Kp = Kp/100;
-		}
-	}
-	
+	//TODO Umschreiben auf Berechnung der Frequenz in Herz
 	private void controllSamplingTime(){
 		double actCall=System.currentTimeMillis();
 		if(lastCall!=0){
@@ -164,6 +120,11 @@ public class PIDController extends Observable{
 		return Kd*(deltaAngle-eold)/Ta;
 	}
 	
+	private void resetController(){
+		this.setEsum(0);
+		this.setEold(0);
+	}
+	
 	public double controll(double pRealAngle, double pTargetAngle){
 		this.realAngle = pRealAngle;
 		this.targetAngle = pTargetAngle;
@@ -175,9 +136,6 @@ public class PIDController extends Observable{
 		output = output*100;
 		output = Math.round(output);
 		output = output / 100;
-		//controllCoefficientP();
-		//controllCoefficientD();
-		//controllCoefficientI();
 		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
 		packValueToList();

@@ -1,7 +1,5 @@
 package de.fhb.sailboat.utils.logevaluation;
 
-import java.io.File;
-
 /***
  * 
  * @author Tobias Koppe
@@ -18,7 +16,7 @@ public class testLogEvaluationStart {
 //		System.out.println("Start evaluate pilot.driveangle rudder commands");
 //		evaluatePilot testPilot = new evaluatePilot("./log/sailboat.log_27_03_2013_Labor_02");
 		
-		logEvaluator evaluator = new logEvaluator("./log/sailboat.log_15_04_2013_04_Labor_CompassCourse180_NewPIDTest","");
+		logEvaluator evaluator = new logEvaluator("./log/sailboat.log_17_04_2013_Wasser","");
 		evaluator.setEvaluateCompassCourse(true);
 		evaluator.setEvaluatePilot(true);
 		evaluator.setEvaluateRudderPositions(true);
