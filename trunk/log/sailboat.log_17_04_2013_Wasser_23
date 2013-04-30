@@ -1,3 +1,4 @@
+INFO  2013-04-17 15:30:38,378 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [ReachCircleTask, ]
 DEBUG 2013-04-17 15:30:38,379 [de.fhb.sailboat.control.planner.WorkerThread] interrupted while waiting
 INFO  2013-04-17 15:30:38,383 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: ReachCircleTask [center=GPS [latitude: 52.42677884375019, longitude: 12.564775943756104, satelites: -1, speed: 0.0], radius=3]
 DEBUG 2013-04-17 15:30:38,383 [de.fhb.sailboat.mission.ReachCircleTask] ReachCircleTask [center=GPS [latitude: 52.42677884375019, longitude: 12.564775943756104, satelites: -1, speed: 0.0], radius=3] finished

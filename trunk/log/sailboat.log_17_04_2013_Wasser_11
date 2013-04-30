@@ -1,3 +1,4 @@
+INFO  2013-04-17 14:33:48,641 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [CompassCourseTask, ]
 DEBUG 2013-04-17 14:33:48,642 [de.fhb.sailboat.control.planner.WorkerThread] interrupted while waiting
 DEBUG 2013-04-17 14:33:48,644 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] new aksenboard state: send: , -- received: ?
 DEBUG 2013-04-17 14:33:48,669 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 200.4 Pitch: 6.4 Roll: 4.6 Temp: 34.2 out of 10 useful samples (1.0)

@@ -1,3 +1,4 @@
+INFO  2013-04-17 13:58:14,653 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [PrimitiveCommandTask, CompassCourseTask, PrimitiveCommandTask, ]
 DEBUG 2013-04-17 13:58:14,656 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] new aksenboard state: received: a
 DEBUG 2013-04-17 13:58:14,657 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Needed time to execute aquire connection and got achknowledge: 8 ms
 DEBUG 2013-04-17 13:58:14,657 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] new aksenboard state: will send servo command : 1,108

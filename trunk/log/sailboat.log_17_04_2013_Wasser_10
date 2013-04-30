@@ -1,3 +1,4 @@
+INFO  2013-04-17 14:30:07,786 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [CompassCourseTask, ]
 DEBUG 2013-04-17 14:30:07,786 [de.fhb.sailboat.control.planner.WorkerThread] interrupted while waiting
 INFO  2013-04-17 14:30:07,806 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: CompassCourseTask [angle=201]
 DEBUG 2013-04-17 14:30:07,806 [de.fhb.sailboat.mission.CompassCourseTask] CompassCourseTask [angle=201] finished

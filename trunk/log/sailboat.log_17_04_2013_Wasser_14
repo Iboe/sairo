@@ -1,3 +1,4 @@
+INFO  2013-04-17 14:49:03,069 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [CompassCourseTask, ]
 INFO  2013-04-17 14:49:03,075 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: CompassCourseTask [angle=0]
 DEBUG 2013-04-17 14:49:03,090 [de.fhb.sailboat.control.pilot.SimplePIDController] SimplePIDController init: P(0.25)I(5.0)D(0.0)
 DEBUG 2013-04-17 14:49:03,256 [de.fhb.sailboat.serial.sensor.CompassSensor$CompassSensorThread] Azimuth: 64.6 Pitch: 6.2 Roll: 7.1 Temp: 32.2 out of 10 useful samples (1.0)

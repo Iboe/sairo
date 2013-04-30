@@ -1,3 +1,4 @@
+INFO  2013-04-17 11:56:58,774 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [CompassCourseTask, ]
 INFO  2013-04-17 11:56:58,783 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: CompassCourseTask [angle=180]
 DEBUG 2013-04-17 11:56:58,808 [de.fhb.sailboat.control.pilot.SimplePIDController] SimplePIDController init: P(0.25)I(5.0)D(0.0)
 DEBUG 2013-04-17 11:56:59,078 [de.fhb.sailboat.control.pilot.PIDController] PIDController init: P(1.0)I(0.0)D(0.0)

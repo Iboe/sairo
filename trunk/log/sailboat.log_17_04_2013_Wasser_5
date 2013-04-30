@@ -1,3 +1,4 @@
+INFO  2013-04-17 14:04:30,832 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [PrimitiveCommandTask, CompassCourseTask, PrimitiveCommandTask, ]
 DEBUG 2013-04-17 14:04:30,832 [de.fhb.sailboat.control.planner.WorkerThread] interrupted while waiting
 INFO  2013-04-17 14:04:30,853 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: PrimitiveCommandTask [executed=false, propellor=80, rudder=null, sail=null]
 DEBUG 2013-04-17 14:04:30,854 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] new aksenboard state: received: e

@@ -1,3 +1,4 @@
+INFO  2013-04-17 15:29:19,120 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [StopTask, ]
 DEBUG 2013-04-17 15:29:19,136 [de.fhb.sailboat.control.planner.WorkerThread] interrupted while waiting
 INFO  2013-04-17 15:29:19,138 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: StopTask [turnPropellorOff=false]
 DEBUG 2013-04-17 15:29:19,138 [de.fhb.sailboat.mission.ReachCircleTask] ReachCircleTask [center=GPS [latitude: 52.42683999999999, longitude: 12.564913333333333, satelites: 11, speed: 0.0], radius=10]

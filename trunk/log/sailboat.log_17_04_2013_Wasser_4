@@ -1,3 +1,4 @@
+INFO  2013-04-17 14:01:23,632 [de.fhb.sailboat.control.planner.PlannerImpl] execute mission MissionImpl [PrimitiveCommandTask, CompassCourseTask, PrimitiveCommandTask, ]
 DEBUG 2013-04-17 14:01:23,632 [de.fhb.sailboat.control.planner.WorkerThread] interrupted while waiting
 INFO  2013-04-17 14:01:23,637 [de.fhb.sailboat.control.navigator.NavigatorImpl] execute task: PrimitiveCommandTask [executed=false, propellor=80, rudder=null, sail=null]
 DEBUG 2013-04-17 14:01:23,638 [de.fhb.sailboat.control.pilot.DriveAngleThread] interrupted while waiting
