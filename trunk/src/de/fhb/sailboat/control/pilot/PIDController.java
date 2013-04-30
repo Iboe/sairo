@@ -15,7 +15,7 @@ import de.fhb.sailboat.pilot.gui.Window;
  * y = Kp * e + Ki * Ta * esum + Kd * (e – ealt)/Ta
  * ealt = e
  * @author Tobias Koppe
- *
+ * @version 2
  */
 public class PIDController extends Observable{
 
@@ -42,6 +42,9 @@ public class PIDController extends Observable{
 	
 	private Window gui;
 	
+	/***
+	 * Constructor of PID controller
+	 */
 	public PIDController(){
 		valueList = new ArrayList<String>();
 		this.gui = new Window(this);
@@ -50,6 +53,9 @@ public class PIDController extends Observable{
 		LOG.debug("PIDController init: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 	}
 	
+	/***
+	 * Calculates the sampling time of controller and save it to class variable Ta
+	 */
 	private void controllSamplingTime(){
 		double actCall=System.currentTimeMillis();
 		if(lastCall!=0){
@@ -93,11 +99,19 @@ public class PIDController extends Observable{
 		return Kd*(deltaAngle-eold)/Ta;
 	}
 	
+	/***
+	 * Resets the variables of controller which saving data
+	 */
 	private void resetController(){
 		this.setEsum(0);
 		this.setEold(0);
 	}
 	
+	/***
+	 * Controlls the rudder position in depending the compass course
+	 * @param pDealtaAngle
+	 * @return
+	 */
 	public double controll(double pDealtaAngle){
 		this.deltaAngle = pDealtaAngle;
 		if(deltaAngle==0){
