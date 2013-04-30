@@ -114,7 +114,7 @@ public class MissionCreatorLogic {
      * @param name
      */
     public void missionTree_NewPropellorStop_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_NORMAL);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_STOP);
         missionTreeNew_Task(missionTree, name, load);
     }
     
@@ -124,7 +124,7 @@ public class MissionCreatorLogic {
      * @param name
      */
     public void missionTree_NewPropellorFullBackward_Task(JTree missionTree, String name) {
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MIN);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_REVERSE);
         missionTreeNew_Task(missionTree, name, load);
     }
     

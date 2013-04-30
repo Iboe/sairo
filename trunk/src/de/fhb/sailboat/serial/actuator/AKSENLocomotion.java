@@ -115,8 +115,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 			LOG.debug("clipping value for rudder from " + pValue + " to " + returnValue);
 		}
 		else if (pActuator==PROPELLOR_NUMBER){
-			if(pValue>PROPELLOR_MIN){
-				returnValue=PROPELLOR_MIN;
+			if(pValue>PROPELLOR_REVERSE){
+				returnValue=PROPELLOR_REVERSE;
 			}
 			else if(pValue<PROPELLOR_MAX){
 				returnValue=PROPELLOR_MAX;
@@ -195,7 +195,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void setPropellor(int angle) {
 		lastCom = "setPropellor to " + angle;
-		angle = clipActuatorValues(angle, PROPELLOR_NORMAL);
+		angle = clipActuatorValues(angle, PROPELLOR_STOP);
 			int status = this.AKSENServoCommand(PROPELLOR_NUMBER, angle);
 			if (status == -1) {
 				// TODO Exception? Eskalieren?
@@ -251,9 +251,9 @@ public class AKSENLocomotion implements LocomotionSystem {
 	 */
 	@Override
 	public void resetPropellor() {
-		this.setPropellor(PROPELLOR_NORMAL);
+		this.setPropellor(PROPELLOR_STOP);
 		worldModel.getActuatorModel().setPropeller(
-				new Actuator(PROPELLOR_NORMAL));
+				new Actuator(PROPELLOR_STOP));
 	}
 
 	public void closePort() {

@@ -58,7 +58,7 @@ public class MissionObject implements Serializable{
         mission.setTasks(tasklist);
         
         //debug
-        System.out.println("Created mission with " + tasklist.size() + " entries.");
+        System.err.println("Created mission with " + tasklist.size() + " entries.");
         
         return mission;
     }

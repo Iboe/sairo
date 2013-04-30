@@ -5,10 +5,19 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
+import javax.swing.JTree;
+
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.gui.missioncreator.MissionCreatorInterface;
+import de.fhb.sailboat.gui.missioncreator.MissionCreatorLogic;
+import de.fhb.sailboat.gui.missioncreator.MissionObject;
+import de.fhb.sailboat.gui.missioncreator.MissionTreeObject;
+import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.missionplayer.PlayerDialog;
 
 /**
@@ -820,6 +829,53 @@ public class GUI extends javax.swing.JFrame {
 	    	this.guiLogic.getController().setActualUpdateRateBackToDefault();
 		}
 	}
+    
+    //XXX Test des Missioncreator, nur temporär zu entwicklungszwecken
+    public void testAMissionCreatorSequence(){
+    	
+    	//*********** Initialize needed objects
+    	
+//        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new MissionTreeObject("Mission"));
+        JTree missionTree = new javax.swing.JTree();
+        
+    	MissionCreatorLogic missionCreatorLogic =  new MissionCreatorLogic(guiLogic);
+        missionCreatorLogic.missionTreeInitialize(missionTree);
+        missionTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+    	
+    	
+    	//************* Einbindung in den Tree
+//    	missionCreatorLogic.missionTree_NewPropellorFullForward_Task(missionTree, "TestForwardMission");
+    	
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MAX);
+    	
+        DefaultMutableTreeNode item = new DefaultMutableTreeNode(new MissionTreeObject("Test", load), false);
+        
+        // get current selection
+        DefaultMutableTreeNode selected = (DefaultMutableTreeNode)missionTree.getLastSelectedPathComponent();
+        
+        System.out.println(selected);
+        System.out.println(selected.getChildCount());
+   
+        
+        // insert new leaf (list)
+        ((DefaultTreeModel)missionTree.getModel()).insertNodeInto(item, selected, selected.getChildCount());
+        
+        // expand selection
+        missionTree.expandPath(missionTree.getSelectionPath());
+        
+    
+        //*************** generate and Send
+        
+//        private void TestMenuMakeAndSendActionPerformed(java.awt.event.ActionEvent evt) {    
+        
+        //create
+        MissionObject instruction = new MissionObject(missionTree);
+            
+        //send
+        missionCreatorLogic.commitMission(instruction);
+            
+    }
 
 	/**
 	 * Closes the GUI.
@@ -867,7 +923,8 @@ public class GUI extends javax.swing.JFrame {
     }                                                            
 
     private void missionTestMenuHoldAngleToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        guiLogic.sendHoldAngleToWind();
+//        guiLogic.sendHoldAngleToWind();
+    	this.testAMissionCreatorSequence();
     }                                                              
 
     private void missionTestMenuStopTaskActionPerformed(java.awt.event.ActionEvent evt) {                                                        
@@ -876,7 +933,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void missionTestMenuResetActorsActionPerformed(java.awt.event.ActionEvent evt) {                                                           
         guiLogic.sendResetActors();
-    }                                                          
+    }     
+    
 
     private void resetMissionMapActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         guiLogic.sendResetMissionMap();
@@ -991,6 +1049,7 @@ public class GUI extends javax.swing.JFrame {
      */
     private void missionMenuMissionCreatorActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         MissionCreatorInterface mc = new MissionCreatorInterface(this, true, this.guiLogic);
+        //XXX
         mc.setVisible(true);
         this.guiLogic.getMissionMap().setObstacles(mc.getObstacleList());
     }                                                         
@@ -1002,13 +1061,13 @@ public class GUI extends javax.swing.JFrame {
      */
     private void propellorStateUpdate() {
         if (propellorMinRadioButton.isSelected()) {
-            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_MIN) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_MIN, null, null);
+            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_REVERSE) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_REVERSE, null, null);
             }
         }
         else if (propellorNullRadioButton.isSelected()) {
-            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_NORMAL) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_NORMAL, null, null);
+            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_STOP) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_STOP, null, null);
             }
         }
         else {

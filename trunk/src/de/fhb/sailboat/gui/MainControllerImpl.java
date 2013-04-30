@@ -37,8 +37,8 @@ public class MainControllerImpl implements MainController {
 	
 	// Constants
 	public final static int PROPELLOR_MAX = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MAX"));			// full forward
-	public final static int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_NORMAL"));	// propellor off
-	public final static int PROPELLOR_MIN = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_MIN"));			// full backward
+	public final static int PROPELLOR_STOP = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_STOP"));	// propellor off
+	public final static int PROPELLOR_REVERSE = Integer.parseInt(System.getProperty("AKSENLocomotion.PROPELLOR_REVERSE"));			// full backward
 	public final static int RUDDER_LEFT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_LEFT"));
 	public final static int RUDDER_NORMAL = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_NORMAL"));
 	public final static int RUDDER_RIGHT = Integer.parseInt(System.getProperty("AKSENLocomotion.RUDDER_RIGHT"));
@@ -110,7 +110,7 @@ public class MainControllerImpl implements MainController {
 		}
 		
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_STOP));
 
 		mission.setTasks(tasks);
 		System.out.println(mission.getTasks().toString());
@@ -140,7 +140,7 @@ public class MainControllerImpl implements MainController {
 		}
 		
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_STOP));
 
 		mission.setTasks(tasks);
 
@@ -166,7 +166,7 @@ public class MainControllerImpl implements MainController {
 		tasks.add(new CompassCourseTask(angle));
 		
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_STOP));
 
 		mission.setTasks(tasks);
 
@@ -189,7 +189,7 @@ public class MainControllerImpl implements MainController {
 			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_MAX));
 		tasks.add(new HoldAngleToWindTask(angle));
 		if (!isSailMode())
-			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_NORMAL));
+			tasks.add(new PrimitiveCommandTask(null, null, PROPELLOR_STOP));
 
 		mission.setTasks(tasks);
 
@@ -229,7 +229,7 @@ public class MainControllerImpl implements MainController {
 		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_NORMAL));
+		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_STOP));
 
 		mission.setTasks(tasks);
 
@@ -381,10 +381,10 @@ public class MainControllerImpl implements MainController {
 	 */
 	public void setPropellor() {
 		int value = this.worldModel.getActuatorModel().getPropeller().getValue();
-		if ((value <= PROPELLOR_MAX) && (value <= PROPELLOR_NORMAL)) {
+		if ((value <= PROPELLOR_MAX) && (value <= PROPELLOR_STOP)) {
 			this.model.setPropellor(3); 	// set propellor to maximum forward
 		}
-		else if (value == PROPELLOR_NORMAL) {
+		else if (value == PROPELLOR_STOP) {
 			this.model.setPropellor(2); 	// set propellor to off
 		}
 		else this.model.setPropellor(1); 	// set propellor to maximum backward

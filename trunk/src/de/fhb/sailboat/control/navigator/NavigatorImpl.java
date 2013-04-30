@@ -141,7 +141,7 @@ public class NavigatorImpl implements Navigator {
 				worldModel.getGPSModel().getPosition(), 10);
 		
 		if (task.isTurnPropellorOff()) {
-			pilot.setPropellor(LocomotionSystem.PROPELLOR_NORMAL);
+			pilot.setPropellor(LocomotionSystem.PROPELLOR_STOP);
 		}
 		navigateToCircle(reachCircleTask);
 	}

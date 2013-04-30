@@ -22,8 +22,8 @@ public interface LocomotionSystem {
 	public static final int RUDDER_RIGHT = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".RUDDER_RIGHT"));
 	// Propellor
 	static final int PROPELLOR_NUMBER = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".propellorNo"));
-	public static final int PROPELLOR_MIN = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MIN"));
-	public static final int PROPELLOR_NORMAL = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_NORMAL"));
+	public static final int PROPELLOR_REVERSE = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_REVERSE"));
+	public static final int PROPELLOR_STOP = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_STOP"));
 	public static final int PROPELLOR_MAX = Integer.parseInt(System.getProperty(AKSENLocomotion.class.getSimpleName() + ".PROPELLOR_MAX"));
 
 	/**

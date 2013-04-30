@@ -21,7 +21,7 @@ public class ActuatorModelImpl implements ActuatorModel {
 	public ActuatorModelImpl() {
 		sail = new Actuator(LocomotionSystem.SAIL_NORMAL);
 		rudder = new Actuator(LocomotionSystem.RUDDER_NORMAL);
-		propeller = new Actuator(LocomotionSystem.PROPELLOR_NORMAL);
+		propeller = new Actuator(LocomotionSystem.PROPELLOR_STOP);
 	}
 	
 	@Override
