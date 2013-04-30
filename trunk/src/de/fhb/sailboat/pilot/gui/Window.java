@@ -33,7 +33,7 @@ public class Window extends JFrame implements Observer {
 	private JLabel iLabel;
 	private JLabel dLabel;
 	private JLabel realAngleLabel;
-	private JLabel targetAngleLabel;
+	private JLabel deltaAngleLabel;
 	private JLabel steuersignalLabel;
 	private JLabel abtastrateLabel;
 	private JPanel contentPanel;
@@ -62,7 +62,7 @@ public class Window extends JFrame implements Observer {
 		iLabel = new JLabel("I: n/a");
 		dLabel = new JLabel("D: n/a");
 		realAngleLabel = new JLabel("real angle: n/a °");
-		targetAngleLabel = new JLabel("target angle: n/a °");
+		deltaAngleLabel = new JLabel("delta angle: n/a °");
 		steuersignalLabel = new JLabel("Steuersignal: n/a");
 		abtastrateLabel = new JLabel("Abtastrate: n/a Hz");
 		
@@ -83,7 +83,7 @@ public class Window extends JFrame implements Observer {
 		contentPanel.add(iLabel);
 		contentPanel.add(dLabel);
 		contentPanel.add(realAngleLabel);
-		contentPanel.add(targetAngleLabel);
+		contentPanel.add(deltaAngleLabel);
 		contentPanel.add(steuersignalLabel);
 		contentPanel.add(abtastrateLabel);
 		contentPanel.add(kpLabel);
@@ -96,6 +96,7 @@ public class Window extends JFrame implements Observer {
 		contentPanel.add(paintCanvas);
 		
 		this.add(contentPanel);
+		this.pidController=pidController;
 		updateTextFields();
 		this.pack();
 		this.setVisible(true);
@@ -124,9 +125,9 @@ public class Window extends JFrame implements Observer {
 		iLabel.setText("I: " + updateData.get(1));
 		dLabel.setText("D: " + updateData.get(2));
 		realAngleLabel.setText("real angle: " + updateData.get(3) + "°");
-		targetAngleLabel.setText("target angle: " + updateData.get(4) + "°");
-		steuersignalLabel.setText("Steuersignal: " + updateData.get(5));
-		abtastrateLabel.setText("Abtastrate: " + updateData.get(6) + " Hz");
+		deltaAngleLabel.setText("delta angle: " + updateData.get(5) + "°");
+		steuersignalLabel.setText("Steuersignal: " + updateData.get(6));
+		abtastrateLabel.setText("Abtastrate: " + updateData.get(7) + " Hz");
 		
 		Graphics gfx = paintCanvas.getGraphics();
 		gfx.copyArea(0, 0, 399, 359, -1, 0);

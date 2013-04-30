@@ -360,7 +360,7 @@ public class DriveAngleThread extends Thread {
 		
 			
 		//Neuimplementierung PIDController
-		deltaAngle = (int) PIDController.controll(deltaAngle);
+		deltaAngle = (int) PIDController.controll(transformAngle(deltaAngle));
 		}
 		//
 		

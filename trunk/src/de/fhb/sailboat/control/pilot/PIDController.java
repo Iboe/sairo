@@ -21,9 +21,9 @@ public class PIDController extends Observable{
 
 	private static final Logger LOG = Logger.getLogger(PIDController.class);
 	
-	double Kp=1; //Koeffizient P
+	double Kp=3; //Koeffizient P
 	double Ki=0; //Koeffizient I
-	double Kd=0; //Koeffizient D
+	double Kd=9; //Koeffizient D
 	double Ta=0; //Samplingrate
 	
 	double lastCall=0;
@@ -54,6 +54,7 @@ public class PIDController extends Observable{
 		double actCall=System.currentTimeMillis();
 		if(lastCall!=0){
 			Ta=1/(Math.abs((actCall-lastCall)/1000)); //1000ms -> 1 second -> 1/seconds -> Hz
+			Ta=((int)(Ta*100))/100;
 			lastCall = actCall;
 		}
 		else{
@@ -152,6 +153,9 @@ public class PIDController extends Observable{
 
 	public void setKp(double kp) {
 		Kp = kp;
+		packValueToList();
+		setChanged();
+		notifyObservers(valueList);
 	}
 
 	public double getKi() {
@@ -160,6 +164,9 @@ public class PIDController extends Observable{
 
 	public void setKi(double ki) {
 		Ki = ki;
+		packValueToList();
+		setChanged();
+		notifyObservers(valueList);
 	}
 
 	public double getKd() {
@@ -168,6 +175,9 @@ public class PIDController extends Observable{
 
 	public void setKd(double kd) {
 		Kd = kd;
+		packValueToList();
+		setChanged();
+		notifyObservers(valueList);
 	}
 
 	public double getTa() {
