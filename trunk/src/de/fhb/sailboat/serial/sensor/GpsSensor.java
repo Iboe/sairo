@@ -18,9 +18,9 @@ public class GpsSensor {
 	
 	// private static Logger LOG = Logger.getLogger(GpsSensor.class);
 	public static final String MODEL = System.getProperty(GpsSensor.class.getSimpleName() + ".Model");
-	public static final String COM_PORT = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".comPort");
-	public static final String BAUDRATE = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".baudRate");
-	public static final String UPDATERATE = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".updateRate");
+	public static final String COM_PORT = System.getProperty(GpsSensor.class.getSimpleName() + "." + MODEL + ".comPort");
+	public static final String BAUDRATE = System.getProperty(GpsSensor.class.getSimpleName() + "." + MODEL + ".baudRate");
+	public static final String UPDATERATE = System.getProperty(GpsSensor.class.getSimpleName() + "." + MODEL + ".updateRate");
 	private static final int useUpdateRate = Integer.parseInt(UPDATERATE);
 	
 	/**
