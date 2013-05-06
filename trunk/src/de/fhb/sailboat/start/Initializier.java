@@ -102,7 +102,7 @@ public class Initializier {
 	protected void initializeSensors() {
 		LOG.info("-----init sensors-----");
 		
-		GpsSensor gps = new GpsSensor(15);
+		GpsSensor gps = new GpsSensor();
 		//WindSensor wind = new WindSensor(4);
 		CompassSensor compassSensor = new CompassSensor();
 		

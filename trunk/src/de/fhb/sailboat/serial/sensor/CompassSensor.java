@@ -54,7 +54,7 @@ public class CompassSensor {
 	}
 	
 	static class CompassSensorThread extends Thread {
-		CompassSensor cInstance;
+		CompassSensor compassInstance;
 		// clock in milliseconds
 		long clock; //vorher clock = 100
 		long start, end;
@@ -62,13 +62,13 @@ public class CompassSensor {
 
 		
 		public CompassSensorThread(CompassSensor sensorInstance) {
-			this.cInstance = sensorInstance;
+			this.compassInstance = sensorInstance;
 			this.clock = sensorInstance.getClock();
 		}
 
 		public void run() {
 
-			while (cInstance.keepRunning) {
+			while (compassInstance.keepRunning) {
 				try {
 					
 					
@@ -78,7 +78,7 @@ public class CompassSensor {
 					String[] valueArray = null;
 					// read the values (7 for 7 rows)
 					try {
-						valueArray = cInstance.myCOM.readLine(10);
+						valueArray = compassInstance.myCOM.readLine(10);
 					} catch (IOException e1) {
 						LOG.warn("no sensor data available", e1);
 					}
@@ -97,7 +97,7 @@ public class CompassSensor {
 								String[] data = (nmea.splitNmea(item));
 								// at the moment, we expect at least 12 fields
 								if (data.length<12) {
-									cInstance.errorcount++;
+									compassInstance.errorcount++;
 								} else {
 									// azimuth = data[1]
 									// pitch =  data[2]
@@ -124,7 +124,7 @@ public class CompassSensor {
 								}
 							} else {
 								// increment Errorcount
-								cInstance.errorcount++;
+								compassInstance.errorcount++;
 							}
 						}
 						
@@ -135,7 +135,7 @@ public class CompassSensor {
 							if(dataSet.medianAll()) {
 								// set to Worldmodel
 								double usefullrate = i/valueArray.length;
-								this.cInstance.c = new Compass(dataSet.getAzimuth(),
+								this.compassInstance.c = new Compass(dataSet.getAzimuth(),
 																dataSet.getPitch(), 
 																dataSet.getRoll(),
 																dataSet.getTemp(),
@@ -144,7 +144,7 @@ public class CompassSensor {
 																dataSet.getAccS(), 
 																dataSet.getAccVect(), 
 																usefullrate);
-								WorldModelImpl.getInstance().getCompassModel().setCompass(this.cInstance.c);
+								WorldModelImpl.getInstance().getCompassModel().setCompass(this.compassInstance.c);
 								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
 										+" Temp: "+ dataSet.getTemp()
 										+" out of "+ i +" useful samples ("+ usefullrate +")");
@@ -163,7 +163,7 @@ public class CompassSensor {
 					}
 				}  catch (InterruptedException e) {
 					// something went wrong, stop the loop, throw an error to the next higher level
-					cInstance.keepRunning = false;
+					compassInstance.keepRunning = false;
 					
 					LOG.debug("thread interrupted", e);
 				}
