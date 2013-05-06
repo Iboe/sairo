@@ -25,9 +25,7 @@ public class GpsSensor {
 	
 	/**
 	 * Creates an object which allows querying the GPS sensor.
-	 * An asyncronous thread will be started to update the world modell each UpdateRate-cycle.
-	 * 
-	 * @param port
+	 * An asyncronous thread will be started to update the world model each UpdateRate-cycle.
 	 */
 	public GpsSensor() {
 		COMPort myCOM = new COMPort(Integer.parseInt(COM_PORT), Integer.parseInt(BAUDRATE), 0);
@@ -120,7 +118,7 @@ public class GpsSensor {
 									// + " Satellites: {2}",
 									// minLat, minLong, satellites, lastSpeed));
 
-									GPS myGps = new GPS(gradLat + minLat, gradLong + minLong, this.satellites, lastSpeed); 
+									GPS myGps = new GPS(gradLat + minLat, gradLong + minLong, gpsInstance.getSatellites(), lastSpeed); 
 									WorldModelImpl.getInstance().getGPSModel().setPosition(myGps);
 									LOG.info("GPS coordinates: " + myGps.toString());
 									
