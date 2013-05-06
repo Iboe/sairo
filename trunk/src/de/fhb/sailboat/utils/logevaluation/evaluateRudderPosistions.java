@@ -19,12 +19,12 @@ public class evaluateRudderPosistions {
 	
 	private ArrayList<RudderPosition> rudderPositions;
 	
-	/***
+	/**
+	 * *
 	 * Evaluates the logentries of aksen command setting rudder to in pLogfileName and save
-	 * the result in rudderPositions
-	 * @author Tobias Koppe
-	 * @version 1
-	 * @param pLogfileName
+	 * the result in rudderPositions.
+	 *
+	 * @param pLogFileName the log file name
 	 */
 	public evaluateRudderPosistions(String pLogFileName){
 		rudderPositions = new ArrayList<RudderPosition>();

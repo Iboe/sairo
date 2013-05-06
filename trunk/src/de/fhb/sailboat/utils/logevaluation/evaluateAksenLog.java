@@ -52,10 +52,11 @@ public class evaluateAksenLog {
 		return tmpList;
 	}
 
-	/***
-	 * This method filters all logfile rows which inform about aksen board
-	 * 
-	 * @return
+	/**
+	 * *
+	 * This method filters all logfile rows which inform about aksen board.
+	 *
+	 * @return the array list
 	 */
 	private ArrayList<String> filterAksenLog() {
 		ArrayList<String> aksenLogList = new ArrayList<String>();

@@ -18,12 +18,12 @@ public class evaluateCompassCourse {
 
 	private ArrayList<CompassCourse> compassCourseList = new ArrayList<CompassCourse>();
 	
-	/***
+	/**
+	 * *
 	 * Evaluates the logentries of compasscourses in pLogfileName and save
-	 * the result in compassCourseList
-	 * @author Tobias Koppe
-	 * @version 1
-	 * @param pLogfileName
+	 * the result in compassCourseList.
+	 *
+	 * @param pLogfileName the logfile name
 	 */
 	public evaluateCompassCourse(String pLogfileName){
 		BufferedReader bfReader=null;

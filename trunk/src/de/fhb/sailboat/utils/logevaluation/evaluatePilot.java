@@ -18,12 +18,12 @@ public class evaluatePilot {
 
 	private ArrayList<PilotDriveAngleRudderCommand> commandList;
 	
-	/***
+	/**
+	 * *
 	 * Evaluates the logentries of pilot rudder command in pLogfileName and save
-	 * the result in commandList
-	 * @author Tobias Koppe
-	 * @version 1
-	 * @param pLogfileName
+	 * the result in commandList.
+	 *
+	 * @param pLogfileName the logfile name
 	 */
 	public evaluatePilot(String pLogfileName){
 		this.commandList = new ArrayList<PilotDriveAngleRudderCommand>();
