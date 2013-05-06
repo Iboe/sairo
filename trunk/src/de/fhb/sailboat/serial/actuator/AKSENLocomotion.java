@@ -70,7 +70,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 					+ this.worldModel.toString());
 		}
 
-		COMPort myCOM = new COMPort(7, Integer.parseInt(BAUDRATE), 0);
+		COMPort myCOM = new COMPort(10, Integer.parseInt(BAUDRATE), 0);
 		this.myCOM = myCOM;
 
 		if (this.myCOM != null) {

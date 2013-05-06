@@ -102,9 +102,9 @@ public class Initializier {
 	protected void initializeSensors() {
 		LOG.info("-----init sensors-----");
 		
-		GpsSensor gps = new GpsSensor(12);
-		WindSensor wind = new WindSensor(4);
-		CompassSensor compassSensor = new CompassSensor(); //zzt. COM17
+		GpsSensor gps = new GpsSensor(15);
+		//WindSensor wind = new WindSensor(4);
+		CompassSensor compassSensor = new CompassSensor();
 		
 		try {
 			Thread.sleep(2000);
@@ -121,5 +121,6 @@ public class Initializier {
 	protected void initializeView() {
 		view = new GUI(planner);
 		view.setVisible(true);
+		LOG.debug("GUI-Referenz: " + view);
 	}
 }
