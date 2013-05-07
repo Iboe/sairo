@@ -13,7 +13,6 @@ public class GpsSensor {
 
 	private double latitude;
 	private double longitude;
-	private Integer satellites = null;
 	private COMPort myCOM;
 	
 	// private static Logger LOG = Logger.getLogger(GpsSensor.class);
@@ -22,6 +21,7 @@ public class GpsSensor {
 	public static final String BAUDRATE = System.getProperty(GpsSensor.class.getSimpleName() + "." + MODEL + ".baudRate");
 	public static final String UPDATERATE = System.getProperty(GpsSensor.class.getSimpleName() + "." + MODEL + ".updateRate");
 	private static final int useUpdateRate = Integer.parseInt(UPDATERATE);
+	private static int satellites = 0;
 	
 	/**
 	 * Creates an object which allows querying the GPS sensor.
@@ -55,7 +55,7 @@ public class GpsSensor {
 	 * @return the number of GPS and GALILEO satellites used for determining the current position (up to 50) 
 	 */
 	private int getSatellites() {
-		return this.satellites;
+		return GpsSensor.satellites;
 	}
 
 	/**
@@ -63,7 +63,6 @@ public class GpsSensor {
 	 */
 	static class GpsSensorThread extends Thread {
 		GpsSensor gpsInstance;
-		int satellites;
 		private static Logger LOG = Logger.getLogger(GpsSensorThread.class);
 
 		public GpsSensorThread(GpsSensor sensorInstance) {
@@ -100,8 +99,7 @@ public class GpsSensor {
 									// Schreiben in Weltmodell
 									double latitude = Double.parseDouble(myNmea[2]);
 									double longitude = Double.parseDouble(myNmea[4]);
-
-									this.satellites = Integer.parseInt(myNmea[7]);
+									satellites = Integer.parseInt(myNmea[7]);
 
 									int gradLat = (int) (latitude / 100);
 									int gradLong = (int) (longitude / 100);
