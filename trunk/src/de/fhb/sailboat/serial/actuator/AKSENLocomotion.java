@@ -39,10 +39,8 @@ public class AKSENLocomotion implements LocomotionSystem {
 	private static final Logger LOG = Logger.getLogger(AKSENLocomotion.class);
 	private String lastCom; // changed to private , not checked because of
 							// threads
-	static final String COM_PORT = System.getProperty(AKSENLocomotion.class
-			.getSimpleName() + ".comPort");
-	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class
-			.getSimpleName() + ".baudrate");
+	static final String COM_PORT = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".comPort");
+	static final String BAUDRATE = System.getProperty(AKSENLocomotion.class.getSimpleName() + ".baudrate");
 	static long wait_sleep = 3; // sleep for x milliseconds between each byte
 								// send to comport
 
@@ -62,22 +60,21 @@ public class AKSENLocomotion implements LocomotionSystem {
 	public AKSENLocomotion() {
 		LOG.debug("Constructor AKSENLocomotion() called");
 		worldModel = WorldModelImpl.getInstance();
+		
 		if (worldModel == null) {
 			LOG.debug(TAG + "worldModel: haven't got an instance");
 			throw new NullPointerException();
 		} else {
-			LOG.debug(TAG + " worldModel: have got an instance - "
-					+ this.worldModel.toString());
+			LOG.debug(TAG + " worldModel: have got an instance - " + this.worldModel.toString());
 		}
 
-		COMPort myCOM = new COMPort(10, Integer.parseInt(BAUDRATE), 0);
+		COMPort myCOM = new COMPort(Integer.parseInt(COM_PORT), Integer.parseInt(BAUDRATE), 0);
 		this.myCOM = myCOM;
 
 		if (this.myCOM != null) {
 			// DEPRECATED: LOG.debug(TAG + " COMPort created with Port: " +
 			// this.myCOM.getPort() + " Baudrate: " + this.myCOM.get_baud());
-			LOG.debug(TAG + SerialSystemTextEnum.COMPORT_CREATED.toString()
-					+ myCOM.getPort() + "," + myCOM.get_baud());
+			LOG.debug(TAG + SerialSystemTextEnum.COMPORT_CREATED.toString() + myCOM.getPort() + "," + myCOM.get_baud());
 		}
 
 		myCOM.open();
