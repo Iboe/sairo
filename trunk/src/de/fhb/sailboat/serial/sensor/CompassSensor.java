@@ -287,9 +287,16 @@ public class CompassSensor {
 		    else
 		    {
 		    	double lower = values.get(values.size()/2-1);
-		    	double upper = values.get(values.size()/2);
+		    	//double upper = values.get(values.size()/2);
 		    	
-			return (lower + upper) / 2.0;
+		    	//return (lower + upper) / 2.0;
+		    	return lower;
+		    	
+		    	/*
+		    	 * Median-Rechnung auskommentiert, da sie nicht in jedem Fall richtig die gewünschten Werte ausgibt.
+		    	 * Wählt er für lower und upper z. B. die Werte 0,1° und 359,9°, wird 180° ausgegeben.
+		    	 */
+		    	
 		    }	
 		}
 	}
