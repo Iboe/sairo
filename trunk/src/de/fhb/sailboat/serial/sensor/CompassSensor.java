@@ -15,32 +15,29 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
 /**
  * Implementation of a certain Compass-Sensor-Module
  * Opens a new Thread for continously pushing Sensor-Data into Worldmodel
- * (every $clock milliseconds)
+ * (every $updateRate milliseconds)
  * @author schmidst
  *
  */
 public class CompassSensor {
 	
-	COMPort myCOM;
+	private COMPort myCOM;
+	private Compass myCompass;
+	private boolean keepRunning = true;
+	private Thread sensorThread;
+	private int errorcount = 0;
 	private static final Logger LOG = Logger.getLogger(CompassSensor.class);
 
-	private Compass c;
-
-	/*
-	 * Configuration Variables
+	public static final String MODEL = System.getProperty(CompassSensor.class.getSimpleName() + ".Model");
+	public static final String COM_PORT = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".comPort");
+	public static final String BAUDRATE = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".baudrate");
+	public static final String UPDATERATE = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".updateRate");
+	private static long useUpdateRate = Long.parseLong(UPDATERATE);
+	
+	/**
+	 * Creates an object which allows querying the compass sensor.
+	 * An asyncronous thread will be started to update the world model each UpdateRate-cycle.
 	 */
-	boolean keepRunning = true;
-	Thread sensorThread;
-
-	long clock = 25; //1000			// clock-rate in milliseconds; Compass sends actually 10 Samples/s, Sample-Buffer stores 10 Samples
-	
-	// intern
-	int errorcount = 0;
-	
-	static final String MODEL = System.getProperty(CompassSensor.class.getSimpleName() + ".Model");
-	static final String COM_PORT = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".comPort");
-	static final String BAUDRATE = System.getProperty(CompassSensor.class.getSimpleName() + "." + MODEL + ".baudrate");
-	
 	public CompassSensor(){
 		
 		// create an instance of the sairoComm Class
@@ -53,17 +50,17 @@ public class CompassSensor {
 		
 	}
 	
+	/**
+	 * Background worker which regularly updates the world model. 
+	 */
 	static class CompassSensorThread extends Thread {
 		CompassSensor compassInstance;
-		// clock in milliseconds
-		long clock; //vorher clock = 100
 		long start, end;
 		private static Logger LOG = Logger.getLogger(CompassSensorThread.class);
 
 		
 		public CompassSensorThread(CompassSensor sensorInstance) {
 			this.compassInstance = sensorInstance;
-			this.clock = sensorInstance.getClock();
 		}
 
 		public void run() {
@@ -131,34 +128,38 @@ public class CompassSensor {
 						// if there is at least one sample, try to get the average value and set it to Worldmodell
 						if (i >= 1) {
 							
-							// TODO errase aberration; calculate average
+							// TODO erase aberration; calculate average
 							if(dataSet.medianAll()) {
 								// set to Worldmodel
 								double usefullrate = i/valueArray.length;
-								this.compassInstance.c = new Compass(dataSet.getAzimuth(),
-																dataSet.getPitch(), 
-																dataSet.getRoll(),
-																dataSet.getTemp(),
-																dataSet.getMagS(),
-																dataSet.getMagVect(),
-																dataSet.getAccS(), 
-																dataSet.getAccVect(), 
-																usefullrate);
-								WorldModelImpl.getInstance().getCompassModel().setCompass(this.compassInstance.c);
-								LOG.debug("Azimuth: "+ dataSet.getAzimuth() +" Pitch: "+ dataSet.getPitch() +" Roll: "+ dataSet.getRoll() 
-										+" Temp: "+ dataSet.getTemp()
-										+" out of "+ i +" useful samples ("+ usefullrate +")");
+								
+								this.compassInstance.myCompass = new Compass(dataSet.getAzimuth(),
+																	 dataSet.getPitch(), 
+																	 dataSet.getRoll(),
+																	 dataSet.getTemp(),
+																	 dataSet.getMagS(),
+																	 dataSet.getMagVect(),
+																	 dataSet.getAccS(), 
+																	 dataSet.getAccVect(), 
+																	 usefullrate);
+								WorldModelImpl.getInstance().getCompassModel().setCompass(this.compassInstance.myCompass);
+								
+								LOG.debug("Azimuth: " + dataSet.getAzimuth()
+										+ " Pitch: " + dataSet.getPitch()
+										+ " Roll: "+ dataSet.getRoll() 
+										+ " Temp: "+ dataSet.getTemp()
+										+ " out of " + i + " useful samples (" + usefullrate + ")");
 								
 							}
 						}
 						
 						end = System.currentTimeMillis();
-						// Sleep the difference of clock-rate and calculation-time of this run
+						// Sleep the difference of update rate and calculation time of this run
 						long duration = end-start; //Koppe: 2x end-start => 1x duration
-						if( duration > clock)
-							Thread.sleep(clock);
+						if( duration > useUpdateRate)
+							Thread.sleep(useUpdateRate);
 						else
-							Thread.sleep(clock-((duration)));
+							Thread.sleep(useUpdateRate - duration);
 						
 					}
 				}  catch (InterruptedException e) {
@@ -171,6 +172,9 @@ public class CompassSensor {
 		}
 	}
 
+	/**
+	 * Stops the background worker thread.
+	 */
 	public void shutdown()
 	{
 		if(sensorThread != null && !sensorThread.isInterrupted())
@@ -185,35 +189,53 @@ public class CompassSensor {
 			
 		}
 	}
-	public long getClock() {
-		return clock;
-	}
-
-
-	public void setClock(long clock) {
-		this.clock = clock;
-	}
-
 	
-	public String getC() {
-		return c.toString();
+	/**
+	 * @return the update rate used in milliseconds
+	 * @see de.fhb.sailboat.serial.sensor.CompassSensor#setUpdateRate(long)
+	 */
+	public long getUpdateRate() {
+		return useUpdateRate;
 	}
+
+	/**
+	 * @param new update rate to use in milliseconds
+	 * @see de.fhb.sailboat.serial.sensor.CompassSensor#getUpdateRate()
+	 */
+	public void setUpdateRate(long updateRate) {
+		CompassSensor.useUpdateRate = updateRate;
+	}
+
+	/**
+	 * @return the compass object which contains the current sensor values
+	 * @see de.fhb.sailboat.data.Compass
+	 */
+	public String getCompass() {
+		return myCompass.toString();
+	}
+	
+	/**
+	 * @return number of unusable or faulty data send by the compass sensor 
+	 */
 	public int getErrorcount() {
 		return errorcount;
 	}
 
+	/**
+	 * @param number of unusable or faulty data send by the compass sensor
+	 */
 	public void setErrorcount(int errorcount) {
 		this.errorcount = errorcount;
 	}
 
 	/**
-	 * OS500dataSet
+	 * Represents the current set of data reported by the compass sensor.
+	 * Also calculates the median value of them.
 	 * 
 	 * @author schmidst
 	 *
 	 */
 	public static class OS500dataSet {
-
 
 		Double azimuth, pitch, roll, temp, magS, accS;
 		Vector3d magVect, accVect;
@@ -255,6 +277,11 @@ public class CompassSensor {
 			return this.accVect;
 		}
 
+		/**
+		 * Calculates median values of all data lists.
+		 * 
+		 * @return 
+		 */
 		public boolean medianAll() {
 			this.azimuth = Median(this.azimuthList);
 			this.pitch = Median(this.pitchList);
@@ -274,6 +301,12 @@ public class CompassSensor {
 			return true;
 		}
 		
+		/**
+		 * Calculates the median value of a given data list.
+		 * 
+		 * @param values
+		 * @return median value
+		 */
 		public double Median(ArrayList<Double> values)
 		{
 		    

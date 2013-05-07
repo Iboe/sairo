@@ -23,19 +23,19 @@ public class compasstest {
 		try {
 			System.out.println("Abfrage1: ");
 
-			compass.getC();
+			compass.getCompass();
 			System.out.println("Abfrage2: ");
 			Thread.sleep(1000);
-			compass.getC();
+			compass.getCompass();
 			System.out.println("Abfrage3: ");
 			Thread.sleep(1000);
-			compass.getC();
+			compass.getCompass();
 			System.out.println("Abfrage4: ");
 			Thread.sleep(1000);
-			compass.getC();
+			compass.getCompass();
 			System.out.println("Abfrage5: ");
 			Thread.sleep(1000);
-			compass.getC();
+			compass.getCompass();
 			System.out.println("----");
 		
 		} catch (InterruptedException e) {
