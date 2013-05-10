@@ -245,7 +245,7 @@ public class MissionTask implements java.io.Serializable {
             }
         } 
         else {
-            //System.out.println("Name was NULL");
+            //Name war NULL
             return null;
         }
     }

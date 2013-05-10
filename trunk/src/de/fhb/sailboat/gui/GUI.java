@@ -830,7 +830,7 @@ public class GUI extends javax.swing.JFrame {
 		}
 	}
     
-    //XXX Test des Missioncreator, nur temporär zu entwicklungszwecken
+    //XXX GGf. Loeschen wenn Funktion bestaetigt, Test des Missioncreator, nur temporär zu entwicklungszwecken
     public void testAMissionCreatorSequence(){
     	
     	//*********** Initialize needed objects
