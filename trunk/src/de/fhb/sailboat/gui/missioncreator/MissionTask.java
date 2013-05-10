@@ -117,6 +117,16 @@ public class MissionTask implements java.io.Serializable {
                 parameters.add((Boolean)((StopTask)task).isTurnPropellorOff());
                 
                 break;
+            }case PRIMITIVECOMMANDTASK:{
+            	
+            	//XXX klay: lediglich eine Kennzeichnung zum wiederaufinden
+            	System.err.println("PRIMITIVECOMMANDTASK stored in MissionTask");
+          	
+            	parameters.add((Integer)((PrimitiveCommandTask)task).getSail());
+            	parameters.add((Integer)((PrimitiveCommandTask)task).getRudder());
+            	parameters.add((Integer)((PrimitiveCommandTask)task).getPropellor());
+            	
+            	break;
             }
         }
     }
@@ -198,6 +208,34 @@ public class MissionTask implements java.io.Serializable {
                         myTask = new StopTask(myIsPropellorOff);
                         
                         break;
+                    }case PRIMITIVECOMMANDTASK:{
+                    	
+                    	//XXX klay: lediglich eine Kennzeichnung zum wiederaufinden
+                    	System.err.println("PRIMITIVECOMMANDTASK created in MissionTask");
+                    	
+                    	int mySail, myRudder, myPropellor;
+                    	
+                    	if(parameters.get(0)!=null){
+                    		
+                       	 mySail = (Integer) parameters.get(0);
+                       	 
+                     	myTask = new PrimitiveCommandTask(mySail, null, null);
+                    		
+                    	}else if(parameters.get(1)!=null){
+                    		
+                       	 myRudder = (Integer) parameters.get(1);
+                       	 
+                     	myTask = new PrimitiveCommandTask(null, myRudder, null);
+                    		
+                    	}else if(parameters.get(2)!=null){
+                    		
+                       	 myPropellor = (Integer) parameters.get(2);
+                       	 
+                     	myTask = new PrimitiveCommandTask(null, null, myPropellor);
+                    		
+                    	}
+                    	
+                    	break;
                     }
                 }
 

@@ -194,8 +194,7 @@ public class MissionCreatorLogic {
      * @param name
      */
     public void missionTree_NewReachCircle_Task(JTree missionTree, String name, GPS position, int radius) {
-        // XXX Radius festsetzen ???? Magic numberrrsss
-        Task load = new de.fhb.sailboat.mission.ReachCircleTask(position, 3);
+        Task load = new de.fhb.sailboat.mission.ReachCircleTask(position, radius);
         missionTreeNew_Task(missionTree, name, load);
     }
     

@@ -3,7 +3,11 @@ package de.fhb.sailboat.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhb.sailboat.control.planner.Planner;
+import de.fhb.sailboat.control.planner.PlannerImpl;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.CompassCourseTask;
@@ -29,6 +33,8 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * 
  */
 public class MainControllerImpl implements MainController {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(MainControllerImpl.class);
 
     public final static int GUI_UPDATE_RATE_DEFAULT = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_DEFAULT"));	// sleep in ms after each gui loop
     private int actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
@@ -87,6 +93,7 @@ public class MainControllerImpl implements MainController {
 	 * @param mission
 	 */
 	public void commitMission(Planner planner, Mission mission) {
+		LOG.warn("Missionssize: "+ mission.getTasks().size());
 		planner.doMission(mission);
 	}
 

@@ -212,7 +212,7 @@ public class MissionCreatorInterface extends RootDialog{
         treePopupNewMenuTaskMenu_Control_PropellorFullStop.setText("Propellor Stop");
         treePopupNewMenuTaskMenu_Control_PropellorFullStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                treePopupNewMenuTaskMenu_Control_PropellorFullStopActionPerformed(evt);
+                treePopupNewMenuTaskMenu_Control_PropellorStopActionPerformed(evt);
             }
         });
         treePopupNewMenuTaskMenu_Control.add(treePopupNewMenuTaskMenu_Control_PropellorFullStop);
@@ -704,7 +704,7 @@ public class MissionCreatorInterface extends RootDialog{
      * Creates a new PropellorFullStop node.
      * @param evt
      */
-    private void treePopupNewMenuTaskMenu_Control_PropellorFullStopActionPerformed(java.awt.event.ActionEvent evt) {                                                                                   
+    private void treePopupNewMenuTaskMenu_Control_PropellorStopActionPerformed(java.awt.event.ActionEvent evt) {                                                                                   
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
             value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORSTOP);

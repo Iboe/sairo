@@ -100,8 +100,8 @@ public class GUI extends javax.swing.JFrame {
         rudderLabelRight = new javax.swing.JLabel();
         rudderLabelLeft = new javax.swing.JLabel();
         propellorPanel = new javax.swing.JPanel();
-        propellorMinRadioButton = new javax.swing.JRadioButton();
-        propellorNullRadioButton = new javax.swing.JRadioButton();
+        propellorReverseRadioButton = new javax.swing.JRadioButton();
+        propellorStopRadioButton = new javax.swing.JRadioButton();
         propellorMaxRadioButton = new javax.swing.JRadioButton();
         propellorRadioGroup = new javax.swing.ButtonGroup();
         gpsPanel = new javax.swing.JPanel();
@@ -327,22 +327,22 @@ public class GUI extends javax.swing.JFrame {
 
         propellorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Motor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        propellorRadioGroup.add(propellorMinRadioButton);
-        propellorMinRadioButton.setText("Volle Fahrt zurück");
-        propellorMinRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        propellorMinRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
+        propellorRadioGroup.add(propellorReverseRadioButton);
+        propellorReverseRadioButton.setText("Volle Fahrt zurück");
+        propellorReverseRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        propellorReverseRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 propellorMinStateChanged(evt);
             }
         });
 
-        propellorRadioGroup.add(propellorNullRadioButton);
-        propellorNullRadioButton.setText("Aus");
-        propellorNullRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        propellorNullRadioButton.setMaximumSize(new java.awt.Dimension(107, 23));
-        propellorNullRadioButton.setMinimumSize(new java.awt.Dimension(107, 23));
-        propellorNullRadioButton.setPreferredSize(new java.awt.Dimension(107, 23));
-        propellorNullRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
+        propellorRadioGroup.add(propellorStopRadioButton);
+        propellorStopRadioButton.setText("Aus");
+        propellorStopRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        propellorStopRadioButton.setMaximumSize(new java.awt.Dimension(107, 23));
+        propellorStopRadioButton.setMinimumSize(new java.awt.Dimension(107, 23));
+        propellorStopRadioButton.setPreferredSize(new java.awt.Dimension(107, 23));
+        propellorStopRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 propellorNullStateChanged(evt);
             }
@@ -365,17 +365,17 @@ public class GUI extends javax.swing.JFrame {
         propellorPanelLayout.setHorizontalGroup(
             propellorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(propellorPanelLayout.createSequentialGroup()
-                .addComponent(propellorMinRadioButton)
+                .addComponent(propellorReverseRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(propellorNullRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(propellorStopRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(propellorMaxRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
         );
         propellorPanelLayout.setVerticalGroup(
             propellorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(propellorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(propellorMinRadioButton)
-                .addComponent(propellorNullRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(propellorReverseRadioButton)
+                .addComponent(propellorStopRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(propellorMaxRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -969,20 +969,17 @@ public class GUI extends javax.swing.JFrame {
      */
     private void remoteDialogWindowActivated(java.awt.event.WindowEvent evt) {                                             
         // get current propellor setting, relate it to min, null and max and set the propellor control (radioButtons) to the right value.
-//        int propellor = guiLogic.getController().getPropellor();
+        int propellor = guiLogic.getController().getPropellor();
 
-        //sollte nicht von den aktuellen Propeller-werte fesgemacht werden
-//        if (propellor > MainControllerImpl.PROPELLOR_NORMAL) {
-//            propellorMinRadioButton.setSelected(true);
-//        } else if (propellor == MainControllerImpl.PROPELLOR_NORMAL) {
-//            propellorNullRadioButton.setSelected(true);
-//        } else {
-//            propellorMaxRadioButton.setSelected(false);
-//        }
+        if (propellor > MainControllerImpl.PROPELLOR_STOP) {
+            propellorReverseRadioButton.setSelected(true);
+        } else if (propellor == MainControllerImpl.PROPELLOR_STOP) {
+            propellorStopRadioButton.setSelected(true);
+        } else {
+            propellorMaxRadioButton.setSelected(false);
+        }
         
-        propellorNullRadioButton.setSelected(true);
-//        propellorMinRadioButton.setSelected(false);
-//        propellorMaxRadioButton.setSelected(false);
+        propellorStopRadioButton.setSelected(true);
         
         // get current rudder position and set the value to the rudder control slider
         int rudder = guiLogic.getController().getRudder();
@@ -1049,7 +1046,7 @@ public class GUI extends javax.swing.JFrame {
      */
     private void missionMenuMissionCreatorActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         MissionCreatorInterface mc = new MissionCreatorInterface(this, true, this.guiLogic);
-        //XXX
+        //XXX fehler tritt auch hier auf
         mc.setVisible(true);
         this.guiLogic.getMissionMap().setObstacles(mc.getObstacleList());
     }                                                         
@@ -1060,12 +1057,12 @@ public class GUI extends javax.swing.JFrame {
      * as new propellor command.
      */
     private void propellorStateUpdate() {
-        if (propellorMinRadioButton.isSelected()) {
+        if (propellorReverseRadioButton.isSelected()) {
             if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_REVERSE) {
                 this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_REVERSE, null, null);
             }
         }
-        else if (propellorNullRadioButton.isSelected()) {
+        else if (propellorStopRadioButton.isSelected()) {
             if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_STOP) {
                 this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_STOP, null, null);
             }
@@ -1249,8 +1246,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuResetMissionMap;
     private javax.swing.JMenuItem missionTestMenuStopTask;
     private javax.swing.JRadioButton propellorMaxRadioButton;
-    private javax.swing.JRadioButton propellorMinRadioButton;
-    private javax.swing.JRadioButton propellorNullRadioButton;
+    private javax.swing.JRadioButton propellorReverseRadioButton;
+    private javax.swing.JRadioButton propellorStopRadioButton;
     private javax.swing.JPanel propellorPanel;
     private javax.swing.ButtonGroup propellorRadioGroup;
     private javax.swing.JDialog remoteDialog;

@@ -81,7 +81,7 @@ public class MissionObject implements Serializable{
                 tasklist.add(((MissionTreeObject)child.getUserObject()).getTask());
                 
                 // debug output
-                //System.out.println("Adding task named <" + ((MissionTreeObject)child.getUserObject()).toString() + "> to mission...");
+                System.out.println("Adding task named <" + ((MissionTreeObject)child.getUserObject()).toString() + "> to mission...");
             }
             // check if child has children itself, parsing it if so
             if (child.getChildCount() > 0) parseChilds(child, tasklist);
