@@ -120,7 +120,6 @@ public class PIDController extends Observable{
 		controllSamplingTime();
 		lastOutput=output;
 		output=(calculateP()+calculateI()+calculateD());
-		LOG.debug("PIDController controlled coefficients: P(" + Kp + ")I(" + Ki + ")D(" + Kd + ")");
 		LOG.debug(this.toString());
 		packValueToList();
 		setChanged();

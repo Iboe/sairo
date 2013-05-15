@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
+import de.fhb.sailboat.utils.logevaluation.logTextblocks;
 import de.fhb.sailboat.worldmodel.ActuatorModel;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
@@ -387,15 +388,15 @@ public class DriveAngleThread extends Thread {
 	 * @param angle the angle to be transformed
 	 * @return the angle in range from -180 to +180
 	 */
-	public int transformAngle(int angle) {
-		angle = angle % 360;
+	public int transformAngle(int pAngle) {
+		int angle = pAngle % 360;
 		
 		if (angle > 180) {
 			angle -= 360;
 		} else if (angle < -180) {
 			angle += 360;
 		}
-
+		LOG.debug("transform angle: " + pAngle + " to: " + angle);
 		return angle;
 	}
 
