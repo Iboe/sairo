@@ -106,7 +106,7 @@ public class DriveAngleThread extends Thread {
 		windModel = WorldModelImpl.getInstance().getWindModel();
 		gpsModel = WorldModelImpl.getInstance().getGPSModel();
 		actuatorModel = WorldModelImpl.getInstance().getActuatorModel();
-		simplePIDController = new SimplePIDController();
+		//simplePIDController = new SimplePIDController();
 		PIDController = new PIDController();
 		calc = new Calculations();
 	}
@@ -389,6 +389,7 @@ public class DriveAngleThread extends Thread {
 	 * @return the angle in range from -180 to +180
 	 */
 	public int transformAngle(int pAngle) {
+		pAngle=pAngle-180;
 		int angle = pAngle % 360;
 		
 		if (angle > 180) {
