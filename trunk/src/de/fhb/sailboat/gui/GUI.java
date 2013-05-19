@@ -842,8 +842,6 @@ public class GUI extends javax.swing.JFrame {
         missionCreatorLogic.missionTreeInitialize(missionTree);
         missionTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
-    	
-    	
     	//************* Einbindung in den Tree
 //    	missionCreatorLogic.missionTree_NewPropellorFullForward_Task(missionTree, "TestForwardMission");
     	
