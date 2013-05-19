@@ -18,7 +18,7 @@ import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.MainControllerModel;
 import de.fhb.sailboat.gui.map.utilities.JMapViewer;
 import de.fhb.sailboat.gui.map.utilities.MissionVisualization;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 
 /**
  * Class for dividing between a map for representing in the GUI and a map
@@ -110,7 +110,7 @@ public class GeneralMap extends JPanel {
 	 * @param mission
 	 *            mission to be visualized
 	 */
-	public void visualizeMission(MissionImpl mission) {
+	public void visualizeMission(MissionVO mission) {
 		visualize.visualize(mission);
 	}
 

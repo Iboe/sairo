@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.navigator.Navigator;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
@@ -44,7 +44,7 @@ public class PlannerImpl implements Planner {
 	}
 	
 	@Override
-	public void doMission(MissionImpl mission) {
+	public void doMission(MissionVO mission) {
 		if (mission == null || mission.getTasks() == null || mission.getTasks().isEmpty()) {
 			LOG.warn("could not start mission: mission is emtpy: {}", mission);
 		} else {

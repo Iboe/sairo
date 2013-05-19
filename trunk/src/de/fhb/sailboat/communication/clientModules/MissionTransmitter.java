@@ -15,7 +15,7 @@ import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.planner.Planner;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.Task;
 
@@ -78,7 +78,7 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	 * @param mission The mission to transmit.
 	 */
 	@Override
-	public void doMission(MissionImpl mission) {
+	public void doMission(MissionVO mission) {
 		
 		synchronized(mode){
 				

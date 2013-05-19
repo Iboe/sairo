@@ -11,7 +11,7 @@ import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -90,7 +90,7 @@ public class MainControllerImpl implements MainController {
 	 * @param planner
 	 * @param mission
 	 */
-	public void commitMission(Planner planner, MissionImpl mission) {
+	public void commitMission(Planner planner, MissionVO mission) {
 		LOG.warn("Missionssize: "+ mission.getTasks().size());
 		planner.doMission(mission);
 	}
@@ -103,7 +103,7 @@ public class MainControllerImpl implements MainController {
 	public void commitCircleMarkerList(Planner planner) {
 		List<GPS> markerList = this.model.getCircleMarkerList();
 
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -134,7 +134,7 @@ public class MainControllerImpl implements MainController {
 	public void commitPolyList(Planner planner) {
 		List<MapPolygon> polyList = this.model.getPolyList();
 
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -162,7 +162,7 @@ public class MainControllerImpl implements MainController {
 	 * @param planner
 	 */
 	public void commitReachCompassTask(int angle, Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -187,7 +187,7 @@ public class MainControllerImpl implements MainController {
 	 * @param planner
 	 */
 	public void commitHoldAngleToWind(int angle, Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -211,7 +211,7 @@ public class MainControllerImpl implements MainController {
 	 * @param planner
 	 */
 	public void commitStopTask(Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(new StopTask());
@@ -231,7 +231,7 @@ public class MainControllerImpl implements MainController {
 	 * @param planner
 	 */
 	public void resetActorsTask(Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(new PrimitiveCommandTask(SAIL_NORMAL, RUDDER_NORMAL, PROPELLOR_STOP));
@@ -422,7 +422,7 @@ public class MainControllerImpl implements MainController {
 	 * Returns currently active mission. This mission reference only contains tasks left for processing, not finished ones.
 	 * @return mission
 	 */
-	public MissionImpl getCurrentMission() {
+	public MissionVO getCurrentMission() {
 		return this.model.getMissionTasksLeft();
 	}
 	
@@ -430,7 +430,7 @@ public class MainControllerImpl implements MainController {
 	 * Returns the whole mission. This mission contains all tasks defined for it, regardless of completion.
 	 * @return wholeMission
 	 */
-	public MissionImpl getCurrentWholeMission() {
+	public MissionVO getCurrentWholeMission() {
 		return this.model.getCurrentWholeMission();
 	}
 	

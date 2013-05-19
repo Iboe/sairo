@@ -11,7 +11,7 @@ import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -51,7 +51,7 @@ public class Controller {
 	public void commitCircleMarkerList(Planner planner) {
 		List<GPS> markerList = this.model.getCircleMarkerList();
 
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -75,7 +75,7 @@ public class Controller {
 	public void commitPolyList(Planner planner) {
 		List<MapPolygon> polyList = this.model.getPolyList();
 
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -96,7 +96,7 @@ public class Controller {
 	}
 
 	public void commitReachCompassTask(int angle, Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -115,7 +115,7 @@ public class Controller {
 	}
 
 	public void commitHoldAngleToWind(int angle, Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		if (!isSailMode())
@@ -135,7 +135,7 @@ public class Controller {
 
 	public void commitStopTask(Planner planner) {
 		// TODO Implement proper stop mission task beyond resetting motor
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(new StopTask());
@@ -148,7 +148,7 @@ public class Controller {
 	}
 
 	public void stopMotorTask(Planner planner) {
-		MissionImpl mission = new MissionImpl();
+		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(new PrimitiveCommandTask(null, null,
@@ -210,8 +210,8 @@ public class Controller {
 	
 	public void generateMissionReport() {
 		if ((this.model.getCurrentWholeMission().getTasks().size() > 0) && (this.model.getMissionTasksLeft().getTasks().size() > 0)) {
-			MissionImpl currentWholeMission = this.model.getCurrentWholeMission();
-			MissionImpl missionTasksLeft = this.model.getMissionTasksLeft();
+			MissionVO currentWholeMission = this.model.getCurrentWholeMission();
+			MissionVO missionTasksLeft = this.model.getMissionTasksLeft();
 			StringBuffer missionReport = new StringBuffer();
 			Task task;
 			int crossPoint = currentWholeMission.getTasks().size() - missionTasksLeft.getTasks().size();

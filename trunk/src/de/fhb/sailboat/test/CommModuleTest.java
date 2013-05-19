@@ -19,7 +19,7 @@ import de.fhb.sailboat.communication.serverModules.MissionReceiver;
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -117,7 +117,7 @@ public class CommModuleTest {
 		}
 		System.out.println("Now instigating the mission transmission...");
 		//Task t=new ReachCircleTask(new GPS(52.34567,24.56789), 1337);
-		MissionImpl m=new MissionImpl();
+		MissionVO m=new MissionVO();
 		List<Task> taskList=new ArrayList<Task>();
 		taskList.add(new ReachCircleTask(new GPS(52.34567,24.56789), 1337));
 		taskList.add(new HoldAngleToWindTask(27));
@@ -244,7 +244,7 @@ public class CommModuleTest {
 		 * @param mission The mission to print out.
 		 */
 		@Override
-		public void doMission(MissionImpl mission) {
+		public void doMission(MissionVO mission) {
 			
 			System.out.println("Received Mission("+mission.getTasks().size()+" Tasks):");
 			for(Task t:mission.getTasks())

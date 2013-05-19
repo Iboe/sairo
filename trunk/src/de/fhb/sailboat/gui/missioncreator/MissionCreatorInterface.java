@@ -16,7 +16,7 @@ import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUILogic;
 import de.fhb.sailboat.gui.RootDialog;
 import de.fhb.sailboat.gui.map.MissionCreatingMap;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 
 /**
  * This class represents the graphical interface of the MissionCreator dialog.
@@ -923,7 +923,7 @@ public class MissionCreatorInterface extends RootDialog{
         paul.setMissionTasksLeft(mission);
         if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(paul);*/
         
-    	MissionImpl mission = new MissionObject(this.missionTree).getMission();
+    	MissionVO mission = new MissionObject(this.missionTree).getMission();
         if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(mission);
     }
     

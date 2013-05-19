@@ -1,6 +1,6 @@
 package de.fhb.sailboat.gui.missioncreator;
 
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.Task;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,8 +43,8 @@ public class MissionObject implements Serializable{
      * Creates and returns a Mission object from this MissionObject.
      * @return mission
      */
-    private MissionImpl makeMission() {
-        MissionImpl mission = null;
+    private MissionVO makeMission() {
+        MissionVO mission = null;
         
         JTree tree = new JTree(root);
         
@@ -54,7 +54,7 @@ public class MissionObject implements Serializable{
         
         parseChilds(root, tasklist);
         
-        mission = new MissionImpl();
+        mission = new MissionVO();
         mission.setTasks(tasklist);
         
         //debug
@@ -92,7 +92,7 @@ public class MissionObject implements Serializable{
      * Tunnel for makeMission to directly yield the mission represented by this MissionObject.
      * @return mission
      */
-    public MissionImpl getMission() {
+    public MissionVO getMission() {
         return makeMission();
     }
   

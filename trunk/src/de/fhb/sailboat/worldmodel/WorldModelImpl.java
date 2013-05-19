@@ -1,6 +1,6 @@
 package de.fhb.sailboat.worldmodel;
 
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 
 /**
  * Concrete implementation of the {@link WorldModel}.<br>
@@ -22,7 +22,7 @@ public class WorldModelImpl implements WorldModel {
 	private WindModel windModel;
 	private MapModel mapModel;
 	private int batteryState;
-	private MissionImpl mission;
+	private MissionVO mission;
 	
 	/**
 	 * Default constructor, which creates instances of all sub-models to be referenced.
@@ -33,7 +33,7 @@ public class WorldModelImpl implements WorldModel {
 		gpsModel = new GPSModelImpl();
 		windModel = new WindModelImpl();
 		mapModel = new MapModelImpl();
-		mission = new MissionImpl();
+		mission = new MissionVO();
 	}
 
 	/**
@@ -81,12 +81,12 @@ public class WorldModelImpl implements WorldModel {
 	}
 
 	@Override
-	public MissionImpl getMission() {
+	public MissionVO getMission() {
 		return mission;
 	}
 
 	@Override
-	public void setMission(MissionImpl mission) {
+	public void setMission(MissionVO mission) {
 		this.mission = mission;
 	}
 }

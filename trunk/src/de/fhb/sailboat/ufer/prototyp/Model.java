@@ -5,7 +5,7 @@ import java.util.List;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.CompassModelImpl;
 import de.fhb.sailboat.worldmodel.GPSModel;
@@ -37,8 +37,8 @@ public class Model {
 	
 	private boolean sailMode;
 	
-	private MissionImpl currentWholeMission;			// current mission of the sailboat as a whole from start to finish
-	private MissionImpl missionTasksLeft;				// current state of the mission (tasks left)
+	private MissionVO currentWholeMission;			// current mission of the sailboat as a whole from start to finish
+	private MissionVO missionTasksLeft;				// current state of the mission (tasks left)
 	
 	private StringBuffer missionReport;
 	
@@ -48,8 +48,8 @@ public class Model {
 		this.compass.setCompass(new Compass(170,0,0));
 		this.gps = new GPSModelImpl();
 		this.sailMode = false;
-		this.currentWholeMission = new MissionImpl();
-		this.missionTasksLeft = new MissionImpl();
+		this.currentWholeMission = new MissionVO();
+		this.missionTasksLeft = new MissionVO();
 		this.missionReport = new StringBuffer();
 	}
 
@@ -115,11 +115,11 @@ public class Model {
 		this.sailMode = sailMode;
 	}
 
-	public MissionImpl getCurrentWholeMission() {
+	public MissionVO getCurrentWholeMission() {
 		return currentWholeMission;
 	}
 
-	public MissionImpl getMissionTasksLeft() {
+	public MissionVO getMissionTasksLeft() {
 		return missionTasksLeft;
 	}
 
@@ -127,11 +127,11 @@ public class Model {
 		return missionReport;
 	}
 
-	public void setCurrentWholeMission(MissionImpl currentWholeMission) {
+	public void setCurrentWholeMission(MissionVO currentWholeMission) {
 		this.currentWholeMission = currentWholeMission;
 	}
 
-	public void setMissionTasksLeft(MissionImpl missionTasksLeft) {
+	public void setMissionTasksLeft(MissionVO missionTasksLeft) {
 		this.missionTasksLeft = missionTasksLeft;
 	}
 

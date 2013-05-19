@@ -14,7 +14,7 @@ import de.fhb.sailboat.gui.map.MapPolygonImpl;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
 import de.fhb.sailboat.mission.RepeatTask;
@@ -31,7 +31,7 @@ import de.fhb.sailboat.mission.Task;
  */
 public class MissionVisualization {
 
-	private MissionImpl whole;
+	private MissionVO whole;
 
 	private JMapViewer map;
 
@@ -60,20 +60,20 @@ public class MissionVisualization {
 
 		clearMap();
 
-		MissionImpl current = model.getMissionTasksLeft();
+		MissionVO current = model.getMissionTasksLeft();
 
 		if (current.getTasks() != null) {
 			this.model = model;
 
 			if (whole == null || taskCountLastCall < current.getTasks().size()) {
-				whole = new MissionImpl();
+				whole = new MissionVO();
 				whole.setTasks(new ArrayList<Task>());
 				for (int i = 0; i < current.getTasks().size(); i++)
 					whole.getTasks().add(current.getTasks().get(i));
 			}
 
 			if (current.getTasks().size() < whole.getTasks().size()) {
-				MissionImpl solved = getSolved(current);
+				MissionVO solved = getSolved(current);
 				visualizeTasks(current, solved);
 			} else {
 				visualizeTasks(whole);
@@ -88,24 +88,24 @@ public class MissionVisualization {
 	 * @param mission
 	 *            mission to be displayed
 	 */
-	public void visualize(MissionImpl mission) {
+	public void visualize(MissionVO mission) {
 
 		clearMap();
 
-		MissionImpl current = mission;
+		MissionVO current = mission;
 
 		if (current.getTasks() != null) {
 			this.model = null;
 
 			if (whole == null || taskCountLastCall < current.getTasks().size()) {
-				whole = new MissionImpl();
+				whole = new MissionVO();
 				whole.setTasks(new ArrayList<Task>());
 				for (int i = 0; i < current.getTasks().size(); i++)
 					whole.getTasks().add(current.getTasks().get(i));
 			}
 
 			if (current.getTasks().size() < whole.getTasks().size()) {
-				MissionImpl solved = getSolved(current);
+				MissionVO solved = getSolved(current);
 				visualizeTasks(current, solved);
 			} else {
 				visualizeTasks(whole);
@@ -120,7 +120,7 @@ public class MissionVisualization {
 	 * @param whole
 	 *            whole mission
 	 */
-	private void visualizeTasks(MissionImpl whole) {
+	private void visualizeTasks(MissionVO whole) {
 		visualizeTasks(whole, null);
 	}
 
@@ -132,7 +132,7 @@ public class MissionVisualization {
 	 * @param solved
 	 *            solved tasks
 	 */
-	private void visualizeTasks(MissionImpl current, MissionImpl solved) {
+	private void visualizeTasks(MissionVO current, MissionVO solved) {
 		if (solved == null) {
 			// visualize whole mission
 			visualizeTask(current.getTasks().get(0), Color.GREEN);
@@ -198,8 +198,8 @@ public class MissionVisualization {
 	 * 
 	 * @return solved tasks
 	 */
-	private MissionImpl getSolved(MissionImpl current) {
-		MissionImpl solved = new MissionImpl();
+	private MissionVO getSolved(MissionVO current) {
+		MissionVO solved = new MissionVO();
 		solved.setTasks(new ArrayList<Task>());
 
 		for (int i = 0; i < whole.getTasks().size() - current.getTasks().size(); i++)

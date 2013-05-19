@@ -5,7 +5,7 @@ import java.util.List;
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -25,7 +25,7 @@ public interface MainController {
 	 * @param planner
 	 * @param mission
 	 */
-	public void commitMission(Planner planner, MissionImpl mission);
+	public void commitMission(Planner planner, MissionVO mission);
 
 	@Deprecated
 	/**
@@ -210,7 +210,7 @@ public interface MainController {
 	 * 
 	 * @return mission
 	 */
-	public MissionImpl getCurrentMission();
+	public MissionVO getCurrentMission();
 
 	/**
 	 * Returns the whole mission. This mission contains all tasks defined for
@@ -218,7 +218,7 @@ public interface MainController {
 	 * 
 	 * @return wholeMission
 	 */
-	public MissionImpl getCurrentWholeMission();
+	public MissionVO getCurrentWholeMission();
 
 	/**
 	 * Returns state of missionUpdating. True equals a recent update (task

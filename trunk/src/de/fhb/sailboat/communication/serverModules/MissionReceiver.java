@@ -17,7 +17,7 @@ import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.planner.Planner;
-import de.fhb.sailboat.mission.MissionImpl;
+import de.fhb.sailboat.mission.MissionVO;
 import de.fhb.sailboat.mission.Task;
 
 /**
@@ -196,7 +196,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 			case TM_MissionEnd_ACK:
 				if(opCode == eOperationType.OT_EndMission_ACK.getValue()){
 					
-					MissionImpl m=new MissionImpl();
+					MissionVO m=new MissionVO();
 					m.setTasks(missionAssembly);
 					planner.doMission(m);
 					LOG.info("Mission receive finished!");
