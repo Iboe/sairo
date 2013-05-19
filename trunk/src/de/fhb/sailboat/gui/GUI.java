@@ -846,7 +846,7 @@ public class GUI extends javax.swing.JFrame {
 //    	missionCreatorLogic.missionTree_NewPropellorFullForward_Task(missionTree, "TestForwardMission");
     	
         Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MAX);
-    	
+  
         DefaultMutableTreeNode item = new DefaultMutableTreeNode(new MissionTreeObject("Test", load), false);
         
         // get current selection

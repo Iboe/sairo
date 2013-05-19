@@ -214,7 +214,7 @@ public class MainControllerImpl implements MainController {
 		MissionVO mission = new MissionVO();
 		List<Task> tasks = new ArrayList<Task>();
 
-		tasks.add(new StopTask());
+		tasks.add(new StopTask(true));
 
 		mission.setTasks(tasks);
 

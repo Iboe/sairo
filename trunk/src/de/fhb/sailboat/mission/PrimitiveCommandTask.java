@@ -3,11 +3,12 @@ package de.fhb.sailboat.mission;
 import de.fhb.sailboat.data.GPS;
 
 /**
- * Task for setting values for the actuators directly. It is finished after the values have been set.
+ * Task for setting values for the actuators directly. It is finished after the
+ * values have been set.
  * 
  * @author hscheel
  * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
- *
+ * 
  */
 public class PrimitiveCommandTask implements Task {
 
@@ -15,21 +16,25 @@ public class PrimitiveCommandTask implements Task {
 	private final Integer rudder;
 	private final Integer propellor;
 	private boolean executed;
-	
+
 	/**
-	 * Creates a new instance based on the values for actuators to be set. Each value can be set to 
-	 * <code>null</code>, so the current value of the related actuator is not changed.
+	 * Creates a new instance based on the values for actuators to be set. Each
+	 * value can be set to <code>null</code>, so the current value of the
+	 * related actuator is not changed.
 	 * 
-	 * @param sail the desired position for the sail
-	 * @param rudder the desired position for the rudder
-	 * @param propellor the desired speed and direction for the propellor
+	 * @param sail
+	 *            the desired position for the sail
+	 * @param rudder
+	 *            the desired position for the rudder
+	 * @param propellor
+	 *            the desired speed and direction for the propellor
 	 */
 	public PrimitiveCommandTask(Integer sail, Integer rudder, Integer propellor) {
 		this.sail = sail;
 		this.rudder = rudder;
 		this.propellor = propellor;
 	}
-	
+
 	@Override
 	public boolean isFinished(GPS position) {
 		return isExecuted();
@@ -53,8 +58,9 @@ public class PrimitiveCommandTask implements Task {
 		return rudder;
 	}
 
-    /**
-	 * Getter for the value indicating the desired speed and direction for the propellor.
+	/**
+	 * Getter for the value indicating the desired speed and direction for the
+	 * propellor.
 	 * 
 	 * @return the desired speed and direction for the propellor
 	 */
@@ -62,10 +68,12 @@ public class PrimitiveCommandTask implements Task {
 		return propellor;
 	}
 
-    /**
+	/**
 	 * Setter for the flag, which indicates if this {@link Task} was executed.
 	 * 
-	 * @param executed <code>true</code> if this {@link Task} was executed, <code>false</code> otherwise
+	 * @param executed
+	 *            <code>true</code> if this {@link Task} was executed,
+	 *            <code>false</code> otherwise
 	 */
 	public void setExecuted(boolean executed) {
 		this.executed = executed;
@@ -74,7 +82,8 @@ public class PrimitiveCommandTask implements Task {
 	/**
 	 * Describes if the values were already set.
 	 * 
-	 * @return <code>true</code> if this {@link Task} was executed, <code>false</code> otherwise
+	 * @return <code>true</code> if this {@link Task} was executed,
+	 *         <code>false</code> otherwise
 	 */
 	public boolean isExecuted() {
 		return executed;
@@ -82,10 +91,9 @@ public class PrimitiveCommandTask implements Task {
 
 	@Override
 	public String toString() {
-//		return "PrimitiveCommandTask [executed=" + executed + ", propellor="
-//				+ propellor + ", rudder=" + rudder + ", sail=" + sail + "]";
-		
-	return MissionSystemTextEnum.PRIMITIVE_COMMAND_TASK + " [executed=" + executed + ", propellor="
-				+ propellor + ", rudder=" + rudder + ", sail=" + sail + "]";
+
+		return MissionSystemTextEnum.PRIMITIVE_COMMAND_TASK + " [executed="
+				+ executed + ", propellor=" + propellor + ", rudder=" + rudder
+				+ ", sail=" + sail + "]";
 	}
 }

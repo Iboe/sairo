@@ -11,6 +11,7 @@ import de.fhb.sailboat.mission.Task;
  * missionTree while using DefaultMutableTreeNode.
  * 
  * @author Patrick Rutter
+ * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  */
 public class MissionTreeObject implements Serializable {
 	private static final long serialVersionUID = 1L;

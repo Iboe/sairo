@@ -77,7 +77,6 @@ public class MainControllerModelImpl implements MainControllerModel{
 		this.compass = compass;
 	}
 
-	// Wind
 	@Override
 	/**
 	 * Sets the current WindModel.
@@ -96,7 +95,6 @@ public class MainControllerModelImpl implements MainControllerModel{
 		return this.wind;
 	}
 
-	// GPS
 	@Override
 	/**
 	 * Sets the current GPSModel.
