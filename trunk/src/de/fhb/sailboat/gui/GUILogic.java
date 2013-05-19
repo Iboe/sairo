@@ -2,7 +2,7 @@ package de.fhb.sailboat.gui;
 
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.gui.map.Map;
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 
 /**
  * This class represents the program logic used by a GUInterface. It handles updating, sending and converting of value displayed
@@ -19,7 +19,7 @@ public interface GUILogic {
      * Commit a mission to planner.
      * @param mission
      */
-    public void commitMission(Mission mission);
+    public void commitMission(MissionImpl mission);
     
     /**
      * Initializes a Map Object and assigns it to the given panel.

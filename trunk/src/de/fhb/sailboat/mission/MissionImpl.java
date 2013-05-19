@@ -8,16 +8,16 @@ import java.util.List;
  * @author hscheel
  *
  */
-public class MissionImpl implements Mission {
+public class MissionImpl {
 
 	private List<Task> tasks;
 
-	@Override
+
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
 
-	@Override
+
 	public List<Task> getTasks() {
 		return tasks;
 	}

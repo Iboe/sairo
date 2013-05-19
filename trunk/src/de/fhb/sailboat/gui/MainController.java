@@ -5,7 +5,7 @@ import java.util.List;
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -25,7 +25,7 @@ public interface MainController {
 	 * @param planner
 	 * @param mission
 	 */
-	public void commitMission(Planner planner, Mission mission);
+	public void commitMission(Planner planner, MissionImpl mission);
 
 	@Deprecated
 	/**
@@ -210,7 +210,7 @@ public interface MainController {
 	 * 
 	 * @return mission
 	 */
-	public Mission getCurrentMission();
+	public MissionImpl getCurrentMission();
 
 	/**
 	 * Returns the whole mission. This mission contains all tasks defined for
@@ -218,7 +218,7 @@ public interface MainController {
 	 * 
 	 * @return wholeMission
 	 */
-	public Mission getCurrentWholeMission();
+	public MissionImpl getCurrentWholeMission();
 
 	/**
 	 * Returns state of missionUpdating. True equals a recent update (task
@@ -243,16 +243,12 @@ public interface MainController {
 	public void startPlayer(String filePath);
 
 	/**
-	 * TODO Add comment.
-	 * 
-	 * @param filePath
+	 * stops playing the player-module
 	 */
 	public void stopPlaying();
 
 	/**
-	 * TODO Add comment.
-	 * 
-	 * @param filePath
+	 * pause player-module
 	 */
 	public void pausePlaying();
 
@@ -262,16 +258,15 @@ public interface MainController {
 	public void playPlayer();
 
 	/**
-	 * Sets the palaying speed in a range from...to ... TODO
+	 * Sets the playing speed in a range from...to ... TODO
 	 * 
 	 * @param value
 	 */
 	public void setPlayingSpeed(int value);
 
 	/**
-	 * TODO Add comment.
-	 * 
-	 * @param filePath
+	 * Gets the actual updaterate of GUI
+	 * @return miliSecs
 	 */
 	public int getActualUpdateRate();
 

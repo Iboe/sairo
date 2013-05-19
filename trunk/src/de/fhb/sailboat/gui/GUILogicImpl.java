@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import de.fhb.sailboat.control.planner.Planner;
 import de.fhb.sailboat.gui.map.Map;
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 
 /**
  * This class represents the program logic used by a GUInterface. It handles
@@ -58,7 +58,7 @@ public class GUILogicImpl implements GUILogic {
      * Commits the given Mission.
      * @param mission
      */
-    public void commitMission(Mission mission) {
+    public void commitMission(MissionImpl mission) {
         this.controller.commitMission(planner, mission);
     }
 

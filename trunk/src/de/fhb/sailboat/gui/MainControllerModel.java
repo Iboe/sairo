@@ -4,7 +4,7 @@ import java.util.List;
 
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
 import de.fhb.sailboat.worldmodel.WindModel;
@@ -96,25 +96,25 @@ public interface MainControllerModel {
 	 * Returns the whole mission. This mission contains all tasks defined for it, regardless of completion.
 	 * @return wholeMission
 	 */
-	public Mission getCurrentWholeMission();
+	public MissionImpl getCurrentWholeMission();
 
 	/**
 	 * Returns currently active mission. This mission reference only contains tasks left for processing, not finished ones.
 	 * @return mission
 	 */
-	public Mission getMissionTasksLeft();
+	public MissionImpl getMissionTasksLeft();
 
 	/**
 	 * Sets the current whole mission.
 	 * @param currentWholeMission
 	 */
-	public void setCurrentWholeMission(Mission currentWholeMission);
+	public void setCurrentWholeMission(MissionImpl currentWholeMission);
 
 	/**
 	 * Sets the tasks left of the current whole mission.
 	 * @param missionTasksLeft
 	 */
-	public void setMissionTasksLeft(Mission missionTasksLeft);
+	public void setMissionTasksLeft(MissionImpl missionTasksLeft);
 	
 	/**
 	 * Sets propellor value.

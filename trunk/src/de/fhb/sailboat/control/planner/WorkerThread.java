@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.navigator.Navigator;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.StopTask;
 import de.fhb.sailboat.mission.Task;
 import de.fhb.sailboat.worldmodel.WorldModel;

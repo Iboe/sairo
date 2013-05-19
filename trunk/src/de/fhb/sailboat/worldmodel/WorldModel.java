@@ -1,6 +1,6 @@
 package de.fhb.sailboat.worldmodel;
 
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 
 /**
  * Interface for the central world model, which has references to all sub-models and the currently running mission.
@@ -59,11 +59,11 @@ public interface WorldModel {
 	 * Returns the currently running {@link Mission} instance.
 	 * @return The currently running {@link Mission} instance.
 	 */
-	Mission getMission();
+	MissionImpl getMission();
 	
 	/**
 	 * Setting the {@link Mission} that's executed.
 	 * @param mission The {@link Mission} that's executed.
 	 */
-	void setMission(Mission mission);
+	void setMission(MissionImpl mission);
 }

@@ -15,10 +15,8 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.MissionNegotiationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
-import de.fhb.sailboat.communication.MissionNegotiationBase.eTransmissionMode;
 import de.fhb.sailboat.communication.mission.TaskSerializer;
 import de.fhb.sailboat.control.planner.Planner;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.Task;
 
@@ -198,7 +196,7 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 			case TM_MissionEnd_ACK:
 				if(opCode == eOperationType.OT_EndMission_ACK.getValue()){
 					
-					Mission m=new MissionImpl();
+					MissionImpl m=new MissionImpl();
 					m.setTasks(missionAssembly);
 					planner.doMission(m);
 					LOG.info("Mission receive finished!");

@@ -5,7 +5,6 @@ import java.util.List;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.CompassModelImpl;
@@ -38,8 +37,8 @@ public class Model {
 	
 	private boolean sailMode;
 	
-	private Mission currentWholeMission;			// current mission of the sailboat as a whole from start to finish
-	private Mission missionTasksLeft;				// current state of the mission (tasks left)
+	private MissionImpl currentWholeMission;			// current mission of the sailboat as a whole from start to finish
+	private MissionImpl missionTasksLeft;				// current state of the mission (tasks left)
 	
 	private StringBuffer missionReport;
 	
@@ -116,11 +115,11 @@ public class Model {
 		this.sailMode = sailMode;
 	}
 
-	public Mission getCurrentWholeMission() {
+	public MissionImpl getCurrentWholeMission() {
 		return currentWholeMission;
 	}
 
-	public Mission getMissionTasksLeft() {
+	public MissionImpl getMissionTasksLeft() {
 		return missionTasksLeft;
 	}
 
@@ -128,11 +127,11 @@ public class Model {
 		return missionReport;
 	}
 
-	public void setCurrentWholeMission(Mission currentWholeMission) {
+	public void setCurrentWholeMission(MissionImpl currentWholeMission) {
 		this.currentWholeMission = currentWholeMission;
 	}
 
-	public void setMissionTasksLeft(Mission missionTasksLeft) {
+	public void setMissionTasksLeft(MissionImpl missionTasksLeft) {
 		this.missionTasksLeft = missionTasksLeft;
 	}
 

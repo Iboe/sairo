@@ -11,7 +11,6 @@ import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
@@ -211,8 +210,8 @@ public class Controller {
 	
 	public void generateMissionReport() {
 		if ((this.model.getCurrentWholeMission().getTasks().size() > 0) && (this.model.getMissionTasksLeft().getTasks().size() > 0)) {
-			Mission currentWholeMission = this.model.getCurrentWholeMission();
-			Mission missionTasksLeft = this.model.getMissionTasksLeft();
+			MissionImpl currentWholeMission = this.model.getCurrentWholeMission();
+			MissionImpl missionTasksLeft = this.model.getMissionTasksLeft();
 			StringBuffer missionReport = new StringBuffer();
 			Task task;
 			int crossPoint = currentWholeMission.getTasks().size() - missionTasksLeft.getTasks().size();

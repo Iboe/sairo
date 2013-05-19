@@ -14,7 +14,6 @@ import de.fhb.sailboat.gui.map.MapPolygonImpl;
 import de.fhb.sailboat.mission.BeatTask;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -32,7 +31,7 @@ import de.fhb.sailboat.mission.Task;
  */
 public class MissionVisualization {
 
-	private Mission whole;
+	private MissionImpl whole;
 
 	private JMapViewer map;
 
@@ -61,7 +60,7 @@ public class MissionVisualization {
 
 		clearMap();
 
-		Mission current = model.getMissionTasksLeft();
+		MissionImpl current = model.getMissionTasksLeft();
 
 		if (current.getTasks() != null) {
 			this.model = model;
@@ -74,7 +73,7 @@ public class MissionVisualization {
 			}
 
 			if (current.getTasks().size() < whole.getTasks().size()) {
-				Mission solved = getSolved(current);
+				MissionImpl solved = getSolved(current);
 				visualizeTasks(current, solved);
 			} else {
 				visualizeTasks(whole);
@@ -89,11 +88,11 @@ public class MissionVisualization {
 	 * @param mission
 	 *            mission to be displayed
 	 */
-	public void visualize(Mission mission) {
+	public void visualize(MissionImpl mission) {
 
 		clearMap();
 
-		Mission current = mission;
+		MissionImpl current = mission;
 
 		if (current.getTasks() != null) {
 			this.model = null;
@@ -106,7 +105,7 @@ public class MissionVisualization {
 			}
 
 			if (current.getTasks().size() < whole.getTasks().size()) {
-				Mission solved = getSolved(current);
+				MissionImpl solved = getSolved(current);
 				visualizeTasks(current, solved);
 			} else {
 				visualizeTasks(whole);
@@ -121,7 +120,7 @@ public class MissionVisualization {
 	 * @param whole
 	 *            whole mission
 	 */
-	private void visualizeTasks(Mission whole) {
+	private void visualizeTasks(MissionImpl whole) {
 		visualizeTasks(whole, null);
 	}
 
@@ -133,7 +132,7 @@ public class MissionVisualization {
 	 * @param solved
 	 *            solved tasks
 	 */
-	private void visualizeTasks(Mission current, Mission solved) {
+	private void visualizeTasks(MissionImpl current, MissionImpl solved) {
 		if (solved == null) {
 			// visualize whole mission
 			visualizeTask(current.getTasks().get(0), Color.GREEN);
@@ -199,8 +198,8 @@ public class MissionVisualization {
 	 * 
 	 * @return solved tasks
 	 */
-	private Mission getSolved(Mission current) {
-		Mission solved = new MissionImpl();
+	private MissionImpl getSolved(MissionImpl current) {
+		MissionImpl solved = new MissionImpl();
 		solved.setTasks(new ArrayList<Task>());
 
 		for (int i = 0; i < whole.getTasks().size() - current.getTasks().size(); i++)

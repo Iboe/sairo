@@ -923,8 +923,8 @@ public class GUI extends javax.swing.JFrame {
     }                                                            
 
     private void missionTestMenuHoldAngleToWindActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-//        guiLogic.sendHoldAngleToWind();
-    	this.testAMissionCreatorSequence();
+        guiLogic.sendHoldAngleToWind();
+//    	this.testAMissionCreatorSequence();
     }                                                              
 
     private void missionTestMenuStopTaskActionPerformed(java.awt.event.ActionEvent evt) {                                                        

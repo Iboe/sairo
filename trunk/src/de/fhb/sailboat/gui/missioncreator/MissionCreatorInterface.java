@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.TreeSelectionModel;
@@ -17,7 +16,7 @@ import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.GUILogic;
 import de.fhb.sailboat.gui.RootDialog;
 import de.fhb.sailboat.gui.map.MissionCreatingMap;
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 
 /**
  * This class represents the graphical interface of the MissionCreator dialog.
@@ -924,7 +923,7 @@ public class MissionCreatorInterface extends RootDialog{
         paul.setMissionTasksLeft(mission);
         if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(paul);*/
         
-        Mission mission = new MissionObject(this.missionTree).getMission();
+    	MissionImpl mission = new MissionObject(this.missionTree).getMission();
         if (!mission.getTasks().isEmpty()) this.missionMap.visualizeMission(mission);
     }
     

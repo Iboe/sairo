@@ -7,12 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.planner.Planner;
-import de.fhb.sailboat.control.planner.PlannerImpl;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.mission.CompassCourseTask;
 import de.fhb.sailboat.mission.HoldAngleToWindTask;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.ReachCircleTask;
@@ -72,7 +70,7 @@ public class MainControllerImpl implements MainController {
 
 	/**
 	 * Gets the actual updaterate of GUI
-	 * @param miliSecs
+	 * @return miliSecs
 	 */
 	public int getActualUpdateRate() {
 		return actualUpdateRate;
@@ -92,7 +90,7 @@ public class MainControllerImpl implements MainController {
 	 * @param planner
 	 * @param mission
 	 */
-	public void commitMission(Planner planner, Mission mission) {
+	public void commitMission(Planner planner, MissionImpl mission) {
 		LOG.warn("Missionssize: "+ mission.getTasks().size());
 		planner.doMission(mission);
 	}
@@ -303,7 +301,7 @@ public class MainControllerImpl implements MainController {
 	public void updateMission() {
 		if (worldModel.getMission() != this.model.getMissionTasksLeft()) {
 			this.model.setMissionTasksLeft(worldModel.getMission());
-			//generateMissionReport();
+//			generateMissionReport();
 		}
 	}
 
@@ -424,7 +422,7 @@ public class MainControllerImpl implements MainController {
 	 * Returns currently active mission. This mission reference only contains tasks left for processing, not finished ones.
 	 * @return mission
 	 */
-	public Mission getCurrentMission() {
+	public MissionImpl getCurrentMission() {
 		return this.model.getMissionTasksLeft();
 	}
 	
@@ -432,7 +430,7 @@ public class MainControllerImpl implements MainController {
 	 * Returns the whole mission. This mission contains all tasks defined for it, regardless of completion.
 	 * @return wholeMission
 	 */
-	public Mission getCurrentWholeMission() {
+	public MissionImpl getCurrentWholeMission() {
 		return this.model.getCurrentWholeMission();
 	}
 	

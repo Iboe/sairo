@@ -1,6 +1,6 @@
 package de.fhb.sailboat.control.planner;
 
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.PrimitiveCommandTask;
 import de.fhb.sailboat.mission.Task;
 
@@ -27,7 +27,7 @@ public interface Planner {
 	 * 
 	 * @param mission the mission to be executed
 	 */
-	void doMission(Mission mission);
+	void doMission(MissionImpl mission);
 	
 	/**
 	 * Stops executing the current mission. To avoid the boat being pushed around

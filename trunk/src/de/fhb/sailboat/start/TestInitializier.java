@@ -9,7 +9,6 @@ import de.fhb.sailboat.control.pilot.PilotImpl;
 import de.fhb.sailboat.control.planner.PlannerImpl;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.mission.Mission;
 import de.fhb.sailboat.mission.MissionImpl;
 import de.fhb.sailboat.mission.ReachCircleTask;
 import de.fhb.sailboat.mission.ReachPolygonTask;
@@ -70,7 +69,7 @@ public class TestInitializier extends Initializier {
 	protected void createDummyMission() {
 		WorldModel worldModel = WorldModelImpl.getInstance();
 		final GPS position = worldModel.getGPSModel().getPosition();
-		Mission mission = new MissionImpl();
+		MissionImpl mission = new MissionImpl();
 		List<Task> tasks = new LinkedList<Task>();
 		
 		if (position != null) {

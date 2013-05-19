@@ -31,7 +31,7 @@ import de.fhb.sailboat.gui.map.utilities.JMapViewer;
 import de.fhb.sailboat.gui.map.utilities.MissionVisualization;
 import de.fhb.sailboat.gui.map.utilities.ScalePanel;
 import de.fhb.sailboat.gui.map.utilities.WindMarkerLine;
-import de.fhb.sailboat.mission.Mission;
+import de.fhb.sailboat.mission.MissionImpl;
 
 /**
  * Primary Map-class which uses all the other classes.
@@ -380,7 +380,7 @@ public class Map extends JPanel {
 	 * @param mission
 	 *            mission to be visualized
 	 */
-	public void visualizeMission(Mission mission) {
+	public void visualizeMission(MissionImpl mission) {
 		visualize.visualize(mission);
 	}
 
