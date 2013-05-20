@@ -28,9 +28,9 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * This class manages the data pipe between GUI (logic), model and the boat (world model/ planner).
  * 
  * @author Patrick Rutter
- * 
+ * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  */
-public class MainControllerImpl implements MainController {
+public class MainControllerImpl {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MainControllerImpl.class);
 
@@ -51,10 +51,15 @@ public class MainControllerImpl implements MainController {
 	public final static int SAIL_OUT = Integer.parseInt(System.getProperty("AKSENLocomotion.SAIL_SHEET_OUT"));
 	
 	
-	// Variables
-	private MainControllerModel model;			// GUIModel is used to store values locally
+	/**
+	 * GUIModel is used to store values locally
+	 */
+	private MainControllerModel model;
 
-	private WorldModel worldModel;	// An instance of the world model is used to get values from the boat
+	/**
+	 * An instance of the world model is used to get values from the boat
+	 */
+	private WorldModel worldModel;
 	
 	private Player player;
 	
@@ -84,7 +89,7 @@ public class MainControllerImpl implements MainController {
 		this.worldModel = WorldModelImpl.getInstance();
 	}
 	
-	@Override
+	 
 	/**
 	 * Commit a mission to a sailboat via its planner.
 	 * @param planner
@@ -257,11 +262,11 @@ public class MainControllerImpl implements MainController {
 		if (planner != null) planner.doPrimitiveCommand(new PrimitiveCommandTask(sail, rudder, propellor));
 	}
 
-	// Updater (used to update a sensor reading and store it in model, kind of
-	// like a more sophisticated setter)
 	/**
 	 * As the name suggests, this method calls ALL (existing) update methods to
 	 * get the most recent values possible at once.
+	 * (used to update a sensor reading and store it in model, kind of
+	 * like a more sophisticated setter)
 	 */
 	public void updateAll() {
 		updateWind();
@@ -296,16 +301,16 @@ public class MainControllerImpl implements MainController {
 
 	/**
 	 * Update current mission data.
-	 * TODO???
+	 * 
 	 */
 	public void updateMission() {
 		if (worldModel.getMission() != this.model.getMissionTasksLeft()) {
 			this.model.setMissionTasksLeft(worldModel.getMission());
+			//TODO???
 //			generateMissionReport();
 		}
 	}
 
-	// Setter (values given by View to store in Model)
 	/**
 	 * Old method for creating a list of GPS points for usage with ReachCircleTasks.
 	 * @param pointList
@@ -450,16 +455,18 @@ public class MainControllerImpl implements MainController {
 		return this.model;
 	}
 
-	@Override
+	 
 	/**
 	 * starts the Player with a specific log-file
+	 * 
+	 * @param filePath
 	 */
 	public void startPlayer(String filePath) {
 		player=new Player(this.worldModel, filePath);
 		player.start();
 	}
 
-	@Override
+	 
 	/**
 	 * stops playing the player-module
 	 */
@@ -467,7 +474,7 @@ public class MainControllerImpl implements MainController {
 		player.stop();
 	}
 
-	@Override
+	 
 	/**
 	 * pause player-module
 	 */
@@ -475,24 +482,27 @@ public class MainControllerImpl implements MainController {
 		player.pause();
 	}
 
-	@Override
+	 
 	/**
-	 * playing the loaded log-file of the player-module
+	 * plays the loaded log-file with the player-module
 	 */
 	public void playPlayer() {
 		player.play();
 	}
 
-	@Override
+	 
 	/**
-	 * sets the Playing speed of the player-module
+	 * Sets the playing speed in a range
+	 * from Player.SPEED_INTERVAL_MAX to Player.SPEED_INTERVAL_MIN
+	 * 
+	 * @param value
 	 */
 	public void setPlayingSpeed(int value) {
 		player.setSpeedIntervall(value);
 		this.setUpdateIntervall(value);
 	}
 
-	@Override
+	 
 	/**
 	 * sets the GUI-update-rate back to default
 	 */

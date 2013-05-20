@@ -14,6 +14,7 @@ import de.fhb.sailboat.mission.MissionVO;
  * updating, sending and converting of value displayed and set via the GUI.
  * 
  * @author Patrick Rutter
+ * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  */
 public class GUILogic {
 
@@ -54,7 +55,7 @@ public class GUILogic {
 	 * the GUIController is used for getting and setting values from and to the
 	 * world model/ local database
 	 */
-	private MainController controller;
+	private MainControllerImpl controller;
 
 	/**
 	 * the Planner is used for sending mission sets
@@ -462,7 +463,7 @@ public class GUILogic {
 	 * 
 	 * @return MainController
 	 */
-	public MainController getController() {
+	public MainControllerImpl getController() {
 		return this.controller;
 	}
 
