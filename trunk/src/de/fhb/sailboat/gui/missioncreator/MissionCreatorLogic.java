@@ -11,7 +11,7 @@ import javax.swing.tree.DefaultTreeModel;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.GUILogicImpl;
+import de.fhb.sailboat.gui.GUILogic;
 import de.fhb.sailboat.gui.MainControllerImpl;
 import de.fhb.sailboat.mission.Task;
 
@@ -25,14 +25,14 @@ public class MissionCreatorLogic {
     /**
      * Used as interface to send missions.
      */
-    private GUILogicImpl guiLogic;
+    private GUILogic guiLogic;
     
     /**
      * Copied/ Cut items from missionTree are saved to this list.
      */
     private ArrayList<Object> missionTreeClipboard;
     
-    public MissionCreatorLogic(GUILogicImpl guiLogic) {
+    public MissionCreatorLogic(GUILogic guiLogic) {
         this.guiLogic = guiLogic;
         this.missionTreeClipboard = new ArrayList<Object>();    // initialize clipboard
     }

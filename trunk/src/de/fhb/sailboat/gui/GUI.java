@@ -40,7 +40,7 @@ public class GUI extends javax.swing.JFrame {
 //	private int modus	= GUILogicImpl.LIVE_MODUS;
 
 	private static final long serialVersionUID = 1L;
-	private GUILogicImpl guiLogic;
+	private GUILogic guiLogic;
 	private JMenu playerMenu;
 	
 	private ParallelGroup liveModeGroup;
@@ -61,7 +61,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI(Planner planner) {
         initComponents();
-        guiLogic = new GUILogicImpl(planner);           // GUILogic classes may be switched here
+        guiLogic = new GUILogic(planner);           // GUILogic classes may be switched here
         guiLogic.initializeMissionMap(missionMapPanel); // initialize the mission map for display
         guiLoop();
         
