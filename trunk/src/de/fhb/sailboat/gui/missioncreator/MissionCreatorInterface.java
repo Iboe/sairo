@@ -13,7 +13,7 @@ import javax.swing.tree.TreeSelectionModel;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.GUILogic;
+import de.fhb.sailboat.gui.GUILogicImpl;
 import de.fhb.sailboat.gui.RootDialog;
 import de.fhb.sailboat.gui.map.MissionCreatingMap;
 import de.fhb.sailboat.mission.MissionVO;
@@ -74,7 +74,7 @@ public class MissionCreatorInterface extends RootDialog{
      * @param modal
      * @param guiLogic
      */
-    public MissionCreatorInterface(java.awt.Frame parent, boolean modal, GUILogic guiLogic) {
+    public MissionCreatorInterface(java.awt.Frame parent, boolean modal, GUILogicImpl guiLogic) {
         super(parent, modal);
         initComponents();
         this.missionCreatorLogic = new MissionCreatorLogic(guiLogic);

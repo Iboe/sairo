@@ -1,16 +1,19 @@
 package de.fhb.sailboat.gui.missioncreator;
 
-import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.MainControllerImpl;
-import de.fhb.sailboat.gui.GUILogic;
-import de.fhb.sailboat.mission.Task;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+
+import de.fhb.sailboat.data.GPS;
+import de.fhb.sailboat.gui.GUILogicImpl;
+import de.fhb.sailboat.gui.MainControllerImpl;
+import de.fhb.sailboat.mission.Task;
 
 /**
  * This class holds the logic behind the workings of the MissionCreator dialog.
@@ -22,14 +25,14 @@ public class MissionCreatorLogic {
     /**
      * Used as interface to send missions.
      */
-    private GUILogic guiLogic;
+    private GUILogicImpl guiLogic;
     
     /**
      * Copied/ Cut items from missionTree are saved to this list.
      */
     private ArrayList<Object> missionTreeClipboard;
     
-    public MissionCreatorLogic(GUILogic guiLogic) {
+    public MissionCreatorLogic(GUILogicImpl guiLogic) {
         this.guiLogic = guiLogic;
         this.missionTreeClipboard = new ArrayList<Object>();    // initialize clipboard
     }

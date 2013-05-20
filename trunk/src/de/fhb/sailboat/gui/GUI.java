@@ -40,7 +40,7 @@ public class GUI extends javax.swing.JFrame {
 //	private int modus	= GUILogicImpl.LIVE_MODUS;
 
 	private static final long serialVersionUID = 1L;
-	private GUILogic guiLogic;
+	private GUILogicImpl guiLogic;
 	private JMenu playerMenu;
 	
 	private ParallelGroup liveModeGroup;
