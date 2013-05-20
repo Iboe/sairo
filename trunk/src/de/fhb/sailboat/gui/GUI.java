@@ -846,7 +846,7 @@ public class GUI extends javax.swing.JFrame {
     	//************* Einbindung in den Tree
 //    	missionCreatorLogic.missionTree_NewPropellorFullForward_Task(missionTree, "TestForwardMission");
     	
-        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainControllerImpl.PROPELLOR_MAX);
+        Task load = new de.fhb.sailboat.mission.PrimitiveCommandTask(null, null, MainController.PROPELLOR_MAX);
   
         DefaultMutableTreeNode item = new DefaultMutableTreeNode(new MissionTreeObject("Test", load), false);
         
@@ -970,9 +970,9 @@ public class GUI extends javax.swing.JFrame {
         // get current propellor setting, relate it to min, null and max and set the propellor control (radioButtons) to the right value.
         int propellor = guiLogic.getController().getPropellor();
 
-        if (propellor > MainControllerImpl.PROPELLOR_STOP) {
+        if (propellor > MainController.PROPELLOR_STOP) {
             propellorReverseRadioButton.setSelected(true);
-        } else if (propellor == MainControllerImpl.PROPELLOR_STOP) {
+        } else if (propellor == MainController.PROPELLOR_STOP) {
             propellorStopRadioButton.setSelected(true);
         } else {
             propellorMaxRadioButton.setSelected(false);
@@ -982,11 +982,11 @@ public class GUI extends javax.swing.JFrame {
         
         // get current rudder position and set the value to the rudder control slider
         int rudder = guiLogic.getController().getRudder();
-        rudderSlider.setValue(convertFromNativeValue(rudder, MainControllerImpl.RUDDER_LEFT, MainControllerImpl.RUDDER_NORMAL, MainControllerImpl.RUDDER_RIGHT));
+        rudderSlider.setValue(convertFromNativeValue(rudder, MainController.RUDDER_LEFT, MainController.RUDDER_NORMAL, MainController.RUDDER_RIGHT));
         
         // get current sail position and set the value to the rudder control slider
         int sail = guiLogic.getController().getSail();
-        sailSlider.setValue(convertFromNativeValue(sail, MainControllerImpl.SAIL_IN, MainControllerImpl.SAIL_NORMAL, MainControllerImpl.SAIL_OUT));
+        sailSlider.setValue(convertFromNativeValue(sail, MainController.SAIL_IN, MainController.SAIL_NORMAL, MainController.SAIL_OUT));
     }                                            
 
     /**
@@ -996,7 +996,7 @@ public class GUI extends javax.swing.JFrame {
      * @param evt 
      */
     private void sailStateChanged(javax.swing.event.ChangeEvent evt) {                                  
-        int newSail = convertToNativeValue(sailSlider.getValue(), MainControllerImpl.SAIL_IN, MainControllerImpl.SAIL_NORMAL, MainControllerImpl.SAIL_OUT);
+        int newSail = convertToNativeValue(sailSlider.getValue(), MainController.SAIL_IN, MainController.SAIL_NORMAL, MainController.SAIL_OUT);
         if (guiLogic.getController().getSail() != newSail) {
             this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), null, null, newSail);
         }
@@ -1009,7 +1009,7 @@ public class GUI extends javax.swing.JFrame {
      * @param evt 
      */
     private void rudderStateChanged(javax.swing.event.ChangeEvent evt) {                                    
-        int newRudder = convertToNativeValue(rudderSlider.getValue(), MainControllerImpl.RUDDER_LEFT, MainControllerImpl.RUDDER_NORMAL, MainControllerImpl.RUDDER_RIGHT);
+        int newRudder = convertToNativeValue(rudderSlider.getValue(), MainController.RUDDER_LEFT, MainController.RUDDER_NORMAL, MainController.RUDDER_RIGHT);
         if (guiLogic.getController().getSail() != newRudder) {
             this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), null, newRudder, null);
         }
@@ -1057,18 +1057,18 @@ public class GUI extends javax.swing.JFrame {
      */
     private void propellorStateUpdate() {
         if (propellorReverseRadioButton.isSelected()) {
-            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_REVERSE) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_REVERSE, null, null);
+            if (guiLogic.getController().getPropellor() != MainController.PROPELLOR_REVERSE) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainController.PROPELLOR_REVERSE, null, null);
             }
         }
         else if (propellorStopRadioButton.isSelected()) {
-            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_STOP) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_STOP, null, null);
+            if (guiLogic.getController().getPropellor() != MainController.PROPELLOR_STOP) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainController.PROPELLOR_STOP, null, null);
             }
         }
         else {
-            if (guiLogic.getController().getPropellor() != MainControllerImpl.PROPELLOR_MAX) {
-                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainControllerImpl.PROPELLOR_MAX, null, null);
+            if (guiLogic.getController().getPropellor() != MainController.PROPELLOR_MAX) {
+                this.guiLogic.getController().commitPrimitiveCommand(guiLogic.getPlanner(), MainController.PROPELLOR_MAX, null, null);
             }
         }
     }
