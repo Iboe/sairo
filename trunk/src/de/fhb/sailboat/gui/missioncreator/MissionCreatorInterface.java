@@ -585,7 +585,6 @@ public class MissionCreatorInterface extends RootDialog{
      * @param evt
      */
     private void treePopupNewMenuTaskMenu_Control_PropellorFullForwardActionPerformed(java.awt.event.ActionEvent evt) {   
-    	//XXX Proopellor vorwärts, sollte gehen
         if (this.missionCreatorLogic.isLegalInsertNode(missionTree)) {
             String value = "";
             value = JOptionPane.showInputDialog(this, this.INPUTTEXT_TASK, this.INPUTTEXT_PROPELLORFORWARD);
