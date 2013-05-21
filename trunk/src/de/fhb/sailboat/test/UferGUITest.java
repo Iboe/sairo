@@ -5,6 +5,7 @@ package de.fhb.sailboat.test;
 
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
+import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
 import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
@@ -30,8 +31,9 @@ public class UferGUITest {
 		PropertiesInitializer propsInit = new PropertiesInitializer();
 		propsInit.initializeProperties();
 		
-		//CommunicationBase client=new CommTCPClient("176.16.18.18", 6699);
-		CommunicationBase client=new CommTCPServer(6699);
+		//CommunicationBase client=new CommTCPClient("176.16.18.18", 6699); // Client-Modus - WLAN: FBI-Robot
+		CommunicationBase client=new CommTCPClient("192.168.178.3", 6699); // Client-Modus - WLAN: Ad hoc
+		//CommunicationBase client=new CommTCPServer(6699); // Server-Modus
 		TransmissionModule mTrans=new MissionTransmitter(client);
 		
 		client.registerModule(new GPSReceiver());
