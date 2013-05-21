@@ -29,7 +29,6 @@ public class loadWindData {
 			String zeile=null;
 			while((zeile = reader.readLine()) != null){
 				if(zeile.contains(logTextblocks.windSensorClassName)){
-					//System.out.println("Analyze: " + zeile);
 					Date d=filter.filterTimestamp(zeile);
 					int startWindDir = zeile.indexOf(logTextblocks.windSensorWindDirection)+logTextblocks.windSensorWindDirection.length()+1;
 					int endWindDir = zeile.indexOf(logTextblocks.windSensorWindSpeed)-1;

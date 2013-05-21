@@ -43,7 +43,7 @@ public class Initializier {
 	protected LocomotionSystem loco;
 	protected GUI view;
 	
-	//protected static CPU cpuMonitoring;
+	protected static CPU cpuMonitoring;
 	
 	/**
 	 * Entry point for the application. Loads properties and initializes all control layers, all 
@@ -53,7 +53,8 @@ public class Initializier {
 	 */
 	public static void main(String[] args) {
 		Initializier init = new Initializier();
-		//cpuMonitoring = new CPU();
+		cpuMonitoring = new CPU();
+		cpuMonitoring.startMonitoringCpu();
 		initializeProperties();
 		init.initializeControl();
 		init.initializeSensors();

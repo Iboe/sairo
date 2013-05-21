@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import javax.swing.DefaultListModel;
 
+import org.apache.log4j.Logger;
 import org.jfree.chart.JFreeChart;
 
 import de.fhb.sairo.data.MissionList;
@@ -20,6 +21,8 @@ import de.fhb.sairo.data.windDatalist;
  */
 public class Model extends Observable{
 
+	Logger log = Logger.getLogger(Model.class);
+	
 	private File logFile;
 	private ArrayList<MissionList> missions;
 	private gpsDataList gpsDataList;
@@ -27,16 +30,19 @@ public class Model extends Observable{
 	private windDatalist windDatalist;
 	private MissionList missionList;
 	private DefaultListModel<String> listMissionsModel;
+	private DefaultListModel<String> logfileModel;
 	
 	private JFreeChart guiChart;
 	
 	public Model(){
+		log.trace("Model initialized");
 		this.missions = new ArrayList<MissionList>();
 		this.gpsDataList = new gpsDataList();
 		this.compassCourseList = new compassCourseList();
 		this.windDatalist = new windDatalist();
 		this.missionList = new MissionList();
 		listMissionsModel = new DefaultListModel<String>();
+		logfileModel = new DefaultListModel<String>();
 	}
 
 	/**
@@ -51,7 +57,7 @@ public class Model extends Observable{
 	 */
 	public void setLogFile(File logFile) {
 		this.logFile = logFile;
-		System.out.println(this.getClass().getName() + "setLogFile("+logFile+")");
+		log.debug(this.getClass().getName() + "setLogFile("+logFile+")");
 	}
 
 	/**
@@ -122,7 +128,18 @@ public class Model extends Observable{
 		this.listMissionsModel = listMissionsModel;
 	}
 
+	
+	
+	public DefaultListModel<String> getLogfileModel() {
+		return logfileModel;
+	}
+
+	public void setLogfileModel(DefaultListModel<String> logfileModel) {
+		this.logfileModel = logfileModel;
+	}
+
 	public void update(){
+		log.trace("update for gui called");
 		setChanged();
 		notifyObservers();
 	}

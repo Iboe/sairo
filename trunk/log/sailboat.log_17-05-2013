@@ -1,0 +1,10 @@
+DEBUG 2013-05-17 09:48:48,965 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Constructor AKSENLocomotion() called
+DEBUG 2013-05-17 09:48:48,981 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] de.fhb.sailboat.serial.actuator.AKSENLocomotion |  worldModel: have got an instance - de.fhb.sailboat.worldmodel.WorldModelImpl@179b7b0
+DEBUG 2013-05-17 09:49:34,034 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Constructor AKSENLocomotion() called
+DEBUG 2013-05-17 09:49:34,049 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] de.fhb.sailboat.serial.actuator.AKSENLocomotion |  worldModel: have got an instance - de.fhb.sailboat.worldmodel.WorldModelImpl@18c458
+DEBUG 2013-05-17 09:50:13,549 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Constructor AKSENLocomotion() called
+DEBUG 2013-05-17 09:50:13,564 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] de.fhb.sailboat.serial.actuator.AKSENLocomotion |  worldModel: have got an instance - de.fhb.sailboat.worldmodel.WorldModelImpl@18c458
+DEBUG 2013-05-17 10:21:04,778 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Constructor AKSENLocomotion() called
+DEBUG 2013-05-17 10:21:04,809 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] de.fhb.sailboat.serial.actuator.AKSENLocomotion |  worldModel: have got an instance - de.fhb.sailboat.worldmodel.WorldModelImpl@2a2cc
+DEBUG 2013-05-17 10:22:01,280 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Constructor AKSENLocomotion() called
+DEBUG 2013-05-17 10:22:01,311 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] de.fhb.sailboat.serial.actuator.AKSENLocomotion |  worldModel: have got an instance - de.fhb.sailboat.worldmodel.WorldModelImpl@179b7b0

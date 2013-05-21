@@ -1,0 +1,2 @@
+DEBUG 2013-04-30 15:04:44,190 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] Constructor AKSENLocomotion() called
+DEBUG 2013-04-30 15:04:44,318 [de.fhb.sailboat.serial.actuator.AKSENLocomotion] de.fhb.sailboat.serial.actuator.AKSENLocomotion |  worldModel: have got an instance - de.fhb.sailboat.worldmodel.WorldModelImpl@1e29b99

@@ -25,6 +25,9 @@ public class main extends JFrame {
 
 	private JPanel contentPane;
 
+	/**
+	 * Menuitems
+	 */
 	private JMenuBar menuBar;
 	private JMenu menuFile;
 	private JMenuItem menuItemOpenFile;
@@ -33,6 +36,13 @@ public class main extends JFrame {
 	private JMenu menuSave;
 	private JMenuItem menuItemSaveGpsKml;
 	private JMenuItem menuItemSegmentLog;
+	private JMenuItem menuItemLoadCompassData;
+	private JMenu menuChart;
+	private JMenuItem menuItemCompassCourseTimeChart;
+	private JMenuItem menuItemLoadAllData;
+	private JMenuItem menuItemLoadMissionData;
+	private JMenuItem menuItemSaveCompassCourseWithDesiredAngleToCsv;
+	
 	private JPanel panel;
 	private JLabel lblGpsData;
 	private JLabel lblGpsDataValue;
@@ -40,17 +50,12 @@ public class main extends JFrame {
 	private JLabel lblCompassDataValue;
 	private JLabel lblMissionData;
 	private JLabel lblMissionDataValue;
-	private JMenuItem menuItemLoadCompassData;
-	private JMenu menuChart;
-	private JMenuItem menuItemCompassCourseTimeChart;
 	private JPanel panel_1;
 	private JLabel lblListMissions;
 	private JLabel lblPIDControllerData;
 	private JLabel lblPIDControllerDataValue;
 	private JLabel lblWindsensorData;
 	private JLabel lblWindsensorDataValue;
-	private JMenuItem menuItemLoadAllData;
-	private JMenuItem menuItemLoadMissionData;
 	private JList listMissions;
 	private JScrollPane scrollPane_missions;
 	private JList listMissionInfo;
@@ -58,7 +63,6 @@ public class main extends JFrame {
 	private JList listTasks;
 	private JList listTaskInfo;
 	private JPanel panel_2;
-	private JMenuItem menuItemSaveCompassCourseWithDesiredAngleToCsv;
 	private JTextArea txtLogArea;
 	private JScrollPane scrollPaneTxtLogArea;
 	
@@ -69,6 +73,82 @@ public class main extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(100, 100, 450, 300);
 		
+		initalizeMenu();
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(10, 4, 0, 0));
+		
+		panel = new JPanel();
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblGpsData = new JLabel("GPS Data: ");
+		panel.add(lblGpsData);
+		
+		lblGpsDataValue = new JLabel("n/a");
+		panel.add(lblGpsDataValue);
+		
+		lblCompassData = new JLabel("Compass Data: ");
+		panel.add(lblCompassData);
+		
+		lblCompassDataValue = new JLabel("n/a");
+		panel.add(lblCompassDataValue);
+		
+		lblPIDControllerData = new JLabel("PID Controller Data");
+		panel.add(lblPIDControllerData);
+		
+		lblPIDControllerDataValue = new JLabel("n/a");
+		panel.add(lblPIDControllerDataValue);
+		
+		lblWindsensorData = new JLabel("Windsensor Data: ");
+		panel.add(lblWindsensorData);
+		
+		lblWindsensorDataValue = new JLabel("n/a");
+		panel.add(lblWindsensorDataValue);
+		
+		lblMissionData = new JLabel("Mission Data: ");
+		panel.add(lblMissionData);
+		
+		lblMissionDataValue = new JLabel("n/a");
+		panel.add(lblMissionDataValue);
+		
+		panel_1 = new JPanel();
+		panel_1.setPreferredSize(new Dimension(100, 400));
+		contentPane.add(panel_1);
+		panel_1.setLayout(new GridLayout(2, 5, 0, 0));
+		
+		lblListMissions = new JLabel("Missions");
+		panel_1.add(lblListMissions);
+		listMissions = new JList();
+		scrollPane_missions = new JScrollPane(listMissions);
+		scrollPane_missions.setVisible(true);
+		panel_1.add(scrollPane_missions);
+		
+		listMissionInfo = new JList();
+		panel_1.add(listMissionInfo);
+		listTasks = new JList();
+		scrollPane_tasks = new JScrollPane(listTasks);
+		panel_1.add(scrollPane_tasks);
+		
+		listTaskInfo = new JList();
+		panel_1.add(listTaskInfo);
+		
+		panel_2 = new JPanel();
+		contentPane.add(panel_2);
+
+		txtLogArea = new JTextArea();
+		txtLogArea.setRows(20);
+		txtLogArea.setTabSize(10);
+		scrollPaneTxtLogArea = new JScrollPane(txtLogArea);
+		contentPane.add(scrollPaneTxtLogArea);
+		
+		panel_1.setVisible(true);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setVisible(true);
+	}
+
+	private void initalizeMenu() {
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -110,78 +190,6 @@ public class main extends JFrame {
 		
 		menuItemCompassCourseTimeChart = new JMenuItem("Compasscourse-Time chart");
 		menuChart.add(menuItemCompassCourseTimeChart);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(10, 4, 0, 0));
-		
-		panel = new JPanel();
-		contentPane.add(panel);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		lblGpsData = new JLabel("GPS Data: ");
-		panel.add(lblGpsData);
-		
-		lblGpsDataValue = new JLabel("n/a");
-		panel.add(lblGpsDataValue);
-		
-		lblCompassData = new JLabel("Compass Data: ");
-		panel.add(lblCompassData);
-		
-		lblCompassDataValue = new JLabel("n/a");
-		panel.add(lblCompassDataValue);
-		
-		lblPIDControllerData = new JLabel("PID Controller Data");
-		panel.add(lblPIDControllerData);
-		
-		lblPIDControllerDataValue = new JLabel("n/a");
-		panel.add(lblPIDControllerDataValue);
-		
-		lblWindsensorData = new JLabel("Windsensor Data: ");
-		panel.add(lblWindsensorData);
-		
-		lblWindsensorDataValue = new JLabel("n/a");
-		panel.add(lblWindsensorDataValue);
-		
-		lblMissionData = new JLabel("Mission Data: ");
-		panel.add(lblMissionData);
-		
-		lblMissionDataValue = new JLabel("n/a");
-		panel.add(lblMissionDataValue);
-		
-		panel_1 = new JPanel();
-		panel_1.setPreferredSize(new Dimension(100, 200));
-		contentPane.add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 5, 0, 0));
-		
-		lblListMissions = new JLabel("Missions");
-		panel_1.add(lblListMissions);
-		listMissions = new JList();
-		scrollPane_missions = new JScrollPane(listMissions);
-		scrollPane_missions.setVisible(true);
-		panel_1.add(scrollPane_missions);
-		
-		listMissionInfo = new JList();
-		panel_1.add(listMissionInfo);
-		listTasks = new JList();
-		scrollPane_tasks = new JScrollPane(listTasks);
-		panel_1.add(scrollPane_tasks);
-		
-		listTaskInfo = new JList();
-		panel_1.add(listTaskInfo);
-		
-		panel_2 = new JPanel();
-		contentPane.add(panel_2);
-
-		txtLogArea = new JTextArea();
-		txtLogArea.setRows(20);
-		txtLogArea.setTabSize(10);
-		scrollPaneTxtLogArea = new JScrollPane(txtLogArea);
-		contentPane.add(scrollPaneTxtLogArea);
-		
-		panel_1.setVisible(true);
-		this.setExtendedState(MAXIMIZED_BOTH);
-		this.setVisible(true);
 	}
 
 	/**

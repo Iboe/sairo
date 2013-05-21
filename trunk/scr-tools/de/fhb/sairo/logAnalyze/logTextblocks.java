@@ -29,6 +29,11 @@ public class logTextblocks {
 	public static final String compassCourseTaskMark="CompassCourseTask";
 	public static final String reachCircleTaskMark="ReachCircleTask";
 	public static final String stopTaskMark="StopTask";
+	public static final String primitiveCommandTaskMark="PrimitiveCommandTask";
+	
+	public static final String clippingMark="clipping value";
+	public static final String transformAngleMark="transform angle";
+	
 	
 	public static final String compassCourseTaskParamMark="[angle=";
 	
