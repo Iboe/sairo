@@ -20,6 +20,10 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * @author hscheel
  *
  */
+/**
+ * @author Tobias
+ *
+ */
 public class DriveAngleThread extends Thread {
 	
 	/**
@@ -108,11 +112,15 @@ public class DriveAngleThread extends Thread {
 		windModel = WorldModelImpl.getInstance().getWindModel();
 		gpsModel = WorldModelImpl.getInstance().getGPSModel();
 		actuatorModel = WorldModelImpl.getInstance().getActuatorModel();
-		//simplePIDController = new SimplePIDController();
 		PIDController = new PIDController();
 		calc = new Calculations();
 	}
 	
+	/***
+	 * 
+	 * @param locSystem
+	 * @return instance of DriveAngleThread
+	 */
 	public static DriveAngleThread getInstance(LocomotionSystem locSystem) {
 		if (instance == null) {
 			instance = new DriveAngleThread(locSystem);

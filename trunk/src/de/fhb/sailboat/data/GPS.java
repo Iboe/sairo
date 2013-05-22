@@ -19,7 +19,7 @@ public class GPS implements Serializable{
 	private double longitude;
 	private int satelliteCount;
 	private double speed;
-
+	private long timeStamp;
 
 
 	/**
@@ -29,8 +29,8 @@ public class GPS implements Serializable{
 	 * @param latitude the latitude of the GPS object
 	 * @param longitude the longitude of the GPS object
 	 */
-	public GPS(double latitude, double longitude) {
-		this(latitude, longitude, -1);
+	public GPS(double latitude, double longitude, long timeStamp) {
+		this(latitude, longitude, -1, timeStamp);
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class GPS implements Serializable{
 	 * @param longitude the longitude of the GPS object
 	 * @param satelliteCount number of satellites in range
 	 */
-	public GPS(double latitude, double longitude, int satelliteCount) {
-		this(latitude, longitude, satelliteCount, 0);
+	public GPS(double latitude, double longitude, int satelliteCount , long timeStamp) {
+		this(latitude, longitude, satelliteCount, 0 , timeStamp);
 	}
 	
 	/**
@@ -55,8 +55,8 @@ public class GPS implements Serializable{
 	 * @param longitude the longitude of the GPS object
 	 * @param speed the approximated speed
 	 */
-	public GPS(double latitude, double longitude, double speed) {
-		this(latitude, longitude, -1, speed);
+	public GPS(double latitude, double longitude, double speed , long timeStamp) {
+		this(latitude, longitude, -1, speed , timeStamp);
 	}
 	
 	/**
@@ -69,11 +69,12 @@ public class GPS implements Serializable{
 	 * @param nrSatelites the number of satellites, this GPS data originates from
 	 * @param speed the approximated speed
 	 */
-	public GPS(double latitude, double longitude, int nrSatelites, double speed) {
+	public GPS(double latitude, double longitude, int nrSatelites, double speed , long timeStamp) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.satelliteCount = nrSatelites;
 		this.speed = speed;
+		this.timeStamp = timeStamp;
 	}
 
 	/**
@@ -157,6 +158,14 @@ public class GPS implements Serializable{
 		temp = Double.doubleToLongBits(longitude);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
+	}
+
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
 	@Override

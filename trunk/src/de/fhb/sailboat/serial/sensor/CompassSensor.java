@@ -141,7 +141,8 @@ public class CompassSensor {
 																	 dataSet.getMagVect(),
 																	 dataSet.getAccS(), 
 																	 dataSet.getAccVect(), 
-																	 usefullrate);
+																	 usefullrate,
+																	 System.currentTimeMillis());
 								WorldModelImpl.getInstance().getCompassModel().setCompass(this.compassInstance.myCompass);
 								
 								LOG.debug("Azimuth: " + dataSet.getAzimuth()

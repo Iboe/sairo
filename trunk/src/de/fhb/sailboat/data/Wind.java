@@ -17,6 +17,7 @@ public class Wind implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private final int direction;
 	private final double speed;
+	private final long timeStamp;
 	
 	/**
 	 * Constructs a new instance with the values handed over.
@@ -24,9 +25,10 @@ public class Wind implements Serializable{
 	 * @param direction the value for direction
 	 * @param speed the value for speed
 	 */
-	public Wind(int direction, double speed) {
+	public Wind(int direction, double speed, long timeStamp) {
 		this.direction = direction;
 		this.speed = speed;
+		this.timeStamp = timeStamp;
 	}
 
 	/**
@@ -47,6 +49,10 @@ public class Wind implements Serializable{
 		return speed;
 	}
 	
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
 	@Override
 	public String toString() {
 		return "Wind [direction: " + direction + ", speed: " + speed + "]";

@@ -116,7 +116,7 @@ public class GpsSensor {
 									// + " Satellites: {2}",
 									// minLat, minLong, satellites, lastSpeed));
 
-									GPS myGps = new GPS(gradLat + minLat, gradLong + minLong, gpsInstance.getSatellites(), lastSpeed); 
+									GPS myGps = new GPS(gradLat + minLat, gradLong + minLong, gpsInstance.getSatellites(), lastSpeed, System.currentTimeMillis()); 
 									WorldModelImpl.getInstance().getGPSModel().setPosition(myGps);
 									LOG.info("GPS coordinates: " + myGps.toString());
 									

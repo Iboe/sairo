@@ -57,7 +57,7 @@ public class CompassReceiver implements TransmissionModule {
 		yaw=CommunicationBase.readCompactIndex(stream);
 		
 		//Creating a new Compass object with the decoded yaw value.
-		newCompass=new Compass(((double)(yaw))/10,0,0);
+		newCompass=new Compass(((double)(yaw))/10,0,0,0);
 		//Adding it to the world model.
 		worldModel.getCompassModel().setCompass(newCompass);
 	}

@@ -26,6 +26,7 @@ public class Compass implements Serializable{
 	private final double acceleration;
 	private final Vector3d accelerationField;
 	private final double usefulSampleRate;
+	private final long timeStamp;
 	
 	/**
 	 * Constructs a new partial initialized instance. The other values are set to 0.
@@ -34,7 +35,7 @@ public class Compass implements Serializable{
 	 * @param pitch the angle between the bow of the boat and the water surface
 	 * @param roll the heeling of the boat
 	 */
-	public Compass(double azimuth, double pitch, double roll) {
+	public Compass(double azimuth, double pitch, double roll, long timeStamp) {
 		this.azimuth = azimuth;
 		this.pitch = pitch;
 		this.roll = roll;
@@ -44,6 +45,7 @@ public class Compass implements Serializable{
 		this.acceleration = 0;
 		this.accelerationField = new Vector3d(0, 0, 0);
 		this.usefulSampleRate = 0;
+		this.timeStamp = timeStamp;
 	}
 	
 	/**
@@ -60,7 +62,7 @@ public class Compass implements Serializable{
 	 * @param usefulSampleRate for useful sample rate value
 	 */
 	public Compass(double azimuth, double pitch, double roll, double temperature, double magnetic, 
-			Vector3d magneticField, double acceleration, Vector3d accelerationField, double usefulSampleRate) {
+			Vector3d magneticField, double acceleration, Vector3d accelerationField, double usefulSampleRate , long timeStamp) {
 		this.azimuth = azimuth;
 		this.pitch = pitch;
 		this.roll = roll;
@@ -70,6 +72,7 @@ public class Compass implements Serializable{
 		this.acceleration = acceleration;
 		this.accelerationField = accelerationField;
 		this.usefulSampleRate = usefulSampleRate;
+		this.timeStamp = timeStamp;
 	}
 
 	/**

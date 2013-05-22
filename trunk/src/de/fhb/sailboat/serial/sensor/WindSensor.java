@@ -87,7 +87,7 @@ public class WindSensor {
 									LOG.debug("WindDirection: " + Integer.parseInt(myNmea[1]) +
 											" WindSpeed: "+ Double.parseDouble(myNmea[3]));								
 									
-									Wind wind = new Wind(Integer.parseInt(myNmea[1]), Double.parseDouble(myNmea[3]));
+									Wind wind = new Wind(Integer.parseInt(myNmea[1]), Double.parseDouble(myNmea[3]), System.currentTimeMillis());
 									
 									WorldModelImpl.getInstance().getWindModel().setWind(wind);
 

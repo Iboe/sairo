@@ -22,7 +22,7 @@ public class CompassModelImpl implements CompassModel {
 	public CompassModelImpl() {
 		this.history = new History<Compass>(System.getProperty(
 				CompassModel.HISTORY_SIZE_PROPERTY));
-		compass = new Compass(0, 0, 0);
+		compass = new Compass(0, 0, 0,0);
 	}
 
 	@Override
