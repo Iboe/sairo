@@ -76,6 +76,7 @@ public class ControllerTabbed implements Observer {
 							.getTaskList().get(selectionTask);
 					taskInfoModel.addElement("Task: "
 							+ tmpTask.getTaskDescription());
+					taskInfoModel.addElement("Starttime: " + simpleDateFormat.format(tmpTask.getStartTime()));
 					taskInfoModel.addElement("Taskarguments: "
 							+ tmpTask.getTaskArguments());
 					taskInfoModel.addElement("Task logs: "
