@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import org.apache.log4j.Logger;
+import org.jfree.util.Log;
 
 import de.fhb.sailboat.pilot.gui.Window;
 
@@ -172,12 +173,17 @@ public class PIDController extends Observable{
 		return Kp;
 	}
 
+	private String pidCoefficientsTostring(){
+		return "[Kp: " + getKp() + "Ki: " + getKi() + "Kd: " + getKd() +"]";
+	}
+	
 	/**
 	 * Sets the kp.
 	 *
 	 * @param kp the new kp
 	 */
 	public void setKp(double kp) {
+		LOG.debug("Changed pid constants: " + pidCoefficientsTostring());
 		Kp = kp;
 		packValueToList();
 		setChanged();
@@ -199,6 +205,7 @@ public class PIDController extends Observable{
 	 * @param ki the new ki
 	 */
 	public void setKi(double ki) {
+		LOG.debug("Changed pid constants: " + pidCoefficientsTostring());
 		Ki = ki;
 		packValueToList();
 		setChanged();
@@ -220,6 +227,7 @@ public class PIDController extends Observable{
 	 * @param kd the new kd
 	 */
 	public void setKd(double kd) {
+		LOG.debug("Changed pid constants: " + pidCoefficientsTostring());
 		Kd = kd;
 		packValueToList();
 		setChanged();
