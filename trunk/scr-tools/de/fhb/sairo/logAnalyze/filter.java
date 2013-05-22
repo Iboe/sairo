@@ -11,6 +11,11 @@ import java.util.Date;
  */
 public class filter {
 
+	public static String filterTaskArguments(String pZeile){
+		int tmp = pZeile.indexOf(logTextblocks.taskExecutionSignal) + logTextblocks.taskExecutionSignal.length();
+		return pZeile.substring(pZeile.indexOf("[", tmp), pZeile.indexOf("]", tmp)+1);
+	}
+	
 	/***
 	 * This method filters the timestamp from given string
 	 * @author Tobias Koppe

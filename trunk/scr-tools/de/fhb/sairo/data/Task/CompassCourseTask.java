@@ -41,7 +41,6 @@ public class CompassCourseTask extends Task {
 		int startAngle = taskArguments.indexOf(logTextblocks.compassCourseTaskParamMark) + logTextblocks.compassCourseTaskParamMark.length();
 		int endAngle = taskArguments.indexOf("]", startAngle);
 		String taskArgumentAngle = taskArguments.substring(startAngle, endAngle);
-//		System.out.println(this.getClass().getName() + " setTaskArguments("+taskArguments+") = " + taskArgumentAngle);
 		this.setCompassCourseAngle(Double.valueOf(taskArgumentAngle));
 	}
 	

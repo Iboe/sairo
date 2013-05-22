@@ -15,7 +15,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import opencsv.CSVWriter;
-
 import de.fhb.sairo.data.MissionList;
 import de.fhb.sairo.data.Task.CompassCourseTask;
 import de.fhb.sairo.data.Task.Task;
@@ -25,13 +24,6 @@ import de.fhb.sairo.gui.mainTabbed;
 import de.fhb.sairo.gui.dialogs.openFileDialog;
 import de.fhb.sairo.logAnalyze.loadGpsData;
 import de.fhb.sairo.logAnalyze.loadMissionData;
-import de.fhb.sairo.logAnalyze.logTextblocks;
-import de.fhb.sairo.main.Controller.loadMissionDataFromFile;
-import de.fhb.sairo.main.Controller.loadMissionDetails;
-import de.fhb.sairo.main.Controller.loadTaskDetails;
-import de.fhb.sairo.main.Controller.openFile;
-import de.fhb.sairo.main.Controller.saveTaskCompassCourseWithDesiredAngleToCsvFile;
-import de.fhb.sairo.main.Controller.segmentLogFile;
 
 public class ControllerTabbed implements Observer {
 
@@ -47,7 +39,6 @@ public class ControllerTabbed implements Observer {
 		model.addObserver(this);
 		gui.getMissionTaskInfo().getListMissionList()
 				.setModel(model.getListMissionsModel());
-		gui.getLogViewer().getListLogfile().setModel(model.getLogfileModel());
 		initAddActionListeners();
 	}
 
@@ -75,20 +66,25 @@ public class ControllerTabbed implements Observer {
 
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			DefaultListModel<String> taskInfoModel = new DefaultListModel<String>();
+			new Thread() {
+				public void run() {
+					DefaultListModel<String> taskInfoModel = new DefaultListModel<String>();
 
-			int selection = getSelectedMission();
-			int selectionTask = getSelectedTask();
-			Task tmpTask = model.getMissionList().get(selection).getTaskList()
-					.get(selectionTask);
-			taskInfoModel.addElement("Task: " + tmpTask.getTaskDescription());
-			taskInfoModel.addElement("Taskarguments: "
-					+ tmpTask.getTaskArguments());
-			taskInfoModel.addElement("Task logs: " + tmpTask.getLog().size());
-			// gui.getListTaskInfo().setModel(taskInfoModel);
-			// gui.getTxtLogArea().setText(tmpTask.getTaskLog());
+					int selection = getSelectedMission();
+					int selectionTask = getSelectedTask();
+					Task tmpTask = model.getMissionList().get(selection)
+							.getTaskList().get(selectionTask);
+					taskInfoModel.addElement("Task: "
+							+ tmpTask.getTaskDescription());
+					taskInfoModel.addElement("Taskarguments: "
+							+ tmpTask.getTaskArguments());
+					taskInfoModel.addElement("Task logs: "
+							+ tmpTask.getLog().size());
+					gui.getMissionTaskInfo().getListTaskInfo()
+							.setModel(taskInfoModel);
+				}
+			}.start();
 		}
-
 	}
 
 	/***
@@ -147,8 +143,8 @@ public class ControllerTabbed implements Observer {
 				tmpTasksModel.addElement(model.getMissionList().get(selection)
 						.getTaskList().get(i).toString());
 			}
-			// gui.getListMissionInfo().setModel(tmpModel);
-			// gui.getListTasks().setModel(tmpTasksModel);
+			gui.getMissionTaskInfo().getListMissionInfo().setModel(tmpModel);
+			gui.getMissionTaskInfo().getListTaskList().setModel(tmpTasksModel);
 		}
 
 	}
@@ -258,6 +254,7 @@ public class ControllerTabbed implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			model.getLogfileModel().clear();
 			model.setLogFile(openFileDialog.openFileDialog());
 			enableItems();
 			loadLogfileToModel();
@@ -280,11 +277,15 @@ public class ControllerTabbed implements Observer {
 					while ((zeile = reader.readLine()) != null) {
 						model.getLogfileModel().addElement(zeile);
 					}
+					// gui.getLogViewer().getTextPane().setText(model.logFileModelToString());
+					gui.getLogViewer().getTextArea()
+							.setText(model.logFileModelToString());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}.start();
+		System.out.println("Loading logfile for viewing completed");
 	}
 
 	/***

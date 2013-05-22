@@ -27,23 +27,16 @@ public class loadMissionData{
 			String zeile=null;
 			int taskNo=0;
 			String taskArguments = null;
-//			log.trace("Begin to read logfile: " + fileName + " to scan for missions and tasks");
 			try {
 				//Go trough complete logfile
 				while((zeile=reader.readLine())!=null){
 					//If found mission execution and no stopTaskMark
 					if(zeile.contains(logTextblocks.missionExecuteSignal) && !zeile.contains(logTextblocks.stopTaskMark)){
-//					if(zeile.contains(logTextblocks.missionExecuteSignal)){	
 					//If not mission variable instanced, then do it
 						if(mission!=null){
 						list.add(mission);
 						taskNo=0;
 						}
-						//Found new mission, create new, find and set startTime of mission and add all 
-						//log rows to mission
-						
-						//Log that new mission is founded and the length of the row
-//						System.out.println("Found new mission: " + zeile + " string length: " + zeile.length());
 						
 						//Create new mission with mission number
 						mission = new LogMission("Mission " + (list.size()+1));
@@ -63,8 +56,6 @@ public class loadMissionData{
 						
 						//Iterate trough the founded task list 
 						for(int i=0;i<taskList.length;i++){
-							//Log that a task is founded
-//							log.info("Mission:" + list.size() + "\t Found Task : " + taskList[i].trim());
 							//Add the task to mission tasklist with instance of task type
 							if(taskList[i].trim().equals(logTextblocks.compassCourseTaskMark)){
 								mission.getTaskList().add(new CompassCourseTask(taskList[i],0));
@@ -76,11 +67,7 @@ public class loadMissionData{
 						}
 					}
 					else if(zeile.contains("execute task:")  && !zeile.contains(logTextblocks.stopTaskMark)){
-//					else if(zeile.contains("execute task:")){
-						System.out.println(zeile);
-						int tmp = zeile.indexOf(logTextblocks.taskExecutionSignal) + logTextblocks.taskExecutionSignal.length();
-						taskArguments = zeile.substring(zeile.indexOf("[", tmp), zeile.indexOf("]", tmp)+1);
-						mission.getTaskList().get(taskNo).setTaskArguments(taskArguments);
+						mission.getTaskList().get(taskNo).setTaskArguments(filter.filterTaskArguments(zeile));
 						mission.getTaskList().get(taskNo).setStartTime(filter.filterTimestamp(zeile));
 						taskNo++;
 						if(mission!=null){
@@ -109,85 +96,6 @@ public class loadMissionData{
 		Logger log = Logger.getLogger(loadMissionData.class);
 		worker t = new worker();
 		t.run();
-//		MissionList list = new MissionList(); //Instance new Missionlist to return it
-//		LogMission mission = null; //Instance temporaray LogMission
-//		BufferedReader reader = FileLoader.openLogfile(pFileName); // Get instancee of bufferedReader for File
-//		String zeile=null;
-//		int taskNo=0;
-//		String taskArguments = null;
-//		log.trace("Begin to read logfile: " + pFileName + " to scan for missions and tasks");
-//		try {
-//			//Go trough complete logfile
-//			while((zeile=reader.readLine())!=null){
-//				//If found mission execution and no stopTaskMark
-//				if(zeile.contains(logTextblocks.missionExecuteSignal) && !zeile.contains(logTextblocks.stopTaskMark)){
-////				if(zeile.contains(logTextblocks.missionExecuteSignal)){	
-//				//If not mission variable instanced, then do it
-//					if(mission!=null){
-//					list.add(mission);
-//					taskNo=0;
-//					}
-//					//Found new mission, create new, find and set startTime of mission and add all 
-//					//log rows to mission
-//					
-//					//Log that new mission is founded and the length of the row
-////					System.out.println("Found new mission: " + zeile + " string length: " + zeile.length());
-//					
-//					//Create new mission with mission number
-//					mission = new LogMission("Mission " + (list.size()+1));
-//					//Filter the timestamp for startime of mission
-//					mission.setStartTime(filter.filterTimestamp(zeile));
-//					//Add this row to mission log
-//					mission.getLogFromMission().add(zeile);
-//					
-//					/**
-//					 * Search for tasks in this mission and create a task list 
-//					 */
-//					int startTaskDescription = zeile.indexOf("MissionImpl [")+13;
-//					int endTaskDescription = zeile.indexOf("]", startTaskDescription)-1;
-//					String subString = zeile.substring(startTaskDescription, endTaskDescription);
-//					String[] taskList = subString.split(",");
-//					//
-//					
-//					//Iterate trough the founded task list 
-//					for(int i=0;i<taskList.length;i++){
-//						//Log that a task is founded
-//						log.info("Mission:" + list.size() + "\t Found Task : " + taskList[i].trim());
-//						//Add the task to mission tasklist with instance of task type
-//						if(taskList[i].trim().equals(logTextblocks.compassCourseTaskMark)){
-//							mission.getTaskList().add(new CompassCourseTask(taskList[i],0));
-//						}
-//						//If task type can't find add standard task
-//						else{
-//						mission.getTaskList().add(new Task(taskList[i]));
-//						}
-//					}
-//				}
-//				else if(zeile.contains("execute task:")  && !zeile.contains(logTextblocks.stopTaskMark)){
-////				else if(zeile.contains("execute task:")){
-//					System.out.println(zeile);
-//					int tmp = zeile.indexOf(logTextblocks.taskExecutionSignal) + logTextblocks.taskExecutionSignal.length();
-//					taskArguments = zeile.substring(zeile.indexOf("[", tmp), zeile.indexOf("]", tmp)+1);
-//					mission.getTaskList().get(taskNo).setTaskArguments(taskArguments);
-//					mission.getTaskList().get(taskNo).setStartTime(filter.filterTimestamp(zeile));
-//					taskNo++;
-//					if(mission!=null){
-//					mission.getLogFromMission().add(zeile);
-//					}
-//				}
-//				else{
-//					if(mission!=null){
-//					mission.getLogFromMission().add(zeile);
-//					}
-//				}
-//			}
-//			setLogtoTasks(list);
-//			return list;
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (IndexOutOfBoundsException e){
-//			e.printStackTrace();
-//		}
 		return returnList;
 	}
 	

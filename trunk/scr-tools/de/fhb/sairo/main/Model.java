@@ -34,6 +34,15 @@ public class Model extends Observable{
 	
 	private JFreeChart guiChart;
 	
+	public String logFileModelToString(){
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<logfileModel.size();i++){
+			sb.append(logfileModel.get(i));
+			sb.append(System.getProperty("line.separator"));
+		}
+		return sb.toString();
+	}
+	
 	public Model(){
 		log.trace("Model initialized");
 		this.missions = new ArrayList<MissionList>();
@@ -57,7 +66,6 @@ public class Model extends Observable{
 	 */
 	public void setLogFile(File logFile) {
 		this.logFile = logFile;
-		log.debug(this.getClass().getName() + "setLogFile("+logFile+")");
 	}
 
 	/**
@@ -128,8 +136,6 @@ public class Model extends Observable{
 		this.listMissionsModel = listMissionsModel;
 	}
 
-	
-	
 	public DefaultListModel<String> getLogfileModel() {
 		return logfileModel;
 	}
@@ -139,7 +145,6 @@ public class Model extends Observable{
 	}
 
 	public void update(){
-		log.trace("update for gui called");
 		setChanged();
 		notifyObservers();
 	}
