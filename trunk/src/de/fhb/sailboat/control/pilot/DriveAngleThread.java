@@ -94,13 +94,15 @@ public class DriveAngleThread extends Thread {
 	private double desiredHeeling = 0;
 	private double trueWindDirection;;
 	
+	private static DriveAngleThread instance = null;
+	
 	/**
 	 * Creates a new instance, which calculates commands for the {@link LocomotionSystem}
 	 * handed over. Has to be started with run().
 	 * 
 	 * @param locSystem the {@link LocomotionSystem} which executes the calculated commands  
 	 */
-	public DriveAngleThread(LocomotionSystem locSystem) {
+	private DriveAngleThread(LocomotionSystem locSystem) {
 		this.locSystem = locSystem;
 		compassModel = WorldModelImpl.getInstance().getCompassModel();
 		windModel = WorldModelImpl.getInstance().getWindModel();
@@ -109,6 +111,14 @@ public class DriveAngleThread extends Thread {
 		//simplePIDController = new SimplePIDController();
 		PIDController = new PIDController();
 		calc = new Calculations();
+	}
+	
+	public static DriveAngleThread getInstance(LocomotionSystem locSystem) {
+		if (instance == null) {
+			instance = new DriveAngleThread(locSystem);
+		}
+		
+		return instance;
 	}
 	
         /*

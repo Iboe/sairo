@@ -49,7 +49,8 @@ public class PilotImpl implements Pilot {
 		if (driveAngleThread != null && driveAngleThread.isAlive()) {
 			driveAngleThread.driveAngle(angle, mode);
 		} else {
-			driveAngleThread = new DriveAngleThread(locSystem);
+//			driveAngleThread = new DriveAngleThread(locSystem);
+			driveAngleThread = DriveAngleThread.getInstance(locSystem);
 			driveAngleThread.driveAngle(angle, mode);
 			driveAngleThread.start();
 		}
