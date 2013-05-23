@@ -7,7 +7,7 @@ import java.util.List;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.MainControllerModel;
+import de.fhb.sailboat.gui.MainControllerModelImpl;
 import de.fhb.sailboat.gui.map.MapMarkerDot;
 import de.fhb.sailboat.gui.map.MapPolygon;
 import de.fhb.sailboat.gui.map.MapPolygonImpl;
@@ -41,7 +41,7 @@ public class MissionVisualization {
 	// variable for determining whether it's a new mission or the old one
 	private int taskCountLastCall = 0;
 
-	private MainControllerModel model;
+	private MainControllerModelImpl model;
 
 	public MissionVisualization(JMapViewer map) {
 		this.map = map;
@@ -56,7 +56,7 @@ public class MissionVisualization {
 	 * @param model
 	 *            boat data
 	 */
-	public void visualize(MainControllerModel model) {
+	public void visualize(MainControllerModelImpl model) {
 
 		clearMap();
 

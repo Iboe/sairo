@@ -54,7 +54,7 @@ public class MainController {
 	/**
 	 * GUIModel is used to store values locally
 	 */
-	private MainControllerModel model;
+	private MainControllerModelImpl model;
 
 	/**
 	 * An instance of the world model is used to get values from the boat
@@ -451,7 +451,7 @@ public class MainController {
 	 * Returns a reference to the MainControllerModel object.
 	 * @return ManControllerModel
 	 */
-	public MainControllerModel getModel() {
+	public MainControllerModelImpl getModel() {
 		return this.model;
 	}
 

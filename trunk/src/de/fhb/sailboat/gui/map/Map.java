@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import de.fhb.sailboat.data.Compass;
 import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.Wind;
-import de.fhb.sailboat.gui.MainControllerModel;
+import de.fhb.sailboat.gui.MainControllerModelImpl;
 import de.fhb.sailboat.gui.map.utilities.ArrangePolygon;
 import de.fhb.sailboat.gui.map.utilities.GPSTransformations;
 import de.fhb.sailboat.gui.map.utilities.JMapViewer;
@@ -370,7 +370,7 @@ public class Map extends JPanel {
 	 * @param model
 	 *            data model with current data
 	 */
-	public void visualizeMission(MainControllerModel model) {
+	public void visualizeMission(MainControllerModelImpl model) {
 		visualize.visualize(model);
 	}
 
