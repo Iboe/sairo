@@ -164,7 +164,7 @@ public abstract class WorkerThread<T extends Task> extends Thread {
 		//calculate difference vector between current and goal position, 
 		//as new origin of coordinates
 		difference = new GPS(goal.getLatitude() - worldModel.getGPSModel().getPosition().getLatitude(), 
-				goal.getLongitude() - worldModel.getGPSModel().getPosition().getLongitude());
+				goal.getLongitude() - worldModel.getGPSModel().getPosition().getLongitude(),System.currentTimeMillis());
 		
 		//calculate angle between difference vector and x-axis
 		if (difference.getLongitude() == 0) {

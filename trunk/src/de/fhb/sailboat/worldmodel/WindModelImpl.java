@@ -22,7 +22,7 @@ public class WindModelImpl implements WindModel {
 	public WindModelImpl() {
 		this.history = new History<Wind>(System.getProperty(
 				WindModel.HISTORY_SIZE_PROPERTY));
-		wind = new Wind(0, 0);
+		wind = new Wind(0, 0,System.currentTimeMillis());
 	}
 	
 	@Override
@@ -58,7 +58,7 @@ public class WindModelImpl implements WindModel {
 			averageDirection /= history.size();
 			averageSpeed /= history.size();
 			
-			return new Wind(averageDirection, averageSpeed);
+			return new Wind(averageDirection, averageSpeed,System.currentTimeMillis());
 		} else {
 			return null;
 		}

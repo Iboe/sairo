@@ -49,7 +49,7 @@ public class MainControllerModelImpl implements MainControllerModel{
 		this.missionUpdated = false;
 		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();
-		this.compass.setCompass(new Compass(170,0,0));
+		this.compass.setCompass(new Compass(170,0,0,System.currentTimeMillis()));
 		this.gps = new GPSModelImpl();
 		this.sailMode = false;
 		this.currentWholeMission = new MissionVO();

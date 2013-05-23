@@ -49,8 +49,8 @@ public class Map extends JPanel {
 	protected static final int EVERY_X_GPS_POSITION = 10;
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
 	protected static final int EARTH_CIRCUMFERENCE = 40074000;
-	protected static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
-	protected static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+	protected static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745,System.currentTimeMillis());
+	protected static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414,System.currentTimeMillis());
 
 	protected static final Logger LOG = LoggerFactory.getLogger(Map.class);
 
@@ -323,13 +323,13 @@ public class Map extends JPanel {
 		// nix drin
 		if (positionHistoryList.size() < 1) {
 			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-					boatPosition.getLongitude()));
+					boatPosition.getLongitude(),System.currentTimeMillis()));
 		} else {
 			// zwei elemente
 			if (positionHistoryList.size() == 1) {
 
 				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-						boatPosition.getLongitude()));
+						boatPosition.getLongitude(),System.currentTimeMillis()));
 
 				for (int i = positionHistoryList.size() - 2; i >= 0; i--)
 					positionHistoryList.add(positionHistoryList.get(i));
@@ -347,7 +347,7 @@ public class Map extends JPanel {
 						positionHistoryList.remove(j);
 
 					positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-							boatPosition.getLongitude()));
+							boatPosition.getLongitude(),System.currentTimeMillis()));
 
 					for (int i = positionHistoryList.size() - 2; i >= 0; i--)
 						positionHistoryList.add(positionHistoryList.get(i));

@@ -107,7 +107,7 @@ public class SerializedReachCircleTask extends SerializedTaskBase<ReachCircleTas
 				lat=((float)(CommunicationBase.readCompactIndex(in)))/10000;
 				lon=((float)(CommunicationBase.readCompactIndex(in)))/10000;
 				radius=CommunicationBase.readCompactIndex(in);
-				task=new ReachCircleTask(new GPS(lat,lon), radius);
+				task=new ReachCircleTask(new GPS(lat,lon,System.currentTimeMillis()), radius);
 			}
 			catch (IOException e) {
 				

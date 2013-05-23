@@ -120,7 +120,7 @@ public class SerializedReachPolygonTask extends SerializedTaskBase<ReachPolygonT
 						
 						lat=((float)(CommunicationBase.readCompactIndex(in)))/10000;
 						lon=((float)(CommunicationBase.readCompactIndex(in)))/10000;
-						polygon.add(new GPS(lat,lon));
+						polygon.add(new GPS(lat,lon,System.currentTimeMillis()));
 					}
 				}
 				task=new ReachPolygonTask(polygon);

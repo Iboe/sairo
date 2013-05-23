@@ -116,7 +116,7 @@ public class MainController {
 		
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
-					.getLatitude(), markerList.get(i).getLongitude()), 3));
+					.getLatitude(), markerList.get(i).getLongitude(),System.currentTimeMillis()), 3));
 		}
 		
 		if (!isSailMode())

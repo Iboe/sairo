@@ -315,7 +315,7 @@ public class MissionInputPositionDialog  extends JDialog {
             
             Double lat = Double.parseDouble(this.latitudeTextField.getText());
             Double lon = Double.parseDouble(this.longitudeTextField.getText());
-            this.missionMap.addMapMarker(new GPS(lat, lon));
+            this.missionMap.addMapMarker(new GPS(lat, lon,System.currentTimeMillis()));
             this.missionMap.invalidate();
         }
         else JOptionPane.showMessageDialog(this, this.ERRORTEXT_ILLEGAL_VALUE, this.ERRORTEXT, JOptionPane.ERROR_MESSAGE);
@@ -397,7 +397,7 @@ public class MissionInputPositionDialog  extends JDialog {
      */
     public GPS getGPSinListAt(int index) {
         GPS myReturn = null;
-        if (index < getGPSListSize()) myReturn = new GPS(this.missionMap.getMarkerList().get(index).getLat(), this.missionMap.getMarkerList().get(index).getLon());
+        if (index < getGPSListSize()) myReturn = new GPS(this.missionMap.getMarkerList().get(index).getLat(), this.missionMap.getMarkerList().get(index).getLon(),System.currentTimeMillis());
         return myReturn;
     }
     

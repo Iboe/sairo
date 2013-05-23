@@ -182,7 +182,7 @@ public class MissionTask implements java.io.Serializable {
 					 */
 					// System.out.println("Retrieving CircleTask...");
 					GPS myGPS = new GPS((Double) parameters.get(0),
-							(Double) parameters.get(1));
+							(Double) parameters.get(1),System.currentTimeMillis());
 					int myRadius = (Integer) parameters.get(2);
 					myTask = new ReachCircleTask(myGPS, myRadius);
 					// System.out.println("Gotten " + myTask.toString());
@@ -202,7 +202,7 @@ public class MissionTask implements java.io.Serializable {
 					ArrayList<GPS> myPolygon = new ArrayList<GPS>();
 					for (int i = 0; i < parameters.size(); i = i + 2) {
 						myPolygon.add(new GPS((Double) parameters.get(i),
-								(Double) parameters.get(i + 1)));
+								(Double) parameters.get(i + 1),System.currentTimeMillis()));
 					}
 					myTask = new ReachPolygonTask(myPolygon);
 

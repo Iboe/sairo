@@ -33,7 +33,7 @@ public class MissionCreatingMap extends GeneralMap {
 	private static final long serialVersionUID = 1L;
 
 	//private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
-	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414,System.currentTimeMillis());
 
 	private static final Logger LOG = LoggerFactory
 			.getLogger(MissionCreatingMap.class);

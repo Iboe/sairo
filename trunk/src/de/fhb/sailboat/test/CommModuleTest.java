@@ -119,10 +119,10 @@ public class CommModuleTest {
 		//Task t=new ReachCircleTask(new GPS(52.34567,24.56789), 1337);
 		MissionVO m=new MissionVO();
 		List<Task> taskList=new ArrayList<Task>();
-		taskList.add(new ReachCircleTask(new GPS(52.34567,24.56789), 1337));
+		taskList.add(new ReachCircleTask(new GPS(52.34567,24.56789,System.currentTimeMillis()), 1337));
 		taskList.add(new HoldAngleToWindTask(27));
-		taskList.add(new ReachCircleTask(new GPS(12.345,54.321), 2710));
-		taskList.add(new ReachCircleTask(new GPS(10.1101,13.337), 7353));
+		taskList.add(new ReachCircleTask(new GPS(12.345,54.321,System.currentTimeMillis()), 2710));
+		taskList.add(new ReachCircleTask(new GPS(10.1101,13.337,System.currentTimeMillis()), 7353));
 		taskList.add(new ReachPolygonTask(getTestPolygon()));
 		m.setTasks(taskList);
 		
@@ -137,10 +137,10 @@ public class CommModuleTest {
 		
 		List<GPS> polygon=new LinkedList<GPS>();
 		
-		polygon.add(new GPS(12.345,23.456));
-		polygon.add(new GPS(34.567,45.678));
-		polygon.add(new GPS(9.8765,8.7654));
-		polygon.add(new GPS(6.5432,5.4321));
+		polygon.add(new GPS(12.345,23.456,System.currentTimeMillis()));
+		polygon.add(new GPS(34.567,45.678,System.currentTimeMillis()));
+		polygon.add(new GPS(9.8765,8.7654,System.currentTimeMillis()));
+		polygon.add(new GPS(6.5432,5.4321,System.currentTimeMillis()));
 		return polygon;
 	}
 	
@@ -153,7 +153,7 @@ public class CommModuleTest {
 	 */
 	public void testSerialTasks(){
 		
-		ReachCircleTask t=new ReachCircleTask(new GPS(52.12453,24.84726),1337);
+		ReachCircleTask t=new ReachCircleTask(new GPS(52.12453,24.84726,System.currentTimeMillis()),1337);
 		SerializedTask st=new SerializedReachCircleTask(t);
 		System.out.println("Task and serialized task instance created.");
 		System.out.println("TASK: "+t);
@@ -197,7 +197,7 @@ public class CommModuleTest {
 	public void testTaskSerializer(){
 		
 		TaskSerializer ts;
-		Task task=new ReachCircleTask(new GPS(52.123456, 24.56789), 1337);
+		Task task=new ReachCircleTask(new GPS(52.123456, 24.56789,System.currentTimeMillis()), 1337);
 		Task dTask;
 		byte[] serializedData;
 		

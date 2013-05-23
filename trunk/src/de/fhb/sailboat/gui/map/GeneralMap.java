@@ -35,7 +35,7 @@ public class GeneralMap extends JPanel {
 
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
 	// private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
-	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414,System.currentTimeMillis());
 
 	private static final Logger LOG = LoggerFactory.getLogger(GeneralMap.class);
 

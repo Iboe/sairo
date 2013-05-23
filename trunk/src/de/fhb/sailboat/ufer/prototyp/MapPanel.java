@@ -42,8 +42,8 @@ public class MapPanel extends JPanel {
 	private static final int MAXIMUM_COUNT_LAST_POSITION = 30;
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
 	private static final int EARTH_CIRCUMFERENCE = 40074000;
-	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
-	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745,System.currentTimeMillis());
+	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414,System.currentTimeMillis());
 
 	final static int P_MAP_X = 412;
 	final static int P_MAP_Y = 4;

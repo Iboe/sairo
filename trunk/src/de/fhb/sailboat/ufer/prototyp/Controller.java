@@ -59,7 +59,7 @@ public class Controller {
 					RemoteControl.PROPELLOR_MAX));
 		for (int i = 0; i < markerList.size(); i++) {
 			tasks.add(new ReachCircleTask(new GPS(markerList.get(i)
-					.getLatitude(), markerList.get(i).getLongitude()), 3));
+					.getLatitude(), markerList.get(i).getLongitude(),System.currentTimeMillis()), 3));
 		}
 		if (!isSailMode())
 			tasks.add(new PrimitiveCommandTask(null, null,
@@ -183,7 +183,7 @@ public class Controller {
 		// this.model.setCompDirection(dice.nextInt(361));
 
 		this.model.getWind().setWind(
-				new Wind(dice.nextInt(361), dice.nextInt(3000)));
+				new Wind(dice.nextInt(361), dice.nextInt(3000),System.currentTimeMillis()));
 
 		this.model.setGpsPosition(new GPS(dice.nextDouble() + dice.nextInt(12),
 				dice.nextDouble() + dice.nextInt(12), dice.nextInt(10)));

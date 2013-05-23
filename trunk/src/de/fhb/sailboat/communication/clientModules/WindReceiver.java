@@ -56,7 +56,7 @@ public class WindReceiver implements TransmissionModule {
 		speed=CommunicationBase.readCompactIndex(stream);
 		
 		//Creating a new GPS object with the decoded values.
-		newWind=new Wind(dir,((double)(speed))/100);
+		newWind=new Wind(dir,((double)(speed))/100,System.currentTimeMillis());
 		worldModel.getWindModel().setWind(newWind);
 	}
 

@@ -29,9 +29,9 @@ public class PilotSailTest {
 		//Pilot p=new PilotImpl(new DummyLoco());
 		Pilot p=new PilotImpl(new AKSENLocomotion());
 		System.out.println("PILOT ERSTELLT"); 
-		WorldModelImpl.getInstance().getCompassModel().setCompass(new Compass(0,0,0));
-		WorldModelImpl.getInstance().getWindModel().setWind(new Wind(0, 1.5));
-		WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(52.426923,12.565542, 0.5));
+		WorldModelImpl.getInstance().getCompassModel().setCompass(new Compass(0,0,0,System.currentTimeMillis()));
+		WorldModelImpl.getInstance().getWindModel().setWind(new Wind(0, 1.5,System.currentTimeMillis()));
+		WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(52.426923,12.565542, 0.5,System.currentTimeMillis()));
 		
 		try{
 			System.out.println("attempt angle: 45");

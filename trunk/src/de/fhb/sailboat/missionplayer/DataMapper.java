@@ -61,7 +61,7 @@ public class DataMapper {
 			roll = Double.valueOf(matcher.group(2));
 		}
 
-		return new Compass(azimuth, pitch, roll);
+		return new Compass(azimuth, pitch, roll, System.currentTimeMillis());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class DataMapper {
 			speed = Double.valueOf(matcher.group(2));
 		}
 
-		return new GPS(latitude, longitude, nrSatelites, speed);
+		return new GPS(latitude, longitude, nrSatelites, speed,System.currentTimeMillis());
 	}
 
 	/**
@@ -121,6 +121,6 @@ public class DataMapper {
 			speed = Double.valueOf(matcher.group(2));
 		}
 
-		return new Wind(direction, speed);
+		return new Wind(direction, speed,System.currentTimeMillis());
 	}
 }

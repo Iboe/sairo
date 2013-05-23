@@ -43,9 +43,9 @@ public class RCommTest {
 		//server.registerModule(new SimpleClientTModule());
 		//server.registerModule(new FastServerTModule());
 		
-		WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(52.246555,12.323096));
+		WorldModelImpl.getInstance().getGPSModel().setPosition(new GPS(52.246555,12.323096,System.currentTimeMillis()));
 		server.registerModule(new GPSTransmitter());
-		WorldModelImpl.getInstance().getCompassModel().setCompass(new Compass(-17.76,0,0));
+		WorldModelImpl.getInstance().getCompassModel().setCompass(new Compass(-17.76,0,0,System.currentTimeMillis()));
 		server.registerModule(new CompassTransmitter());
 		
 		System.out.println("..done.");

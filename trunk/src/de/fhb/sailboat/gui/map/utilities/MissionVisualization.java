@@ -235,7 +235,7 @@ public class MissionVisualization {
 		} else
 			deltaY = 0;
 
-		GPS b = new GPS(a.getLatitude() + deltaY, longitude);
+		GPS b = new GPS(a.getLatitude() + deltaY, longitude,System.currentTimeMillis());
 
 		drawLine(a, b, color);
 	}

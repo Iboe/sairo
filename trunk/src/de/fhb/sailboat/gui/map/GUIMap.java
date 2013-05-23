@@ -31,8 +31,8 @@ public class GUIMap extends GeneralMap {
 	private static final int EVERY_X_GPS_POSITION = 3;
 	public static final int PIXEL_TO_CALCULATE_SCALE = 80;
 	private static final int EARTH_CIRCUMFERENCE = 40074000;
-	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745);
-	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414);
+	private static final GPS FH_BRANDENBURG = new GPS(52.410771, 12.538745,System.currentTimeMillis());
+	private static final GPS REGATTASTRECKE = new GPS(52.426458, 12.56414,System.currentTimeMillis());
 
 	private static final Logger LOG = LoggerFactory.getLogger(GeneralMap.class);
 
@@ -78,12 +78,12 @@ public class GUIMap extends GeneralMap {
 
 		if (positionHistoryList.size() < 1) {
 			positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-					boatPosition.getLongitude()));
+					boatPosition.getLongitude(),System.currentTimeMillis()));
 		} else {
 			if (positionHistoryList.size() == 1) {
 
 				positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-						boatPosition.getLongitude()));
+						boatPosition.getLongitude(),System.currentTimeMillis()));
 
 				for (int i = positionHistoryList.size() - 2; i >= 0; i--)
 					positionHistoryList.add(positionHistoryList.get(i));
@@ -100,7 +100,7 @@ public class GUIMap extends GeneralMap {
 						positionHistoryList.remove(j);
 
 					positionHistoryList.add(new GPS(boatPosition.getLatitude(),
-							boatPosition.getLongitude()));
+							boatPosition.getLongitude(),System.currentTimeMillis()));
 
 					for (int i = positionHistoryList.size() - 2; i >= 0; i--)
 						positionHistoryList.add(positionHistoryList.get(i));

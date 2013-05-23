@@ -73,16 +73,16 @@ public class TestInitializier extends Initializier {
 		List<Task> tasks = new LinkedList<Task>();
 		
 		if (position != null) {
-			GPS goal = new GPS(200, 100);
+			GPS goal = new GPS(200, 100,System.currentTimeMillis());
 			GPS goal2 = new GPS(position.getLatitude() + 300, 
-					position.getLongitude());
-			GPS goal3 = new GPS(52.24615, 12.32274); //mensa
+					position.getLongitude(),System.currentTimeMillis());
+			GPS goal3 = new GPS(52.24615, 12.32274,System.currentTimeMillis()); //mensa
 			
 			List<GPS> polygon = new ArrayList<GPS>();
-			polygon.add(new GPS(0,0));
-			polygon.add(new GPS(-2,0));
-			polygon.add(new GPS(-2,2));
-			polygon.add(new GPS(0,2));
+			polygon.add(new GPS(0,0,System.currentTimeMillis()));
+			polygon.add(new GPS(-2,0,System.currentTimeMillis()));
+			polygon.add(new GPS(-2,2,System.currentTimeMillis()));
+			polygon.add(new GPS(0,2,System.currentTimeMillis()));
 			
 			tasks.add(new ReachCircleTask(goal, 5));
 			tasks.add(new ReachPolygonTask(polygon));
@@ -108,7 +108,7 @@ public class TestInitializier extends Initializier {
 	protected void setSensorDummyValues() {
 		WorldModel worldModel = WorldModelImpl.getInstance();
 		
-		worldModel.getGPSModel().setPosition(new GPS(52.246555,12.323096));
-		worldModel.getCompassModel().setCompass(new Compass(175, 0, 0));
+		worldModel.getGPSModel().setPosition(new GPS(52.246555,12.323096,System.currentTimeMillis()));
+		worldModel.getCompassModel().setCompass(new Compass(175, 0, 0,System.currentTimeMillis()));
 	}
 }
