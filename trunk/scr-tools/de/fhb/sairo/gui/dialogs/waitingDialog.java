@@ -1,4 +1,4 @@
-package de.fhb.sairo.main;
+package de.fhb.sairo.gui.dialogs;
 
 import java.awt.Dialog;
 import java.awt.Frame;

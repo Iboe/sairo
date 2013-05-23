@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import de.fhb.sairo.data.LogData.LogWindData;
 
-public class windDatalist extends ArrayList<LogWindData> {
+public class WindDatalist extends ArrayList<LogWindData> {
 	/**
 	 * 
 	 */

@@ -45,11 +45,11 @@ public class NavigatorImplTest {
 		polygon = new ArrayList<GPS>();
 		navigator = new NavigatorImpl(pilot);
 		goal = new GPS(position.getLatitude() + 200, 
-				position.getLongitude());
-		polygon.add(new GPS(0,0));
-		polygon.add(new GPS(-2,0));
-		polygon.add(new GPS(-2,2));
-		polygon.add(new GPS(0,2));
+				position.getLongitude(),System.currentTimeMillis());
+		polygon.add(new GPS(0,0,System.currentTimeMillis()));
+		polygon.add(new GPS(-2,0,System.currentTimeMillis()));
+		polygon.add(new GPS(-2,2,System.currentTimeMillis()));
+		polygon.add(new GPS(0,2,System.currentTimeMillis()));
 	}
 	
 	/**

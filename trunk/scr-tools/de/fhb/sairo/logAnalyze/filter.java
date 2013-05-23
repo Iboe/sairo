@@ -12,7 +12,7 @@ import java.util.Date;
 public class filter {
 
 	public static String filterTaskArguments(String pZeile){
-		int tmp = pZeile.indexOf(logTextblocks.taskExecutionSignal) + logTextblocks.taskExecutionSignal.length();
+		int tmp = pZeile.indexOf(LogTextblocks.taskExecutionSignal) + LogTextblocks.taskExecutionSignal.length();
 		return pZeile.substring(pZeile.indexOf("[", tmp), pZeile.indexOf("]", tmp)+1);
 	}
 	

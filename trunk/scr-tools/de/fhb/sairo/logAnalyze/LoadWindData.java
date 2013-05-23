@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import de.fhb.sairo.data.windDatalist;
+import de.fhb.sairo.data.WindDatalist;
 import de.fhb.sairo.data.LogData.LogWindData;
 import de.fhb.sairo.fileio.FileLoader;
 
@@ -16,24 +16,24 @@ import de.fhb.sairo.fileio.FileLoader;
  * @author Tobias Koppe
  *
  */
-public class loadWindData {
+public class LoadWindData {
 
 	private ArrayList<LogWindData> windDataList = new ArrayList<LogWindData>();
 	
-	public static windDatalist loadWindData(String pFileName){
-		windDatalist list = new windDatalist();
+	public static WindDatalist loadWindData(String pFileName){
+		WindDatalist list = new WindDatalist();
 		BufferedReader reader = FileLoader.openLogfile(pFileName);
 		System.out.println("Loaded logfile: " + pFileName);
 		try {
 			reader = new BufferedReader(new FileReader(pFileName));
 			String zeile=null;
 			while((zeile = reader.readLine()) != null){
-				if(zeile.contains(logTextblocks.windSensorClassName)){
+				if(zeile.contains(LogTextblocks.windSensorClassName)){
 					Date d=filter.filterTimestamp(zeile);
-					int startWindDir = zeile.indexOf(logTextblocks.windSensorWindDirection)+logTextblocks.windSensorWindDirection.length()+1;
-					int endWindDir = zeile.indexOf(logTextblocks.windSensorWindSpeed)-1;
+					int startWindDir = zeile.indexOf(LogTextblocks.windSensorWindDirection)+LogTextblocks.windSensorWindDirection.length()+1;
+					int endWindDir = zeile.indexOf(LogTextblocks.windSensorWindSpeed)-1;
 					String windDir = zeile.substring(startWindDir,endWindDir).trim();
-					int startWindSpeed = zeile.indexOf(logTextblocks.windSensorWindSpeed)+logTextblocks.windSensorWindSpeed.length()+1;
+					int startWindSpeed = zeile.indexOf(LogTextblocks.windSensorWindSpeed)+LogTextblocks.windSensorWindSpeed.length()+1;
 					int endWindSpeed = zeile.length();
 					String windSpeed = zeile.substring(startWindSpeed,endWindSpeed).trim();
 					list.add(new LogWindData(d, Integer.valueOf(windDir), Double.valueOf(windSpeed)));

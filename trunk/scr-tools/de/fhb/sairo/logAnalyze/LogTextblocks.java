@@ -5,7 +5,7 @@ package de.fhb.sairo.logAnalyze;
  * @author Tobias Koppe
  * @version 1
  */
-public class logTextblocks {
+public class LogTextblocks {
 	
 	/**
 	 * Textblocks for evaluate all , means class or threadnames

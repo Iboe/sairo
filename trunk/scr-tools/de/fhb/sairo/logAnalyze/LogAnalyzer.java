@@ -5,9 +5,9 @@ import java.io.IOException;
 
 import de.fhb.sairo.fileio.FileLoader;
 
-public class logAnalyzer {
+public class LogAnalyzer {
 
-	public logAnalyzer() {
+	public LogAnalyzer() {
 		
 	}
 	
@@ -16,22 +16,22 @@ public class logAnalyzer {
 		String zeile=null;
 		try {
 			while((zeile = reader.readLine()) != null){
-				if(zeile.contains(logTextblocks.aksenlocomotionClassName)){
+				if(zeile.contains(LogTextblocks.aksenlocomotionClassName)){
 					//Analyse AKSEN
 				}
-				else if(zeile.contains(logTextblocks.driveAngleThreadName)){
+				else if(zeile.contains(LogTextblocks.driveAngleThreadName)){
 					//Analyse DriveAngleThread
 				}
-				else if(zeile.contains(logTextblocks.compassThreadName)){
+				else if(zeile.contains(LogTextblocks.compassThreadName)){
 					//Analyse Compass
 				}
-				else if(zeile.contains(logTextblocks.gpsSensorThreadName)){
+				else if(zeile.contains(LogTextblocks.gpsSensorThreadName)){
 					//Analyse GPS
 				}
-				else if(zeile.contains(logTextblocks.missionExecuteSignal)){
+				else if(zeile.contains(LogTextblocks.missionExecuteSignal)){
 					//Analyse Missionen und Tasks
 				}
-				else if(zeile.contains(logTextblocks.windSensorClassName)){
+				else if(zeile.contains(LogTextblocks.windSensorClassName)){
 					//Analyse Windsensor
 				}
 			}

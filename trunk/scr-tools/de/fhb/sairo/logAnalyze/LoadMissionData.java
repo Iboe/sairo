@@ -12,7 +12,7 @@ import de.fhb.sairo.data.Task.CompassCourseTask;
 import de.fhb.sairo.data.Task.Task;
 import de.fhb.sairo.fileio.FileLoader;
 
-public class loadMissionData{
+public class LoadMissionData{
 
 	private static String fileName;
 	private static MissionList returnList;
@@ -31,7 +31,7 @@ public class loadMissionData{
 				//Go trough complete logfile
 				while((zeile=reader.readLine())!=null){
 					//If found mission execution and no stopTaskMark
-					if(zeile.contains(logTextblocks.missionExecuteSignal) && !zeile.contains(logTextblocks.stopTaskMark)){
+					if(zeile.contains(LogTextblocks.missionExecuteSignal) && !zeile.contains(LogTextblocks.stopTaskMark)){
 					//If not mission variable instanced, then do it
 						if(mission!=null){
 						list.add(mission);
@@ -57,7 +57,7 @@ public class loadMissionData{
 						//Iterate trough the founded task list 
 						for(int i=0;i<taskList.length;i++){
 							//Add the task to mission tasklist with instance of task type
-							if(taskList[i].trim().equals(logTextblocks.compassCourseTaskMark)){
+							if(taskList[i].trim().equals(LogTextblocks.compassCourseTaskMark)){
 								mission.getTaskList().add(new CompassCourseTask(taskList[i],0));
 							}
 							//If task type can't find add standard task
@@ -66,7 +66,7 @@ public class loadMissionData{
 							}
 						}
 					}
-					else if(zeile.contains("execute task:")  && !zeile.contains(logTextblocks.stopTaskMark)){
+					else if(zeile.contains("execute task:")  && !zeile.contains(LogTextblocks.stopTaskMark)){
 						mission.getTaskList().get(taskNo).setTaskArguments(filter.filterTaskArguments(zeile));
 						mission.getTaskList().get(taskNo).setStartTime(filter.filterTimestamp(zeile));
 						taskNo++;
@@ -93,7 +93,7 @@ public class loadMissionData{
 	
 	public static MissionList loadMissions(String pFileName){
 		fileName = pFileName;
-		Logger log = Logger.getLogger(loadMissionData.class);
+		Logger log = Logger.getLogger(LoadMissionData.class);
 		worker t = new worker();
 		t.run();
 		return returnList;
@@ -116,7 +116,7 @@ public class loadMissionData{
 			//For loop to iterate mission log
 			for(int j=0; j<logMission.getLogFromMission().size(); j++){ // Log einer Mission durchgehen, zeilenweise
 				String zeile = logMission.getLogFromMission().get(j);
-				if(zeile.contains(logTextblocks.taskExecutionSignal) && !zeile.contains(logTextblocks.stopTaskMark)){ // eine Zeile nehmen, auf ExecutionSignal untersuchen
+				if(zeile.contains(LogTextblocks.taskExecutionSignal) && !zeile.contains(LogTextblocks.stopTaskMark)){ // eine Zeile nehmen, auf ExecutionSignal untersuchen
 					tmpTaskNo=increaseTaskNo(tmpTaskNo);
 					System.out.println("Next task: " + logMission.getLogFromMission().get(j));
 				}

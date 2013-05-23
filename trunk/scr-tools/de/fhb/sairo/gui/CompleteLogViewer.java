@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-public class completeLogViewer extends JPanel{
+public class CompleteLogViewer extends JPanel{
 	
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class completeLogViewer extends JPanel{
 	private JLabel lblLogInfo;
 	private JTextArea textArea;
 	
-	public completeLogViewer() {
+	public CompleteLogViewer() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};

@@ -6,11 +6,11 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import de.fhb.sairo.data.compassCourseList;
+import de.fhb.sairo.data.CompassCourseList;
 
 public class createChart {
 	
-	public static DefaultCategoryDataset createCompassCourseChartDataset(compassCourseList pList){
+	public static DefaultCategoryDataset createCompassCourseChartDataset(CompassCourseList pList){
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		System.out.println("Create dataset");
 		for(int i=0;i<pList.size();i++){

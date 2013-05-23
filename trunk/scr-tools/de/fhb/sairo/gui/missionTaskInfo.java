@@ -95,6 +95,7 @@ public class missionTaskInfo extends JPanel {
 		panel.add(btnCompleteGpsKml);
 		
 		btnNewButton = new JButton("GPS KML file");
+		btnNewButton.setEnabled(false);
 		btnNewButton.setToolTipText("Exports the GPS data of selected ressource as kml file");
 		panel.add(btnNewButton);
 		

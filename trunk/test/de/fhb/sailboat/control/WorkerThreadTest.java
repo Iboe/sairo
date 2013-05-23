@@ -39,7 +39,7 @@ public class WorkerThreadTest {
 	public void testIsBeatNecessary() {
 		fillWindModel(0);
 		
-		worldModel.getCompassModel().setCompass(new Compass(0, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(0, 0, 0,System.currentTimeMillis()));
 		assertTrue(workerThread.isBeatNecessary(WorkerThread.MAX_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(WorkerThread.MIN_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(0));
@@ -51,7 +51,7 @@ public class WorkerThreadTest {
 		assertFalse(workerThread.isBeatNecessary(135));
 		assertFalse(workerThread.isBeatNecessary(-135));
 		
-		worldModel.getCompassModel().setCompass(new Compass(30, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(30, 0, 0,System.currentTimeMillis()));
 		assertTrue(workerThread.isBeatNecessary(WorkerThread.MAX_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(WorkerThread.MIN_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(0));
@@ -63,7 +63,7 @@ public class WorkerThreadTest {
 		assertFalse(workerThread.isBeatNecessary(135));
 		assertFalse(workerThread.isBeatNecessary(-135));
 		
-		worldModel.getCompassModel().setCompass(new Compass(-30, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(-30, 0, 0,System.currentTimeMillis()));
 		assertFalse(workerThread.isBeatNecessary(WorkerThread.MAX_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(WorkerThread.MIN_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(0));
@@ -77,7 +77,7 @@ public class WorkerThreadTest {
 		
 		fillWindModel(-90);
 		
-		worldModel.getCompassModel().setCompass(new Compass(0, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(0, 0, 0,System.currentTimeMillis()));
 		assertTrue(workerThread.isBeatNecessary(-90 - WorkerThread.MAX_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(-90 - WorkerThread.MIN_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(0));
@@ -89,7 +89,7 @@ public class WorkerThreadTest {
 		assertFalse(workerThread.isBeatNecessary(135));
 		assertFalse(workerThread.isBeatNecessary(-135));
 		
-		worldModel.getCompassModel().setCompass(new Compass(30, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(30, 0, 0,System.currentTimeMillis()));
 		assertFalse(workerThread.isBeatNecessary(-90 - WorkerThread.MAX_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(-90 - WorkerThread.MIN_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(0));
@@ -101,7 +101,7 @@ public class WorkerThreadTest {
 		assertFalse(workerThread.isBeatNecessary(135));
 		assertFalse(workerThread.isBeatNecessary(-135));
 		
-		worldModel.getCompassModel().setCompass(new Compass(-30, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(-30, 0, 0,System.currentTimeMillis()));
 		assertTrue(workerThread.isBeatNecessary(-90 - WorkerThread.MAX_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(-90 - WorkerThread.MIN_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(0));
@@ -115,7 +115,7 @@ public class WorkerThreadTest {
 		
 		fillWindModel(90);
 		
-		worldModel.getCompassModel().setCompass(new Compass(0, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(0, 0, 0,System.currentTimeMillis()));
 		assertTrue(workerThread.isBeatNecessary(90 - WorkerThread.MAX_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(90 - WorkerThread.MIN_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(0));
@@ -127,7 +127,7 @@ public class WorkerThreadTest {
 		assertFalse(workerThread.isBeatNecessary(135));
 		assertFalse(workerThread.isBeatNecessary(-135));
 		
-		worldModel.getCompassModel().setCompass(new Compass(30, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(30, 0, 0,System.currentTimeMillis()));
 		assertFalse(workerThread.isBeatNecessary(90 - WorkerThread.MAX_BEAT_ANGLE));
 		assertTrue(workerThread.isBeatNecessary(90 - WorkerThread.MIN_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(0));
@@ -139,7 +139,7 @@ public class WorkerThreadTest {
 		assertTrue(workerThread.isBeatNecessary(135));
 		assertFalse(workerThread.isBeatNecessary(-135));
 		
-		worldModel.getCompassModel().setCompass(new Compass(-30, 0, 0));
+		worldModel.getCompassModel().setCompass(new Compass(-30, 0, 0,System.currentTimeMillis()));
 		assertTrue(workerThread.isBeatNecessary(90 - WorkerThread.MAX_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(90 - WorkerThread.MIN_BEAT_ANGLE));
 		assertFalse(workerThread.isBeatNecessary(0));
@@ -154,7 +154,7 @@ public class WorkerThreadTest {
 
 	private void fillWindModel(int direction) {
 		for (int i = 0; i < History.DEFAULT_MAX_SIZE; i++) {
-			worldModel.getWindModel().setWind(new Wind(direction,0));
+			worldModel.getWindModel().setWind(new Wind(direction,0,System.currentTimeMillis()));
 		}
 	}
 }

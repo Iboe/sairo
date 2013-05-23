@@ -12,15 +12,14 @@ import java.util.ArrayList;
  * @author Tobias Koppe
  * @version 1
  */
-public class evaluateAksenLog {
+public class LoadAksenLog {
 
 	private String logFileName;
 
 	private ArrayList<String> aksenLog;
 
-	public evaluateAksenLog(String pLogFileName) {
+	public LoadAksenLog(String pLogFileName) {
 		this.logFileName = pLogFileName;
-		aksenLog = filterAksenLog();
 		aksenLog=filterSendingAksenServoCommand(aksenLog);
 	}
 
@@ -31,16 +30,16 @@ public class evaluateAksenLog {
 		ArrayList<String> tmpList = new ArrayList<String>();
 		for (int i = 0; i < pList.size(); i++) {
 			String field = pList.get(i);
-			if (field.contains(logTextblocks.sendAksenServoCommand)) {
+			if (field.contains(LogTextblocks.sendAksenServoCommand)) {
 				tmpList.add(pList.get(i));
 			}
-			if (field.contains(logTextblocks.sendingAksenServoCommandIncorrect)) {
+			if (field.contains(LogTextblocks.sendingAksenServoCommandIncorrect)) {
 				tmpList.add(pList.get(i));
 			}
-			if (field.contains(logTextblocks.sendingAksenServoCommandCorrect)) {
+			if (field.contains(LogTextblocks.sendingAksenServoCommandCorrect)) {
 				tmpList.add(pList.get(i));
 			}
-			if (field.contains(logTextblocks.receivedValueFailure)) {
+			if (field.contains(LogTextblocks.receivedValueFailure)) {
 				tmpList.add(pList.get(i));
 			}
 		}
@@ -58,14 +57,14 @@ public class evaluateAksenLog {
 	 *
 	 * @return the array list
 	 */
-	private ArrayList<String> filterAksenLog() {
+	public static ArrayList<String> filterAksenLog(String pFileName) {
 		ArrayList<String> aksenLogList = new ArrayList<String>();
 		String zeile = null;
 		try {
 			BufferedReader bfReader = new BufferedReader(new FileReader(
-					this.logFileName));
+					pFileName));
 			while ((zeile = bfReader.readLine()) != null) {
-				if (zeile.contains(logTextblocks.aksenlocomotionClassName)) {
+				if (zeile.contains(LogTextblocks.aksenlocomotionClassName)) {
 					aksenLogList.add(zeile);
 				}
 			}

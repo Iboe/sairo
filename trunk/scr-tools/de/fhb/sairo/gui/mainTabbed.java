@@ -37,13 +37,14 @@ public class mainTabbed extends JFrame {
 	/**
 	 * Panels
 	 */
-	private completeLogViewer logViewer;
+	private CompleteLogViewer logViewer;
 	private missionTaskInfo missionTaskInfo;
 	private ChartPanel panel;
+	private JMenuItem mntmItemLoadAksenLog;
 	
 	public mainTabbed() {
 		initalizeMenu();
-		logViewer = new completeLogViewer();
+		logViewer = new CompleteLogViewer();
 		missionTaskInfo = new missionTaskInfo();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -80,6 +81,9 @@ public class mainTabbed extends JFrame {
 		
 		menuItemLoadMissionData = new JMenuItem("Load Mission Data");
 		menuLoad.add(menuItemLoadMissionData);
+		
+		mntmItemLoadAksenLog = new JMenuItem("Load AKSEN log");
+		menuLoad.add(mntmItemLoadAksenLog);
 		
 		menuItemLoadAllData = new JMenuItem("Load all data");
 		menuLoad.add(menuItemLoadAllData);
@@ -213,11 +217,11 @@ public class mainTabbed extends JFrame {
 		this.menuItemSaveCompassCourseWithDesiredAngleToCsv = menuItemSaveCompassCourseWithDesiredAngleToCsv;
 	}
 
-	public completeLogViewer getLogViewer() {
+	public CompleteLogViewer getLogViewer() {
 		return logViewer;
 	}
 
-	public void setLogViewer(completeLogViewer logViewer) {
+	public void setLogViewer(CompleteLogViewer logViewer) {
 		this.logViewer = logViewer;
 	}
 
@@ -228,4 +232,13 @@ public class mainTabbed extends JFrame {
 	public void setMissionTaskInfo(missionTaskInfo missionTaskInfo) {
 		this.missionTaskInfo = missionTaskInfo;
 	}
+
+	public JMenuItem getMntmItemLoadAksenLog() {
+		return mntmItemLoadAksenLog;
+	}
+
+	public void setMntmItemLoadAksenLog(JMenuItem mntmItemLoadAksenLog) {
+		this.mntmItemLoadAksenLog = mntmItemLoadAksenLog;
+	}
+	
 }

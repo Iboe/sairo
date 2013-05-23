@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import de.fhb.sairo.data.compassCourseList;
+import de.fhb.sairo.data.CompassCourseList;
 import de.fhb.sairo.data.LogData.LogCompassCourse;
+import de.fhb.sairo.logAnalyze.LogTextblocks;
 import de.fhb.sairo.logAnalyze.filter;
-import de.fhb.sairo.logAnalyze.logTextblocks;
 
 public class Task {
 
@@ -19,22 +19,22 @@ public class Task {
 	private String taskDescription;
 	private String taskArguments;
 	
-	private compassCourseList compassCourseList;
+	private CompassCourseList compassCourseList;
 	
 	public Task(String pTaskDescription){
 		this.taskDescription=pTaskDescription;
 		this.log = new ArrayList<String>();
-		this.compassCourseList = new compassCourseList();
+		this.compassCourseList = new CompassCourseList();
 	}
 
 	public void extractCompassCourseList(){
 		String zeile=null;
 		for(int i=0;i<this.log.size();i++){
 			zeile=log.get(i);
-			if(zeile.contains(logTextblocks.compassThreadName)){
+			if(zeile.contains(LogTextblocks.compassThreadName)){
 				Date d=filter.filterTimestamp(zeile);
-				int startAzimuth = zeile.indexOf(logTextblocks.compassAzimuthMark)+logTextblocks.compassAzimuthMark.length();
-				int endAzimuth = zeile.indexOf(logTextblocks.compassPitchMark)-1;
+				int startAzimuth = zeile.indexOf(LogTextblocks.compassAzimuthMark)+LogTextblocks.compassAzimuthMark.length();
+				int endAzimuth = zeile.indexOf(LogTextblocks.compassPitchMark)-1;
 				String azimuth = zeile.substring(startAzimuth,endAzimuth);
 				compassCourseList.add(new LogCompassCourse(Float.valueOf(azimuth), d));
 		}
@@ -100,11 +100,11 @@ public class Task {
 	
 	
 	
-	public compassCourseList getCompassCourseList() {
+	public CompassCourseList getCompassCourseList() {
 		return compassCourseList;
 	}
 
-	public void setCompassCourseList(compassCourseList compassCourseList) {
+	public void setCompassCourseList(CompassCourseList compassCourseList) {
 		this.compassCourseList = compassCourseList;
 	}
 

@@ -2,9 +2,9 @@ package de.fhb.sairo.data;
 
 import java.util.ArrayList;
 
-import de.fhb.sairo.data.LogData.LogGPSCoordinate;
+import de.fhb.sairo.data.LogData.LogCompassCourse;
 
-public class gpsDataList extends ArrayList<LogGPSCoordinate> {
+public class CompassCourseList extends ArrayList<LogCompassCourse> {
 
 	/**
 	 * 

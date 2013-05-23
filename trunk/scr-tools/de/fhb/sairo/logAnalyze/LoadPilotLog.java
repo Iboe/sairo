@@ -14,7 +14,7 @@ import de.fhb.sairo.data.LogData.LogPilotDriveAngleRudderCommand;
  * @author Tobias Koppe
  * @version 1
  */
-public class evaluatePilot {
+public class LoadPilotLog {
 
 	private ArrayList<LogPilotDriveAngleRudderCommand> commandList;
 	
@@ -25,15 +25,15 @@ public class evaluatePilot {
 	 * @version 1
 	 * @param pLogfileName
 	 */
-	public evaluatePilot(String pLogfileName){
+	public LoadPilotLog(String pLogfileName){
 		this.commandList = new ArrayList<LogPilotDriveAngleRudderCommand>();
 		try {
 			BufferedReader bfReader = new BufferedReader(new FileReader(pLogfileName));
 			String zeile = null;
 			while((zeile = bfReader.readLine()) != null){
-				if(zeile.contains(logTextblocks.driveAngleThreadName) && zeile.contains(logTextblocks.driverSetRudderTo)){
+				if(zeile.contains(LogTextblocks.driveAngleThreadName) && zeile.contains(LogTextblocks.driverSetRudderTo)){
 					//System.out.println("Analyze: " + zeile);
-					int start = zeile.indexOf(logTextblocks.driverSetRudderTo)+ logTextblocks.driverSetRudderTo.length();
+					int start = zeile.indexOf(LogTextblocks.driverSetRudderTo)+ LogTextblocks.driverSetRudderTo.length();
 					float pos = Float.valueOf(zeile.substring(start, zeile.length()).trim());
 					Date timeStamp = filter.filterTimestamp(zeile);
 					this.commandList.add(new LogPilotDriveAngleRudderCommand(timeStamp, pos));

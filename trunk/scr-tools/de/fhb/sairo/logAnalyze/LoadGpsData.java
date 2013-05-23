@@ -5,25 +5,25 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
-import de.fhb.sairo.data.gpsDataList;
+import de.fhb.sairo.data.GpsDataList;
 import de.fhb.sairo.data.LogData.LogGPSCoordinate;
 import de.fhb.sairo.fileio.FileLoader;
 
-public class loadGpsData {
+public class LoadGpsData {
 	
-	public static gpsDataList load(String pFileName){
-		gpsDataList list = new gpsDataList();
+	public static GpsDataList load(String pFileName){
+		GpsDataList list = new GpsDataList();
 		BufferedReader reader = FileLoader.openLogfile(pFileName);
 		try {
 			String zeile=null;
 			while((zeile = reader.readLine()) != null){
-				if(zeile.contains(logTextblocks.gpsSensorThreadName)){
+				if(zeile.contains(LogTextblocks.gpsSensorThreadName)){
 					System.out.println("Analyze: " + zeile);
 					Date d=filter.filterTimestamp(zeile);
-					int startGpsLong = zeile.indexOf(logTextblocks.gpsSensorLongitude)+logTextblocks.gpsSensorLongitude.length()+1;
-					int startGpsLat = zeile.indexOf(logTextblocks.gpsSensorLatitude)+logTextblocks.gpsSensorLatitude.length()+1;
-					int startGpsSat = zeile.indexOf(logTextblocks.gpsSensorSatelites)+logTextblocks.gpsSensorSatelites.length()+1;
-					int startGpsSpeed = zeile.indexOf(logTextblocks.gpsSensorSpeed)+logTextblocks.gpsSensorSpeed.length()+1;
+					int startGpsLong = zeile.indexOf(LogTextblocks.gpsSensorLongitude)+LogTextblocks.gpsSensorLongitude.length()+1;
+					int startGpsLat = zeile.indexOf(LogTextblocks.gpsSensorLatitude)+LogTextblocks.gpsSensorLatitude.length()+1;
+					int startGpsSat = zeile.indexOf(LogTextblocks.gpsSensorSatelites)+LogTextblocks.gpsSensorSatelites.length()+1;
+					int startGpsSpeed = zeile.indexOf(LogTextblocks.gpsSensorSpeed)+LogTextblocks.gpsSensorSpeed.length()+1;
 					int endGpsLong = zeile.indexOf(",", startGpsLong);
 					int endGpsLat = zeile.indexOf(",",startGpsLat);
 					int endGpsSat = zeile.indexOf(",",startGpsSat);

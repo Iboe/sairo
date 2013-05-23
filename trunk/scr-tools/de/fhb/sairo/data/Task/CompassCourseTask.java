@@ -1,6 +1,7 @@
 package de.fhb.sairo.data.Task;
 
-import de.fhb.sairo.logAnalyze.logTextblocks;
+import de.fhb.sairo.logAnalyze.LogTextblocks;
+
 
 
 /***
@@ -38,7 +39,7 @@ public class CompassCourseTask extends Task {
 
 	@Override
 	public void setTaskArguments(String taskArguments) {
-		int startAngle = taskArguments.indexOf(logTextblocks.compassCourseTaskParamMark) + logTextblocks.compassCourseTaskParamMark.length();
+		int startAngle = taskArguments.indexOf(LogTextblocks.compassCourseTaskParamMark) + LogTextblocks.compassCourseTaskParamMark.length();
 		int endAngle = taskArguments.indexOf("]", startAngle);
 		String taskArgumentAngle = taskArguments.substring(startAngle, endAngle);
 		this.setCompassCourseAngle(Double.valueOf(taskArgumentAngle));

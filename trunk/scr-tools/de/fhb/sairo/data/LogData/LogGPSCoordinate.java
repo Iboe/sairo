@@ -3,7 +3,7 @@ package de.fhb.sairo.data.LogData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.fhb.sairo.logAnalyze.logTextblocks;
+import de.fhb.sairo.logAnalyze.LogTextblocks;
 
 /***
  * 
@@ -36,10 +36,10 @@ public class LogGPSCoordinate {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("timestamp: " + this.timeStampString+ " ");
-		sb.append(logTextblocks.gpsSensorLatitude + ": " + this.latitude + " ");
-		sb.append(logTextblocks.gpsSensorLongitude + ": " + this.longitude + " ");
-		sb.append(logTextblocks.gpsSensorSatelites + ": " + this.satelliteCount + " ");
-		sb.append(logTextblocks.gpsSensorSpeed + ": " + this.speed);
+		sb.append(LogTextblocks.gpsSensorLatitude + ": " + this.latitude + " ");
+		sb.append(LogTextblocks.gpsSensorLongitude + ": " + this.longitude + " ");
+		sb.append(LogTextblocks.gpsSensorSatelites + ": " + this.satelliteCount + " ");
+		sb.append(LogTextblocks.gpsSensorSpeed + ": " + this.speed);
 		return sb.toString();
 	}
 	

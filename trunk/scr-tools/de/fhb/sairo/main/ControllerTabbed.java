@@ -22,8 +22,10 @@ import de.fhb.sairo.fileio.FileLoader;
 import de.fhb.sairo.fileio.FileSaver;
 import de.fhb.sairo.gui.mainTabbed;
 import de.fhb.sairo.gui.dialogs.openFileDialog;
-import de.fhb.sairo.logAnalyze.loadGpsData;
-import de.fhb.sairo.logAnalyze.loadMissionData;
+import de.fhb.sairo.logAnalyze.LoadCompassData;
+import de.fhb.sairo.logAnalyze.LoadGpsData;
+import de.fhb.sairo.logAnalyze.LoadMissionData;
+import de.fhb.sairo.logAnalyze.LoadWindData;
 
 public class ControllerTabbed implements Observer {
 
@@ -41,7 +43,7 @@ public class ControllerTabbed implements Observer {
 				.setModel(model.getListMissionsModel());
 		initAddActionListeners();
 	}
-
+	
 	private void initAddActionListeners() {
 		gui.getMenuItemOpenFile().addActionListener(new openFile());
 		gui.getMenuItemLoadMissionData().addActionListener(
@@ -54,8 +56,37 @@ public class ControllerTabbed implements Observer {
 		gui.getMenuItemSaveCompassCourseWithDesiredAngleToCsv()
 				.addActionListener(
 						new saveTaskCompassCourseWithDesiredAngleToCsvFile());
+		gui.getMntmItemLoadAksenLog().addActionListener(new loadAksenlog());
+		gui.getMenuItemLoadAllData().addActionListener(new loadAllData());
 	}
 
+	/***
+	 * This class loads all data from logfile
+	 * @author Tobias
+	 *
+	 */
+	class loadAllData implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			model.setCompassCourseList(LoadCompassData.load(model.getLogFile()
+					.getAbsolutePath()));
+			model.setGpsDataList(LoadGpsData.load(model.getLogFile()
+					.getAbsolutePath()));
+			model.setWindDatalist(LoadWindData.loadWindData(model.getLogFile()
+					.getAbsolutePath()));
+			model.setMissionList(LoadMissionData.loadMissions(model
+					.getLogFile().getAbsolutePath()));
+			for (int i = 0; i < model.getMissionList().size(); i++) {
+				model.getListMissionsModel().addElement(
+						model.getMissionList().get(i).toString());
+			}
+			gui.getMissionTaskInfo().getListMissionList().updateUI();
+			
+		}
+
+	}
+	
 	/***
 	 * This class loads the task details of selected task
 	 * 
@@ -88,6 +119,15 @@ public class ControllerTabbed implements Observer {
 		}
 	}
 
+	class loadAksenlog implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			model.setAksenLog(de.fhb.sairo.logAnalyze.LoadAksenLog.filterAksenLog(model.getLogFile().getAbsolutePath()));
+		}
+		
+	}
+	
 	/***
 	 * This class segements the loaded logfile in missions parted logfiles
 	 * 
@@ -160,17 +200,13 @@ public class ControllerTabbed implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setMissionList(loadMissionData.loadMissions(model
+			model.setMissionList(LoadMissionData.loadMissions(model
 					.getLogFile().getAbsolutePath()));
 			for (int i = 0; i < model.getMissionList().size(); i++) {
-				System.out.println("Add: "
-						+ model.getMissionList().get(i).toString()
-						+ " to JList");
 				model.getListMissionsModel().addElement(
 						model.getMissionList().get(i).toString());
 			}
 			gui.getMissionTaskInfo().getListMissionList().updateUI();
-			System.out.println(model.getMissionList().toString());
 		}
 
 	}
@@ -295,13 +331,13 @@ public class ControllerTabbed implements Observer {
 	 * @author Tobias Koppe
 	 * 
 	 */
-	class LoadGpsData implements ActionListener {
+	class LoadGpsDataAction implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			new Thread() {
 				public void run() {
-					model.setGpsDataList(loadGpsData.load(model.getLogFile()
+					model.setGpsDataList(LoadGpsData.load(model.getLogFile()
 							.getAbsolutePath()));
 				}
 			}.start();

@@ -15,7 +15,7 @@ import de.fhb.sairo.data.LogData.LogRudderPosition;
  * @author Tobias Koppe
  * @version 1
  */
-public class evaluateRudderPosistions {
+public class LoadRudderPositions {
 	
 	private ArrayList<LogRudderPosition> rudderPositions;
 	
@@ -26,18 +26,18 @@ public class evaluateRudderPosistions {
 	 * @version 1
 	 * @param pLogfileName
 	 */
-	public evaluateRudderPosistions(String pLogFileName){
+	public LoadRudderPositions(String pLogFileName){
 		rudderPositions = new ArrayList<LogRudderPosition>();
 		BufferedReader bfReader=null;
 		try {
 			bfReader = new BufferedReader( new FileReader(pLogFileName));
 			String zeile=null;
 			while ((zeile = bfReader.readLine()) != null) {
-				if (zeile.contains(logTextblocks.settingRudderTo)) {
+				if (zeile.contains(LogTextblocks.settingRudderTo)) {
 					//System.out.println("Analyze: " + zeile);
 					Date d = filter.filterTimestamp(zeile);
-					int startSubString=zeile.indexOf(logTextblocks.settingRudderTo);
-					int countSubString=logTextblocks.settingRudderTo.length()+1;
+					int startSubString=zeile.indexOf(LogTextblocks.settingRudderTo);
+					int countSubString=LogTextblocks.settingRudderTo.length()+1;
 					int from=startSubString+countSubString;
 					int until = zeile.lastIndexOf(":");
 					String logAngle=zeile.subSequence(from,until).toString();

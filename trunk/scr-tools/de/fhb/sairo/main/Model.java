@@ -9,10 +9,10 @@ import javax.swing.DefaultListModel;
 import org.apache.log4j.Logger;
 import org.jfree.chart.JFreeChart;
 
+import de.fhb.sairo.data.CompassCourseList;
+import de.fhb.sairo.data.GpsDataList;
 import de.fhb.sairo.data.MissionList;
-import de.fhb.sairo.data.compassCourseList;
-import de.fhb.sairo.data.gpsDataList;
-import de.fhb.sairo.data.windDatalist;
+import de.fhb.sairo.data.WindDatalist;
 
 /***
  * 
@@ -25,9 +25,10 @@ public class Model extends Observable{
 	
 	private File logFile;
 	private ArrayList<MissionList> missions;
-	private gpsDataList gpsDataList;
-	private compassCourseList compassCourseList;
-	private windDatalist windDatalist;
+	private ArrayList<String> aksenLog;
+	private GpsDataList gpsDataList;
+	private CompassCourseList compassCourseList;
+	private WindDatalist windDatalist;
 	private MissionList missionList;
 	private DefaultListModel<String> listMissionsModel;
 	private DefaultListModel<String> logfileModel;
@@ -46,9 +47,9 @@ public class Model extends Observable{
 	public Model(){
 		log.trace("Model initialized");
 		this.missions = new ArrayList<MissionList>();
-		this.gpsDataList = new gpsDataList();
-		this.compassCourseList = new compassCourseList();
-		this.windDatalist = new windDatalist();
+		this.gpsDataList = new GpsDataList();
+		this.compassCourseList = new CompassCourseList();
+		this.windDatalist = new WindDatalist();
 		this.missionList = new MissionList();
 		listMissionsModel = new DefaultListModel<String>();
 		logfileModel = new DefaultListModel<String>();
@@ -71,15 +72,15 @@ public class Model extends Observable{
 	/**
 	 * @return the gpsDataList
 	 */
-	public gpsDataList getGpsDataList() {
+	public GpsDataList getGpsDataList() {
 		return gpsDataList;
 	}
 
-	public compassCourseList getCompassCourseList() {
+	public CompassCourseList getCompassCourseList() {
 		return compassCourseList;
 	}
 
-	public void setCompassCourseList(compassCourseList compassCourseList) {
+	public void setCompassCourseList(CompassCourseList compassCourseList) {
 		this.compassCourseList = compassCourseList;
 		update();
 	}
@@ -87,7 +88,7 @@ public class Model extends Observable{
 	/**
 	 * @param gpsDataList the gpsDataList to set
 	 */
-	public void setGpsDataList(gpsDataList gpsDataList) {
+	public void setGpsDataList(GpsDataList gpsDataList) {
 		this.gpsDataList = gpsDataList;
 		System.out.println("Got: " + gpsDataList.toString());
 		update();
@@ -110,11 +111,11 @@ public class Model extends Observable{
 		update();
 	}
 
-	public windDatalist getWindDatalist() {
+	public WindDatalist getWindDatalist() {
 		return windDatalist;
 	}
 
-	public void setWindDatalist(windDatalist windDatalist) {
+	public void setWindDatalist(WindDatalist windDatalist) {
 		this.windDatalist = windDatalist;
 		update();
 	}
@@ -142,6 +143,14 @@ public class Model extends Observable{
 
 	public void setLogfileModel(DefaultListModel<String> logfileModel) {
 		this.logfileModel = logfileModel;
+	}
+	
+	public ArrayList<String> getAksenLog() {
+		return aksenLog;
+	}
+
+	public void setAksenLog(ArrayList<String> aksenLog) {
+		this.aksenLog = aksenLog;
 	}
 
 	public void update(){

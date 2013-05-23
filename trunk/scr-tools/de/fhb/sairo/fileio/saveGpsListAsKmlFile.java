@@ -3,7 +3,7 @@ package de.fhb.sairo.fileio;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import de.fhb.sairo.data.gpsDataList;
+import de.fhb.sairo.data.GpsDataList;
 import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 import de.micromata.opengis.kml.v_2_2_0.KmlFactory;
@@ -18,7 +18,7 @@ public class saveGpsListAsKmlFile {
 	 * @author Tobias Koppe
 	 * @version 1
 	 */
-	public static void save(String pFileName, gpsDataList pList){
+	public static void save(String pFileName, GpsDataList pList){
 		Kml kml = KmlFactory.createKml();
 		Document doc = kml.createAndSetDocument();
 		LineString lineString = new LineString();
