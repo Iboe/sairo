@@ -55,7 +55,7 @@ public class GUILogic {
 	 * the GUIController is used for getting and setting values from and to the
 	 * world model/ local database
 	 */
-	private MainController controller;
+	private GUIController controller;
 
 	/**
 	 * the Planner is used for sending mission sets
@@ -88,7 +88,7 @@ public class GUILogic {
 	public GUILogic(Planner planner) {
 		this.testMode = false;
 		this.gpsDecimalFormat = new DecimalFormat(GPS_DECIMAL_FORMAT);
-		this.controller = new MainController();
+		this.controller = new GUIController();
 		this.planner = planner;
 	}
 
@@ -463,7 +463,7 @@ public class GUILogic {
 	 * 
 	 * @return MainController
 	 */
-	public MainController getController() {
+	public GUIController getController() {
 		return this.controller;
 	}
 

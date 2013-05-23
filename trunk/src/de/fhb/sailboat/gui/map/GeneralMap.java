@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.data.GPS;
-import de.fhb.sailboat.gui.MainControllerModelImpl;
+import de.fhb.sailboat.gui.GUIModel;
 import de.fhb.sailboat.gui.map.utilities.JMapViewer;
 import de.fhb.sailboat.gui.map.utilities.MissionVisualization;
 import de.fhb.sailboat.mission.MissionVO;
@@ -100,7 +100,7 @@ public class GeneralMap extends JPanel {
 	 * @param model
 	 *            data model with current data
 	 */
-	public void visualizeMission(MainControllerModelImpl model) {
+	public void visualizeMission(GUIModel model) {
 		visualize.visualize(model);
 	}
 

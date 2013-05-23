@@ -21,7 +21,7 @@ import de.fhb.sailboat.worldmodel.WindModelImpl;
  * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  * 
  */
-public class MainControllerModelImpl {
+public class GUIModel {
 
 	protected boolean missionUpdated;
 
@@ -68,7 +68,7 @@ public class MainControllerModelImpl {
 	 */
 	protected MissionVO missionTasksLeft;
 
-	public MainControllerModelImpl() {
+	public GUIModel() {
 		this.missionUpdated = false;
 		this.wind = new WindModelImpl();
 		this.compass = new CompassModelImpl();

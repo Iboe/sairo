@@ -30,9 +30,9 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * @author Patrick Rutter
  * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  */
-public class MainController {
+public class GUIController {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GUIController.class);
 
     public final static int GUI_UPDATE_RATE_DEFAULT = Integer.parseInt(System.getProperty("GUI_UPDATE_RATE_DEFAULT"));	// sleep in ms after each gui loop
     private int actualUpdateRate=GUI_UPDATE_RATE_DEFAULT;
@@ -54,7 +54,7 @@ public class MainController {
 	/**
 	 * GUIModel is used to store values locally
 	 */
-	private MainControllerModelImpl model;
+	private GUIModel model;
 
 	/**
 	 * An instance of the world model is used to get values from the boat
@@ -84,8 +84,8 @@ public class MainController {
 	/**
 	 * Contruct and intiialize the MainControllerImpl object.
 	 */
-	public MainController() {
-		this.model = new MainControllerModelImpl();
+	public GUIController() {
+		this.model = new GUIModel();
 		this.worldModel = WorldModelImpl.getInstance();
 	}
 	
@@ -451,7 +451,7 @@ public class MainController {
 	 * Returns a reference to the MainControllerModel object.
 	 * @return ManControllerModel
 	 */
-	public MainControllerModelImpl getModel() {
+	public GUIModel getModel() {
 		return this.model;
 	}
 

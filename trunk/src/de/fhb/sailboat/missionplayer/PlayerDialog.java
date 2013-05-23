@@ -5,7 +5,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import de.fhb.sailboat.gui.MainController;
+import de.fhb.sailboat.gui.GUIController;
 import de.fhb.sailboat.gui.RootDialog;
 
 
@@ -17,12 +17,12 @@ import de.fhb.sailboat.gui.RootDialog;
 public class PlayerDialog extends RootDialog{
 	
 	private static final long serialVersionUID = 1L;
-	private  MainController controller;
+	private  GUIController controller;
 
 	/**
 	 * Creates new form NewJDialog
 	 */
-	public PlayerDialog(java.awt.Frame parent, boolean modal, MainController controller) {
+	public PlayerDialog(java.awt.Frame parent, boolean modal, GUIController controller) {
 		super(parent, modal);
 		initComponents();
 		setResizable(false);
