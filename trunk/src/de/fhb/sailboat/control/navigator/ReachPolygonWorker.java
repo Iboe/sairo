@@ -84,6 +84,6 @@ public class ReachPolygonWorker extends WorkerThread<ReachPolygonTask> {
 		cenLat /= area * 3; //the correct value for the area is area / 2, but it is
 							//not used directly, so the real value is not calculated 
 		cenLong /= area * 3;
-		return new GPS(cenLat, cenLong);
+		return new GPS(cenLat, cenLong, System.currentTimeMillis());
 	}
 }
