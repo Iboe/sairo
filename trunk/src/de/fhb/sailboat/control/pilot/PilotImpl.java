@@ -45,16 +45,32 @@ public class PilotImpl implements Pilot {
 	 * @param angle the desired angle to hold
 	 * @param mode the {@link DriveAngleMode} that determines the way of the thread to work
 	 */
+//	private synchronized void driveAngle(int angle, DriveAngleMode mode) {
+//		if (driveAngleThread != null && driveAngleThread.isAlive()) {
+//			driveAngleThread.driveAngle(angle, mode);
+//		} else {
+////			driveAngleThread = new DriveAngleThread(locSystem);
+//			driveAngleThread = DriveAngleThread.getInstance(locSystem);
+//			driveAngleThread.driveAngle(angle, mode);
+//			driveAngleThread.start();
+//		}
+//	}
+	
 	private synchronized void driveAngle(int angle, DriveAngleMode mode) {
+		
 		if (driveAngleThread != null && driveAngleThread.isAlive()) {
 			driveAngleThread.driveAngle(angle, mode);
 		} else {
-//			driveAngleThread = new DriveAngleThread(locSystem);
+			if(driveAngleThread != null && !driveAngleThread.isAlive()){
+				driveAngleThread.interrupt();
+			}
+			
 			driveAngleThread = DriveAngleThread.getInstance(locSystem);
 			driveAngleThread.driveAngle(angle, mode);
 			driveAngleThread.start();
 		}
 	}
+
 	
 	@Override
 	public void setPropellor(int value) {
