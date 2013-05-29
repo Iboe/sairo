@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import de.fhb.sailboat.data.CompassCourse;
 import de.fhb.sailboat.data.GPSData;
 
 /***

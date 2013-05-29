@@ -1,26 +1,17 @@
 package de.fhb.sailboat.utils.logevaluation;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 
 import de.fhb.sailboat.data.CompassCourse;
-import de.fhb.sailboat.data.GPS;
 import de.fhb.sailboat.data.GPSData;
 import de.fhb.sailboat.data.PilotDriveAngleRudderCommand;
 import de.fhb.sailboat.data.RudderPosition;
 import de.fhb.sailboat.data.SimplePidControllerState;
-import de.fhb.sailboat.data.Wind;
 import de.fhb.sailboat.data.WindData;
 
 /***
@@ -33,8 +24,6 @@ public class CSVWriter {
 	private static ArrayList<RudderPosition> rudderPositionList;
 	private static ArrayList<CompassCourse> compassCoursesList;
 	private static ArrayList<PilotDriveAngleRudderCommand> pilotDriveAngleRudderCommandList;
-	private static ArrayList<GPSData> gpsDataList;
-	private static ArrayList<WindData> windDataList;
 	
 	private static ArrayList<CSVEntry> csvEntries = new ArrayList<CSVEntry>();
 	

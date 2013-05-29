@@ -119,7 +119,7 @@ public class Window extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		ArrayList updateData = (ArrayList<String>) arg1;
+		ArrayList<String> updateData = (ArrayList<String>) arg1;
 		
 		pLabel.setText("P: " + updateData.get(0));
 		iLabel.setText("I: " + updateData.get(1));

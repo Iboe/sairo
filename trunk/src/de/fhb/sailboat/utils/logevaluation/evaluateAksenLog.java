@@ -70,6 +70,7 @@ public class evaluateAksenLog {
 					// System.out.println("Found: " + zeile);
 				}
 			}
+			bfReader.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -86,6 +86,7 @@ public class XBeeTest {
 				System.out.println("RECEIVED: "+(char)b+"("+b+")");
 		
 			
+			in.close();
 		} catch (XBeeException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -93,6 +94,8 @@ public class XBeeTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		xb.close();
 	}
 	
 	public static void xBeeAPITest() throws XBeeException,InterruptedException, IOException{

@@ -22,7 +22,6 @@ import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
 import de.fhb.sailboat.serial.sensor.CompassSensor;
 import de.fhb.sailboat.serial.sensor.GpsSensor;
-import de.fhb.sailboat.serial.sensor.WindSensor;
 import de.fhb.sailboat.utils.performance.CPU;
 
 /**
@@ -103,9 +102,9 @@ public class Initializier {
 	protected void initializeSensors() {
 		LOG.info("-----init sensors-----");
 		
-		GpsSensor gps = new GpsSensor();
-		//WindSensor wind = new WindSensor();
-		CompassSensor compassSensor = new CompassSensor();
+		new GpsSensor();
+		//new WindSensor();
+		new CompassSensor();
 		
 		try {
 			Thread.sleep(2000);

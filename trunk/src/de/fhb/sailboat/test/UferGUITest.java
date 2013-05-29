@@ -6,7 +6,6 @@ package de.fhb.sailboat.test;
 import de.fhb.sailboat.communication.CommunicationBase;
 import de.fhb.sailboat.communication.TransmissionModule;
 import de.fhb.sailboat.communication.carrierAdapters.CommTCPClient;
-import de.fhb.sailboat.communication.carrierAdapters.CommTCPServer;
 import de.fhb.sailboat.communication.clientModules.CompassReceiver;
 import de.fhb.sailboat.communication.clientModules.GPSReceiver;
 import de.fhb.sailboat.communication.clientModules.MissionTransmitter;

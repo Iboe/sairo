@@ -2,7 +2,6 @@ package de.fhb.sailboat.control.pilot;
 
 import org.apache.log4j.Logger;
 
-import de.fhb.sailboat.serial.actuator.AKSENLocomotion;
 import de.fhb.sailboat.worldmodel.ActuatorModel;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
 

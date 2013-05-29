@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import de.fhb.sailboat.control.navigator.Navigator;
 import de.fhb.sailboat.serial.actuator.LocomotionSystem;
-import de.fhb.sailboat.utils.logevaluation.logTextblocks;
 import de.fhb.sailboat.worldmodel.ActuatorModel;
 import de.fhb.sailboat.worldmodel.CompassModel;
 import de.fhb.sailboat.worldmodel.GPSModel;
@@ -96,7 +95,7 @@ public class DriveAngleThread extends Thread {
 	private double sailPos;
 	private Calculations calc;
 	private double desiredHeeling = 0;
-	private double trueWindDirection;;
+	private double trueWindDirection;
 	
 	private static DriveAngleThread instance = null;
 	
