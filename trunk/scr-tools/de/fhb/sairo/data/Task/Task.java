@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import de.fhb.sairo.data.CompassCourseList;
+import de.fhb.sairo.data.Data.PidControllerState;
 import de.fhb.sairo.data.LogData.LogCompassCourse;
+import de.fhb.sairo.logAnalyze.LoadPidController;
 import de.fhb.sairo.logAnalyze.LogTextblocks;
 import de.fhb.sairo.logAnalyze.filter;
 
 public class Task {
 
 	private ArrayList<String> log;
+	private ArrayList<String> pidLog;
 	
 	private Date startTime;
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
@@ -20,6 +23,7 @@ public class Task {
 	private String taskArguments;
 	
 	private CompassCourseList compassCourseList;
+	private ArrayList<PidControllerState> pidControllerStateList;
 	
 	public Task(String pTaskDescription){
 		this.taskDescription=pTaskDescription;
@@ -27,6 +31,12 @@ public class Task {
 		this.compassCourseList = new CompassCourseList();
 	}
 
+	private void extractPidControllerLog(){
+		this.pidLog.clear();
+		this.pidLog = LoadPidController.loadPidControllerLog(this.log);
+		setPidControllerStateList(LoadPidController.extractPidControllerData(this.pidLog));
+	}
+	
 	public void extractCompassCourseList(){
 		String zeile=null;
 		for(int i=0;i<this.log.size();i++){
@@ -87,6 +97,7 @@ public class Task {
 
 	public void setLog(ArrayList<String> log) {
 		this.log = log;
+		extractPidControllerLog();
 	}
 
 	public String getTaskLog(){
@@ -97,8 +108,6 @@ public class Task {
 		}
 		return sb.toString();
 	}
-	
-	
 	
 	public CompassCourseList getCompassCourseList() {
 		return compassCourseList;
@@ -115,5 +124,13 @@ public class Task {
 		sb.append(",");
 		sb.append("Logentries:" +  this.getLog().size());
 		return sb.toString();
+	}
+
+	public ArrayList<PidControllerState> getPidControllerStateList() {
+		return pidControllerStateList;
+	}
+
+	public void setPidControllerStateList(ArrayList<PidControllerState> pidControllerStateList) {
+		this.pidControllerStateList = pidControllerStateList;
 	}
 }

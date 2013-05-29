@@ -33,7 +33,18 @@ public class missionTaskInfo extends JPanel {
 	private JButton btnNewButton_1;
 	private JLabel lblNewLabel;
 	private JButton btnCompleteGpsKml;
+	private JButton btnTaskCompasscourseChart;
 	
+	
+	
+	public JButton getBtnTaskCompasscourseChart() {
+		return btnTaskCompasscourseChart;
+	}
+
+	public void setBtnTaskCompasscourseChart(JButton btnTaskCompasscourseChart) {
+		this.btnTaskCompasscourseChart = btnTaskCompasscourseChart;
+	}
+
 	public missionTaskInfo() {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
@@ -102,6 +113,9 @@ public class missionTaskInfo extends JPanel {
 		btnNewButton_1 = new JButton("CSV file");
 		btnNewButton_1.setToolTipText("exports the complete data to csv file");
 		panel.add(btnNewButton_1);
+		
+		btnTaskCompasscourseChart = new JButton("task compasscourse chart");
+		panel.add(btnTaskCompasscourseChart);
 		
 		scrollPaneMissionList = new JScrollPane();
 		GridBagConstraints gbc_scrollPaneMissionList = new GridBagConstraints();

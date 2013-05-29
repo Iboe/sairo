@@ -80,7 +80,7 @@ public class Compass implements Serializable{
 	 * Directions:
 	 * North:	   0°
 	 * East:	   90°
-	 * South:	   360°
+	 * South:	   180°
 	 * West:	   270°
 	 *   
 	 * @return the direction

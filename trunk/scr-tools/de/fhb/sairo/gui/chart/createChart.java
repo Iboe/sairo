@@ -5,6 +5,9 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import de.fhb.sairo.data.CompassCourseList;
 
@@ -21,6 +24,28 @@ public class createChart {
 		return dataSet;
 	}
 	
+	public static XYDataset createXyDataSet(CompassCourseList pList , double pDesiredCourse){
+		System.out.println("Add " + pList.size() + " elements to chart");
+		XYSeriesCollection dataSet = new XYSeriesCollection();
+		
+		XYSeries drivenCourse = new XYSeries("CompassCourse");
+		XYSeries desiredCourse = new XYSeries("desired Angle("+pDesiredCourse+")");
+		
+		for(int i=0;i<pList.size();i++){
+			drivenCourse.add(i,pList.get(i).getCompassCourseAzimuth());
+			desiredCourse.add(i,pDesiredCourse);
+			System.out.println("Add [y,y][x]: [" + pList.get(i).getCompassCourseAzimuth() + "," + pDesiredCourse +"][" + i +"]");
+		}
+		dataSet.addSeries(desiredCourse);
+		dataSet.addSeries(drivenCourse);
+		return dataSet;
+	}
+	
+	public static JFreeChart createLineChart(XYDataset pDataSet){
+		JFreeChart chart = ChartFactory.createXYLineChart("Compasscourse", "time", "course", pDataSet, PlotOrientation.VERTICAL, true, true, false);
+		System.out.println("Chart created");
+		return chart;
+	}
 	
 	public static JFreeChart createLineChart(DefaultCategoryDataset pDataSet){
 		JFreeChart chart = ChartFactory.createLineChart("Compasscourse", "time", "course", pDataSet, PlotOrientation.VERTICAL, true, true, false);

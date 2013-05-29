@@ -96,6 +96,11 @@ public class LoadMissionData{
 		Logger log = Logger.getLogger(LoadMissionData.class);
 		worker t = new worker();
 		t.run();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return returnList;
 	}
 	

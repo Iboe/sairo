@@ -21,6 +21,8 @@ import de.fhb.sairo.data.Task.Task;
 import de.fhb.sairo.fileio.FileLoader;
 import de.fhb.sairo.fileio.FileSaver;
 import de.fhb.sairo.gui.mainTabbed;
+import de.fhb.sairo.gui.chart.chartFrame;
+import de.fhb.sairo.gui.chart.createChart;
 import de.fhb.sairo.gui.dialogs.openFileDialog;
 import de.fhb.sairo.logAnalyze.LoadCompassData;
 import de.fhb.sairo.logAnalyze.LoadGpsData;
@@ -58,8 +60,25 @@ public class ControllerTabbed implements Observer {
 						new saveTaskCompassCourseWithDesiredAngleToCsvFile());
 		gui.getMntmItemLoadAksenLog().addActionListener(new loadAksenlog());
 		gui.getMenuItemLoadAllData().addActionListener(new loadAllData());
+		gui.getMissionTaskInfo().getBtnTaskCompasscourseChart().addActionListener(new TaskCompasscourseChart());
 	}
 
+	class TaskCompasscourseChart implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			int selection = getSelectedMission();
+			int selectionTask = getSelectedTask();
+			CompassCourseTask tmpTask = (CompassCourseTask) model.getMissionList().get(selection)
+					.getTaskList().get(selectionTask);
+			tmpTask.extractCompassCourseList();
+			
+			chartFrame frame = new chartFrame(createChart.createChartPanel(createChart.createLineChart(createChart.createXyDataSet(tmpTask.getCompassCourseList(), tmpTask.getCompassCourseAngle())))); 
+			
+		}
+		
+	}
+	
 	/***
 	 * This class loads all data from logfile
 	 * @author Tobias

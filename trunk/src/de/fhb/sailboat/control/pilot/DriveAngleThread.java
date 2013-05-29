@@ -366,7 +366,7 @@ public class DriveAngleThread extends Thread {
 		
 		synchronized (mode) {
 //			if (DriveAngleMode.COMPASS.equals(mode)) {
-				deltaAngle = (int) (transformAngle(desiredAngle) - transformAngle((int) compassModel.getCompass().getAzimuth()));
+				deltaAngle = (int) (desiredAngle - (int) compassModel.getCompass().getAzimuth());
 //				deltaAngle = transformAngle(deltaAngle);
 //				
 //			} else if (DriveAngleMode.WIND.equals(mode)) {
@@ -407,7 +407,6 @@ public class DriveAngleThread extends Thread {
 	 * @return the angle in range from -180 to +180
 	 */
 	public int transformAngle(int pAngle) {
-		pAngle=pAngle-180;
 		int angle = pAngle % 360;
 		
 		if (angle > 180) {

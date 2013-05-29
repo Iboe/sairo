@@ -137,14 +137,9 @@ public class PIDController extends Observable{
 		this.valueList.add(String.valueOf(Kp));
 		this.valueList.add(String.valueOf(Ki));
 		this.valueList.add(String.valueOf(Kd));
-		this.valueList.add(String.valueOf(realAngle));
-		this.valueList.add(String.valueOf(targetAngle));
 		this.valueList.add(String.valueOf(deltaAngle));
 		this.valueList.add(String.valueOf(output));
 		this.valueList.add(String.valueOf(Ta));
-		this.valueList.add(String.valueOf(Kp));
-		this.valueList.add(String.valueOf(Ki));
-		this.valueList.add(String.valueOf(Kd));
 	}
 	
 	/***
@@ -156,10 +151,14 @@ public class PIDController extends Observable{
 		StringBuilder sb = new StringBuilder();
 		sb.append("PIDController ");
 		sb.append("controll rudder: ");
-		sb.append("inputSignal[" + realAngle + "]");
-		sb.append("targetAngle["+targetAngle+"]");
+		sb.append("Kp[" + Kp + "]");
+		sb.append("Ki[" + Ki + "]");
+		sb.append("Kd[" + Kd + "]");
+		sb.append("esum[" + esum + "]");
+		sb.append("eold[" + eold + "]");
 		sb.append("deltaAngle["+deltaAngle+"]");
 		sb.append("output["+output+"]");
+		sb.append("lastoutput[" + lastOutput +"]");
 		sb.append("samplingTime["+Ta+"]");
 		return sb.toString();
 	}
