@@ -45,9 +45,15 @@ public class PlannerImpl implements Planner {
 	
 	@Override
 	public void doMission(MissionVO mission) {
+		
 		if (mission == null || mission.getTasks() == null || mission.getTasks().isEmpty()) {
 			LOG.warn("could not start mission: mission is emtpy: {}", mission);
+			
 		} else {
+			if (worldModel.getMission() != null) {
+				LOG.warn("stopped current mission");
+			}
+			
 			worldModel.setMission(mission);
 			LOG.warn("execute mission {}", mission);
 			LOG.warn("number of mission elements:" + mission.getTasks().size(), mission);
