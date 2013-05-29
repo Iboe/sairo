@@ -197,6 +197,6 @@ public class Compass implements Serializable{
 	@Override
 	public String toString() {
 		return "Compass [azimuth: " + azimuth + ", pitch: " + pitch + ", roll: "
-			+ roll + "]";
+			+ roll + "id" + timeStamp + "]";
 	}
 }

@@ -27,6 +27,7 @@ import de.fhb.sairo.gui.dialogs.openFileDialog;
 import de.fhb.sairo.logAnalyze.LoadCompassData;
 import de.fhb.sairo.logAnalyze.LoadGpsData;
 import de.fhb.sairo.logAnalyze.LoadMissionData;
+import de.fhb.sairo.logAnalyze.LoadPidController;
 import de.fhb.sairo.logAnalyze.LoadWindData;
 
 public class ControllerTabbed implements Observer {
@@ -71,9 +72,8 @@ public class ControllerTabbed implements Observer {
 			int selectionTask = getSelectedTask();
 			CompassCourseTask tmpTask = (CompassCourseTask) model.getMissionList().get(selection)
 					.getTaskList().get(selectionTask);
-			tmpTask.extractCompassCourseList();
-			
-			chartFrame frame = new chartFrame(createChart.createChartPanel(createChart.createLineChart(createChart.createXyDataSet(tmpTask.getCompassCourseList(), tmpTask.getCompassCourseAngle())))); 
+			tmpTask.extractData();
+			chartFrame frame = new chartFrame(createChart.createChartPanel(createChart.createLineChart(createChart.createXyDataSet(tmpTask.getCompassCourseList(), tmpTask.getCompassCourseAngle(),tmpTask.getPidList())))); 
 			
 		}
 		

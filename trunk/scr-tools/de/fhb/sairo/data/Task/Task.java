@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import de.fhb.sairo.data.CompassCourseList;
+import de.fhb.sairo.data.pidControllerStateList;
 import de.fhb.sairo.data.Data.PidControllerState;
 import de.fhb.sairo.data.LogData.LogCompassCourse;
 import de.fhb.sairo.logAnalyze.LoadPidController;
@@ -23,18 +24,28 @@ public class Task {
 	private String taskArguments;
 	
 	private CompassCourseList compassCourseList;
-	private ArrayList<PidControllerState> pidControllerStateList;
+	private ArrayList<PidControllerState> pidControllerStateList; //Deprecated !! //TODO Liste loeschen bzw aendern
+	private de.fhb.sairo.data.pidControllerStateList pidList;
 	
 	public Task(String pTaskDescription){
 		this.taskDescription=pTaskDescription;
 		this.log = new ArrayList<String>();
 		this.compassCourseList = new CompassCourseList();
+		pidList = new pidControllerStateList();
 	}
 
+	public void extractData(){
+		extractCompassCourseList();
+		extractPidControllerLog();
+	}
+	
 	private void extractPidControllerLog(){
-		this.pidLog.clear();
+		if(this.pidLog!=null){this.pidLog.clear();}
 		this.pidLog = LoadPidController.loadPidControllerLog(this.log);
 		setPidControllerStateList(LoadPidController.extractPidControllerData(this.pidLog));
+		for(int i=0;i<this.getPidControllerStateList().size();i++){
+			this.getPidList().add(this.getPidControllerStateList().get(i));
+		}
 	}
 	
 	public void extractCompassCourseList(){
@@ -98,6 +109,7 @@ public class Task {
 	public void setLog(ArrayList<String> log) {
 		this.log = log;
 		extractPidControllerLog();
+		extractCompassCourseList();
 	}
 
 	public String getTaskLog(){
@@ -133,4 +145,13 @@ public class Task {
 	public void setPidControllerStateList(ArrayList<PidControllerState> pidControllerStateList) {
 		this.pidControllerStateList = pidControllerStateList;
 	}
+
+	public de.fhb.sairo.data.pidControllerStateList getPidList() {
+		return pidList;
+	}
+
+	public void setPidList(de.fhb.sairo.data.pidControllerStateList pidList) {
+		this.pidList = pidList;
+	}
+	
 }
