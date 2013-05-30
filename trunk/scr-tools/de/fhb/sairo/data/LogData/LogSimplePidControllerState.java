@@ -3,12 +3,14 @@ package de.fhb.sairo.data.LogData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.fhb.sairo.data.Data.SensorData;
+
 /***
  * This class represents a simplepidcontroller state with saving the difference, rudderposition and timestamp
  * @author Tobias Koppe
  *
  */
-public class LogSimplePidControllerState {
+public class LogSimplePidControllerState extends SensorData{
 
 	private double difference;
 	private double rudderPos;

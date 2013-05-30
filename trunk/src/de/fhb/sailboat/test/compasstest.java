@@ -39,7 +39,6 @@ public class compasstest {
 			System.out.println("----");
 		
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(0); 
 		}

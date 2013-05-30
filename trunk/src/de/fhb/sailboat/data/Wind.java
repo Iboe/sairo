@@ -53,6 +53,8 @@ public class Wind implements Serializable{
 		return timeStamp;
 	}
 
+	//TODO LogtextBlocks.valueSeperator implementieren
+	//TODO id implementieren
 	@Override
 	public String toString() {
 		return "Wind [direction: " + direction + ", speed: " + speed + "]";

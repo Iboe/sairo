@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.fhb.sairo.both.LogTextblocks;
+
 /***
  * 
  * @author Tobias Koppe
@@ -11,6 +13,12 @@ import java.util.Date;
  */
 public class filter {
 
+	public static String filterArgumentOfLogEntry(String pZeile, String pArgument){
+		String returnValue = null;
+		
+		return returnValue;
+	}
+	
 	public static String filterTaskArguments(String pZeile){
 		int tmp = pZeile.indexOf(LogTextblocks.taskExecutionSignal) + LogTextblocks.taskExecutionSignal.length();
 		return pZeile.substring(pZeile.indexOf("[", tmp), pZeile.indexOf("]", tmp)+1);

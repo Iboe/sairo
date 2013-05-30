@@ -10,6 +10,7 @@ package de.fhb.sailboat.data;
  */
 public class Actuator{
 
+	private final String id;
 	private final int value;
 
 	/**
@@ -17,8 +18,9 @@ public class Actuator{
 	 * 
 	 * @param value the current value of the actuator
 	 */
-	public Actuator(int value) {
+	public Actuator(int value, String pId) {
 		this.value = value;
+		this.id=pId;
 	}
 
     /**
@@ -28,5 +30,17 @@ public class Actuator{
 	 */
 	public int getValue() {
 		return value;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	@Override
+	public String toString(){
+		return id+":"+value;
 	}
 }

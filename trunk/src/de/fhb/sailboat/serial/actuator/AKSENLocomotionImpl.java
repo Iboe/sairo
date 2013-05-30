@@ -28,7 +28,7 @@ import de.fhb.sailboat.worldmodel.WorldModelImpl;
  * 
  */
 
-//TODO
+
 public class AKSENLocomotionImpl implements IAKSENLocomotion,LocomotionSystem{
 
 	private COMPort comPort;
@@ -50,73 +50,61 @@ public class AKSENLocomotionImpl implements IAKSENLocomotion,LocomotionSystem{
 	
 	@Override
 	public int getStatus() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setSail(int angle) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setRudder(int angle) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setPropellor(int angle) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resetRudder() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resetSail() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resetPropellor() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getBatteryState() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setDebug(boolean debug) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public long getWait_Sleep() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setWait_Sleep(int wait_sleep) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -130,25 +118,21 @@ public class AKSENLocomotionImpl implements IAKSENLocomotion,LocomotionSystem{
 
 	@Override
 	public boolean sendCommand(int pServo, int pValue) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean sendCommandSet(String[] pCommandSet) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public String readState() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void writeData(String data) {
-		// TODO Auto-generated method stub
 		
 	}
 	

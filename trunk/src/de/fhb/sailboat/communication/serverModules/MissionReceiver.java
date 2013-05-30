@@ -342,7 +342,6 @@ public class MissionReceiver extends MissionNegotiationBase implements Transmiss
 	 */
 	@Override
 	public int getPriority() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

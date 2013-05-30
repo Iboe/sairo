@@ -147,7 +147,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				LOG.warn(lastCom + ": incorrect/not send");
 			} else {
 				LOG.info(lastCom + ": correct");
-				worldModel.getActuatorModel().setRudder(new Actuator(angle));
+				worldModel.getActuatorModel().setRudder(new Actuator(angle,"rudder"));
 				setAksenState(AksenSystemTextEnum.AKSEN_COMMAND_RUDDER_LEFT
 						.toString());	
 		}
@@ -175,7 +175,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				LOG.warn(lastCom + ": incorrect/not send");
 			} else {
 				//TODO LOG.debug hinzufuegen
-				worldModel.getActuatorModel().setSail(new Actuator(angle));
+				worldModel.getActuatorModel().setSail(new Actuator(angle,"sail"));
 			}
 			lastCom = "";
 		} catch (InterruptedException e) {
@@ -198,7 +198,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 				// TODO Exception? Eskalieren?
 				LOG.warn(lastCom + ": incorrect/not send");
 			} else {
-				worldModel.getActuatorModel().setPropeller(new Actuator(angle));
+				worldModel.getActuatorModel().setPropeller(new Actuator(angle,"propellor"));
 				LOG.info(lastCom + ": correct");
 			}
 		lastCom = "";
@@ -227,7 +227,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void resetRudder() {
 		this.setRudder(RUDDER_NORMAL);
-		worldModel.getActuatorModel().setRudder(new Actuator(RUDDER_NORMAL));
+		worldModel.getActuatorModel().setRudder(new Actuator(RUDDER_NORMAL,"rudder"));
 	}
 
 	/**
@@ -238,7 +238,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	@Override
 	public void resetSail() {
 		this.setSail(SAIL_NORMAL);
-		worldModel.getActuatorModel().setSail(new Actuator(SAIL_NORMAL));
+		worldModel.getActuatorModel().setSail(new Actuator(SAIL_NORMAL,"sail"));
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class AKSENLocomotion implements LocomotionSystem {
 	public void resetPropellor() {
 		this.setPropellor(PROPELLOR_STOP);
 		worldModel.getActuatorModel().setPropeller(
-				new Actuator(PROPELLOR_STOP));
+				new Actuator(PROPELLOR_STOP,"propellor"));
 	}
 
 	public void closePort() {

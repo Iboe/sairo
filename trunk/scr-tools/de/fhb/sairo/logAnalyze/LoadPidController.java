@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.data.Data.PidControllerState;
 import de.fhb.sairo.fileio.FileLoader;
 

@@ -115,7 +115,6 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	 */
 	@Override
 	public void doPrimitiveCommand(PrimitiveCommandTask task) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -125,7 +124,6 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	 */
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -222,7 +220,6 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 	 */
 	@Override
 	public boolean skipNextCycle() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -352,7 +349,6 @@ public class MissionTransmitter extends MissionNegotiationBase implements Transm
 
 	@Override
 	public int getPriority() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

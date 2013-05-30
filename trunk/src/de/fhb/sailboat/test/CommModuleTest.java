@@ -256,7 +256,6 @@ public class CommModuleTest {
 		 */
 		@Override
 		public void stop() {
-			// TODO Auto-generated method stub
 			
 		}
 
@@ -266,7 +265,6 @@ public class CommModuleTest {
 		 */
 		@Override
 		public void doPrimitiveCommand(PrimitiveCommandTask task) {
-			// TODO Auto-generated method stub
 			
 		}
 	}

@@ -12,6 +12,7 @@ import de.fhb.sailboat.data.Compass;
 
 import de.fhb.sailboat.serial.serialAPI.COMPort;
 import de.fhb.sailboat.worldmodel.WorldModelImpl;
+import de.fhb.sairo.both.LogTextblocks;
 /**
  * Implementation of a certain Compass-Sensor-Module
  * Opens a new Thread for continously pushing Sensor-Data into Worldmodel
@@ -145,10 +146,10 @@ public class CompassSensor {
 																	 System.currentTimeMillis());
 								WorldModelImpl.getInstance().getCompassModel().setCompass(this.compassInstance.myCompass);
 								
-								LOG.debug("Azimuth: " + dataSet.getAzimuth()
-										+ " Pitch: " + dataSet.getPitch()
-										+ " Roll: "+ dataSet.getRoll() 
-										+ " Temp: "+ dataSet.getTemp()
+								LOG.debug("Azimuth: " + dataSet.getAzimuth() + LogTextblocks.valueSeperator
+										+ " Pitch: " + dataSet.getPitch() + LogTextblocks.valueSeperator
+										+ " Roll: "+ dataSet.getRoll() + LogTextblocks.valueSeperator
+										+ " Temp: "+ dataSet.getTemp() + LogTextblocks.valueSeperator
 										+ " out of " + i + " useful samples (" + usefullrate + ")");
 								
 							}
@@ -184,7 +185,6 @@ public class CompassSensor {
 			try {
 				sensorThread.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				LOG.fatal(e, e.fillInStackTrace());
 			}
 			

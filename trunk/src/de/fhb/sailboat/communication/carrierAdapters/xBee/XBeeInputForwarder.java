@@ -123,7 +123,6 @@ public class XBeeInputForwarder extends InputStream implements PacketListener {
 					buffer.put(b);
 			} 
 			catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			/*

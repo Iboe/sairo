@@ -3,6 +3,7 @@ package de.fhb.sairo.logAnalyze;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.fileio.FileLoader;
 
 public class LogAnalyzer {

@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.fhb.sairo.both.LogTextblocks;
+
 /***
  * This class evaluates the aksen board failure rate
  * 

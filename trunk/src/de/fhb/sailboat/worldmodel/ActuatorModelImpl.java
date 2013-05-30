@@ -19,9 +19,9 @@ public class ActuatorModelImpl implements ActuatorModel {
 	 * Default constructor, which sets initial default values into the {@link ActuatorModel}.
 	 */
 	public ActuatorModelImpl() {
-		sail = new Actuator(LocomotionSystem.SAIL_NORMAL);
-		rudder = new Actuator(LocomotionSystem.RUDDER_NORMAL);
-		propeller = new Actuator(LocomotionSystem.PROPELLOR_STOP);
+		sail = new Actuator(LocomotionSystem.SAIL_NORMAL,"sail");
+		rudder = new Actuator(LocomotionSystem.RUDDER_NORMAL,"rudder");
+		propeller = new Actuator(LocomotionSystem.PROPELLOR_STOP,"propellor");
 	}
 	
 	@Override

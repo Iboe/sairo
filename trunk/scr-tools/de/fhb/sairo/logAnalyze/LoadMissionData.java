@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.data.MissionList;
 import de.fhb.sairo.data.TaskList;
 import de.fhb.sairo.data.LogData.LogMission;

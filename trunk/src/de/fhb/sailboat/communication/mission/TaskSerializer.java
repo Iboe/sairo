@@ -119,27 +119,21 @@ public class TaskSerializer {
 					for(i=0;i<serializedData.length;data[i+1]=serializedData[i++]);
 				} 
 				catch (SecurityException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (InstantiationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -194,27 +188,21 @@ public class TaskSerializer {
 						
 				} 
 				catch (SecurityException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (InstantiationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

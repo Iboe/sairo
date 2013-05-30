@@ -1,4 +1,4 @@
-package de.fhb.sairo.logAnalyze;
+package de.fhb.sairo.both;
 
 /***
  * This class provides the textblocks for config the logfile evaluation
@@ -6,6 +6,12 @@ package de.fhb.sairo.logAnalyze;
  * @version 1
  */
 public class LogTextblocks {
+	
+	/**
+	 * 
+	 */
+	
+	public static final String valueSeperator=";";
 	
 	/**
 	 * Textblocks for evaluate all , means class or threadnames

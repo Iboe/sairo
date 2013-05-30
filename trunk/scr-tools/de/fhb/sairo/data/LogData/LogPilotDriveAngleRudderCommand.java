@@ -3,12 +3,14 @@ package de.fhb.sairo.data.LogData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.fhb.sairo.data.Data.SensorData;
+
 /***
  * Thias class represents a rudder command from pilot module with saving the rudderPosition and timestamp
  * @author Tobias Koppe
  *
  */
-public class LogPilotDriveAngleRudderCommand {
+public class LogPilotDriveAngleRudderCommand extends SensorData{
 
 	private Date timeStamp;
 	private float rudderPosition;

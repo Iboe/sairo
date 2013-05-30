@@ -95,7 +95,6 @@ public class CompassReceiver implements TransmissionModule {
 	 */
 	@Override
 	public int getTransmissionInterval() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -107,13 +106,11 @@ public class CompassReceiver implements TransmissionModule {
 	 */
 	@Override
 	public int getPriority() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void connectionReset() {
-		// TODO Auto-generated method stub
 		
 	}
 

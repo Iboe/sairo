@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.data.GpsDataList;
 import de.fhb.sairo.data.LogData.LogGPSCoordinate;
 import de.fhb.sairo.fileio.FileLoader;
@@ -18,7 +19,6 @@ public class LoadGpsData {
 			String zeile=null;
 			while((zeile = reader.readLine()) != null){
 				if(zeile.contains(LogTextblocks.gpsSensorThreadName)){
-					System.out.println("Analyze: " + zeile);
 					Date d=filter.filterTimestamp(zeile);
 					int startGpsLong = zeile.indexOf(LogTextblocks.gpsSensorLongitude)+LogTextblocks.gpsSensorLongitude.length()+1;
 					int startGpsLat = zeile.indexOf(LogTextblocks.gpsSensorLatitude)+LogTextblocks.gpsSensorLatitude.length()+1;

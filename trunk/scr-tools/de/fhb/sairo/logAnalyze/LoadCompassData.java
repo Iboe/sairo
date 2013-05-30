@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.data.CompassCourseList;
 import de.fhb.sairo.data.LogData.LogCompassCourse;
 import de.fhb.sairo.fileio.FileLoader;

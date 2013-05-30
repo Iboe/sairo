@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.data.WindDatalist;
 import de.fhb.sairo.data.LogData.LogWindData;
 import de.fhb.sairo.fileio.FileLoader;

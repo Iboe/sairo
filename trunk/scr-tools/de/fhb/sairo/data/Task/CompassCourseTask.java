@@ -1,6 +1,6 @@
 package de.fhb.sairo.data.Task;
 
-import de.fhb.sairo.logAnalyze.LogTextblocks;
+import de.fhb.sairo.both.LogTextblocks;
 
 
 

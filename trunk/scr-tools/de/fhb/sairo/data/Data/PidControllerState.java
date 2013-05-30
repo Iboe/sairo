@@ -1,6 +1,6 @@
 package de.fhb.sairo.data.Data;
 
-public class PidControllerState {
+public class PidControllerState extends SensorData{
 
 	private double Kp; //Koeffizient P
 	private double Ki; //Koeffizient I

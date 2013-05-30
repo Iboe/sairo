@@ -3,12 +3,14 @@ package de.fhb.sairo.data.LogData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.fhb.sairo.data.Data.SensorData;
+
 /***
  * 
  * @author Tobias Koppe
  *
  */
-public class LogWindData {
+public class LogWindData extends SensorData{
 
 	private Date timeStamp;
 	private String timeStampString;

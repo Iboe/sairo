@@ -112,7 +112,6 @@ public class WindReceiver implements TransmissionModule {
 
 	@Override
 	public void connectionReset() {
-		// TODO Auto-generated method stub
 
 	}
 

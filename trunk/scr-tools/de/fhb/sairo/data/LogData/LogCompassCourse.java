@@ -3,12 +3,14 @@ package de.fhb.sairo.data.LogData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.fhb.sairo.data.Data.SensorData;
+
 /***
  * This class represents the azimuth state of compasscourse with saving
  * the timestamp from the given logfile
  * @author Tobias Koppe
  */
-public class LogCompassCourse {
+public class LogCompassCourse extends SensorData{
 
 	private float compassCourseAzimuth;
 	private Date timeStamp;

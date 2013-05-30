@@ -116,19 +116,16 @@ public class RCommTest {
 
 		@Override
 		public int getPriority() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public boolean skipNextCycle() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void connectionReset() {
-			// TODO Auto-generated method stub
 			
 		}
 		
@@ -157,19 +154,16 @@ public class RCommTest {
 		
 		@Override
 		public int getPriority() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public boolean skipNextCycle() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void connectionReset() {
-			// TODO Auto-generated method stub
 			
 		}
 	}
@@ -198,19 +192,16 @@ public class RCommTest {
 		
 		@Override
 		public int getPriority() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public boolean skipNextCycle() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void connectionReset() {
-			// TODO Auto-generated method stub
 			
 		}
 		
@@ -239,19 +230,16 @@ public class RCommTest {
 		
 		@Override
 		public int getPriority() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public boolean skipNextCycle() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void connectionReset() {
-			// TODO Auto-generated method stub
 			
 		}
 	}

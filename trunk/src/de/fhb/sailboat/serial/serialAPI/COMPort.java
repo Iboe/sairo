@@ -182,7 +182,6 @@ public class COMPort{
 //
 //			}		
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			LOG.warn("Sleep-Failure");
 		}
 	}

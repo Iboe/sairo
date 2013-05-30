@@ -113,7 +113,6 @@ public class WindTransmitter implements TransmissionModule {
 	 */
 	@Override
 	public int getTransmissionInterval() {
-		// TODO Auto-generated method stub
 		return 600;
 	}
 
@@ -122,7 +121,6 @@ public class WindTransmitter implements TransmissionModule {
 	 */
 	@Override
 	public int getPriority() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

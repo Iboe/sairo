@@ -4,12 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.fhb.sairo.both.LogTextblocks;
 import de.fhb.sairo.data.CompassCourseList;
 import de.fhb.sairo.data.pidControllerStateList;
 import de.fhb.sairo.data.Data.PidControllerState;
 import de.fhb.sairo.data.LogData.LogCompassCourse;
 import de.fhb.sairo.logAnalyze.LoadPidController;
-import de.fhb.sairo.logAnalyze.LogTextblocks;
 import de.fhb.sairo.logAnalyze.filter;
 
 public class Task {
@@ -24,7 +24,6 @@ public class Task {
 	private String taskArguments;
 	
 	private CompassCourseList compassCourseList;
-	private ArrayList<PidControllerState> pidControllerStateList; //Deprecated !! //TODO Liste loeschen bzw aendern
 	private de.fhb.sairo.data.pidControllerStateList pidList;
 	
 	public Task(String pTaskDescription){
@@ -136,14 +135,6 @@ public class Task {
 		sb.append(",");
 		sb.append("Logentries:" +  this.getLog().size());
 		return sb.toString();
-	}
-
-	public ArrayList<PidControllerState> getPidControllerStateList() {
-		return pidControllerStateList;
-	}
-
-	public void setPidControllerStateList(ArrayList<PidControllerState> pidControllerStateList) {
-		this.pidControllerStateList = pidControllerStateList;
 	}
 
 	public de.fhb.sairo.data.pidControllerStateList getPidList() {

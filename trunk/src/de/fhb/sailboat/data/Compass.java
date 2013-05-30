@@ -194,6 +194,8 @@ public class Compass implements Serializable{
 		return usefulSampleRate;
 	}
 
+	//TODO LogTextblocks.valueSeperator implementieren
+	//TODO alle andere verfuegbaren Werte implementieren
 	@Override
 	public String toString() {
 		return "Compass [azimuth: " + azimuth + ", pitch: " + pitch + ", roll: "

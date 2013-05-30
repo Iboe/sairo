@@ -3,14 +3,15 @@ package de.fhb.sairo.data.LogData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.fhb.sairo.logAnalyze.LogTextblocks;
+import de.fhb.sairo.both.LogTextblocks;
+import de.fhb.sairo.data.Data.SensorData;
 
 /***
  * 
  * @author Tobias Koppe
  *
  */
-public class LogGPSCoordinate {
+public class LogGPSCoordinate extends SensorData{
 
 	private double latitude;
 	private double longitude;
