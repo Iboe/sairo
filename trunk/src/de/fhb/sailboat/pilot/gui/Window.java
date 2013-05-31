@@ -1,22 +1,25 @@
 package de.fhb.sailboat.pilot.gui;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import de.fhb.sailboat.control.pilot.PIDController;
 
@@ -47,11 +50,21 @@ public class Window extends JFrame implements Observer {
 	
 	private JButton setCoefficients;
 	
-	public Canvas paintCanvas;
-	
 	public PIDController pidController;
+	private JPanel panel;
 	
-	public Window(PIDController pidController) {
+	private XYSeriesCollection dataSet;
+	private XYSeries deltaAngleDataSet;
+	private XYSeries outputDataSet;
+	
+	private int updates;
+public  Window(PIDController pidController) {
+		updates=-1;
+		dataSet = new XYSeriesCollection();
+		deltaAngleDataSet = new XYSeries("deltaAngle");
+		outputDataSet = new XYSeries("output");
+		dataSet.addSeries(deltaAngleDataSet);
+		dataSet.addSeries(outputDataSet);
 		this.setTitle("PID Debug");
 		this.setSize(300, 200);
 		
@@ -76,9 +89,6 @@ public class Window extends JFrame implements Observer {
 		
 		setCoefficients = new JButton("Set");
 		
-		paintCanvas = new Canvas();
-		paintCanvas.setSize(400, 360);
-		
 		contentPanel.add(pLabel);
 		contentPanel.add(iLabel);
 		contentPanel.add(dLabel);
@@ -93,9 +103,13 @@ public class Window extends JFrame implements Observer {
 		contentPanel.add(kdLabel);
 		contentPanel.add(kdText);
 		contentPanel.add(setCoefficients);
-		contentPanel.add(paintCanvas);
 		
-		this.add(contentPanel);
+		getContentPane().add(contentPanel);
+		
+		panel = new JPanel();
+		panel.setSize(250, 250);
+		createChart();
+		contentPanel.add(panel);
 		this.pidController=pidController;
 		updateTextFields();
 		this.pack();
@@ -120,28 +134,33 @@ public class Window extends JFrame implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		ArrayList<String> updateData = (ArrayList<String>) arg1;
-		
+		updates++;
+		if(updates>=100) {
+			updates=0;
+			deltaAngleDataSet.clear();
+			outputDataSet.clear();
+			System.out.println("reset updates to 1");
+		}
 		pLabel.setText("P: " + updateData.get(0));
 		iLabel.setText("I: " + updateData.get(1));
 		dLabel.setText("D: " + updateData.get(2));
-		realAngleLabel.setText("real angle: " + updateData.get(3) + "°");
-		deltaAngleLabel.setText("delta angle: " + updateData.get(5) + "°");
-		steuersignalLabel.setText("Steuersignal: " + updateData.get(6));
-		abtastrateLabel.setText("Abtastrate: " + updateData.get(7) + " Hz");
-		
-		Graphics gfx = paintCanvas.getGraphics();
-		gfx.copyArea(0, 0, 399, 359, -1, 0);
-		gfx.setColor(Color.WHITE);
-		gfx.drawLine(399, 0, 399, 359);
-		
-		// target angle
-		gfx.setColor(Color.BLACK);
-		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(4))), 400, (int)(Double.parseDouble((String) updateData.get(4))));
-		// real angle
-		gfx.setColor(Color.BLACK);
-		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(3))), 400, (int)(Double.parseDouble((String) updateData.get(3))));
-		// steuersignal
-		gfx.setColor(Color.BLACK);
-		gfx.drawLine(400, 180 + (int)(Double.parseDouble((String) updateData.get(5))), 400, (int)(Double.parseDouble((String) updateData.get(5))));
+		deltaAngleLabel.setText("delta angle: " + updateData.get(3) + "°");
+		steuersignalLabel.setText("Steuersignal: " + updateData.get(4));
+		abtastrateLabel.setText("Abtastrate: " + updateData.get(5) + " Hz");
+		double data = Double.valueOf(updateData.get(3));
+		double data2 = Double.valueOf(updateData.get(4));
+		if(data2==Double.POSITIVE_INFINITY || data2==Double.NEGATIVE_INFINITY){
+			data2=0;
+		}
+		deltaAngleDataSet.add(updates,data);
+		outputDataSet.add(updates,data2);
+		System.out.println("Add to dataSet deltaAngle: [" + updates +"][" + data + "]");
+		System.out.println("Add to dataSet output: [" + updates +"][" + data2 + "]");
+	}
+	
+	private void createChart(){
+		JFreeChart pChart = ChartFactory.createXYLineChart("PIDController", "controlls", "values", dataSet, PlotOrientation.VERTICAL, true, true, false);
+		ChartPanel chartPanel = new ChartPanel(pChart);
+		this.panel=chartPanel;
 	}
 }

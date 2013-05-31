@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import org.apache.log4j.Logger;
-import org.jfree.util.Log;
 
 import de.fhb.sailboat.pilot.gui.Window;
 
