@@ -14,7 +14,7 @@ public class CPU {
 
 	private static Logger LOG = Logger.getLogger(CPU.class);
 	
-	private long sleepTime=2000;
+	private final long sleepTime=2000;
 	
 	private Sigar sigar;
 	private CPU cpu;
@@ -56,7 +56,7 @@ public class CPU {
 				cpuPerc = sigar.getCpuPerc();
 				LOG.info("Used combined (system and user) cpu performance: "+CpuPerc.format(cpuPerc.getCombined())+" %");
 				endTime=System.currentTimeMillis();
-				Thread.sleep(sleepTime-(endTime-startTime));
+				Thread.sleep(this.sleepTime-(endTime-startTime));
 			} catch (SigarException e) {
 				e.printStackTrace();
 			} catch (InterruptedException e) {

@@ -171,6 +171,6 @@ public class GPS implements Serializable{
 	@Override
 	public String toString() {
 		return "GPS [latitude: " + latitude + ", longitude: " + longitude
-				+ ", satelites: " + satelliteCount + ", speed: " + speed + "]";
+				+ ", satelites: " + satelliteCount + ", speed: " + speed + ", id: " + timeStamp+"]";
 	}
 }

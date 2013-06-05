@@ -52,11 +52,11 @@ public class Wind implements Serializable{
 	public long getTimeStamp() {
 		return timeStamp;
 	}
-
+	
 	//TODO LogtextBlocks.valueSeperator implementieren
 	//TODO id implementieren
 	@Override
 	public String toString() {
-		return "Wind [direction: " + direction + ", speed: " + speed + "]";
+		return "Wind [direction: " + direction + ", speed: " + speed + ", id: " +  timeStamp + "]";
 	}
 }

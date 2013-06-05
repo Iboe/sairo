@@ -194,6 +194,12 @@ public class Compass implements Serializable{
 		return usefulSampleRate;
 	}
 
+	
+	
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
 	//TODO LogTextblocks.valueSeperator implementieren
 	//TODO alle andere verfuegbaren Werte implementieren
 	@Override
