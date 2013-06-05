@@ -22,6 +22,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import de.fhb.sailboat.control.pilot.PIDController;
+import java.awt.Window.Type;
 
 /**
  * 
@@ -74,7 +75,7 @@ public  Window(PIDController pidController) {
 		pLabel = new JLabel("P: n/a");
 		iLabel = new JLabel("I: n/a");
 		dLabel = new JLabel("D: n/a");
-		realAngleLabel = new JLabel("real angle: n/a °");
+		//realAngleLabel = new JLabel("real angle: n/a °");
 		deltaAngleLabel = new JLabel("delta angle: n/a °");
 		steuersignalLabel = new JLabel("Steuersignal: n/a");
 		abtastrateLabel = new JLabel("Abtastrate: n/a Hz");
@@ -92,7 +93,7 @@ public  Window(PIDController pidController) {
 		contentPanel.add(pLabel);
 		contentPanel.add(iLabel);
 		contentPanel.add(dLabel);
-		contentPanel.add(realAngleLabel);
+		//contentPanel.add(realAngleLabel);
 		contentPanel.add(deltaAngleLabel);
 		contentPanel.add(steuersignalLabel);
 		contentPanel.add(abtastrateLabel);
@@ -107,7 +108,7 @@ public  Window(PIDController pidController) {
 		getContentPane().add(contentPanel);
 		
 		panel = new JPanel();
-		panel.setSize(250, 250);
+		panel.setSize(125, 125);
 		createChart();
 		contentPanel.add(panel);
 		this.pidController=pidController;
