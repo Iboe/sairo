@@ -31,7 +31,8 @@ public class LoadGpsData {
 					String gpsLong = zeile.substring(startGpsLong,endGpsLong).trim();
 					String gpsLat = zeile.substring(startGpsLat, endGpsLat).trim();
 					String gpsSat = zeile.substring(startGpsSat,endGpsSat).trim();
-					String gpsSpeed = zeile.substring(startGpsSpeed,endGpsSpeed).trim();
+					//String gpsSpeed = zeile.substring(startGpsSpeed,endGpsSpeed).trim();
+					String gpsSpeed = "0";
 					list.add(new LogGPSCoordinate(Double.valueOf(gpsLat), Double.valueOf(gpsLong), Integer.valueOf(gpsSat), Double.valueOf(gpsSpeed), d));
 				}
 			}

@@ -21,7 +21,7 @@ public class LoadCompassData {
 			if(zeile.contains(LogTextblocks.compassThreadName)){
 				Date d=filter.filterTimestamp(zeile);
 				int startAzimuth = zeile.indexOf(LogTextblocks.compassAzimuthMark)+LogTextblocks.compassAzimuthMark.length();
-				int endAzimuth = zeile.indexOf(LogTextblocks.compassPitchMark)-1;
+				int endAzimuth = zeile.indexOf(LogTextblocks.compassPitchMark)-2;
 				String azimuth = zeile.substring(startAzimuth,endAzimuth);
 				list.add(new LogCompassCourse(Float.valueOf(azimuth), d));
 			}

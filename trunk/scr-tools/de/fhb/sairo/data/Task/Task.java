@@ -9,6 +9,7 @@ import de.fhb.sairo.data.CompassCourseList;
 import de.fhb.sairo.data.pidControllerStateList;
 import de.fhb.sairo.data.Data.PidControllerState;
 import de.fhb.sairo.data.LogData.LogCompassCourse;
+import de.fhb.sairo.logAnalyze.LoadCpuPerformance;
 import de.fhb.sairo.logAnalyze.LoadPidController;
 import de.fhb.sairo.logAnalyze.filter;
 
@@ -16,6 +17,7 @@ public class Task {
 
 	private ArrayList<String> log;
 	private ArrayList<String> pidLog;
+	private ArrayList<Double> cpuPerformance;
 	
 	private Date startTime;
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
@@ -30,12 +32,14 @@ public class Task {
 		this.taskDescription=pTaskDescription;
 		this.log = new ArrayList<String>();
 		this.compassCourseList = new CompassCourseList();
+		cpuPerformance = new ArrayList<Double>();
 		pidList = new pidControllerStateList();
 	}
 
 	public void extractData(){
 		extractCompassCourseList();
 		extractPidControllerLog();
+		cpuPerformance=LoadCpuPerformance.loadCpuPerformanceData(log);
 	}
 	
 	private void extractPidControllerLog(){
