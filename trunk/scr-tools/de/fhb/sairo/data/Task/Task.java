@@ -41,10 +41,10 @@ public class Task {
 	private void extractPidControllerLog(){
 		if(this.pidLog!=null){this.pidLog.clear();}
 		this.pidLog = LoadPidController.loadPidControllerLog(this.log);
-		setPidControllerStateList(LoadPidController.extractPidControllerData(this.pidLog));
-		for(int i=0;i<this.getPidControllerStateList().size();i++){
-			this.getPidList().add(this.getPidControllerStateList().get(i));
-		}
+//		setPidControllerStateList(LoadPidController.extractPidControllerData(this.pidLog));
+//		for(int i=0;i<this.getPidControllerStateList().size();i++){
+//			this.getPidList().add(this.getPidControllerStateList().get(i));
+//		}
 	}
 	
 	public void extractCompassCourseList(){

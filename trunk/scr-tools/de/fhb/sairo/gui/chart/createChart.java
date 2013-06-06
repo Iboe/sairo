@@ -16,7 +16,6 @@ public class createChart {
 	
 	public static DefaultCategoryDataset createCompassCourseChartDataset(CompassCourseList pList){
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-		System.out.println("Create dataset");
 		for(int i=0;i<pList.size();i++){
 			System.out.println("Add dataset: [" + pList.get(i).getCompassCourseAzimuth()+";"+ "Course" +";"+ pList.get(i).getTimeStampString() +"]");
 			dataSet.addValue(pList.get(i).getCompassCourseAzimuth(), "Course", pList.get(i).getTimeStampString());
