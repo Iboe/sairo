@@ -96,5 +96,11 @@ public class LogTextblocks {
 	public static final String receivedValueFailure="new aksenboard state: received: f";
 	public static final String settingRudderTo="setRudder to";
 
+	/**
+	 * PID Controller
+	 */
+	
+	public static final String pidControllerDeltaAngleMark="deltaAngle";
+	public static final String pidControllerSamplingTimeMark="samplingTime";
  
 }

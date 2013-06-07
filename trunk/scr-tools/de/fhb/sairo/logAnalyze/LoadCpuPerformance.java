@@ -13,7 +13,9 @@ public class LoadCpuPerformance {
 			if(pLog.get(i).contains("de.fhb.sailboat.utils.performance.CPU")){
 				int start = pLog.get(i).indexOf("cpu performance:") + tmp.length() ;
 				int ende = pLog.get(i).indexOf("%");
-				cpuPerformanceList.add(Double.valueOf(pLog.get(i).substring(start, ende)));
+				String tmpSubstring = pLog.get(i).substring(start, ende);
+				if(!tmpSubstring.contains("N")){
+				cpuPerformanceList.add(Double.valueOf(tmpSubstring));}
 			}
 		}
 		return cpuPerformanceList;

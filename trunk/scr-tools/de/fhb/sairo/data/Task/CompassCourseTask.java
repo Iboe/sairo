@@ -14,7 +14,7 @@ public class CompassCourseTask extends Task {
 	private double compassCourseAngle;
 	
 	public CompassCourseTask(String pTaskDescription, double pAngle){
-		super(pTaskDescription);
+		super(pTaskDescription,String.valueOf(pAngle));
 		this.compassCourseAngle=pAngle;
 	}
 

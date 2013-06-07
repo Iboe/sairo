@@ -20,16 +20,17 @@ public class Task {
 	private ArrayList<Double> cpuPerformance;
 	
 	private Date startTime;
-	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss,SSS");
 	
 	private String taskDescription;
 	private String taskArguments;
 	
 	private CompassCourseList compassCourseList;
-	private de.fhb.sairo.data.pidControllerStateList pidList;
+	private ArrayList<PidControllerState> pidList;
 	
-	public Task(String pTaskDescription){
+	public Task(String pTaskDescription, String pTaskArguments){
 		this.taskDescription=pTaskDescription;
+		this.taskArguments = pTaskArguments;
 		this.log = new ArrayList<String>();
 		this.compassCourseList = new CompassCourseList();
 		cpuPerformance = new ArrayList<Double>();
@@ -45,24 +46,23 @@ public class Task {
 	private void extractPidControllerLog(){
 		if(this.pidLog!=null){this.pidLog.clear();}
 		this.pidLog = LoadPidController.loadPidControllerLog(this.log);
-//		setPidControllerStateList(LoadPidController.extractPidControllerData(this.pidLog));
-//		for(int i=0;i<this.getPidControllerStateList().size();i++){
-//			this.getPidList().add(this.getPidControllerStateList().get(i));
-//		}
+		pidList=LoadPidController.extractPidControllerData(pidLog);
 	}
 	
 	public void extractCompassCourseList(){
+		System.out.println("Try to extract compasscourse elements from tasklog");
 		String zeile=null;
 		for(int i=0;i<this.log.size();i++){
 			zeile=log.get(i);
 			if(zeile.contains(LogTextblocks.compassThreadName)){
 				Date d=filter.filterTimestamp(zeile);
 				int startAzimuth = zeile.indexOf(LogTextblocks.compassAzimuthMark)+LogTextblocks.compassAzimuthMark.length();
-				int endAzimuth = zeile.indexOf(LogTextblocks.compassPitchMark)-1;
+				int endAzimuth = zeile.indexOf(LogTextblocks.compassPitchMark)-2;
 				String azimuth = zeile.substring(startAzimuth,endAzimuth);
 				compassCourseList.add(new LogCompassCourse(Float.valueOf(azimuth), d));
 		}
 		}
+		System.out.println("Found " + compassCourseList.size() + " compasscourse elements in this task");
 	}
 	
 	/**
@@ -99,6 +99,10 @@ public class Task {
 	
 	public Date getStartTime() {
 		return startTime;
+	}
+	
+	public String getStartTimeString(){
+		return simpleDateFormat.format(getStartTime());
 	}
 
 	public void setStartTime(Date startTime) {
@@ -141,12 +145,28 @@ public class Task {
 		return sb.toString();
 	}
 
-	public de.fhb.sairo.data.pidControllerStateList getPidList() {
+	public ArrayList<PidControllerState> getPidList() {
 		return pidList;
 	}
 
 	public void setPidList(de.fhb.sairo.data.pidControllerStateList pidList) {
 		this.pidList = pidList;
 	}
+
+	/**
+	 * @return the pidLog
+	 */
+	public ArrayList<String> getPidLog() {
+		return pidLog;
+	}
+
+	/**
+	 * @param pidLog the pidLog to set
+	 */
+	public void setPidLog(ArrayList<String> pidLog) {
+		this.pidLog = pidLog;
+	}
+	
+	
 	
 }

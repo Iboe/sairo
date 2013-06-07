@@ -1,5 +1,7 @@
 package de.fhb.sairo.gui.chart;
 
+import java.util.ArrayList;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -11,6 +13,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import de.fhb.sairo.data.CompassCourseList;
 import de.fhb.sairo.data.pidControllerStateList;
+import de.fhb.sairo.data.Data.PidControllerState;
 
 public class createChart {
 	
@@ -33,34 +36,40 @@ public class createChart {
 		
 		for(int i=0;i<pList.size();i++){
 			drivenCourse.add(i,pList.get(i).getCompassCourseAzimuth());
-			desiredCourse.add(i,pDesiredCourse);
-			System.out.println("Add [y,y][x]: [" + pList.get(i).getCompassCourseAzimuth() + "," + pDesiredCourse +"][" + i +"]");
+			desiredCourse.add((pList.get(i).getTimeStamp().getTime()-pList.get(0).getTimeStamp().getTime()),pDesiredCourse);
+			System.out.println("Add [y,y][x]: [" + pList.get(i).getCompassCourseAzimuth() + "," + pDesiredCourse +"][" + (pList.get(i).getTimeStamp().getTime()-pList.get(0).getTimeStamp().getTime()) +"]");
 		}
 		dataSet.addSeries(desiredCourse);
 		dataSet.addSeries(drivenCourse);
 		return dataSet;
 	}
 	
-	public static XYDataset createXyDataSet(CompassCourseList pList , double pDesiredCourse , pidControllerStateList pPidList){
+	public static XYDataset createXyDataSet(CompassCourseList pList , double pDesiredCourse , ArrayList<PidControllerState> pPidList){
 		System.out.println("Add " + pList.size() + " elements to chart");
 		XYSeriesCollection dataSet = new XYSeriesCollection();
 		
 		XYSeries drivenCourse = new XYSeries("CompassCourse");
 		XYSeries desiredCourse = new XYSeries("desired Angle("+pDesiredCourse+")");
 		XYSeries pidCourseDelta = new XYSeries("PID Controller Delta Angle");
+		XYSeries pidSamplingTime = new XYSeries("PID Controller sampling time");
 		
 		for(int i=0;i<pList.size();i++){
-			drivenCourse.add(i,pList.get(i).getCompassCourseAzimuth());
-			desiredCourse.add(i,pDesiredCourse);
-			System.out.println("Add [y,y][x]: [" + pList.get(i).getCompassCourseAzimuth() + "," + pDesiredCourse +"][" + i +"]");
+			drivenCourse.add((pList.get(i).getTimeStamp().getTime()-pList.get(0).getTimeStamp().getTime())/1000,pList.get(i).getCompassCourseAzimuth());
+			desiredCourse.add((pList.get(i).getTimeStamp().getTime()-pList.get(0).getTimeStamp().getTime())/1000,pDesiredCourse);
+			System.out.println("Add [y,y][x]: [" + pList.get(i).getCompassCourseAzimuth() + "," + pDesiredCourse +"][" + (pList.get(i).getTimeStamp().getTime()-pList.get(0).getTimeStamp().getTime())/1000 +"]");
 		}
 		for(int i=0;i<pPidList.size();i++){
-			pidCourseDelta.add(i,pPidList.get(i).getDeltaAngle());
-			System.out.println("Add [y][x]: [" + pPidList.get(i).getDeltaAngle() + "][" + i +"]");
+			pidCourseDelta.add((pPidList.get(i).getTimeStamp().getTime()-pPidList.get(0).getTimeStamp().getTime())/1000,pPidList.get(i).getDeltaAngle());
+			System.out.println("Add [y][x]: [" + pPidList.get(i).getDeltaAngle() + "][" + (pPidList.get(i).getTimeStamp().getTime()-pPidList.get(0).getTimeStamp().getTime())/1000 +"]");
+		}
+		for(int i=0;i<pPidList.size();i++){
+			pidSamplingTime.add((pPidList.get(i).getTimeStamp().getTime()-pPidList.get(0).getTimeStamp().getTime())/1000,pPidList.get(i).getTa());
+			System.out.println("Add [y][x]: [" + pPidList.get(i).getTa() + "][" + (pPidList.get(i).getTimeStamp().getTime()-pPidList.get(0).getTimeStamp().getTime())/1000 +"]");
 		}
 		dataSet.addSeries(desiredCourse);
 		dataSet.addSeries(drivenCourse);
 		dataSet.addSeries(pidCourseDelta);
+		dataSet.addSeries(pidSamplingTime);
 		return dataSet;
 	}
 	

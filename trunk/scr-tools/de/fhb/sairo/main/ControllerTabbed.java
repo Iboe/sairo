@@ -29,6 +29,8 @@ import de.fhb.sairo.logAnalyze.LoadGpsData;
 import de.fhb.sairo.logAnalyze.LoadMissionData;
 import de.fhb.sairo.logAnalyze.LoadPidController;
 import de.fhb.sairo.logAnalyze.LoadWindData;
+import de.fhb.sairo.logAnalyze.MissionParser;
+import de.fhb.sairo.logAnalyze.TaskParser;
 
 public class ControllerTabbed implements Observer {
 
@@ -94,8 +96,14 @@ public class ControllerTabbed implements Observer {
 					.getAbsolutePath()));
 			model.setWindDatalist(LoadWindData.loadWindData(model.getLogFile()
 					.getAbsolutePath()));
-			model.setMissionList(LoadMissionData.loadMissions(model
-					.getLogFile().getAbsolutePath()));
+//			model.setMissionList(LoadMissionData.loadMissions(model
+//					.getLogFile().getAbsolutePath()));
+			MissionParser.MissionParser(model.getLogFile().getAbsolutePath());
+			MissionList tmpMissionList = MissionParser.getMissionList();
+			for(int i=0;i<tmpMissionList.size();i++){
+				tmpMissionList.get(i).setTaskList(TaskParser.parseTasksFromMission(tmpMissionList.get(i).getLogFromMission()));
+			}
+			model.setMissionList(MissionParser.getMissionList());
 			for (int i = 0; i < model.getMissionList().size(); i++) {
 				model.getListMissionsModel().addElement(
 						model.getMissionList().get(i).toString());

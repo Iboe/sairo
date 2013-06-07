@@ -45,7 +45,7 @@ public class LoadMissionData{
 						mission.setStartTime(filter.filterTimestamp(zeile));
 						//Add this row to mission log
 						mission.getLogFromMission().add(zeile);
-						
+						System.out.println("Found mission: " + mission.toString());
 						/**
 						 * Search for tasks in this mission and create a task list 
 						 */
@@ -53,10 +53,13 @@ public class LoadMissionData{
 						int endTaskDescription = zeile.indexOf("]", startTaskDescription)-1;
 						String subString = zeile.substring(startTaskDescription, endTaskDescription);
 						String[] taskList = subString.split(",");
+						System.out.println("Found: " + taskList.length + " tasks in mission: " + mission.toString());
+						
 						//
 						
 						//Iterate trough the founded task list 
 						for(int i=0;i<taskList.length;i++){
+							System.out.println("analyze task: " + taskList[i]);
 							//Add the task to mission tasklist with instance of task type
 							if(taskList[i].trim().equals(LogTextblocks.compassCourseTaskMark)){
 								mission.getTaskList().add(new CompassCourseTask(taskList[i],0));
@@ -68,7 +71,13 @@ public class LoadMissionData{
 						}
 					}
 					else if(zeile.contains("execute task:")  && !zeile.contains(LogTextblocks.stopTaskMark)){
+						try{
 						mission.getTaskList().get(taskNo).setTaskArguments(filter.filterTaskArguments(zeile));
+						System.out.println("try to acces taskNo: " + taskNo + " with list size: " + mission.getTaskList().size() + " in mission: " + mission.getDescription() + " which has: " + mission.getTaskList().size() + " tasks");
+						}
+						catch (IndexOutOfBoundsException e){
+							System.out.println("try to acces taskNo: " + taskNo + " with list size: " + mission.getTaskList().size() + " in mission: " + mission.getDescription() + " which has: " + mission.getTaskList().size() + " tasks has failed");
+						}
 						mission.getTaskList().get(taskNo).setStartTime(filter.filterTimestamp(zeile));
 						taskNo++;
 						if(mission!=null){

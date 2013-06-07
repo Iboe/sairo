@@ -1,5 +1,7 @@
 package de.fhb.sairo.data.Data;
 
+import java.util.Date;
+
 public class PidControllerState extends SensorData{
 
 	private double Kp; //Koeffizient P
@@ -13,6 +15,8 @@ public class PidControllerState extends SensorData{
 	
 	private double lastOutput=0; //Ausgabe alt
 	private double output=0; //Ausgabe
+	
+	private Date timeStamp;
 	
 	public PidControllerState(double kp, double ki, double kd, double ta,
 			double esum, double eold, double deltaAngle, double lastOutput,
@@ -100,5 +104,20 @@ public class PidControllerState extends SensorData{
 	public void setOutput(double output) {
 		this.output = output;
 	}
+
+	/**
+	 * @return the timeStamp
+	 */
+	public Date getTimeStamp() {
+		return timeStamp;
+	}
+
+	/**
+	 * @param timeStamp the timeStamp to set
+	 */
+	public void setTimeStamp(Date timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+	
 	
 }

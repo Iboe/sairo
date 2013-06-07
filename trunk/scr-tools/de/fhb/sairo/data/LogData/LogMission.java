@@ -1,5 +1,6 @@
 package de.fhb.sairo.data.LogData;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,10 +19,11 @@ public class LogMission {
 	private ArrayList<String> logFromMission;
 	private TaskList taskList;
 	
-	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss,SSS");
 	
-	public LogMission(String pDescription) {
+	public LogMission(String pDescription, Date pStartTime) {
 		this.description = pDescription;
+		this.startTime = pStartTime;
 		this.logFromMission = new ArrayList<String>();
 		this.taskList = new TaskList();
 	}
@@ -66,6 +68,7 @@ public class LogMission {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.getDescription());
+		sb.append(" started at: " + this.getStartTimeString());
 		return sb.toString();
 	}
 	
