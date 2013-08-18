@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * intended for use with standard serialization.
  * 
  * @author Patrick Rutter
+ * @author Modifications by Andy Klay <klay@fh-brandenburg.de>
  */
 public class MissionTask implements java.io.Serializable {
 
@@ -142,9 +143,6 @@ public class MissionTask implements java.io.Serializable {
 		}
 		case PRIMITIVECOMMANDTASK: {
 
-			// XXX klay: lediglich eine Kennzeichnung zum wiederaufinden
-			System.err.println("PRIMITIVECOMMANDTASK stored in MissionTask");
-
 			parameters.add((Integer) ((PrimitiveCommandTask) task).getSail());
 			parameters.add((Integer) ((PrimitiveCommandTask) task).getRudder());
 			parameters.add((Integer) ((PrimitiveCommandTask) task)
@@ -239,10 +237,6 @@ public class MissionTask implements java.io.Serializable {
 					break;
 				}
 				case PRIMITIVECOMMANDTASK: {
-
-					// XXX klay: lediglich eine Kennzeichnung zum wiederaufinden
-					System.err
-							.println("PRIMITIVECOMMANDTASK created in MissionTask");
 
 					int mySail, myRudder, myPropellor;
 
