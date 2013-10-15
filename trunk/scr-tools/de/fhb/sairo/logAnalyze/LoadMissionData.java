@@ -2,6 +2,7 @@ package de.fhb.sairo.logAnalyze;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Date;
 
 import org.apache.log4j.Logger;
 
@@ -40,7 +41,8 @@ public class LoadMissionData{
 						}
 						
 						//Create new mission with mission number
-						mission = new LogMission("Mission " + (list.size()+1));
+						//TODO Zeile gefixed aber nciht überprüft
+						mission = new LogMission("Mission " + (list.size()+1),new Date(System.currentTimeMillis()));
 						//Filter the timestamp for startime of mission
 						mission.setStartTime(filter.filterTimestamp(zeile));
 						//Add this row to mission log
@@ -66,7 +68,8 @@ public class LoadMissionData{
 							}
 							//If task type can't find add standard task
 							else{
-							mission.getTaskList().add(new Task(taskList[i]));
+							//@koppe bitte Fixen
+//							mission.getTaskList().add(new Task(taskList[i]));
 							}
 						}
 					}
